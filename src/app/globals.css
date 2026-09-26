@@ -1,26 +1,223 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   SamayYudh 2.0 — Design System
+   ============================================================ */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand Colors */
+  --color-brand-50: #EEF2FF;
+  --color-brand-100: #E0E7FF;
+  --color-brand-200: #C7D2FE;
+  --color-brand-300: #A5B4FC;
+  --color-brand-400: #818CF8;
+  --color-brand-500: #6366F1;
+  --color-brand-600: #4F46E5;
+  --color-brand-700: #4338CA;
+  --color-brand-800: #3730A3;
+  --color-brand-900: #312E81;
+  --color-brand-950: #1E1B4B;
+
+  --color-accent-50: #F5F3FF;
+  --color-accent-100: #EDE9FE;
+  --color-accent-200: #DDD6FE;
+  --color-accent-300: #C4B5FD;
+  --color-accent-400: #A78BFA;
+  --color-accent-500: #8B5CF6;
+  --color-accent-600: #7C3AED;
+
+  --color-success-50: var(--success-50);
+  --color-success-500: var(--success-500);
+  --color-success-600: var(--success-600);
+
+  --color-warning-50: var(--warning-50);
+  --color-warning-500: var(--warning-500);
+  --color-warning-600: var(--warning-600);
+
+  --color-danger-50: var(--danger-50);
+  --color-danger-500: var(--danger-500);
+  --color-danger-600: var(--danger-600);
+
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+}
+
+:root {
+  --background: #FAFAF9;
+  --foreground: #1C1917;
+  --radius: 0.625rem;
+
+  /* Semantic surface colors */
+  --surface: #F5F5F4;
+  --surface-2: #E7E5E4;
+  --card: #FFFFFF;
+  --border: #E7E5E4;
+  --border-hover: #D6D3D1;
+  --muted: #78716C;
+
+  /* Status colors */
+  --success-50: #ECFDF5;
+  --success-500: #10B981;
+  --success-600: #059669;
+
+  --warning-50: #FFFBEB;
+  --warning-500: #F59E0B;
+  --warning-600: #D97706;
+
+  --danger-50: #FEF2F2;
+  --danger-500: #EF4444;
+  --danger-600: #DC2626;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0C0A09;
+    --foreground: #FAFAF9;
+
+    /* Dark semantic surfaces */
+    --surface: #1C1917;
+    --surface-2: #292524;
+    --card: #1C1917;
+    --border: #44403C;
+    --border-hover: #57534E;
+    --muted: #A8A29E;
+
+    /* Dark status colors */
+    --success-50: #052E16;
+    --success-500: #22C55E;
+    --success-600: #16A34A;
+
+    --warning-50: #422006;
+    --warning-500: #FBBF24;
+    --warning-600: #F59E0B;
+
+    --danger-50: #450A0A;
+    --danger-500: #F87171;
+    --danger-600: #EF4444;
   }
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* ============================================================
+   Custom Utilities
+   ============================================================ */
+
+.text-gradient-brand {
+  background: linear-gradient(135deg, var(--color-brand-600), var(--color-accent-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient-brand {
+  background: linear-gradient(135deg, var(--color-brand-600), var(--color-accent-500));
+}
+
+.bg-gradient-brand-subtle {
+  background: linear-gradient(135deg, var(--color-brand-50), var(--color-accent-50));
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(28, 25, 23, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.glass-dark {
+  background: rgba(12, 10, 9, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Pulse animation for timer */
+@keyframes timer-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.timer-warning {
+  animation: timer-pulse 1.5s ease-in-out infinite;
+}
+
+.timer-critical {
+  animation: timer-pulse 0.7s ease-in-out infinite;
+  color: var(--danger-500);
+}
+
+/* Exam state glow effects */
+.state-answered {
+  box-shadow: 0 0 0 2px var(--success-500), 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.state-flagged {
+  box-shadow: 0 0 0 2px var(--danger-500), 0 0 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Bengali Font Support
+   ============================================================ */
+
+.font-bengali {
+  font-family: 'Noto Sans Bengali', var(--font-sans), sans-serif;
 }

@@ -118,7 +118,7 @@ export async function evaluateSession(
     return answer && answer.answer_text.trim().length > 0;
   });
 
-  const CONCURRENCY = 5;
+  const CONCURRENCY = 3;
   let completed = 0;
 
   for (let i = 0; i < answeredQuestions.length; i += CONCURRENCY) {

@@ -4,6 +4,8 @@
 
 import { GoogleGenAI } from '@google/genai';
 
+export const maxDuration = 60; // Allow up to 60 seconds on Vercel to prevent 504 timeouts
+
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 
 interface EvaluationRequest {

@@ -135,13 +135,13 @@ export default function DashboardPage() {
   };
 
   const totalSessions = sessions.length;
-  // Count questions answered (simplification: if session is completed, we assume they answered some)
-  // For now, let's just count total sessions
+  const streakCount = totalSessions > 0 ? 1 : 0; // Simplified check: if they have any sessions, assume a 1 day streak for now
+
   const stats = [
     { label: 'Sessions', value: totalSessions.toString(), icon: Target, color: 'text-brand-600', bg: 'bg-brand-50 dark:bg-brand-100/10' },
     { label: 'Avg Score', value: '—', icon: BarChart3, color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-900/20' },
     { label: 'Study Time', value: '—', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20' },
-    { label: 'Day Streak', value: totalSessions > 0 ? '1' : '0', icon: Flame, color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-900/20' },
+    { label: 'Day Streak', value: streakCount.toString(), icon: Flame, color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-900/20' },
   ];
 
   const actions = [
@@ -190,7 +190,7 @@ export default function DashboardPage() {
             {/* Streak badge — right side */}
             <div className="ml-auto hidden sm:flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 flex-shrink-0">
               <Flame className="w-4 h-4 text-amber-300" />
-              <span className="text-white text-xs font-semibold">0 Day Streak</span>
+              <span className="text-white text-xs font-semibold">{streakCount} Day Streak</span>
             </div>
           </div>
 

@@ -118,37 +118,43 @@ export async function evaluateSession(
     return answer && answer.answer_text.trim().length > 0;
   });
 
-  for (let i = 0; i < answeredQuestions.length; i++) {
-    const question = answeredQuestions[i];
-    const answer = answers.get(question.id);
-    if (!answer) continue;
+  const CONCURRENCY = 5;
+  let completed = 0;
 
-    let success = false;
-    let attempts = 0;
-    const maxAttempts = 3;
+  for (let i = 0; i < answeredQuestions.length; i += CONCURRENCY) {
+    const chunk = answeredQuestions.slice(i, i + CONCURRENCY);
+    
+    await Promise.all(chunk.map(async (question) => {
+      const answer = answers.get(question.id);
+      if (!answer) return;
 
-    while (!success && attempts < maxAttempts) {
-      try {
-        attempts++;
-        const evaluation = await evaluateAnswer({ question, answer });
-        evaluations.set(question.id, evaluation);
-        success = true;
-      } catch (err) {
-        if (attempts >= maxAttempts) {
-          // Log as a warning instead of error so Next.js doesn't pop up a fatal overlay
-          console.warn(`Failed to evaluate question ${question.id} after ${maxAttempts} attempts:`, err);
-        } else {
-          // Wait 2 seconds before retrying if it's a 503 overloaded error
-          await new Promise(resolve => setTimeout(resolve, 2000));
+      let success = false;
+      let attempts = 0;
+      const maxAttempts = 3;
+
+      while (!success && attempts < maxAttempts) {
+        try {
+          attempts++;
+          const evaluation = await evaluateAnswer({ question, answer });
+          evaluations.set(question.id, evaluation);
+          success = true;
+        } catch (err) {
+          if (attempts >= maxAttempts) {
+            console.warn(`Failed to evaluate question ${question.id} after ${maxAttempts} attempts:`, err);
+          } else {
+            // Exponential backoff for 503 overloaded errors
+            await new Promise(resolve => setTimeout(resolve, 2000 * attempts));
+          }
         }
       }
-    }
-    
-    onProgress?.(i + 1, answeredQuestions.length, question.id);
+      
+      completed++;
+      onProgress?.(completed, answeredQuestions.length, question.id);
+    }));
 
-    // Rate limiting: 500ms between calls
-    if (i < answeredQuestions.length - 1) {
-      await new Promise(resolve => setTimeout(resolve, 500));
+    // Rate limiting between concurrent chunks
+    if (i + CONCURRENCY < answeredQuestions.length) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
 

@@ -292,9 +292,22 @@ function ResultsInner() {
                 <p className="text-xs text-stone-500">{evaluations.size} answers evaluated · {Math.round(avgConfidence * 100)}% confidence</p>
               </div>
             </div>
-            <div className="text-right">
-              <div className="text-3xl font-bold text-gradient-brand">{scorePercentage}%</div>
-              <div className="text-xs text-stone-500">{totalScore}/{totalMaxScore} marks</div>
+            <div className="flex items-center gap-4 text-right">
+              <button
+                onClick={runEvaluation}
+                disabled={isEvaluating}
+                className="flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-lg border border-border bg-background hover:bg-stone-50 disabled:opacity-50 transition-colors"
+              >
+                {isEvaluating ? (
+                  <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Re-evaluating...</>
+                ) : (
+                  <><Brain className="w-3.5 h-3.5" /> Re-evaluate</>
+                )}
+              </button>
+              <div className="border-l border-border pl-4">
+                <div className="text-3xl font-bold text-gradient-brand">{scorePercentage}%</div>
+                <div className="text-xs text-stone-500">{totalScore}/{totalMaxScore} marks</div>
+              </div>
             </div>
           </div>
 

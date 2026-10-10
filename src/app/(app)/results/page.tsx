@@ -234,8 +234,8 @@ function ResultsInner() {
       {/* AI Evaluation Section */}
       {!hasEvaluations ? (
         <div className="bg-gradient-to-br from-brand-50 to-accent-50 border border-brand-200 rounded-2xl p-6 text-center space-y-4">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-card shadow-sm">
-            <Sparkles className="w-7 h-7 text-brand-600" />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-card shadow-sm overflow-hidden">
+            <img src="/gemini-logo.jpg" alt="Gemini" className="w-10 h-10 object-cover" />
           </div>
           <h3 className="text-lg font-bold text-foreground">AI-Powered Evaluation</h3>
           <p className="text-sm text-stone-600 max-w-md mx-auto">
@@ -275,7 +275,7 @@ function ResultsInner() {
               disabled={apiConfigured === false || answeredCount === 0}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-brand hover:opacity-90 transition-opacity shadow-lg shadow-brand-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Brain className="w-4 h-4" /> Evaluate with Gemini AI
+              <img src="/gemini-logo.jpg" alt="Gemini" className="w-4 h-4 rounded-full" /> Evaluate with Gemini AI
             </button>
           )}
         </div>
@@ -284,8 +284,8 @@ function ResultsInner() {
         <div className="bg-card rounded-2xl border border-border p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-brand flex items-center justify-center">
-                <Brain className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-gradient-brand flex items-center justify-center overflow-hidden">
+                <img src="/gemini-logo.jpg" alt="Gemini" className="w-8 h-8 rounded-full object-cover" />
               </div>
               <div>
                 <h3 className="font-bold text-foreground">AI Evaluation Complete</h3>
@@ -422,7 +422,7 @@ function ResultsInner() {
                     {/* Examiner Feedback */}
                     <div className="bg-brand-50 rounded-lg p-3 border border-brand-100">
                       <h4 className="text-xs font-semibold text-brand-700 mb-1 flex items-center gap-1">
-                        <Sparkles className="w-3.5 h-3.5" /> Examiner Feedback
+                        <img src="/gemini-logo.jpg" alt="Gemini" className="w-3.5 h-3.5 object-cover" /> Examiner Feedback
                       </h4>
                       <p className="text-xs text-brand-800 leading-relaxed">{evaluation.examiner_feedback}</p>
                     </div>

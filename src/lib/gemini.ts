@@ -39,6 +39,24 @@ interface APIEvaluationResponse {
 export async function evaluateAnswer({ question, answer }: EvaluateAnswerParams): Promise<AnswerEvaluation> {
   const recommendedTime = getRecommendedTime(question.marks);
 
+  let finalAnswerText = answer.answer_text;
+  if (!finalAnswerText || finalAnswerText.trim() === '') {
+    if (answer.selected_option && question.options) {
+      const opt = question.options.find(o => o.id === answer.selected_option);
+      if (opt) {
+        finalAnswerText = `Selected Option: (${opt.id.replace('opt_', '').toUpperCase()}) ${opt.text}`;
+      } else {
+        finalAnswerText = answer.selected_option;
+      }
+    } else if (answer.selected_options && question.options) {
+      const opts = answer.selected_options.map(id => {
+        const o = question.options!.find(opt => opt.id === id);
+        return o ? `(${o.id.replace('opt_', '').toUpperCase()}) ${o.text}` : id;
+      });
+      finalAnswerText = `Selected Options: ${opts.join(', ')}`;
+    }
+  }
+
   const response = await fetch('/api/evaluate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -54,7 +72,7 @@ export async function evaluateAnswer({ question, answer }: EvaluateAnswerParams)
       expected_points: question.expected_points,
       model_answer: question.model_answer,
       evaluation_rubric: question.evaluation_rubric,
-      answer_text: answer.answer_text,
+      answer_text: finalAnswerText,
       time_spent_seconds: answer.time_spent_seconds,
       recommended_time_seconds: recommendedTime,
       word_count: answer.word_count,
@@ -115,7 +133,11 @@ export async function evaluateSession(
 
   const answeredQuestions = questions.filter(q => {
     const answer = answers.get(q.id);
-    return answer && answer.answer_text.trim().length > 0;
+    if (!answer) return false;
+    const hasText = answer.answer_text && answer.answer_text.trim().length > 0;
+    const hasOption = !!answer.selected_option;
+    const hasOptions = answer.selected_options && answer.selected_options.length > 0;
+    return hasText || hasOption || hasOptions;
   });
 
   const CONCURRENCY = 3;

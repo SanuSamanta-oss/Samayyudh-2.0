@@ -123,15 +123,28 @@ export async function evaluateSession(
     const answer = answers.get(question.id);
     if (!answer) continue;
 
-    try {
-      const evaluation = await evaluateAnswer({ question, answer });
-      evaluations.set(question.id, evaluation);
-      onProgress?.(i + 1, answeredQuestions.length, question.id);
-    } catch (err) {
-      console.error(`Failed to evaluate question ${question.id}:`, err);
-      // Continue with other questions even if one fails
-      onProgress?.(i + 1, answeredQuestions.length, question.id);
+    let success = false;
+    let attempts = 0;
+    const maxAttempts = 3;
+
+    while (!success && attempts < maxAttempts) {
+      try {
+        attempts++;
+        const evaluation = await evaluateAnswer({ question, answer });
+        evaluations.set(question.id, evaluation);
+        success = true;
+      } catch (err) {
+        if (attempts >= maxAttempts) {
+          // Log as a warning instead of error so Next.js doesn't pop up a fatal overlay
+          console.warn(`Failed to evaluate question ${question.id} after ${maxAttempts} attempts:`, err);
+        } else {
+          // Wait 2 seconds before retrying if it's a 503 overloaded error
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
     }
+    
+    onProgress?.(i + 1, answeredQuestions.length, question.id);
 
     // Rate limiting: 500ms between calls
     if (i < answeredQuestions.length - 1) {

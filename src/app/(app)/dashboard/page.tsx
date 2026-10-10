@@ -331,22 +331,13 @@ export default function DashboardPage() {
               </button>
             </motion.div>
           ) : (
-            <motion.div
-              variants={stagger}
-              initial="hidden"
-              animate="visible"
-              className="grid gap-3"
-            >
-              {sessions.slice(0, 3).map((session, i) => {
-                const isCompleted = session.status === 'completed';
+            <div className="grid gap-3">
+              {sessions.slice(0, 3).map((session) => {
+                const isCompleted = session.status === 'completed' || session.status === 'evaluated' || session.evaluation_status === 'completed';
                 const cat = EXAM_CATEGORIES.find(c => c.code === session.exam_category);
                 
                 return (
-                  <motion.div
-                    key={session.id}
-                    custom={i}
-                    variants={fadeUp}
-                  >
+                  <div key={session.id}>
                     <Link
                       href={isCompleted ? `/results?session=${session.id}` : `/exam/session?id=${session.id}`}
                       className="group flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-2xl border border-border bg-card hover:shadow-md hover:border-brand-200 transition-all duration-300"
@@ -357,7 +348,7 @@ export default function DashboardPage() {
                         </div>
                         <div className="min-w-0 flex-1">
                           <h3 className="font-bold text-foreground truncate group-hover:text-brand-600 transition-colors">
-                            {cat?.name || session.exam_category}
+                            {cat?.name || session.exam_category || 'Exam Session'}
                           </h3>
                           <p className="text-xs text-muted flex items-center gap-2 mt-0.5">
                             <Calendar className="w-3.5 h-3.5" />
@@ -375,10 +366,10 @@ export default function DashboardPage() {
                         <ChevronRight className="w-5 h-5 text-muted group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
                       </div>
                     </Link>
-                  </motion.div>
+                  </div>
                 );
               })}
-            </motion.div>
+            </div>
           )}
         </section>
 

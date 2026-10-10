@@ -244,6 +244,7 @@ function ExamSessionInner() {
                 onChange={(text) => updateAnswer(currentQuestion.id, text)}
                 saveStatus={state.saveStatus}
                 disabled={state.isTimeUp}
+                options={currentQuestion.options}
               />
 
               {/* Notes Board */}

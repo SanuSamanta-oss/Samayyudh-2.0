@@ -100,6 +100,10 @@ function ResultsInner() {
         await localDB.saveEvaluation(evaluation);
       }
 
+      if (results.size === 0 && answerMap.size > 0) {
+        throw new Error("The AI rejected the evaluation requests. Please ensure you are not hitting rate limits and try again.");
+      }
+
       setEvaluations(results);
 
       // Update session evaluation status

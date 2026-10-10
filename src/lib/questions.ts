@@ -1003,8 +1003,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1023,8 +1023,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1043,8 +1043,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1063,8 +1063,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1083,8 +1083,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1103,8 +1103,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1123,8 +1123,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1143,8 +1143,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1163,8 +1163,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1183,8 +1183,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1203,8 +1203,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1674,8 +1674,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1694,8 +1694,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1714,8 +1714,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1734,8 +1734,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1754,8 +1754,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1774,8 +1774,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1794,8 +1794,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1814,8 +1814,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1834,8 +1834,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1854,8 +1854,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1874,8 +1874,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1894,8 +1894,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1914,8 +1914,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1934,8 +1934,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1954,8 +1954,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1974,8 +1974,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -1994,8 +1994,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -2014,8 +2014,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -2034,8 +2034,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -3361,8 +3361,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -3381,8 +3381,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -3401,8 +3401,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4159,8 +4159,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4179,8 +4179,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4199,8 +4199,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4219,8 +4219,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4239,8 +4239,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4259,8 +4259,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4279,8 +4279,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4299,8 +4299,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4319,8 +4319,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4339,8 +4339,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4359,8 +4359,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -4379,8 +4379,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -5537,8 +5537,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -5557,8 +5557,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -5577,8 +5577,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -5597,8 +5597,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -5617,8 +5617,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -5637,8 +5637,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -5657,8 +5657,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6292,8 +6292,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6312,8 +6312,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6332,8 +6332,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6352,8 +6352,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6372,8 +6372,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6392,8 +6392,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6412,8 +6412,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6432,8 +6432,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6452,8 +6452,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6472,8 +6472,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6492,8 +6492,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6512,8 +6512,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6532,8 +6532,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6552,8 +6552,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -6572,8 +6572,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -7699,8 +7699,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -7719,8 +7719,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -7739,8 +7739,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -7759,8 +7759,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -7779,8 +7779,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -7799,8 +7799,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -7819,8 +7819,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -7839,8 +7839,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8433,8 +8433,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8453,8 +8453,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8473,8 +8473,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8493,8 +8493,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8513,8 +8513,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8533,8 +8533,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8553,8 +8553,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8573,8 +8573,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8593,8 +8593,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8613,8 +8613,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8633,8 +8633,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8653,8 +8653,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8673,8 +8673,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8693,8 +8693,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8713,8 +8713,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -8733,8 +8733,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -9850,8 +9850,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -10444,8 +10444,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -10464,8 +10464,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -10484,8 +10484,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -10504,8 +10504,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -10524,8 +10524,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -10544,8 +10544,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -10564,8 +10564,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -10830,8 +10830,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11055,8 +11055,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11075,8 +11075,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11095,8 +11095,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11115,8 +11115,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11381,8 +11381,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11606,8 +11606,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11626,8 +11626,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11646,8 +11646,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"
@@ -11666,8 +11666,8 @@ const rawQuestions: Omit<Question, 'exam_category' | 'question_type'>[] = [
     "keywords": [],
     "model_answer": "See options",
     "evaluation_rubric": "1 mark",
-    "options": null,
-    "correct_answer": null,
+    
+    
     "year": "2024",
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-01T00:00:00Z"

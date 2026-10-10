@@ -349,7 +349,7 @@ export default function DashboardPage() {
             <div className="grid gap-3">
               {sessions.slice(0, 3).map((session) => {
                 const isCompleted = session.status === 'completed' || session.status === 'evaluated' || session.evaluation_status === 'completed';
-                const cat = EXAM_CATEGORIES.find(c => c.code === session.exam_category);
+                const cat = EXAM_CATEGORIES.find(c => c.code === session.exam_code);
                 
                 return (
                   <div key={session.id}>
@@ -363,7 +363,7 @@ export default function DashboardPage() {
                         </div>
                         <div className="min-w-0 flex-1">
                           <h3 className="font-bold text-foreground truncate group-hover:text-brand-600 transition-colors">
-                            {cat?.name || session.exam_category || 'Exam Session'}
+                            {cat?.name || session.exam_code || 'Exam Session'}
                           </h3>
                           <p className="text-xs text-muted flex items-center gap-2 mt-0.5">
                             <Calendar className="w-3.5 h-3.5" />

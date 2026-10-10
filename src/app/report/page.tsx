@@ -113,10 +113,10 @@ function ReportInner() {
             </p>
           </div>
           {hasEvaluations && (
-            <div className="text-center sm:text-right border-2 border-black rounded-lg p-4 bg-stone-50">
-              <div className="text-4xl font-bold">{scorePercentage}%</div>
-              <div className="text-sm font-medium text-stone-600 uppercase tracking-widest mt-1">Final Score</div>
-              <div className="text-xs text-stone-500 mt-1">{totalScore} out of {totalMaxScore} marks</div>
+            <div className="text-center sm:text-right border-2 border-purple-200 rounded-lg p-5 bg-purple-50">
+              <div className="text-4xl font-bold text-black">{scorePercentage}%</div>
+              <div className="text-sm font-bold text-purple-700 uppercase tracking-widest mt-1">Final Score</div>
+              <div className="text-xs font-semibold text-purple-500 mt-1">{totalScore} out of {totalMaxScore} marks</div>
             </div>
           )}
         </div>

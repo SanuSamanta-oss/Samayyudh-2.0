@@ -15,13 +15,16 @@ import type { ExamMode } from '@/types';
 
 export default function PracticePage() {
   const router = useRouter();
-  const [step, setStep] = useState(0); // 0: exam, 1: mode, 2: duration, 3: confirm
-  const [selectedExam, setSelectedExam] = useState<string | null>(null);
+  const [step, setStep] = useState(0); // 0: category, 1: sub-exam, 2: mode, 3: duration, 4: confirm
+  const [selectedCategoryCode, setSelectedCategoryCode] = useState<string | null>(null);
+  const [selectedExamCode, setSelectedExamCode] = useState<string | null>(null);
   const [selectedMode, setSelectedMode] = useState<ExamMode | null>(null);
   const [selectedDuration, setSelectedDuration] = useState<number | null>(null);
   const [customCount, setCustomCount] = useState(20);
 
-  const examCategory = EXAM_CATEGORIES.find(c => c.code === selectedExam);
+  const examCategory = EXAM_CATEGORIES.find(c => c.code === selectedCategoryCode);
+  const subExam = examCategory?.exams?.find(e => e.exam_code === selectedExamCode);
+  
   const modeConfig = EXAM_MODES.find(m => m.mode === selectedMode);
   const questionCount = modeConfig?.questionCount || customCount;
   const durationConfig = EXAM_DURATIONS.find(d => d.seconds === selectedDuration);
@@ -33,7 +36,7 @@ export default function PracticePage() {
     setIsStarting(true);
     // Build session params and navigate to exam
     const params = new URLSearchParams({
-      exam: selectedExam || 'UNIVERSITY',
+      exam: selectedExamCode || selectedCategoryCode || 'UNIVERSITY',
       mode: selectedMode || 'quick_battle',
       questions: String(questionCount),
       duration: String(selectedDuration || 3600),
@@ -54,11 +57,34 @@ export default function PracticePage() {
         <OmnitrixLoader 
           finished={finished} 
           text="PREPARING EXAM..." 
-          logoUrl={selectedExam ? EXAM_CATEGORIES.find(c => c.code === selectedExam)?.logo : undefined}
+          logoUrl={examCategory?.logo}
         />
       </div>
     );
   }
+
+  // Generate step labels based on whether a sub-exam is required
+  const hasSubExams = examCategory && examCategory.exams && examCategory.exams.length > 0;
+  const stepLabels = hasSubExams 
+    ? ['Category', 'Branch', 'Mode', 'Duration', 'Ready'] 
+    : ['Category', 'Mode', 'Duration', 'Ready'];
+
+  // Adjust step logic based on presence of sub-exams
+  const getDisplayStep = (currentStep: number) => {
+    if (!hasSubExams && currentStep >= 2) return currentStep - 1;
+    return currentStep;
+  };
+
+  const handleCategorySelect = (code: string) => {
+    setSelectedCategoryCode(code);
+    const cat = EXAM_CATEGORIES.find(c => c.code === code);
+    if (cat && cat.exams && cat.exams.length > 0) {
+      setStep(1); // Go to branch selection
+    } else {
+      setSelectedExamCode(null);
+      setStep(2); // Skip to mode selection
+    }
+  };
 
   return (
     <div className="max-w-3xl mx-auto px-4 lg:px-6 py-6 md:py-10">
@@ -74,22 +100,32 @@ export default function PracticePage() {
 
       {/* Step indicator */}
       <div className="flex items-center justify-center gap-2 mb-8">
-        {['Exam', 'Mode', 'Duration', 'Ready'].map((label, i) => (
-          <div key={label} className="flex items-center gap-2">
-            <button
-              onClick={() => i < step && setStep(i)}
-              className={cn(
-                'w-8 h-8 rounded-full text-xs font-bold flex items-center justify-center transition-all',
-                i === step && 'bg-gradient-brand text-white shadow-md',
-                i < step && 'bg-brand-100 text-brand-700 cursor-pointer',
-                i > step && 'bg-stone-100 text-stone-400',
+        {stepLabels.map((label, index) => {
+          // Map visual index to actual state step
+          let actualStepForIndex = index;
+          if (!hasSubExams && index >= 1) actualStepForIndex = index + 1;
+          
+          return (
+            <div key={label} className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  if (actualStepForIndex < step) setStep(actualStepForIndex);
+                }}
+                className={cn(
+                  'w-8 h-8 rounded-full text-xs font-bold flex items-center justify-center transition-all',
+                  actualStepForIndex === step && 'bg-gradient-brand text-white shadow-md',
+                  actualStepForIndex < step && 'bg-brand-100 text-brand-700 cursor-pointer',
+                  actualStepForIndex > step && 'bg-stone-100 text-stone-400',
+                )}
+              >
+                {index + 1}
+              </button>
+              {index < stepLabels.length - 1 && (
+                <div className={cn('w-8 h-0.5 rounded', actualStepForIndex < step ? 'bg-brand-300' : 'bg-stone-200')} />
               )}
-            >
-              {i + 1}
-            </button>
-            {i < 3 && <div className={cn('w-8 h-0.5 rounded', i < step ? 'bg-brand-300' : 'bg-stone-200')} />}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
 
       {/* Step Content */}
@@ -99,18 +135,18 @@ export default function PracticePage() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Step 0: Choose Exam */}
+        {/* Step 0: Choose Category */}
         {step === 0 && (
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-foreground">Choose Your Exam</h2>
+            <h2 className="text-lg font-semibold text-foreground">Choose Your Exam Category</h2>
             <div className="grid grid-cols-2 gap-3">
               {EXAM_CATEGORIES.map((cat) => (
                 <button
                   key={cat.code}
-                  onClick={() => { setSelectedExam(cat.code); setStep(1); }}
+                  onClick={() => handleCategorySelect(cat.code)}
                   className={cn(
                     'flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-left',
-                    selectedExam === cat.code
+                    selectedCategoryCode === cat.code
                       ? 'border-brand-500 bg-brand-50 shadow-sm'
                       : 'border-border bg-card hover:border-brand-200 hover:shadow-sm',
                   )}
@@ -130,15 +166,45 @@ export default function PracticePage() {
           </div>
         )}
 
-        {/* Step 1: Choose Mode */}
-        {step === 1 && (
+        {/* Step 1: Choose Branch/Topic */}
+        {step === 1 && examCategory && examCategory.exams && (
+          <div className="space-y-4">
+            <h2 className="text-lg font-semibold text-foreground">Choose Branch / Topic</h2>
+            <div className="grid grid-cols-1 gap-3 max-h-[60vh] overflow-y-auto pr-2 pb-2">
+              {examCategory.exams.map((exam) => (
+                <button
+                  key={exam.exam_code}
+                  onClick={() => { setSelectedExamCode(exam.exam_code); setStep(2); }}
+                  className={cn(
+                    'flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-left',
+                    selectedExamCode === exam.exam_code
+                      ? 'border-brand-500 bg-brand-50 shadow-sm'
+                      : 'border-border bg-card hover:border-brand-200 hover:shadow-sm',
+                  )}
+                >
+                  <span className="text-2xl shrink-0">{exam.icon || '📚'}</span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-foreground truncate">{exam.exam_name}</p>
+                    <p className="text-xs text-stone-500 truncate">{exam.description}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+            <button onClick={() => setStep(0)} className="flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700 pt-2">
+              <ChevronLeft className="w-4 h-4" /> Back to Categories
+            </button>
+          </div>
+        )}
+
+        {/* Step 2: Choose Mode */}
+        {step === 2 && (
           <div className="space-y-4">
             <h2 className="text-lg font-semibold text-foreground">Choose Mode</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {EXAM_MODES.filter(m => ['quick_battle', 'practice_battle', 'half_century', 'full_century', 'custom'].includes(m.mode)).map((mode) => (
                 <button
                   key={mode.mode}
-                  onClick={() => { setSelectedMode(mode.mode); setStep(2); }}
+                  onClick={() => { setSelectedMode(mode.mode); setStep(3); }}
                   className={cn(
                     'flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-left',
                     selectedMode === mode.mode
@@ -168,28 +234,28 @@ export default function PracticePage() {
                   className="w-full px-4 py-2.5 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/30"
                 />
                 <button
-                  onClick={() => setStep(2)}
+                  onClick={() => setStep(3)}
                   className="mt-3 w-full px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-gradient-brand"
                 >
                   Continue
                 </button>
               </div>
             )}
-            <button onClick={() => setStep(0)} className="flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700">
+            <button onClick={() => setStep(hasSubExams ? 1 : 0)} className="flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700">
               <ChevronLeft className="w-4 h-4" /> Back
             </button>
           </div>
         )}
 
-        {/* Step 2: Choose Duration */}
-        {step === 2 && (
+        {/* Step 3: Choose Duration */}
+        {step === 3 && (
           <div className="space-y-4">
             <h2 className="text-lg font-semibold text-foreground">Set Duration</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {EXAM_DURATIONS.map((dur) => (
                 <button
                   key={dur.seconds}
-                  onClick={() => { setSelectedDuration(dur.seconds); setStep(3); }}
+                  onClick={() => { setSelectedDuration(dur.seconds); setStep(4); }}
                   className={cn(
                     'flex flex-col items-center gap-1 p-4 rounded-xl border-2 transition-all',
                     selectedDuration === dur.seconds
@@ -202,18 +268,18 @@ export default function PracticePage() {
                 </button>
               ))}
             </div>
-            <button onClick={() => setStep(1)} className="flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700">
+            <button onClick={() => setStep(2)} className="flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700">
               <ChevronLeft className="w-4 h-4" /> Back
             </button>
           </div>
         )}
 
-        {/* Step 3: Confirm */}
-        {step === 3 && (
+        {/* Step 4: Confirm */}
+        {step === 4 && (
           <div className="space-y-6">
             <NewspaperBattleSummary
-              examCode={selectedExam}
-              examName={examCategory?.name || 'University'}
+              examCode={selectedExamCode || selectedCategoryCode}
+              examName={subExam?.exam_name || examCategory?.name || 'University'}
               modeName={modeConfig?.label || 'Quick Battle'}
               modeKey={selectedMode || 'quick_battle'}
               questionCount={questionCount}
@@ -223,7 +289,7 @@ export default function PracticePage() {
 
             <div className="flex gap-3">
               <button
-                onClick={() => setStep(2)}
+                onClick={() => setStep(3)}
                 className="flex-1 px-4 py-3 rounded-xl text-sm font-semibold text-stone-600 border border-border hover:bg-stone-50 transition-colors"
               >
                 <ChevronLeft className="w-4 h-4 inline mr-1" /> Back

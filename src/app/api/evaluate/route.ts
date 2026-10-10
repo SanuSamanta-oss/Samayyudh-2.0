@@ -171,7 +171,7 @@ export async function POST(request: Request) {
     const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-3.8-flash',
       contents: buildEvaluationPrompt(body),
       config: {
         systemInstruction: SYSTEM_PROMPT,

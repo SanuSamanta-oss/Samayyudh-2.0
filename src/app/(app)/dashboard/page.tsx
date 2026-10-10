@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +14,8 @@ import {
 import { EXAM_CATEGORIES } from '@/lib/constants';
 import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import { useAuth } from '@/components/providers/AuthProvider';
+import * as localDB from '@/lib/store/local-db';
+import type { ExamSession } from '@/types';
 
 /* ─── Helpers ────────────────────────────────────────────────── */
 
@@ -105,6 +107,16 @@ export default function DashboardPage() {
   const { user } = useAuth();
   const [loadingExam, setLoadingExam] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
+  const [sessions, setSessions] = useState<ExamSession[]>([]);
+
+  useEffect(() => {
+    async function loadSessions() {
+      const all = await localDB.getAllSessions();
+      all.sort((a, b) => new Date(b.started_at).getTime() - new Date(a.started_at).getTime());
+      setSessions(all);
+    }
+    loadSessions();
+  }, []);
 
   const displayName: string =
     user?.user_metadata?.display_name ||
@@ -122,11 +134,14 @@ export default function DashboardPage() {
     }, 2000);
   };
 
+  const totalSessions = sessions.length;
+  // Count questions answered (simplification: if session is completed, we assume they answered some)
+  // For now, let's just count total sessions
   const stats = [
-    { label: 'Questions', value: '0', icon: Target, color: 'text-brand-600', bg: 'bg-brand-50 dark:bg-brand-100/10' },
+    { label: 'Sessions', value: totalSessions.toString(), icon: Target, color: 'text-brand-600', bg: 'bg-brand-50 dark:bg-brand-100/10' },
     { label: 'Avg Score', value: '—', icon: BarChart3, color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-900/20' },
-    { label: 'Study Time', value: '0m', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20' },
-    { label: 'Day Streak', value: '0', icon: Flame, color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-900/20' },
+    { label: 'Study Time', value: '—', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20' },
+    { label: 'Day Streak', value: totalSessions > 0 ? '1' : '0', icon: Flame, color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-900/20' },
   ];
 
   const actions = [
@@ -182,9 +197,9 @@ export default function DashboardPage() {
           {/* Quick stats row inside hero */}
           <div className="relative mt-5 grid grid-cols-3 gap-3">
             {[
-              { label: 'Sessions', value: '0', icon: Zap },
-              { label: 'Questions', value: '0', icon: Target },
-              { label: 'This Week', value: '0h', icon: TrendingUp },
+              { label: 'Sessions', value: totalSessions.toString(), icon: Zap },
+              { label: 'Questions', value: '—', icon: Target },
+              { label: 'This Week', value: totalSessions > 0 ? 'Active' : '0', icon: TrendingUp },
             ].map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-1 bg-white/10 backdrop-blur-sm rounded-2xl py-3 px-2">
                 <s.icon className="w-4 h-4 text-white/80" />
@@ -292,27 +307,79 @@ export default function DashboardPage() {
               View all <ChevronRight className="w-3.5 h-3.5" />
             </Link>
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-card rounded-2xl border border-border p-10 flex flex-col items-center justify-center text-center gap-3"
-          >
-            <div className="w-14 h-14 rounded-2xl bg-surface flex items-center justify-center">
-              <GraduationCap className="w-7 h-7 text-muted" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-foreground">No sessions yet</p>
-              <p className="text-xs text-muted mt-0.5">Start your first battle to see your history here</p>
-            </div>
-            <button
-              onClick={() => handleExamClick('UNIVERSITY')}
-              className="inline-flex items-center gap-2 mt-1 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-brand hover:opacity-90 active:scale-[0.98] transition-all"
+          
+          {sessions.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-card rounded-2xl border border-border p-10 flex flex-col items-center justify-center text-center gap-3"
             >
-              <Swords className="w-4 h-4" />
-              Start Practicing
-            </button>
-          </motion.div>
+              <div className="w-14 h-14 rounded-2xl bg-surface flex items-center justify-center">
+                <GraduationCap className="w-7 h-7 text-muted" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">No sessions yet</p>
+                <p className="text-xs text-muted mt-0.5">Start your first battle to see your history here</p>
+              </div>
+              <button
+                onClick={() => handleExamClick('UNIVERSITY')}
+                className="inline-flex items-center gap-2 mt-1 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-brand hover:opacity-90 active:scale-[0.98] transition-all"
+              >
+                <Swords className="w-4 h-4" />
+                Start Practicing
+              </button>
+            </motion.div>
+          ) : (
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              animate="visible"
+              className="grid gap-3"
+            >
+              {sessions.slice(0, 3).map((session, i) => {
+                const isCompleted = session.status === 'completed';
+                const cat = EXAM_CATEGORIES.find(c => c.code === session.exam_category);
+                
+                return (
+                  <motion.div
+                    key={session.id}
+                    custom={i}
+                    variants={fadeUp}
+                  >
+                    <Link
+                      href={isCompleted ? `/results?session=${session.id}` : `/exam/session?id=${session.id}`}
+                      className="group flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-2xl border border-border bg-card hover:shadow-md hover:border-brand-200 transition-all duration-300"
+                    >
+                      <div className="flex items-center gap-4 flex-1 min-w-0">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${isCompleted ? 'bg-emerald-50 text-emerald-600' : 'bg-brand-50 text-brand-600'}`}>
+                          {isCompleted ? <Trophy className="w-6 h-6" /> : <Swords className="w-6 h-6" />}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-bold text-foreground truncate group-hover:text-brand-600 transition-colors">
+                            {cat?.name || session.exam_category}
+                          </h3>
+                          <p className="text-xs text-muted flex items-center gap-2 mt-0.5">
+                            <Calendar className="w-3.5 h-3.5" />
+                            {new Date(session.started_at).toLocaleDateString()} at {new Date(session.started_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between sm:justify-end gap-4 shrink-0 sm:pl-4 sm:border-l border-border">
+                        <div className="text-left sm:text-right">
+                          <div className={`text-xs font-semibold px-2.5 py-1 rounded-full ${isCompleted ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>
+                            {isCompleted ? 'Completed' : 'In Progress'}
+                          </div>
+                        </div>
+                        <ChevronRight className="w-5 h-5 text-muted group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
+                      </div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          )}
         </section>
 
         {/* ── Today card ─────────────────────────────────── */}

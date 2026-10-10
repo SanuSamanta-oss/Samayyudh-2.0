@@ -43,7 +43,9 @@ export async function evaluateAnswer({ question, answer }: EvaluateAnswerParams)
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      question_text: question.question_text,
+      question_text: question.options 
+        ? `${question.question_text}\n\nOptions:\n${question.options.map(o => `(${o.id.replace('opt_', '').toUpperCase()}) ${o.text}`).join('\n')}`
+        : question.question_text,
       question_type: question.question_type,
       marks: question.marks,
       difficulty: question.difficulty,

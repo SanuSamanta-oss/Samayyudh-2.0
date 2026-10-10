@@ -5,7 +5,8 @@ import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Printer, ArrowLeft, Brain, 
-  CheckCircle2, XCircle, TrendingUp, Sparkles
+  CheckCircle2, XCircle, TrendingUp, Sparkles,
+  Clock, Timer, FileText
 } from 'lucide-react';
 import { formatDuration, formatTime } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';

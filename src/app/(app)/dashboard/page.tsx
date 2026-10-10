@@ -188,8 +188,20 @@ export default function DashboardPage() {
             </div>
 
             {/* Streak badge — right side */}
-            <div className="ml-auto hidden sm:flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 flex-shrink-0">
-              <Flame className="w-4 h-4 text-amber-300" />
+            <div className="ml-auto hidden sm:flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 flex-shrink-0 shadow-lg">
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.15, 0.95, 1.1, 1],
+                  rotate: [0, -5, 4, -3, 2, 0],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <Flame className="w-4 h-4 text-orange-400 drop-shadow-[0_0_5px_rgba(251,146,60,0.8)]" />
+              </motion.div>
               <span className="text-white text-xs font-semibold">{streakCount} Day Streak</span>
             </div>
           </div>

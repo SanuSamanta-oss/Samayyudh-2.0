@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import { QUESTION_STATE_CONFIG } from '@/lib/constants';
 import type { AnswerStatus } from '@/types';
-import { CheckCircle2, Circle, Eye, Pencil, Flag, AlertCircle } from 'lucide-react';
+import { CheckCircle2, Circle, Eye, Pencil, Flag } from 'lucide-react';
 
 interface QuestionNavigatorProps {
   totalQuestions: number;
@@ -38,7 +38,7 @@ export function QuestionNavigator({
   stats,
 }: QuestionNavigatorProps) {
   return (
-    <div className="bg-white border border-border rounded-xl p-4 space-y-4">
+    <div className="bg-card border border-border rounded-xl p-4 space-y-4">
       {/* Stats */}
       <div className="grid grid-cols-2 gap-2 text-xs">
         <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-2">

@@ -1,0 +1,41 @@
+{
+  "name": "সময়যুদ্ধ 2.0 — SamayYudh",
+  "short_name": "SamayYudh",
+  "description": "Practice real exam questions under realistic time pressure. Supports GATE, JEE, WBJEE, UPSC, and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a1a",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
+    }
+  ]
+}

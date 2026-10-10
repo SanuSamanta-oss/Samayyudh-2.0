@@ -22,7 +22,9 @@ export function ExamTimer({ endsAt, onTimeUp, className }: ExamTimerProps) {
   }, [endsAt]);
 
   useEffect(() => {
-    setRemaining(calculateRemaining());
+    setTimeout(() => {
+      setRemaining(calculateRemaining());
+    }, 0);
 
     const interval = setInterval(() => {
       const r = calculateRemaining();

@@ -8,10 +8,12 @@ import { QuestionCard } from '@/components/exam/QuestionCard';
 import { AnswerEditor } from '@/components/exam/AnswerEditor';
 import { QuestionNavigator } from '@/components/exam/QuestionNavigator';
 import { StickyNote } from '@/components/exam/StickyNote';
+import { NotesBoard } from '@/components/exam/NotesBoard';
 import { MobileQuestionDrawer } from '@/components/exam/MobileQuestionDrawer';
 import { questionBank } from '@/lib/questions';
+import * as localDB from '@/lib/store/local-db';
 import { generateId, now, formatDuration } from '@/lib/utils';
-import type { ExamSession, ExamMode } from '@/types';
+import type { ExamSession, ExamMode, BoardNote, StickyNoteColor } from '@/types';
 import {
   ChevronLeft, ChevronRight, Flag, Grid3X3, Send, Award,
   AlertTriangle, CheckCircle2
@@ -30,6 +32,29 @@ function ExamSessionInner() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [showMilestone, setShowMilestone] = useState<string | null>(null);
+  const [boardNotes, setBoardNotes] = useState<BoardNote[]>([]);
+
+  const handlePin = (content: string, color: StickyNoteColor) => {
+    if (!currentQuestion || !state.session) return;
+    const note: BoardNote = {
+      id: generateId(),
+      session_id: state.session.id,
+      question_id: currentQuestion.id,
+      question_index: state.currentQuestionIndex,
+      content,
+      color,
+      pinned_at: now(),
+    };
+    setBoardNotes((prev) => [...prev, note]);
+  };
+
+  const handleDeleteBoardNote = (id: string) => {
+    setBoardNotes((prev) => prev.filter((n) => n.id !== id));
+  };
+
+  const handleBoardNoteColorChange = (id: string, color: StickyNoteColor) => {
+    setBoardNotes((prev) => prev.map((n) => n.id === id ? { ...n, color } : n));
+  };
 
   // Initialize session from URL params
   useEffect(() => {
@@ -39,32 +64,35 @@ function ExamSessionInner() {
     const questionCount = Number(searchParams.get('questions') || 10);
     const duration = Number(searchParams.get('duration') || 3600);
 
-    // Select random questions from the bank
-    const shuffled = [...questionBank].sort(() => Math.random() - 0.5);
-    const selected = shuffled.slice(0, Math.min(questionCount, shuffled.length));
+    localDB.getAllCustomQuestions().then(customQs => {
+      // Select random questions from the combined bank
+      const allQuestions = [...questionBank, ...customQs];
+      const shuffled = allQuestions.sort(() => Math.random() - 0.5);
+      const selected = shuffled.slice(0, Math.min(questionCount, shuffled.length));
 
-    const startTime = now();
-    const endTime = new Date(Date.now() + duration * 1000).toISOString();
+      const startTime = now();
+      const endTime = new Date(Date.now() + duration * 1000).toISOString();
 
-    const session: ExamSession = {
-      id: generateId(),
-      user_id: 'local-user',
-      title: `${mode.replace(/_/g, ' ')} — ${new Date().toLocaleDateString()}`,
-      exam_code: searchParams.get('exam') || 'UNIVERSITY',
-      mode,
-      status: 'in_progress',
-      total_questions: selected.length,
-      total_marks: selected.reduce((sum, q) => sum + q.marks, 0),
-      duration_seconds: duration,
-      started_at: startTime,
-      ends_at: endTime,
-      completed_at: null,
-      current_question_index: 0,
-      evaluation_status: 'not_started',
-      created_at: startTime,
-    };
+      const session: ExamSession = {
+        id: generateId(),
+        user_id: 'local-user',
+        title: `${mode.replace(/_/g, ' ')} — ${new Date().toLocaleDateString()}`,
+        exam_code: searchParams.get('exam') || 'UNIVERSITY',
+        mode,
+        status: 'in_progress',
+        total_questions: selected.length,
+        total_marks: selected.reduce((sum, q) => sum + q.marks, 0),
+        duration_seconds: duration,
+        started_at: startTime,
+        ends_at: endTime,
+        completed_at: null,
+        current_question_index: 0,
+        evaluation_status: 'not_started',
+        created_at: startTime,
+      };
 
-    initSession(session, selected);
+      initSession(session, selected);
+    });
   }, [searchParams, state.session, initSession]);
 
   const handleTimeUp = useCallback(() => {
@@ -136,7 +164,7 @@ function ExamSessionInner() {
       )}
 
       {/* Top Bar */}
-      <header className="sticky top-0 z-20 bg-white border-b border-border shadow-sm">
+      <header className="sticky top-0 z-20 bg-card border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-3 md:px-6 flex items-center justify-between h-14 gap-3">
           {/* Left: Title + Progress */}
           <div className="flex items-center gap-3 min-w-0">
@@ -194,6 +222,7 @@ function ExamSessionInner() {
                   <StickyNote
                     content={currentStickyNote?.content || ''}
                     onChange={(c) => updateStickyNote(currentQuestion.id, c)}
+                    onPin={handlePin}
                   />
                   <button
                     onClick={() => flagQuestion(currentQuestion.id)}
@@ -216,6 +245,13 @@ function ExamSessionInner() {
                 saveStatus={state.saveStatus}
                 disabled={state.isTimeUp}
               />
+
+              {/* Notes Board */}
+              <NotesBoard
+                notes={boardNotes}
+                onDelete={handleDeleteBoardNote}
+                onColorChange={handleBoardNoteColorChange}
+              />
             </div>
 
             {/* Navigation Buttons */}
@@ -223,7 +259,7 @@ function ExamSessionInner() {
               <button
                 onClick={handlePrev}
                 disabled={state.currentQuestionIndex === 0}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border border-border bg-white hover:bg-stone-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border border-border bg-card hover:bg-stone-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="w-4 h-4" /> Previous
               </button>
@@ -279,7 +315,7 @@ function ExamSessionInner() {
       {/* Submit Dialog */}
       {showSubmitDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 space-y-5">
+          <div className="bg-card rounded-2xl shadow-2xl max-w-sm w-full p-6 space-y-5">
             <div className="text-center">
               <AlertTriangle className="w-10 h-10 mx-auto text-amber-500 mb-3" />
               <h3 className="text-lg font-bold text-foreground">Submit Exam?</h3>

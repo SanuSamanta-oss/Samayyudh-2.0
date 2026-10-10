@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { QUESTION_STATE_CONFIG } from '@/lib/constants';
 import type { AnswerStatus } from '@/types';
-import { CheckCircle2, Circle, Eye, Pencil, Flag, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface MobileQuestionDrawerProps {
   isOpen: boolean;
@@ -33,11 +33,14 @@ export function MobileQuestionDrawer({
   onNavigate,
   stats,
 }: MobileQuestionDrawerProps) {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(isOpen);
+
+  if (isOpen && !mounted) {
+    setMounted(true);
+  }
 
   useEffect(() => {
     if (isOpen) {
-      setMounted(true);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -66,7 +69,7 @@ export function MobileQuestionDrawer({
       {/* Drawer */}
       <div
         className={cn(
-          'fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl shadow-2xl transition-transform duration-300 ease-out max-h-[75vh] overflow-y-auto',
+          'fixed bottom-0 left-0 right-0 z-50 bg-card rounded-t-2xl shadow-2xl transition-transform duration-300 ease-out max-h-[75vh] overflow-y-auto',
           isOpen ? 'translate-y-0' : 'translate-y-full'
         )}
         onTransitionEnd={() => { if (!isOpen) setMounted(false); }}

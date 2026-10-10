@@ -4,16 +4,18 @@
 // ============================================================
 
 import { openDB, type IDBPDatabase } from 'idb';
-import type { Answer, ExamSession, StickyNote } from '@/types';
+import type { Answer, AnswerEvaluation, ExamSession, StickyNote, Question } from '@/types';
 
 const DB_NAME = 'samayyudh-v2';
-const DB_VERSION = 1;
+const DB_VERSION = 3;
 
 interface SamayYudhDB {
   sessions: ExamSession;
   answers: Answer;
   sticky_notes: StickyNote;
+  evaluations: AnswerEvaluation;
   sync_queue: SyncQueueItem;
+  questions: Question;
 }
 
 interface SyncQueueItem {
@@ -44,9 +46,17 @@ function getDB() {
           const noteStore = db.createObjectStore('sticky_notes', { keyPath: 'id' });
           noteStore.createIndex('by_session', 'session_id');
         }
+        if (!db.objectStoreNames.contains('evaluations')) {
+          const evalStore = db.createObjectStore('evaluations', { keyPath: 'id' });
+          evalStore.createIndex('by_answer', 'answer_id');
+          evalStore.createIndex('by_question', 'question_id');
+        }
         if (!db.objectStoreNames.contains('sync_queue')) {
           const syncStore = db.createObjectStore('sync_queue', { keyPath: 'id' });
           syncStore.createIndex('by_synced', 'synced');
+        }
+        if (!db.objectStoreNames.contains('questions')) {
+          db.createObjectStore('questions', { keyPath: 'id' });
         }
       },
     });
@@ -147,3 +157,70 @@ export async function markSynced(id: string): Promise<void> {
     await db.put('sync_queue', item);
   }
 }
+
+// --- Evaluation Operations ---
+
+export async function saveEvaluation(evaluation: AnswerEvaluation): Promise<void> {
+  const db = await getDB();
+  if (!db) return;
+  await db.put('evaluations', evaluation);
+}
+
+export async function getEvaluationByQuestion(questionId: string): Promise<AnswerEvaluation | undefined> {
+  const db = await getDB();
+  if (!db) return undefined;
+  const results = await db.getAllFromIndex('evaluations', 'by_question', questionId);
+  return results[0]; // Latest evaluation for this question
+}
+
+export async function getEvaluationsByAnswerIds(answerIds: string[]): Promise<AnswerEvaluation[]> {
+  const db = await getDB();
+  if (!db) return [];
+  const all: AnswerEvaluation[] = [];
+  for (const id of answerIds) {
+    const results = await db.getAllFromIndex('evaluations', 'by_answer', id);
+    all.push(...results);
+  }
+  return all;
+}
+
+export async function getAllEvaluations(): Promise<AnswerEvaluation[]> {
+  const db = await getDB();
+  if (!db) return [];
+  return db.getAll('evaluations');
+}
+
+// --- Bulk Operations ---
+
+export async function getAllAnswers(): Promise<Answer[]> {
+  const db = await getDB();
+  if (!db) return [];
+  return db.getAll('answers');
+}
+
+export async function getAllStickyNotes(): Promise<StickyNote[]> {
+  const db = await getDB();
+  if (!db) return [];
+  return db.getAll('sticky_notes');
+}
+
+// --- Custom Question Operations ---
+
+export async function saveCustomQuestion(question: Question): Promise<void> {
+  const db = await getDB();
+  if (!db) return;
+  await db.put('questions', question);
+}
+
+export async function getAllCustomQuestions(): Promise<Question[]> {
+  const db = await getDB();
+  if (!db) return [];
+  return db.getAll('questions');
+}
+
+export async function deleteCustomQuestion(id: string): Promise<void> {
+  const db = await getDB();
+  if (!db) return;
+  await db.delete('questions', id);
+}
+

@@ -2,12 +2,15 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
-  Clock, Hash, Award, ChevronRight, ChevronLeft, Settings2
+  Clock, ChevronRight, ChevronLeft
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { EXAM_CATEGORIES, EXAM_MODES, EXAM_DURATIONS } from '@/lib/constants';
+import { NewspaperBattleSummary } from '@/components/practice/NewspaperBattleSummary';
+import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import type { ExamMode } from '@/types';
 
 export default function PracticePage() {
@@ -23,7 +26,11 @@ export default function PracticePage() {
   const questionCount = modeConfig?.questionCount || customCount;
   const durationConfig = EXAM_DURATIONS.find(d => d.seconds === selectedDuration);
 
+  const [isStarting, setIsStarting] = useState(false);
+  const [finished, setFinished] = useState(false);
+
   const handleStart = () => {
+    setIsStarting(true);
     // Build session params and navigate to exam
     const params = new URLSearchParams({
       exam: selectedExam || 'UNIVERSITY',
@@ -31,8 +38,27 @@ export default function PracticePage() {
       questions: String(questionCount),
       duration: String(selectedDuration || 3600),
     });
-    router.push(`/exam/session?${params.toString()}`);
+    
+    // Simulate loading time so user can see the loading screen
+    setTimeout(() => {
+      setFinished(true);
+      setTimeout(() => {
+        router.push(`/exam/session?${params.toString()}`);
+      }, 800);
+    }, 2000);
   };
+
+  if (isStarting) {
+    return (
+      <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4">
+        <OmnitrixLoader 
+          finished={finished} 
+          text="PREPARING EXAM..." 
+          logoUrl={selectedExam ? EXAM_CATEGORIES.find(c => c.code === selectedExam)?.logo : undefined}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-3xl mx-auto px-4 lg:px-6 py-6 md:py-10">
@@ -86,10 +112,14 @@ export default function PracticePage() {
                     'flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-left',
                     selectedExam === cat.code
                       ? 'border-brand-500 bg-brand-50 shadow-sm'
-                      : 'border-border bg-white hover:border-brand-200 hover:shadow-sm',
+                      : 'border-border bg-card hover:border-brand-200 hover:shadow-sm',
                   )}
                 >
-                  <span className="text-2xl">{cat.icon}</span>
+                  {cat.logo ? (
+                    <Image src={cat.logo} alt={cat.name} width={32} height={32} className="w-8 h-8 rounded-full object-contain shrink-0" />
+                  ) : (
+                    <span className="text-2xl shrink-0">{cat.icon}</span>
+                  )}
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-foreground truncate">{cat.name}</p>
                     <p className="text-xs text-stone-500 truncate">{cat.description}</p>
@@ -113,7 +143,7 @@ export default function PracticePage() {
                     'flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-left',
                     selectedMode === mode.mode
                       ? 'border-brand-500 bg-brand-50'
-                      : 'border-border bg-white hover:border-brand-200',
+                      : 'border-border bg-card hover:border-brand-200',
                   )}
                 >
                   <span className="text-2xl">{mode.icon}</span>
@@ -128,7 +158,7 @@ export default function PracticePage() {
               ))}
             </div>
             {selectedMode === 'custom' && (
-              <div className="bg-white rounded-xl border border-border p-4">
+              <div className="bg-card rounded-xl border border-border p-4">
                 <label className="text-sm font-medium text-foreground block mb-2">Number of Questions</label>
                 <input
                   type="number"
@@ -164,7 +194,7 @@ export default function PracticePage() {
                     'flex flex-col items-center gap-1 p-4 rounded-xl border-2 transition-all',
                     selectedDuration === dur.seconds
                       ? 'border-brand-500 bg-brand-50'
-                      : 'border-border bg-white hover:border-brand-200',
+                      : 'border-border bg-card hover:border-brand-200',
                   )}
                 >
                   <Clock className="w-5 h-5 text-brand-600" />
@@ -181,33 +211,15 @@ export default function PracticePage() {
         {/* Step 3: Confirm */}
         {step === 3 && (
           <div className="space-y-6">
-            <h2 className="text-lg font-semibold text-foreground">Battle Summary</h2>
-            <div className="bg-white rounded-2xl border border-border p-6 space-y-4">
-              <div className="flex items-center justify-between py-2 border-b border-border">
-                <span className="text-sm text-stone-500">Exam</span>
-                <span className="text-sm font-semibold flex items-center gap-2">
-                  {examCategory?.icon} {examCategory?.name || 'University'}
-                </span>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b border-border">
-                <span className="text-sm text-stone-500">Mode</span>
-                <span className="text-sm font-semibold flex items-center gap-2">
-                  {modeConfig?.icon} {modeConfig?.label}
-                </span>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b border-border">
-                <span className="text-sm text-stone-500 flex items-center gap-1"><Hash className="w-3.5 h-3.5" /> Questions</span>
-                <span className="text-sm font-semibold">{questionCount}</span>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b border-border">
-                <span className="text-sm text-stone-500 flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Duration</span>
-                <span className="text-sm font-semibold">{durationConfig?.label}</span>
-              </div>
-              <div className="flex items-center justify-between py-2">
-                <span className="text-sm text-stone-500 flex items-center gap-1"><Award className="w-3.5 h-3.5" /> Estimated Marks</span>
-                <span className="text-sm font-semibold">~{questionCount * 5}</span>
-              </div>
-            </div>
+            <NewspaperBattleSummary
+              examCode={selectedExam}
+              examName={examCategory?.name || 'University'}
+              modeName={modeConfig?.label || 'Quick Battle'}
+              modeKey={selectedMode || 'quick_battle'}
+              questionCount={questionCount}
+              durationLabel={durationConfig?.label || '30 minutes'}
+              estimatedMarks={questionCount * 5}
+            />
 
             <div className="flex gap-3">
               <button

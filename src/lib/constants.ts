@@ -10,13 +10,23 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     name: 'GATE',
     description: 'Graduate Aptitude Test in Engineering',
     icon: '🎓',
+    logo: '/logos/gate.jpg',
     exams: [],
   },
   {
-    code: 'ENGINEERING_ENTRANCE',
-    name: 'JEE',
-    description: 'Joint Entrance Examination',
+    code: 'JEE_MAINS',
+    name: 'JEE Mains',
+    description: 'Joint Entrance Examination — Mains',
     icon: '🚀',
+    logo: '/logos/jee_mains.png',
+    exams: [],
+  },
+  {
+    code: 'JEE_ADVANCED',
+    name: 'JEE Advanced',
+    description: 'Joint Entrance Examination — Advanced (IIT)',
+    icon: '⭐',
+    logo: '/logos/jee_advanced.jpg',
     exams: [],
   },
   {
@@ -24,6 +34,7 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     name: 'WBJEE',
     description: 'West Bengal Joint Entrance Examination',
     icon: '📐',
+    logo: '/logos/wbjee.jpg',
     exams: [],
   },
   {
@@ -31,6 +42,7 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     name: 'UPSC',
     description: 'Union Public Service Commission',
     icon: '🏛️',
+    logo: '/logos/upsc.jpg',
     exams: [],
   },
   {
@@ -38,6 +50,7 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     name: 'University',
     description: 'University & College Examinations',
     icon: '🏫',
+    logo: '/logos/university.jpg',
     exams: [],
   },
   {
@@ -45,6 +58,7 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     name: 'Competitive Exams',
     description: 'SSC · Banking · Railway · CAT · State Exams',
     icon: '⚔️',
+    logo: '/logos/ssc.jpg',
     exams: [],
   },
   {
@@ -52,6 +66,7 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     name: 'NEET',
     description: 'National Eligibility cum Entrance Test',
     icon: '🩺',
+    logo: '/logos/neet.jpg',
     exams: [],
   },
   {

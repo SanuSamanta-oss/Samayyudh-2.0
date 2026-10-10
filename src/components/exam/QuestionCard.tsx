@@ -41,7 +41,7 @@ export function QuestionCard({ question, answer, questionIndex, totalQuestions }
       </div>
 
       {/* Question Text */}
-      <div className="bg-white border border-border rounded-xl p-5 md:p-6">
+      <div className="bg-card border border-border rounded-xl p-5 md:p-6">
         <p className="text-base md:text-lg leading-relaxed text-foreground">
           {question.question_text}
         </p>

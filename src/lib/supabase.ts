@@ -1,26 +1,15 @@
 // ============================================================
-// SamayYudh 2.0 — Supabase Client (Browser)
+// SamayYudh 2.0 — Supabase Client (Legacy Compatibility)
+// This file re-exports from the new SSR-safe module.
+// New code should import from '@/lib/supabase/client' directly.
 // ============================================================
 
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 
 /**
- * Check if Supabase is configured with real credentials.
- * When not configured, the app falls back to local-only mode.
+ * @deprecated Use `createClient()` from '@/lib/supabase/client' instead.
+ * This is kept for backward compatibility with existing code.
  */
-export const isSupabaseConfigured =
-  supabaseUrl.length > 0 &&
-  supabaseAnonKey.length > 0 &&
-  supabaseUrl.startsWith('https://');
+export const supabase = createClient();
 
-/**
- * Supabase browser client.
- * Safe to import even when credentials are missing — guarded by `isSupabaseConfigured`.
- */
-export const supabase = createClient(
-  supabaseUrl || 'https://placeholder.supabase.co',
-  supabaseAnonKey || 'placeholder-key',
-);
+export { isSupabaseConfigured };

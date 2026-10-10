@@ -43,7 +43,7 @@ export function AnswerEditor({
           disabled={disabled}
           placeholder={placeholder}
           className={cn(
-            'w-full min-h-[240px] p-4 md:p-5 rounded-xl border border-border bg-white',
+            'w-full min-h-[240px] p-4 md:p-5 rounded-xl border border-border bg-card',
             'text-base leading-relaxed resize-none',
             'focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400',
             'transition-all duration-200',

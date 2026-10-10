@@ -1,12 +1,19 @@
 'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Clock, BookOpen, BarChart3, Brain, Shield, Smartphone,
-  ChevronRight, Timer, PenLine, Target, Zap, Award,
+  BookOpen, BarChart3, Brain,
+  ChevronRight, PenLine,
   GraduationCap, FileText
 } from 'lucide-react';
+import { FeatureIdCards } from '@/components/home/FeatureIdCards';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { OmnitrixLoader } from '@/components/OmnitrixLoader';
+import { DonationTicket } from '@/components/home/DonationTicket';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -18,27 +25,30 @@ const fadeUp = {
 
 
 const examCategories = [
-  { name: 'GATE', desc: 'Graduate Aptitude Test', icon: '🎓', color: 'from-indigo-500 to-violet-500' },
-  { name: 'JEE', desc: 'Engineering Entrance', icon: '🚀', color: 'from-blue-500 to-cyan-500' },
-  { name: 'WBJEE', desc: 'WB Joint Entrance', icon: '📐', color: 'from-emerald-500 to-teal-500' },
-  { name: 'UPSC', desc: 'Civil Services', icon: '🏛️', color: 'from-amber-500 to-orange-500' },
-  { name: 'University', desc: 'College Exams', icon: '🏫', color: 'from-rose-500 to-pink-500' },
-  { name: 'Competitive', desc: 'SSC · Banking · Railway', icon: '⚔️', color: 'from-purple-500 to-fuchsia-500' },
+  { name: 'GATE', desc: 'Graduate Aptitude Test', icon: '🎓', logo: '/logos/gate.jpg', color: 'from-indigo-500 to-violet-500' },
+  { name: 'JEE', desc: 'Engineering Entrance', icon: '🚀', logo: '/logos/jee.jpg', color: 'from-blue-500 to-cyan-500' },
+  { name: 'WBJEE', desc: 'WB Joint Entrance', icon: '📐', logo: '/logos/wbjee.jpg', color: 'from-emerald-500 to-teal-500' },
+  { name: 'UPSC', desc: 'Civil Services', icon: '🏛️', logo: '/logos/upsc.jpg', color: 'from-amber-500 to-orange-500' },
+  { name: 'University', desc: 'College Exams', icon: '🏫', logo: '/logos/university.jpg', color: 'from-rose-500 to-pink-500' },
+  { name: 'Competitive', desc: 'SSC · Banking · Railway', icon: '⚔️', logo: '/logos/ssc.jpg', color: 'from-purple-500 to-fuchsia-500' },
 ];
 
-const features = [
-  { icon: Timer, title: 'Persistent Timer', desc: 'Survives refresh, tab switches, and network drops. Your time never lies.' },
-  { icon: PenLine, title: 'Real Answer Writing', desc: 'Write full answers, not just click options. Track word count and structure.' },
-  { icon: Target, title: 'Time Pressure Analysis', desc: 'Know exactly where you spend too much — or too little — time.' },
-  { icon: Brain, title: 'AI Evaluation', desc: 'Gemini-powered analysis of correctness, completeness, and exam-readiness.' },
-  { icon: Zap, title: 'Auto-Save & Offline', desc: 'Answers save automatically. IndexedDB backup keeps data safe offline.' },
-  { icon: Award, title: 'Half Century & Century', desc: 'Milestone celebrations at 50 and 100 questions. Track your exam readiness.' },
-  { icon: BookOpen, title: 'Multi-Exam Support', desc: 'GATE, JEE, UPSC, University — one engine, every exam pattern.' },
-  { icon: BarChart3, title: 'Deep Analytics', desc: 'Score by topic, time per question, weak areas, and readiness metrics.' },
-  { icon: Shield, title: 'Secure & Private', desc: 'Your data is yours. RLS protection. No exposed API keys.' },
-];
 
 export default function LandingPage() {
+  const router = useRouter();
+  const [loadingExam, setLoadingExam] = useState<string | null>(null);
+  const [finished, setFinished] = useState(false);
+
+  const handleExamClick = (name: string) => {
+    setLoadingExam(name);
+    setTimeout(() => {
+      setFinished(true);
+      setTimeout(() => {
+        router.push('/practice');
+      }, 800); // 800ms for unlocked animation
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
@@ -46,9 +56,10 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-4 lg:px-6 flex items-center justify-between h-14">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-xl font-bold text-gradient-brand">সময়যুদ্ধ</span>
-            <span className="text-xs font-semibold text-brand-600 bg-brand-50 px-1.5 py-0.5 rounded-md">2.0</span>
+            <span className="text-xs font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1.5 py-0.5 rounded-md">2.0</span>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 relative">
+            <ThemeToggle />
             <Link href="/auth" className="text-sm font-medium text-muted hover:text-foreground transition-colors px-3 py-2">
               Log In
             </Link>
@@ -58,6 +69,56 @@ export default function LandingPage() {
             >
               Get Started
             </Link>
+
+            {/* Decorative Hanging Bulb */}
+            <div 
+              className="absolute top-[100%] right-4 md:right-8 w-16 h-32 md:w-20 md:h-40 pointer-events-none z-50 animate-bulb-sway" 
+              aria-hidden="true"
+            >
+               <svg viewBox="0 0 100 200" className="w-full h-full animate-bulb-flicker" preserveAspectRatio="xMidYMin meet">
+                 {/* Wire */}
+                 <line x1="50" y1="0" x2="50" y2="73" className="stroke-stone-400 dark:stroke-[#9ca3af]" strokeWidth="0.5" />
+                 
+                 {/* Top Loop */}
+                 <rect x="49" y="73" width="2" height="3" className="fill-stone-500 dark:fill-[#6b7280]" />
+                 
+                 {/* Metallic Dome Cap */}
+                 <path d="M 43 80 Q 50 74 57 80 Z" className="fill-stone-400 dark:fill-[#9ca3af]" />
+                 
+                 {/* Socket Cylinder */}
+                 <rect x="43" y="80" width="14" height="15" className="fill-stone-600 dark:fill-[#374151]" />
+                 {/* Socket Highlight */}
+                 <rect x="44" y="80" width="2" height="15" className="fill-stone-400 dark:fill-[#9ca3af] opacity-80" />
+                 
+                 {/* Socket Bottom Ring */}
+                 <rect x="41" y="94" width="18" height="2" className="fill-stone-500 dark:fill-[#6b7280]" rx="0.5" />
+                 
+                 {/* Dark/Transparent Glass Neck */}
+                 <rect x="42.5" y="96" width="15" height="19" className="fill-stone-900/5 stroke-stone-900/10 dark:fill-white/5 dark:stroke-white/15" strokeWidth="0.5" />
+                 {/* Glass Neck Highlight */}
+                 <rect x="43.5" y="96" width="1.5" height="19" className="fill-white/80 dark:fill-white/15" />
+                 
+                 {/* Glowing Bulb Glass */}
+                 <path d="M 42 115
+                          C 42 118, 18 130, 18 155
+                          C 18 178, 32 190, 50 190
+                          C 68 190, 82 178, 82 155
+                          C 82 130, 58 118, 58 115
+                          Z"
+                       fill="url(#bulbGlow)"
+                       className="stroke-stone-300 dark:stroke-transparent"
+                       strokeWidth="0.5" />
+                 
+                 <defs>
+                   <radialGradient id="bulbGlow" cx="50%" cy="70%" r="50%">
+                     <stop offset="0%" stopColor="#ffffff" />
+                     <stop offset="35%" stopColor="#fef08a" />
+                     <stop offset="75%" stopColor="#eab308" />
+                     <stop offset="100%" stopColor="#ca8a04" stopOpacity="0.8" />
+                   </radialGradient>
+                 </defs>
+               </svg>
+            </div>
           </div>
         </div>
       </header>
@@ -65,9 +126,9 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         {/* Background elements */}
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-50/50 via-transparent to-transparent" />
-        <div className="absolute top-20 left-1/4 w-72 h-72 bg-brand-200/20 rounded-full blur-3xl" />
-        <div className="absolute top-40 right-1/4 w-96 h-96 bg-accent-200/20 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-50/50 via-transparent to-transparent dark:from-brand-950/40 dark:via-transparent dark:to-transparent" />
+        <div className="absolute top-20 left-1/4 w-72 h-72 bg-brand-200/20 dark:bg-brand-900/30 rounded-full blur-3xl" />
+        <div className="absolute top-40 right-1/4 w-96 h-96 bg-accent-200/20 dark:bg-accent-600/10 rounded-full blur-3xl" />
 
         <div className="relative max-w-6xl mx-auto px-4 lg:px-6 pt-16 md:pt-24 pb-16 md:pb-20">
           <div className="text-center max-w-3xl mx-auto space-y-6">
@@ -81,19 +142,9 @@ export default function LandingPage() {
               সময়যুদ্ধ 2.0
             </motion.h1>
 
-            {/* English title */}
-            <motion.p
-              className="text-lg md:text-xl font-medium text-muted"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              SamayYudh 2.0
-            </motion.p>
-
             {/* Tagline */}
             <motion.h2
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mt-4 md:mt-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -122,14 +173,14 @@ export default function LandingPage() {
             >
               <Link
                 href="/practice"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold text-white bg-gradient-brand hover:opacity-90 transition-all shadow-lg shadow-brand-500/25"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold text-white bg-gradient-brand hover:!bg-white hover:!bg-none hover:text-black transition-all shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.8)]"
               >
                 Start Your First Battle
                 <ChevronRight className="w-5 h-5" />
               </Link>
               <Link
                 href="/questions"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold text-brand-700 bg-brand-50 hover:bg-brand-100 transition-all border border-brand-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold text-brand-700 bg-brand-50 hover:!bg-white hover:text-black transition-all border border-brand-200 hover:border-transparent hover:shadow-[0_0_30px_rgba(255,255,255,0.8)]"
               >
                 <BookOpen className="w-5 h-5" />
                 Explore Question Bank
@@ -165,16 +216,26 @@ export default function LandingPage() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Link
-                href="/practice"
-                className="group flex flex-col items-center gap-3 p-5 md:p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-brand-200 transition-all duration-300"
+              <button
+                onClick={() => handleExamClick(cat.name)}
+                className="w-full text-left group flex flex-col items-center gap-3 p-5 md:p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-brand-200 transition-all duration-300"
               >
-                <span className="text-3xl">{cat.icon}</span>
+                {'logo' in cat && cat.logo ? (
+                  <Image
+                    src={cat.logo}
+                    alt={`${cat.name} logo`}
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 rounded-full object-contain"
+                  />
+                ) : (
+                  <span className="text-3xl">{cat.icon}</span>
+                )}
                 <div className="text-center">
                   <h4 className="font-semibold text-foreground group-hover:text-brand-600 transition-colors">{cat.name}</h4>
                   <p className="text-xs text-muted mt-0.5">{cat.desc}</p>
                 </div>
-              </Link>
+              </button>
             </motion.div>
           ))}
         </div>
@@ -214,29 +275,13 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="max-w-6xl mx-auto px-4 lg:px-6 py-16 md:py-20">
-        <div className="text-center mb-12">
+      <section className="max-w-6xl mx-auto px-4 lg:px-6 py-16 md:py-20 overflow-hidden">
+        <div className="text-center mb-16">
           <h3 className="text-2xl md:text-3xl font-bold text-foreground">Built for Real Exams</h3>
           <p className="text-muted mt-2">Not a chatbot. An exam time simulator.</p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((f, i) => (
-            <motion.div
-              key={f.title}
-              custom={i}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="group p-5 rounded-2xl border border-border bg-card hover:shadow-md hover:border-brand-200 transition-all duration-300"
-            >
-              <div className="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center mb-3 group-hover:bg-brand-100 transition-colors">
-                <f.icon className="w-5 h-5 text-brand-600" />
-              </div>
-              <h4 className="font-semibold text-foreground mb-1">{f.title}</h4>
-              <p className="text-sm text-muted leading-relaxed">{f.desc}</p>
-            </motion.div>
-          ))}
+        <div className="flex justify-center pb-8">
+          <FeatureIdCards />
         </div>
       </section>
 
@@ -267,7 +312,7 @@ export default function LandingPage() {
                   <div className="w-10 h-10 rounded-full bg-gradient-brand flex items-center justify-center text-white font-bold text-sm">
                     {item.step}
                   </div>
-                  {i < 4 && <div className="w-0.5 flex-1 bg-brand-200 mt-2" />}
+                  {i < 4 && <div className="w-0.5 flex-1 bg-brand-200 dark:bg-brand-800 mt-2" />}
                 </div>
                 <div className="pb-4">
                   <h4 className="font-semibold text-foreground flex items-center gap-2">
@@ -297,13 +342,16 @@ export default function LandingPage() {
           </p>
           <Link
             href="/practice"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-semibold text-brand-700 bg-white hover:bg-brand-50 transition-colors shadow-lg"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-semibold text-brand-700 bg-card hover:!bg-white hover:text-black transition-all shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.8)]"
           >
             Start Your First Battle
             <ChevronRight className="w-5 h-5" />
           </Link>
         </motion.div>
       </section>
+
+      {/* Donation Ticket Section */}
+      <DonationTicket />
 
       {/* Footer */}
       <footer className="border-t border-border bg-card py-8">
@@ -315,6 +363,18 @@ export default function LandingPage() {
           <p>Built with 💜 for students who refuse to lose to time.</p>
         </div>
       </footer>
+      <AnimatePresence>
+        {loadingExam && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4"
+          >
+            <OmnitrixLoader finished={finished} text={`PREPARING ${loadingExam.toUpperCase()}...`} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

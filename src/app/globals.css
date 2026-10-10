@@ -10,10 +10,10 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Brand Colors */
-  --color-brand-50: #EEF2FF;
-  --color-brand-100: #E0E7FF;
-  --color-brand-200: #C7D2FE;
+  /* Brand Colors — light end uses vars for dark-mode swap */
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
   --color-brand-300: #A5B4FC;
   --color-brand-400: #818CF8;
   --color-brand-500: #6366F1;
@@ -23,13 +23,15 @@
   --color-brand-900: #312E81;
   --color-brand-950: #1E1B4B;
 
-  --color-accent-50: #F5F3FF;
-  --color-accent-100: #EDE9FE;
-  --color-accent-200: #DDD6FE;
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
   --color-accent-300: #C4B5FD;
   --color-accent-400: #A78BFA;
   --color-accent-500: #8B5CF6;
   --color-accent-600: #7C3AED;
+
+  --color-stone-50: var(--stone-50);
 
   --color-success-50: var(--success-50);
   --color-success-500: var(--success-500);
@@ -56,6 +58,19 @@
   --foreground: #1C1917;
   --radius: 0.625rem;
 
+  /* Brand light-end */
+  --brand-50: #EEF2FF;
+  --brand-100: #E0E7FF;
+  --brand-200: #C7D2FE;
+
+  /* Accent light-end */
+  --accent-50: #F5F3FF;
+  --accent-100: #EDE9FE;
+  --accent-200: #DDD6FE;
+
+  /* Stone light-end */
+  --stone-50: #FAFAF9;
+
   /* Semantic surface colors */
   --surface: #F5F5F4;
   --surface-2: #E7E5E4;
@@ -76,34 +91,51 @@
   --danger-50: #FEF2F2;
   --danger-500: #EF4444;
   --danger-600: #DC2626;
+
+  /* Newspaper ink */
+  --np-ink: #1a1610;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0C0A09;
-    --foreground: #FAFAF9;
+.dark {
+  --background: #0B1120;
+  --foreground: #E2E8F0;
 
-    /* Dark semantic surfaces */
-    --surface: #1C1917;
-    --surface-2: #292524;
-    --card: #1C1917;
-    --border: #44403C;
-    --border-hover: #57534E;
-    --muted: #A8A29E;
+  /* Brand light-end → deep navy-indigo in dark */
+  --brand-50: #131A2E;
+  --brand-100: #172242;
+  --brand-200: #1E2D5A;
 
-    /* Dark status colors */
-    --success-50: #052E16;
-    --success-500: #22C55E;
-    --success-600: #16A34A;
+  /* Accent light-end → deep navy-violet in dark */
+  --accent-50: #141428;
+  --accent-100: #1A1A3E;
+  --accent-200: #252050;
 
-    --warning-50: #422006;
-    --warning-500: #FBBF24;
-    --warning-600: #F59E0B;
+  /* Stone light-end → navy tint in dark */
+  --stone-50: #111B2E;
 
-    --danger-50: #450A0A;
-    --danger-500: #F87171;
-    --danger-600: #EF4444;
-  }
+  /* Dark semantic surfaces — deep navy blues */
+  --surface: #111B2E;
+  --surface-2: #162032;
+  --card: #111B2E;
+  --border: #1E2D45;
+  --border-hover: #2A3F5F;
+  --muted: #8B9DC3;
+
+  /* Dark status colors */
+  --success-50: #052E16;
+  --success-500: #22C55E;
+  --success-600: #16A34A;
+
+  --warning-50: #422006;
+  --warning-500: #FBBF24;
+  --warning-600: #F59E0B;
+
+  --danger-50: #450A0A;
+  --danger-500: #F87171;
+  --danger-600: #EF4444;
+
+  /* Newspaper ink */
+  --np-ink: #d5cfc0;
 }
 
 /* ============================================================
@@ -153,6 +185,8 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  padding-bottom: 0.15em; /* Prevents descenders from getting cut off */
+  margin-bottom: -0.15em; /* Offsets the padding so layout is unaffected */
 }
 
 .bg-gradient-brand {
@@ -170,18 +204,16 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  .glass {
-    background: rgba(28, 25, 23, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
+.dark .glass {
+  background: rgba(17, 27, 46, 0.75);
+  border: 1px solid rgba(30, 45, 69, 0.6);
 }
 
 .glass-dark {
-  background: rgba(12, 10, 9, 0.8);
+  background: rgba(11, 17, 32, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(30, 45, 69, 0.5);
 }
 
 /* Pulse animation for timer */
@@ -220,4 +252,186 @@ body {
 
 .font-bengali {
   font-family: 'Noto Sans Bengali', var(--font-sans), sans-serif;
+}
+
+/* ============================================================
+   ID Card Sway Animation
+   ============================================================ */
+
+@keyframes id-card-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+.id-card-sway {
+  animation: id-card-sway 4s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+/* ============================================================
+   Hanging Bulb Animations
+   ============================================================ */
+
+@keyframes bulb-sway {
+  0% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
+}
+
+@keyframes bulb-flicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 35px rgba(253, 224, 71, 0.4)) brightness(1); }
+  90% { opacity: 1; filter: drop-shadow(0 0 35px rgba(253, 224, 71, 0.4)) brightness(1); }
+  92% { opacity: 0.85; filter: drop-shadow(0 0 15px rgba(253, 224, 71, 0.2)) brightness(0.85); }
+  94% { opacity: 0.95; filter: drop-shadow(0 0 25px rgba(253, 224, 71, 0.35)) brightness(0.95); }
+  96% { opacity: 0.75; filter: drop-shadow(0 0 10px rgba(253, 224, 71, 0.15)) brightness(0.75); }
+  98% { opacity: 1; filter: drop-shadow(0 0 35px rgba(253, 224, 71, 0.4)) brightness(1); }
+}
+
+.animate-bulb-sway {
+  transform-origin: top center;
+  animation: bulb-sway 4s ease-in-out infinite;
+}
+
+.animate-bulb-flicker {
+  animation: bulb-flicker 7s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bulb-sway, .animate-bulb-flicker {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   Newspaper Battle Summary — Paper Effect
+   ============================================================ */
+
+.newspaper-paper {
+  background-color: #f5f0e8;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(0, 0, 0, 0.018) 28px,
+      rgba(0, 0, 0, 0.018) 29px
+    );
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 6px 20px rgba(0, 0, 0, 0.06),
+    inset 0 0 60px rgba(0, 0, 0, 0.03);
+  position: relative;
+}
+
+.newspaper-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.newspaper-paper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.02) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.dark .newspaper-paper {
+  background-color: #1a1e2a;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(255, 255, 255, 0.012) 28px,
+      rgba(255, 255, 255, 0.012) 29px
+    );
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 6px 20px rgba(0, 0, 0, 0.25),
+    inset 0 0 60px rgba(0, 0, 0, 0.15);
+}
+
+.dark .newspaper-paper::before {
+  opacity: 0.6;
+  filter: invert(1);
+}
+
+.dark .newspaper-paper::after {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.06) 100%
+  );
+}
+
+/* Newspaper typography */
+.newspaper-masthead {
+  font-family: 'Georgia', 'Times New Roman', 'Playfair Display', serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.newspaper-label {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.newspaper-value {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: 700;
+}
+
+.newspaper-rule {
+  border: none;
+  height: 1px;
+  background: #2a2520;
+  opacity: 0.2;
+}
+
+.dark .newspaper-rule {
+  background: #c8bfa8;
+  opacity: 0.15;
+}
+
+.newspaper-rule-thick {
+  border: none;
+  height: 2px;
+  background: #2a2520;
+  opacity: 0.7;
+}
+
+.dark .newspaper-rule-thick {
+  background: #c8bfa8;
+  opacity: 0.5;
+}
+
+.newspaper-rule-double {
+  border: none;
+  height: 0;
+  border-top: 2px solid;
+  border-bottom: 1px solid;
+  padding-top: 2px;
+  border-color: rgba(42, 37, 32, 0.6);
+}
+
+.dark .newspaper-rule-double {
+  border-color: rgba(200, 191, 168, 0.35);
 }

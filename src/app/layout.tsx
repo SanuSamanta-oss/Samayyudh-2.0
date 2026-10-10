@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,6 +18,24 @@ export const metadata: Metadata = {
   description:
     "Practice real exam questions under realistic time pressure. Write your answers, track your speed, and let AI tell you whether your answer is exam-ready. Supports GATE, JEE, WBJEE, UPSC, University, and more.",
   keywords: ["exam preparation", "time pressure", "GATE", "JEE", "WBJEE", "UPSC", "AI evaluation", "exam simulator"],
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "SamayYudh",
+  },
+  icons: {
+    icon: "/icon-512.jpg",
+    apple: "/icon-512.jpg",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#7c3aed",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -24,8 +43,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').then(function(reg){console.log('SW registered:',reg.scope)}).catch(function(err){console.log('SW error:',err)})})}`,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

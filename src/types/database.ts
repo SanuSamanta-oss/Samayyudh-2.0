@@ -6,6 +6,8 @@
 
 export type ExamCategoryCode =
   | 'ENGINEERING_ENTRANCE'
+  | 'JEE_MAINS'
+  | 'JEE_ADVANCED'
   | 'ENGINEERING'
   | 'STATE_ENTRANCE'
   | 'CIVIL_SERVICES'
@@ -23,6 +25,7 @@ export interface ExamCategory {
   name: string;
   description: string;
   icon: string;
+  logo?: string;
   exams: ExamConfig[];
 }
 
@@ -229,14 +232,28 @@ export interface AnswerEvaluation {
 
 // --- Sticky Notes ---
 
+export type StickyNoteColor = 'yellow' | 'orange' | 'seagreen' | 'white';
+
 export interface StickyNote {
   id: string;
   user_id: string;
   question_id: string;
   session_id: string;
   content: string;
+  color?: StickyNoteColor;
   created_at: string;
   updated_at: string;
+}
+
+/** In-session board note — pinned manually by the student during an exam. */
+export interface BoardNote {
+  id: string;
+  session_id: string;
+  question_id: string;   // which question it was pinned from
+  question_index: number;
+  content: string;
+  color: StickyNoteColor;
+  pinned_at: string;
 }
 
 // --- User ---

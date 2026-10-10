@@ -1,15 +1,24 @@
 'use client';
-import { Library, Search, Filter } from 'lucide-react';
+import { Library, Search } from 'lucide-react';
 import { questionBank } from '@/lib/questions';
-import { useState } from 'react';
+import * as localDB from '@/lib/store/local-db';
+import type { Question } from '@/types';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 export default function QuestionsPage() {
   const [search, setSearch] = useState('');
   const [filterMarks, setFilterMarks] = useState<number | null>(null);
   const [filterDifficulty, setFilterDifficulty] = useState<string | null>(null);
+  const [customQuestions, setCustomQuestions] = useState<Question[]>([]);
 
-  const filtered = questionBank.filter((q) => {
+  useEffect(() => {
+    localDB.getAllCustomQuestions().then(setCustomQuestions).catch(console.error);
+  }, []);
+
+  const allQuestions = [...questionBank, ...customQuestions];
+
+  const filtered = allQuestions.filter((q) => {
     if (search && !q.question_text.toLowerCase().includes(search.toLowerCase()) && !q.topic.toLowerCase().includes(search.toLowerCase())) return false;
     if (filterMarks && q.marks !== filterMarks) return false;
     if (filterDifficulty && q.difficulty !== filterDifficulty) return false;
@@ -20,7 +29,7 @@ export default function QuestionsPage() {
     <div className="max-w-6xl mx-auto px-4 lg:px-6 py-6 md:py-8 space-y-6">
       <div>
         <h1 className="text-2xl md:text-3xl font-bold text-foreground">Question Bank</h1>
-        <p className="text-stone-500 mt-1">{questionBank.length} questions available</p>
+        <p className="text-stone-500 mt-1">{allQuestions.length} questions available</p>
       </div>
 
       {/* Search + Filters */}
@@ -30,14 +39,14 @@ export default function QuestionsPage() {
           <input
             type="text" value={search} onChange={(e) => setSearch(e.target.value)}
             placeholder="Search questions or topics..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/30"
           />
         </div>
         <div className="flex gap-2">
           {[2, 5, 10].map((m) => (
             <button key={m} onClick={() => setFilterMarks(filterMarks === m ? null : m)}
               className={cn('px-3 py-2 rounded-lg text-sm font-medium border transition-colors',
-                filterMarks === m ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-border bg-white text-stone-600 hover:bg-stone-50'
+                filterMarks === m ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-border bg-card text-stone-600 hover:bg-stone-50'
               )}>
               {m} marks
             </button>
@@ -45,7 +54,7 @@ export default function QuestionsPage() {
           {['easy', 'medium', 'hard'].map((d) => (
             <button key={d} onClick={() => setFilterDifficulty(filterDifficulty === d ? null : d)}
               className={cn('px-3 py-2 rounded-lg text-sm font-medium border transition-colors capitalize',
-                filterDifficulty === d ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-border bg-white text-stone-600 hover:bg-stone-50'
+                filterDifficulty === d ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-border bg-card text-stone-600 hover:bg-stone-50'
               )}>
               {d}
             </button>
@@ -56,9 +65,11 @@ export default function QuestionsPage() {
       {/* Questions List */}
       <div className="space-y-3">
         {filtered.slice(0, 30).map((q) => (
-          <div key={q.id} className="p-4 rounded-xl border border-border bg-white hover:shadow-sm transition-shadow">
+          <div key={q.id} className="p-4 rounded-xl border border-border bg-card hover:shadow-sm transition-shadow">
             <div className="flex items-start gap-3">
-              <span className="text-xs font-mono text-stone-400 mt-0.5 shrink-0">Q{q.question_number}</span>
+              <span className="text-xs font-mono text-stone-400 mt-0.5 shrink-0">
+                {q.id.startsWith('custom_') ? 'Custom' : `Q${q.question_number}`}
+              </span>
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-foreground leading-relaxed">{q.question_text}</p>
                 <div className="flex flex-wrap items-center gap-2 mt-2">

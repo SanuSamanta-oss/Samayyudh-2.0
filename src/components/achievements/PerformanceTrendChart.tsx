@@ -91,7 +91,8 @@ export function PerformanceTrendChart({
               tickLine={false}
             />
             <YAxis
-              domain={[yMin, yMax]}
+              domain={[0, 80]}
+              ticks={[0, 20, 40, 60, 80]}
               tick={{ fontSize: 11, fill: '#888888' }}
               tickFormatter={(v) => `${v}%`}
               axisLine={false}

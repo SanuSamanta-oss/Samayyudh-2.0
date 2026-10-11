@@ -1,17 +1,15 @@
 'use client';
 
 // ============================================================
-// SamayYudh 2.0 — Procedural Spider-Web SVG Renderer
-// Generates realistic, irregular spiderweb geometry using
-// seeded pseudo-random math. Multiple web clusters with
-// varied radial patterns, connecting threads, and loose
-// strands for a haunted-house atmosphere.
+// SamayYudh 2.0 — Photorealistic Spider-Web SVG Renderer
+// Inspired directly by atmospheric haunted cobweb photography:
+// Dense gossamer veils, illuminated primary silk tension cables,
+// organic polygonal sheets, and delicate dew glints.
 // ============================================================
 
 import React, { useMemo } from 'react';
 
-// ── Seeded PRNG ─────────────────────────────────────────────
-// Mulberry32 — deterministic, so geometry is stable per-render
+// ── Seeded PRNG (Mulberry32) ────────────────────────────────
 function createRng(seed: number) {
   let s = seed | 0;
   return () => {
@@ -23,238 +21,261 @@ function createRng(seed: number) {
 }
 
 // ── Types ───────────────────────────────────────────────────
-interface Point { x: number; y: number }
-
-interface WebCluster {
-  center: Point;
-  anchorAngles: number[];
-  anchorLengths: number[];
-  rings: number[];   // radial distances for connecting rings
-  id: string;
-  layer: number;     // 0 = background, 1 = mid, 2 = foreground
+interface Point {
+  x: number;
+  y: number;
 }
 
 interface StrandPath {
   d: string;
   opacity: number;
   strokeWidth: number;
-  layer: number;
-  delay: number;      // animation delay in seconds
-  duration: number;    // animation duration for draw-in
-  length: number;      // approximate path length for dasharray
+  layer: number; // 0 = background blur, 1 = midground, 2 = foreground glow
+  delay: number; // seconds
+  duration: number; // seconds
+  length: number;
+  id: string;
+  color?: string;
+}
+
+interface Glint {
+  cx: number;
+  cy: number;
+  r: number;
+  delay: number;
   id: string;
 }
 
-// ── Geometry helpers ────────────────────────────────────────
-function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
+}
 
 function polarToCart(cx: number, cy: number, angle: number, radius: number): Point {
   return { x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius };
 }
 
-// ── Web generation ──────────────────────────────────────────
-function generateClusters(
-  w: number, h: number, isMobile: boolean, rng: () => number
-): WebCluster[] {
-  const clusters: WebCluster[] = [];
-
-  // Utility to push a cluster
-  const addCluster = (
-    cx: number, cy: number,
-    numSpokes: number, minLen: number, maxLen: number,
-    numRings: number, layer: number, id: string
-  ) => {
-    const angles: number[] = [];
-    const lengths: number[] = [];
-    let angle = rng() * Math.PI * 2;
-    for (let i = 0; i < numSpokes; i++) {
-      angle += (Math.PI * 2 / numSpokes) * (0.7 + rng() * 0.6);
-      angles.push(angle);
-      lengths.push(lerp(minLen, maxLen, 0.4 + rng() * 0.6));
-    }
-    const rings: number[] = [];
-    for (let r = 0; r < numRings; r++) {
-      rings.push(lerp(minLen * 0.2, maxLen * 0.9, (r + 0.5 + rng() * 0.3) / numRings));
-    }
-    clusters.push({ center: { x: cx, y: cy }, anchorAngles: angles, anchorLengths: lengths, rings, id, layer });
-  };
-
-  // Large corner webs
-  addCluster(w * 0.03, h * 0.02, isMobile ? 8 : 14, w * 0.08, w * 0.32, isMobile ? 3 : 5, 1, 'tl');
-  addCluster(w * 0.97, h * 0.04, isMobile ? 7 : 12, w * 0.07, w * 0.28, isMobile ? 3 : 5, 1, 'tr');
-
-  // Central suspended web (slightly off-center)
-  if (!isMobile) {
-    addCluster(w * (0.45 + rng() * 0.15), h * (0.35 + rng() * 0.15), 16, w * 0.06, w * 0.22, 6, 2, 'center');
-  }
-
-  // Side webs
-  addCluster(w * 0.02, h * (0.4 + rng() * 0.2), isMobile ? 5 : 8, w * 0.04, w * 0.18, isMobile ? 2 : 4, 0, 'left');
-  addCluster(w * 0.98, h * (0.55 + rng() * 0.2), isMobile ? 5 : 8, w * 0.04, w * 0.16, isMobile ? 2 : 4, 0, 'right');
-
-  // Bottom partial web
-  addCluster(w * (0.3 + rng() * 0.4), h * 0.97, isMobile ? 5 : 9, w * 0.05, w * 0.2, isMobile ? 2 : 3, 1, 'bottom');
-
-  // Background large sparse web
-  if (!isMobile) {
-    addCluster(w * 0.7, h * 0.15, 10, w * 0.1, w * 0.35, 4, 0, 'bg');
-  }
-
-  return clusters;
-}
-
-function generateStrands(
-  clusters: WebCluster[], w: number, h: number, isMobile: boolean, rng: () => number
-): StrandPath[] {
+// ── Web Generation ──────────────────────────────────────────
+function generateHauntedWebs(
+  w: number,
+  h: number,
+  isMobile: boolean,
+  rng: () => number
+): { strands: StrandPath[]; glints: Glint[] } {
   const strands: StrandPath[] = [];
-  let strandIdx = 0;
+  let strandCounter = 0;
 
-  const layerProps = (layer: number) => {
-    if (layer === 0) return { opRange: [0.25, 0.5], swRange: [0.5, 1.0] };
-    if (layer === 1) return { opRange: [0.35, 0.65], swRange: [0.6, 1.4] };
-    return { opRange: [0.5, 0.85], swRange: [0.8, 1.8] };
-  };
-
-  for (const cluster of clusters) {
-    const { center, anchorAngles, anchorLengths, rings, layer, id } = cluster;
-    const { opRange, swRange } = layerProps(layer);
-
-    // ── Radial spokes ───────────────────────────────────
-    for (let i = 0; i < anchorAngles.length; i++) {
-      const angle = anchorAngles[i];
-      const len = anchorLengths[i];
-      const end = polarToCart(center.x, center.y, angle, len);
-
-      // Add slight curve via control point
-      const wobble = (rng() - 0.5) * len * 0.12;
-      const mid = polarToCart(center.x, center.y, angle, len * 0.5);
-      const perpAngle = angle + Math.PI / 2;
-      const cp = { x: mid.x + Math.cos(perpAngle) * wobble, y: mid.y + Math.sin(perpAngle) * wobble };
-
-      const d = `M ${center.x.toFixed(1)} ${center.y.toFixed(1)} Q ${cp.x.toFixed(1)} ${cp.y.toFixed(1)} ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;
-      const approxLen = len * 1.05;
-
-      strands.push({
-        d,
-        opacity: lerp(opRange[0], opRange[1], rng()),
-        strokeWidth: lerp(swRange[0], swRange[1], rng()),
-        layer,
-        delay: 0.1 + rng() * 1.5,      // Phase 1 timing
-        duration: 0.8 + rng() * 1.2,
-        length: approxLen,
-        id: `${id}-spoke-${i}`,
-      });
-      strandIdx++;
+  // Helper to add strand
+  const addStrand = (
+    d: string,
+    layer: number,
+    baseLen: number,
+    opt?: {
+      opacity?: number;
+      strokeWidth?: number;
+      delay?: number;
+      duration?: number;
+      color?: string;
     }
-
-    // ── Connecting ring threads ──────────────────────────
-    for (let r = 0; r < rings.length; r++) {
-      const radius = rings[r];
-      // Connect adjacent spokes at this ring radius
-      for (let i = 0; i < anchorAngles.length; i++) {
-        const next = (i + 1) % anchorAngles.length;
-        const aLen = anchorLengths[i];
-        const bLen = anchorLengths[next];
-        if (radius > aLen * 0.95 || radius > bLen * 0.95) continue;
-
-        // Occasionally skip a connection for irregularity
-        if (rng() < 0.15) continue;
-
-        const pa = polarToCart(center.x, center.y, anchorAngles[i], radius);
-        const pb = polarToCart(center.x, center.y, anchorAngles[next], radius);
-
-        // Sag the connecting thread slightly inward
-        const midAngle = (anchorAngles[i] + anchorAngles[next]) / 2;
-        const sag = radius * (0.03 + rng() * 0.08);
-        const cp2 = polarToCart(center.x, center.y, midAngle, radius - sag);
-
-        const d = `M ${pa.x.toFixed(1)} ${pa.y.toFixed(1)} Q ${cp2.x.toFixed(1)} ${cp2.y.toFixed(1)} ${pb.x.toFixed(1)} ${pb.y.toFixed(1)}`;
-        const arcLen = Math.hypot(pb.x - pa.x, pb.y - pa.y) * 1.2;
-
-        strands.push({
-          d,
-          opacity: lerp(opRange[0] * 0.8, opRange[1] * 0.85, rng()),
-          strokeWidth: lerp(swRange[0] * 0.8, swRange[1] * 0.85, rng()),
-          layer,
-          delay: 1.5 + r * 0.3 + rng() * 1.0,   // Phase 2 timing
-          duration: 0.5 + rng() * 0.8,
-          length: arcLen,
-          id: `${id}-ring-${r}-${i}`,
-        });
-        strandIdx++;
-      }
-    }
-  }
-
-  // ── Loose hanging strands (top and sides) ─────────────
-  const looseCount = isMobile ? 6 : 14;
-  for (let i = 0; i < looseCount; i++) {
-    const edge = rng();
-    let sx: number, sy: number, ex: number, ey: number;
-    if (edge < 0.4) {
-      // From top
-      sx = rng() * w;
-      sy = 0;
-      ex = sx + (rng() - 0.5) * w * 0.3;
-      ey = h * (0.15 + rng() * 0.4);
-    } else if (edge < 0.7) {
-      // From left
-      sx = 0;
-      sy = rng() * h * 0.7;
-      ex = w * (0.1 + rng() * 0.3);
-      ey = sy + (rng() - 0.5) * h * 0.2;
-    } else {
-      // From right
-      sx = w;
-      sy = rng() * h * 0.7;
-      ex = w * (0.7 + rng() * 0.2);
-      ey = sy + (rng() - 0.5) * h * 0.2;
-    }
-
-    // Gravity sag
-    const cpx = (sx + ex) / 2 + (rng() - 0.5) * 30;
-    const cpy = Math.max(sy, ey) + 20 + rng() * 50;
-    const d = `M ${sx.toFixed(1)} ${sy.toFixed(1)} Q ${cpx.toFixed(1)} ${cpy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`;
-    const approxLen = Math.hypot(ex - sx, ey - sy) * 1.3;
+  ) => {
+    const sw = opt?.strokeWidth ?? (layer === 2 ? 1.6 : layer === 1 ? 0.9 : 0.6);
+    const op = opt?.opacity ?? (layer === 2 ? 0.85 : layer === 1 ? 0.6 : 0.35);
+    const del = opt?.delay ?? 0.2 + rng() * 1.8;
+    const dur = opt?.duration ?? 0.8 + rng() * 1.4;
 
     strands.push({
       d,
-      opacity: 0.2 + rng() * 0.35,
-      strokeWidth: 0.5 + rng() * 0.8,
-      layer: rng() < 0.5 ? 0 : 1,
-      delay: 0.3 + rng() * 2.0,
-      duration: 1.0 + rng() * 1.5,
-      length: approxLen,
-      id: `loose-${i}`,
+      layer,
+      strokeWidth: sw,
+      opacity: op,
+      delay: del,
+      duration: dur,
+      length: Math.max(20, Math.round(baseLen)),
+      id: `sw-${strandCounter++}`,
+      color: opt?.color,
     });
-    strandIdx++;
+  };
+
+  // 1. PRIMARY STRUCTURAL TENSION CABLES (Like the reference photo)
+  // Sweeping diagonal silk ropes with 2-3 bundled parallel micro-fibers
+  const cableAnchors: [Point, Point, Point][] = [
+    // Top-left across to top-center
+    [
+      { x: 0, y: h * 0.05 },
+      { x: w * 0.45, y: h * 0.18 },
+      { x: w * 0.95, y: h * 0.02 },
+    ],
+    // Deep swoop from top-left toward center
+    [
+      { x: w * 0.02, y: h * 0.12 },
+      { x: w * 0.35, y: h * 0.42 },
+      { x: w * 0.75, y: h * 0.52 },
+    ],
+    // Transverse bridge from mid-left to mid-right
+    [
+      { x: 0, y: h * 0.48 },
+      { x: w * 0.52, y: h * 0.58 },
+      { x: w, y: h * 0.38 },
+    ],
+    // Top-right drape across corner
+    [
+      { x: w * 0.65, y: 0 },
+      { x: w * 0.82, y: h * 0.28 },
+      { x: w, y: h * 0.72 },
+    ],
+    // Bottom sweeping veil support
+    [
+      { x: w * 0.05, y: h * 0.78 },
+      { x: w * 0.42, y: h * 0.88 },
+      { x: w * 0.92, y: h * 0.96 },
+    ],
+  ];
+
+  cableAnchors.forEach(([p1, cp, p2], cIdx) => {
+    const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y) * 1.15;
+    // Bundle of 3 micro-strands
+    [-2, 0, 2.5].forEach((offsetY, subIdx) => {
+      const d = `M ${p1.x.toFixed(1)} ${(p1.y + offsetY).toFixed(1)} Q ${cp.x.toFixed(1)} ${(cp.y + offsetY * 1.2).toFixed(1)} ${p2.x.toFixed(1)} ${(p2.y + offsetY).toFixed(1)}`;
+      addStrand(d, subIdx === 1 ? 2 : 1, dist, {
+        strokeWidth: subIdx === 1 ? (isMobile ? 1.6 : 2.4) : (isMobile ? 0.8 : 1.2),
+        opacity: subIdx === 1 ? 0.95 : 0.6,
+        delay: 0.1 + cIdx * 0.25 + subIdx * 0.1,
+        duration: 1.2,
+      });
+    });
+  });
+
+  // 2. DENSE ORGANIC COBWEB CLUSTERS (Corners and anchor hubs)
+  // Instead of plain geometric circles, realistic irregular spider web sheets
+  const clusterDefs = [
+    // Top Left (Massive dense corner veil)
+    { cx: w * 0.02, cy: h * 0.03, count: isMobile ? 14 : 22, maxR: w * 0.45, rings: isMobile ? 6 : 10, layer: 1 },
+    // Top Right (High intricate corner)
+    { cx: w * 0.98, cy: h * 0.04, count: isMobile ? 12 : 20, maxR: w * 0.4, rings: isMobile ? 6 : 9, layer: 1 },
+    // Center-left suspended web
+    { cx: w * 0.32, cy: h * 0.45, count: isMobile ? 10 : 16, maxR: w * 0.25, rings: isMobile ? 4 : 7, layer: 2 },
+    // Right mid suspended web
+    { cx: w * 0.88, cy: h * 0.5, count: isMobile ? 9 : 14, maxR: w * 0.26, rings: isMobile ? 4 : 6, layer: 1 },
+    // Bottom left corner web
+    { cx: w * 0.04, cy: h * 0.96, count: isMobile ? 10 : 16, maxR: w * 0.32, rings: isMobile ? 4 : 7, layer: 1 },
+    // Deep background broad web
+    { cx: w * 0.62, cy: h * 0.2, count: isMobile ? 8 : 14, maxR: w * 0.35, rings: 5, layer: 0 },
+  ];
+
+  clusterDefs.forEach(({ cx, cy, count, maxR, rings, layer }, cIdx) => {
+    const spokes: { angle: number; len: number; end: Point }[] = [];
+    let curAngle = rng() * Math.PI * 2;
+
+    // Build radiating spokes with natural organic irregularity
+    for (let i = 0; i < count; i++) {
+      curAngle += (Math.PI * 2 / count) * (0.7 + rng() * 0.6);
+      const len = lerp(maxR * 0.35, maxR, 0.4 + rng() * 0.6);
+      const end = polarToCart(cx, cy, curAngle, len);
+      spokes.push({ angle: curAngle, len, end });
+
+      // Spoke curvature
+      const mid = polarToCart(cx, cy, curAngle, len * 0.5);
+      const perp = curAngle + Math.PI / 2;
+      const wobble = (rng() - 0.5) * len * 0.08;
+      const cp = { x: mid.x + Math.cos(perp) * wobble, y: mid.y + Math.sin(perp) * wobble };
+      const d = `M ${cx.toFixed(1)} ${cy.toFixed(1)} Q ${cp.x.toFixed(1)} ${cp.y.toFixed(1)} ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;
+
+      addStrand(d, layer, len, {
+        strokeWidth: layer === 2 ? 1.4 : 0.85,
+        opacity: layer === 2 ? 0.8 : 0.55,
+        delay: 0.1 + cIdx * 0.2 + (i / count) * 0.8,
+        duration: 0.9,
+      });
+    }
+
+    // Build connecting web spirals / sheets between spokes
+    for (let r = 0; r < rings; r++) {
+      const ringRadius = lerp(maxR * 0.12, maxR * 0.92, (r + 0.6) / rings);
+
+      for (let i = 0; i < spokes.length; i++) {
+        const next = (i + 1) % spokes.length;
+        if (ringRadius > spokes[i].len * 0.96 || ringRadius > spokes[next].len * 0.96) continue;
+
+        // Skip random sections for broken/haunted antique feel
+        if (rng() < 0.12) continue;
+
+        const pA = polarToCart(cx, cy, spokes[i].angle, ringRadius);
+        const pB = polarToCart(cx, cy, spokes[next].angle, ringRadius);
+
+        // Sagging silk arc
+        const midAngle = (spokes[i].angle + spokes[next].angle) / 2;
+        const sag = ringRadius * (0.04 + rng() * 0.07);
+        const cp = polarToCart(cx, cy, midAngle, ringRadius - sag);
+
+        const arcLen = Math.hypot(pB.x - pA.x, pB.y - pA.y) * 1.15;
+        const d = `M ${pA.x.toFixed(1)} ${pA.y.toFixed(1)} Q ${cp.x.toFixed(1)} ${cp.y.toFixed(1)} ${pB.x.toFixed(1)} ${pB.y.toFixed(1)}`;
+
+        addStrand(d, layer, arcLen, {
+          strokeWidth: layer === 2 ? 1.1 : 0.65,
+          opacity: (layer === 2 ? 0.75 : 0.48) * (0.7 + rng() * 0.4),
+          delay: 1.2 + r * 0.25 + rng() * 0.9,
+          duration: 0.7,
+        });
+
+        // Delicate micro-mesh crossover thread
+        if (rng() < 0.4) {
+          const crossA = polarToCart(cx, cy, spokes[i].angle, ringRadius * 0.94);
+          const crossB = polarToCart(cx, cy, spokes[next].angle, ringRadius * 1.04);
+          const crossD = `M ${crossA.x.toFixed(1)} ${crossA.y.toFixed(1)} L ${crossB.x.toFixed(1)} ${crossB.y.toFixed(1)}`;
+          addStrand(crossD, 0, arcLen * 0.9, {
+            strokeWidth: 0.45,
+            opacity: 0.32,
+            delay: 2.0 + rng() * 1.5,
+            duration: 0.6,
+          });
+        }
+      }
+    }
+  });
+
+  // 3. LOOSE HANGING WISPS & VERTICAL DRAPES (Abandoned mansion cobwebs)
+  const looseCount = isMobile ? 12 : 24;
+  for (let i = 0; i < looseCount; i++) {
+    const sx = rng() * w;
+    const sy = rng() < 0.65 ? 0 : rng() * h * 0.35;
+    const lenY = lerp(h * 0.15, h * 0.55, rng());
+    const ex = sx + (rng() - 0.5) * w * 0.18;
+    const ey = sy + lenY;
+
+    const cpx = (sx + ex) / 2 + (rng() - 0.5) * 45;
+    const cpy = sy + lenY * (0.45 + rng() * 0.2);
+
+    const d = `M ${sx.toFixed(1)} ${sy.toFixed(1)} Q ${cpx.toFixed(1)} ${cpy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+    const approxLen = Math.hypot(ex - sx, ey - sy) * 1.1;
+
+    addStrand(d, rng() < 0.5 ? 0 : 1, approxLen, {
+      strokeWidth: 0.5 + rng() * 0.7,
+      opacity: 0.25 + rng() * 0.35,
+      delay: 0.4 + rng() * 2.2,
+      duration: 1.2 + rng() * 1.0,
+    });
   }
 
-  return strands;
-}
-
-// ── Highlight points (intersection glints) ──────────────
-function generateGlints(strands: StrandPath[], rng: () => number, count: number) {
-  const glints: { cx: number; cy: number; r: number; delay: number; id: string }[] = [];
-  // Pick random strands and place glints along them
-  for (let i = 0; i < count; i++) {
+  // 4. DEW / MOONLIGHT GLINT PARTICLES AT SILK INTERSECTIONS
+  const glints: Glint[] = [];
+  const glintCount = isMobile ? 16 : 38;
+  for (let i = 0; i < glintCount; i++) {
     const strand = strands[Math.floor(rng() * strands.length)];
-    // Parse a rough midpoint from the path
     const nums = strand.d.match(/-?\d+\.?\d*/g);
     if (!nums || nums.length < 4) continue;
     const midX = (parseFloat(nums[0]) + parseFloat(nums[nums.length - 2])) / 2;
     const midY = (parseFloat(nums[1]) + parseFloat(nums[nums.length - 1])) / 2;
+
     glints.push({
-      cx: midX + (rng() - 0.5) * 15,
-      cy: midY + (rng() - 0.5) * 15,
-      r: 0.8 + rng() * 1.5,
-      delay: 5.0 + rng() * 2.5,   // Phase 3 glint timing
+      cx: midX + (rng() - 0.5) * 12,
+      cy: midY + (rng() - 0.5) * 12,
+      r: 0.7 + rng() * 1.6,
+      delay: 4.0 + rng() * 3.0,
       id: `glint-${i}`,
     });
   }
-  return glints;
-}
 
+  return { strands, glints };
+}
 
 // ── Component ───────────────────────────────────────────────
 interface SpiderWebSVGProps {
@@ -268,24 +289,22 @@ interface SpiderWebSVGProps {
 }
 
 const SpiderWebSVG = React.memo(function SpiderWebSVG({
-  width, height, seed = 42, wipeProgress, phase,
+  width,
+  height,
+  seed = 42,
+  wipeProgress,
+  phase,
 }: SpiderWebSVGProps) {
-
   const isMobile = width < 768;
 
   const { strands, glints } = useMemo(() => {
     if (width === 0 || height === 0) return { strands: [], glints: [] };
     const rng = createRng(seed);
-    const clusters = generateClusters(width, height, isMobile, rng);
-    const s = generateStrands(clusters, width, height, isMobile, rng);
-    const g = generateGlints(s, rng, isMobile ? 8 : 20);
-    return { strands: s, glints: g };
+    return generateHauntedWebs(width, height, isMobile, rng);
   }, [width, height, seed, isMobile]);
 
   if (phase === 'done' || width === 0) return null;
 
-  // Wipe direction: left-to-right gradient mask
-  // wipeProgress 0 → fully visible, 1 → fully hidden
   const maskId = 'haunted-wipe-mask';
 
   return (
@@ -296,17 +315,16 @@ const SpiderWebSVG = React.memo(function SpiderWebSVG({
       viewBox={`0 0 ${width} ${height}`}
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      style={{ position: 'absolute', inset: 0 }}
     >
       <defs>
-        {/* Progressive wipe mask — sweeps left to right */}
-        <linearGradient id={`${maskId}-grad`} x1="0" y1="0" x2="1" y2="0.3">
+        {/* Progressive Left-to-Right Dissolve / Wipe Mask */}
+        <linearGradient id={`${maskId}-grad`} x1="0" y1="0" x2="1" y2="0.2">
           <stop
-            offset={`${Math.max(0, wipeProgress * 1.4 - 0.4) * 100}%`}
+            offset={`${Math.max(0, wipeProgress * 1.45 - 0.45) * 100}%`}
             stopColor="black"
           />
           <stop
-            offset={`${Math.min(1, wipeProgress * 1.4) * 100}%`}
+            offset={`${Math.min(1, wipeProgress * 1.45) * 100}%`}
             stopColor="white"
           />
         </linearGradient>
@@ -314,96 +332,112 @@ const SpiderWebSVG = React.memo(function SpiderWebSVG({
           <rect x="0" y="0" width={width} height={height} fill={`url(#${maskId}-grad)`} />
         </mask>
 
-        {/* Subtle glow filter for foreground strands */}
-        <filter id="silk-glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="1.5" result="blur" />
+        {/* Luminous Silk Glow for structural tension cables */}
+        <filter id="silk-glow" x="-25%" y="-25%" width="150%" height="150%">
+          <feGaussianBlur stdDeviation="2.2" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
 
-        {/* Blur filter for background layer */}
-        <filter id="silk-blur" x="-10%" y="-10%" width="120%" height="120%">
-          <feGaussianBlur stdDeviation="1.2" />
+        {/* Atmospheric Blur for background gossamer veil */}
+        <filter id="silk-blur" x="-15%" y="-15%" width="130%" height="130%">
+          <feGaussianBlur stdDeviation="1.5" />
         </filter>
       </defs>
 
       <g mask={wipeProgress > 0 ? `url(#${maskId})` : undefined}>
-        {/* Layer 0: background (blurred, low opacity) */}
-        <g filter="url(#silk-blur)" opacity={0.85}>
-          {strands.filter(s => s.layer === 0).map((strand) => (
-            <path
-              key={strand.id}
-              d={strand.d}
-              fill="none"
-              stroke="rgba(200,210,225,1)"
-              strokeWidth={strand.strokeWidth}
-              strokeLinecap="round"
-              opacity={strand.opacity}
-              strokeDasharray={strand.length}
-              strokeDashoffset={strand.length}
-              style={{
-                animation: `haunted-strand-draw ${strand.duration}s ease-out ${strand.delay}s forwards`,
-              }}
-            />
-          ))}
+        {/* Layer 0: Background Deep Gossamer Veil (Soft blur, eerie depth) */}
+        <g filter="url(#silk-blur)" opacity={0.75}>
+          {strands
+            .filter((s) => s.layer === 0)
+            .map((strand) => (
+              <path
+                key={strand.id}
+                d={strand.d}
+                fill="none"
+                stroke="rgba(195, 210, 235, 0.95)"
+                strokeWidth={strand.strokeWidth}
+                strokeLinecap="round"
+                opacity={strand.opacity}
+                style={
+                  {
+                    '--strand-length': strand.length,
+                    strokeDasharray: strand.length,
+                    strokeDashoffset: strand.length,
+                    animation: `haunted-strand-draw ${strand.duration}s ease-out ${strand.delay}s forwards`,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
         </g>
 
-        {/* Layer 1: mid-ground */}
+        {/* Layer 1: Midground Intricate Web Mesh (Crisp, silvery, delicate) */}
         <g>
-          {strands.filter(s => s.layer === 1).map((strand) => (
-            <path
-              key={strand.id}
-              d={strand.d}
-              fill="none"
-              stroke="rgba(215,220,235,1)"
-              strokeWidth={strand.strokeWidth}
-              strokeLinecap="round"
-              opacity={strand.opacity}
-              strokeDasharray={strand.length}
-              strokeDashoffset={strand.length}
-              style={{
-                animation: `haunted-strand-draw ${strand.duration}s ease-out ${strand.delay}s forwards`,
-              }}
-            />
-          ))}
+          {strands
+            .filter((s) => s.layer === 1)
+            .map((strand) => (
+              <path
+                key={strand.id}
+                d={strand.d}
+                fill="none"
+                stroke="rgba(225, 235, 250, 0.95)"
+                strokeWidth={strand.strokeWidth}
+                strokeLinecap="round"
+                opacity={strand.opacity}
+                style={
+                  {
+                    '--strand-length': strand.length,
+                    strokeDasharray: strand.length,
+                    strokeDashoffset: strand.length,
+                    animation: `haunted-strand-draw ${strand.duration}s ease-out ${strand.delay}s forwards`,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
         </g>
 
-        {/* Layer 2: foreground (glow, crisp) */}
+        {/* Layer 2: Foreground Illuminated Silk Cables (Glow, radiant silver) */}
         <g filter="url(#silk-glow)">
-          {strands.filter(s => s.layer === 2).map((strand) => (
-            <path
-              key={strand.id}
-              d={strand.d}
-              fill="none"
-              stroke="rgba(230,235,250,1)"
-              strokeWidth={strand.strokeWidth}
-              strokeLinecap="round"
-              opacity={strand.opacity}
-              strokeDasharray={strand.length}
-              strokeDashoffset={strand.length}
+          {strands
+            .filter((s) => s.layer === 2)
+            .map((strand) => (
+              <path
+                key={strand.id}
+                d={strand.d}
+                fill="none"
+                stroke="rgba(245, 250, 255, 1)"
+                strokeWidth={strand.strokeWidth}
+                strokeLinecap="round"
+                opacity={strand.opacity}
+                style={
+                  {
+                    '--strand-length': strand.length,
+                    strokeDasharray: strand.length,
+                    strokeDashoffset: strand.length,
+                    animation: `haunted-strand-draw ${strand.duration}s ease-out ${strand.delay}s forwards`,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
+        </g>
+
+        {/* Moonlight / Dew Glints at Silk Intersections */}
+        {(phase === 'atmosphere' || phase === 'removal') &&
+          glints.map((g) => (
+            <circle
+              key={g.id}
+              cx={g.cx}
+              cy={g.cy}
+              r={g.r}
+              fill="rgba(255, 255, 255, 0.95)"
+              opacity={0}
               style={{
-                animation: `haunted-strand-draw ${strand.duration}s ease-out ${strand.delay}s forwards`,
+                animation: `haunted-glint 2.6s ease-in-out ${g.delay}s infinite`,
               }}
             />
           ))}
-        </g>
-
-        {/* Intersection glints */}
-        {(phase === 'atmosphere' || phase === 'removal') && glints.map((g) => (
-          <circle
-            key={g.id}
-            cx={g.cx}
-            cy={g.cy}
-            r={g.r}
-            fill="rgba(255,255,255,0.7)"
-            opacity={0}
-            style={{
-              animation: `haunted-glint 2.5s ease-in-out ${g.delay}s infinite`,
-            }}
-          />
-        ))}
       </g>
     </svg>
   );

@@ -44,7 +44,7 @@ interface Particle {
 
 // ── Component ───────────────────────────────────────────────
 export function HauntedWebIntro() {
-  const { shouldPlay, hasChecked, markComplete } = useEntranceEffect();
+  const { shouldPlay, hasChecked, markComplete, replay } = useEntranceEffect();
   const [phase, setPhase] = useState<Phase>('arrival');
   const [wipeProgress, setWipeProgress] = useState(0);
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
@@ -98,6 +98,15 @@ export function HauntedWebIntro() {
     particlesRef.current = particles;
   }, []);
 
+  // ── Reset state on shouldPlay change ──────────────────────
+  useEffect(() => {
+    if (shouldPlay) {
+      cleanedUpRef.current = false;
+      setPhase('arrival');
+      setWipeProgress(0);
+    }
+  }, [shouldPlay]);
+
   // ── Main animation loop ───────────────────────────────────
   const cleanup = useCallback(() => {
     if (cleanedUpRef.current) return;
@@ -108,6 +117,7 @@ export function HauntedWebIntro() {
       rafRef.current = 0;
     }
     particlesRef.current = [];
+    setPhase('done');
     markComplete();
   }, [markComplete]);
 
@@ -235,53 +245,66 @@ export function HauntedWebIntro() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldPlay, dimensions.w, dimensions.h, initParticles, cleanup]);
 
-  // ── Don't render anything until we've checked session ─────
-  if (!hasChecked || !shouldPlay) return null;
-  if (phase === 'done') return null;
-
   const isAtmosphericPhase = phase === 'atmosphere' || phase === 'formation';
   const isRemoving = phase === 'removal';
 
   return (
-    <div
-      ref={containerRef}
-      className="haunted-web-container"
-      data-phase={phase}
-      role="presentation"
-      aria-hidden="true"
-    >
-      {/* Darkness overlay */}
-      <div
-        className="haunted-darkness"
-        data-active={isAtmosphericPhase || phase === 'arrival' ? 'true' : undefined}
-        data-fading={isRemoving ? 'true' : undefined}
-      />
+    <>
+      {shouldPlay && phase !== 'done' && (
+        <div
+          ref={containerRef}
+          className="haunted-web-container"
+          data-phase={phase}
+          role="presentation"
+          aria-hidden="true"
+        >
+          {/* Darkness overlay */}
+          <div
+            className="haunted-darkness"
+            data-active={isAtmosphericPhase || phase === 'arrival' ? 'true' : undefined}
+            data-fading={isRemoving ? 'true' : undefined}
+          />
 
-      {/* Vignette */}
-      <div
-        className="haunted-vignette"
-        data-active={!isRemoving ? 'true' : undefined}
-        data-fading={isRemoving ? 'true' : undefined}
-      />
+          {/* Vignette */}
+          <div
+            className="haunted-vignette"
+            data-active={!isRemoving ? 'true' : undefined}
+            data-fading={isRemoving ? 'true' : undefined}
+          />
 
-      {/* SVG web layer */}
-      {dimensions.w > 0 && (
-        <SpiderWebSVG
-          width={dimensions.w}
-          height={dimensions.h}
-          seed={7331}
-          wipeProgress={wipeProgress}
-          phase={phase}
-        />
+          {/* SVG web layer */}
+          {dimensions.w > 0 && (
+            <SpiderWebSVG
+              width={dimensions.w}
+              height={dimensions.h}
+              seed={7331}
+              wipeProgress={wipeProgress}
+              phase={phase}
+            />
+          )}
+
+          {/* Canvas atmospheric particles */}
+          <canvas
+            ref={canvasRef}
+            className="haunted-canvas"
+            data-active={isAtmosphericPhase ? 'true' : undefined}
+            data-fading={isRemoving ? 'true' : undefined}
+          />
+        </div>
       )}
 
-      {/* Canvas atmospheric particles */}
-      <canvas
-        ref={canvasRef}
-        className="haunted-canvas"
-        data-active={isAtmosphericPhase ? 'true' : undefined}
-        data-fading={isRemoving ? 'true' : undefined}
-      />
-    </div>
+      {/* Floating Replay Button — Always available so the user can easily replay and inspect the animation */}
+      {(!shouldPlay || phase === 'done') && (
+        <button
+          onClick={replay}
+          className="fixed bottom-4 right-4 z-40 flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full bg-stone-900/85 hover:bg-black text-stone-300 hover:text-white border border-stone-800/80 shadow-lg backdrop-blur transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+          title="Replay Haunted Spider-Web Entrance Animation"
+          aria-label="Replay Haunted Spider-Web Entrance Animation"
+        >
+          <span className="text-sm">🕸️</span>
+          <span>Replay Intro</span>
+        </button>
+      )}
+    </>
   );
 }

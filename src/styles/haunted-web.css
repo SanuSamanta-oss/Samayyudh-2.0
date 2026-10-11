@@ -7,7 +7,7 @@
 /* ── Strand draw-in animation ──────────────────────────────── */
 @keyframes haunted-strand-draw {
   from {
-    stroke-dashoffset: var(--dasharray, 1000);
+    stroke-dashoffset: var(--strand-length, 1000);
   }
   to {
     stroke-dashoffset: 0;
@@ -21,8 +21,8 @@
     transform: scale(0.6);
   }
   30% {
-    opacity: 0.9;
-    transform: scale(1.3);
+    opacity: 0.95;
+    transform: scale(1.4);
   }
   60% {
     opacity: 0.35;
@@ -76,8 +76,10 @@
 
 /* ── SVG layer ─────────────────────────────────────────────── */
 .haunted-web-svg {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
-  will-change: opacity;
+  will-change: opacity, transform;
 }
 
 /* ── Vignette — heavy dark edges for haunted atmosphere ────── */
@@ -86,11 +88,11 @@
   inset: 0;
   pointer-events: none;
   background: radial-gradient(
-    ellipse 65% 55% at 50% 50%,
-    transparent 30%,
-    rgba(0, 0, 0, 0.35) 60%,
-    rgba(0, 0, 0, 0.75) 85%,
-    rgba(0, 0, 0, 0.92) 100%
+    ellipse 70% 60% at 50% 50%,
+    transparent 20%,
+    rgba(0, 0, 0, 0.5) 55%,
+    rgba(0, 0, 0, 0.85) 80%,
+    rgba(2, 3, 6, 0.98) 100%
   );
   opacity: 0;
   transition: opacity 1.8s ease-in;
@@ -102,7 +104,7 @@
 
 .haunted-vignette[data-fading="true"] {
   opacity: 0;
-  transition: opacity 2.5s ease-out;
+  transition: opacity 2.8s ease-out;
 }
 
 /* ── Dark overlay for the "abandoned mansion" effect ──────── */
@@ -111,16 +113,22 @@
   inset: 0;
   pointer-events: none;
   background: rgba(0, 0, 0, 0);
-  transition: background 1.5s ease-in;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
 }
 
 .haunted-darkness[data-active="true"] {
-  background: rgba(5, 5, 15, 0.6);
+  opacity: 1;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(14, 16, 26, 0.88) 0%,
+    rgba(5, 6, 12, 0.96) 100%
+  );
 }
 
 .haunted-darkness[data-fading="true"] {
-  background: rgba(0, 0, 0, 0);
-  transition: background 3s ease-out;
+  opacity: 0;
+  transition: opacity 3.2s ease-out;
 }
 
 /* ── Canvas atmospheric particles layer ───────────────────── */

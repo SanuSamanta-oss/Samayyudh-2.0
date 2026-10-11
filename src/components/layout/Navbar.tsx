@@ -13,6 +13,7 @@ import gsap from 'gsap';
 import { motion } from 'framer-motion';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuth } from '@/components/providers/AuthProvider';
+import { getSelectedAvatar } from '@/lib/avatars';
 
 const iconMap: Record<string, React.ReactNode> = {
   LayoutDashboard: <LayoutDashboard className="w-5 h-5" />,
@@ -48,6 +49,7 @@ const mobileNavItems = [
 export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { user, signOut, isAuthenticated } = useAuth();
 
   // Navigation track and bubble animation refs
@@ -96,12 +98,28 @@ export function Navbar() {
     prevIndexRef.current = activeIndex;
   }, [activeIndex]);
 
+  const [currentAvatar, setCurrentAvatar] = useState<ReturnType<typeof getSelectedAvatar>>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    setCurrentAvatar(getSelectedAvatar());
+
+    const handleAvatarChange = () => {
+      setCurrentAvatar(getSelectedAvatar());
+    };
+
+    window.addEventListener('samayyudh:avatar-change', handleAvatarChange);
+    return () => {
+      window.removeEventListener('samayyudh:avatar-change', handleAvatarChange);
+    };
+  }, []);
+
   // Don't show nav during active exam
   if (pathname?.startsWith('/exam/') && pathname !== '/exams') return null;
 
   // Get user display info
   const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email?.split('@')[0] || 'S';
-  const avatarUrl = user?.user_metadata?.avatar_url;
+  const avatarUrl = mounted ? (currentAvatar?.src || user?.user_metadata?.avatar_url) : null;
   const initial = displayName.charAt(0).toUpperCase();
 
   return (

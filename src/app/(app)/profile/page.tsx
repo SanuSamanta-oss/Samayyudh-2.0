@@ -1,17 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   User, BookOpen, BarChart3, History as HistoryIcon, Trophy,
   StickyNote, Settings, Trash2, Loader2, Shield, Calendar,
   Zap, Clock, Target, Award, Star, ChevronRight, Edit3,
-  CheckCircle2, Lock, Flame, LogIn, LogOut, KeyRound
+  CheckCircle2, Lock, Flame, LogIn, LogOut, KeyRound, Sparkles
 } from 'lucide-react';
 import { cn, formatDuration } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
 import { useAuth } from '@/components/providers/AuthProvider';
+import { AVATARS, getSelectedAvatar, setSelectedAvatarId, clearSelectedAvatar, type AvatarDef } from '@/lib/avatars';
 
 type SidebarTab = 'profile' | 'sessions' | 'achievements' | 'analytics' | 'settings';
 
@@ -79,6 +81,9 @@ export default function ProfilePage() {
   const [revokeMessage, setRevokeMessage] = useState<string | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState<AvatarDef | null>(null);
+  const [avatarPickerOpen, setAvatarPickerOpen] = useState(false);
+  const [justSelected, setJustSelected] = useState<string | null>(null);
 
   const displayName: string =
     user?.user_metadata?.display_name ||
@@ -94,6 +99,23 @@ export default function ProfilePage() {
   useEffect(() => {
     setNameInput(displayName);
   }, [displayName]);
+
+  // Load persisted avatar on mount
+  useEffect(() => {
+    setSelectedAvatar(getSelectedAvatar());
+  }, []);
+
+  const handleAvatarSelect = useCallback((avatar: AvatarDef) => {
+    setSelectedAvatarId(avatar.id);
+    setSelectedAvatar(avatar);
+    setJustSelected(avatar.id);
+    setTimeout(() => setJustSelected(null), 600);
+  }, []);
+
+  const handleAvatarClear = useCallback(() => {
+    clearSelectedAvatar();
+    setSelectedAvatar(null);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => loadStats(), 0);
@@ -232,8 +254,12 @@ export default function ProfilePage() {
         <aside className="hidden md:flex flex-col w-52 shrink-0 gap-1">
           {/* Mini avatar */}
           <div className="flex flex-col items-center gap-2 p-4 mb-2">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-brand flex items-center justify-center text-white text-lg font-extrabold shadow-lg">
-              {initials}
+            <div className="w-14 h-14 rounded-2xl bg-gradient-brand flex items-center justify-center text-white text-lg font-extrabold shadow-lg overflow-hidden">
+              {selectedAvatar ? (
+                <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={56} height={56} className="w-full h-full object-cover" />
+              ) : (
+                initials
+              )}
             </div>
             <p className="text-xs font-semibold text-foreground text-center truncate w-full">{displayName}</p>
           </div>
@@ -314,8 +340,12 @@ export default function ProfilePage() {
                   <div className="px-6 pb-6">
                     {/* Avatar overlapping banner */}
                     <div className="relative -mt-10 mb-4 flex items-end justify-between">
-                      <div className="w-20 h-20 rounded-2xl bg-gradient-brand border-4 border-card shadow-xl flex items-center justify-center text-white text-2xl font-extrabold">
-                        {initials}
+                      <div className="w-20 h-20 rounded-2xl bg-gradient-brand border-4 border-card shadow-xl flex items-center justify-center text-white text-2xl font-extrabold overflow-hidden">
+                        {selectedAvatar ? (
+                          <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={80} height={80} className="w-full h-full object-cover" />
+                        ) : (
+                          initials
+                        )}
                       </div>
                       <button
                         onClick={() => setEditingName(!editingName)}
@@ -362,6 +392,133 @@ export default function ProfilePage() {
                       ))}
                     </div>
                   </div>
+                </div>
+
+                {/* ── Avatar Picker Section ──────────────── */}
+                <div className="bg-card rounded-2xl border border-border overflow-hidden">
+                  <button
+                    onClick={() => setAvatarPickerOpen(!avatarPickerOpen)}
+                    className="w-full flex items-center justify-between px-6 py-4 hover:bg-surface/50 transition-colors group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 flex items-center justify-center">
+                        <Sparkles className="w-4 h-4 text-purple-500" />
+                      </div>
+                      <div className="text-left">
+                        <p className="text-sm font-semibold text-foreground">Choose Avatar</p>
+                        <p className="text-xs text-muted">Pick a character to represent you</p>
+                      </div>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: avatarPickerOpen ? 90 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronRight className="w-4 h-4 text-muted group-hover:text-foreground transition-colors" />
+                    </motion.div>
+                  </button>
+
+                  <AnimatePresence>
+                    {avatarPickerOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-5 pt-1">
+                          {/* Currently selected indicator */}
+                          {selectedAvatar && (
+                            <div className="flex items-center justify-between mb-4 p-3 rounded-xl bg-brand-50/50 dark:bg-brand-900/10 border border-brand-200/50 dark:border-brand-800/30">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-brand-400 shadow-md">
+                                  <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={40} height={40} className="w-full h-full object-cover" />
+                                </div>
+                                <div>
+                                  <p className="text-xs font-semibold text-brand-700 dark:text-brand-400">Current: {selectedAvatar.label}</p>
+                                  <p className="text-[10px] text-brand-500/70">Your active avatar</p>
+                                </div>
+                              </div>
+                              <button
+                                onClick={handleAvatarClear}
+                                className="text-[10px] font-medium text-muted hover:text-danger-500 px-2 py-1 rounded-lg hover:bg-danger-50 dark:hover:bg-danger-900/20 transition-colors"
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          )}
+
+                          {/* Avatar grid */}
+                          <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
+                            {AVATARS.map((avatar, i) => {
+                              const isActive = selectedAvatar?.id === avatar.id;
+                              const isJustSelected = justSelected === avatar.id;
+                              return (
+                                <motion.button
+                                  key={avatar.id}
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ delay: i * 0.05, type: 'spring', stiffness: 300, damping: 20 }}
+                                  whileHover={{ scale: 1.08, y: -2 }}
+                                  whileTap={{ scale: 0.95 }}
+                                  onClick={() => handleAvatarSelect(avatar)}
+                                  className={cn(
+                                    'relative flex flex-col items-center gap-1.5 p-2 rounded-xl transition-all duration-200',
+                                    isActive
+                                      ? 'bg-brand-50 dark:bg-brand-900/20 ring-2 ring-brand-500 shadow-lg shadow-brand-500/10'
+                                      : 'hover:bg-surface-2 ring-1 ring-transparent hover:ring-border'
+                                  )}
+                                >
+                                  {/* Glow on select */}
+                                  <AnimatePresence>
+                                    {isJustSelected && (
+                                      <motion.div
+                                        initial={{ scale: 0.5, opacity: 0.8 }}
+                                        animate={{ scale: 1.8, opacity: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.6 }}
+                                        className="absolute inset-0 rounded-xl bg-brand-400/30 pointer-events-none"
+                                      />
+                                    )}
+                                  </AnimatePresence>
+
+                                  <div className={cn(
+                                    'w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 transition-all duration-200',
+                                    isActive ? 'border-brand-500 shadow-md' : 'border-transparent'
+                                  )}>
+                                    <Image
+                                      src={avatar.src}
+                                      alt={avatar.label}
+                                      width={64}
+                                      height={64}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                  <span className={cn(
+                                    'text-[10px] font-medium truncate w-full text-center transition-colors',
+                                    isActive ? 'text-brand-600 dark:text-brand-400' : 'text-muted'
+                                  )}>
+                                    {avatar.label}
+                                  </span>
+
+                                  {/* Checkmark */}
+                                  {isActive && (
+                                    <motion.div
+                                      initial={{ scale: 0 }}
+                                      animate={{ scale: 1 }}
+                                      className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-brand-500 flex items-center justify-center shadow-md"
+                                    >
+                                      <CheckCircle2 className="w-3 h-3 text-white" />
+                                    </motion.div>
+                                  )}
+                                </motion.button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* Quick stats */}

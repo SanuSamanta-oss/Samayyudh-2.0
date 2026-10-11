@@ -16,6 +16,7 @@ import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import { useAuth } from '@/components/providers/AuthProvider';
 import * as localDB from '@/lib/store/local-db';
 import type { ExamSession } from '@/types';
+import { getSelectedAvatar } from '@/lib/avatars';
 
 /* ─── Helpers ────────────────────────────────────────────────── */
 
@@ -131,6 +132,23 @@ export default function DashboardPage() {
     loadSessionsAndStreaks();
   }, [user]);
 
+  const [mounted, setMounted] = useState(false);
+  const [currentAvatar, setCurrentAvatar] = useState<ReturnType<typeof getSelectedAvatar>>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    setCurrentAvatar(getSelectedAvatar());
+
+    const handleAvatarChange = () => {
+      setCurrentAvatar(getSelectedAvatar());
+    };
+
+    window.addEventListener('samayyudh:avatar-change', handleAvatarChange);
+    return () => {
+      window.removeEventListener('samayyudh:avatar-change', handleAvatarChange);
+    };
+  }, []);
+
   const displayName: string =
     user?.user_metadata?.display_name ||
     user?.email?.split('@')[0] ||
@@ -138,6 +156,7 @@ export default function DashboardPage() {
 
   const initials = useMemo(() => getInitials(displayName), [displayName]);
   const greeting = getGreeting();
+  const selectedAvatar = mounted ? currentAvatar : null;
 
   const handleExamClick = (code: string) => {
     setLoadingExam(code);
@@ -185,8 +204,12 @@ export default function DashboardPage() {
           <div className="relative flex items-center gap-4 md:gap-5">
             {/* Avatar */}
             <div className="relative flex-shrink-0">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/20 backdrop-blur-sm border-2 border-white/30 flex items-center justify-center text-white text-xl md:text-2xl font-extrabold shadow-lg">
-                {initials}
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/20 backdrop-blur-sm border-2 border-white/30 flex items-center justify-center text-white text-xl md:text-2xl font-extrabold shadow-lg overflow-hidden">
+                {selectedAvatar ? (
+                  <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={80} height={80} className="w-full h-full object-cover" />
+                ) : (
+                  initials
+                )}
               </div>
               {/* Online dot */}
               <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-emerald-400 border-2 border-white shadow-sm" />

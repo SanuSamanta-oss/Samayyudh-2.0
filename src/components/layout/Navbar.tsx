@@ -79,17 +79,17 @@ export function Navbar() {
     const tl = gsap.timeline();
 
     if (prevIndexRef.current === activeIndex) {
-      // Initial positioning
-      gsap.set(bgBubbleRef.current, { left: centerX, top: -14, backgroundColor: bubbleColor });
-      gsap.set(activeBubbleRef.current, { left: centerX, y: '-10px', backgroundColor: '#ffffff', opacity: 1 });
+      // Initial positioning - droplet hangs downwards below navbar
+      gsap.set(bgBubbleRef.current, { left: centerX, bottom: -18, backgroundColor: bubbleColor });
+      gsap.set(activeBubbleRef.current, { left: centerX, bottom: -24, backgroundColor: '#ffffff', opacity: 1 });
     } else {
-      // Fluid goo wave motion matching the prototype
-      tl.to(bgBubbleRef.current, { duration: 0.15, top: 4, ease: 'power2.out' }, 0)
-        .to(activeBubbleRef.current, { duration: 0.12, y: '30px', opacity: 0, ease: 'power2.out' }, 0)
+      // Fluid goo droplet wave dipping downwards below the navigation track
+      tl.to(bgBubbleRef.current, { duration: 0.15, bottom: 2, ease: 'power2.out' }, 0)
+        .to(activeBubbleRef.current, { duration: 0.12, bottom: 6, opacity: 0, ease: 'power2.out' }, 0)
         .to(bgBubbleRef.current, { duration: 0.28, left: centerX, ease: 'power2.inOut' }, 0.08)
-        .to(bgBubbleRef.current, { duration: 0.2, top: -14, ease: 'back.out(1.8)' }, 0.22)
+        .to(bgBubbleRef.current, { duration: 0.22, bottom: -18, ease: 'back.out(1.8)' }, 0.22)
         .set(activeBubbleRef.current, { left: centerX }, 0.22)
-        .to(activeBubbleRef.current, { duration: 0.25, y: '-10px', opacity: 1, ease: 'back.out(2)' }, 0.24)
+        .to(activeBubbleRef.current, { duration: 0.25, bottom: -24, opacity: 1, ease: 'back.out(2)' }, 0.24)
         .to(bgBubbleRef.current, { duration: 0.3, backgroundColor: bubbleColor, ease: 'power2.out' }, 0);
     }
 
@@ -155,12 +155,12 @@ export function Navbar() {
                   />
                 </div>
 
-                {/* The Floating / Popping White/Light Bubble with Icon */}
+                {/* The Floating / Droplet Bubble with Icon hanging DOWNWARD */}
                 <div
                   ref={activeBubbleRef}
                   className="absolute -translate-x-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-lg border-2 border-white/80 dark:border-stone-800 pointer-events-none z-20 text-purple-700 dark:text-purple-400 bg-white dark:bg-stone-900 transition-colors duration-300"
                   style={{
-                    boxShadow: '0 10px 22px -3px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.2)',
+                    boxShadow: '0 8px 20px -2px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.2)',
                   }}
                 >
                   <span className="scale-95">
@@ -168,7 +168,7 @@ export function Navbar() {
                   </span>
                 </div>
 
-                {/* Navigation Items */}
+                {/* Navigation Items (cleanly on top of track) */}
                 <nav className="relative z-10 flex items-center gap-1.5">
                   {navItems.map((item, idx) => {
                     const isActive = idx === activeIndex;
@@ -180,16 +180,16 @@ export function Navbar() {
                           itemRefs.current[idx] = el;
                         }}
                         className={cn(
-                          'relative z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 select-none cursor-pointer',
+                          'relative z-10 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-200 select-none cursor-pointer',
                           isActive
                             ? 'text-white'
                             : 'text-white/80 hover:text-white hover:opacity-100 opacity-80'
                         )}
                       >
-                        <span className={cn('transition-opacity duration-200', isActive ? 'opacity-0' : 'opacity-100')}>
+                        <span className={cn('transition-all duration-200', isActive ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
                           {iconMap[item.icon]}
                         </span>
-                        <span className={cn('transition-all duration-200', isActive ? 'font-extrabold translate-y-[2px]' : '')}>
+                        <span className={cn('transition-all duration-200 text-xs px-1', isActive ? 'font-extrabold text-white tracking-wide scale-105' : 'text-white/80')}>
                           {item.label}
                         </span>
                       </Link>

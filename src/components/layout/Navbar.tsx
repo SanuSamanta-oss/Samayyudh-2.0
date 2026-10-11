@@ -69,7 +69,7 @@ export function Navbar() {
             </Link>
 
             {/* Nav Links */}
-            <nav className="flex items-center gap-1">
+            <nav className="flex items-center gap-1.5">
               {navItems.map((item) => {
                 const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
                 return (
@@ -77,13 +77,15 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                      'flex items-center gap-2 px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all duration-300',
                       isActive
-                        ? 'bg-brand-50 text-brand-700'
-                        : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+                        ? 'bg-purple-500/20 dark:bg-purple-500/25 text-purple-700 dark:text-purple-200 border border-purple-400/40 dark:border-purple-400/50 shadow-[0_0_12px_rgba(168,85,247,0.35)] backdrop-blur-md'
+                        : 'text-stone-700 dark:text-white/90 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10'
                     )}
                   >
-                    {iconMap[item.icon]}
+                    <span className={cn('transition-colors', isActive ? 'text-purple-600 dark:text-purple-300' : 'text-stone-500 dark:text-white/80')}>
+                      {iconMap[item.icon]}
+                    </span>
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -168,20 +170,24 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-40 bg-card pt-12">
-          <nav className="p-4 space-y-1">
+          <nav className="p-4 space-y-1.5">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    'flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors',
-                    isActive ? 'bg-brand-50 text-brand-700' : 'text-stone-600 hover:bg-stone-50'
+                    'flex items-center gap-3 px-4 py-3 rounded-2xl text-base font-semibold transition-all',
+                    isActive
+                      ? 'bg-purple-500/20 dark:bg-purple-500/25 text-purple-700 dark:text-purple-200 border border-purple-400/40 shadow-[0_0_12px_rgba(168,85,247,0.3)]'
+                      : 'text-stone-700 dark:text-white hover:bg-stone-50 dark:hover:bg-white/10'
                   )}
                 >
-                  {iconMap[item.icon]}
+                  <span className={isActive ? 'text-purple-600 dark:text-purple-300' : 'text-stone-500 dark:text-white/80'}>
+                    {iconMap[item.icon]}
+                  </span>
                   <span>{item.label}</span>
                 </Link>
               );

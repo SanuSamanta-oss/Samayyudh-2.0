@@ -8,7 +8,8 @@ import {
   LayoutDashboard, Swords, GraduationCap, Library,
   History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut, Trophy
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
 import { motion } from 'framer-motion';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuth } from '@/components/providers/AuthProvider';
@@ -26,14 +27,14 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const navItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard' },
-  { href: '/practice', label: 'Practice', icon: 'Swords' },
-  { href: '/exams', label: 'Exams', icon: 'GraduationCap' },
-  { href: '/achievements', label: 'Badges', icon: 'Trophy' },
-  { href: '/questions', label: 'Questions', icon: 'Library' },
-  { href: '/history', label: 'History', icon: 'History' },
-  { href: '/analytics', label: 'Analytics', icon: 'BarChart3' },
-  { href: '/admin', label: 'Admin', icon: 'ShieldAlert' },
+  { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard', color: '#9333ea' },
+  { href: '/practice', label: 'Practice', icon: 'Swords', color: '#7c3aed' },
+  { href: '/exams', label: 'Exams', icon: 'GraduationCap', color: '#6366f1' },
+  { href: '/achievements', label: 'Badges', icon: 'Trophy', color: '#a855f7' },
+  { href: '/questions', label: 'Questions', icon: 'Library', color: '#8b5cf6' },
+  { href: '/history', label: 'History', icon: 'History', color: '#7e22ce' },
+  { href: '/analytics', label: 'Analytics', icon: 'BarChart3', color: '#6b21a8' },
+  { href: '/admin', label: 'Admin', icon: 'ShieldAlert', color: '#581c87' },
 ];
 
 const mobileNavItems = [
@@ -48,6 +49,52 @@ export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, signOut, isAuthenticated } = useAuth();
+
+  // Navigation track and bubble animation refs
+  const navRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const bgBubbleRef = useRef<HTMLDivElement>(null);
+  const activeBubbleRef = useRef<HTMLDivElement>(null);
+  const prevIndexRef = useRef<number>(0);
+
+  // Determine active nav index
+  const activeIndex = Math.max(
+    0,
+    navItems.findIndex((item) => pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href)))
+  );
+
+  // Animate the gooey fluid bubble to the active tab
+  useEffect(() => {
+    const targetElement = itemRefs.current[activeIndex];
+    const navContainer = navRef.current;
+    if (!targetElement || !navContainer || !bgBubbleRef.current || !activeBubbleRef.current) return;
+
+    const navRect = navContainer.getBoundingClientRect();
+    const targetRect = targetElement.getBoundingClientRect();
+    const centerX = targetRect.left - navRect.left + targetRect.width / 2;
+
+    const activeItem = navItems[activeIndex];
+    const bubbleColor = activeItem.color;
+
+    const tl = gsap.timeline();
+
+    if (prevIndexRef.current === activeIndex) {
+      // Initial positioning
+      gsap.set(bgBubbleRef.current, { left: centerX, top: -14, backgroundColor: bubbleColor });
+      gsap.set(activeBubbleRef.current, { left: centerX, y: '-10px', backgroundColor: '#ffffff', opacity: 1 });
+    } else {
+      // Fluid goo wave motion matching the prototype
+      tl.to(bgBubbleRef.current, { duration: 0.15, top: 4, ease: 'power2.out' }, 0)
+        .to(activeBubbleRef.current, { duration: 0.12, y: '30px', opacity: 0, ease: 'power2.out' }, 0)
+        .to(bgBubbleRef.current, { duration: 0.28, left: centerX, ease: 'power2.inOut' }, 0.08)
+        .to(bgBubbleRef.current, { duration: 0.2, top: -14, ease: 'back.out(1.8)' }, 0.22)
+        .set(activeBubbleRef.current, { left: centerX }, 0.22)
+        .to(activeBubbleRef.current, { duration: 0.25, y: '-10px', opacity: 1, ease: 'back.out(2)' }, 0.24)
+        .to(bgBubbleRef.current, { duration: 0.3, backgroundColor: bubbleColor, ease: 'power2.out' }, 0);
+    }
+
+    prevIndexRef.current = activeIndex;
+  }, [activeIndex]);
 
   // Don't show nav during active exam
   if (pathname?.startsWith('/exam/') && pathname !== '/exams') return null;
@@ -69,56 +116,88 @@ export function Navbar() {
               <span className="text-xs font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1.5 py-0.5 rounded-md">2.0</span>
             </Link>
 
-            {/* Nav Links with Goo Bubble Indicator */}
-            <nav className="relative flex items-center p-1 rounded-full bg-stone-100/80 dark:bg-stone-900/80 border border-stone-200/60 dark:border-white/10 backdrop-blur-md">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href));
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      'relative z-10 flex items-center gap-2 px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-200 select-none',
-                      isActive
-                        ? 'text-white'
-                        : 'text-stone-600 dark:text-stone-300 hover:text-purple-600 dark:hover:text-purple-300'
-                    )}
-                  >
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeBubblePill"
-                        className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 via-brand-600 to-indigo-600 shadow-[0_0_18px_rgba(147,51,234,0.55),0_2px_8px_rgba(0,0,0,0.15)] border border-purple-400/40"
-                        transition={{
-                          type: 'spring',
-                          stiffness: 380,
-                          damping: 30,
+            {/* Nav Links with Exact Gooey Fluid Wave and Popping Bubble */}
+            <div className="relative flex items-center">
+              {/* SVG Gooey Filter */}
+              <svg width="0" height="0" className="absolute">
+                <defs>
+                  <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" id="blurFilter" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -9" result="goo" />
+                    <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+                  </filter>
+                </defs>
+              </svg>
+
+              {/* Gooey Fluid Canvas Container */}
+              <div 
+                ref={navRef}
+                className="relative flex items-center px-2 py-1.5 rounded-full bg-stone-100/90 dark:bg-stone-900/90 border border-stone-200/70 dark:border-white/10 backdrop-blur-md shadow-inner"
+              >
+                {/* Goo Liquid Background Layer with Filter */}
+                <div 
+                  className="absolute inset-0 rounded-full overflow-visible pointer-events-none -z-10"
+                  style={{ filter: 'url(#goo)' }}
+                >
+                  {/* Fluid Base strip */}
+                  <div 
+                    className="absolute inset-x-0 bottom-0 top-0 rounded-full transition-colors duration-300 opacity-90"
+                    style={{ backgroundColor: navItems[activeIndex]?.color || '#9333ea' }}
+                  />
+                  {/* Goo Bubble (merges and pulls fluidly) */}
+                  <div
+                    ref={bgBubbleRef}
+                    className="absolute -translate-x-1/2 w-14 h-14 rounded-full pointer-events-none"
+                    style={{
+                      backgroundColor: navItems[activeIndex]?.color || '#9333ea',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+                    }}
+                  />
+                </div>
+
+                {/* The Floating / Popping White/Light Bubble with Icon */}
+                <div
+                  ref={activeBubbleRef}
+                  className="absolute -translate-x-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-lg border-2 border-white/80 dark:border-stone-800 pointer-events-none z-20 text-purple-700 dark:text-purple-400 bg-white dark:bg-stone-900 transition-colors duration-300"
+                  style={{
+                    boxShadow: '0 10px 22px -3px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.2)',
+                  }}
+                >
+                  <span className="scale-95">
+                    {iconMap[navItems[activeIndex]?.icon]}
+                  </span>
+                </div>
+
+                {/* Navigation Items */}
+                <nav className="relative z-10 flex items-center gap-1.5">
+                  {navItems.map((item, idx) => {
+                    const isActive = idx === activeIndex;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        ref={(el) => {
+                          itemRefs.current[idx] = el;
                         }}
+                        className={cn(
+                          'relative z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 select-none cursor-pointer',
+                          isActive
+                            ? 'text-white'
+                            : 'text-white/80 hover:text-white hover:opacity-100 opacity-80'
+                        )}
                       >
-                        {/* Floating ambient glow bubble */}
-                        <div className="absolute -inset-1 rounded-full bg-purple-500/25 blur-sm -z-10" />
-                        <div className="absolute top-0 left-1/4 right-1/4 h-1/2 bg-white/25 rounded-full blur-[1px]" />
-                      </motion.div>
-                    )}
-                    <span
-                      className={cn(
-                        'relative z-10 transition-transform duration-200',
-                        isActive ? 'text-white scale-110 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]' : ''
-                      )}
-                    >
-                      {iconMap[item.icon]}
-                    </span>
-                    <span
-                      className={cn(
-                        'relative z-10 font-bold',
-                        isActive ? 'text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]' : ''
-                      )}
-                    >
-                      {item.label}
-                    </span>
-                  </Link>
-                );
-              })}
-            </nav>
+                        <span className={cn('transition-opacity duration-200', isActive ? 'opacity-0' : 'opacity-100')}>
+                          {iconMap[item.icon]}
+                        </span>
+                        <span className={cn('transition-all duration-200', isActive ? 'font-extrabold translate-y-[2px]' : '')}>
+                          {item.label}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </div>
+            </div>
 
             {/* Right */}
             <div className="flex items-center gap-3">

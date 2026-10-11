@@ -101,17 +101,20 @@ export function PullBulbToggle() {
     }, 75);
   }, []);
 
-  // Drag handlers
+  // Drag handlers with full mobile touch & pointer support
   const handlePointerDown = (e: React.PointerEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    (e.target as Element).setPointerCapture?.(e.pointerId);
+    try {
+      (e.target as Element).setPointerCapture?.(e.pointerId);
+    } catch {}
     startPosRef.current = { x: e.clientX, y: e.clientY };
     setIsDragging(true);
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDragging) return;
+    e.preventDefault();
     const dx = (e.clientX - startPosRef.current.x) * 0.45;
     // Disallow pushing cord upwards; restrict maximum downward stretch to 55px
     const dy = Math.max(0, Math.min(55, (e.clientY - startPosRef.current.y) * 0.7));
@@ -120,6 +123,9 @@ export function PullBulbToggle() {
 
   const handlePointerUp = (e: React.PointerEvent) => {
     if (!isDragging) return;
+    try {
+      (e.target as Element).releasePointerCapture?.(e.pointerId);
+    } catch {}
     setIsDragging(false);
 
     // Calculate total displacement traveled
@@ -133,6 +139,46 @@ export function PullBulbToggle() {
     // If pulled more than 16px, or quick tap/click, trigger toggle
     if (distance > 16 || distance < 4) {
       toggleTheme();
+    }
+  };
+
+  // Dedicated touch fallbacks for mobile browsers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length > 0) {
+      e.stopPropagation();
+      const touch = e.touches[0];
+      startPosRef.current = { x: touch.clientX, y: touch.clientY };
+      setIsDragging(true);
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || e.touches.length === 0) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const touch = e.touches[0];
+    const dx = (touch.clientX - startPosRef.current.x) * 0.45;
+    const dy = Math.max(0, Math.min(55, (touch.clientY - startPosRef.current.y) * 0.7));
+    setDragOffset({ x: dx, y: dy });
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const changedTouch = e.changedTouches[0];
+    if (changedTouch) {
+      const dx = Math.abs(changedTouch.clientX - startPosRef.current.x);
+      const dy = Math.abs(changedTouch.clientY - startPosRef.current.y);
+      const distance = Math.hypot(dx, dy);
+      setDragOffset({ x: 0, y: 0 });
+
+      if (distance > 16 || distance < 4) {
+        toggleTheme();
+      }
+    } else {
+      setDragOffset({ x: 0, y: 0 });
     }
   };
 
@@ -330,7 +376,10 @@ export function PullBulbToggle() {
         </g>
 
         {/* ── THE INTERACTIVE PULL CORD (hangs from bottom of dome) ── */}
-        <g className="cursor-grab active:cursor-grabbing">
+        <g 
+          className="cursor-grab active:cursor-grabbing select-none"
+          style={{ touchAction: 'none' }}
+        >
           {/* Main Pull Cord Line / Ripple Wave */}
           <path
             fill="none"
@@ -351,10 +400,15 @@ export function PullBulbToggle() {
             r="44"
             fill="transparent"
             className="cursor-pointer"
+            style={{ touchAction: 'none' }}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
           />
 
           {/* Subtle Pull Indicator Bead */}
@@ -362,6 +416,7 @@ export function PullBulbToggle() {
             cx={currentCordEndX}
             cy={currentCordEndY}
             r="9"
+            style={{ touchAction: 'none' }}
             className={
               isDark
                 ? 'fill-amber-400 stroke-amber-200 stroke-2 drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]'
@@ -371,6 +426,10 @@ export function PullBulbToggle() {
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
           />
         </g>
       </svg>

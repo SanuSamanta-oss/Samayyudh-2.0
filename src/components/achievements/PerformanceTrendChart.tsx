@@ -3,8 +3,8 @@
 import React from 'react';
 import {
   ResponsiveContainer,
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   Tooltip,
@@ -50,6 +50,12 @@ export function PerformanceTrendChart({
   const initialScore = chartData[0].score;
   const netDelta = latestScore - initialScore;
 
+  // Calculate dynamic adaptive domain so slopes and surges are clearly visible
+  const minScore = Math.min(...chartData.map(d => d.score));
+  const maxScore = Math.max(...chartData.map(d => d.score));
+  const yMin = Math.max(0, Math.floor((minScore - 15) / 10) * 10);
+  const yMax = Math.min(100, Math.ceil((maxScore + 15) / 10) * 10);
+
   return (
     <div className={`rounded-3xl border border-border bg-card p-6 ${className}`}>
       {/* Header */}
@@ -68,38 +74,62 @@ export function PerformanceTrendChart({
       </div>
 
       {/* Recharts Container */}
-      <div className="w-full h-56 pt-2">
+      <div className="w-full h-64 pt-2">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-            <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#888888' }} />
-            <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: '#888888' }} />
+          <AreaChart data={chartData} margin={{ top: 15, right: 20, left: -10, bottom: 0 }}>
+            <defs>
+              <linearGradient id="scoreGrowthGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#F59E0B" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="#F59E0B" stopOpacity={0.0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" opacity={0.12} vertical={false} />
+            <XAxis
+              dataKey="name"
+              tick={{ fontSize: 12, fill: '#888888', fontWeight: 600 }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <YAxis
+              domain={[yMin, yMax]}
+              tick={{ fontSize: 11, fill: '#888888' }}
+              tickFormatter={(v) => `${v}%`}
+              axisLine={false}
+              tickLine={false}
+            />
             <Tooltip
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   const data = payload[0].payload;
                   return (
-                    <div className="rounded-xl border border-border bg-card p-3 shadow-lg text-xs space-y-1">
-                      <p className="font-bold text-foreground">{data.name} · {data.date}</p>
-                      <p className="text-amber-600 dark:text-amber-400 font-extrabold text-sm">
+                    <div className="rounded-2xl border border-amber-300/30 bg-card p-3.5 shadow-xl text-xs space-y-1.5">
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="font-bold text-foreground text-sm">{data.name}</span>
+                        <span className="text-[11px] text-stone-400 font-medium">{data.date}</span>
+                      </div>
+                      <p className="text-amber-500 font-black text-base">
                         Score: {data.score}%
                       </p>
-                      <p className="text-stone-400 text-[10px] uppercase">{data.category}</p>
+                      <span className="inline-block px-2 py-0.5 rounded-full bg-stone-100 dark:bg-stone-800 text-[10px] font-bold text-stone-500 uppercase tracking-wide">
+                        {data.category}
+                      </span>
                     </div>
                   );
                 }
                 return null;
               }}
             />
-            <Line
+            <Area
               type="monotone"
               dataKey="score"
               stroke="#F59E0B"
-              strokeWidth={3.5}
-              dot={{ r: 5, fill: '#F59E0B', stroke: '#FFF', strokeWidth: 2 }}
-              activeDot={{ r: 7, fill: '#D97706' }}
+              strokeWidth={4}
+              fillOpacity={1}
+              fill="url(#scoreGrowthGradient)"
+              dot={{ r: 6, fill: '#F59E0B', stroke: '#FFF', strokeWidth: 2.5 }}
+              activeDot={{ r: 8, fill: '#D97706', stroke: '#FFF', strokeWidth: 3 }}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     </div>

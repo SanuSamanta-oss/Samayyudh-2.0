@@ -155,21 +155,21 @@ export function Navbar() {
                   />
                 </div>
 
-                {/* The Floating / Droplet Bubble with Icon hanging DOWNWARD */}
+                {/* The Floating / Droplet Bubble with Icon hanging DOWNWARD below navbar */}
                 <div
                   ref={activeBubbleRef}
-                  className="absolute -translate-x-1/2 w-9 h-9 rounded-full flex items-center justify-center shadow-lg border-2 border-white/80 dark:border-stone-800 pointer-events-none z-20 text-purple-700 dark:text-purple-400 bg-white dark:bg-stone-900 transition-colors duration-300"
+                  className="absolute -translate-x-1/2 w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white/80 dark:border-stone-800 pointer-events-none z-20 text-purple-700 dark:text-purple-400 bg-white dark:bg-stone-900 transition-colors duration-300"
                   style={{
-                    boxShadow: '0 8px 20px -2px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.2)',
+                    boxShadow: '0 10px 24px -2px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.2)',
                   }}
                 >
-                  <span className="scale-95">
+                  <span className="scale-100 flex items-center justify-center">
                     {iconMap[navItems[activeIndex]?.icon]}
                   </span>
                 </div>
 
-                {/* Navigation Items (cleanly on top of track) */}
-                <nav className="relative z-10 flex items-center gap-1.5">
+                {/* Navigation Items (perfectly centered in the middle of track) */}
+                <nav className="relative z-10 flex items-center gap-1">
                   {navItems.map((item, idx) => {
                     const isActive = idx === activeIndex;
                     return (
@@ -180,16 +180,13 @@ export function Navbar() {
                           itemRefs.current[idx] = el;
                         }}
                         className={cn(
-                          'relative z-10 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-200 select-none cursor-pointer',
+                          'relative z-10 flex items-center justify-center min-w-[76px] h-8 px-3.5 rounded-full text-xs transition-all duration-200 select-none cursor-pointer text-center',
                           isActive
-                            ? 'text-white'
-                            : 'text-white/80 hover:text-white hover:opacity-100 opacity-80'
+                            ? 'text-white font-extrabold tracking-wide'
+                            : 'text-white/80 hover:text-white hover:opacity-100 opacity-80 font-semibold'
                         )}
                       >
-                        <span className={cn('transition-all duration-200', isActive ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
-                          {iconMap[item.icon]}
-                        </span>
-                        <span className={cn('transition-all duration-200 text-xs px-1', isActive ? 'font-extrabold text-white tracking-wide scale-105' : 'text-white/80')}>
+                        <span className="leading-none text-center block">
                           {item.label}
                         </span>
                       </Link>

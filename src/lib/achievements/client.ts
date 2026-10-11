@@ -35,6 +35,11 @@ export async function getAchievementSystemData(userId: string): Promise<{
   // 2. If online and Supabase is configured, pull server data in parallel
   if (isSupabaseConfigured && typeof window !== 'undefined') {
     try {
+      const { pullFromCloud } = await import('@/lib/store/sync-engine');
+      if (userId && userId !== 'local-user') {
+        await pullFromCloud(userId).catch(() => {});
+      }
+
       const [streakRes, achRes, histRes] = await Promise.allSettled([
         fetch('/api/streak').then(r => r.ok ? r.json() : null),
         fetch('/api/achievements/me').then(r => r.ok ? r.json() : null),
@@ -198,55 +203,102 @@ export async function getAchievementSystemData(userId: string): Promise<{
     localAchievements.push(firstStepRecord);
   }
 
-  // 5. If user has 2+ tests, check for performance improvement badge
+  // 5. Evaluate improvements & milestones across all consecutive tests
   if (localMockTests.length >= 2) {
     const sorted = [...localMockTests].sort(
       (a, b) => new Date(a.completed_at).getTime() - new Date(b.completed_at).getTime()
     );
-    const test1 = sorted[0];
-    const test2 = sorted[1];
-    const delta = Number((test2.percentage - test1.percentage).toFixed(2));
 
-    if (delta >= 5) {
-      const hasGettingBetter = localAchievements.some(a => a.achievement_definition_id === 'ach-getting-better');
-      if (!hasGettingBetter) {
-        const gbRecord: UserAchievement = {
-          id: `ua-${userId}-ach-getting-better`,
-          user_id: userId,
-          achievement_definition_id: 'ach-getting-better',
-          source_test_id: test2.id,
-          earned_at: test2.completed_at,
-          metadata: {
-            improvement: delta,
-            previous_percentage: test1.percentage,
-            latest_percentage: test2.percentage,
-            exam_category: test2.exam_category,
-          },
-        };
-        await localDB.saveUserAchievement(gbRecord);
-        localAchievements.push(gbRecord);
-      }
-    }
+    let maxScoreSeen = sorted[0].percentage;
 
-    if (delta >= 10) {
-      const hasRisingStar = localAchievements.some(a => a.achievement_definition_id === 'ach-rising-star');
-      if (!hasRisingStar) {
-        const rsRecord: UserAchievement = {
-          id: `ua-${userId}-ach-rising-star`,
-          user_id: userId,
-          achievement_definition_id: 'ach-rising-star',
-          source_test_id: test2.id,
-          earned_at: test2.completed_at,
-          metadata: {
-            improvement: delta,
-            previous_percentage: test1.percentage,
-            latest_percentage: test2.percentage,
-            exam_category: test2.exam_category,
-          },
-        };
-        await localDB.saveUserAchievement(rsRecord);
-        localAchievements.push(rsRecord);
+    for (let k = 1; k < sorted.length; k++) {
+      const prevTest = sorted[k - 1];
+      const currTest = sorted[k];
+      const delta = Number((currTest.percentage - prevTest.percentage).toFixed(2));
+
+      if (delta >= 5) {
+        const hasGettingBetter = localAchievements.some(a => a.achievement_definition_id === 'ach-getting-better');
+        if (!hasGettingBetter) {
+          const gbRecord: UserAchievement = {
+            id: `ua-${userId}-ach-getting-better`,
+            user_id: userId,
+            achievement_definition_id: 'ach-getting-better',
+            source_test_id: currTest.id,
+            earned_at: currTest.completed_at,
+            metadata: {
+              improvement: delta,
+              previous_percentage: prevTest.percentage,
+              latest_percentage: currTest.percentage,
+              exam_category: currTest.exam_category,
+            },
+          };
+          await localDB.saveUserAchievement(gbRecord);
+          localAchievements.push(gbRecord);
+        }
       }
+
+      if (delta >= 10) {
+        const hasRisingStar = localAchievements.some(a => a.achievement_definition_id === 'ach-rising-star');
+        if (!hasRisingStar) {
+          const rsRecord: UserAchievement = {
+            id: `ua-${userId}-ach-rising-star`,
+            user_id: userId,
+            achievement_definition_id: 'ach-rising-star',
+            source_test_id: currTest.id,
+            earned_at: currTest.completed_at,
+            metadata: {
+              improvement: delta,
+              previous_percentage: prevTest.percentage,
+              latest_percentage: currTest.percentage,
+              exam_category: currTest.exam_category,
+            },
+          };
+          await localDB.saveUserAchievement(rsRecord);
+          localAchievements.push(rsRecord);
+        }
+      }
+
+      if (delta >= 15) {
+        const hasHighAchiever = localAchievements.some(a => a.achievement_definition_id === 'ach-high-achiever');
+        if (!hasHighAchiever) {
+          const haRecord: UserAchievement = {
+            id: `ua-${userId}-ach-high-achiever`,
+            user_id: userId,
+            achievement_definition_id: 'ach-high-achiever',
+            source_test_id: currTest.id,
+            earned_at: currTest.completed_at,
+            metadata: {
+              improvement: delta,
+              previous_percentage: prevTest.percentage,
+              latest_percentage: currTest.percentage,
+              exam_category: currTest.exam_category,
+            },
+          };
+          await localDB.saveUserAchievement(haRecord);
+          localAchievements.push(haRecord);
+        }
+      }
+
+      if (currTest.percentage > maxScoreSeen && currTest.percentage >= 70) {
+        const hasPersonalBest = localAchievements.some(a => a.achievement_definition_id === 'ach-score-best');
+        if (!hasPersonalBest) {
+          const pbRecord: UserAchievement = {
+            id: `ua-${userId}-ach-score-best`,
+            user_id: userId,
+            achievement_definition_id: 'ach-score-best',
+            source_test_id: currTest.id,
+            earned_at: currTest.completed_at,
+            metadata: {
+              latest_percentage: currTest.percentage,
+              exam_category: currTest.exam_category,
+            },
+          };
+          await localDB.saveUserAchievement(pbRecord);
+          localAchievements.push(pbRecord);
+        }
+      }
+
+      maxScoreSeen = Math.max(maxScoreSeen, currTest.percentage);
     }
   }
 

@@ -21,6 +21,16 @@ export function ThemeToggle() {
       setDark(prefersDark);
       if (prefersDark) document.documentElement.classList.add('dark');
     }
+
+    const handleThemeChange = (e: CustomEvent<{ isDark: boolean }>) => {
+      if (typeof e.detail?.isDark === 'boolean') {
+        setDark(e.detail.isDark);
+      }
+    };
+    window.addEventListener('samayyudh:theme-change' as any, handleThemeChange as any);
+    return () => {
+      window.removeEventListener('samayyudh:theme-change' as any, handleThemeChange as any);
+    };
   }, []);
 
   const toggle = () => {
@@ -33,6 +43,7 @@ export function ThemeToggle() {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+    window.dispatchEvent(new CustomEvent('samayyudh:theme-change', { detail: { isDark: next } }));
   };
 
   if (!mounted) return <div className="w-[40px] h-[20px]" />;

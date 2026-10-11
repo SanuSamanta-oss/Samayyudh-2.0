@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { FeatureIdCards } from '@/components/home/FeatureIdCards';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { PullBulbToggle } from '@/components/PullBulbToggle';
 import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import { DonationTicket } from '@/components/home/DonationTicket';
 
@@ -70,54 +71,12 @@ export default function LandingPage() {
               Get Started
             </Link>
 
-            {/* Decorative Hanging Bulb */}
+            {/* Interactive Pull-Cord Hanging Bulb Theme Switcher */}
             <div 
-              className="absolute top-[100%] right-4 md:right-8 w-16 h-32 md:w-20 md:h-40 pointer-events-none z-50 animate-bulb-sway" 
-              aria-hidden="true"
+              className="absolute top-[100%] right-4 md:right-8 z-50 pointer-events-auto" 
+              aria-label="Theme toggle bulb"
             >
-               <svg viewBox="0 0 100 200" className="w-full h-full animate-bulb-flicker" preserveAspectRatio="xMidYMin meet">
-                 {/* Wire */}
-                 <line x1="50" y1="0" x2="50" y2="73" className="stroke-stone-400 dark:stroke-[#9ca3af]" strokeWidth="0.5" />
-                 
-                 {/* Top Loop */}
-                 <rect x="49" y="73" width="2" height="3" className="fill-stone-500 dark:fill-[#6b7280]" />
-                 
-                 {/* Metallic Dome Cap */}
-                 <path d="M 43 80 Q 50 74 57 80 Z" className="fill-stone-400 dark:fill-[#9ca3af]" />
-                 
-                 {/* Socket Cylinder */}
-                 <rect x="43" y="80" width="14" height="15" className="fill-stone-600 dark:fill-[#374151]" />
-                 {/* Socket Highlight */}
-                 <rect x="44" y="80" width="2" height="15" className="fill-stone-400 dark:fill-[#9ca3af] opacity-80" />
-                 
-                 {/* Socket Bottom Ring */}
-                 <rect x="41" y="94" width="18" height="2" className="fill-stone-500 dark:fill-[#6b7280]" rx="0.5" />
-                 
-                 {/* Dark/Transparent Glass Neck */}
-                 <rect x="42.5" y="96" width="15" height="19" className="fill-stone-900/5 stroke-stone-900/10 dark:fill-white/5 dark:stroke-white/15" strokeWidth="0.5" />
-                 {/* Glass Neck Highlight */}
-                 <rect x="43.5" y="96" width="1.5" height="19" className="fill-white/80 dark:fill-white/15" />
-                 
-                 {/* Glowing Bulb Glass */}
-                 <path d="M 42 115
-                          C 42 118, 18 130, 18 155
-                          C 18 178, 32 190, 50 190
-                          C 68 190, 82 178, 82 155
-                          C 82 130, 58 118, 58 115
-                          Z"
-                       fill="url(#bulbGlow)"
-                       className="stroke-stone-300 dark:stroke-transparent"
-                       strokeWidth="0.5" />
-                 
-                 <defs>
-                   <radialGradient id="bulbGlow" cx="50%" cy="70%" r="50%">
-                     <stop offset="0%" stopColor="#ffffff" />
-                     <stop offset="35%" stopColor="#fef08a" />
-                     <stop offset="75%" stopColor="#eab308" />
-                     <stop offset="100%" stopColor="#ca8a04" stopOpacity="0.8" />
-                   </radialGradient>
-                 </defs>
-               </svg>
+              <PullBulbToggle />
             </div>
           </div>
         </div>

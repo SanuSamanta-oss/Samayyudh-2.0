@@ -7,7 +7,7 @@ import {
   User, BookOpen, BarChart3, History as HistoryIcon, Trophy,
   StickyNote, Settings, Trash2, Loader2, Shield, Calendar,
   Zap, Clock, Target, Award, Star, ChevronRight, Edit3,
-  CheckCircle2, Lock, Flame, LogIn
+  CheckCircle2, Lock, Flame, LogIn, LogOut, KeyRound
 } from 'lucide-react';
 import { cn, formatDuration } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
@@ -69,11 +69,14 @@ function getGreeting() {
 }
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const { user, revokeAllSessions } = useAuth();
   const [tab, setTab] = useState<SidebarTab>('profile');
   const [stats, setStats] = useState<ProfileStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [showRevokeConfirm, setShowRevokeConfirm] = useState(false);
+  const [isRevoking, setIsRevoking] = useState(false);
+  const [revokeMessage, setRevokeMessage] = useState<string | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState('');
 
@@ -638,6 +641,82 @@ export default function ProfilePage() {
                       <ChevronRight className="w-4 h-4 text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
                     </Link>
                   ))}
+                </div>
+
+                {/* Security & Token Revocation */}
+                <div className="bg-card rounded-2xl border border-border p-5 space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                        <KeyRound className="w-4 h-4 text-brand-600" /> Account Security & Session Control
+                      </h3>
+                      <p className="text-xs text-muted mt-1">
+                        Prevent unauthorized account access and terminate all sessions across other devices if compromised.
+                      </p>
+                    </div>
+                  </div>
+
+                  {revokeMessage && (
+                    <div className="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs text-brand-600 font-medium">
+                      {revokeMessage}
+                    </div>
+                  )}
+
+                  <div className="space-y-3 pt-1">
+                    {showRevokeConfirm ? (
+                      <div className="p-3 rounded-xl bg-surface border border-border space-y-3">
+                        <p className="text-xs text-muted leading-relaxed">
+                          This will immediately invalidate your active JWT authentication tokens, refresh tokens, and log out all active sessions across all devices and browsers.
+                        </p>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setShowRevokeConfirm(false)}
+                            className="flex-1 px-3 py-2 rounded-xl text-xs font-medium border border-border bg-card hover:bg-surface transition-colors"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="button"
+                            disabled={isRevoking}
+                            onClick={async () => {
+                              setIsRevoking(true);
+                              setRevokeMessage(null);
+                              try {
+                                const ok = await revokeAllSessions();
+                                if (ok) {
+                                  setRevokeMessage('All tokens revoked successfully. Redirecting...');
+                                  setTimeout(() => {
+                                    window.location.href = '/auth';
+                                  }, 1000);
+                                } else {
+                                  setRevokeMessage('Failed to revoke tokens. Please try again.');
+                                }
+                              } catch {
+                                setRevokeMessage('An error occurred during token revocation.');
+                              } finally {
+                                setIsRevoking(false);
+                                setShowRevokeConfirm(false);
+                              }
+                            }}
+                            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 transition-colors disabled:opacity-50"
+                          >
+                            {isRevoking ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Shield className="w-3.5 h-3.5" />}
+                            Revoke All Sessions
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setShowRevokeConfirm(true)}
+                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-foreground border border-border bg-surface hover:bg-surface-2 transition-colors cursor-pointer"
+                      >
+                        <Lock className="w-3.5 h-3.5 text-brand-600" />
+                        Revoke All Active Tokens & Log Out Everywhere
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 {/* Danger zone */}

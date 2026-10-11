@@ -19,6 +19,7 @@ interface AuthState {
 
 interface AuthContextValue extends AuthState {
   signOut: () => Promise<void>;
+  revokeAllSessions: () => Promise<boolean>;
   refreshSession: () => Promise<void>;
 }
 
@@ -90,10 +91,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = useCallback(async () => {
     if (!isSupabaseConfigured) return;
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    // Redirect to landing after sign out
-    window.location.href = window.location.origin + '/';
+    try {
+      const supabase = createClient();
+      // Revoke session globally on Supabase Auth server so stolen tokens immediately fail
+      await supabase.auth.signOut({ scope: 'global' });
+    } catch (e) {
+      console.error('Error during signOut:', e);
+    } finally {
+      // Clear local storage auth cache and redirect to landing
+      window.location.href = window.location.origin + '/';
+    }
+  }, []);
+
+  const revokeAllSessions = useCallback(async (): Promise<boolean> => {
+    if (!isSupabaseConfigured) return false;
+    try {
+      // Call dedicated server-side token revocation endpoint
+      const res = await fetch('/api/auth/revoke', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scope: 'global' }),
+      });
+
+      const supabase = createClient();
+      await supabase.auth.signOut({ scope: 'global' });
+
+      setState({
+        user: null,
+        session: null,
+        loading: false,
+        isAuthenticated: false,
+        isConfigured: true,
+      });
+
+      return res.ok;
+    } catch (err) {
+      console.error('Failed to revoke tokens globally:', err);
+      return false;
+    }
   }, []);
 
   const refreshSession = useCallback(async () => {
@@ -110,7 +145,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ ...state, signOut, refreshSession }}>
+    <AuthContext.Provider value={{ ...state, signOut, revokeAllSessions, refreshSession }}>
       {children}
     </AuthContext.Provider>
   );

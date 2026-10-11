@@ -61,12 +61,21 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith(path),
   );
 
-  // Redirect unauthenticated users to auth page
+  // Redirect unauthenticated users to auth page and clear any invalid/stale/revoked cookies
   if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone();
     url.pathname = '/auth';
     url.searchParams.set('redirect', request.nextUrl.pathname);
-    return NextResponse.redirect(url);
+    const redirectResponse = NextResponse.redirect(url);
+
+    // If an invalid or revoked token was provided, ensure client cookies are purged
+    request.cookies.getAll().forEach((c) => {
+      if (c.name.startsWith('sb-') || c.name.includes('supabase') || c.name.includes('auth-token')) {
+        redirectResponse.cookies.delete(c.name);
+      }
+    });
+
+    return redirectResponse;
   }
 
   // Redirect authenticated users away from auth page

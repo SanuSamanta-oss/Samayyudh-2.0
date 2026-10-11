@@ -5,22 +5,26 @@
 // Interactive hanging lamp with physics pull-string, audio click,
 // realistic spring recoil, cord wiggle, and dynamic bulb glow.
 // Pulling the cord toggles between Light Mode and Dark Mode.
+// BULB IS ROTATED 180° — glass dome faces DOWN, cap faces UP.
+// The cord hangs from the bottom of the glass dome.
 // ============================================================
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 // Pre-defined wavy cord paths for the classic pull animation ripple
+// Cord now starts from the bottom of the inverted bulb (dome at bottom)
+// Cord origin Y = 260 (bottom of inverted dome), end Y = 410
 const CORD_PULL_PATHS = [
   // 0: straight rest
-  'M 98.7 228 L 98.7 378',
+  'M 98.7 260 L 98.7 410',
   // 1: wave phase 1
-  'M 98.7 228 Q 126.7 265 98.7 303 Q 70.7 341 98.7 378',
+  'M 98.7 260 Q 126.7 297 98.7 335 Q 70.7 373 98.7 410',
   // 2: wave phase 2 (recoil reverse)
-  'M 98.7 228 Q 78.7 265 98.7 303 Q 118.7 341 98.7 378',
+  'M 98.7 260 Q 78.7 297 98.7 335 Q 118.7 373 98.7 410',
   // 3: wave phase 3 (tighter wave)
-  'M 98.7 228 Q 114.7 265 98.7 303 Q 82.7 341 98.7 378',
+  'M 98.7 260 Q 114.7 297 98.7 335 Q 82.7 373 98.7 410',
   // 4: slight oscillation
-  'M 98.7 228 Q 88.7 265 98.7 303 Q 108.7 341 98.7 378',
+  'M 98.7 260 Q 88.7 297 98.7 335 Q 108.7 373 98.7 410',
 ];
 
 export function PullBulbToggle() {
@@ -137,8 +141,9 @@ export function PullBulbToggle() {
   }
 
   // Determine current active cord path
-  const restCordStartY = 228;
-  const restCordEndY = 378;
+  // Cord hangs from bottom of inverted bulb dome (Y=260) down to Y=410
+  const restCordStartY = 260;
+  const restCordEndY = 410;
   const currentCordEndX = 98.7 + dragOffset.x;
   const currentCordEndY = restCordEndY + dragOffset.y;
 
@@ -148,20 +153,28 @@ export function PullBulbToggle() {
     ? CORD_PULL_PATHS[waveStep]
     : `M 98.7 ${restCordStartY} L 98.7 ${restCordEndY}`;
 
+  // ── Bulb geometry constants ──
+  // Original bulb center in local-group coords: (-745.343, ~800)
+  // After translate(844.069, -645.213) → SVG coords ~(98.7, 155)
+  // The bulb spans roughly from Y=55 (dome top) to Y=237 (cap bottom) in SVG space
+  // Rotation center in SVG space: (98.7, 146) — center of the bulb body
+  const bulbCenterX = 98.7;
+  const bulbCenterY = 146;
+
   return (
     <div
       className="relative select-none animate-bulb-sway"
       style={{
-        width: '100px',
-        height: '240px',
+        width: '75px',
+        height: '220px',
         transformOrigin: 'top center',
       }}
       title={isDark ? 'Pull cord to switch to Light Mode' : 'Pull cord to switch to Dark Mode'}
     >
       <svg
         className="w-full h-full overflow-visible"
-        viewBox="0 0 197.451 481.081"
-        preserveAspectRatio="xMinYMin meet"
+        viewBox="-10 0 220 520"
+        preserveAspectRatio="xMidYMin meet"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
@@ -208,20 +221,20 @@ export function PullBulbToggle() {
           </radialGradient>
         </defs>
 
-        {/* ── TOP SUSPENSION WIRE (From ceiling/navbar down to bulb) ── */}
+        {/* ── TOP SUSPENSION WIRE (Starts cleanly from bottom edge of button down to bulb cap) ── */}
         <line
           x1="98.7"
-          y1="-20"
+          y1="-2"
           x2="98.7"
-          y2="98"
+          y2="55"
           stroke={isDark ? '#64748b' : '#94a3b8'}
-          strokeWidth="3.5"
+          strokeWidth="3"
           strokeLinecap="round"
         />
 
-        {/* ── THE LIGHT BULB BODY ── */}
+        {/* ── THE LIGHT BULB BODY — ROTATED 180° (dome faces down) ── */}
         <g
-          transform="translate(844.069 -645.213)"
+          transform={`translate(844.069 -645.213) rotate(180 -745.343 800)`}
           className="transition-all duration-300"
         >
           {/* Outer Atmospheric Aura Glow when ON */}
@@ -236,7 +249,7 @@ export function PullBulbToggle() {
             />
           )}
 
-          {/* Bulb Metallic Screw Cap Base */}
+          {/* Bulb Metallic Screw Cap Base (now at top after rotation) */}
           <path
             fill={isDark ? '#475569' : '#64748b'}
             strokeLinecap="round"
@@ -253,7 +266,7 @@ export function PullBulbToggle() {
             transform="matrix(.52452 0 0 .90177 -368.282 82.976)"
           />
 
-          {/* Cap Lower Rim */}
+          {/* Cap Lower Rim (now upper rim after rotation) */}
           <path
             fill={isDark ? '#334155' : '#475569'}
             strokeLinecap="round"
@@ -292,7 +305,7 @@ export function PullBulbToggle() {
             )}
           </g>
 
-          {/* Glass Envelope Bulb Dome */}
+          {/* Glass Envelope Bulb Dome (now faces downward) */}
           <path
             strokeLinecap="round"
             strokeWidth="5"
@@ -316,7 +329,7 @@ export function PullBulbToggle() {
           />
         </g>
 
-        {/* ── THE INTERACTIVE PULL CORD ── */}
+        {/* ── THE INTERACTIVE PULL CORD (hangs from bottom of dome) ── */}
         <g className="cursor-grab active:cursor-grabbing">
           {/* Main Pull Cord Line / Ripple Wave */}
           <path

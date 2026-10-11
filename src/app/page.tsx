@@ -59,24 +59,26 @@ export default function LandingPage() {
             <span className="text-xl font-bold text-gradient-brand">সময়যুদ্ধ</span>
             <span className="text-xs font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1.5 py-0.5 rounded-md">2.0</span>
           </Link>
-          <div className="flex items-center gap-3 relative">
+          <div className="flex items-center gap-3">
             <ThemeToggle />
             <Link href="/auth" className="text-sm font-medium text-muted hover:text-foreground transition-colors px-3 py-2">
               Log In
             </Link>
-            <Link
-              href="/auth"
-              className="text-sm font-semibold text-white bg-gradient-brand px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
-            >
-              Get Started
-            </Link>
+            <div className="relative inline-flex items-center justify-center">
+              <Link
+                href="/auth"
+                className="relative z-10 text-sm font-semibold text-white bg-gradient-brand px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
+              >
+                Get Started
+              </Link>
 
-            {/* Interactive Pull-Cord Hanging Bulb Theme Switcher */}
-            <div 
-              className="absolute top-[100%] right-4 md:right-8 z-50 pointer-events-auto" 
-              aria-label="Theme toggle bulb"
-            >
-              <PullBulbToggle />
+              {/* Interactive Pull-Cord Hanging Bulb Theme Switcher */}
+              <div 
+                className="absolute top-full left-1/2 -translate-x-1/2 z-0 pointer-events-auto" 
+                aria-label="Theme toggle bulb"
+              >
+                <PullBulbToggle />
+              </div>
             </div>
           </div>
         </div>

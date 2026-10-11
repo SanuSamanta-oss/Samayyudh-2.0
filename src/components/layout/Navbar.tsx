@@ -79,14 +79,14 @@ export function Navbar() {
                     className={cn(
                       'flex items-center gap-2 px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all duration-300',
                       isActive
-                        ? 'bg-purple-500/20 dark:bg-purple-500/25 text-purple-900 dark:text-purple-200 border border-purple-400/40 dark:border-purple-400/50 shadow-[0_0_12px_rgba(168,85,247,0.35)] backdrop-blur-md'
-                        : 'text-black dark:text-white hover:text-black dark:hover:text-white hover:bg-stone-100 dark:hover:bg-white/10'
+                        ? 'bg-purple-100 dark:bg-purple-950/60 text-purple-950 dark:text-purple-100 border border-purple-300 dark:border-purple-500/50 shadow-[0_0_14px_rgba(168,85,247,0.3)] backdrop-blur-md'
+                        : 'text-stone-950 dark:text-white hover:text-black dark:hover:text-white hover:bg-stone-200/60 dark:hover:bg-white/10'
                     )}
                   >
-                    <span className={cn('transition-colors', isActive ? 'text-purple-700 dark:text-purple-300' : 'text-stone-800 dark:text-white/80')}>
+                    <span className={cn('transition-colors', isActive ? 'text-purple-700 dark:text-purple-300' : 'text-stone-950 dark:text-white')}>
                       {iconMap[item.icon]}
                     </span>
-                    <span>{item.label}</span>
+                    <span className={isActive ? 'font-bold text-purple-950 dark:text-purple-100' : 'text-stone-950 dark:text-white'}>{item.label}</span>
                   </Link>
                 );
               })}
@@ -181,14 +181,14 @@ export function Navbar() {
                   className={cn(
                     'flex items-center gap-3 px-4 py-3 rounded-2xl text-base font-semibold transition-all',
                     isActive
-                      ? 'bg-purple-500/20 dark:bg-purple-500/25 text-purple-900 dark:text-purple-200 border border-purple-400/40 shadow-[0_0_12px_rgba(168,85,247,0.3)]'
-                      : 'text-black dark:text-white hover:bg-stone-50 dark:hover:bg-white/10'
+                      ? 'bg-purple-100 dark:bg-purple-950/60 text-purple-950 dark:text-purple-100 border border-purple-300 dark:border-purple-500/50 shadow-[0_0_14px_rgba(168,85,247,0.3)]'
+                      : 'text-stone-950 dark:text-white hover:bg-stone-100 dark:hover:bg-white/10'
                   )}
                 >
-                  <span className={isActive ? 'text-purple-700 dark:text-purple-300' : 'text-stone-800 dark:text-white/80'}>
+                  <span className={isActive ? 'text-purple-700 dark:text-purple-300' : 'text-stone-950 dark:text-white'}>
                     {iconMap[item.icon]}
                   </span>
-                  <span>{item.label}</span>
+                  <span className={isActive ? 'font-bold text-purple-950 dark:text-purple-100' : 'text-stone-950 dark:text-white'}>{item.label}</span>
                 </Link>
               );
             })}

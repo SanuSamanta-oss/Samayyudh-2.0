@@ -108,15 +108,28 @@ export default function DashboardPage() {
   const [loadingExam, setLoadingExam] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
   const [sessions, setSessions] = useState<ExamSession[]>([]);
+  const [activeStreak, setActiveStreak] = useState<number>(0);
+  const [achievementCount, setAchievementCount] = useState<number>(0);
 
   useEffect(() => {
-    async function loadSessions() {
+    async function loadSessionsAndStreaks() {
       const all = await localDB.getAllSessions();
       all.sort((a, b) => new Date(b.started_at).getTime() - new Date(a.started_at).getTime());
       setSessions(all);
+
+      const userId = user?.id || 'local-user';
+      const streak = await localDB.getUserStreak(userId);
+      if (streak) {
+        setActiveStreak(streak.current_streak || 0);
+      } else if (all.length > 0) {
+        setActiveStreak(1);
+      }
+
+      const achs = await localDB.getUserAchievements(userId);
+      setAchievementCount(achs.length);
     }
-    loadSessions();
-  }, []);
+    loadSessionsAndStreaks();
+  }, [user]);
 
   const displayName: string =
     user?.user_metadata?.display_name ||
@@ -135,12 +148,12 @@ export default function DashboardPage() {
   };
 
   const totalSessions = sessions.length;
-  const streakCount = totalSessions > 0 ? 1 : 0; // Simplified check: if they have any sessions, assume a 1 day streak for now
+  const streakCount = activeStreak;
 
   const stats = [
     { label: 'Sessions', value: totalSessions.toString(), icon: Target, color: 'text-brand-600', bg: 'bg-brand-50 dark:bg-brand-100/10' },
+    { label: 'Badges', value: achievementCount.toString(), icon: Trophy, color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-900/20' },
     { label: 'Avg Score', value: '—', icon: BarChart3, color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-900/20' },
-    { label: 'Study Time', value: '—', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20' },
     { label: 'Day Streak', value: streakCount.toString(), icon: Flame, color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-900/20' },
   ];
 
@@ -188,7 +201,10 @@ export default function DashboardPage() {
             </div>
 
             {/* Streak badge — right side */}
-            <div className="ml-auto hidden sm:flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 flex-shrink-0 shadow-lg">
+            <Link
+              href="/achievements"
+              className="ml-auto hidden sm:flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 flex-shrink-0 shadow-lg cursor-pointer"
+            >
               <motion.div
                 animate={{ 
                   scaleX: [1, 1.15, 0.85, 1.05, 1],
@@ -206,7 +222,7 @@ export default function DashboardPage() {
                 <span className="text-base leading-none block">🔥</span>
               </motion.div>
               <span className="text-white text-xs font-semibold">{streakCount} Day Streak</span>
-            </div>
+            </Link>
           </div>
 
           {/* Quick stats row inside hero */}

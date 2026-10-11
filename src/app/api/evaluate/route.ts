@@ -146,8 +146,10 @@ export async function POST(request: Request) {
       );
     }
 
+    const isOptValue = body.answer_text.trim().startsWith('opt_');
+    
     // Empty answer shortcut
-    if (!body.answer_text.trim()) {
+    if (!body.answer_text.trim() && !isOptValue) {
       const emptyResult: EvaluationResponse = {
         score: 0,
         max_score: body.marks || 0,

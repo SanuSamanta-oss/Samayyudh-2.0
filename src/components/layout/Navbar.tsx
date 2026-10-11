@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, Swords, GraduationCap, Library,
-  History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut
+  History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut, Trophy
 } from 'lucide-react';
 import { useState } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -21,12 +21,14 @@ const iconMap: Record<string, React.ReactNode> = {
   BarChart3: <BarChart3 className="w-5 h-5" />,
   StickyNote: <StickyNote className="w-5 h-5" />,
   ShieldAlert: <ShieldAlert className="w-5 h-5" />,
+  Trophy: <Trophy className="w-5 h-5" />,
 };
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard' },
   { href: '/practice', label: 'Practice', icon: 'Swords' },
   { href: '/exams', label: 'Exams', icon: 'GraduationCap' },
+  { href: '/achievements', label: 'Badges', icon: 'Trophy' },
   { href: '/questions', label: 'Questions', icon: 'Library' },
   { href: '/history', label: 'History', icon: 'History' },
   { href: '/analytics', label: 'Analytics', icon: 'BarChart3' },

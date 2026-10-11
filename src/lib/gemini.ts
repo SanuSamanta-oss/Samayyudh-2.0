@@ -40,13 +40,19 @@ export async function evaluateAnswer({ question, answer }: EvaluateAnswerParams)
   const recommendedTime = getRecommendedTime(question.marks);
 
   let finalAnswerText = answer.answer_text;
-  if (!finalAnswerText || finalAnswerText.trim() === '') {
-    if (answer.selected_option && question.options) {
-      const opt = question.options.find(o => o.id === answer.selected_option);
+  
+  // If answer_text is just an option ID (like "opt_a") or if it's completely empty but selected_option is set
+  const isJustOptionId = finalAnswerText && finalAnswerText.trim().startsWith('opt_') && finalAnswerText.trim().length <= 10;
+  
+  if (!finalAnswerText || finalAnswerText.trim() === '' || isJustOptionId) {
+    const selectedOption = isJustOptionId ? finalAnswerText.trim() : answer.selected_option;
+    
+    if (selectedOption && question.options) {
+      const opt = question.options.find(o => o.id === selectedOption);
       if (opt) {
         finalAnswerText = `Selected Option: (${opt.id.replace('opt_', '').toUpperCase()}) ${opt.text}`;
       } else {
-        finalAnswerText = answer.selected_option;
+        finalAnswerText = selectedOption;
       }
     } else if (answer.selected_options && question.options) {
       const opts = answer.selected_options.map(id => {
@@ -140,7 +146,7 @@ export async function evaluateSession(
     return hasText || hasOption || hasOptions;
   });
 
-  const CONCURRENCY = 3;
+  const CONCURRENCY = 2;
   let completed = 0;
 
   for (let i = 0; i < answeredQuestions.length; i += CONCURRENCY) {
@@ -160,12 +166,20 @@ export async function evaluateSession(
           const evaluation = await evaluateAnswer({ question, answer });
           evaluations.set(question.id, evaluation);
           success = true;
-        } catch (err) {
+        } catch (err: any) {
           if (attempts >= maxAttempts) {
             console.warn(`Failed to evaluate question ${question.id} after ${maxAttempts} attempts:`, err);
           } else {
-            // Exponential backoff for 503 overloaded errors
-            await new Promise(resolve => setTimeout(resolve, 2000 * attempts));
+            const errStr = String(err?.message || err);
+            if (errStr.includes('429') || errStr.includes('RESOURCE_EXHAUSTED')) {
+              // Rate limit hit (usually 15 RPM for flash models on free tier).
+              // Wait 30 seconds before retrying.
+              console.warn(`Rate limit hit on question ${question.id}, waiting 30s...`);
+              await new Promise(resolve => setTimeout(resolve, 30000));
+            } else {
+              // Exponential backoff for 503 overloaded errors
+              await new Promise(resolve => setTimeout(resolve, 2000 * attempts));
+            }
           }
         }
       }
@@ -176,7 +190,7 @@ export async function evaluateSession(
 
     // Rate limiting between concurrent chunks
     if (i + CONCURRENCY < answeredQuestions.length) {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 3000));
     }
   }
 

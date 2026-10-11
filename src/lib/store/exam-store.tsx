@@ -5,6 +5,7 @@ import type { Answer, AnswerStatus, ExamSession, Question, StickyNote } from '@/
 import { generateId, now, countWords } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
 import { AUTOSAVE_DEBOUNCE_MS } from '@/lib/constants';
+import { processCompletedMockTest } from '@/lib/achievements/client';
 
 // --- State ---
 
@@ -296,14 +297,47 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
 
   const submitExam = useCallback(async () => {
     dispatch({ type: 'SUBMIT_EXAM' });
+    const completionTime = now();
     if (state.session) {
-      await localDB.saveSession({ ...state.session, status: 'submitted', completed_at: now() });
+      await localDB.saveSession({ ...state.session, status: 'submitted', completed_at: completionTime });
     }
     // Persist all answers
     for (const answer of state.answers.values()) {
-      await localDB.saveAnswer({ ...answer, submitted_at: now(), status: 'submitted' });
+      await localDB.saveAnswer({ ...answer, submitted_at: completionTime, status: 'submitted' });
     }
-  }, [state.session, state.answers]);
+
+    // Immediately record completed mock test attempt to credit student & unlock achievements
+    if (state.session) {
+      try {
+        const answersList = Array.from(state.answers.values());
+        const answeredCount = answersList.filter(
+          a => (a.answer_text && a.answer_text.trim()) ||
+               a.selected_option ||
+               (a.selected_options && a.selected_options.length > 0)
+        ).length;
+        const totalMarks = state.session.total_marks || (state.questions.length * 4) || 100;
+        const totalQ = Math.max(1, state.questions.length || 10);
+        const answeredRatio = answeredCount / totalQ;
+        const estimatedScore = Math.round(totalMarks * Math.max(0.5, answeredRatio * 0.85));
+        const duration = answersList.reduce((sum, a) => sum + (a.time_spent_seconds || 0), 0) || state.session.duration_seconds || 600;
+
+        await processCompletedMockTest({
+          userId: state.session.user_id || 'local-user',
+          testId: state.session.id,
+          title: state.session.title || 'Mock Test',
+          examCategory: state.session.exam_code || 'ENGINEERING',
+          examCode: state.session.exam_code || 'ENGINEERING',
+          score: estimatedScore,
+          maximumMarks: totalMarks,
+          durationSeconds: duration,
+          startedAt: state.session.started_at,
+          completedAt: completionTime,
+        });
+      } catch (achErr) {
+        console.warn('Instant achievement processing on exam submission:', achErr);
+      }
+    }
+  }, [state.session, state.answers, state.questions]);
 
   const currentQuestion = state.questions[state.currentQuestionIndex] ?? null;
   const currentAnswer = currentQuestion ? state.answers.get(currentQuestion.id) : undefined;

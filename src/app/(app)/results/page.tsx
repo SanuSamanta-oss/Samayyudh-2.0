@@ -14,6 +14,9 @@ import * as localDB from '@/lib/store/local-db';
 import { evaluateSession, checkGeminiStatus } from '@/lib/gemini';
 import { questionBank } from '@/lib/questions';
 import type { ExamSession, Answer, AnswerEvaluation, Question } from '@/types';
+import { processCompletedMockTest } from '@/lib/achievements/client';
+import { AchievementUnlockModal } from '@/components/achievements/AchievementUnlockModal';
+import type { AchievementDefinition, UserAchievement } from '@/types/achievements';
 
 // --- Correctness badge helpers ---
 const correctnessConfig = {
@@ -44,6 +47,10 @@ function ResultsInner() {
   const [apiError, setApiError] = useState<string | null>(null);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
+  const [unlockedAchievement, setUnlockedAchievement] = useState<{
+    achievement: AchievementDefinition;
+    record: UserAchievement;
+  } | null>(null);
 
   // Load session data from IndexedDB
   useEffect(() => {
@@ -111,6 +118,36 @@ function ResultsInner() {
         const updated = { ...session, evaluation_status: 'completed' as const };
         await localDB.saveSession(updated);
         setSession(updated);
+
+        // Calculate final score & evaluate achievements
+        let finalScore = 0;
+        let finalMaxScore = 0;
+        for (const ev of results.values()) {
+          finalScore += ev.score;
+          finalMaxScore += ev.max_score;
+        }
+
+        const totalTimeSpent = answers.reduce((sum, a) => sum + a.time_spent_seconds, 0);
+
+        try {
+          const achResult = await processCompletedMockTest({
+            userId: session.user_id || 'local-user',
+            testId: session.id,
+            title: session.title,
+            examCategory: (questions[0]?.exam_category as string) || session.exam_code || 'MOCK_EXAM',
+            examCode: session.exam_code,
+            score: finalScore,
+            maximumMarks: finalMaxScore || session.total_marks || 100,
+            durationSeconds: totalTimeSpent,
+          });
+
+          // If a new achievement was earned, trigger celebratory popup
+          if (achResult.new_achievements.length > 0) {
+            setUnlockedAchievement(achResult.new_achievements[0]);
+          }
+        } catch (achErr) {
+          console.warn('Achievement evaluation error:', achErr);
+        }
       }
     } catch (err) {
       setApiError(err instanceof Error ? err.message : 'Evaluation failed');
@@ -308,9 +345,9 @@ function ResultsInner() {
                   <><Brain className="w-3.5 h-3.5" /> Re-evaluate</>
                 )}
               </button>
-              <div className="border-l border-border pl-4">
-                <div className="text-3xl font-bold text-gradient-brand">{scorePercentage}%</div>
-                <div className="text-xs text-stone-500">{totalScore}/{totalMaxScore} marks</div>
+              <div className="border border-purple-200 bg-purple-50 rounded-xl px-4 py-3 min-w-[120px] text-center">
+                <div className="text-3xl font-bold text-black">{scorePercentage}%</div>
+                <div className="text-xs text-stone-600 font-medium">{totalScore}/{totalMaxScore} marks</div>
               </div>
             </div>
           </div>
@@ -436,6 +473,20 @@ function ResultsInner() {
                       </div>
                     )}
 
+                    {/* Incorrect Points */}
+                    {evaluation.incorrect_points && evaluation.incorrect_points.length > 0 && (
+                      <div>
+                        <h4 className="text-xs font-semibold text-red-700 mb-1.5 flex items-center gap-1">
+                          <XCircle className="w-3.5 h-3.5" /> Incorrect Concepts
+                        </h4>
+                        <ul className="space-y-1">
+                          {evaluation.incorrect_points.map((s, i) => (
+                            <li key={i} className="text-xs text-stone-600 pl-4 relative before:content-['•'] before:absolute before:left-1 before:text-red-400">{s}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
                     {/* Examiner Feedback */}
                     <div className="bg-brand-50 rounded-lg p-3 border border-brand-100">
                       <h4 className="text-xs font-semibold text-brand-700 mb-1 flex items-center gap-1">
@@ -502,6 +553,16 @@ function ResultsInner() {
           New Battle <ChevronRight className="w-4 h-4" />
         </Link>
       </div>
+
+      {/* Achievement Unlock Popup */}
+      <AchievementUnlockModal
+        unlockedItem={unlockedAchievement}
+        onClose={() => setUnlockedAchievement(null)}
+        onViewCollection={() => {
+          setUnlockedAchievement(null);
+          window.location.href = '/achievements';
+        }}
+      />
     </div>
   );
 }

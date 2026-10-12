@@ -83,7 +83,8 @@ INTERACTION GUIDELINES:
 const SAMAYYUDH_SYSTEM_INSTRUCTION = getSamayyudhSystemInstruction('Student');
 
 export function getGeminiClient(): { ai: GoogleGenAI; model: string } | null {
-  const apiKey = process.env.GEMINI_API_KEY || '';
+  // Dedicated key for SOKHA assistant to isolate quotas, with fallback to shared GEMINI_API_KEY
+  const apiKey = (process.env.SOKHA_GEMINI_API_KEY || process.env.GEMINI_API_KEY || '').trim();
   if (!apiKey) return null;
 
   const model = process.env.SOKHA_MODEL || 'gemini-2.5-flash';

@@ -329,6 +329,21 @@ export function Navbar() {
                 </Link>
               );
             })}
+            {isAuthenticated && (
+              <div className="pt-3 mt-2 border-t border-border">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    signOut();
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-base font-semibold text-rose-600 dark:text-rose-400 bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-colors"
+                >
+                  <LogOut className="w-5 h-5" />
+                  <span>Log Out</span>
+                </button>
+              </div>
+            )}
           </nav>
         </div>
       )}

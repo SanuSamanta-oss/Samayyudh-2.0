@@ -71,14 +71,25 @@ function getGreeting() {
 }
 
 export default function ProfilePage() {
-  const { user, revokeAllSessions } = useAuth();
+  const { user, signOut, revokeAllSessions, isAuthenticated } = useAuth();
   const [tab, setTab] = useState<SidebarTab>('profile');
   const [stats, setStats] = useState<ProfileStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [showRevokeConfirm, setShowRevokeConfirm] = useState(false);
   const [isRevoking, setIsRevoking] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [revokeMessage, setRevokeMessage] = useState<string | null>(null);
+
+  const handleSignOut = async () => {
+    setIsLoggingOut(true);
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Logout error:', error);
+      setIsLoggingOut(false);
+    }
+  };
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState<AvatarDef | null>(null);
@@ -289,33 +300,65 @@ export default function ProfilePage() {
           ))}
 
           <div className="mt-auto pt-4 border-t border-border">
-            <Link href="/auth" className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-100/10 transition-all">
-              <LogIn className="w-4 h-4" />
-              Sign In
-            </Link>
+            {isAuthenticated || user ? (
+              <button
+                onClick={handleSignOut}
+                disabled={isLoggingOut}
+                className="w-full flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all text-left disabled:opacity-50 cursor-pointer"
+              >
+                {isLoggingOut ? <Loader2 className="w-4 h-4 animate-spin" /> : <LogOut className="w-4 h-4" />}
+                <span>Log Out</span>
+              </button>
+            ) : (
+              <Link href="/auth" className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-100/10 transition-all">
+                <LogIn className="w-4 h-4" />
+                Sign In
+              </Link>
+            )}
           </div>
         </aside>
 
         {/* ── MAIN CONTENT ─────────────────────────────────── */}
         <div className="flex-1 min-w-0">
 
-          {/* Mobile tab bar */}
-          <div className="md:hidden flex gap-1 overflow-x-auto pb-3 mb-4 scrollbar-hide">
-            {navItems.map(item => (
+          {/* Mobile tab bar & quick action */}
+          <div className="md:hidden flex items-center justify-between gap-2 pb-3 mb-4">
+            <div className="flex gap-1 overflow-x-auto scrollbar-hide py-0.5">
+              {navItems.map(item => (
+                <button
+                  key={item.id}
+                  onClick={() => setTab(item.id)}
+                  className={cn(
+                    'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all shrink-0',
+                    tab === item.id
+                      ? 'bg-brand-50 dark:bg-brand-100/10 text-brand-600'
+                      : 'bg-surface text-muted hover:text-foreground'
+                  )}
+                >
+                  <item.icon className="w-3.5 h-3.5" />
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            {(isAuthenticated || user) ? (
               <button
-                key={item.id}
-                onClick={() => setTab(item.id)}
-                className={cn(
-                  'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all shrink-0',
-                  tab === item.id
-                    ? 'bg-brand-50 dark:bg-brand-100/10 text-brand-600'
-                    : 'bg-surface text-muted hover:text-foreground'
-                )}
+                onClick={handleSignOut}
+                disabled={isLoggingOut}
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 shrink-0 hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-colors shadow-sm disabled:opacity-50 cursor-pointer"
+                title="Log Out"
               >
-                <item.icon className="w-3.5 h-3.5" />
-                {item.label}
+                {isLoggingOut ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <LogOut className="w-3.5 h-3.5" />}
+                <span>Log Out</span>
               </button>
-            ))}
+            ) : (
+              <Link
+                href="/auth"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950/30 border border-brand-200 dark:border-brand-900/50 shrink-0 hover:bg-brand-100 transition-colors shadow-sm"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>Sign In</span>
+              </Link>
+            )}
           </div>
 
           <AnimatePresence mode="wait">
@@ -347,13 +390,34 @@ export default function ProfilePage() {
                           initials
                         )}
                       </div>
-                      <button
-                        onClick={() => setEditingName(!editingName)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-border hover:bg-surface transition-all text-muted hover:text-foreground"
-                      >
-                        <Edit3 className="w-3.5 h-3.5" />
-                        Edit Profile
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setEditingName(!editingName)}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-border hover:bg-surface transition-all text-muted hover:text-foreground shadow-sm cursor-pointer"
+                        >
+                          <Edit3 className="w-3.5 h-3.5" />
+                          <span>Edit Profile</span>
+                        </button>
+                        {(isAuthenticated || user) ? (
+                          <button
+                            onClick={handleSignOut}
+                            disabled={isLoggingOut}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-rose-200 dark:border-rose-900/50 bg-rose-50/80 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-all shadow-sm disabled:opacity-50 cursor-pointer"
+                            title="Log Out"
+                          >
+                            {isLoggingOut ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <LogOut className="w-3.5 h-3.5" />}
+                            <span>Log Out</span>
+                          </button>
+                        ) : (
+                          <Link
+                            href="/auth"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-gradient-brand text-white hover:opacity-90 transition-all shadow-sm"
+                          >
+                            <LogIn className="w-3.5 h-3.5" />
+                            <span>Sign In</span>
+                          </Link>
+                        )}
+                      </div>
                     </div>
 
                     {/* Name + edit */}
@@ -864,14 +928,27 @@ export default function ProfilePage() {
                         </div>
                       </div>
                     ) : (
-                      <button
-                        type="button"
-                        onClick={() => setShowRevokeConfirm(true)}
-                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-foreground border border-border bg-surface hover:bg-surface-2 transition-colors cursor-pointer"
-                      >
-                        <Lock className="w-3.5 h-3.5 text-brand-600" />
-                        Revoke All Active Tokens & Log Out Everywhere
-                      </button>
+                      <div className="space-y-2">
+                        {(isAuthenticated || user) && (
+                          <button
+                            type="button"
+                            onClick={handleSignOut}
+                            disabled={isLoggingOut}
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 bg-rose-50/50 dark:bg-rose-950/20 hover:bg-rose-100 dark:hover:bg-rose-900/30 transition-colors cursor-pointer disabled:opacity-50"
+                          >
+                            {isLoggingOut ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <LogOut className="w-3.5 h-3.5" />}
+                            Log Out of Current Device
+                          </button>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => setShowRevokeConfirm(true)}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-foreground border border-border bg-surface hover:bg-surface-2 transition-colors cursor-pointer"
+                        >
+                          <Lock className="w-3.5 h-3.5 text-brand-600" />
+                          Revoke All Active Tokens & Log Out Everywhere
+                        </button>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -960,30 +1037,55 @@ export default function ProfilePage() {
             </button>
           </div>
 
-          {/* Sign-in CTA */}
+          {/* Sign-in / Account Status CTA */}
           <div className="bg-card rounded-2xl border border-border p-5 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-100/10 flex items-center justify-center">
-              <Zap className="w-5 h-5 text-brand-600" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-foreground">Sync Your Progress</p>
-              <p className="text-xs text-muted mt-0.5">Sign in to access your data on any device</p>
-            </div>
-            <ul className="space-y-1">
-              {['Access from any device', 'Never lose your history', 'Track long-term progress'].map(t => (
-                <li key={t} className="flex items-center gap-2 text-xs text-muted">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                  {t}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/auth"
-              className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-brand hover:opacity-90 transition-opacity"
-            >
-              <LogIn className="w-3.5 h-3.5" />
-              Sign In Free
-            </Link>
+            {isAuthenticated || user ? (
+              <>
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <p className="text-sm font-bold text-foreground">Signed In</p>
+                  </div>
+                  <p className="text-xs text-muted mt-0.5 truncate">{memberEmail || displayName}</p>
+                </div>
+                <button
+                  onClick={handleSignOut}
+                  disabled={isLoggingOut}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 bg-rose-50/60 dark:bg-rose-950/20 hover:bg-rose-100 dark:hover:bg-rose-900/30 transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  {isLoggingOut ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <LogOut className="w-3.5 h-3.5" />}
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-100/10 flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-brand-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-foreground">Sync Your Progress</p>
+                  <p className="text-xs text-muted mt-0.5">Sign in to access your data on any device</p>
+                </div>
+                <ul className="space-y-1">
+                  {['Access from any device', 'Never lose your history', 'Track long-term progress'].map(t => (
+                    <li key={t} className="flex items-center gap-2 text-xs text-muted">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/auth"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-brand hover:opacity-90 transition-opacity"
+                >
+                  <LogIn className="w-3.5 h-3.5" />
+                  Sign In Free
+                </Link>
+              </>
+            )}
           </div>
         </aside>
 

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import { ThemeInitializer } from "@/components/providers/ThemeInitializer";
+import { SokhaWidget } from "@/components/sokha/SokhaWidget";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -48,7 +49,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <ThemeInitializer />
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          {children}
+          <SokhaWidget />
+        </AuthProvider>
       </body>
     </html>
   );

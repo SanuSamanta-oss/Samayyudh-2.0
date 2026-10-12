@@ -275,8 +275,8 @@ export function SokhaWidget() {
 
   return (
     <>
-      {/* ── Compact Floating Bot (Right Bottom Corner) ────────────────────────── */}
-      <div className="fixed bottom-5 right-5 z-40 flex items-center gap-2">
+      {/* ── Compact Floating Bot (Lifted above mobile bottom navigation) ──── */}
+      <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 flex items-center gap-2">
         {!isOpen && (
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
@@ -306,8 +306,8 @@ export function SokhaWidget() {
             exit={{ opacity: 0, y: 25, scale: 0.94 }}
             transition={{ type: 'spring', damping: 28, stiffness: 320 }}
             className={cn(
-              'fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col overflow-hidden',
-              'w-[calc(100vw-2rem)] sm:w-[420px] h-[580px] max-h-[85vh]',
+              'fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col overflow-hidden',
+              'w-[calc(100vw-2rem)] sm:w-[420px] h-[580px] max-h-[calc(100dvh-6.5rem)] sm:max-h-[85vh]',
               'rounded-[2.5rem] backdrop-blur-2xl transition-all duration-300',
               // Pristine white theme without dark-mode outline strokes
               'bg-white/98 text-stone-900 shadow-[0_25px_70px_rgba(0,0,0,0.16),0_10px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.04]'

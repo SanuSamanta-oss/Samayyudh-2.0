@@ -461,25 +461,47 @@ export function SokhaWidget() {
 
   return (
     <>
-      {/* ── Compact Floating Bot (Lifted above mobile bottom navigation) ──── */}
+      {/* ── Compact Floating Bot & Direct Voice Search Trigger (Both Web & Mobile App) ──── */}
       <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 flex items-center gap-2">
         {!isOpen && (
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.94 }}
-            onClick={() => setIsOpen(true)}
-            className="relative cursor-pointer flex items-center justify-center"
-            aria-label="Open SamayYudh Assistant"
-          >
+          <>
+            {/* Quick 1-Click Voice Search Button for instant doubt asking */}
+            <motion.button
+              type="button"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.92 }}
+              onClick={() => {
+                setIsOpen(true);
+                setTimeout(() => {
+                  toggleVoiceRecognition();
+                }, 350);
+              }}
+              className="w-11 h-11 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-500/30 flex items-center justify-center cursor-pointer transition-all hover:brightness-110 active:scale-95 group"
+              title="Voice Search Doubts (Speak to AI)"
+              aria-label="Voice Search Doubts"
+            >
+              <Mic className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            </motion.button>
+
             {/* Compact Floating Bot model */}
-            <SokhaBotCharacter
-              size="sm"
-              showGreeting={true}
-              greetingText="👋 Need help?"
-            />
-          </motion.div>
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.94 }}
+              onClick={() => setIsOpen(true)}
+              className="relative cursor-pointer flex items-center justify-center"
+              aria-label="Open SamayYudh Assistant"
+            >
+              <SokhaBotCharacter
+                size="sm"
+                showGreeting={true}
+                greetingText="👋 Speak or type your doubt!"
+              />
+            </motion.div>
+          </>
         )}
       </div>
 
@@ -550,7 +572,25 @@ export function SokhaWidget() {
 
                   {/* Quick Action Suggestions to use the app prominently (Smooth borderless cards) */}
                   <div className="w-full space-y-2 mt-1">
-                    {SAMAYYUDH_QUICK_PROMPTS.slice(0, 4).map((item, idx) => (
+                    {/* Instant Voice Doubt Button */}
+                    <button
+                      type="button"
+                      onClick={toggleVoiceRecognition}
+                      className="w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-semibold transition-all group cursor-pointer bg-gradient-to-r from-sky-50 to-blue-50 hover:from-sky-100 hover:to-blue-100 text-sky-900 border border-sky-200/60 shadow-xs hover:shadow-sm"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="p-1.5 rounded-xl bg-sky-500 text-white shadow-xs">
+                          <Mic className="w-4 h-4 animate-pulse" />
+                        </span>
+                        <div className="flex flex-col text-left">
+                          <span>Ask Doubts with Your Voice</span>
+                          <span className="text-[10px] text-sky-700/80 font-normal">Tap to speak your question</span>
+                        </div>
+                      </div>
+                      <span className="text-[10px] bg-sky-200/80 text-sky-800 font-bold px-2 py-0.5 rounded-full">Voice Mode</span>
+                    </button>
+
+                    {SAMAYYUDH_QUICK_PROMPTS.slice(0, 3).map((item, idx) => (
                       <button
                         key={idx}
                         type="button"

@@ -2,6 +2,12 @@
 > **The Battle Between You & The Clock**  
 > An AI-powered, offline-first exam preparation and practice platform for competitive examinations (GATE, JEE, WBJEE, UPSC, NEET, University, and more).
 
+[![Live Website](https://img.shields.io/badge/Live_Site-samayyudh--2--0.vercel.app-7c3aed?style=for-the-badge&logo=vercel&logoColor=white)](https://samayyudh-2-0.vercel.app/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![PWA Ready](https://img.shields.io/badge/PWA-Ready-10b981?style=for-the-badge&logo=pwa&logoColor=white)](https://samayyudh-2-0.vercel.app/)
+
+🔗 **Live Deployment:** [https://samayyudh-2-0.vercel.app/](https://samayyudh-2-0.vercel.app/)
+
 ---
 
 ## 🌟 Overview

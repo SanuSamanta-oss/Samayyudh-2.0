@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, Swords, GraduationCap, Library,
-  History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut, Trophy
+  History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut, Trophy,
+  Bot
 } from 'lucide-react';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
@@ -19,6 +20,7 @@ const iconMap: Record<string, React.ReactNode> = {
   LayoutDashboard: <LayoutDashboard className="w-5 h-5" />,
   Swords: <Swords className="w-5 h-5" />,
   GraduationCap: <GraduationCap className="w-5 h-5" />,
+  Bot: <Bot className="w-5 h-5" />,
   Library: <Library className="w-5 h-5" />,
   History: <History className="w-5 h-5" />,
   BarChart3: <BarChart3 className="w-5 h-5" />,

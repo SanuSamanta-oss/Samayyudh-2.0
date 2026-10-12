@@ -125,6 +125,21 @@ export function SokhaWidget() {
     };
   }, []);
 
+  // Pre-load speech synthesis voices on client
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.getVoices();
+    const handleVoices = () => {
+      window.speechSynthesis.getVoices();
+    };
+    window.speechSynthesis.onvoiceschanged = handleVoices;
+    return () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = null;
+      }
+    };
+  }, []);
+
   const stopSpeaking = () => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
@@ -145,13 +160,88 @@ export function SokhaWidget() {
   };
 
   // Convert markdown/latex to clean plain text for natural spoken audio
+  // Strips URLs, route links (e.g. prevents "dashboard slash dashboard"), markdown formatting, emojis
   const sanitizeTextForSpeech = (rawText: string) => {
+    if (!rawText) return '';
     return rawText
-      .replace(/[*_#`~>\[\]\(\)\$]/g, ' ')
-      .replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '$1 over $2')
+      // 1. Convert markdown links: [Dashboard](/dashboard) -> Dashboard
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      // 2. Remove markdown link brackets: [Text] -> Text
+      .replace(/\[([^\]]+)\]/g, '$1')
+      // 3. Remove raw URLs (https://... or http://...)
       .replace(/https?:\/\/\S+/g, '')
+      // 4. Remove path targets in parentheses like (/dashboard)
+      .replace(/\(\/[a-zA-Z0-9_\-\/]+\)/g, '')
+      // 5. Remove route paths like /dashboard or /exam/session
+      .replace(/(?:^|\s)\/[a-zA-Z0-9_\-]+(?:\/[a-zA-Z0-9_\-]+)*/g, ' ')
+      // 6. Clean repetitive words like "Dashboard dashboard" or "Dashboard slash dashboard"
+      .replace(/\b([a-zA-Z]+)(?:\s+(?:slash\s+)?\1)+\b/gi, '$1')
+      // 7. Math formulas & LaTeX
+      .replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '$1 over $2')
+      .replace(/\\(?:times|cdot)/g, ' multiplied by ')
+      .replace(/\\(?:pm)/g, ' plus or minus ')
+      .replace(/\\sqrt\{([^}]+)\}/g, 'square root of $1')
+      // 8. Remove emojis and Unicode pictographs so TTS doesn't read symbol names
+      .replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1FA00}-\u{1FAFF}]/gu, '')
+      // 9. Remove markdown formatting characters
+      .replace(/[*_#`~>|\$]/g, ' ')
+      // 10. Clean slashes and leftover symbols
+      .replace(/\//g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
+  };
+
+  // Select a pleasant, natural male companion voice for SOKHA (avoids robotic/female Samantha or Zira)
+  const getSokhaVoice = (): SpeechSynthesisVoice | undefined => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return undefined;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices || voices.length === 0) return undefined;
+
+    const femaleKeywords = [
+      'zira', 'samantha', 'victoria', 'karen', 'susan', 'hazel',
+      'jenny', 'aria', 'sonia', 'neerja', 'female', 'catherine',
+      'linda', 'heather', 'ayumi', 'haruka'
+    ];
+    const preferredMaleKeywords = [
+      'guy', 'david', 'mark', 'daniel', 'alex', 'christopher',
+      'george', 'james', 'oliver', 'arthur', 'male', 'tom', 'steffan'
+    ];
+
+    // 1. Natural/Online male English voice (e.g. Microsoft Guy Natural, Christopher Natural)
+    let chosen = voices.find((v) => {
+      const name = v.name.toLowerCase();
+      const isEn = v.lang.toLowerCase().startsWith('en');
+      return (
+        isEn &&
+        (name.includes('natural') || name.includes('online')) &&
+        preferredMaleKeywords.some((k) => name.includes(k))
+      );
+    });
+
+    // 2. Any English voice with a male keyword
+    if (!chosen) {
+      chosen = voices.find((v) => {
+        const name = v.name.toLowerCase();
+        const isEn = v.lang.toLowerCase().startsWith('en');
+        return isEn && preferredMaleKeywords.some((k) => name.includes(k));
+      });
+    }
+
+    // 3. Any English voice that does not match female names
+    if (!chosen) {
+      chosen = voices.find((v) => {
+        const name = v.name.toLowerCase();
+        const isEn = v.lang.toLowerCase().startsWith('en');
+        return isEn && !femaleKeywords.some((k) => name.includes(k));
+      });
+    }
+
+    // 4. Fallback: Any English voice
+    if (!chosen) {
+      chosen = voices.find((v) => v.lang.toLowerCase().startsWith('en'));
+    }
+
+    return chosen;
   };
 
   // Speaks an assistant answer aloud (enforces the maximum 3 voice answers limit)
@@ -180,17 +270,13 @@ export function SokhaWidget() {
 
     const utterance = new SpeechSynthesisUtterance(plainText);
     utterance.rate = 1.0;
-    utterance.pitch = 1.05;
+    // Pitch 0.95 gives a warm, calm, natural male mentor tone instead of high-pitched / female
+    utterance.pitch = 0.95;
     utterance.lang = 'en-US';
 
-    // Pick best available English voice
-    const voices = window.speechSynthesis.getVoices();
-    const naturalVoice = voices.find(
-      (v) => (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha')) && v.lang.startsWith('en')
-    ) || voices.find((v) => v.lang.startsWith('en'));
-
-    if (naturalVoice) {
-      utterance.voice = naturalVoice;
+    const preferredVoice = getSokhaVoice();
+    if (preferredVoice) {
+      utterance.voice = preferredVoice;
     }
 
     utterance.onstart = () => {
@@ -461,47 +547,24 @@ export function SokhaWidget() {
 
   return (
     <>
-      {/* ── Compact Floating Bot & Direct Voice Search Trigger (Both Web & Mobile App) ──── */}
-      <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 flex items-center gap-2">
+      {/* ── Compact Floating Bot Character (Voice Search & Chat Inside) ──── */}
+      <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 flex items-center">
         {!isOpen && (
-          <>
-            {/* Quick 1-Click Voice Search Button for instant doubt asking */}
-            <motion.button
-              type="button"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.92 }}
-              onClick={() => {
-                setIsOpen(true);
-                setTimeout(() => {
-                  toggleVoiceRecognition();
-                }, 350);
-              }}
-              className="w-11 h-11 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-500/30 flex items-center justify-center cursor-pointer transition-all hover:brightness-110 active:scale-95 group"
-              title="Voice Search Doubts (Speak to AI)"
-              aria-label="Voice Search Doubts"
-            >
-              <Mic className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            </motion.button>
-
-            {/* Compact Floating Bot model */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.94 }}
-              onClick={() => setIsOpen(true)}
-              className="relative cursor-pointer flex items-center justify-center"
-              aria-label="Open SamayYudh Assistant"
-            >
-              <SokhaBotCharacter
-                size="sm"
-                showGreeting={true}
-                greetingText="👋 Speak or type your doubt!"
-              />
-            </motion.div>
-          </>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.94 }}
+            onClick={() => setIsOpen(true)}
+            className="relative cursor-pointer flex items-center justify-center"
+            aria-label="Open SamayYudh Assistant"
+          >
+            <SokhaBotCharacter
+              size="md"
+              showGreeting={true}
+              greetingText="👋 Ask or speak your doubt!"
+            />
+          </motion.div>
         )}
       </div>
 
@@ -730,17 +793,17 @@ export function SokhaWidget() {
                 )}
                 style={{ outline: 'none' }}
               >
-                {/* Voice Search Button (Microphone) */}
+                {/* Voice Search Button (Microphone inside the bot) */}
                 <button
                   type="button"
                   onClick={toggleVoiceRecognition}
                   className={cn(
-                    'p-2 mr-1 rounded-full transition-all shrink-0 cursor-pointer',
+                    'p-2 mr-1.5 rounded-full transition-all shrink-0 cursor-pointer flex items-center justify-center',
                     isListening
-                      ? 'bg-red-500 text-white animate-pulse shadow-md'
-                      : 'text-stone-500 hover:text-purple-600 hover:bg-stone-200/60'
+                      ? 'bg-rose-500 text-white animate-pulse shadow-md ring-2 ring-rose-300'
+                      : 'text-sky-600 hover:text-sky-700 bg-sky-100/80 hover:bg-sky-200/80 shadow-2xs'
                   )}
-                  title={isListening ? 'Stop listening' : 'Search with your voice'}
+                  title={isListening ? 'Stop listening' : 'Voice search (Tap to speak your doubt)'}
                   aria-label="Voice search"
                 >
                   {isListening ? (

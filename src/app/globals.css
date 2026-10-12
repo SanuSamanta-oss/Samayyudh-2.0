@@ -437,3 +437,286 @@ body {
 .dark .newspaper-rule-double {
   border-color: rgba(200, 191, 168, 0.35);
 }
+
+/* ============================================================
+   Profile Picture Modal — Instagram-Style Popup
+   ============================================================ */
+
+/* Clickable avatar hover effect */
+.clickable-avatar {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable-avatar:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 0 2px rgba(139, 92, 246, 0.5),
+    0 0 16px rgba(139, 92, 246, 0.25);
+}
+
+.clickable-avatar:active {
+  transform: scale(0.97);
+}
+
+/* Dark blurred overlay backdrop */
+.profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(5, 8, 18, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Modal content card */
+.profile-modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2rem 2.5rem 2rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(145deg, #111B2E 0%, #0B1120 100%);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(139, 92, 246, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  max-width: 420px;
+  width: 100%;
+}
+
+/* Close button */
+.profile-modal-close {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.profile-modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.profile-modal-close:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.7);
+  outline-offset: 2px;
+}
+
+/* Avatar wrapper — positions the glow behind the image */
+.profile-modal-avatar-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Violet glow behind avatar */
+.profile-modal-avatar-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #7C3AED,
+    #A78BFA,
+    #8B5CF6,
+    #6366F1,
+    #818CF8,
+    #7C3AED
+  );
+  opacity: 0.55;
+  filter: blur(10px);
+  animation: glow-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  0% { opacity: 0.4; filter: blur(10px); }
+  100% { opacity: 0.65; filter: blur(14px); }
+}
+
+/* Avatar circle */
+.profile-modal-avatar {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid transparent;
+  background-image: linear-gradient(#111B2E, #111B2E),
+                    linear-gradient(135deg, #7C3AED, #A78BFA, #6366F1);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(139, 92, 246, 0.2);
+  flex-shrink: 0;
+}
+
+.profile-modal-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Initials fallback inside modal */
+.profile-modal-avatar-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 5rem;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, #4F46E5, #8B5CF6);
+}
+
+/* Name beneath avatar */
+.profile-modal-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #E2E8F0;
+  letter-spacing: 0.01em;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Action buttons row */
+.profile-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* Upload photo button (primary action) */
+.profile-modal-upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7C3AED, #6366F1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-modal-upload-btn:hover {
+  background: linear-gradient(135deg, #8B5CF6, #4F46E5);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.55);
+}
+
+.profile-modal-upload-btn:active {
+  transform: translateY(0);
+}
+
+.profile-modal-upload-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.profile-modal-upload-btn:focus-visible {
+  outline: 2px solid rgba(167, 139, 250, 0.8);
+  outline-offset: 2px;
+}
+
+/* Change avatar button */
+.profile-modal-change-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-modal-change-btn:hover {
+  background: rgba(139, 92, 246, 0.22);
+  color: white;
+  border-color: rgba(139, 92, 246, 0.45);
+}
+
+.profile-modal-change-btn:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.7);
+  outline-offset: 2px;
+}
+
+/* Responsive: scale down on mobile */
+@media (max-width: 480px) {
+  .profile-modal-content {
+    padding: 1.5rem 1.5rem 1.5rem;
+    max-width: calc(100vw - 2rem);
+  }
+
+  .profile-modal-avatar {
+    width: 220px;
+    height: 220px;
+  }
+
+  .profile-modal-avatar-initials {
+    font-size: 3.5rem;
+  }
+
+  .profile-modal-name {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .profile-modal-avatar {
+    width: 180px;
+    height: 180px;
+  }
+
+  .profile-modal-avatar-initials {
+    font-size: 3rem;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .profile-modal-avatar-glow {
+    animation: none !important;
+  }
+
+  .clickable-avatar:hover {
+    transform: none;
+  }
+}

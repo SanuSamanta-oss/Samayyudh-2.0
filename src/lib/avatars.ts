@@ -2,6 +2,7 @@
 // SamayYudh 2.0 — Avatar System
 // Centralized avatar definitions & localStorage persistence.
 // Extensible: just add entries to AVATARS to grow the gallery.
+// Now supports user-uploaded custom photos (stored as base64).
 // ============================================================
 
 export interface AvatarDef {
@@ -42,6 +43,7 @@ export const AVATARS: AvatarDef[] = [
 ];
 
 const STORAGE_KEY = 'samayyudh_selected_avatar';
+const CUSTOM_PHOTO_KEY = 'samayyudh_custom_avatar';
 
 /** Read the persisted avatar id from localStorage. */
 export function getSelectedAvatarId(): string | null {
@@ -53,6 +55,8 @@ export function getSelectedAvatarId(): string | null {
 export function setSelectedAvatarId(id: string): void {
   if (typeof window === 'undefined') return;
   localStorage.setItem(STORAGE_KEY, id);
+  // Clear custom photo when selecting a preset avatar
+  localStorage.removeItem(CUSTOM_PHOTO_KEY);
   window.dispatchEvent(new CustomEvent('samayyudh:avatar-change', { detail: { avatarId: id } }));
 }
 
@@ -60,12 +64,76 @@ export function setSelectedAvatarId(id: string): void {
 export function clearSelectedAvatar(): void {
   if (typeof window === 'undefined') return;
   localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(CUSTOM_PHOTO_KEY);
   window.dispatchEvent(new CustomEvent('samayyudh:avatar-change', { detail: { avatarId: null } }));
 }
 
 /** Resolve the full avatar definition from the stored id. Returns null if nothing selected / not found. */
 export function getSelectedAvatar(): AvatarDef | null {
+  if (typeof window === 'undefined') return null;
+
+  // Custom uploaded photo takes priority
+  const customSrc = localStorage.getItem(CUSTOM_PHOTO_KEY);
+  if (customSrc) {
+    return { id: '__custom__', src: customSrc, label: 'My Photo' };
+  }
+
   const id = getSelectedAvatarId();
   if (!id) return null;
   return AVATARS.find(a => a.id === id) ?? null;
+}
+
+// ── Custom Photo Upload ──────────────────────────────────────
+
+/** Save a custom photo data-URL to localStorage and notify listeners. */
+export function setCustomAvatar(dataUrl: string): void {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(STORAGE_KEY); // clear preset selection
+  localStorage.setItem(CUSTOM_PHOTO_KEY, dataUrl);
+  window.dispatchEvent(new CustomEvent('samayyudh:avatar-change', { detail: { avatarId: '__custom__' } }));
+}
+
+/** Remove only the custom photo (keeps preset if any). */
+export function clearCustomAvatar(): void {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(CUSTOM_PHOTO_KEY);
+  window.dispatchEvent(new CustomEvent('samayyudh:avatar-change', { detail: { avatarId: null } }));
+}
+
+/** Check whether the current avatar is a custom upload. */
+export function hasCustomAvatar(): boolean {
+  if (typeof window === 'undefined') return false;
+  return !!localStorage.getItem(CUSTOM_PHOTO_KEY);
+}
+
+/**
+ * Resize an image file to a max dimension and return a base64 data-URL.
+ * Keeps aspect ratio, outputs as JPEG for smaller file size.
+ */
+export function resizeImageFile(file: File, maxSize = 400): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.onload = () => {
+      const img = new window.Image();
+      img.onerror = () => reject(new Error('Failed to load image'));
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let { width, height } = img;
+        if (width > height) {
+          if (width > maxSize) { height = Math.round(height * maxSize / width); width = maxSize; }
+        } else {
+          if (height > maxSize) { width = Math.round(width * maxSize / height); height = maxSize; }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) { reject(new Error('Canvas not supported')); return; }
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', 0.85));
+      };
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  });
 }

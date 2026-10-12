@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,6 +17,7 @@ import { useAuth } from '@/components/providers/AuthProvider';
 import * as localDB from '@/lib/store/local-db';
 import type { ExamSession } from '@/types';
 import { getSelectedAvatar } from '@/lib/avatars';
+import { ProfilePictureModal } from '@/components/ProfilePictureModal';
 
 /* ─── Helpers ────────────────────────────────────────────────── */
 
@@ -166,6 +167,22 @@ export default function DashboardPage() {
     }, 2000);
   };
 
+  // Profile picture modal
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
+
+  const handleOpenProfileModal = useCallback(() => {
+    setProfileModalOpen(true);
+  }, []);
+
+  const handleCloseProfileModal = useCallback(() => {
+    setProfileModalOpen(false);
+  }, []);
+
+  const handleChangeAvatar = useCallback(() => {
+    setProfileModalOpen(false);
+    router.push('/profile');
+  }, [router]);
+
   const totalSessions = sessions.length;
   const streakCount = activeStreak;
 
@@ -204,13 +221,23 @@ export default function DashboardPage() {
           <div className="relative flex items-center gap-4 md:gap-5">
             {/* Avatar */}
             <div className="relative flex-shrink-0">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/20 backdrop-blur-sm border-2 border-white/30 flex items-center justify-center text-white text-xl md:text-2xl font-extrabold shadow-lg overflow-hidden">
+              <button
+                type="button"
+                onClick={handleOpenProfileModal}
+                className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/20 backdrop-blur-sm border-2 border-white/30 flex items-center justify-center text-white text-xl md:text-2xl font-extrabold shadow-lg overflow-hidden clickable-avatar"
+                aria-label="View profile picture"
+              >
                 {selectedAvatar ? (
-                  <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={80} height={80} className="w-full h-full object-cover" />
+                  selectedAvatar.src.startsWith('data:') ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={selectedAvatar.src} alt={selectedAvatar.label} className="w-full h-full object-cover" />
+                  ) : (
+                    <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={80} height={80} className="w-full h-full object-cover" />
+                  )
                 ) : (
                   initials
                 )}
-              </div>
+              </button>
               {/* Online dot */}
               <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-emerald-400 border-2 border-white shadow-sm" />
             </div>
@@ -464,6 +491,17 @@ export default function DashboardPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Instagram-style Profile Picture Modal */}
+      <ProfilePictureModal
+        isOpen={profileModalOpen}
+        onClose={handleCloseProfileModal}
+        avatarUrl={selectedAvatar?.src ?? null}
+        avatarLabel={selectedAvatar?.label ?? displayName}
+        displayName={displayName}
+        initials={initials}
+        onChangeAvatar={handleChangeAvatar}
+      />
     </>
   );
 }

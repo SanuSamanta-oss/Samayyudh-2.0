@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,12 +8,14 @@ import {
   User, BookOpen, BarChart3, History as HistoryIcon, Trophy,
   StickyNote, Settings, Trash2, Loader2, Shield, Calendar,
   Zap, Clock, Target, Award, Star, ChevronRight, Edit3,
-  CheckCircle2, Lock, Flame, LogIn, LogOut, KeyRound, Sparkles
+  CheckCircle2, Lock, Flame, LogIn, LogOut, KeyRound, Sparkles,
+  Upload
 } from 'lucide-react';
 import { cn, formatDuration } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
 import { useAuth } from '@/components/providers/AuthProvider';
-import { AVATARS, getSelectedAvatar, setSelectedAvatarId, clearSelectedAvatar, type AvatarDef } from '@/lib/avatars';
+import { AVATARS, getSelectedAvatar, setSelectedAvatarId, clearSelectedAvatar, setCustomAvatar, resizeImageFile, type AvatarDef } from '@/lib/avatars';
+import { ProfilePictureModal } from '@/components/ProfilePictureModal';
 
 type SidebarTab = 'profile' | 'sessions' | 'achievements' | 'analytics' | 'settings';
 
@@ -95,6 +97,21 @@ export default function ProfilePage() {
   const [selectedAvatar, setSelectedAvatar] = useState<AvatarDef | null>(null);
   const [avatarPickerOpen, setAvatarPickerOpen] = useState(false);
   const [justSelected, setJustSelected] = useState<string | null>(null);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
+
+  const handleOpenProfileModal = useCallback(() => {
+    setProfileModalOpen(true);
+  }, []);
+
+  const handleCloseProfileModal = useCallback(() => {
+    setProfileModalOpen(false);
+  }, []);
+
+  const handleChangeAvatarFromModal = useCallback(() => {
+    setProfileModalOpen(false);
+    setTab('profile');
+    setAvatarPickerOpen(true);
+  }, []);
 
   const displayName: string =
     user?.user_metadata?.display_name ||
@@ -111,9 +128,40 @@ export default function ProfilePage() {
     setNameInput(displayName);
   }, [displayName]);
 
-  // Load persisted avatar on mount
+  const profileFileInputRef = useRef<HTMLInputElement>(null);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+
+  // Load persisted avatar on mount and listen for external changes
   useEffect(() => {
     setSelectedAvatar(getSelectedAvatar());
+
+    const handleAvatarChange = () => {
+      setSelectedAvatar(getSelectedAvatar());
+    };
+
+    window.addEventListener('samayyudh:avatar-change', handleAvatarChange);
+    return () => {
+      window.removeEventListener('samayyudh:avatar-change', handleAvatarChange);
+    };
+  }, []);
+
+  const handleDevicePhotoUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !file.type.startsWith('image/')) return;
+
+    setUploadingPhoto(true);
+    try {
+      const dataUrl = await resizeImageFile(file, 400);
+      setCustomAvatar(dataUrl);
+      setSelectedAvatar({ id: '__custom__', src: dataUrl, label: 'My Photo' });
+    } catch (err) {
+      console.error('Failed to upload image:', err);
+    } finally {
+      setUploadingPhoto(false);
+      if (profileFileInputRef.current) {
+        profileFileInputRef.current.value = '';
+      }
+    }
   }, []);
 
   const handleAvatarSelect = useCallback((avatar: AvatarDef) => {
@@ -265,13 +313,23 @@ export default function ProfilePage() {
         <aside className="hidden md:flex flex-col w-52 shrink-0 gap-1">
           {/* Mini avatar */}
           <div className="flex flex-col items-center gap-2 p-4 mb-2">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-brand flex items-center justify-center text-white text-lg font-extrabold shadow-lg overflow-hidden">
+            <button
+              type="button"
+              onClick={handleOpenProfileModal}
+              className="w-14 h-14 rounded-2xl bg-gradient-brand flex items-center justify-center text-white text-lg font-extrabold shadow-lg overflow-hidden clickable-avatar"
+              aria-label="View profile picture"
+            >
               {selectedAvatar ? (
-                <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={56} height={56} className="w-full h-full object-cover" />
+                selectedAvatar.src.startsWith('data:') ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={selectedAvatar.src} alt={selectedAvatar.label} className="w-full h-full object-cover" />
+                ) : (
+                  <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={56} height={56} className="w-full h-full object-cover" />
+                )
               ) : (
                 initials
               )}
-            </div>
+            </button>
             <p className="text-xs font-semibold text-foreground text-center truncate w-full">{displayName}</p>
           </div>
 
@@ -362,13 +420,23 @@ export default function ProfilePage() {
                   <div className="px-6 pb-6">
                     {/* Avatar overlapping banner */}
                     <div className="relative -mt-10 mb-4 flex items-end justify-between">
-                      <div className="w-20 h-20 rounded-2xl bg-gradient-brand border-4 border-card shadow-xl flex items-center justify-center text-white text-2xl font-extrabold overflow-hidden">
+                      <button
+                        type="button"
+                        onClick={handleOpenProfileModal}
+                        className="w-20 h-20 rounded-2xl bg-gradient-brand border-4 border-card shadow-xl flex items-center justify-center text-white text-2xl font-extrabold overflow-hidden clickable-avatar"
+                        aria-label="View profile picture"
+                      >
                         {selectedAvatar ? (
-                          <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={80} height={80} className="w-full h-full object-cover" />
+                          selectedAvatar.src.startsWith('data:') ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img src={selectedAvatar.src} alt={selectedAvatar.label} className="w-full h-full object-cover" />
+                          ) : (
+                            <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={80} height={80} className="w-full h-full object-cover" />
+                          )
                         ) : (
                           initials
                         )}
-                      </div>
+                      </button>
                       <button
                         onClick={() => setEditingName(!editingName)}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-border hover:bg-surface transition-all text-muted hover:text-foreground shadow-sm cursor-pointer"
@@ -454,7 +522,12 @@ export default function ProfilePage() {
                             <div className="flex items-center justify-between mb-4 p-3 rounded-xl bg-brand-50/50 dark:bg-brand-900/10 border border-brand-200/50 dark:border-brand-800/30">
                               <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-brand-400 shadow-md">
-                                  <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={40} height={40} className="w-full h-full object-cover" />
+                                  {selectedAvatar.src.startsWith('data:') ? (
+                                    /* eslint-disable-next-line @next/next/no-img-element */
+                                    <img src={selectedAvatar.src} alt={selectedAvatar.label} className="w-full h-full object-cover" />
+                                  ) : (
+                                    <Image src={selectedAvatar.src} alt={selectedAvatar.label} width={40} height={40} className="w-full h-full object-cover" />
+                                  )}
                                 </div>
                                 <div>
                                   <p className="text-xs font-semibold text-brand-700 dark:text-brand-400">Current: {selectedAvatar.label}</p>
@@ -469,6 +542,30 @@ export default function ProfilePage() {
                               </button>
                             </div>
                           )}
+
+                          {/* Upload photo from device button */}
+                          <div className="mb-4">
+                            <input
+                              ref={profileFileInputRef}
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={handleDevicePhotoUpload}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => profileFileInputRef.current?.click()}
+                              disabled={uploadingPhoto}
+                              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-dashed border-brand-300 dark:border-brand-700/60 bg-brand-50/40 dark:bg-brand-950/20 hover:bg-brand-100/50 dark:hover:bg-brand-900/30 text-brand-700 dark:text-brand-300 text-xs font-semibold transition-colors disabled:opacity-50 cursor-pointer"
+                            >
+                              {uploadingPhoto ? (
+                                <Loader2 className="w-4 h-4 animate-spin text-brand-600" />
+                              ) : (
+                                <Upload className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                              )}
+                              <span>{uploadingPhoto ? 'Processing photo…' : 'Upload photo from your device'}</span>
+                            </button>
+                          </div>
 
                           {/* Avatar grid */}
                           <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
@@ -1049,6 +1146,17 @@ export default function ProfilePage() {
         </aside>
 
       </div>
+
+      {/* Instagram-style Profile Picture Modal */}
+      <ProfilePictureModal
+        isOpen={profileModalOpen}
+        onClose={handleCloseProfileModal}
+        avatarUrl={selectedAvatar?.src ?? null}
+        avatarLabel={selectedAvatar?.label ?? displayName}
+        displayName={displayName}
+        initials={initials}
+        onChangeAvatar={handleChangeAvatarFromModal}
+      />
     </div>
   );
 }

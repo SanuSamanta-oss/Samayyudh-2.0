@@ -8,7 +8,7 @@ import {
   LayoutDashboard, Swords, GraduationCap, Library,
   History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut, Trophy
 } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { motion } from 'framer-motion';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -231,10 +231,16 @@ export function Navbar() {
               )}
               <Link
                 href="/profile"
-                className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-white text-sm font-bold overflow-hidden"
+                className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-white text-sm font-bold overflow-hidden clickable-avatar"
+                aria-label="Profile"
               >
                 {avatarUrl ? (
-                  <Image src={avatarUrl} alt={displayName} width={32} height={32} className="w-full h-full object-cover" />
+                  avatarUrl.startsWith('data:') ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={avatarUrl} alt={displayName} className="w-full h-full object-cover" />
+                  ) : (
+                    <Image src={avatarUrl} alt={displayName} width={32} height={32} className="w-full h-full object-cover" />
+                  )
                 ) : (
                   initial
                 )}
@@ -256,6 +262,22 @@ export function Navbar() {
             <button className="p-1.5 rounded-lg text-stone-500" aria-label="Search">
               <Search className="w-5 h-5" />
             </button>
+            <Link
+              href="/profile"
+              className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-white text-xs font-bold overflow-hidden clickable-avatar"
+              aria-label="Profile"
+            >
+              {avatarUrl ? (
+                avatarUrl.startsWith('data:') ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={avatarUrl} alt={displayName} className="w-full h-full object-cover" />
+                ) : (
+                  <Image src={avatarUrl} alt={displayName} width={28} height={28} className="w-full h-full object-cover" />
+                )
+              ) : (
+                initial
+              )}
+            </Link>
             <button
               className="p-1.5 rounded-lg text-stone-500"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

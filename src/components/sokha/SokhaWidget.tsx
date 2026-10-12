@@ -12,7 +12,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Trash2, Send, Square, Globe, Sparkles, ExternalLink,
-  ChevronDown, ArrowUpRight
+  ChevronDown, ArrowUpRight, Mic, MicOff, Volume2, VolumeX
 } from 'lucide-react';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { SokhaOrb } from './SokhaOrb';
@@ -44,6 +44,18 @@ export function SokhaWidget() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [enableWebSearch, setEnableWebSearch] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // ── Voice Input & Output (Limit up to 3 voice answers) ──
+  const [isListening, setIsListening] = useState(false);
+  const [voiceAnswersCount, setVoiceAnswersCount] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('sokha_voice_answers_count');
+      return saved ? parseInt(saved, 10) || 0 : 0;
+    }
+    return 0;
+  });
+  const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null);
+  const recognitionRef = useRef<any>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -98,11 +110,180 @@ export function SokhaWidget() {
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 250);
+    } else {
+      // Stop speech and listening if widget is closed
+      stopSpeaking();
+      stopListening();
     }
   }, [isOpen]);
 
-  // Send message handler
-  const handleSendMessage = async (textToSend?: string) => {
+  // Clean up speech synthesis and recognition on unmount
+  useEffect(() => {
+    return () => {
+      stopSpeaking();
+      stopListening();
+    };
+  }, []);
+
+  const stopSpeaking = () => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      setSpeakingMsgId(null);
+    }
+  };
+
+  const stopListening = () => {
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort();
+      } catch {
+        // Ignore abort errors
+      }
+      recognitionRef.current = null;
+    }
+    setIsListening(false);
+  };
+
+  // Convert markdown/latex to clean plain text for natural spoken audio
+  const sanitizeTextForSpeech = (rawText: string) => {
+    return rawText
+      .replace(/[*_#`~>\[\]\(\)\$]/g, ' ')
+      .replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '$1 over $2')
+      .replace(/https?:\/\/\S+/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  };
+
+  // Speaks an assistant answer aloud (enforces the maximum 3 voice answers limit)
+  const speakMessage = (msgId: string, text: string, isAutoPlay: boolean = false) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+      setErrorMessage('Voice playback is not supported on this browser.');
+      return;
+    }
+
+    // Toggle off if currently speaking this same message
+    if (speakingMsgId === msgId) {
+      stopSpeaking();
+      return;
+    }
+
+    // If limit (3) is reached and trying to trigger, display notice
+    if (voiceAnswersCount >= 3) {
+      setErrorMessage('Voice answer limit reached (maximum 3 voice answers used).');
+      return;
+    }
+
+    stopSpeaking();
+
+    const plainText = sanitizeTextForSpeech(text);
+    if (!plainText) return;
+
+    const utterance = new SpeechSynthesisUtterance(plainText);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.05;
+    utterance.lang = 'en-US';
+
+    // Pick best available English voice
+    const voices = window.speechSynthesis.getVoices();
+    const naturalVoice = voices.find(
+      (v) => (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha')) && v.lang.startsWith('en')
+    ) || voices.find((v) => v.lang.startsWith('en'));
+
+    if (naturalVoice) {
+      utterance.voice = naturalVoice;
+    }
+
+    utterance.onstart = () => {
+      setSpeakingMsgId(msgId);
+    };
+
+    utterance.onend = () => {
+      setSpeakingMsgId(null);
+    };
+
+    utterance.onerror = () => {
+      setSpeakingMsgId(null);
+    };
+
+    // Increment count towards the 3 voice answers limit
+    const nextCount = voiceAnswersCount + 1;
+    setVoiceAnswersCount(nextCount);
+    try {
+      localStorage.setItem('sokha_voice_answers_count', nextCount.toString());
+    } catch {
+      // Ignore localStorage errors
+    }
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  // Toggle voice search / speech-to-text
+  const toggleVoiceRecognition = () => {
+    if (typeof window === 'undefined') return;
+
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      setErrorMessage('Voice recognition is not supported in this browser. Please use Chrome, Edge, or Safari.');
+      return;
+    }
+
+    if (isListening) {
+      stopListening();
+      return;
+    }
+
+    stopSpeaking();
+    setErrorMessage(null);
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onresult = (event: any) => {
+        const transcript = Array.from(event.results)
+          .map((res: any) => res[0].transcript)
+          .join('');
+
+        setInputText(transcript);
+
+        // If recognition detected final sentence, automatically send query
+        if (event.results[0] && event.results[0].isFinal && transcript.trim()) {
+          stopListening();
+          handleSendMessage(transcript.trim(), true);
+        }
+      };
+
+      recognition.onerror = (event: any) => {
+        console.warn('Speech recognition error:', event.error);
+        if (event.error !== 'no-speech') {
+          setErrorMessage(`Voice search error: ${event.error}`);
+        }
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch (err: any) {
+      setErrorMessage('Could not start microphone. Please check microphone permissions.');
+      setIsListening(false);
+    }
+  };
+
+  // Send message handler (supports triggerFromVoice for automatic voice answer playback)
+  const handleSendMessage = async (textToSend?: string, triggerFromVoice: boolean = false) => {
     const query = (textToSend || inputText).trim();
     if (!query || isStreaming) return;
 
@@ -223,6 +404,11 @@ export function SokhaWidget() {
             }
           }
         }
+      }
+
+      // If search was triggered via voice, automatically play voice answer (up to limit of 3)
+      if (triggerFromVoice && accumulatedText && voiceAnswersCount < 3) {
+        speakMessage(botMsgId, accumulatedText, true);
       }
     } catch (err: any) {
       if (err.name === 'AbortError') return;
@@ -410,7 +596,7 @@ export function SokhaWidget() {
                     >
                       <div
                         className={cn(
-                          'max-w-[85%] text-sm leading-relaxed transition-all',
+                          'max-w-[85%] text-sm leading-relaxed transition-all relative group',
                           msg.role === 'user'
                             ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-[1.75rem] rounded-br-md px-5 py-3 shadow-[0_4px_16px_rgba(124,58,237,0.22)]'
                             : 'bg-[#F2F4F8] text-stone-800 rounded-[1.75rem] rounded-tl-md px-5 py-3.5 shadow-xs'
@@ -419,7 +605,43 @@ export function SokhaWidget() {
                         {msg.role === 'user' ? (
                           <p className="whitespace-pre-wrap">{msg.content}</p>
                         ) : msg.content ? (
-                          <SokhaMarkdown content={msg.content} sources={msg.sources} />
+                          <div>
+                            <SokhaMarkdown content={msg.content} sources={msg.sources} />
+                            {/* Voice Speak Button on Assistant Response */}
+                            <div className="mt-2 pt-1 border-t border-stone-200/50 flex items-center justify-between text-xs text-stone-500">
+                              <button
+                                type="button"
+                                onClick={() => speakMessage(msg.id, msg.content)}
+                                className={cn(
+                                  'flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium transition-all cursor-pointer',
+                                  speakingMsgId === msg.id
+                                    ? 'bg-purple-100 text-purple-700 font-semibold'
+                                    : 'hover:bg-stone-200/70 text-stone-600'
+                                )}
+                                title={
+                                  voiceAnswersCount >= 3
+                                    ? 'Voice limit reached (3/3 used)'
+                                    : speakingMsgId === msg.id
+                                    ? 'Stop listening'
+                                    : `Listen to answer (${3 - voiceAnswersCount} voice answers left)`
+                                }
+                              >
+                                {speakingMsgId === msg.id ? (
+                                  <>
+                                    <VolumeX className="w-3.5 h-3.5 text-purple-600 animate-pulse" />
+                                    <span>Speaking…</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Volume2 className="w-3.5 h-3.5" />
+                                    <span>
+                                      {voiceAnswersCount >= 3 ? 'Voice limit (3/3 used)' : `Listen (${3 - voiceAnswersCount} left)`}
+                                    </span>
+                                  </>
+                                )}
+                              </button>
+                            </div>
+                          </div>
                         ) : (
                           <div className="flex items-center gap-2 text-xs text-purple-600 py-1">
                             <Sparkles className="w-3.5 h-3.5 animate-spin" />
@@ -442,12 +664,52 @@ export function SokhaWidget() {
               )}
             </div>
 
+            {/* ── Voice status banner when microphone is active ── */}
+            {isListening && (
+              <div className="px-6 py-1.5 bg-purple-50 text-purple-700 text-xs flex items-center justify-between border-t border-purple-100 animate-pulse">
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+                  Listening to your voice... Speak now!
+                </span>
+                <button
+                  type="button"
+                  onClick={stopListening}
+                  className="text-purple-900 font-semibold underline text-[11px]"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+
             {/* ── Smooth Bubble Text Box (No black outline, smooth pill design) ── */}
             <div className="p-4 pt-2 bg-white/90 backdrop-blur-md">
               <div
-                className="relative flex items-center justify-between rounded-full px-5 py-3 bg-[#EEF1F7] hover:bg-[#E8ECF4] focus-within:bg-[#EEF1F7] shadow-xs focus-within:shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-200"
+                className={cn(
+                  'relative flex items-center justify-between rounded-full px-4 py-2.5 bg-[#EEF1F7] hover:bg-[#E8ECF4] focus-within:bg-[#EEF1F7] shadow-xs focus-within:shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-200',
+                  isListening && 'ring-2 ring-purple-500 bg-purple-50'
+                )}
                 style={{ outline: 'none' }}
               >
+                {/* Voice Search Button (Microphone) */}
+                <button
+                  type="button"
+                  onClick={toggleVoiceRecognition}
+                  className={cn(
+                    'p-2 mr-1 rounded-full transition-all shrink-0 cursor-pointer',
+                    isListening
+                      ? 'bg-red-500 text-white animate-pulse shadow-md'
+                      : 'text-stone-500 hover:text-purple-600 hover:bg-stone-200/60'
+                  )}
+                  title={isListening ? 'Stop listening' : 'Search with your voice'}
+                  aria-label="Voice search"
+                >
+                  {isListening ? (
+                    <MicOff className="w-4 h-4" />
+                  ) : (
+                    <Mic className="w-4 h-4" />
+                  )}
+                </button>
+
                 <input
                   ref={inputRef}
                   type="text"
@@ -459,8 +721,8 @@ export function SokhaWidget() {
                       handleSendMessage();
                     }
                   }}
-                  placeholder="Ask anything..."
-                  className="w-full bg-transparent text-sm text-stone-900 placeholder:text-stone-400 border-0 outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-0 focus-visible:outline-none focus-visible:ring-0 pr-3"
+                  placeholder={isListening ? 'Listening to your voice...' : 'Ask anything or speak...'}
+                  className="w-full bg-transparent text-sm text-stone-900 placeholder:text-stone-400 border-0 outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-0 focus-visible:outline-none focus-visible:ring-0 pr-2"
                   style={{ outline: 'none', border: 'none', boxShadow: 'none' }}
                 />
 
@@ -468,7 +730,7 @@ export function SokhaWidget() {
                   <button
                     type="button"
                     onClick={handleStopGeneration}
-                    className="p-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white transition-colors shrink-0"
+                    className="p-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white transition-colors shrink-0 cursor-pointer"
                     title="Stop"
                   >
                     <Square className="w-3.5 h-3.5 fill-current" />
@@ -477,13 +739,13 @@ export function SokhaWidget() {
                   <button
                     type="button"
                     onClick={() => handleSendMessage()}
-                    className="p-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-105 active:scale-95 text-white transition-all shadow-sm shrink-0"
+                    className="p-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-105 active:scale-95 text-white transition-all shadow-sm shrink-0 cursor-pointer"
                     title="Send"
                   >
                     <Send className="w-3.5 h-3.5" />
                   </button>
                 ) : (
-                  /* Audio-wave visual indicator matching Photo 1 */
+                  /* Audio wave visual indicator matching Photo 1 */
                   <div className="flex items-center gap-1 text-purple-400/80 shrink-0 px-1">
                     <span className="w-0.5 h-2 rounded-full bg-current animate-pulse" />
                     <span className="w-0.5 h-3.5 rounded-full bg-current animate-pulse delay-75" />

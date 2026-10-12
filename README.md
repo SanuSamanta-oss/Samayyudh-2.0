@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# সময়যুদ্ধ 2.0 — SamayYudh
+> **The Battle Between You & The Clock**  
+> An AI-powered, offline-first exam preparation and practice platform for competitive examinations (GATE, JEE, WBJEE, UPSC, NEET, University, and more).
 
-## Getting Started
+---
 
-First, run the development server:
+## 🌟 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**SamayYudh 2.0** helps students practice high-stakes exam questions under realistic time pressure. It features real-time answer evaluation powered by Google Gemini AI, seamless offline-first exam taking, automatic background cloud synchronization, gamified streaks & achievements, and an intelligent interactive assistant (**SOKHA**) equipped with voice search and speech response capabilities.
+
+---
+
+## 🚀 Key Features
+
+### ⏱️ Real-Time Exam Simulator & Practice
+- **Realistic Time Pressure:** Countdown timers, section pacing, and speed tracking simulating real test conditions.
+- **Rich Answer Canvas & Scratchboard:** Write or type long-form solutions, take sticky notes, and manage answer revisions.
+- **Support for Major Competitive Exams:** Curated question banks for **GATE, JEE Mains, JEE Advanced, WBJEE, UPSC, NEET, SSC, and University Examinations**.
+
+### 🤖 AI Evaluation & Instant Grading
+- **Google Gemini 2.0 AI Integration:** Instant evaluation of user-written answers with step-by-step scoring, breakdown of mistakes, and model exam-ready solutions.
+- **Performance Analytics & Diagnostic Insights:** Deep breakdowns across subjects, topics, speed, and accuracy.
+
+### 🌐 Offline-First Architecture & Auto-Sync
+- **Zero Data Loss:** Never lose exam progress during internet cuts or network drops.
+- **IndexedDB Local Storage:** Exam answers, session timers, sticky notes, and mock tests persist instantly on the user's device.
+- **Automatic Cloud Sync:** Answers queued in an offline queue are automatically synchronized to Supabase PostgreSQL when internet connectivity is restored.
+- **Interactive Offline Mode Screen:** A dedicated animated caveman overlay automatically notifies the user when disconnected, providing real-time reconnection checking and a "Continue in Offline Mode" option.
+- **Creative 404 Error Screen:** Custom branded animation for missing routes and broken links.
+
+### 🎙️ SOKHA — AI Study Assistant with Voice Capabilities
+- **Animated 3D Companion:** An animated, expressive floating robot with life-like bobs, visor scans, and glow effects.
+- **Voice Search (Speech-to-Text):** Search questions or ask doubts directly by speaking via the microphone.
+- **AI Voice Answers (Text-to-Speech):** High-quality natural voice generation reads answers aloud (up to 3 voice answers limit).
+- **Web Search Integration:** Live academic fact retrieval and reference citations.
+
+### 🏆 Gamification, Streaks & Achievements
+- **Dual-Tier Streaks:** Track consecutive study days, freezing logic, and qualifying daily goals.
+- **Badges & Medals:** Unlock tier-based medals (Bronze, Silver, Gold, Platinum, Diamond, Master, Grandmaster) with celebratory confetti.
+- **Customizable Avatar Profile:** High-res avatar picker, personal best records, and social sharing cards.
+
+### 📱 Progressive Web App (PWA)
+- **Installable Desktop & Mobile App:** Native-like full-screen experience on Android, iOS, Windows, and macOS.
+- **Custom Service Worker:** Offline asset caching for rapid load times and resilience.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technology | Description |
+|---|---|---|
+| **Framework** | [Next.js 16 (App Router)](https://nextjs.org/) | React Server Components, Turbopack, SSR, API routes |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) | Strict type-safety across client and server |
+| **Styling & Design** | [Tailwind CSS v4](https://tailwindcss.com/) | Modern CSS variables, design tokens, responsive utilities |
+| **Typography** | `next/font/google` | Geist, Geist Mono, and Arvo serif fonts |
+| **Cloud Database & Auth** | [Supabase](https://supabase.com/) | Managed PostgreSQL, Row-Level Security (RLS), Supabase Auth |
+| **Local Database** | [IndexedDB (`idb`)](https://github.com/jakearchibald/idb) | Client-side persistent storage for offline-first capabilities |
+| **Artificial Intelligence** | [@google/genai (Gemini 2.0)](https://ai.google.dev/) | Answer scoring, step-by-step critique, SOKHA companion |
+| **Voice & Speech APIs** | Web Speech API | `SpeechRecognition` (voice input) & `SpeechSynthesis` (voice output) |
+| **Animations & Physics** | [Framer Motion](https://www.framer.com/motion/) & [GSAP](https://gsap.com/) | Fluid UI micro-interactions and floating physics |
+| **Icons & Visuals** | [Lucide React](https://lucide.dev/) | Clean, accessible vector icons |
+| **Charts & Visualization** | [Recharts](https://recharts.org/) | Subject accuracy, time-spent trends, and score analytics |
+| **Payments** | [Razorpay](https://razorpay.com/) | Secure checkout for premium exam mock packs |
+| **PWA** | Service Worker (`sw.js`) | Offline cache-first asset storage & Web App Manifest |
+
+---
+
+## 📂 Project Structure
+
+```text
+samayyudh-2.0/
+├── public/                 # Static assets, icons, logos, manifest.json, sw.js
+├── src/
+│   ├── app/                # Next.js App Router
+│   │   ├── (app)/          # Main dashboard, profile, analytics, exams, history
+│   │   ├── api/            # Serverless API routes (Gemini, Supabase, Razorpay)
+│   │   ├── auth/           # Authentication login/signup pages
+│   │   ├── exam/           # Live interactive exam session
+│   │   ├── globals.css     # Global styles, Tailwind configuration, design tokens
+│   │   ├── layout.tsx      # Root layout, theme provider, offline screen mount
+│   │   ├── not-found.tsx   # Custom animated 404 page
+│   │   └── page.tsx        # Landing page
+│   ├── components/         # Reusable UI components
+│   │   ├── achievements/   # Streaks, badges, medals, progress cards
+│   │   ├── exam/           # Timer, Question card, Answer editor, Navigator
+│   │   ├── layout/         # Navbar, footer, navigation controls
+│   │   ├── offline/        # OfflineScreen network listener component
+│   │   ├── providers/      # AuthProvider, ThemeInitializer
+│   │   └── sokha/          # SOKHA assistant, SokhaBotCharacter, SokhaOrb
+│   ├── lib/                # Core utilities and business logic
+│   │   ├── achievements/   # Streak engine, achievement definitions
+│   │   ├── sokha/          # Gemini companion logic and storage
+│   │   ├── store/          # local-db (IndexedDB), sync-engine, exam-store
+│   │   ├── supabase/       # Supabase client and server helpers
+│   │   ├── gemini.ts       # AI answer evaluation prompts and logic
+│   │   └── questions.ts    # Competitive exam question banks
+│   └── types/              # TypeScript interfaces and schema declarations
+├── supabase/               # SQL migrations and PostgreSQL schema definitions
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the root directory:
 
-## Learn More
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-To learn more about Next.js, take a look at the following resources:
+# Google Gemini AI
+GEMINI_API_KEY=your_gemini_api_key
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Razorpay (Optional - for payments)
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🏃 Getting Started
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 1. Install dependencies
+```bash
+npm install
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 2. Run the development server
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 3. Build for Production
+```bash
+npm run build
+npm start
+```
+
+---
+
+## 🔒 Offline & Data Privacy
+- Written answers are stored directly on the user's browser in IndexedDB first, ensuring student work is never lost due to unexpected disconnections.
+- User data syncing uses encrypted Supabase Row-Level Security (RLS) policies.
+- AI evaluations redact sensitive user identifiers before prompt submission.
+
+---
+
+## 📄 License
+This project is proprietary and developed for **SamayYudh 2.0**. All rights reserved.

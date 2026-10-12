@@ -720,3 +720,52 @@ body {
     transform: none;
   }
 }
+
+/* ============================================================
+   Offline & 404 Screen Styles
+   ============================================================ */
+
+.page_404 {
+  padding: 40px 0;
+  background: #fff;
+  font-family: var(--font-arvo), 'Arvo', serif;
+}
+
+.page_404 img {
+  width: 100%;
+}
+
+.four_zero_four_bg {
+  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.four_zero_four_bg h1 {
+  font-size: clamp(48px, 10vw, 80px);
+}
+
+.four_zero_four_bg h3 {
+  font-size: clamp(48px, 10vw, 80px);
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 10px 24px;
+  background: #39ac31;
+  margin: 16px 0;
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.link_404:hover {
+  background: #329c2b;
+}
+
+.contant_box_404 {
+  margin-top: -50px;
+}

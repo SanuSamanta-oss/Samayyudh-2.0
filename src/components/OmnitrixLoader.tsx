@@ -44,7 +44,7 @@ export function OmnitrixLoader({
         {/* Dynamic Contextual Text (if specific exam or action is being prepared) */}
         {showCustomText && (
           <motion.p
-            className="text-stone-300 text-xs sm:text-sm font-bold tracking-[0.25em] text-center uppercase -mt-4 px-4"
+            className="text-stone-300 text-xs sm:text-sm font-bold tracking-[0.25em] text-center uppercase mt-6 sm:mt-8 px-4"
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: finished ? 1 : [0.7, 1, 0.7] }}
             transition={{ repeat: finished ? 0 : Infinity, duration: 1.6 }}
@@ -54,7 +54,7 @@ export function OmnitrixLoader({
         )}
 
         {/* Minimal High-Tech Progress Bar on Black Screen */}
-        <div className="w-56 sm:w-64 h-1 bg-zinc-900 rounded-full mt-4 overflow-hidden relative border border-zinc-800">
+        <div className={`w-56 sm:w-64 h-1 bg-zinc-900 rounded-full ${showCustomText ? 'mt-3 sm:mt-4' : 'mt-6 sm:mt-8'} overflow-hidden relative border border-zinc-800`}>
           <motion.div
             className="absolute top-0 left-0 h-full bg-gradient-to-r from-stone-400 via-white to-stone-300 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.7)]"
             initial={{ width: "0%" }}

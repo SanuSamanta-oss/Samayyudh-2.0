@@ -7,6 +7,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
+import { markUserLoggedIn } from '@/lib/auth-welcome';
 import type { User, Session, AuthChangeEvent } from '@supabase/supabase-js';
 
 interface AuthState {
@@ -57,6 +58,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const initAuth = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          markUserLoggedIn(session.user);
+        }
         setState({
           user: session?.user ?? null,
           session,
@@ -74,6 +78,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Listen for auth state changes (login, logout, token refresh)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event: AuthChangeEvent, session: Session | null) => {
+        if (session?.user) {
+          markUserLoggedIn(session.user);
+        }
         setState({
           user: session?.user ?? null,
           session,

@@ -1,15 +1,25 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect } from 'react';
+// ============================================================
+// SamayYudh 2.0 — Authentication Page
+// Supports Email OTP, SMS OTP, and Google OAuth.
+// The Bored Hand tapping animation is only ever shown ONCE for brand-new
+// users during their first onboarding completion. Once a user has logged in,
+// it is NEVER shown anywhere again across the app.
+// ============================================================
+
+import { useState, useCallback, useRef, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Mail, Phone, ArrowRight, Loader2, AlertCircle,
   CheckCircle2, User, Sparkles
 } from 'lucide-react';
 import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
+import { useAuth } from '@/components/providers/AuthProvider';
 import { BoredHandLoader } from '@/components/BoredHandLoader';
+import { hasUserLoggedInBefore, markUserLoggedIn } from '@/lib/auth-welcome';
 
 type AuthMethod = 'email' | 'phone' | null;
 type AuthStep = 'choose' | 'input' | 'otp' | 'name';
@@ -20,8 +30,11 @@ const slideVariants = {
   exit: (dir: number) => ({ opacity: 0, x: dir * -24 }),
 };
 
-export default function AuthPage() {
+function AuthPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
+
   const [method, setMethod] = useState<AuthMethod>(null);
   const [step, setStep] = useState<AuthStep>('choose');
   const [direction, setDirection] = useState(1);
@@ -36,6 +49,25 @@ export default function AuthPage() {
   const [redirectingFinished, setRedirectingFinished] = useState(false);
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
+
+  // Target destination after login
+  const targetUrl = useMemo(() => {
+    const redirectParam = searchParams.get('redirect') || searchParams.get('next');
+    const examParam = searchParams.get('exam');
+    let url = redirectParam || '/dashboard';
+    if (examParam && !url.includes('exam=')) {
+      url += (url.includes('?') ? '&' : '?') + `exam=${encodeURIComponent(examParam)}`;
+    }
+    return url;
+  }, [searchParams]);
+
+  // If already authenticated, redirect immediately without showing auth forms or loaders
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      markUserLoggedIn(user);
+      router.replace(targetUrl);
+    }
+  }, [isAuthenticated, authLoading, user, targetUrl, router]);
 
   // Sync otpDigits → otp string
   useEffect(() => {
@@ -101,23 +133,26 @@ export default function AuthPage() {
       }
       if (result.error) throw result.error;
 
-      // Check if user already has a display name
-      const existingName = result.data?.user?.user_metadata?.display_name;
-      if (existingName) {
-        setRedirecting(true);
-        setTimeout(() => {
-          setRedirectingFinished(true);
-          setTimeout(() => router.push('/dashboard'), 500);
-        }, 1400);
-      } else {
-        goTo('name');
+      // Check if user has already logged in before or already has a display name
+      const isExistingUser =
+        hasUserLoggedInBefore(result.data?.user) ||
+        !!result.data?.user?.user_metadata?.display_name;
+
+      if (isExistingUser) {
+        // Returning user: NEVER show the hand animation! Immediately route to destination
+        markUserLoggedIn(result.data?.user);
+        router.push(targetUrl);
+        return;
       }
+
+      // Brand new user: prompt for name setup
+      goTo('name');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Invalid OTP. Please try again.');
     } finally {
       setLoading(false);
     }
-  }, [method, email, phone, otp, router, goTo]);
+  }, [method, email, phone, otp, targetUrl, router, goTo]);
 
   const handleSaveName = useCallback(async () => {
     const trimmed = displayName.trim();
@@ -130,39 +165,49 @@ export default function AuthPage() {
     try {
       const supabase = createClient();
       const { error: updateError } = await supabase.auth.updateUser({
-        data: { display_name: trimmed },
+        data: { display_name: trimmed, has_logged_in: true, animation_shown: true },
       });
       if (updateError) throw updateError;
-      setRedirecting(true);
-      setTimeout(() => {
-        setRedirectingFinished(true);
-        setTimeout(() => router.push('/dashboard'), 500);
-      }, 1400);
+
+      const alreadySeen = hasUserLoggedInBefore();
+      markUserLoggedIn();
+
+      if (!alreadySeen) {
+        // Brand-new user: show onboarding animation for the first and only time
+        setRedirecting(true);
+        setTimeout(() => {
+          setRedirectingFinished(true);
+          setTimeout(() => router.push(targetUrl), 500);
+        }, 1400);
+      } else {
+        // Already logged in before: navigate directly without animation
+        router.push(targetUrl);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save name. Please try again.');
     } finally {
       setLoading(false);
     }
-  }, [displayName, router]);
+  }, [displayName, targetUrl, router]);
 
   const handleGoogleLogin = useCallback(async () => {
     setError(null);
     setLoading(true);
-    setRedirecting(true);
+    // Note: Do NOT set full-screen redirect overlay here so user is never stuck
     try {
       if (!isSupabaseConfigured) throw new Error('Supabase is not configured.');
       const supabase = createClient();
+      const callbackUrl = `${window.location.origin}/auth/callback?next=${encodeURIComponent(targetUrl)}`;
       const { error: authError } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: `${window.location.origin}/auth/callback` },
+        options: { redirectTo: callbackUrl },
       });
       if (authError) throw authError;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Google sign-in failed.');
       setLoading(false);
-      setRedirecting(false);
     }
-  }, []);
+  }, [targetUrl]);
 
   const handleOtpDigit = (index: number, value: string) => {
     const digit = value.replace(/\D/g, '').slice(-1);
@@ -180,9 +225,9 @@ export default function AuthPage() {
 
   return (
     <>
-      {/* Full-screen redirect overlay */}
+      {/* Full-screen redirect overlay: ONLY shown for brand-new users */}
       <AnimatePresence>
-        {redirecting && (
+        {redirecting && !hasUserLoggedInBefore() && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -308,7 +353,7 @@ export default function AuthPage() {
                     <button
                       id="auth-phone-btn"
                       onClick={() => { setMethod('phone'); goTo('input'); }}
-                      className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl border border-border hover:border-accent-400 hover:bg-accent-50 dark:hover:bg-accent-50/5 transition-all text-left group"
+                      className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl border border-accent-400/50 hover:border-accent-400 hover:bg-accent-50 dark:hover:bg-accent-50/5 transition-all text-left group"
                     >
                       <div className="w-10 h-10 rounded-xl bg-accent-50 dark:bg-accent-100/10 flex items-center justify-center shrink-0">
                         <Phone className="w-5 h-5 text-accent-600" />
@@ -526,5 +571,19 @@ export default function AuthPage() {
         </motion.div>
       </div>
     </>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-background">
+          <Loader2 className="w-6 h-6 animate-spin text-brand-500" />
+        </div>
+      }
+    >
+      <AuthPageContent />
+    </Suspense>
   );
 }

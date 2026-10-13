@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 import { BoredHandLoader } from './BoredHandLoader';
+import { hasUserLoggedInBefore } from '@/lib/auth-welcome';
 
 export function OmnitrixLoader({ 
   text = 'LOADING...', 
@@ -15,7 +16,7 @@ export function OmnitrixLoader({
   logoUrl?: string;
   variant?: 'penspin' | 'boredhand';
 }) {
-  if (variant === 'boredhand') {
+  if (variant === 'boredhand' && !hasUserLoggedInBefore()) {
     return <BoredHandLoader text={text} finished={finished} />;
   }
 

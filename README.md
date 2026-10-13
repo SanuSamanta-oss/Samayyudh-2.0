@@ -5,6 +5,7 @@
 [![Live Website](https://img.shields.io/badge/Live_Site-samayyudh--2--0.vercel.app-7c3aed?style=for-the-badge&logo=vercel&logoColor=white)](https://samayyudh-2-0.vercel.app/)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Ready-10b981?style=for-the-badge&logo=pwa&logoColor=white)](https://samayyudh-2-0.vercel.app/)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](LICENSE)
 
 🔗 **Live Deployment:** [https://samayyudh-2-0.vercel.app/](https://samayyudh-2-0.vercel.app/)
 
@@ -167,4 +168,4 @@ npm start
 ---
 
 ## 📄 License
-This project is proprietary and developed for **SamayYudh 2.0**. All rights reserved.
+This project is open-source software licensed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE).

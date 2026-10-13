@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuth } from '@/components/providers/AuthProvider';
+import { getSelectedAvatar } from '@/lib/avatars';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen, BarChart3, Brain,
@@ -37,8 +39,38 @@ const examCategories = [
 
 export default function LandingPage() {
   const router = useRouter();
+  const { user, isAuthenticated } = useAuth();
   const [loadingExam, setLoadingExam] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [currentAvatar, setCurrentAvatar] = useState<ReturnType<typeof getSelectedAvatar>>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    setCurrentAvatar(getSelectedAvatar());
+
+    const handleAvatarChange = () => {
+      setCurrentAvatar(getSelectedAvatar());
+    };
+
+    window.addEventListener('samayyudh:avatar-change', handleAvatarChange);
+    return () => {
+      window.removeEventListener('samayyudh:avatar-change', handleAvatarChange);
+    };
+  }, []);
+
+  const displayName =
+    user?.user_metadata?.display_name ||
+    user?.user_metadata?.full_name ||
+    user?.user_metadata?.name ||
+    user?.email?.split('@')[0] ||
+    'Warrior';
+
+  const avatarUrl = mounted
+    ? (currentAvatar?.src || user?.user_metadata?.avatar_url || null)
+    : null;
+
+  const initial = displayName.charAt(0).toUpperCase();
 
   const handleExamClick = (name: string) => {
     setLoadingExam(name);
@@ -61,15 +93,37 @@ export default function LandingPage() {
           </Link>
           <div className="flex items-center gap-3">
             <ThemeToggle />
-            <Link href="/auth" className="text-sm font-medium text-muted hover:text-foreground transition-colors px-3 py-2">
-              Log In
-            </Link>
+            {mounted && isAuthenticated ? (
+              <Link
+                href="/profile"
+                className="relative group flex items-center justify-center p-0.5 rounded-full hover:ring-2 hover:ring-brand-500/50 transition-all focus:outline-none"
+                title={`Signed in as ${displayName} — View Profile`}
+                aria-label="View Profile"
+              >
+                <div className="w-8 h-8 rounded-full bg-gradient-brand flex items-center justify-center text-white text-xs font-bold overflow-hidden shadow-sm shadow-brand-500/20 ring-1 ring-border">
+                  {avatarUrl ? (
+                    avatarUrl.startsWith('data:') ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={avatarUrl} alt={displayName} className="w-full h-full object-cover" />
+                    ) : (
+                      <Image src={avatarUrl} alt={displayName} width={32} height={32} className="w-full h-full object-cover" />
+                    )
+                  ) : (
+                    <span>{initial}</span>
+                  )}
+                </div>
+              </Link>
+            ) : (
+              <Link href="/auth" className="text-sm font-medium text-muted hover:text-foreground transition-colors px-3 py-2">
+                Log In
+              </Link>
+            )}
             <div className="relative inline-flex items-center justify-center">
               <Link
-                href="/auth"
+                href={isAuthenticated ? "/dashboard" : "/auth"}
                 className="relative z-10 text-sm font-semibold text-white bg-gradient-brand px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
               >
-                Get Started
+                {isAuthenticated ? "Dashboard" : "Get Started"}
               </Link>
 
               {/* Interactive Pull-Cord Hanging Bulb Theme Switcher */}

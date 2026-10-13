@@ -187,7 +187,7 @@ export default function AuthPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center select-none"
+            className="fixed inset-0 z-[999999] bg-black flex flex-col items-center justify-center select-none"
           >
             <BoredHandLoader finished={redirectingFinished} text="AUTHENTICATING..." />
           </motion.div>

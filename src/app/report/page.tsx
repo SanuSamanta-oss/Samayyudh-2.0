@@ -8,7 +8,7 @@ import {
   CheckCircle2, XCircle, TrendingUp, Sparkles,
   Clock, Timer, FileText
 } from 'lucide-react';
-import { formatDuration, formatTime } from '@/lib/utils';
+import { formatDuration, formatTime, formatMathText } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
 import { questionBank } from '@/lib/questions';
 import type { ExamSession, Answer, AnswerEvaluation, Question } from '@/types';
@@ -161,7 +161,7 @@ function ReportInner() {
                       <span className="inline-block bg-purple-900 text-white text-xs font-bold px-2.5 py-1 rounded-md mb-3 shadow-sm">
                         Q{idx + 1}
                       </span>
-                      <h4 className="text-base font-semibold text-black leading-relaxed">{q.question_text}</h4>
+                      <h4 className="text-base font-semibold text-black leading-relaxed whitespace-pre-line">{formatMathText(q.question_text)}</h4>
                     </div>
                     {evaluation && (
                       <div className="text-right shrink-0 bg-white px-3 py-2 rounded-lg border border-purple-100 shadow-sm">

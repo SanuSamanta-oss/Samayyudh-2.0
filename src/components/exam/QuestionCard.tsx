@@ -1,6 +1,6 @@
 'use client';
 
-import { cn, formatTime } from '@/lib/utils';
+import { cn, formatTime, formatMathText } from '@/lib/utils';
 import { getRecommendedTime } from '@/lib/constants';
 import type { Question, Answer } from '@/types';
 import { Award, Clock, Hash } from 'lucide-react';
@@ -42,8 +42,8 @@ export function QuestionCard({ question, answer, questionIndex, totalQuestions }
 
       {/* Question Text */}
       <div className="bg-card border border-border rounded-xl p-5 md:p-6">
-        <p className="text-base md:text-lg leading-relaxed text-foreground">
-          {question.question_text}
+        <p className="text-base md:text-lg leading-relaxed text-foreground whitespace-pre-line">
+          {formatMathText(question.question_text)}
         </p>
       </div>
 

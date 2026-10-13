@@ -4,7 +4,7 @@ import { questionBank } from '@/lib/questions';
 import * as localDB from '@/lib/store/local-db';
 import type { Question } from '@/types';
 import { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
+import { cn, formatMathText } from '@/lib/utils';
 
 export default function QuestionsPage() {
   const [search, setSearch] = useState('');
@@ -71,7 +71,7 @@ export default function QuestionsPage() {
                 {q.id.startsWith('custom_') ? 'Custom' : `Q${q.question_number}`}
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-foreground leading-relaxed">{q.question_text}</p>
+                <p className="text-sm text-foreground leading-relaxed whitespace-pre-line">{formatMathText(q.question_text)}</p>
                 <div className="flex flex-wrap items-center gap-2 mt-2">
                   <span className="text-xs font-medium text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">{q.marks} marks</span>
                   <span className="text-xs text-stone-500">{q.topic}</span>

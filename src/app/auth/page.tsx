@@ -9,7 +9,7 @@ import {
   CheckCircle2, User, Sparkles
 } from 'lucide-react';
 import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
-import { OmnitrixLoader } from '@/components/OmnitrixLoader';
+import { BoredHandLoader } from '@/components/BoredHandLoader';
 
 type AuthMethod = 'email' | 'phone' | null;
 type AuthStep = 'choose' | 'input' | 'otp' | 'name';
@@ -33,6 +33,7 @@ export default function AuthPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [redirecting, setRedirecting] = useState(false);
+  const [redirectingFinished, setRedirectingFinished] = useState(false);
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
 
@@ -104,7 +105,10 @@ export default function AuthPage() {
       const existingName = result.data?.user?.user_metadata?.display_name;
       if (existingName) {
         setRedirecting(true);
-        setTimeout(() => router.push('/dashboard'), 1000);
+        setTimeout(() => {
+          setRedirectingFinished(true);
+          setTimeout(() => router.push('/dashboard'), 500);
+        }, 1400);
       } else {
         goTo('name');
       }
@@ -130,7 +134,10 @@ export default function AuthPage() {
       });
       if (updateError) throw updateError;
       setRedirecting(true);
-      setTimeout(() => router.push('/dashboard'), 800);
+      setTimeout(() => {
+        setRedirectingFinished(true);
+        setTimeout(() => router.push('/dashboard'), 500);
+      }, 1400);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save name. Please try again.');
     } finally {
@@ -141,6 +148,7 @@ export default function AuthPage() {
   const handleGoogleLogin = useCallback(async () => {
     setError(null);
     setLoading(true);
+    setRedirecting(true);
     try {
       if (!isSupabaseConfigured) throw new Error('Supabase is not configured.');
       const supabase = createClient();
@@ -152,6 +160,7 @@ export default function AuthPage() {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Google sign-in failed.');
       setLoading(false);
+      setRedirecting(false);
     }
   }, []);
 
@@ -177,9 +186,10 @@ export default function AuthPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center"
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center select-none"
           >
-            <OmnitrixLoader finished text="AUTHENTICATING..." />
+            <BoredHandLoader finished={redirectingFinished} text="AUTHENTICATING..." />
           </motion.div>
         )}
       </AnimatePresence>

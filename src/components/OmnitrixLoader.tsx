@@ -3,14 +3,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import { BoredHandLoader } from './BoredHandLoader';
+
 export function OmnitrixLoader({ 
   text = 'LOADING...', 
   finished = false,
+  variant = 'penspin',
 }: { 
   text?: string;
   finished?: boolean;
   logoUrl?: string;
+  variant?: 'penspin' | 'boredhand';
 }) {
+  if (variant === 'boredhand') {
+    return <BoredHandLoader text={text} finished={finished} />;
+  }
+
   const showCustomText = text && text.trim().toUpperCase() !== 'LOADING...' && text.trim().toUpperCase() !== 'LOADING';
 
   return (
@@ -61,7 +69,7 @@ export function OmnitrixLoader({
 
 // Named alias exports for cleaner imports
 export const PenSpinLoader = OmnitrixLoader;
-export const BoredHandLoader = OmnitrixLoader;
+export { BoredHandLoader };
 export const LoadingScreen = OmnitrixLoader;
 export default OmnitrixLoader;
 

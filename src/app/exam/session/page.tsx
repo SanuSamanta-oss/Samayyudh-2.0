@@ -13,6 +13,7 @@ import { MobileQuestionDrawer } from '@/components/exam/MobileQuestionDrawer';
 import { questionBank, getQuestionsByExam } from '@/lib/questions';
 import * as localDB from '@/lib/store/local-db';
 import { generateId, now, formatDuration } from '@/lib/utils';
+import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import type { ExamSession, ExamMode, BoardNote, StickyNoteColor } from '@/types';
 import {
   ChevronLeft, ChevronRight, Flag, Grid3X3, Send, Award,
@@ -187,11 +188,8 @@ function ExamSessionInner() {
 
   if (!state.session || !currentQuestion) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center space-y-3">
-          <div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-sm text-stone-500">Preparing your battle...</p>
-        </div>
+      <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4">
+        <OmnitrixLoader text="PREPARING YOUR BATTLE..." />
       </div>
     );
   }

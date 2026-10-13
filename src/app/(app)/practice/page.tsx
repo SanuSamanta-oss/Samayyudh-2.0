@@ -57,6 +57,23 @@ function PracticeContent() {
 
   const [isStarting, setIsStarting] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [isLoadingSlot, setIsLoadingSlot] = useState(false);
+  const [slotFinished, setSlotFinished] = useState(false);
+
+  const handleDurationSelect = (seconds: number) => {
+    setSelectedDuration(seconds);
+    setIsLoadingSlot(true);
+    setSlotFinished(false);
+
+    // Exact animation cycle on black screen before transitioning to Battle Summary
+    setTimeout(() => {
+      setSlotFinished(true);
+      setTimeout(() => {
+        setIsLoadingSlot(false);
+        setStep(4);
+      }, 500);
+    }, 1800);
+  };
 
   const handleStart = () => {
     setIsStarting(true);
@@ -77,8 +94,22 @@ function PracticeContent() {
     }, 2000);
   };
 
+  const examDisplayName = subExam?.exam_name || examCategory?.name || 'EXAM';
+
+  if (isLoadingSlot) {
+    const durConfig = EXAM_DURATIONS.find(d => d.seconds === selectedDuration);
+    const durLabel = durConfig?.label || 'CUSTOM TIME';
+    return (
+      <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4">
+        <OmnitrixLoader 
+          finished={slotFinished} 
+          text={`CONFIGURING ${durLabel.toUpperCase()} FOR ${examDisplayName.toUpperCase()}...`} 
+        />
+      </div>
+    );
+  }
+
   if (isStarting) {
-    const examDisplayName = subExam?.exam_name || examCategory?.name || 'EXAM';
     return (
       <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4">
         <OmnitrixLoader 
@@ -282,7 +313,7 @@ function PracticeContent() {
               {EXAM_DURATIONS.map((dur) => (
                 <button
                   key={dur.seconds}
-                  onClick={() => { setSelectedDuration(dur.seconds); setStep(4); }}
+                  onClick={() => handleDurationSelect(dur.seconds)}
                   className={cn(
                     'flex flex-col items-center gap-1 p-4 rounded-xl border-2 transition-all',
                     selectedDuration === dur.seconds

@@ -21,14 +21,14 @@ export function OmnitrixLoader({
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        {/* Exact Bored Hand Tapping Loading Animation from Claudio Scotto (Pinterest) on Black Screen */}
+        {/* Exact Pen Spinning Hand Animation from Pinterest (pin.it/3ZPwVZTHf) on Black Screen */}
         <div className="relative flex items-center justify-center">
           <picture>
-            <source srcSet="/bored_hand_black.webp" type="image/webp" />
+            <source srcSet="/pen_spin_black.webp" type="image/webp" />
             <img 
-              src="/bored_hand_black.gif" 
+              src="/pen_spin_black.gif" 
               alt="Loading animation" 
-              className="w-[280px] sm:w-[350px] md:w-[400px] h-auto object-contain pointer-events-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]"
+              className="w-[260px] sm:w-[320px] md:w-[380px] h-auto object-contain pointer-events-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]"
             />
           </picture>
         </div>
@@ -60,6 +60,8 @@ export function OmnitrixLoader({
 }
 
 // Named alias exports for cleaner imports
+export const PenSpinLoader = OmnitrixLoader;
 export const BoredHandLoader = OmnitrixLoader;
 export const LoadingScreen = OmnitrixLoader;
 export default OmnitrixLoader;
+

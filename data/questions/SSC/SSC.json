@@ -1,0 +1,49 @@
+[
+  {
+    "id": "ssc-cgl-24-q1",
+    "question_number": 1,
+    "question_text": "Who among the following was the founder of the Maurya Empire in ancient India?",
+    "exam_code": "SSC",
+    "exam_category": "COMPETITIVE",
+    "subject": "General Awareness",
+    "topic": "Ancient Indian History",
+    "marks": 2,
+    "difficulty": "easy",
+    "recommended_minutes": 1,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [
+      "Maurya Empire",
+      "Chandragupta",
+      "Ancient History"
+    ],
+    "model_answer": "Chandragupta Maurya founded the Maurya Empire in 322 BCE with the help of Chanakya.",
+    "evaluation_rubric": "+2 for correct, -0.5 for wrong",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Chandragupta Maurya",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Ashoka",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Bindusara",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Samudragupta",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  }
+]

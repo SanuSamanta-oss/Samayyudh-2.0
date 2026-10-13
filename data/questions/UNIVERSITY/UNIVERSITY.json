@@ -1,0 +1,35 @@
+[
+  {
+    "id": "univ-24-q1",
+    "question_number": 1,
+    "question_text": "Explain the time complexity of the Merge Sort algorithm using the Master Theorem.",
+    "exam_code": "UNIVERSITY",
+    "exam_category": "UNIVERSITY",
+    "subject": "Computer Science & Engineering",
+    "topic": "Algorithms",
+    "marks": 5,
+    "difficulty": "medium",
+    "recommended_minutes": 5,
+    "question_type": "descriptive",
+    "expected_points": [
+      "Recurrence relation T(n) = 2T(n/2) + O(n)",
+      "a=2, b=2, log_b(a) = 1",
+      "f(n) = Theta(n)",
+      "Case 2 of Master Theorem",
+      "Total complexity O(n log n)"
+    ],
+    "keywords": [
+      "Merge Sort",
+      "Master Theorem",
+      "Time Complexity",
+      "Recurrence"
+    ],
+    "model_answer": "Merge sort divides an array of size n into two subarrays of size n/2. The recurrence is T(n) = 2T(n/2) + O(n). By Master Theorem, case 2 applies giving Theta(n log n).",
+    "evaluation_rubric": "5 marks total: 2 for recurrence, 2 for Master theorem steps, 1 for final O(n log n)",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [],
+    "correct_answer": "O(n log n)"
+  }
+]

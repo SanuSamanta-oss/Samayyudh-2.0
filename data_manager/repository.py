@@ -26,14 +26,18 @@ class QuestionRepository:
         return self.data_dir / f"{safe_code}.json"
 
     def list_exam_files(self) -> List[Path]:
-        return sorted(list(self.data_dir.glob("*.json")))
+        return sorted(list(self.data_dir.rglob("*.json")))
 
     def load_exam(self, exam_code: str) -> List[Question]:
-        filepath = self._exam_filename(exam_code)
-        if not filepath.exists():
-            return []
+        safe_code = "".join(c if c.isalnum() or c in ("-", "_") else "_" for c in exam_code)
+        matches = list(self.data_dir.rglob(f"{safe_code}.json"))
+        if not matches:
+            filepath = self._exam_filename(exam_code)
+            if not filepath.exists():
+                return []
+            matches = [filepath]
 
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(matches[0], "r", encoding="utf-8") as f:
             data = json.load(f)
 
         questions = [clean_question(Question.from_dict(d)) for d in data if isinstance(d, dict)]

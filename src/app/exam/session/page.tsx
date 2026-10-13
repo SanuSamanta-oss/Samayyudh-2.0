@@ -10,7 +10,7 @@ import { QuestionNavigator } from '@/components/exam/QuestionNavigator';
 import { StickyNote } from '@/components/exam/StickyNote';
 import { NotesBoard } from '@/components/exam/NotesBoard';
 import { MobileQuestionDrawer } from '@/components/exam/MobileQuestionDrawer';
-import { questionBank } from '@/lib/questions';
+import { questionBank, getQuestionsByExam } from '@/lib/questions';
 import * as localDB from '@/lib/store/local-db';
 import { generateId, now, formatDuration } from '@/lib/utils';
 import type { ExamSession, ExamMode, BoardNote, StickyNoteColor } from '@/types';
@@ -65,8 +65,19 @@ function ExamSessionInner() {
     const duration = Number(searchParams.get('duration') || 3600);
     const resumeId = searchParams.get('resume') || searchParams.get('session');
 
+    const requestedExam = searchParams.get('exam') || 'NEET';
+
     localDB.getAllCustomQuestions().then(async (customQs) => {
-      const allQuestions = [...questionBank, ...customQs];
+      // Strictly isolate questions by the requested exam (NEET, GATE, JEE, etc.)
+      const examSpecific = getQuestionsByExam(requestedExam);
+      const customForExam = customQs.filter(q => 
+        q.exam_code?.toUpperCase() === requestedExam.toUpperCase() ||
+        q.exam_category?.toUpperCase() === requestedExam.toUpperCase()
+      );
+      
+      const allQuestions = examSpecific.length > 0 
+        ? [...examSpecific, ...customForExam]
+        : [...questionBank.filter(q => q.exam_code?.toUpperCase() === requestedExam.toUpperCase() || q.exam_category?.toUpperCase() === requestedExam.toUpperCase()), ...customQs];
 
       // 1. If explicit resume requested:
       if (resumeId) {
@@ -88,6 +99,7 @@ function ExamSessionInner() {
       const recentEmptyDraft = allSessions.find(s => 
         s.status === 'in_progress' && 
         s.mode === mode &&
+        s.exam_code?.toUpperCase() === requestedExam.toUpperCase() &&
         (Date.now() - new Date(s.started_at).getTime()) < 10 * 60 * 1000
       );
 
@@ -96,16 +108,18 @@ function ExamSessionInner() {
         const hasAnswers = answers.some(a => a.answer_text.trim());
         if (!hasAnswers) {
           // Reuse this draft session instead of creating another duplicate
-          const shuffled = allQuestions.sort(() => Math.random() - 0.5);
-          const selected = shuffled.slice(0, Math.min(recentEmptyDraft.total_questions, shuffled.length));
+          const selected = (mode === 'full_century' || recentEmptyDraft.total_questions >= allQuestions.length)
+            ? [...allQuestions].sort((a, b) => a.question_number - b.question_number).slice(0, Math.min(recentEmptyDraft.total_questions, allQuestions.length))
+            : [...allQuestions].sort(() => Math.random() - 0.5).slice(0, Math.min(recentEmptyDraft.total_questions, allQuestions.length));
           await initSession(recentEmptyDraft, selected);
           return;
         }
       }
 
       // 3. Otherwise, create a clean new session
-      const shuffled = allQuestions.sort(() => Math.random() - 0.5);
-      const selected = shuffled.slice(0, Math.min(questionCount, shuffled.length));
+      const selected = (mode === 'full_century' || questionCount >= allQuestions.length)
+        ? [...allQuestions].sort((a, b) => a.question_number - b.question_number).slice(0, questionCount)
+        : [...allQuestions].sort(() => Math.random() - 0.5).slice(0, Math.min(questionCount, allQuestions.length));
 
       const startTime = now();
       const endTime = new Date(Date.now() + duration * 1000).toISOString();
@@ -114,7 +128,7 @@ function ExamSessionInner() {
         id: generateId(),
         user_id: 'local-user',
         title: `${mode.replace(/_/g, ' ')} — ${new Date().toLocaleDateString()}`,
-        exam_code: searchParams.get('exam') || 'UNIVERSITY',
+        exam_code: requestedExam,
         mode,
         status: 'in_progress',
         total_questions: selected.length,

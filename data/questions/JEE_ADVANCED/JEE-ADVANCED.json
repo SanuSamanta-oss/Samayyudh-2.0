@@ -1,0 +1,49 @@
+[
+  {
+    "id": "jee-adv-24-q1",
+    "question_number": 1,
+    "question_text": "An ideal gas undergoes a thermodynamic cycle consisting of an isobaric expansion, an adiabatic expansion, an isothermal compression, and an isochoric heating. Calculate the net efficiency of the cycle given the volume expansion ratios.",
+    "exam_code": "JEE-ADVANCED",
+    "exam_category": "JEE_ADVANCED",
+    "subject": "Physics",
+    "topic": "Thermodynamics",
+    "marks": 4,
+    "difficulty": "hard",
+    "recommended_minutes": 3,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [
+      "Thermodynamics",
+      "Efficiency",
+      "Adiabatic"
+    ],
+    "model_answer": "Apply first law of thermodynamics and efficiency formula eta = W_net / Q_in.",
+    "evaluation_rubric": "+4 for correct option, -2 for incorrect",
+    "year": "2024",
+    "created_at": "2024-05-01T00:00:00Z",
+    "updated_at": "2024-05-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "45%",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "55%",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "35%",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "60%",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  }
+]

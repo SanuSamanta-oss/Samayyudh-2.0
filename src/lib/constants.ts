@@ -103,10 +103,31 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
   {
     code: 'MEDICAL',
     name: 'NEET',
-    description: 'National Eligibility cum Entrance Test',
+    description: 'National Eligibility cum Entrance Test (UG)',
     icon: '🩺',
     logo: '/logos/neet.jpg',
-    exams: [],
+    exams: [
+      {
+        id: 'neet-2024',
+        exam_code: 'NEET',
+        exam_name: 'NEET UG 2024 (Rigud Q4 Official Paper)',
+        category: 'MEDICAL',
+        description: 'Actual 200 Questions (Physics, Chemistry, Botany, Zoology)',
+        icon: '🩺',
+        duration_seconds: 12000,
+        total_questions: 200,
+        total_marks: 720,
+        negative_marking: true,
+        marking_rules: [],
+        question_types: ['mcq'],
+        subjects: ['Physics', 'Chemistry', 'Botany', 'Zoology'],
+        sections: [],
+        time_rules: [],
+        is_active: true,
+        created_at: '',
+        updated_at: ''
+      }
+    ],
   },
   {
     code: 'CUSTOM',

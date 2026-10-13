@@ -56,8 +56,116 @@ export const SAMPLE_QUESTIONS: Question[] = rawQuestions.map((q) => {{
   }};
 }});
 
-export function getQuestionsByExam(examCode: string): Question[] {{
-  return SAMPLE_QUESTIONS.filter((q) => q.exam_code === examCode);
+// ============================================================
+// Dedicated Question Banks by Exam (Strictly Isolated)
+// ============================================================
+
+/** NEET (National Eligibility cum Entrance Test) — Physics, Chemistry, Botany, Zoology */
+export const NEET_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+  (q) => q.exam_code === 'NEET' || q.exam_category === 'MEDICAL'
+);
+
+/** GATE (Graduate Aptitude Test in Engineering) — Specific engineering branches/topics */
+export const GATE_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+  (q) => q.exam_code.startsWith('GATE') || q.exam_category === 'ENGINEERING'
+);
+
+/** JEE Mains — Engineering Entrance */
+export const JEE_MAINS_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+  (q) => q.exam_code === 'JEE-MAINS' || q.exam_category === 'JEE_MAINS'
+);
+
+/** JEE Advanced — IIT Entrance */
+export const JEE_ADVANCED_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+  (q) => q.exam_code === 'JEE-ADVANCED' || q.exam_category === 'JEE_ADVANCED'
+);
+
+/** WBJEE — West Bengal Joint Entrance Examination */
+export const WBJEE_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+  (q) => q.exam_code === 'WBJEE' || q.exam_category === 'STATE_ENTRANCE'
+);
+
+/** UPSC Civil Services */
+export const UPSC_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+  (q) => q.exam_code.includes('UPSC') || q.exam_category === 'CIVIL_SERVICES'
+);
+
+/** SSC & Competitive Exams */
+export const SSC_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+  (q) => q.exam_code.includes('SSC') || q.exam_category === 'COMPETITIVE'
+);
+
+/** University & College Examinations */
+export const UNIVERSITY_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+  (q) => q.exam_code === 'UNIVERSITY' || q.exam_category === 'UNIVERSITY'
+);
+
+export const EXAM_QUESTION_BANKS = {{
+  NEET: NEET_QUESTIONS,
+  GATE: GATE_QUESTIONS,
+  JEE_MAINS: JEE_MAINS_QUESTIONS,
+  JEE_ADVANCED: JEE_ADVANCED_QUESTIONS,
+  WBJEE: WBJEE_QUESTIONS,
+  UPSC: UPSC_QUESTIONS,
+  SSC: SSC_QUESTIONS,
+  UNIVERSITY: UNIVERSITY_QUESTIONS,
+}} as const;
+
+/**
+ * Returns questions strictly for the requested exam without cross-contaminating.
+ */
+export function getQuestionsByExam(examCodeOrCategory: string): Question[] {{
+  const code = (examCodeOrCategory || '').trim().toUpperCase();
+
+  // Strict NEET isolation
+  if (code === 'NEET' || code === 'MEDICAL' || code.includes('NEET')) {{
+    return NEET_QUESTIONS;
+  }}
+
+  // Strict GATE isolation
+  if (code.startsWith('GATE')) {{
+    const branchQs = GATE_QUESTIONS.filter((q) => q.exam_code.toUpperCase() === code);
+    return branchQs.length > 0 ? branchQs : GATE_QUESTIONS;
+  }}
+  if (code === 'ENGINEERING') {{
+    return GATE_QUESTIONS;
+  }}
+
+  // Strict JEE Mains isolation
+  if (code === 'JEE_MAINS' || code === 'JEE-MAINS' || code === 'JEE') {{
+    return JEE_MAINS_QUESTIONS;
+  }}
+
+  // Strict JEE Advanced isolation
+  if (code === 'JEE_ADVANCED' || code === 'JEE-ADVANCED') {{
+    return JEE_ADVANCED_QUESTIONS;
+  }}
+
+  // Strict WBJEE isolation
+  if (code === 'WBJEE' || code === 'STATE_ENTRANCE') {{
+    return WBJEE_QUESTIONS;
+  }}
+
+  // Strict UPSC isolation
+  if (code === 'UPSC' || code.includes('UPSC') || code === 'CIVIL_SERVICES') {{
+    return UPSC_QUESTIONS;
+  }}
+
+  // Strict SSC isolation
+  if (code === 'SSC' || code.includes('SSC') || code === 'COMPETITIVE') {{
+    return SSC_QUESTIONS;
+  }}
+
+  // Strict University isolation
+  if (code === 'UNIVERSITY') {{
+    return UNIVERSITY_QUESTIONS;
+  }}
+
+  // Fallback: match by exam_code or category strictly
+  const matched = SAMPLE_QUESTIONS.filter(
+    (q) => q.exam_code.toUpperCase() === code || q.exam_category.toUpperCase() === code
+  );
+  return matched.length > 0 ? matched : SAMPLE_QUESTIONS;
 }}
 
 export function getRandomQuestions(count: number, examCode?: string): Question[] {{

@@ -3,10 +3,12 @@
 // ============================================================
 // SamayYudh 2.0 — Professional ID Card Feature Badges
 // Modeled precisely after the reference emerald green lanyard ID badge:
-// - Woven forest green lanyard with metallic rivet, D-ring clamp & swivel hook
-// - Fanned-out 3-card deck presentation
+// - Separate woven forest green lanyard for EACH card (with snap button,
+//   D-ring clamp, swivel joint & lobster clasp)
+// - Gentle hanging wavy sway animation (id-card-sway)
+// - Fanned-out 3-card deck with interactive drag & spring physics
 // - Right-edge vertical 'DESIGNER' style ribbon tag
-// - Iconic central portrait emblem with corner reticles
+// - Iconic central portrait emblem with reticle viewfinder styling
 // - Bold white title with vibrant mint pill badge underneath
 // - High-security QR code badge & verification metadata
 // ============================================================
@@ -112,17 +114,17 @@ function MiniQRCode() {
         {/* Top-Left Target */}
         <rect x="2" y="2" width="7" height="7" rx="1" fill="#0f172a" />
         <rect x="4" y="4" width="3" height="3" fill="#fff" />
-        <rect x="5" y="5" width="1" height="1" fill="#0f172a" />
+        <rect x="5" y="5" width="1" fill="#0f172a" />
 
         {/* Top-Right Target */}
         <rect x="20" y="2" width="7" height="7" rx="1" fill="#0f172a" />
         <rect x="22" y="4" width="3" height="3" fill="#fff" />
-        <rect x="23" y="5" width="1" height="1" fill="#0f172a" />
+        <rect x="23" y="5" width="1" fill="#0f172a" />
 
         {/* Bottom-Left Target */}
         <rect x="2" y="20" width="7" height="7" rx="1" fill="#0f172a" />
         <rect x="4" y="22" width="3" height="3" fill="#fff" />
-        <rect x="5" y="23" width="1" height="1" fill="#0f172a" />
+        <rect x="5" y="23" width="1" fill="#0f172a" />
 
         {/* Interior Matrix Data */}
         <rect x="11" y="3" width="2" height="2" />
@@ -168,9 +170,12 @@ function IDCard({
   const y = useMotionValue(0);
 
   // Drag physics & dynamic rotations
-  const dragRotateZ = useTransform(x, [-260, 260], [-26, 26]);
-  const rotateY = useTransform(x, [-260, 260], [-18, 18]);
-  const rotateX = useTransform(y, [-260, 260], [14, -14]);
+  const dragRotateZ = useTransform(x, [-260, 260], [-25, 25]);
+  const rotateY = useTransform(x, [-260, 260], [-16, 16]);
+  const rotateX = useTransform(y, [-260, 260], [12, -12]);
+
+  // Strap elastic stretch on vertical drag
+  const strapScaleY = useTransform(y, (val) => Math.max(0.4, 1 + val / 220));
 
   const isFront = stackIndex === 0;
 
@@ -182,15 +187,15 @@ function IDCard({
 
   const Icon = feature.icon;
 
-  // Exact 3-card fanned layout matching reference photograph:
+  // 3-card fanned layout matching reference photograph:
   // stackIndex 0 = Center front (0 deg)
-  // stackIndex 1 = Left fan (-14.5 deg, shifted left -46px)
-  // stackIndex 2 = Right fan (+14.5 deg, shifted right +46px)
-  const restingRotation = stackIndex === 0 ? 0 : stackIndex === 1 ? -14.5 : 14.5;
-  const restingX = stackIndex === 0 ? 0 : stackIndex === 1 ? -46 : 46;
-  const restingY = stackIndex === 0 ? 0 : 14;
-  const restingScale = stackIndex === 0 ? 1 : 0.93;
-  const restingOpacity = stackIndex === 0 ? 1 : 0.85;
+  // stackIndex 1 = Left fan (-14 deg, shifted left -44px)
+  // stackIndex 2 = Right fan (+14 deg, shifted right +44px)
+  const restingRotation = stackIndex === 0 ? 0 : stackIndex === 1 ? -14 : 14;
+  const restingX = stackIndex === 0 ? 0 : stackIndex === 1 ? -44 : 44;
+  const restingY = stackIndex === 0 ? 0 : 12;
+  const restingScale = stackIndex === 0 ? 1 : 0.94;
+  const restingOpacity = stackIndex === 0 ? 1 : 0.88;
   const zIndex = stackIndex === 0 ? 30 : stackIndex === 1 ? 20 : 19;
 
   return (
@@ -213,9 +218,78 @@ function IDCard({
       onDragEnd={handleDragEnd}
       transition={{ type: 'spring', stiffness: 280, damping: 24, mass: 1 }}
     >
+      {/* ── Separate Lanyard Strap & Hardware for this Card ── */}
+      <div className="relative flex flex-col items-center z-40 -mb-5 pointer-events-none">
+        {/* Woven Damask Forest Green Strap */}
+        <motion.div
+          className="w-11 sm:w-12 h-24 sm:h-26 relative overflow-hidden shadow-2xl"
+          style={{
+            background: 'linear-gradient(90deg, #022c22 0%, #064e3b 15%, #065f46 50%, #064e3b 85%, #022c22 100%)',
+            scaleY: isFront ? strapScaleY : 1,
+            transformOrigin: 'top center',
+          }}
+        >
+          {/* Woven geometric texture */}
+          <div
+            className="absolute inset-0 opacity-25"
+            style={{
+              backgroundImage: 'repeating-linear-gradient(45deg, #34d399 0px, #34d399 2px, transparent 2px, transparent 6px)',
+            }}
+          />
+          {/* Lighting highlights */}
+          <div className="absolute inset-y-0 left-0 w-1.5 bg-black/50" />
+          <div className="absolute inset-y-0 right-0 w-1.5 bg-black/50" />
+          <div className="absolute inset-y-0 left-2 w-px bg-white/15" />
+
+          {/* Dark Gunmetal Rivet / Snap Button */}
+          <div className="absolute top-8 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-[#18231e] border-2 border-[#4b5563] shadow-md flex items-center justify-center">
+            <div className="w-1 h-1 rounded-full bg-[#374151]" />
+          </div>
+        </motion.div>
+
+        {/* Gunmetal D-Ring Clamp */}
+        <div
+          className="w-11 sm:w-12 h-4 relative -mt-1 z-20 rounded-b-md shadow-md"
+          style={{
+            background: 'linear-gradient(180deg, #4b5563 0%, #1f2937 70%, #111827 100%)',
+            borderLeft: '1px solid #9ca3af',
+            borderRight: '1px solid #9ca3af',
+            borderBottom: '2px solid #374151',
+          }}
+        />
+
+        {/* Swivel Joint Mechanism */}
+        <div className="flex flex-col items-center -mt-0.5 z-20">
+          <div
+            className="w-2.5 h-3.5 shadow-sm"
+            style={{
+              background: 'linear-gradient(90deg, #374151 0%, #9ca3af 50%, #374151 100%)',
+              borderLeft: '1px solid #1f2937',
+              borderRight: '1px solid #1f2937',
+            }}
+          />
+          <div className="w-4 h-2 rounded-full bg-gradient-to-b from-[#9ca3af] to-[#374151] border border-[#1f2937] -mt-0.5 z-30 shadow-sm" />
+        </div>
+
+        {/* Metallic Lobster Clasp Hook looping through card hole */}
+        <div className="flex flex-col items-center -mt-0.5 relative z-20">
+          <div
+            className="w-6 h-8 relative shadow-xl"
+            style={{
+              border: '3.5px solid #6b7280',
+              borderRadius: '999px 999px 10px 10px',
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(31,41,55,0.8) 100%)',
+            }}
+          >
+            {/* Spring latch lever */}
+            <div className="absolute -right-1 top-2 w-1.5 h-4 bg-gradient-to-r from-[#9ca3af] to-[#4b5563] rounded-full border border-[#1f2937]" />
+          </div>
+        </div>
+      </div>
+
       {/* ── ID Card Body ────────────────────────────────────────── */}
       <motion.div
-        className="relative w-[310px] sm:w-[330px] h-[480px] sm:h-[495px] rounded-[28px] overflow-hidden text-left"
+        className="relative w-[305px] sm:w-[325px] h-[475px] sm:h-[490px] rounded-[28px] overflow-hidden text-left"
         style={{
           background: 'radial-gradient(ellipse at 50% 15%, #08634c 0%, #054837 40%, #033326 75%, #012219 100%)',
           boxShadow: isFront
@@ -396,94 +470,27 @@ export function FeatureIdCards() {
 
   return (
     <div className="flex flex-col items-center w-full max-w-lg mx-auto">
-      {/* ── Fixed Static Lanyard Hanging from Top ── */}
-      <div className="relative flex flex-col items-center z-50 pointer-events-none -mb-3">
-        {/* Deep Forest Green Patterned Lanyard Strap */}
-        <div
-          className="w-12 h-24 relative overflow-hidden shadow-2xl"
-          style={{
-            background: 'linear-gradient(90deg, #022c22 0%, #064e3b 15%, #065f46 50%, #064e3b 85%, #022c22 100%)',
-          }}
-        >
-          {/* Woven Damask Strap Pattern */}
-          <div
-            className="absolute inset-0 opacity-25"
-            style={{
-              backgroundImage: 'repeating-linear-gradient(45deg, #34d399 0px, #34d399 2px, transparent 2px, transparent 6px)',
-            }}
-          />
-          {/* Edge Shadows & Highlights */}
-          <div className="absolute inset-y-0 left-0 w-1.5 bg-black/50" />
-          <div className="absolute inset-y-0 right-0 w-1.5 bg-black/50" />
-          <div className="absolute inset-y-0 left-2 w-px bg-white/15" />
-
-          {/* Dark Gunmetal Rivet / Snap Button */}
-          <div className="absolute top-9 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#18231e] border-2 border-[#4b5563] shadow-md flex items-center justify-center">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#374151]" />
-          </div>
-        </div>
-
-        {/* Gunmetal D-Ring Clamp */}
-        <div
-          className="w-12 h-4 relative -mt-1 z-20 rounded-b-md shadow-md"
-          style={{
-            background: 'linear-gradient(180deg, #4b5563 0%, #1f2937 70%, #111827 100%)',
-            borderLeft: '1px solid #9ca3af',
-            borderRight: '1px solid #9ca3af',
-            borderBottom: '2px solid #374151',
-          }}
-        />
-
-        {/* Swivel Joint Mechanism */}
-        <div className="flex flex-col items-center -mt-0.5 z-20">
-          <div
-            className="w-2.5 h-3.5 shadow-sm"
-            style={{
-              background: 'linear-gradient(90deg, #374151 0%, #9ca3af 50%, #374151 100%)',
-              borderLeft: '1px solid #1f2937',
-              borderRight: '1px solid #1f2937',
-            }}
-          />
-          <div className="w-4 h-2 rounded-full bg-gradient-to-b from-[#9ca3af] to-[#374151] border border-[#1f2937] -mt-0.5 z-30 shadow-sm" />
-        </div>
-
-        {/* Metallic Swivel Snap Hook / Lobster Clasp */}
-        <div className="flex flex-col items-center -mt-0.5 relative z-20">
-          <div
-            className="w-6 h-8 relative shadow-xl"
-            style={{
-              border: '3.5px solid #6b7280',
-              borderRadius: '999px 999px 10px 10px',
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(31,41,55,0.8) 100%)',
-            }}
-          >
-            {/* Spring latch lever */}
-            <div className="absolute -right-1 top-2 w-1.5 h-4 bg-gradient-to-r from-[#9ca3af] to-[#4b5563] rounded-full border border-[#1f2937]" />
-          </div>
-        </div>
-      </div>
-
-      {/* ── 3-Card Fanned Deck Container ── */}
+      {/* ── 3-Card Fanned Deck Container with the Hanging Wavy Sway Animation ── */}
       <div
-        className="relative w-full max-w-[340px] sm:max-w-[360px] flex justify-center"
-        style={{ height: '525px', perspective: '1200px' }}
+        className="relative w-full max-w-[340px] sm:max-w-[360px] flex justify-center id-card-sway"
+        style={{ height: '585px', perspective: '1200px', transformOrigin: 'top center' }}
       >
         <AnimatePresence mode="popLayout">
-          {/* Background right card (index 2) */}
+          {/* Background right card (index 2) with its own strap */}
           <IDCard
             key={visible[2].title + '-right'}
             feature={visible[2]}
             stackIndex={2}
             onSwipe={handleNext}
           />
-          {/* Background left card (index 1) */}
+          {/* Background left card (index 1) with its own strap */}
           <IDCard
             key={visible[1].title + '-left'}
             feature={visible[1]}
             stackIndex={1}
             onSwipe={handleNext}
           />
-          {/* Foreground active card (index 0) */}
+          {/* Foreground active card (index 0) with its own strap */}
           <IDCard
             key={visible[0].title + '-front'}
             feature={visible[0]}
@@ -494,7 +501,7 @@ export function FeatureIdCards() {
       </div>
 
       {/* ── Interactive Controls & Swipe Guidance ── */}
-      <div className="flex items-center gap-4 mt-6">
+      <div className="flex items-center gap-4 mt-3">
         <button
           onClick={handlePrev}
           className="p-2 rounded-full border border-emerald-500/30 bg-emerald-950/60 text-emerald-300 hover:bg-emerald-800/40 hover:text-white transition-all active:scale-95 shadow-md"

@@ -1,0 +1,3 @@
+exam_code,subject,topic,question_text,marks,difficulty,option_a,option_b,option_c,option_d,correct_answer,model_answer
+GATE-DA,Data Science & AI,Machine Learning,"Which loss function is commonly used for binary classification in logistic regression?",1,easy,"Binary Cross-Entropy (Log Loss)","Mean Squared Error","Hinge Loss","Huber Loss",opt_a,"Binary cross-entropy minimizes the negative log likelihood for binary probabilistic classification."
+GATE-DA,Data Science & AI,Linear Algebra,"What is the determinant of an identity matrix of size 3x3?",1,easy,"0","1","3","Undefined",opt_b,"The determinant of any identity matrix I_n is always 1."

@@ -61,6 +61,7 @@
 | **Typography** | `next/font/google` | Geist, Geist Mono, and Arvo serif fonts |
 | **Cloud Database & Auth** | [Supabase](https://supabase.com/) | Managed PostgreSQL, Row-Level Security (RLS), Supabase Auth |
 | **Local Database** | [IndexedDB (`idb`)](https://github.com/jakearchibald/idb) | Client-side persistent storage for offline-first capabilities |
+| **Data Management** | [Python 3 (`data_manager/`)](docs/DATA_MANAGEMENT.md) | Question ETL, PyMuPDF paper parsing, validation, Supabase/TS sync |
 | **Artificial Intelligence** | [@google/genai (Gemini 2.0)](https://ai.google.dev/) | Answer scoring, step-by-step critique, SOKHA companion |
 | **Voice & Speech APIs** | Web Speech API | `SpeechRecognition` (voice input) & `SpeechSynthesis` (voice output) |
 | **Animations & Physics** | [Framer Motion](https://www.framer.com/motion/) & [GSAP](https://gsap.com/) | Fluid UI micro-interactions and floating physics |
@@ -75,6 +76,16 @@
 
 ```text
 samayyudh-2.0/
+├── data/                   # Structured question banks and raw ingestion datasets
+│   ├── questions/          # Modular exam JSON banks (GATE, JEE, UPSC, NEET, etc.)
+│   └── raw/                # Staging folder for raw PDF/CSV/TXT question dumps
+├── data_manager/           # Python 3 Data Management Package
+│   ├── cli.py              # CLI suite (python -m data_manager)
+│   ├── models.py           # Dataclass models matching database & TS interfaces
+│   ├── cleaner.py          # Math unicode NFKC sanitization & deduplication
+│   ├── repository.py       # Local question repository manager
+│   ├── extractors/         # Parsers for PDF (PyMuPDF), CSV, JSON, and Raw Text
+│   └── exporters/          # Exporters for TypeScript, Supabase SQL, and Cloud sync
 ├── public/                 # Static assets, icons, logos, manifest.json, sw.js
 ├── src/
 │   ├── app/                # Next.js App Router
@@ -101,7 +112,7 @@ samayyudh-2.0/
 │   │   ├── gemini.ts       # AI answer evaluation prompts and logic
 │   │   └── questions.ts    # Competitive exam question banks
 │   └── types/              # TypeScript interfaces and schema declarations
-├── supabase/               # SQL migrations and PostgreSQL schema definitions
+├── supabase/               # SQL migrations, schema, and question seed files
 └── README.md
 ```
 

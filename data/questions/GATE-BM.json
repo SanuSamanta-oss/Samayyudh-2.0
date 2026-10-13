@@ -1,0 +1,2245 @@
+[
+  {
+    "id": "gate-bm-24-q1",
+    "question_number": 1,
+    "question_text": "If '→' denotes increasing order of intensity, then the meaning of the words [simmer → seethe → smolder] is analogous to [break → raze → ________ ]. Which one of the given options is appropriate to fill the blank?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "obfuscate",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "obliterate",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "fracture",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "fissure Biomedical Engineering (BM) Page 2 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q2",
+    "question_number": 2,
+    "question_text": "In a locality, the houses are numbered in the following way: The house-numbers on one side of a road are consecutive odd integers starting from 301, while the house-numbers on the other side of the road are consecutive even numbers starting from 302. The total number of houses is the same on both sides of the road. If the difference of the sum of the house-numbers between the two sides of the road is 27, then the number of houses on each side of the road is",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "27",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "52",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "54",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "26",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q3",
+    "question_number": 3,
+    "question_text": "For positive integers p and q, with p q≠1 , ( p q) p q= p (p q −1). Then,",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "qp= pq",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "qp= p2q",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "√q= √p",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "√q p = √p q Biomedical Engineering (BM) Page 3 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q4",
+    "question_number": 4,
+    "question_text": "Which one of the given options is a possible value of x in the following sequence? 3, 7, 15, x, 63, 127, 255",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "35",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "40",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "45",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "31",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q5",
+    "question_number": 5,
+    "question_text": "On a given day, how many times will the second-hand and the minute-hand of a clock cross each other during the clock time 12:05:00 hours to 12:55:00 hours?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "51",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "49",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "50",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "55 Biomedical Engineering (BM) Page 4 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q6",
+    "question_number": 6,
+    "question_text": "In the given text, the blanks are numbered (i)−(iv). Select the best match for all the blanks. From the ancient Athenian arena to the modern Olympic stadiums, athletics (i) the potential for a spectacle. The crowd (ii) with bated breath as the Olympian artist twists his body, stretching the javelin behind him. Twelve strides in, he begins to cross-step. Six cross-steps (iii) in an abrupt stop on his left foot. As his body (iv) like a door",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "(i) hold (ii) waits (iii) culminates (iv) pivot",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "(i) holds (ii) wait (iii) culminates (iv) pivot",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "(i) hold (ii) wait (iii) culminate (iv) pivots",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "(i) holds (ii) waits (iii) culminate (iv) pivots Biomedical Engineering (BM) Page 5 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q7",
+    "question_number": 7,
+    "question_text": "Three distinct sets of indistinguishable twins are to be seated at a circular table that has 8 identical chairs. Unique seating arrangements are defined by the relative positions of the people. How many unique seating arrangements are possible such that each person is sitting next to their twin?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "12",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "14",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "10",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "28 Biomedical Engineering (BM) Page 6 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q8",
+    "question_number": 8,
+    "question_text": "The chart given below compares the Installed Capacity (MW) of four power generation technologies, T1, T2, T3, and T4, and their Electricity Generation (MWh) in a time of 1000 hours (h). The Capacity Factor of a power generation technology is: Capacity Factor = Electricity Generation (MWh) Installed Capacity (MW) × 1000 (h) Which one of the given technologies has the highest Capacity Factor?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "T1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "T2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "T3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "T4 0 5 10 15 20 25 30 35 40 45 50 55 60 65 70 0 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000 11000 12000 13000 14000 T1 T2 T3 T4 Installed Capacity (MW) Electricity Generation (MWh) Power",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q9",
+    "question_number": 9,
+    "question_text": "In the 4 × 4 array shown below, each cell of the first three columns has either a cross (X) or a number, as per the given rule. Rule: The number in a cell represents the count of crosses around its immediate neighboring cells (left, right, top, bottom, diagonals). As per this rule, the maximum number of crosses possible in the empty column is",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "0",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "3 Biomedical Engineering (BM) Page 8 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q10",
+    "question_number": 10,
+    "question_text": "During a half-moon phase, the Earth-Moon-Sun form a right triangle. If the Moon-Earth-Sun angle at this half-moon phase is measured to be 89.85°, the ratio of the Earth-Sun and Earth-Moon distances is closest to",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "328",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "382",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "238",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "283 Biomedical Engineering (BM) Page 9 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q11",
+    "question_number": 11,
+    "question_text": "What is the value of the following complex line integral counter-clockwise? ∮ 8 z(z−2)(z−4) |z|=3 dz",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "+j2π",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "−j2π",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "−j10π",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "+j10π",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q12",
+    "question_number": 12,
+    "question_text": "To solve the equation x= 2 cos x using Newton-Raphson's method, which one of the following iterations should be used?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "xn+1 = xn−xn−2cosxn 1 + 2sinxn",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "xn+1 = xn+ xn−2cosxn 1 + 2sinxn",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "xn+1 = xn+ 1 + 2sinxn xn−2cosxn",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "xn+1 = xn−1 + 2sinxn xn−2cosxn Biomedical Engineering (BM) Page 10 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q13",
+    "question_number": 13,
+    "question_text": "During the repolarization phase of a neuron, the cell is brought back to the resting potential by the action of a Sodium-Potassium pump. Which one of the following statements is TRUE for the active transport of Na+ and K+ ions through the cell membrane?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "For every 3 Na+ transported out of the cell 2 K+ is transported into the cell.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "For every 3 Na+ transported into the cell 2 K+ is transported out of the cell.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "For every 2 Na+ transported out of the cell 3 K+ is transported into the cell.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The ratio of Na+ and K+ transport is always equal to one.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q14",
+    "question_number": 14,
+    "question_text": "The cardiac rhythm in a healthy human heart originates from _____.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Sinu-atrial node (SA)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Atrio-ventricular node (AV)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Aorta",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Right atria Biomedical Engineering (BM) Page 11 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q15",
+    "question_number": 15,
+    "question_text": "Which one of the following events is NOT typically encountered in diagnostic X-ray projection radiography?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Pair production",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Photoelectric absorption",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Compton scattering",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Characteristic radiation",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q16",
+    "question_number": 16,
+    "question_text": "Which of the following statements is TRUE for a PET imaging system?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Two coincident photons of 511 keV energy are detected 180o apart.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Photons of 51.1 keV energy are detected 360o around the body.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Photons of energy 511 keV are detected 360o around the body.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Coincident photons with 51.1 keV energy are detected 180o apart. Biomedical Engineering (BM) Page 12 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q17",
+    "question_number": 17,
+    "question_text": "Consider the following layers: subcutaneous fat, viable epidermis, stratum corneum, and dermis. Which one of the following represents the correct sequence of the layers from skin surface to within?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Dermis, subcutaneous fat, viable epidermis, stratum corneum",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Dermis, viable epidermis, subcutaneous fat, stratum corneum",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Stratum corneum, viable epidermis, dermis, subcutaneous fat",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Viable epidermis, stratum corneum, dermis, subcutaneous fat",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q18",
+    "question_number": 18,
+    "question_text": "Bioglass 45S5 has a composition of ________.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "45 wt% SiO2 and 5:1 molar ratio of Calcium to Phosphorus.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "45 wt% Hydroxyapatite and 5 wt% SiO2.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "45 wt% Hydroxyapatite and 5:1 molar ratio of CaO and Ca3(PO4)2.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "45 wt% SiO2 and 5 wt% Hydroxyapatite. Biomedical Engineering (BM) Page 13 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q19",
+    "question_number": 19,
+    "question_text": "Macrophages that are resident in the liver are _________________.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Histiocyte cells",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Langerhans cells",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Kupffer cells",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Fibroblast cells Biomedical Engineering (BM) Page 14 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q20",
+    "question_number": 20,
+    "question_text": "Which one of the following drug release kinetic curves will be ideal for developing an implantable slow-release drug delivery device?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "time % cumulative release",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "time % cumulative release",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "time % cumulative release",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "time % cumulative release Biomedical Engineering (BM) Page 15 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q21",
+    "question_number": 21,
+    "question_text": "The circuit shown in the figure functions as which one of the following digital circuit blocks? 1 0 D clk Q",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Negative level triggered D-latch",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Positive level triggered D-latch",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Negative edge triggered D-flip-flop",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Positive edge triggered D-flip-flop",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q22",
+    "question_number": 22,
+    "question_text": "The Fourier transform of e−|2t| is _________.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "4 4 −ω2",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "4 4 + ω2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "2 2 + ω",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "2 2 −ω Biomedical Engineering (BM) Page 16 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q23",
+    "question_number": 23,
+    "question_text": "The Bode plot of a 2nd order low pass filter is shown in the figure below. What is the frequency at which the attenuation is 80 dB? 0 dB 1 kHz",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "10 kHz",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "10 MHz",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "100 kHz",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "100 MHz",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q24",
+    "question_number": 24,
+    "question_text": "The input x(t) and the output y(t) of a linear time invariant system are related as follows: y(t) + dy(t) dt + 0.5 d2y(t) dt2 = x(t) + 0.1 dx(t) dt What is the Laplace transform of the impulse response of the system?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "0.5s2 + s+ 1 0.1s+ 1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "0.1s+ 1 0.5s2 + s+ 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "0.1s+ s2 s2 + s+ 0.5",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "s2 + s+ 0.5 0.1s2 + s Biomedical Engineering (BM) Page 17 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q25",
+    "question_number": 25,
+    "question_text": "Match the different chambers/locations of a healthy human heart in Column-1 to the ranges of diastolic pressures in Column-2. Column-1 Column-2 (P) Arterial (I) 2-6 mm Hg (Q) Pulmonary artery (II) 8-12 mm Hg (R) Right ventricle (III) 60-80 mm Hg",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "(P) - (II), (Q) - (III), (R) - (I)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "(P) - (II), (Q) - (I), (R) - (III)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "(P) - (III), (Q) - (II), (R) - (I)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "(P) - (III), (Q) - (I), (R) - (II)",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q26",
+    "question_number": 26,
+    "question_text": "Which of the following is/are NOT TRUE about photoreceptor cells in a healthy human retina?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The distribution of rod and cone cells is uniform all over the retina.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The number of rods are higher than the number of cones in the retina.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Rods contain photopsin pigment.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Cones are responsible for colour vision in bright light. Biomedical Engineering (BM) Page 18 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q27",
+    "question_number": 27,
+    "question_text": "A monochromatic beam of γ-ray photons is incident on a homogenous tissue. Which of the following relationships hold(s) TRUE for the half-value layer thickness?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The first half-value layer is thicker than the second half-value layer.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The second half-value layer is thicker than the first half-value layer.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "All the half-value layers have equal thickness.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The ratio of thickness of the first and second half-value layers change based on the intensity of the incident beam.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q28",
+    "question_number": 28,
+    "question_text": "A group of four people were residing together when a new virus was detected. If the probability of each person being infected is 0.1, then the probability that at least two of them are infected is ____. Give your answer rounded off to 3 decimal places.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q29",
+    "question_number": 29,
+    "question_text": "A random noise signal with Gaussian distribution has a mean of zero and a standard deviation of 1 mV. The probability that an instantaneous measurement of this signal is greater than 2 mV or lesser than -2 mV is ______. Give your answer as a percentage rounded off to the nearest integer. Biomedical Engineering (BM) Page 19 of 37 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q30",
+    "question_number": 30,
+    "question_text": "The trigonometric Fourier series expansion of the periodic function in the figure has coefficients {an} and {bn} for cosine and sine terms, respectively. The value of a1/a3 is __________. Give your answer rounded off to 1 decimal place. 1 3 5 +1 -1 seconds 2 0",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q31",
+    "question_number": 31,
+    "question_text": "A cylindrical engineered tissue was developed with a diameter of 2 cm, height of 3 cm and Young's modulus of 20 MPa. If an axial tensile force of 10 N is applied, the percentage change in the height of the tissue is ______ %. Give your answer rounded off to 2 decimal places.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q32",
+    "question_number": 32,
+    "question_text": "The measured current through a device is 5 A, the voltage measured across the device is 20 V. The ammeter and the voltmeter used for these measurements have a measurement uncertainty of 1% each. The maximum error in estimation of impedance of the device is _______ mΩ. Give your answer rounded to the nearest integer.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q33",
+    "question_number": 33,
+    "question_text": "The Larmor frequency of a Na nucleus when placed in a magnetic field strength of 3 T is ___________. (The gyromagnetic ratio of Na is given as γ = 11.26 MHz/T.) Give your answer in MHz rounded off to the nearest integer. Biomedical Engineering (BM) Page 20 of 37 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q34",
+    "question_number": 34,
+    "question_text": "A Doppler ultrasound transducer operating at 5 MHz gave maximum output frequency shift of 3 kHz. The velocity of sound in blood is 1500 m/s. If the probe was held at an angle of 45o to the direction of blood flow, the maximum velocity of blood flow through the artery is _____ m/s. (Give your answer rounded off to two decimal places.)",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q35",
+    "question_number": 35,
+    "question_text": "The wavelength of the peak emission from a human body at a temperature of 37oC due to black-body radiation is ______ μm. The value of Wien's displacement constant is 2.898 × 10−3 m K. (Give your answer rounded off to 2 decimal places.) Biomedical Engineering (BM) Page 21 of 37 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q36",
+    "question_number": 36,
+    "question_text": "If A= (1 −1 2 −2), the eigenvalues of A are _____________.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "−1 and 0.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "−1 and +1.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "−1 and −1.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "+1 and 0.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q37",
+    "question_number": 37,
+    "question_text": "Consider a system of the following two partial differential equations: ∂α ∂x= −2 ∂β ∂t ∂β ∂x= −2 ∂α ∂t Which one of the following choices is a possible solution for the system?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "α(t, x) = (x−t)2 + (x+ t)2 and β(t, x) = (x−t)2 −(x+ t)2.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "α(t, x) = (x−2t)2 + (x+ 2t)2 and β(t, x) = (x−2t)2 −(x+ 2t)2.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "α(t, x) = (x− t 2) 2 + (x+ t 2) 2 and β(t, x) = (x− t 2) 2 −(x+ t 2) 2 .",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "α(t, x) = (x− t 2) 2 + 2 (x+ t 2) 2 and β(t, x) = 2 (x− t 2) 2 −(x+ t 2) 2 . Biomedical Engineering (BM) Page 22 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q38",
+    "question_number": 38,
+    "question_text": "The end-diastolic ventricular volume is found to be 125 mL and the end-systolic ventricular volume is found to be 50 mL. If the heart rate is 65 beats/minute, what is the cardiac output in liters per minute? (Rounded off to 2 decimal places.)",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "3.25",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "4.88",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "5.20",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "3.00 Biomedical Engineering (BM) Page 23 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q39",
+    "question_number": 39,
+    "question_text": "Which of the following waveforms represents the output Vo of the circuit given below? The Zener diode used has a Zener breakdown voltage of 1 V and can be assumed ideal while in forward bias. Vs=2sin(2πt) V 1Ω 1V + -vo",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "1 -2 0 -1 vo t 1 2",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "1 -2 0 vo t 1 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "1 0 -1 vo t 1 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "1 0 -1 vo t 1 2 Biomedical Engineering (BM) Page 24 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q40",
+    "question_number": 40,
+    "question_text": "In magnetic resonance imaging (MRI), pulse repetition time (TR), time to echo (TE), T1 relaxation time, T2 relaxation time are some of the important pulse sequence design parameters. Which one of the following specifications is used for proton density weighted imaging?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "TR≫T1 , TE≪T2",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "TR≫T1 , TE≫T2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "TR≪T1 , TE≪T2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "TR≪T1 , TE≫T2 Biomedical Engineering (BM) Page 25 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q41",
+    "question_number": 41,
+    "question_text": "An orthopaedic implant when monitored over 6 months showed the following normalized curves for polymer molecular weight (MW), mass of implant and mechanical strength. Among the choices, what is the most probable reason for the observed changes?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Bulk erosion",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Surface erosion",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Bulk initially followed by surface erosion",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "No erosion but mechanical breakage due to injury Biomedical Engineering (BM) Page 26 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q42",
+    "question_number": 42,
+    "question_text": "In an attempt to integrate engineered tissue with native tissue, three samples of engineered tissue, X, Y, Z, with identical material properties, were co-cultured adjacent to three different native tissues (bone, cartilage and liver). The adhesive strengths of X, Y, Z were observed after 8 weeks as follows. Adhesive strength for X = 150 kPa, Y= 250 kPa, Z= 350 kPa Match the native tissue that were used to co-culture X, Y and Z from the following. I: Liver Tissue II: Articular Cartilage I",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "X with I, Y with II and Z with III",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "X with II, Y with III and Z with I",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "X with I, Y with III and Z with II",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "X with III, Y with II and Z with I Biomedical Engineering (BM) Page 27 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q43",
+    "question_number": 43,
+    "question_text": "In a catheter-sensor system to measure blood pressure (P) as shown in the below figure, the liquid resistance (RL) of the catheter is due to friction between shearing molecules flowing through the catheter. Which of the following is TRUE for RL if only the radius of the catheter is doubled. Assume that the pressure difference across the catheter segment is fixed. P Catheter Diaphragm Liquid",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "RL will decrease by 16 times",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "RL will decrease by 8 times",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "RL will decrease by 4 times",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "RL will decrease by 2 times",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q44",
+    "question_number": 44,
+    "question_text": "What is the value of the following integral using the residue integration method? ∫ dx 1 + x4 ∞ −∞",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "π √2",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "π 2√2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "π 4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "π 2 Biomedical Engineering (BM) Page 28 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q45",
+    "question_number": 45,
+    "question_text": "A neurologist needs to observe the alpha wave in EEG recordings of a patient. The system block diagram with ideal filter blocks is shown below. Which one of the following design choices is correct? EEG Signal High Pass Filter Cut-Off fh Low Pass Filter Cut Off fl A/D Converter Sampling at fs",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "fh = 8 Hz, fl = 12 Hz, fs = 12 Hz",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "fh = 4 Hz, fl = 6 Hz, fs = 24 Hz",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "fh = 6 Hz, fl = 4 Hz, fs = 12 Hz",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "fh = 8 Hz, fl = 12 Hz, fs = 48 Hz Biomedical Engineering (BM) Page 29 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q46",
+    "question_number": 46,
+    "question_text": "In the circuit below, what is the value of IL to transfer the maximum power to load? 5V 1Ω 1A IL Load",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "3 A",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "6 A",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "4 A",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "2 A",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q47",
+    "question_number": 47,
+    "question_text": "A mechanical ventilator operating in volume controlled mode is set to deliver 600mL of tidal volume (TV) with a flow rate of 40 L/min. The frequency of breathing is set to 10 breaths per minute. If the flow rate is doubled which one of the following happens?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The inspiratory time will increase.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The expiratory time will increase.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "The tidal volume will increase.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The frequency of breathing will decrease. Biomedical Engineering (BM) Page 30 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q48",
+    "question_number": 48,
+    "question_text": "The X-ray attenuation coefficients as a function of photon energy for three materials are shown in the figure below. A tissue phantom containing these three materials is imaged at two different X-ray photon energies of 50 keV and 150 keV. When the developed X-ray film is viewed, which of the following statements is/are TRUE?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Bone will appear relatively brighter than DCA in 50 keV.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "DCA will appear relatively brighter than bone in 50 keV.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Bone will appear relatively brighter than DCA in 150 keV.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "DCA will appear relatively brighter than bone in 150 keV. Biomedical Engineering (BM) Page 31 of 37 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q49",
+    "question_number": 49,
+    "question_text": "Which of the following is/are TRUE for a surface electromyography (sEMG) signal of a muscle experiencing fatigue?",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The median frequency of power spectral density of sEMG will decrease.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The median frequency of power spectral density of sEMG will increase.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "The root mean square (RMS) value of sEMG will increase.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The root mean square (RMS) value of sEMG will decrease.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-bm-24-q50",
+    "question_number": 50,
+    "question_text": "For F⃗= (x+ y)î + (x+ y)ĵ the value of ∮F⃗∙dr⃗ along the path shown in the figure is ______. Give your answer as an integer. (1,1) (1,0) (0,1) x y Biomedical Engineering (BM) Page 32 of 37 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q51",
+    "question_number": 51,
+    "question_text": "The approximate total cross sectional areas of various types of blood vessels are given below. It was estimated that the velocity of blood in the aorta is 30 cms-1. The time it will take for the blood to travel through a capillary of length 0.5 mm is _____ seconds. Give your answer rounded off to two decimal places. Vessel Type Approximate total cross sectional area (cm2) Aorta 4.5 Artery 20 Arteriole 400 Capillary 4500 Venule 40 Vein 15",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q52",
+    "question_number": 52,
+    "question_text": "A DNA extract solution with a concentration of 15 ng/μL placed in a micro-cuvette of sample thickness 0.5 mm gave an absorbance of 0.24 at a wavelength of 260 nm in a spectrophotometer. After further concentration, the sample was found to give an absorbance of 0.38 at the same wavelength under identical conditions. The final concentration of the sample is ______ ng/μL. (Give your answer rounded off to 2 decimal places.)",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q53",
+    "question_number": 53,
+    "question_text": "An X-ray beam of initial intensity I0 of 70 keV imaging the chest is assumed to undergo attenuation through the muscle tissue for a thickness of 16 cm and further through the bone tissue for a thickness of 4 cm. The half value layer (HVL) thicknesses for the muscle and bone are 3.5 cm and 1.8 cm, respectively. The percentage of X-ray intensity transmitted through the body is ______. Give your answer rounded off to 2 decimal places. Biomedical Engineering (BM) Page 33 of 37 Organizi",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q54",
+    "question_number": 54,
+    "question_text": "A person standing one meter away from a 4000 curie radioactive source receives a lethal dose of radiation in about 5 minutes. At 3 meters away from the same source, the time in which he will receive the same lethal dose is ______ minutes. Give your answer rounded off to the nearest integer.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q55",
+    "question_number": 55,
+    "question_text": "If a circular ultrasound transducer of radius a = 8 mm operating at a central frequency of 1 MHz has a pressure beam pattern in a medium as given below: P(r, 0) ∝sin ka2 4r Here, k is the wave number, r is the axial distance from the center of aperture. The speed of sound in the medium is 1600 ms-1. The reduction in intensity between r= 8 cm and r= 16 cm is ______ dB. Give your answer as a positive quantity rounded off to two decimal places.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q56",
+    "question_number": 56,
+    "question_text": "The source in the figure is a current source and the circuit is in steady state. At t= 0.5π seconds, the value of v in the circuit given below is _____ volts. Give your answer rounded off to 2 decimal digits. 1F 1H 2Ω v I=sin(t) A Biomedical Engineering (BM) Page 34 of 37 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q57",
+    "question_number": 57,
+    "question_text": "The equivalent impedance, ZAB, in the circuit given below is _____ Ω. Give your answer rounded off to one decimal place. + - + - V V ZAB 1Ω 1Ω 1Ω",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q58",
+    "question_number": 58,
+    "question_text": "The bandwidth of ECG signal ranges from 0.5 Hz to 100 Hz. If a single ADC is used to digitize data from 8 ECG channels then the minimum ADC sampling rate is ______ Hz. Give your answer rounded off to the nearest integer.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q59",
+    "question_number": 59,
+    "question_text": "If x[n] = u[n] −u[n−5], and h[n] = δ[n] −δ[n−1] and y[n] = x[n] ∗h[n], then the value of ∑ y[n] ∞ n=−∞ is ______. Give your answer rounded off to the nearest integer. Biomedical Engineering (BM) Page 35 of 37 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q60",
+    "question_number": 60,
+    "question_text": "In the figure below, the diode is ideal. The current reading shown in the ammeter is _____ A. Give your answer rounded off to the nearest integer. 1F 1H 1Ω 1Ω Ammeter sin(t) V",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q61",
+    "question_number": 61,
+    "question_text": "In the figure below, the Fourier series of v(t), in volts, is given as: v(t) = v0 + 2 cos(ω0t) + 5 cos(3ω0t) + cos (5ω0t) The capacitor is a short circuit for all AC signals. The power absorbed by the 1Ω resistor is _____ W. Give your answer rounded off to the nearest integer. v(t) 1Ω C=∞ Biomedical Engineering (BM) Page 36 of 37 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q62",
+    "question_number": 62,
+    "question_text": "An artificial fore-arm has a moment-of-inertia around the center of mass as 0.3kg.m2. The mass of the artificial fore-arm is 3 kg. If the distance from the elbow joint to the center of mass of the fore-arm is 20 cm, the moment-of-inertia of the fore-arm about the elbow joint is ______ kg.m2. Give your answer rounded off to two decimal places.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q63",
+    "question_number": 63,
+    "question_text": "A bio-potential signal of 4 mV on the skin surface was fed to an amplifier with a differential gain of 2000. The noise in the signal is 1000 mV. If the amplifier output produces a noise output of 200 mV, the common mode rejection ratio of the amplifier is ______ dB. Give your answer rounded to the nearest integer.",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q64",
+    "question_number": 64,
+    "question_text": "In a motor nerve conduction velocity experiment, the distance between the distal and the recording sites is 4 cm and the distance between the proximal and the recording sites is 24 cm. The distal and proximal latencies were recorded as 6 ms and 10 ms, respectively. The nerve conduction velocity is _____ meters per second. Give your answer rounded off to the nearest integer. Biomedical Engineering (BM) Page 37 of 37 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-bm-24-q65",
+    "question_number": 65,
+    "question_text": "A person creates an apparatus as shown in the figure to exercise the extensor muscle of the hand. It is given that OP = 0.15 m, OQ = 0.35 m, θ = 30∘, the weight of the lower arm = 20 N, the center of mass of the lower arm is at point P, the magnitude of the applied tensile force F = 50 N. If the extensor muscle is acting with a moment arm of 0.25 m, the muscle force required to hold the hand at the position shown in the figure is _____ N. Give your answer rounded off to the nearest integer",
+    "exam_code": "GATE-BM",
+    "exam_category": "ENGINEERING",
+    "subject": "Biomedical Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "upsc-prelims-q1",
+    "question_number": 1,
+    "question_text": "Under the Constitution of India, which one of the following is NOT a Fundamental Right?",
+    "exam_code": "UPSC-PRELIMS",
+    "exam_category": "CIVIL_SERVICES",
+    "subject": "Indian Polity",
+    "topic": "Fundamental Rights",
+    "marks": 2,
+    "difficulty": "easy",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [
+      "Right to Property",
+      "44th Amendment",
+      "Article 300A",
+      "Fundamental Rights"
+    ],
+    "model_answer": "Right to Property was deleted from the list of Fundamental Rights by the 44th Amendment Act, 1978, and made a legal right under Article 300A in Part XII of the Constitution.",
+    "evaluation_rubric": "2 marks for Right to Property.",
+    "year": "2024",
+    "created_at": "2026-10-13T05:00:38.323022+00:00",
+    "updated_at": "2026-10-13T05:00:38.323024+00:00",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Right to Equality",
+        "is_correct": false
+      },
+      {
+        "id": "opt_b",
+        "text": "Right to Property",
+        "is_correct": true
+      },
+      {
+        "id": "opt_c",
+        "text": "Right to Freedom of Religion",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Right to Constitutional Remedies",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_b"
+  },
+  {
+    "id": "upsc-prelims-q2",
+    "question_number": 2,
+    "question_text": "The Monetary Policy Committee (MPC) in India is headed by:",
+    "exam_code": "UPSC-PRELIMS",
+    "exam_category": "CIVIL_SERVICES",
+    "subject": "Indian Economy",
+    "topic": "Banking & Monetary Policy",
+    "marks": 2,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [
+      "MPC",
+      "RBI Governor",
+      "Monetary Policy",
+      "Economy"
+    ],
+    "model_answer": "The Governor of the Reserve Bank of India is the ex-officio Chairperson of the Monetary Policy Committee (MPC).",
+    "evaluation_rubric": "2 marks for RBI Governor.",
+    "year": "2024",
+    "created_at": "2026-10-13T05:00:38.323030+00:00",
+    "updated_at": "2026-10-13T05:00:38.323032+00:00",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The Union Finance Minister",
+        "is_correct": false
+      },
+      {
+        "id": "opt_b",
+        "text": "The Governor of the Reserve Bank of India",
+        "is_correct": true
+      },
+      {
+        "id": "opt_c",
+        "text": "The Chief Economic Advisor",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The Prime Minister of India",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_b"
+  }
+]

@@ -1,0 +1,88 @@
+[
+  {
+    "id": "gate-da-csv-1",
+    "question_number": 1,
+    "question_text": "Which loss function is commonly used for binary classification in logistic regression?",
+    "exam_code": "GATE-DA",
+    "exam_category": "ENGINEERING",
+    "subject": "Data Science & AI",
+    "topic": "Machine Learning",
+    "marks": 1,
+    "difficulty": "easy",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "Binary cross-entropy minimizes the negative log likelihood for binary probabilistic classification.",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2026-10-13T05:03:31.878709+00:00",
+    "updated_at": "2026-10-13T05:03:31.878775+00:00",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Binary Cross-Entropy (Log Loss)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Mean Squared Error",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Hinge Loss",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Huber Loss",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-da-csv-2",
+    "question_number": 2,
+    "question_text": "What is the determinant of an identity matrix of size 3x3?",
+    "exam_code": "GATE-DA",
+    "exam_category": "ENGINEERING",
+    "subject": "Data Science & AI",
+    "topic": "Linear Algebra",
+    "marks": 1,
+    "difficulty": "easy",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "The determinant of any identity matrix I_n is always 1.",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2026-10-13T05:03:31.879765+00:00",
+    "updated_at": "2026-10-13T05:03:31.879774+00:00",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "0",
+        "is_correct": false
+      },
+      {
+        "id": "opt_b",
+        "text": "1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_c",
+        "text": "3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Undefined",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_b"
+  }
+]

@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "data:stats": "python -m data_manager stats",
+    "data:validate": "python -m data_manager validate",
+    "data:clean": "python -m data_manager clean",
+    "data:export": "python -m data_manager export-ts",
+    "data:export-sql": "python -m data_manager export-sql"
   },
   "dependencies": {
     "@google/genai": "^2.24.0",

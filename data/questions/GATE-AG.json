@@ -1,0 +1,2107 @@
+[
+  {
+    "id": "gate-ag-24-q1",
+    "question_number": 1,
+    "question_text": "If '→' denotes increasing order of intensity, then the meaning of the words [dry → arid → parched] is analogous to [diet → fast → ________ ]. Which one of the given options is appropriate to fill the blank?",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "starve",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "reject",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "feast",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "deny",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q2",
+    "question_number": 2,
+    "question_text": "If two distinct non-zero real variables x and y are such that (x+ y) is proportional to (x−y) then the value of x y",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "depends on xy",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "depends only on x and not on y",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "depends only on y and not on x",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "is a constant Agricultural Engineering (AG) Page 2 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q3",
+    "question_number": 3,
+    "question_text": "Consider the following sample of numbers: 9, 18, 11, 14, 15, 17, 10, 69, 11, 13 The median of the sample is",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "13.5",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "14",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "11",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "18.7",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q4",
+    "question_number": 4,
+    "question_text": "The number of coins of ₹1, ₹5, and ₹10 denominations that a person has are in the ratio 5:3:13. Of the total amount, the percentage of money in ₹5 coins is",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "21%",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "14 2 7%",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "10%",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "30% Agricultural Engineering (AG) Page 3 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q5",
+    "question_number": 5,
+    "question_text": "For positive non-zero real variables p and q, if log (p2 + q2) = log p+ log q+ 2 log 3 , then, the value of p4+q4 p2q2 is",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "79",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "81",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "9",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "83",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q6",
+    "question_number": 6,
+    "question_text": "In the given text, the blanks are numbered (i)−(iv). Select the best match for all the blanks. Steve was advised to keep his head (i) before heading (ii) to bat; for, while he had a head (iii) batting, he could only do so with a cool head s (iv) his shoulders.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "(i) down (ii) down (iii) on (iv) for",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "(i) on (ii) down (iii) for (iv) on",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "(i) down (ii) out (iii) for (iv) on",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "(i) on (ii) out (iii) on (iv) for Agricultural Engineering (AG) Page 4 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q7",
+    "question_number": 7,
+    "question_text": "A rectangular paper sheet of dimensions 54 cm × 4 cm is taken. The two longer edges of the sheet are joined together to create a cylindrical tube. A cube whose surface area is equal to the area of the sheet is also taken. Then, the ratio of the volume of the cylindrical tube to the volume of the cube is",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "1/π",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "2/π",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "3/π",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "4/π Agricultural Engineering (AG) Page 5 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q8",
+    "question_number": 8,
+    "question_text": "The pie chart presents the percentage contribution of different macronutrients to a typical 2,000 kcal diet of a person. The typical energy density (kcal/g) of these macronutrients is given in the table. Macronutrient Energy density (kcal/g) Carbohydrates 4 Proteins 4 Unsaturated fat 9 Saturated fat 9 Trans fat 9 The total fat (all three types), in grams, this person consumes is",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "44.4",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "77.8",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "100",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "3,600 Carbohydrates 35% Proteins 20% Unsaturated fat 20% Saturated fat 20% Trans fat 5% Macronutrient energy contribution Agricultural Engineering (AG) Page 6 of 25 Organizing Institute: IIS",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q9",
+    "question_number": 9,
+    "question_text": "A rectangular paper of 20 cm × 8 cm is folded 3 times. Each fold is made along the line of symmetry, which is perpendicular to its long edge. The perimeter of the final folded sheet (in cm) is",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "18",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "24",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "20",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "21",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q10",
+    "question_number": 10,
+    "question_text": "The least number of squares to be added in the figure to make AB a line of symmetry is",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "6",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "5",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "7 Agricultural Engineering (AG) Page 7 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q11",
+    "question_number": 11,
+    "question_text": "The divergence of the curl of a twice continuously differentiable vector function is __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "0",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "∞",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q12",
+    "question_number": 12,
+    "question_text": "Laplace transform of a function f(t) = t4 as a function of 's' is __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "120 s5",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "24 s5",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "120 s4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "24 s4 Agricultural Engineering (AG) Page 8 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q13",
+    "question_number": 13,
+    "question_text": "If the dynamic weight on the front axle is lesser than 20% of the total weight of tractor, the longitudinal instability of tractor can be avoided by __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "adding weight on the rear axle",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "adding weight on the front axle",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "reducing weight on the rear axle",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "reducing weight on the front axle",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q14",
+    "question_number": 14,
+    "question_text": "In places with severe cold climate, the most important fuel property to be considered for running an internal combustion engine is __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "heating value",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "flash point",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "pour point",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "boiling point Agricultural Engineering (AG) Page 9 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q15",
+    "question_number": 15,
+    "question_text": "A towed rigid wheel with a total weight W is to be rolled on a hard horizontal surface as well as up the slope on a hard surface inclined at an angle θ with the horizontal. The rolling resistance of the wheel on inclined surface as compared to that on the horizontal surface is __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "increased by Wsinθ",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "increased by Wcosθ",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "decreased by Wsinθ",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "decreased by Wcosθ",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q16",
+    "question_number": 16,
+    "question_text": "The difference between advance curve and recession curve for a given surface irrigation event is known as __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "time of concentration",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "lag time",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "time to peak",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "intake opportunity time Agricultural Engineering (AG) Page 10 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q17",
+    "question_number": 17,
+    "question_text": "Match the following instruments (in Column I) with corresponding measurements (in Column II). Column I Column II P Current meter 1 Solar radiation Q Anemometer 2 Rainfall R Hygrometer 3 Stream flow velocity S Symon's gauge 4 Humidity T Pyranometer 5 Wind speed",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P-3, Q-5, R-4, S-2, T-1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P-2, Q-3, R-5, S-1, T-4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P-1, Q-2, R-3, S-4, T-5",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P-5, Q-4, R-1, S-3, T-2 Agricultural Engineering (AG) Page 11 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q18",
+    "question_number": 18,
+    "question_text": "In wind erosion, the maximum portion of soil is transported by the process of __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "suspension",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "saltation",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "surface creep",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "bed load",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q19",
+    "question_number": 19,
+    "question_text": "Hilly areas receiving heavy rainfall, where a major portion of the rainfall is to be drained as surface runoff, are suggested to adopt bench terraces with __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "sloping inward",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "level tops",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "sloping outward",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "narrow width",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q20",
+    "question_number": 20,
+    "question_text": "Critical thickness of insulation (rcr) for a pipe having thermal conductivity (k) and convective heat transfer coefficient (ho) is __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "2k/ho",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "k/ho",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "ho/k",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "2ho/k Agricultural Engineering (AG) Page 12 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q21",
+    "question_number": 21,
+    "question_text": "A continuously differentiable function y = f(x) satisfies one or more of the following conditions at its point of inflection:",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "d2y dx2 ≠ 0",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "d2y dx2 = 0",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "d3y dx3 = 0",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "d3y dx3 ≠ 0",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q22",
+    "question_number": 22,
+    "question_text": "In-situ volumetric soil moisture content measuring method(s) is/are:",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Neutron probe",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Tensiometer",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Time domain reflectometry",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Piezometer Agricultural Engineering (AG) Page 13 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q23",
+    "question_number": 23,
+    "question_text": "Incorrect statement(s) with respect to hydrothermal treatment of paddy is/are:",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Process imparts hard texture to grain",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Retention of Vitamin B is less",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Cooking to the same degree of softness requires less time",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Bran obtained contains higher oil content",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q24",
+    "question_number": 24,
+    "question_text": "Falling rate period of drying can be explained by one/more of the following:",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Capillary rise of water",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Molecular diffusion of water",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Surface cooling",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Surface evaporation",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q25",
+    "question_number": 25,
+    "question_text": "The mean and variance of a dataset are 16 and 25, respectively. The coefficient of variation of the dataset, in %, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q26",
+    "question_number": 26,
+    "question_text": "The chances for passing an endurance test for three threshers P, Q and R are 1/6, 1/4, and 1/2, respectively. The probability of passing the endurance test by at least one thresher, in fraction, is __________. (Rounded off to 2 decimal places) Agricultural Engineering (AG) Page 14 of 25 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q27",
+    "question_number": 27,
+    "question_text": "The height of adult males at 5th, 50th and 95th percentiles are 162 cm, 173 cm and 185 cm, respectively. The minimum inside height of the tractor cab required to ensure the satisfactory design based on the given data, in cm, is __________. (Answer in integer)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q28",
+    "question_number": 28,
+    "question_text": "A chain drive is used to transmit power from a DC motor to the shaft of a solar energy operated thresher by reducing the speed from 240 rpm to 120 rpm. The number of teeth on the driving sprocket is 20 and the pitch circle diameter of the driven sprocket is 600 mm. The pitch of the chain used, in mm, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q29",
+    "question_number": 29,
+    "question_text": "A tractor drawn rotavator with a rotor radius 300 mm has 6 flanges having 3 blades in each flange acting in one plane. It is operated at a rotor speed of 180 rpm and a forward speed of 3 km.h-1. Increasing the forward speed as well as the rotor speed by 15% each, the change in length of soil slice, in mm, is __________. (Answer in integer)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q30",
+    "question_number": 30,
+    "question_text": "The air standard cycle efficiency of the Otto cycle is 56% and heat supplied is 12.5 kJ, the heat rejected during the cycle, in kJ, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q31",
+    "question_number": 31,
+    "question_text": "The slope length of an area having land slope of 6% is reduced to half while other conditions are kept unchanged. The reduction in annual soil loss from the area, in %, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q32",
+    "question_number": 32,
+    "question_text": "The excess water from a watershed of area 16.95 km2 is drained out through a channel at an average rate of 2.8 m3.s-1. Drainage coefficient of the watershed, in cm, is __________. (Rounded off to 2 decimal places) Agricultural Engineering (AG) Page 15 of 25 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q33",
+    "question_number": 33,
+    "question_text": "Freshly harvested shrimps of 100 kg having initial temperature of 25 °C are frozen to −18 °C. The specific heat (cp) of shrimp above and below freezing point (0 °C) are 3.64 kJ.kg-1.°C-1 and 2.01 kJ.kg-1.°C-1, respectively. Considering the latent heat of fusion as 240 kJ.kg-1, the heat load removed during the process, in kJ, is __________. (Rounded off to 1 decimal place)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q34",
+    "question_number": 34,
+    "question_text": "An indented cylinder type rice grader has been fed with milled rice containing 18 % brokens. After separation, head rice stream contains 3 % brokens and the broken stream carried away 4 % head rice. The effectiveness of the given rice grader on the basis of head rice separation, in fraction, is __________. (Rounded off to 3 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q35",
+    "question_number": 35,
+    "question_text": "A single effect evaporator concentrates 9090 kg.h-1 herbal extract of 12 % solids entering at 300 K to a final solid concentration of 20 %. Assuming negligible product loss through vapor, the amount of concentrated product, in kg, is __________. (Answer in integer) Agricultural Engineering (AG) Page 16 of 25 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q36",
+    "question_number": 36,
+    "question_text": "[P] = [ 2 3 7 4 1 5 ] and [Q] = [ 8 11 9 12 6 13 ] are two matrices. The matrix [P]T[Q] is __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "[ 64 36 116 46 39 107 70 40 128 ]",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "[ 64 46 70 36 39 40 116 107 128 ]",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "[ 112 113 88 89 ]",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "[ 112 88 113 89 ]",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q37",
+    "question_number": 37,
+    "question_text": "The complete solution for the differential equation d2y dx2 + 2 dy dx − 3y = 0 for y(0) = 0 and dy dx(0) = 8 is __________.",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "2(ex − e3x)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "2(ex −e−3x)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "2(ex + e3x)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "2(ex + e−3x) Agricultural Engineering (AG) Page 17 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q38",
+    "question_number": 38,
+    "question_text": "A power operated chaff cutter has an effective throat width of 450 mm and operating clearance of 150 mm. It is used for chopping straw at a moisture content of 20 % with bulk density of 60 kg.m-3 while passing through the feed rolls. The number of knives on the cutter head are 4, speed of the cutter head is 540 rpm and the theoretical length of cut is 10 mm. The theoretical capacity of the chaff cutter, in ton.h-1, is _________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "1.31",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "5.25",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "7.54",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "9.61",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q39",
+    "question_number": 39,
+    "question_text": "A 4.2 m self-propelled combine harvester operating at a forward speed of 3.5 km.h-1 is used to harvest wheat in an area of 300 ha in a year at a field efficiency of 75 %. Consider the variable cost to be linearly related to the actual hours of operation. To bring down the cost of operation per hour by 15 %, the change in area required to be harvested per year, in ha, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "52.94",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "53.74",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "55.80",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "57.65 Agricultural Engineering (AG) Page 18 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q40",
+    "question_number": 40,
+    "question_text": "A 3-cylinder 4-stroke diesel engine with a bore 73 mm and stroke 78 mm is tested at 2200 rpm. When a braking torque 55 N.m is applied, the indicated mean effective pressure is found to be 1050 kPa. The mechanical efficiency of the engine, in %, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "57.21",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "61.45",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "67.21",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "71.25",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q41",
+    "question_number": 41,
+    "question_text": "The performance of a border irrigation event was evaluated by taking soil moisture measurements at 12 locations along the border from the upstream end. The computed irrigation depths at those locations were 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, and 39 mm. The Christiansen Uniformity Coefficient (CU) for the event, in %, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "93.26",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "91.66",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "89.70",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "36.28 Agricultural Engineering (AG) Page 19 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q42",
+    "question_number": 42,
+    "question_text": "A 10 ha watershed received a 4-hour rainfall storm with rainfall intensity of 2, 1, 1.5, and 1 cm.h-1 in each subsequent hour, respectively. Assuming phi-index (φ) of 1 cm.h-1, the volume of direct runoff, in m3, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "1500",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "4500",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "5500",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "15000",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q43",
+    "question_number": 43,
+    "question_text": "A surveyor started a longitudinal section leveling survey by taking starting bench mark of elevation 53.85 m. During the survey, he takes an observation of intermediate sight of 2.42 m with the staff held on another bench mark of 85.45 m. The sum of the back sights from the start to the point is 50.28 m and that of fore sight is 16.30 m. If the surveyor ends the survey operation on the second bench mark, the error of closure on the second bench mark, in m, is __________. (Rounded off to 2 d",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "0.02",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "0.04",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "0.06",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "0.08 Agricultural Engineering (AG) Page 20 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q44",
+    "question_number": 44,
+    "question_text": "The decimal reduction time D121 and the z value of thermophilic spores in milk were found to be 60 seconds and 11 °C, respectively. Heating time required at 141 °C for a 10 log cycle reduction in population, in seconds, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "0.28",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "0.91",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "2.81",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "9.12",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q45",
+    "question_number": 45,
+    "question_text": "Match the following in material types (Column I) with their rheological properties (Column II). Column I Column II P. Bingham plastic 1. Viscosity increases with increase in shear rate Q. Dilatant 2. Finite yield stress R. Pseudoplastic 3. Shear rate proportional to shear stress S. Newtonian 4. Viscosity decreases with increase in shear rate",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P-1, Q-2, R-4, S-3",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P-2, Q-1, R-4, S-3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P-2, Q-4, R-1, S-3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P-4, Q-3, R-2, S-1 Agricultural Engineering (AG) Page 21 of 25 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q46",
+    "question_number": 46,
+    "question_text": "Match the following types of mill in Column I based on their grinding mechanisms in Column II. Column I Column II P. Attrition mill 1. Compression and shear Q. Ball mill 2. Impact and abrasion R. Hammer mill 3. Crushing and shear S. Roller mill 4. Impact and shear",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P-3; Q-2; R-4; S-1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P-2; Q-3; R-4; S-1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P-3; Q-1; R-4; S-2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P-3; Q-4; R-1; S-2",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ag-24-q47",
+    "question_number": 47,
+    "question_text": "The calculated value of e2x using Taylor's series with first four terms for x = 1 2 is __________. (Rounded off to 3 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q48",
+    "question_number": 48,
+    "question_text": "The directional derivative of u(x, y, z) = x2y + y2z at the point (1, 2, 3) in the direction î +2 ĵ + 3 k̂ is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q49",
+    "question_number": 49,
+    "question_text": "A single acting disk harrow having 5 disks in each gang with a gang angle of 20o is operated at a forward speed of 3 km.h-1 and a depth of 10 cm. The horizontal soil reaction force acting parallel to the face of each disk is found to be 250 N. The drawbar power required to pull the harrow, in kW, is __________. (Rounded off to 2 decimal places) Agricultural Engineering (AG) Page 22 of 25 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q50",
+    "question_number": 50,
+    "question_text": "A tractor drawn rotary mower has a swath width 1.2 m when operated at a forward speed of 5 km.h-1. The specific power loss due to air, stubble and gear train friction per m of swath width is 1.5 kW and the specific cutting energy is 2 kJ.m-2. The total weight of tractor with mower is 25 kN and the resistance to propel the tractor with mower is 6 % of its total weight. Assuming transmission efficiency between engine to drawbar as 75 % and engine to PTO as 87 %, the total engine power require",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q51",
+    "question_number": 51,
+    "question_text": "A farmer desires to run a diesel engine developing a brake power of 1.5 kW, continuously for 2 hours using biogas and diesel in a dual fuel mode. If gas requirement for running the engine in dual fuel mode is 0.67 m3.kW-1.h-1, the minimum size of KVIC model biogas plant with a gas holding capacity of 60 % suitable for running this diesel engine, in m3, is __________. (Answer in integer)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q52",
+    "question_number": 52,
+    "question_text": "An accelerator mounted to the waist of a seated tractor operator records an RMS acceleration of 2.5 m.s-2. By improving the seat design, the vibration acceleration level is decreased by 5 dB. After improvement, the RMS acceleration, in m.s-2, is __________. (Rounded off to 3 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q53",
+    "question_number": 53,
+    "question_text": "A two-wheel drive tractor having a total weight of 20 kN is pulling an implement at an actual speed of 3 km.h-1. The ratio of axle power (kW) to dynamic weight (kN) on the rear axle is expressed as 1.79/V, where, V is the theoretical forward speed in km.h-1. During pulling the implement, the weight distribution on the front and rear axles of the tractor is 40 % and 60 % of the total weight, respectively, with wheel slip 12 % and coefficient of net traction 0.42. The tractive efficiency, in",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q54",
+    "question_number": 54,
+    "question_text": "A tractor drawn boom type sprayer fitted with 12 nozzles at a spacing of 50 cm is used to carryout spraying at a forward speed of 3.5 km.h-1 and nozzle pressure of 250 kPa for an application rate of 1.5 m3.ha-1. Out of the total discharge from the pump, 12 % is bypassed to the liquid tank and the total pressure drop in all pipe lines from the pump is 10 % of the pressure developed by the pump. Considering the pump efficiency as 60 %, if the nozzle pressure is increased by 10 %, the power r",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q55",
+    "question_number": 55,
+    "question_text": "A flow rate of 2 m3.s-1 is to be carried out in an open channel at a velocity of 1 m.s-1. The cross section of the channel is rectangular with depth equal to one-half of the width. Considering Manning's roughness coefficient (n) as 0.02, the slope of the channel, in %, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q56",
+    "question_number": 56,
+    "question_text": "A catchment with 5 rain gauge stations recorded annual rainfall of 90, 100, 80, 120, and 110 cm, respectively. Considering 5 % error in estimation of the mean annual rainfall, additional number of rain gauge stations required is __________. (Answer in integer)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q57",
+    "question_number": 57,
+    "question_text": "A soil sample of diameter 70 mm was used for constant head permeability test. The observed head loss was 80 mm in the soil sample length of 100 mm and water collected in one minute was 60 mL. The coefficient of permeability, in mm.s-1, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q58",
+    "question_number": 58,
+    "question_text": "In an area, one tubewell of 15 cm diameter was operating such that groundwater table is 40 m above the bottom of screen. The groundwater formation has permeability (K) as 20 m.d-1 and well has radius of influence of 980 m with a maximum drawdown of 12 m. After some time, a second tubewell of same size was installed at a distance of 500 m from the first tubewell. If both the tubewells are running simultaneously and have equal discharge, the loss of discharge in the first tubewell due to inst",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q59",
+    "question_number": 59,
+    "question_text": "In a semi-arid region with land slope of 3 %, contour bunding is planned to conserve and store the rain water. In 10 years return period, the daily effective rainfall is estimated as 20 cm maximum in the region. If the horizontal spacing between the bunds is 30 m, the designed height of the bund, in m, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q60",
+    "question_number": 60,
+    "question_text": "A single acting reciprocating pump, running at 40 rpm, has piston of 20 cm diameter and stroke length of 40 cm. The suction and delivery heads are 5 m and 20 m, respectively. Assuming overall pump efficiency as 80 %, the power requirement of the pump, in kW, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q61",
+    "question_number": 61,
+    "question_text": "A steam jacketed kettle is filled with a 250 kg liquid food with a specific heat of 3.1 kJ.kg-1.K-1. Steam used at 121 °C has a heat transfer coefficient of 2 kW.m-2.K-1. The area of heat transfer is 0.15 m2. Using lumped capacity method, the time required to heat the product from 30 °C to 95 °C, in minutes, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q62",
+    "question_number": 62,
+    "question_text": "Fruit juice entering at 30 °C is being pasteurized in a double pipe counter flow heat exchanger using hot water entering at 97 °C and leaving at 65 °C. Specific heat of juice and water are 3.8 kJ.kg-1.K-1 and 4.2 kJ.kg-1.K-1, respectively. Flow rate of juice is 0.3 kg.s-1 and that of water is 0.4 kg.s-1. Considering an overall heat transfer coefficient of 1 kW.m-2.K-1, the area of heat exchanger required, in m2, is __________. (Rounded off to 3 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q63",
+    "question_number": 63,
+    "question_text": "Mango pulp at an initial temperature of 25 °C and a moisture content of 70 % (wb) is to be dried into leather to a final moisture content of 10 % (wb) using hot air at 95 °C. The latent heat of vaporization of water at 95 °C and at standard atmospheric pressure is 2250 kJ.kg-1. Considering the specific heat of mango pulp as 3.8 kJ.kg-1.°C-1, the energy required for drying per kg of mango pulp, in kJ, is __________. (Rounded off to 1 decimal place) Agricultural Engineering (AG",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q64",
+    "question_number": 64,
+    "question_text": "Sorghum flour obtained from a grinder was analyzed by IS sieves for particle size determination. The data obtained are as follows: IS sieve number 100 70 50 40 30 20 PAN Mass of flour retained (g) 0 10.1 16.5 36.2 82.8 95.0 9.4 The average particle size of the flour, in mm, is __________. (Rounded off to 3 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ag-24-q65",
+    "question_number": 65,
+    "question_text": "Fish fillets at −1 °C are being frozen in Individual Quick Freezing (IQF) system using air at −40 °C. The product has a characteristic dimension of 10 cm with a density of 1200 kg.m-3. Thermal conductivity of the product is 2.5 W.m-2.K-1, the convective heat transfer coefficient is 100 W.m-2.K-1 and the latent heat of fusion is 300 kJ.kg-1. If the fillet is considered as an infinite plate, the freezing time, in minutes, is __________. (Rounded off to 2 decimal places)",
+    "exam_code": "GATE-AG",
+    "exam_category": "ENGINEERING",
+    "subject": "Agricultural Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+]

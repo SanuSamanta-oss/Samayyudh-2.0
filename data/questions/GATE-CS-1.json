@@ -1,0 +1,153 @@
+[
+  {
+    "id": "gate-cs-q1",
+    "question_number": 1,
+    "question_text": "Consider a binary search tree (BST) with n distinct keys. What is the worst-case time complexity of searching for an element in this BST?",
+    "exam_code": "GATE-CS-1",
+    "exam_category": "ENGINEERING",
+    "subject": "Computer Science",
+    "topic": "Data Structures & Algorithms",
+    "marks": 1,
+    "difficulty": "easy",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [
+      "Worst case occurs in a skewed tree",
+      "Tree height becomes n",
+      "Search time is O(n)"
+    ],
+    "keywords": [
+      "BST",
+      "skewed tree",
+      "worst-case",
+      "O(n)"
+    ],
+    "model_answer": "In the worst case (a degenerate or skewed tree where elements are inserted in sorted order), the BST behaves like a linked list, requiring O(n) search time.",
+    "evaluation_rubric": "1 mark for identifying O(n) due to tree skewness.",
+    "year": "2024",
+    "created_at": "2026-10-13T05:00:38.313172+00:00",
+    "updated_at": "2026-10-13T05:00:38.322921+00:00",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "O(1)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_b",
+        "text": "O(log n)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "O(n)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_d",
+        "text": "O(n log n)",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_c"
+  },
+  {
+    "id": "gate-cs-q2",
+    "question_number": 2,
+    "question_text": "Which of the following page replacement algorithms does NOT suffer from Belady's Anomaly?",
+    "exam_code": "GATE-CS-1",
+    "exam_category": "ENGINEERING",
+    "subject": "Computer Science",
+    "topic": "Operating Systems",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [
+      "LRU satisfies inclusion property",
+      "FIFO suffers from Belady's Anomaly"
+    ],
+    "keywords": [
+      "Belady anomaly",
+      "LRU",
+      "stack algorithm",
+      "page replacement"
+    ],
+    "model_answer": "LRU is a stack algorithm. Stack algorithms satisfy the inclusion property and therefore never suffer from Belady's Anomaly.",
+    "evaluation_rubric": "1 mark for LRU and stack algorithm property.",
+    "year": "2024",
+    "created_at": "2026-10-13T05:00:38.322948+00:00",
+    "updated_at": "2026-10-13T05:00:38.322953+00:00",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "FIFO (First-In, First-Out)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_b",
+        "text": "LRU (Least Recently Used)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_c",
+        "text": "Second Chance Algorithm",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Random Page Replacement",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_b"
+  },
+  {
+    "id": "gate-cs-q3",
+    "question_number": 3,
+    "question_text": "In an IPv4 packet, the Total Length field is 1200 bytes and the Header Length (IHL) is 5. What is the size of the payload (data) in bytes?",
+    "exam_code": "GATE-CS-1",
+    "exam_category": "ENGINEERING",
+    "subject": "Computer Science",
+    "topic": "Computer Networks",
+    "marks": 2,
+    "difficulty": "medium",
+    "recommended_minutes": 3,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [
+      "IPv4",
+      "IHL",
+      "payload",
+      "header length"
+    ],
+    "model_answer": "The IHL field represents length in 32-bit (4-byte) words. Header size = 5 * 4 = 20 bytes. Payload = Total Length - Header Length = 1200 - 20 = 1180 bytes.",
+    "evaluation_rubric": "2 marks for correctly multiplying IHL by 4 and subtracting from 1200.",
+    "year": "2024",
+    "created_at": "2026-10-13T05:00:38.322968+00:00",
+    "updated_at": "2026-10-13T05:00:38.322971+00:00",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "1180 bytes",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "1195 bytes",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "1200 bytes",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "1175 bytes",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  }
+]

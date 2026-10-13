@@ -1,0 +1,2281 @@
+[
+  {
+    "id": "gate-ae-24-q1",
+    "question_number": 1,
+    "question_text": "If '→' denotes increasing order of intensity, then the meaning of the words [dry → arid → parched] is analogous to [diet → fast → ________ ]. Which one of the given options is appropriate to fill the blank?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "starve",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "reject",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "feast",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "deny",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q2",
+    "question_number": 2,
+    "question_text": "If two distinct non-zero real variables x and y are such that (x+ y) is proportional to (x−y) then the value of x y",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "depends on xy",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "depends only on x and not on y",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "depends only on y and not on x",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "is a constant Aerospace Engineering (AE) Page 2 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q3",
+    "question_number": 3,
+    "question_text": "Consider the following sample of numbers: 9, 18, 11, 14, 15, 17, 10, 69, 11, 13 The median of the sample is",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "13.5",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "14",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "11",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "18.7",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q4",
+    "question_number": 4,
+    "question_text": "The number of coins of ₹1, ₹5, and ₹10 denominations that a person has are in the ratio 5:3:13. Of the total amount, the percentage of money in ₹5 coins is",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "21%",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "14 2 7%",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "10%",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "30% Aerospace Engineering (AE) Page 3 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q5",
+    "question_number": 5,
+    "question_text": "For positive non-zero real variables p and q, if log (p2 + q2) = log p+ log q+ 2 log 3 , then, the value of p4+q4 p2q2 is",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "79",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "81",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "9",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "83 Aerospace Engineering (AE) Page 4 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q6",
+    "question_number": 6,
+    "question_text": "In the given text, the blanks are numbered (i)−(iv). Select the best match for all the blanks. Steve was advised to keep his head (i) before heading (ii) to bat; for, while he had a head (iii) batting, he could only do so with a cool head s (iv) his shoulders.",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "(i) down (ii) down (iii) on (iv) for",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "(i) on (ii) down (iii) for (iv) on",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "(i) down (ii) out (iii) for (iv) on",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "(i) on (ii) out (iii) on (iv) for Aerospace Engineering (AE) Page 5 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q7",
+    "question_number": 7,
+    "question_text": "A rectangular paper sheet of dimensions 54 cm × 4 cm is taken. The two longer edges of the sheet are joined together to create a cylindrical tube. A cube whose surface area is equal to the area of the sheet is also taken. Then, the ratio of the volume of the cylindrical tube to the volume of the cube is",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "1/π",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "2/π",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "3/π",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "4/π Aerospace Engineering (AE) Page 6 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q8",
+    "question_number": 8,
+    "question_text": "The pie chart presents the percentage contribution of different macronutrients to a typical 2,000 kcal diet of a person. The typical energy density (kcal/g) of these macronutrients is given in the table. Macronutrient Energy density (kcal/g) Carbohydrates 4 Proteins 4 Unsaturated fat 9 Saturated fat 9 Trans fat 9 The total fat (all three types), in grams, this person consumes is",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "44.4",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "77.8",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "100",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "3,600 Carbohydrates 35% Proteins 20% Unsaturated fat 20% Saturated fat 20% Trans fat 5% Macronutrient energy contribution Aerospace Engineering (AE) Page 7 of 40 Organizing",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q9",
+    "question_number": 9,
+    "question_text": "A rectangular paper of 20 cm × 8 cm is folded 3 times. Each fold is made along the line of symmetry, which is perpendicular to its long edge. The perimeter of the final folded sheet (in cm) is",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "18",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "24",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "20",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "21",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q10",
+    "question_number": 10,
+    "question_text": "The least number of squares to be added in the figure to make AB a line of symmetry is",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "6",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "5",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "7 Aerospace Engineering (AE) Page 8 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q11",
+    "question_number": 11,
+    "question_text": "The following system of linear equations 7x−3y+ z= 0 3x−y+ z= 0 x−y−z= 0 has:",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "infinitely many solutions",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "a unique solution",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "no solution",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "three solutions Aerospace Engineering (AE) Page 9 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q12",
+    "question_number": 12,
+    "question_text": "The acceleration of a body travelling in a straight line is given by a= −C1 −C2v2 where v is the velocity, and C1, C2 are positive constants. Starting with an initial positive velocity vo, the distance travelled by the body before coming to rest for the first time is:",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "1 2C2 ln (1 + C2 C1 vo 2)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "1 2C2 ln (1 −C2 C1 vo 2)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "1 2C2 ln(C1 + C2vo 2)",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "1 2C2 ln(1 + C2vo 2) Aerospace Engineering (AE) Page 10 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q13",
+    "question_number": 13,
+    "question_text": "The three-dimensional stress-strain relationship for an isotropic material is given as { σxx σyy σzz τyz τxz τxy} = [ P Q Q Q P Q Q Q P 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 R 0 0 0 R 0 0 0 R] { εxx εyy εzz γyz γxz γxy} where, P, Q and R are the three elastic constants, σ and τ represent normal and shear stresses and ε and γ represent normal and engineering shear strains. Which one of the following options is correct?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "R= P−Q 2",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "R= Q−P 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Q= P−R 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Q= R−P 2 Aerospace Engineering (AE) Page 11 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q14",
+    "question_number": 14,
+    "question_text": "Consider the free vibration responses P, Q, R and S (shown in the figure) of a single degree of freedom spring-mass-damper system with the same initial conditions. For the different damping cases listed below, which one of the following options is correct? 1. Overdamped 2. Underdamped 3. Critically damped 4. Undamped",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 1, Q - 4, R - 2, S - 3",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 1, Q - 2, R - 4, S - 3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 3, Q - 4, R - 2, S - 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 3, Q - 2, R - 4, S - 1 Aerospace Engineering (AE) Page 12 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q15",
+    "question_number": 15,
+    "question_text": "For a single degree of freedom spring-mass-damper system subjected to harmonic forcing, the part of the motion (response) that decays due to damping is known as:",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "transient response",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "steady-state response",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "harmonic response",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "non-transient response",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q16",
+    "question_number": 16,
+    "question_text": "For an ideal gas, the specific heat at constant pressure is 1147 J/kg K and the ratio of specific heats is equal to 1.33. What is the value of the gas constant for this gas in J/kg K?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "284.6",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "1005",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "862.4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "8314 Aerospace Engineering (AE) Page 13 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q17",
+    "question_number": 17,
+    "question_text": "A surrogate liquid hydrocarbon fuel, approximated as C10H12, is being burned in a land-based gas turbine combustor with dry air (79% N2 and 21% O2 by volume). How many moles of dry air are required for the stoichiometric combustion of the surrogate fuel with dry air at atmospheric temperature and pressure?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "61.9",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "30.95",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "13",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "10 Aerospace Engineering (AE) Page 14 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q18",
+    "question_number": 18,
+    "question_text": "In the figure shown below, various thermodynamics processes for an ideal gas are represented. Match each curve with the process that it best represents.",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "aa' - Isentropic; bb' - Isothermal; cc' - Isobaric; dd' - Isochoric",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "aa' - Isothermal; bb' - Isentropic; cc' - Isochoric; dd' - Isobaric",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "aa' - Isothermal; bb' - Isentropic; cc' - Isobaric; dd' - Isochoric",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "aa' - Isothermal; bb' - Isobaric; cc' - Isentropic; dd' - Isochoric Aerospace Engineering (AE) Page 15 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q19",
+    "question_number": 19,
+    "question_text": "In an airbreathing gas turbine engine, the combustor inlet temperature is 600 K. The heating value of the fuel is 43.4 × 106 J/kg. Assume Cp to be 1100 J/kg K for air and burned gases, and fuel-air ratio f << 1.0. Neglect kinetic energy at the inlet and exit of the combustor and assume 100% burner efficiency. What is the fuel-air ratio required to achieve 1300 K temperature at the combustor exit?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "0.0177",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "0.0215",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "0.0127",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "0.0277 Aerospace Engineering (AE) Page 16 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q20",
+    "question_number": 20,
+    "question_text": "Which one of the following figures represents the drag polar of a general aviation aircraft?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "(B)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_c",
+        "text": "(D) Aerospace Engineering (AE) Page 17 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q21",
+    "question_number": 21,
+    "question_text": "In the context of steady, inviscid, incompressible flows, consider the superposition of a uniform flow with speed U along the positive x-axis (from left to right), and a source of strength Λ located at the origin. Which one of the following statements is NOT true regarding the location of the stagnation point of the resulting flow?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "It is located to the left of the origin",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "It moves closer to the origin for increasing Λ, while U is held constant",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "It moves closer to the origin for increasing U, while Λ is held constant",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "It is located along the x-axis",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q22",
+    "question_number": 22,
+    "question_text": "On Day 1, an aircraft flies with a speed of V1 m/s at an altitude where the temperature is T1 K. On Day 2, the same aircraft flies with a speed of √1.2 V1 m/s at an altitude where the temperature is 1.2 T1 K. How does the Mach number M2 on Day 2 compare with the Mach number M1 on Day 1? Assume ideal gas behavior for air. Also assume the ratio of specific heats and molecular weight of air to be the same on both the days.",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "M2 = 0.6 M1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "M2 = M1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "M2 = 1 √1.2 M1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "M2 = √1.2 M1 Aerospace Engineering (AE) Page 18 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q23",
+    "question_number": 23,
+    "question_text": "Consider a steady, isentropic, supersonic flow (Mach number M > 1) entering a Convergent-Divergent (CD) duct as shown in the figure. Which one of the following options correctly describes the flow at the throat?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Can only be supersonic",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Can only be sonic",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Can either be sonic or supersonic",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Can only be subsonic Aerospace Engineering (AE) Page 19 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q24",
+    "question_number": 24,
+    "question_text": "Consider steady, incompressible, inviscid flow past two airfoils shown in the figure. The coefficient of pressure at the trailing edge of the airfoil with finite angle, shown in figure (I), is CPI while that at the trailing edge of the airfoil with cusp, shown in figure (II), is CPII. Which one of the following options is TRUE?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "CPI< 1, CPII< 1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "CPI= 1, CPII= 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "CPI= 1, CPII< 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "CPI< 1, CPII= 1 Aerospace Engineering (AE) Page 20 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q25",
+    "question_number": 25,
+    "question_text": "Which of the following options is/are correct?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The stress-strain graph for a nonlinear elastic material is as shown in the figure",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Material properties are independent of position in a homogeneous material",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "An isotropic material has infinitely many planes of material symmetry",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The stress-strain graph for a linear elastic material is Aerospace Engineering (AE) Page 21 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q26",
+    "question_number": 26,
+    "question_text": "Which of the following statements is/are correct about a satellite moving in a geostationary orbit?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The orbit lies in the equatorial plane",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The orbit is circular about the center of the Earth",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "The time period of motion is 90 minutes",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The satellite is visible from all parts of the Earth",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q27",
+    "question_number": 27,
+    "question_text": "In a conventional configuration airplane, the rudder can be used:",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "to overcome adverse yaw during a turning maneuver",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "to overcome yawing moment due to failure of one engine in a multi engine airplane",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "for landing the airplane in crosswind conditions",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "for enhancing longitudinal stability Aerospace Engineering (AE) Page 22 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q28",
+    "question_number": 28,
+    "question_text": "Which of the following statements about a general aviation aircraft, while operating at point Q in the V-n diagram, is/are true?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The aircraft has the highest turn rate",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The aircraft has the smallest turn radius",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "The aircraft is flying with minimum drag",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The aircraft is operating at CL,max",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q29",
+    "question_number": 29,
+    "question_text": "Two fair dice with numbered faces are rolled together. The faces are numbered from 1 to 6. The probability of getting odd numbers on both the dice is ________________ (rounded off to 2 decimal places).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q30",
+    "question_number": 30,
+    "question_text": "A particle acted upon by a constant force 4î + ĵ −3k̂ N is displaced from point A with position vector î + 2ĵ + 3k̂ m to point B with position vector 5î + 4ĵ + k̂ m. The work done by this force is _______ J (answer in integer). Aerospace Engineering (AE) Page 23 of 40 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q31",
+    "question_number": 31,
+    "question_text": "Using Trapezoidal rule with one interval, the approximate value of the definite integral: ∫ dx 1 + x2 2 1 = ______ (rounded off to 2 decimal places).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q32",
+    "question_number": 32,
+    "question_text": "A material has Poisson's ratio ν= 0.5 and Young's modulus E=2500 MPa. The percentage change in its volume when subjected to a hydrostatic stress of magnitude 10 MPa is ______ (answer in integer).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q33",
+    "question_number": 33,
+    "question_text": "An airplane experiences a net vertical ground reaction of 15000 N during landing. The weight of the airplane is 10000 N. The landing vertical load factor, defined as the ratio of inertial load to the weight of the aircraft, is __________ (rounded off to 1 decimal place).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q34",
+    "question_number": 34,
+    "question_text": "An aircraft with a turbojet engine is flying with 250 m/s speed at an altitude, where the density of air is 1 kg/m3. The inlet area of the engine is 1 m2. The average velocity of the exhaust gases at the exit of the nozzle, with respect to aircraft, is 550 m/s. Assume the engine exit pressure is equal to the ambient pressure and the fuel-air ratio is negligible. The uninstalled thrust produced by the engine at these conditions is _________ N (rounded off to the nearest integer).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q35",
+    "question_number": 35,
+    "question_text": "Using thin airfoil theory, the lift coefficient of a NACA 0012 airfoil placed at 5o angle of attack in a uniform flow is _____________ (rounded off to 2 decimal places). Aerospace Engineering (AE) Page 24 of 40 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q36",
+    "question_number": 36,
+    "question_text": "Given y= epxsin qx, where p and q are non-zero real numbers, the value of the differential expression d2y dx2 −2pdy dx+ (p2 + q2)y is",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "0",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "p2 + q2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "pq Aerospace Engineering (AE) Page 25 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q37",
+    "question_number": 37,
+    "question_text": "The volume of the solid formed by a complete rotation of the shaded portion of the circle of radius R about the y-axis is kπR3. The value of k is:",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "5 12",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "5 24",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "7 12",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "7 24 Aerospace Engineering (AE) Page 26 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q38",
+    "question_number": 38,
+    "question_text": "As per the International Standard Atmosphere model, which one of the following options about density variation with increase in altitude in the isothermal layer is correct?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "remains constant",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "increases linearly",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "decreases linearly",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "decreases exponentially",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q39",
+    "question_number": 39,
+    "question_text": "At a point in the trajectory of an unpowered space vehicle moving about the Earth, the altitude above the mean sea level is 600 km, and the speed with reference to a coordinate system fixed to the center of mass of the Earth is 9 km/s. Assume that the Earth is a sphere with a radius 6400 km and GMEarth= 3.98 × 1014 m3/s2, where, G is the universal gravitational constant and MEarth is mass of the Earth. The trajectory is:",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Circular",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Elliptic",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Parabolic",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Hyperbolic Aerospace Engineering (AE) Page 27 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q40",
+    "question_number": 40,
+    "question_text": "A multistage axial compressor, with overall isentropic efficiency of 0.83, is used to compress air at a stagnation temperature of 300 K through a pressure ratio of 10:1. Each stage of the compressor is similar, and the stagnation temperature rise across each compressor stage is 20 K. Assume Cp = 1005 J/kg K and  = 1.4 for air. How many stages are there in the compressor?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "17",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "13",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "19",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "11",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q41",
+    "question_number": 41,
+    "question_text": "An aircraft with a turbojet engine is flying at 250 m/s. The uninstalled thrust produced by the engine is 60000 N. The heating value of the fuel is 44 × 106 J/kg. The engine has a thermal efficiency of 35% while burning the fuel at a rate of 3 kg/s. Assume the engine exit pressure to be equal to the ambient pressure. What is the propulsion efficiency of the engine under these conditions (in percentage)?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "32.5",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "35.0",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "11.4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "92.4 Aerospace Engineering (AE) Page 28 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q42",
+    "question_number": 42,
+    "question_text": "Consider a flat plate, with a sharp leading edge, placed in a uniform flow of speed U. The direction of the free-stream flow is aligned with the plate. Assume that the flow is steady, incompressible and laminar. The thickness of the boundary layer at a fixed stream-wise location L from the leading edge of the plate is δ. Which one of the following correctly describes the variation of δ with U?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "δ ∝ U",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "δ ∝ U 3/2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "δ ∝ U 1/2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "δ ∝ U −1/2 Aerospace Engineering (AE) Page 29 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q43",
+    "question_number": 43,
+    "question_text": "Shock structures for flow at three different Mach numbers over a given wedge are shown in the figure below. Assuming that only the weak shock solutions are possible for the attached oblique shocks, which one of the following options is TRUE?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "M1 < M2 < M3",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "M1 > M2 > M3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "M1 < M3< M2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "M3 < M1 < M2 Aerospace Engineering (AE) Page 30 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q44",
+    "question_number": 44,
+    "question_text": "Air flowing at Mach number M = 2 from left to right accelerates to M = 3 across an expansion corner as shown in the figure. What is the value of δ (the angle between the Forward and Rearward Mach lines) in degrees? The values of the Prandtl-Meyer functions are ν(3) = 49.76o and ν(2) = 26.38o.",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "23.38",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "19.47",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "53.38",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "33.91 Aerospace Engineering (AE) Page 31 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q45",
+    "question_number": 45,
+    "question_text": "Consider the function f(x) = {x2 for x< 0 x for x≥0 where x is real. Which of the following statements is/are correct?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The function is continuous for all x",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The derivative of the function is discontinuous at x = 0",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "The derivative of the function is continuous at x = 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The function is discontinuous at x = 0 Aerospace Engineering (AE) Page 32 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q46",
+    "question_number": 46,
+    "question_text": "The figure shows plots of two yield loci for an isotropic material, where σI and σII are the principal stresses, and σY is the yield stress in uniaxial tension. Which of the following statements is/are correct?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Criterion P represents the von Mises criterion",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Criterion Q represents the Tresca criterion",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Criterion P represents the Tresca criterion",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Criterion Q represents the von Mises criterion Aerospace Engineering (AE) Page 33 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q47",
+    "question_number": 47,
+    "question_text": "Which of the following statements about absolute ceiling and service ceiling for a piston-propeller aircraft is/are correct?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The altitude corresponding to absolute ceiling is higher than that for service ceiling",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "At the absolute ceiling, the power required for cruise equals the maximum power available",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "The altitude corresponding to absolute ceiling is lower than that for service ceiling",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "At the service ceiling, the maximum rate of climb is 50 ft/min Aerospace Engineering (AE) Page 34 of 40 Organizing Institute: IISc Bengaluru",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q48",
+    "question_number": 48,
+    "question_text": "For an airplane having directional / weathercock static stability, which of the following options is/are correct?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The airplane when disturbed in yaw, from an equilibrium state, will experience a restoring moment",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The variation of yawing moment coefficient (Cn) with sideslip angle (β) for the airplane will look like",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "The airplane will always tend to point into the relative wind",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "The airplane when disturbed in yaw will return to equilibrium state in a finite amount of time after removing the disturbance",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q49",
+    "question_number": 49,
+    "question_text": "Which of the following statements is/are TRUE for an axial turbine?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "For a fixed rotational speed, the mass flow rate increases with increase in the flow coefficient",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "The absolute stagnation enthalpy of the flow decreases across the nozzle row",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "The relative stagnation enthalpy remains unchanged through the rotor",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "For a fixed rotational speed, the mass flow rate remains unchanged with a change in the flow coefficient Aerospace Engineering (AE) Page 35 of 40 Organizing Institute: I",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q50",
+    "question_number": 50,
+    "question_text": "Which of the following statements is/are TRUE for a single stage axial compressor?",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Starting from design condition and keeping the mass flow rate constant, if the blade RPM is increased, the compressor rotor may experience positive incidence flow separation (actual relative flow an",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Starting from design condition at the same blade RPM, if the mass flow rate is increased, the compressor rotor may experience positive incidence flow separation (actual relative flow angle greater t",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Keeping the mass flow rate constant, if the blade RPM is increased, the compressor may experience surge",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "At the same blade RPM, if the mass flow rate is increased, the compressor may experience surge",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ae-24-q51",
+    "question_number": 51,
+    "question_text": "Consider the matrix A= [5 −4 k −1], where k is a constant. If the determinant of A is 3, then the ratio of the largest eigenvalue of A to the constant k is ___________ (rounded off to 1 decimal place). Aerospace Engineering (AE) Page 36 of 40 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q52",
+    "question_number": 52,
+    "question_text": "The state of stress at a point is caused by two separate loading cases. One of them produces a pure uniaxial tension along the x′ direction, and other one produces a pure uniaxial compression along the y′ direction, as shown in the figure. The sum of maximum and minimum principal stresses for the resultant state of stress caused by both loads acting simultaneously is ___________ N/mm2 (rounded off to 1 decimal place).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q53",
+    "question_number": 53,
+    "question_text": "In the figure shown below, the magnitude of internal force in member BC is ___________ N (rounded off to 1 decimal place). Aerospace Engineering (AE) Page 37 of 40 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q54",
+    "question_number": 54,
+    "question_text": "The cross section of a thin-walled beam with uniform wall thickness t, shown in the figure, is subjected to a bending moment Mx = 10 Nm. If h = 1 m and t = 0.001 m, the magnitude of maximum normal stress in the cross section is _________N/m2 (answer in integer).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q55",
+    "question_number": 55,
+    "question_text": "The equations of motion for a two degrees of freedom undamped spring-mass system are: mẍ1 + 2kx1 −kx2 = 0 mẍ2 −kx1 + 2kx2 = 0 where m and k represent mass and stiffness respectively, in corresponding SI units, and x1 and x2 are the degrees of freedom. The larger of the two natural frequencies is given by: ω= α√k m rad/s. The value of α is ________ (rounded off to 2 decimal places).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q56",
+    "question_number": 56,
+    "question_text": "Consider the plane strain field given by εxx= 10 xy2, εyy= −5 x2y and γxy= A xy (2x−y) where, A is a constant and γxy is the engineering shear strain. The value of the constant A for the strain field to be compatible is _____________ (rounded off to 1 decimal place). Aerospace Engineering (AE) Page 38 of 40 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q57",
+    "question_number": 57,
+    "question_text": "A chemical rocket with an ideally expanded flow through the nozzle produces 5 × 106 N thrust at sea level. The specific impulse of the rocket is 200 s and acceleration due to gravity at the sea level is 9.8 m/s2. The propellent mass flow rate out of the rocket nozzle is _________ kg/s (rounded off to the nearest integer).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q58",
+    "question_number": 58,
+    "question_text": "A centrifugal compressor is designed to operate with air. At the leading edge of the tip of the inducer (eye of the impeller), the blade angle is 45o, and the relative Mach number is 1.0. The stagnation temperature of the incoming air is 300 K. Consider  = 1.4. Neglect pre-whirl and slip. The inducer tip speed is ________ m/s (rounded off to the nearest integer).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q59",
+    "question_number": 59,
+    "question_text": "Consider the following Fanno flow problem: Flow enters a constant area duct at a temperature of 273 K and a Mach number 0.2 and eventually reaches sonic condition (Mach number =1) due to friction. Assume γ= 1.4. The static temperature at the location where sonic condition is reached is_____________ K (rounded off to 2 decimal places).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q60",
+    "question_number": 60,
+    "question_text": "Consider an artificial satellite moving around the Moon in an elliptic orbit. The altitude of the satellite from the Moon's surface at the perigee is 25 km and that at the apogee is 134 km. Assume the Moon to be spherical with a radius of 1737 km. The trajectory is considered with reference to a coordinate system fixed to the center of mass of the Moon. The ratio of the speed of the satellite at the perigee to that at the apogee is ___________ (rounded off to 2 decimal places).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q61",
+    "question_number": 61,
+    "question_text": "For an aircraft moving at 4 km altitude above mean sea level at a Mach number of 0.2, the ratio of equivalent air speed to true air speed is _______ (rounded off to 2 decimal places). The density of air at mean sea level is 1.225 kg/m3 and at 4 km altitude is 0.819 kg/m3. Aerospace Engineering (AE) Page 39 of 40 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q62",
+    "question_number": 62,
+    "question_text": "For a general aviation airplane, one of the complex conjugate pair of eigenvalues for longitudinal dynamics is given by −0.039 ± 0.0567 i (in SI units). If the system is disturbed to excite only this mode, the time taken for the amplitude of response to become half in magnitude is _______ s (rounded off to 1 decimal place).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q63",
+    "question_number": 63,
+    "question_text": "The figure (not to scale) shows a control volume to estimate the forces on the airfoil with elliptic cross-section. Surfaces 2 and 3 are streamlines. Velocity profiles are measured at the upstream end (surface 1) and at the downstream end (surface 4) of the control volume. The drag coefficient for the airfoil is defined as Cd = D 1 2 ρ U∞ 2 c , where D is the drag force on the airfoil per unit span and  is the density of the air. The static pressure, p, is constant over the entire surfac",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q64",
+    "question_number": 64,
+    "question_text": "An airplane of mass 1000 kg is in a steady level flight with a speed of 50 m/s. The wing has an elliptic planform with a span of 20 m and planform area 31.4 m2. Assuming the density of air at that altitude to be 1 kg/m3 and acceleration due to gravity to be 10 m/s2, the induced drag on the wing is _________ N (rounded off to 1 decimal place). Aerospace Engineering (AE) Page 40 of 40 Organizing Institute: IISc Bengaluru",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ae-24-q65",
+    "question_number": 65,
+    "question_text": "It is desired to estimate the aerodynamic drag, D, on a car traveling at a speed of 30 m/s. A one-third scale model of the car is tested in a wind-tunnel following the principles of dynamic similarity. The drag on the scaled model is measured to be Dm. The ratio D/Dm is _________ (rounded off to 1 decimal place).",
+    "exam_code": "GATE-AE",
+    "exam_category": "ENGINEERING",
+    "subject": "Aerospace Engineering",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+]

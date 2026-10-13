@@ -1,0 +1,2889 @@
+[
+  {
+    "id": "gate-ar-24-q1",
+    "question_number": 1,
+    "question_text": "If '→' denotes increasing order of intensity, then the meaning of the words [sick → infirm → moribund] is analogous to [silly → _______ → daft]. Which one of the given options is appropriate to fill the blank?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "frown",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "fawn",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "vein",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "vain Architecture and Planning (AR) Page | 2",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q2",
+    "question_number": 2,
+    "question_text": "The 15 parts of the given figure are to be painted such that no two adjacent parts with shared boundaries (excluding corners) have the same color. The minimum number of colors required is",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "4",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "5",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "6 Architecture and Planning (AR) Page | 3",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q3",
+    "question_number": 3,
+    "question_text": "How many 4-digit positive integers divisible by 3 can be formed using only the digits {1, 3, 4, 6, 7}, such that no digit appears more than once in a number?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "24",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "48",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "72",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "12",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q4",
+    "question_number": 4,
+    "question_text": "The sum of the following infinite series is 2 + 1 2 + 1 3 + 1 4 + 1 8 + 1 9 + 1 16 + 1 27 + ⋯",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "11/3",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "7/2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "13/4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "9/2 Architecture and Planning (AR) Page | 4",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q5",
+    "question_number": 5,
+    "question_text": "In an election, the share of valid votes received by the four candidates A, B, C, and D is represented by the pie chart shown. The total number of votes cast in the election were 1,15,000, out of which 5,000 were invalid. Based on the data provided, the total number of valid votes received by the candidates B and C is",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "45,000",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "49,500",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "51,750",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "54,000 A 40% B 25% C 20% D 15% Share of valid votes Architecture and Planning (AR) Page | 5",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q6",
+    "question_number": 6,
+    "question_text": "Thousands of years ago, some people began dairy farming. This coincided with a number of mutations in a particular gene that resulted in these people developing the ability to digest dairy milk. Based on the given passage, which of the following can be inferred?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "All human beings can digest dairy milk.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "No human being can digest dairy milk.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Digestion of dairy milk is essential for human beings.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "In human beings, digestion of dairy milk resulted from a mutated gene.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q7",
+    "question_number": 7,
+    "question_text": "The probability of a boy or a girl being born is 1/2. For a family having only three children, what is the probability of having two girls and one boy?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "3/8",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "1/8",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "1/4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "1/2 Architecture and Planning (AR) Page | 6",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q8",
+    "question_number": 8,
+    "question_text": "Person 1 and Person 2 invest in three mutual funds A, B, and C. The amounts they invest in each of these mutual funds are given in the table. Mutual fund A Mutual fund B Mutual fund C Person 1 ₹10,000 ₹20,000 ₹20,000 Person 2 ₹20,000 ₹15,000 ₹15,000 At the end of one year, the total amount that Person 1 gets is ₹500 more than Person 2. The annual rate of return for the mutual funds B and C is 15% each. What is the annual rate of return for the mutual fund A?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "7.5%",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "10%",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "15%",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "20% Architecture and Planning (AR) Page | 7",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q9",
+    "question_number": 9,
+    "question_text": "Three different views of a dice are shown in the figure below. The piece of paper that can be folded to make this dice is",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "(B)",
+        "is_correct": true
+      },
+      {
+        "id": "opt_c",
+        "text": "(D) Architecture and Planning (AR) Page | 8",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q10",
+    "question_number": 10,
+    "question_text": "Visualize two identical right circular cones such that one is inverted over the other and they share a common circular base. If a cutting plane passes through the vertices of the assembled cones, what shape does the outer boundary of the resulting cross-section make?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "A rhombus",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "A triangle",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "An ellipse",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "A hexagon Architecture and Planning (AR) Page | 9 PART A: Common FOR ALL CANDIDATES",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q11",
+    "question_number": 11,
+    "question_text": "The nature of curvature of the following structural form is",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "monoclastic",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "synclastic",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "anticlastic",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "möbius",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q12",
+    "question_number": 12,
+    "question_text": "As per the Ekistics Logarithmic Scale, the 'world city' is referred as",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Megalopolis",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Conurbation",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Acropolis",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Ecumenopolis Architecture and Planning (AR) Page | 10",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q13",
+    "question_number": 13,
+    "question_text": "In Mānasāra Silpasāstra, a bow-shaped town plan is known as",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Dandaka",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Prastara",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Kārmuka",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Nandyāvarta",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q14",
+    "question_number": 14,
+    "question_text": "The value of a property when sold at a lower price than its open market price is called",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Distress Value",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Accommodation Value",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Speculative Value",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Replacement Value Architecture and Planning (AR) Page | 11",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q15",
+    "question_number": 15,
+    "question_text": "In a traffic survey, Enoscope is used to measure",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Volume to Capacity ratio",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Sight distance",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Spot speed",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Intersection delay",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q16",
+    "question_number": 16,
+    "question_text": "The author of the book Human Aspects of Urban Form is",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Cliff Moughtin",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Amos Rapoport",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Peter Katz",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Lewis Mumford Architecture and Planning (AR) Page | 12",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q17",
+    "question_number": 17,
+    "question_text": "Which of the following statements is correct for Urban Cool Island (UCI)?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "The UCI and Urban Heat Island (UHI) cannot happen in a city at the same time.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Air temperature of surrounding rural areas is warmer than that of the urban areas.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Air temperature of surrounding rural areas is cooler than that of the urban areas.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "UCI happens only in a snow-clad mountain.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q18",
+    "question_number": 18,
+    "question_text": "Which of the following statements is correct for an oxidation pond to treat waste water?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "It is an aerobic pond.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "It is an anaerobic pond.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "It does not require sunlight.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "It does not remove Biological Oxygen Demand (BOD). Architecture and Planning (AR) Page | 13",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q19",
+    "question_number": 19,
+    "question_text": "The conservation architect of the Maitreya Buddha Temple at Basgo, Ladakh which won the 2007 UNESCO Asia-Pacific Heritage Award is",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Abha Narain Lambah",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Vinod Kumar M. M.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Rahul Mehrotra",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Saima Iqbal",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q20",
+    "question_number": 20,
+    "question_text": "Which of the following options is/are the right sequence(s) in water treatment process?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Coagulation → Flocculation → Sedimentation",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Sedimentation → Filtration → Disinfection",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Sedimentation → Flocculation → Coagulation",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Disinfection → Filtration → Flocculation Architecture and Planning (AR) Page | 14",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q21",
+    "question_number": 21,
+    "question_text": "Which of the following is/are associated with Gentrification in a neighbourhood?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Wealthier households displace poor households",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Poor households displace wealthier households",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Real estate value increases",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Real estate value decreases",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q22",
+    "question_number": 22,
+    "question_text": "Which of the following sites is/are included in the UNESCO World Heritage List as on December 2022?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Capitol Complex, Chandigarh",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Moth ki Masjid, Delhi",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Keoladeo National Park, Bharatpur",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Paradesi Synagogue, Kochi Architecture and Planning (AR) Page | 15",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q23",
+    "question_number": 23,
+    "question_text": "The reference points, lines and planes for drawing a two-point perspective of an object are marked in the Figure below. Select the correct option(s) that match(es) with the corresponding nomenclature.",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "R - Station point, S - Picture plane",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "R - Vanishing point, T - Picture plane",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - Vanishing point, T - Ground line",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Q - Ground line, S - Horizon line Architecture and Planning (AR) Page | 16",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q24",
+    "question_number": 24,
+    "question_text": "India's intended Nationally Determined Contribution to the United Nations Framework Convention on Climate Change in 2022 include(s)",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "reduction of emissions intensity of India's GDP by 45% by 2030 from 2005 level",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "achieving about 50% cumulative electric power installed capacity from non-fossil fuel-based energy resources by 2030",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "achieving the target of net-zero emission by 2030",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "reduction of total projected carbon emission by one billion tonnes from 2022 to 2025",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q25",
+    "question_number": 25,
+    "question_text": "As per the Census of India 2011, non-notified slums is/are categorised as",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Recognised",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Identified",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Unrecognised",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Authorised Architecture and Planning (AR) Page | 17",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q26",
+    "question_number": 26,
+    "question_text": "Which of the following is/are under the purview of the Energy Conservation Building Code of India 2017 ?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Indoor Lighting",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Outdoor Lighting",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Plug Loads",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Embodied Energy",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q27",
+    "question_number": 27,
+    "question_text": "Which of the following is/are used for municipal fiscal resource mobilisation?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Property tax",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Development charges",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Income tax",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Salary of municipal staff",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q28",
+    "question_number": 28,
+    "question_text": "A ramp with a slope of 1:12 is required for wheelchair access. Intermediate landings of length 1.5 m each have to be provided after every 9 m running length. The running length of a straight ramp including landing, to negotiate a level difference of 900 mm vertical height, in m, is _____________ (rounded off to two decimal places). Architecture and Planning (AR) Page | 18",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q29",
+    "question_number": 29,
+    "question_text": "Match the features in Group-I with the corresponding software tools in Group-II. Group-I Group-II (P) Raster Graphics Editing (1) OpenStudio (Q) Energy Modeling (2) GIMP (R) Visual Programming Interface (3) STAAD (S) Structural Analysis (4) Grasshopper (5) Radiance",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 3, Q - 1, R - 2, S - 5",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 2, Q - 1, R - 4, S - 3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 1, Q - 4, R - 5, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 2, Q - 5, R - 1, S - 3 Architecture and Planning (AR) Page | 19",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q30",
+    "question_number": 30,
+    "question_text": "Match the elements in Group-I with the corresponding buildings in Group-II. Group-I Group-II (P) Lightweight Structure (1) Taipei 101, Taipei by Lee and Wang (Q) Base Isolator (2) The Gherkin, London by Foster & Partners (R) Tuned-mass Damper (3) Museum of New Zealand Te Papa Tongarewa, Wellington by Ivan Mercep (S) Diagrid (4) Paper Log Houses, Kobe by Shigeru Ban (5) Metropolitan Cathedral of Christ the King, Liverpool by Lutyens and Gibberd",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 1, Q - 3, R - 5, S - 4",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 4, Q - 3, R - 1, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 4, Q - 1, R - 5, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 3, Q - 2, R - 1, S - 5 Architecture and Planning (AR) Page | 20",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q31",
+    "question_number": 31,
+    "question_text": "Match the following concepts in Group-I with their corresponding description in Group-II. Group-I Group-II (P) N I M B Y (1) Affording a clear view of the waterfront to a plot through the abutting street (Q) Form based code (2) Planning and zoning tool to regulate development primarily through urban form (R) Tactical urbanism (3) Establishment of residential areas on the outskirts of a city (S) Suburbanisation (4) Short-term, low cost, scalable interventions and polic",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 5, Q - 2, R - 4, S - 3",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 5, Q - 4, R - 3, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 1, Q - 2, R - 4, S - 5",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 1, Q - 5, R - 4, S - 3 Architecture and Planning (AR) Page | 21",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q32",
+    "question_number": 32,
+    "question_text": "Match the urban renewal projects in Group-I with the corresponding cities in Group-II. Group-I Group-II (P) Cheonggyecheon (1) New York (Q) The High Line (2) London (R) False Creek South (3) Seoul (S) Canary Wharf (4) Vancouver (5) Tokyo",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 3, Q - 1, R - 4, S - 2",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 3, Q - 5, R - 1, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 5, Q - 1, R - 2, S - 3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 2, Q - 5, R - 4, S - 3 Architecture and Planning (AR) Page | 22",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q33",
+    "question_number": 33,
+    "question_text": "Match the Biosphere Reserves in Group-I with their corresponding features in Group-II. Group-I Group-II (P) Gulf of Mannar (1) Ridge, Glacier (Q) Sunderbans (2) Sub-tropical/Tropical Forest, Stepped Hill (R) Nanda Devi (3) Swamp forest, Mangrove (S) Nilgiri (4) Coral Reefs, Seagrass bed (5) Salt Marsh, Flat Terrain",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 1, Q - 3, R - 4, S - 5",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 3, Q - 5, R - 1, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 4, Q - 3, R - 1, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 4, Q - 2, R - 3, S - 5 Architecture and Planning (AR) Page | 23",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q34",
+    "question_number": 34,
+    "question_text": "Match the terminologies in Group-I with their descriptions in Group-II. Group-I Group-II (P) Edge City (1) Rapid expansion of geographical areas of towns or cities (Q) Synekism (2) Violence against the city (R) Urbicide (3) A secondary CBD on the edge of the city (S) Urban Sprawl (4) Rebuilding core city area (5) Union of several small urban settlements under one rule",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 3, Q - 5, R - 2, S - 1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 3, Q - 4, R - 2, S - 5",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 2, Q - 5, R - 3, S - 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 4, Q - 2, R - 3, S - 1 Architecture and Planning (AR) Page | 24",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q35",
+    "question_number": 35,
+    "question_text": "Match the items in Group-I with their corresponding items in Group-II. Group-I Group-II (P) Floating floor (1) Overflow control (Q) Float valve (2) Delay not affecting a project (R) Metal float (3) Acoustical buffer (S) Free float (4) Plastering equipment (5) Traffic flow control",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 3, Q - 2, R - 4, S - 1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 5, Q - 1, R - 3, S - 4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 3, Q - 1, R - 4, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 1, Q - 2, R - 5, S - 4 Architecture and Planning (AR) Page | 25",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q36",
+    "question_number": 36,
+    "question_text": "As per the URDPFI Guidelines 2015, match the type of educational facilities in Group-I with the corresponding minimum population to be served per facility in Group-II. Group-I Group-II (P) Integrated school (1) 4,000 (Q) Senior secondary school (2) 2,500 (R) College (3) 90,000 (S) Primary school (4) 1,25,000 (5) 7,500",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 4, Q - 2, R - 3, S - 1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 3, Q - 5, R - 4, S - 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 2, Q - 5, R - 1, S - 3",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 3, Q - 2, R - 4, S - 5",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q37",
+    "question_number": 37,
+    "question_text": "Which of the following statements is/are true?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Physiological Equivalent Temperature is used in outdoor thermal comfort evaluation.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Thermal Performance Index is computed using outside surface temperature of building envelope.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Reynolds number less than 2000 refers to laminar wind flow.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Reynolds number greater than 4000 refers to turbulent wind flow. Architecture and Planning (AR) Page | 26",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q38",
+    "question_number": 38,
+    "question_text": "Which of the following statements is/are correct?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Yellow, blue-violet and red-violet are split complementary hues.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Orange, green and violet are analogous combinations.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "CMYK is a subtractive colour system.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Blue, green, orange and red are tetrad combinations.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q41",
+    "question_number": 41,
+    "question_text": "Which of the following is/are component(s) of Right of Way (RoW) of a road?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Building line",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Kerb",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Carriageway",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Sidewalk Architecture and Planning (AR) Page | 28",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q42",
+    "question_number": 42,
+    "question_text": "As per the National Building Code of India 2016, terminologies associated with fire fighting in a building is/are",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Refuge area",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Water sprinkler system",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Panic bar",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Atrium",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q43",
+    "question_number": 43,
+    "question_text": "For the beam shown below, ignoring the self-weight, the maximum hogging moment (in kN⋅m) generated for the loads indicated is _____________ (rounded off to one decimal place).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q44",
+    "question_number": 44,
+    "question_text": "At present, the cost of a new office equipment is 50,000 (in Indian Rupees). It has 15% salvage value after a useful life of 5 years. Using straight line method of depreciation, the book value of the equipment 3 years from now, in Indian Rupees, will be _____________ (in integer). Architecture and Planning (AR) Page | 29",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q45",
+    "question_number": 45,
+    "question_text": "The network diagram of a construction project is shown in the following Figure. The duration of each activity, in days, and the early start time of the project are denoted in the diagram. The total project duration along the critical path, in days, is _____________(in integer).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q46",
+    "question_number": 46,
+    "question_text": "The design of a 1200 capacity concert hall considers 1/3rd female audience and 2/3rd male audience. The Table below shows the guideline for calculating Water Closet requirements. Fixture Male Female Water closet 1 number per 100 up to 400 and over 400, 1 number for every 250 or part thereof 3 numbers per 100 up to 200 population and over 200, 2 numbers for every 100 or part thereof Using the above guideline, the number of Water Closets required for the total audience is ___",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q47",
+    "question_number": 47,
+    "question_text": "A declining Industrial Town has proposed to improve water sustainability by reducing stormwater runoff through change of land use land cover (LULC), as shown in the Table below, to attract new residents. LULC Runoff Coefficient Existing Area in hectare Proposed Area in hectare Industrial 0.7 1500 800 Residential 0.5 1000 1200 Park and Playgrounds 0.25 1200 1000 Forest 0.15 300 1000 Considering a flat topography and zero additional runoff from the adjoining areas, the",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q48",
+    "question_number": 48,
+    "question_text": "A real estate developer is developing a township on a PPP mode. The total area of the site is 2.672 hectares with an allowable FAR of 2.25, of which 20% is earmarked for MIG category. The gross area of each MIG unit including common areas and services is 72 m2. Assuming super built up area to be same as FAR, the maximum number of MIG apartments that can be constructed is _____________ (in integer).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q49",
+    "question_number": 49,
+    "question_text": "A municipal town requires a volume of 70,000 m3 compacted solid waste to fill a low lying land. The city has a total of 10,000 households. Type of House Percentage of Households Equivalent volume of compacted solid waste generated/ household/ day LIG 30% 0.10 m3 MIG 60% 0.15 m3 HIG 10% 0.20 m3 Using the information as shown in the Table above, the estimated minimum number of days required to fill the low lying land is _____________ (in integer). Architecture and Planning",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q50",
+    "question_number": 50,
+    "question_text": "Rose window is a characteristic feature of",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Great Temple of Ammon, Karnak, Egypt",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Temple of Jupiter, Baalbek, Lebanon",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Notre-Dame, Paris, France",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Humayun Tomb, Nizamuddin, Delhi Architecture and Planning (AR) Page | 32",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q51",
+    "question_number": 51,
+    "question_text": "The schematic diagram of a unitary air-conditioner operating in cooling mode, is shown in the following Figure. The component P marked in the figure represents",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Condenser",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Evaporator",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Compressor",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Expansion valve",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q52",
+    "question_number": 52,
+    "question_text": "Titan Integrity Campus, Bengaluru is designed by",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Christopher C. Benninger",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Sanjay Mohe",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Raj Rewal",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Anant Raje Architecture and Planning (AR) Page | 33",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q53",
+    "question_number": 53,
+    "question_text": "With reference to the Figure below, which of the following labelling is/are correct?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - Extrados, Q - Key , R - Span",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Q - Key, S - Abutment, T - Rise",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - Abutment, R - Rise, T - Extrados",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Q - Key, S - Span, T - Extrados Architecture and Planning (AR) Page | 34",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q54",
+    "question_number": 54,
+    "question_text": "Which of the following buildings has/have pendentives as a structural element?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "St. Mark's Basilica, Venice, Italy",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Westminster Cathedral, London, UK",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Dilwara Temple, Mount Abu, India",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Hagia Irene Museum and Concert Hall, Istanbul",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q55",
+    "question_number": 55,
+    "question_text": "Polytetrafluroethylene (PTFE) coated fiberglass has been used as a roofing membrane in",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Jawaharlal Nehru Stadium, New Delhi",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Eden Gardens Stadium, Kolkata",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Melbourne Cricket Ground Stadium, Melbourne",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Beijing National Stadium, Beijing Architecture and Planning (AR) Page | 35",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q56",
+    "question_number": 56,
+    "question_text": "A non-stop express elevator directly connects the observatory level at 80th floor of a tower with the podium at 2nd floor level. The tower has a uniform floor-floor height of 4 m. The elevator attains a maximum speed of 8 m/s. Assume 2 m/s2 as net vertical acceleration and net vertical deceleration (incorporating gravity). If the elevator starts from a state of rest from the podium, the time taken to reach the observatory, in seconds, is _____________ (rounded off to one decimal place).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q57",
+    "question_number": 57,
+    "question_text": "Match the elements in Group-I with the corresponding religious buildings in Group-II. Group-I Group-II (P) Bell capital (1) Mosque (Q) Mehrab (2) Hindu Temple (R) Gopuram (3) Greek Temple (S) Pediment (4) Romanesque Church (5) Egyptian Temple",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 5, Q - 1, R - 2, S - 3",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 3, Q - 1, R - 5, S - 4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 5, Q - 4, R - 3, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 4, Q - 1, R - 2, S - 3 Architecture and Planning (AR) Page | 37",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q58",
+    "question_number": 58,
+    "question_text": "Match the museums in Group-I with their architects in Group-II. Group-I Group-II (P) Indira Gandhi Rashtriya Manav Sangrahalaya, Bhopal (1) Charles Correa (Q) Bihar Museum, Patna (2) Ram Sharma (R) Gandhi Memorial Museum, Ahmedabad (3) Romi Khosla (S) Museum of Art and Photography, Bengaluru (4) Soumitro Ghosh & Nisha Mathew (5) Fumihiko Maki",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 4, Q - 5, R - 3, S - 1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 4, Q - 3, R - 1, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 2, Q - 3, R - 1, S - 4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 2, Q - 5, R - 1, S - 4 Architecture and Planning (AR) Page | 38",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q59",
+    "question_number": 59,
+    "question_text": "Match the specially shaped bricks in Group-I with their corresponding nomenclature in Group-II. Group-I Group-II (P) (1) Plinth Header (Q) (2) Bird's mouth (R) (3) Squint (S) (4) Double cant (5) Plinth stretcher",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 4, Q - 3, R - 5, S - 1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 3, Q - 2, R - 4, S - 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 4, Q - 3, R - 5, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 4, Q - 1, R - 2, S - 5 Architecture and Planning (AR) Page | 39",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q62",
+    "question_number": 62,
+    "question_text": "A 5 m long Aluminium tie rod of cross-section 0.20 m × 0.04 m is subjected to a tensile force induced by its self-weight of 21.20 kg/m considering gravitational acceleration of 10 m/s2. If tensile Young's modulus of Aluminium is 70,000 MPa, the maximum tensile strain in the rod is _____________×10-6 (rounded off to two decimal places).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q63",
+    "question_number": 63,
+    "question_text": "The following Figure shows the excavation plan of a two room structure, where the trench has a uniform width of 1.10 meters. If the cumulative centre line length of the trench is 41.10 meters and the required depth of concrete to be poured is 0.30 meters, the volume of concrete in foundation, in cubic meters, will be _____________(rounded off to two decimal places). Architecture and Planning (AR) Page | 41",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q64",
+    "question_number": 64,
+    "question_text": "The decay of sound in an enclosed lecture hall of volume 3500 m3 is shown in the Figure below. The sound source is switched off at point P. Using the Reverberation Time (RT60) obtained from the figure, the calculated total sound absorption of the hall, in Sabins, is _____________ (rounded off to the nearest integer).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q65",
+    "question_number": 65,
+    "question_text": "A 2 TR window air-conditioner of Energy Efficiency Ratio (EER) 3.1 is catering to a room of volume 40 m3. The air-conditioner is operational for 600 hours during summer on cooling mode. The compressor is also operational for the complete duration. The total energy consumption of the air-conditioner during the above mentioned period, in kWh, is _____________ (rounded off to nearest integer). Architecture and Planning (AR) Page | 42 PART B2: FOR Planning CANDIDATES",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q66",
+    "question_number": 66,
+    "question_text": "Which of the following aims is set under the SVAMITVA scheme of the Ministry of Panchayati Raj, Government of India?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Provide tap water connection to all households in rural areas.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Provide 'right to work' to the rural people falling Below Poverty Line.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Establish clear ownership of property in rural inhabited (Abadi) areas, by mapping of land parcels using improvised technology.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Provide effective and efficient institutional platforms to enable the rural poor to increase their household income by means of sustainable livelihood enhancement.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q67",
+    "question_number": 67,
+    "question_text": "Mass Rapid Transit System is a",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Fixed Route and Fixed Schedule service.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Fixed Route and Flexible Schedule service.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Flexible Route and Fixed Schedule service.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Flexible Route and Flexible Schedule service. Architecture and Planning (AR) Page | 43",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q68",
+    "question_number": 68,
+    "question_text": "Which of the following initiatives of the Government of India is also known as the National Master Plan for Multi-modal Connectivity?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "PM Gati Shakti",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Bharatmala",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Parvatmala",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Sagarmala Architecture and Planning (AR) Page | 44",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q69",
+    "question_number": 69,
+    "question_text": "With reference to the Speed-Density diagram given below, which of the following statements is/are correct?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Point P represents Maximum Flow",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Point P represents Jam Density",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Point Q represents Space Mean Speed for Free Flow condition",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Point Q represents Time Mean Speed Architecture and Planning (AR) Page | 45",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q70",
+    "question_number": 70,
+    "question_text": "Which of the following statements correctly represent(s) the Demographic dividend of a country?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Share of working age population is larger than dependent population.",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Share of working age population is lesser than dependent population.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Demographic dividend demands more job creation.",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Demographic dividend can never lead to demographic disaster.",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q71",
+    "question_number": 71,
+    "question_text": "As per the URDPFI Guidelines 2015, choose the option(s) which indicate(s) the appropriate hierarchy of plans from higher to lower order.",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Perspective Plan > Development Plan > Local Area Plan",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Development Plan > Special Purpose Plan > Annual Plan",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Local Area Plan > Development Plan > Annual Plan",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Special Purpose Plan > Perspective Plan > Local Area Plan",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q72",
+    "question_number": 72,
+    "question_text": "In 2021, a city survey report revealed a sex ratio of 930 with an estimated increase of 2.16% over the next 20 years. In 2041, the total population of the city is projected to be 15,00,000. The estimated female population in the year 2041 will be ____________ (in integer). Architecture and Planning (AR) Page | 46",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q73",
+    "question_number": 73,
+    "question_text": "Match the terms in Group-I with their descriptions in Group-II. Group-I Group-II (P) Landfill site (1) Development on previously developed site (Q) Greenfield development (2) Land to dispose solid waste (R) Green Belt (3) Development on previously undeveloped land (S) Brownfield development (4) Policy to protect livestock (5) A buffer to control urban development",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 2, Q - 3, R - 1, S - 4",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 3, Q - 5, R - 2, S - 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 2, Q - 3, R - 5, S - 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 3, Q - 4, R - 5, S - 2 Architecture and Planning (AR) Page | 47",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q74",
+    "question_number": 74,
+    "question_text": "Match the following illustrations in Group-I with their corresponding concepts in Group-II. Group-I Group-II (P) (1) Figure Ground Relationship (Q) (2) Town Planning Scheme (TPS) (R) (3) Transit Oriented Development (TOD) (S) (4) Transferable Development Rights (TDR) (5) Cul-de-Sac",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 3, Q - 4, R - 1, S - 2",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 3, Q - 5, R - 2, S - 4",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 1, Q - 3, R - 4, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 2, Q - 4, R - 1, S - 5 Architecture and Planning (AR) Page | 48",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q75",
+    "question_number": 75,
+    "question_text": "Match the following planning theories/concepts in Group-I with their corresponding proponents in Group-II. Group-I Group-II (P) Valley Section (1) McGee and Gemburg (Q) Third Place Theory (2) Oscar Newman (R) Defensible Space (3) Ray Oldenberg (S) Desakota Model (4) Patrick Geddes (5) C. A. Doxiadis",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "P - 4, Q - 3, R - 2, S - 1",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "P - 4, Q - 2, R - 3, S - 1",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "P - 1, Q - 3, R - 5, S - 2",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "P - 2, Q - 4, R - 1, S - 5 Architecture and Planning (AR) Page | 49",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q76",
+    "question_number": 76,
+    "question_text": "Which of the following methods is/are used in traffic survey to measure the Running Speed and Journey Speed?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Moving Observer Method",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Registration Number Method",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Elevated Observer Method",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Hardy Cross Method",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q77",
+    "question_number": 77,
+    "question_text": "In the context of regional planning, which of the following terms represent(s) a region?",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "mcq",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "options": [
+      {
+        "id": "opt_a",
+        "text": "Formal",
+        "is_correct": true
+      },
+      {
+        "id": "opt_b",
+        "text": "Functional",
+        "is_correct": false
+      },
+      {
+        "id": "opt_c",
+        "text": "Isometric",
+        "is_correct": false
+      },
+      {
+        "id": "opt_d",
+        "text": "Planning",
+        "is_correct": false
+      }
+    ],
+    "correct_answer": "opt_a"
+  },
+  {
+    "id": "gate-ar-24-q78",
+    "question_number": 78,
+    "question_text": "In a one-way single lane traffic stream, the observed average time headway is 2.5 seconds. The traffic flow of the above mentioned lane, in vehicle/hr, is _____________(in integer). Architecture and Planning (AR) Page | 50",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q79",
+    "question_number": 79,
+    "question_text": "The demand of a EcoCity theme park is estimated as P = 1500 − 7.5Q, where P (in Indian Rupees) is the price of a ticket for single entry, and Q (in integer) is the number of tickets sold per hour. The maximum revenue per hour along the demand curve, in Indian Rupees, is _____________(in integer).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q80",
+    "question_number": 80,
+    "question_text": "Labour supply and urban growth are represented in X and Y axis of the Figure below. Curve OP represents the relationship between labour supply and urban growth. The ratios A:A' and B:B' are 1:1.2 and 3:1.2, respectively. If 6 units of labour is supplied in B, then the number of units of urban growth in B' will be _____________ (rounded off to one decimal place).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "gate-ar-24-q81",
+    "question_number": 81,
+    "question_text": "A city with a present population of 1,75,000 is expecting an annual population growth rate of 0.85%. In a traffic assessment study, the trip generation model has been developed as Y = 142 + 0.675X, where Y is the number of daily trips generated within the city and X is the population of the city. The number of daily trips to be generated within the city after 10 years is _____________(in integer).",
+    "exam_code": "GATE-AR",
+    "exam_category": "ENGINEERING",
+    "subject": "Architecture and Planning",
+    "topic": "General",
+    "marks": 1,
+    "difficulty": "medium",
+    "recommended_minutes": 2,
+    "question_type": "short_answer",
+    "expected_points": [],
+    "keywords": [],
+    "model_answer": "See options",
+    "evaluation_rubric": "1 mark",
+    "year": "2024",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+]

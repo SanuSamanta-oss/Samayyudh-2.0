@@ -5,11 +5,9 @@
 // Provides user state across the entire app
 // ============================================================
 
-import React, { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 import type { User, Session, AuthChangeEvent } from '@supabase/supabase-js';
-import { BoredHandLoader } from '@/components/BoredHandLoader';
 
 interface AuthState {
   user: User | null;
@@ -28,10 +26,6 @@ interface AuthContextValue extends AuthState {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [showAuthLoader, setShowAuthLoader] = useState(false);
-  const [authLoaderFinished, setAuthLoaderFinished] = useState(false);
-  const authTimerRef = useRef<NodeJS.Timeout | null>(null);
-
   const [state, setState] = useState<AuthState>(() => {
     // Initialize with loading=false if not configured
     if (!isSupabaseConfigured) {
@@ -57,18 +51,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    // Check if returning from OAuth redirect with code or access_token
-    if (typeof window !== 'undefined') {
-      const isOAuth =
-        window.location.search.includes('code=') ||
-        window.location.hash.includes('access_token=') ||
-        window.location.pathname.startsWith('/auth/callback');
-
-      if (isOAuth) {
-        setShowAuthLoader(true);
-      }
-    }
-
     const supabase = createClient();
 
     // Get initial session
@@ -82,28 +64,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           isAuthenticated: !!session?.user,
           isConfigured: true,
         });
-
-        // If OAuth was detected and session is now resolved
-        if (session?.user && typeof window !== 'undefined') {
-          const isOAuth =
-            window.location.search.includes('code=') ||
-            window.location.hash.includes('access_token=') ||
-            window.location.pathname.startsWith('/auth/callback');
-
-          if (isOAuth) {
-            setShowAuthLoader(true);
-            if (authTimerRef.current) clearTimeout(authTimerRef.current);
-            authTimerRef.current = setTimeout(() => {
-              setAuthLoaderFinished(true);
-              setTimeout(() => {
-                setShowAuthLoader(false);
-              }, 500);
-            }, 1800);
-          }
-        }
       } catch {
         setState((prev) => ({ ...prev, loading: false }));
-        setShowAuthLoader(false);
       }
     };
 
@@ -111,7 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Listen for auth state changes (login, logout, token refresh)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event: AuthChangeEvent, session: Session | null) => {
+      (_event: AuthChangeEvent, session: Session | null) => {
         setState({
           user: session?.user ?? null,
           session,
@@ -119,23 +81,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           isAuthenticated: !!session?.user,
           isConfigured: true,
         });
-
-        if (event === 'SIGNED_IN') {
-          setShowAuthLoader(true);
-          if (authTimerRef.current) clearTimeout(authTimerRef.current);
-          authTimerRef.current = setTimeout(() => {
-            setAuthLoaderFinished(true);
-            setTimeout(() => {
-              setShowAuthLoader(false);
-            }, 500);
-          }, 1800);
-        }
       },
     );
 
     return () => {
       subscription.unsubscribe();
-      if (authTimerRef.current) clearTimeout(authTimerRef.current);
     };
   }, []);
 
@@ -196,19 +146,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider value={{ ...state, signOut, revokeAllSessions, refreshSession }}>
-      <AnimatePresence>
-        {showAuthLoader && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[999999] bg-black flex flex-col items-center justify-center select-none"
-          >
-            <BoredHandLoader finished={authLoaderFinished} text="AUTHENTICATING..." />
-          </motion.div>
-        )}
-      </AnimatePresence>
       {children}
     </AuthContext.Provider>
   );

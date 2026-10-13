@@ -63,7 +63,7 @@ export function BoredHandLoader({
         {/* Dynamic Contextual Text if custom or finished */}
         {(showCustomText || finished) && (
           <motion.p
-            className="text-stone-300 text-xs sm:text-sm font-bold tracking-[0.25em] text-center uppercase mt-4 px-4"
+            className="text-stone-300 text-xs sm:text-sm font-bold tracking-[0.25em] pl-[0.25em] text-center uppercase mt-4 px-4 w-full"
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: finished ? 1 : [0.7, 1, 0.7] }}
             transition={{ repeat: finished ? 0 : Infinity, duration: 1.6 }}

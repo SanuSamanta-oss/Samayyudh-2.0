@@ -83,6 +83,17 @@ export default function HistoryPage() {
     setSessions(prev => prev.filter(s => s.session.id !== sessionId));
   }
 
+  async function clearAbandonedSessions() {
+    const abandoned = sessions.filter(s => s.session.status === 'in_progress' && s.answeredCount === 0);
+    if (abandoned.length === 0) return;
+    for (const item of abandoned) {
+      await localDB.deleteSession(item.session.id);
+    }
+    setSessions(prev => prev.filter(s => !(s.session.status === 'in_progress' && s.answeredCount === 0)));
+  }
+
+  const abandonedCount = sessions.filter(s => s.session.status === 'in_progress' && s.answeredCount === 0).length;
+
   const filtered = sessions.filter(s => {
     const matchesSearch = searchQuery === '' ||
       s.session.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -112,6 +123,29 @@ export default function HistoryPage() {
         </h1>
         <p className="text-stone-500 mt-1">Your past exam sessions and performance</p>
       </div>
+
+      {/* Abandoned sessions cleanup banner */}
+      {abandonedCount > 0 && (
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-amber-300/60 bg-amber-500/10 text-amber-200">
+          <div className="flex items-center gap-2.5">
+            <span className="text-xl">⚡</span>
+            <div>
+              <p className="text-sm font-semibold text-foreground">
+                Found {abandonedCount} unsubmitted &quot;In Progress&quot; battle{abandonedCount > 1 ? 's' : ''} (0 questions answered)
+              </p>
+              <p className="text-xs text-stone-400">
+                These were started without submitting. You can clean them up in one click.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={clearAbandonedSessions}
+            className="flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg font-medium text-xs text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm shrink-0"
+          >
+            <Trash2 className="w-3.5 h-3.5" /> Clean Up {abandonedCount} Draft{abandonedCount > 1 ? 's' : ''}
+          </button>
+        </div>
+      )}
 
       {/* Search and Filter */}
       <div className="flex flex-col sm:flex-row gap-3">
@@ -227,28 +261,43 @@ export default function HistoryPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-1 shrink-0">
+                  <div className="flex items-center gap-1.5 shrink-0">
                     <button
                       onClick={() => deleteSession(session.id)}
-                      className="p-2 rounded-lg text-stone-400 hover:text-red-500 hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100"
+                      className="p-2 rounded-lg text-stone-400 hover:text-red-500 hover:bg-red-500/10 transition-colors"
+                      title="Delete session"
                       aria-label="Delete session"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
-                    <Link
-                      href={`/report?session=${session.id}`}
-                      className="p-2 rounded-lg text-stone-400 hover:text-brand-600 hover:bg-brand-50 transition-colors opacity-0 group-hover:opacity-100"
-                      aria-label="View printable report"
-                    >
-                      <Printer className="w-4 h-4" />
-                    </Link>
-                    <Link
-                      href={`/results?session=${session.id}`}
-                      className="p-2 rounded-lg text-stone-400 hover:text-brand-600 hover:bg-brand-50 transition-colors"
-                      aria-label="View results"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </Link>
+                    {session.status !== 'in_progress' && (
+                      <Link
+                        href={`/report?session=${session.id}`}
+                        className="p-2 rounded-lg text-stone-400 hover:text-brand-400 hover:bg-brand-500/10 transition-colors hidden sm:inline-flex"
+                        title="View printable report"
+                        aria-label="View printable report"
+                      >
+                        <Printer className="w-4 h-4" />
+                      </Link>
+                    )}
+                    {session.status === 'in_progress' ? (
+                      <Link
+                        href={`/exam/session?resume=${session.id}`}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 transition-colors shadow-sm"
+                        title="Resume battle"
+                      >
+                        Resume <ChevronRight className="w-3.5 h-3.5" />
+                      </Link>
+                    ) : (
+                      <Link
+                        href={`/results?session=${session.id}`}
+                        className="p-2 rounded-lg text-stone-400 hover:text-brand-400 hover:bg-brand-500/10 transition-colors"
+                        title="View results"
+                        aria-label="View results"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

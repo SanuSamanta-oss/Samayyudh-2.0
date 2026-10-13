@@ -63,10 +63,47 @@ function ExamSessionInner() {
     const mode = (searchParams.get('mode') || 'quick_battle') as ExamMode;
     const questionCount = Number(searchParams.get('questions') || 10);
     const duration = Number(searchParams.get('duration') || 3600);
+    const resumeId = searchParams.get('resume') || searchParams.get('session');
 
-    localDB.getAllCustomQuestions().then(customQs => {
-      // Select random questions from the combined bank
+    localDB.getAllCustomQuestions().then(async (customQs) => {
       const allQuestions = [...questionBank, ...customQs];
+
+      // 1. If explicit resume requested:
+      if (resumeId) {
+        const existing = await localDB.getSession(resumeId);
+        if (existing && existing.status === 'in_progress') {
+          const savedAnswers = await localDB.getAnswersBySession(existing.id);
+          const answerQIds = new Set(savedAnswers.map(a => a.question_id));
+          const matched = allQuestions.filter(q => answerQIds.has(q.id));
+          const remaining = allQuestions.filter(q => !answerQIds.has(q.id));
+          const needed = Math.max(0, existing.total_questions - matched.length);
+          const selected = [...matched, ...remaining.slice(0, needed)];
+          await initSession(existing, selected);
+          return;
+        }
+      }
+
+      // 2. Prevent duplicate ghost sessions on quick reload/re-entry:
+      const allSessions = await localDB.getAllSessions();
+      const recentEmptyDraft = allSessions.find(s => 
+        s.status === 'in_progress' && 
+        s.mode === mode &&
+        (Date.now() - new Date(s.started_at).getTime()) < 10 * 60 * 1000
+      );
+
+      if (recentEmptyDraft) {
+        const answers = await localDB.getAnswersBySession(recentEmptyDraft.id);
+        const hasAnswers = answers.some(a => a.answer_text.trim());
+        if (!hasAnswers) {
+          // Reuse this draft session instead of creating another duplicate
+          const shuffled = allQuestions.sort(() => Math.random() - 0.5);
+          const selected = shuffled.slice(0, Math.min(recentEmptyDraft.total_questions, shuffled.length));
+          await initSession(recentEmptyDraft, selected);
+          return;
+        }
+      }
+
+      // 3. Otherwise, create a clean new session
       const shuffled = allQuestions.sort(() => Math.random() - 0.5);
       const selected = shuffled.slice(0, Math.min(questionCount, shuffled.length));
 
@@ -91,7 +128,7 @@ function ExamSessionInner() {
         created_at: startTime,
       };
 
-      initSession(session, selected);
+      await initSession(session, selected);
     });
   }, [searchParams, state.session, initSession]);
 

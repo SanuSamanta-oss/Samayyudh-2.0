@@ -183,3 +183,26 @@ export const NAV_ITEMS = [
   { href: '/analytics', label: 'Analytics', icon: 'BarChart3' },
   { href: '/notes', label: 'Notes', icon: 'StickyNote' },
 ] as const;
+
+export function getExamDisplayName(identifier?: string | null): string {
+  if (!identifier) return 'EXAM';
+  const clean = identifier.trim();
+
+  // 1. Direct match on category code or name
+  const cat = EXAM_CATEGORIES.find(
+    (c) => c.code.toLowerCase() === clean.toLowerCase() || c.name.toLowerCase() === clean.toLowerCase()
+  );
+  if (cat) return cat.name;
+
+  // 2. Direct match on sub-exam code or name
+  for (const c of EXAM_CATEGORIES) {
+    const sub = c.exams?.find(
+      (e) => e.exam_code.toLowerCase() === clean.toLowerCase() || e.exam_name.toLowerCase() === clean.toLowerCase()
+    );
+    if (sub) return sub.exam_name;
+  }
+
+  // 3. Fallback: clean underscores
+  return clean.replace(/_/g, ' ');
+}
+

@@ -45,7 +45,7 @@ export default function LandingPage() {
     setTimeout(() => {
       setFinished(true);
       setTimeout(() => {
-        router.push('/practice');
+        router.push(`/practice?exam=${encodeURIComponent(name)}`);
       }, 800); // 800ms for unlocked animation
     }, 2000);
   };

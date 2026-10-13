@@ -11,7 +11,7 @@ import {
   TrendingUp, ChevronRight, BookOpen, Trophy, Flame,
   Zap, Calendar, ArrowRight
 } from 'lucide-react';
-import { EXAM_CATEGORIES } from '@/lib/constants';
+import { EXAM_CATEGORIES, getExamDisplayName } from '@/lib/constants';
 import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import { useAuth } from '@/components/providers/AuthProvider';
 import * as localDB from '@/lib/store/local-db';
@@ -159,8 +159,9 @@ export default function DashboardPage() {
   const greeting = getGreeting();
   const selectedAvatar = mounted ? currentAvatar : null;
 
-  const handleExamClick = (code: string) => {
-    setLoadingExam(code);
+  const handleExamClick = (code: string, customName?: string) => {
+    const displayName = customName || getExamDisplayName(code);
+    setLoadingExam(displayName);
     setTimeout(() => {
       setFinished(true);
       setTimeout(() => router.push(`/practice?exam=${code}`), 800);
@@ -330,7 +331,13 @@ export default function DashboardPage() {
                 icon={a.icon}
                 gradient={a.gradient}
                 delay={i}
-                onClick={() => handleExamClick('UNIVERSITY')}
+                onClick={() => {
+                  setLoadingExam(a.label);
+                  setTimeout(() => {
+                    setFinished(true);
+                    setTimeout(() => router.push(`/practice?mode=${a.mode}`), 800);
+                  }, 2000);
+                }}
               />
             ))}
           </motion.div>
@@ -354,7 +361,7 @@ export default function DashboardPage() {
                 animate="visible"
               >
                 <button
-                  onClick={() => handleExamClick(cat.code)}
+                  onClick={() => handleExamClick(cat.code, cat.name)}
                   className="w-full group text-left flex items-center gap-3 p-3.5 rounded-2xl border border-border bg-card hover:shadow-md hover:border-brand-200 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {cat.logo ? (
@@ -404,7 +411,7 @@ export default function DashboardPage() {
                 <p className="text-xs text-muted mt-0.5">Start your first battle to see your history here</p>
               </div>
               <button
-                onClick={() => handleExamClick('UNIVERSITY')}
+                onClick={() => router.push('/practice')}
                 className="inline-flex items-center gap-2 mt-1 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-brand hover:opacity-90 active:scale-[0.98] transition-all"
               >
                 <Swords className="w-4 h-4" />
@@ -429,7 +436,7 @@ export default function DashboardPage() {
                         </div>
                         <div className="min-w-0 flex-1">
                           <h3 className="font-bold text-foreground truncate group-hover:text-brand-600 transition-colors">
-                            {cat?.name || session.exam_code || 'Exam Session'}
+                            {cat?.name || getExamDisplayName(session.exam_code) || 'Exam Session'}
                           </h3>
                           <p className="text-xs text-muted flex items-center gap-2 mt-0.5">
                             <Calendar className="w-3.5 h-3.5" />
@@ -481,12 +488,12 @@ export default function DashboardPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4"
           >
             <OmnitrixLoader
               finished={finished}
-              text={`PREPARING ${loadingExam.toUpperCase()}...`}
-              logoUrl={EXAM_CATEGORIES.find((c) => c.code === loadingExam)?.logo}
+              text={`PREPARING ${getExamDisplayName(loadingExam).toUpperCase()}...`}
+              logoUrl={EXAM_CATEGORIES.find((c) => c.code === loadingExam || c.name.toLowerCase() === loadingExam.toLowerCase())?.logo}
             />
           </motion.div>
         )}

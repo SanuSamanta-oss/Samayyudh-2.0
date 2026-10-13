@@ -1,26 +1,52 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   Clock, ChevronRight, ChevronLeft
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { EXAM_CATEGORIES, EXAM_MODES, EXAM_DURATIONS } from '@/lib/constants';
+import { EXAM_CATEGORIES, EXAM_MODES, EXAM_DURATIONS, getExamDisplayName } from '@/lib/constants';
 import { NewspaperBattleSummary } from '@/components/practice/NewspaperBattleSummary';
 import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import type { ExamMode } from '@/types';
 
-export default function PracticePage() {
+function PracticeContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [step, setStep] = useState(0); // 0: category, 1: sub-exam, 2: mode, 3: duration, 4: confirm
   const [selectedCategoryCode, setSelectedCategoryCode] = useState<string | null>(null);
   const [selectedExamCode, setSelectedExamCode] = useState<string | null>(null);
   const [selectedMode, setSelectedMode] = useState<ExamMode | null>(null);
   const [selectedDuration, setSelectedDuration] = useState<number | null>(null);
   const [customCount, setCustomCount] = useState(20);
+
+  // Pre-select category or mode if passed in URL query
+  useEffect(() => {
+    const examParam = searchParams.get('exam');
+    const modeParam = searchParams.get('mode') as ExamMode | null;
+
+    if (examParam) {
+      const cat = EXAM_CATEGORIES.find(
+        (c) => c.code.toLowerCase() === examParam.toLowerCase() || c.name.toLowerCase() === examParam.toLowerCase()
+      );
+      if (cat) {
+        setSelectedCategoryCode(cat.code);
+        if (cat.exams && cat.exams.length > 0) {
+          setStep(1); // Go to branch selection
+        } else {
+          setSelectedExamCode(null);
+          setStep(2); // Skip to mode selection
+        }
+      }
+    }
+
+    if (modeParam && EXAM_MODES.some((m) => m.mode === modeParam)) {
+      setSelectedMode(modeParam);
+    }
+  }, [searchParams]);
 
   const examCategory = EXAM_CATEGORIES.find(c => c.code === selectedCategoryCode);
   const subExam = examCategory?.exams?.find(e => e.exam_code === selectedExamCode);
@@ -52,11 +78,12 @@ export default function PracticePage() {
   };
 
   if (isStarting) {
+    const examDisplayName = subExam?.exam_name || examCategory?.name || 'EXAM';
     return (
       <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4">
         <OmnitrixLoader 
           finished={finished} 
-          text="PREPARING EXAM..." 
+          text={`PREPARING ${examDisplayName.toUpperCase()}...`} 
           logoUrl={examCategory?.logo}
         />
       </div>
@@ -305,5 +332,19 @@ export default function PracticePage() {
         )}
       </motion.div>
     </div>
+  );
+}
+
+export default function PracticePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <PracticeContent />
+    </Suspense>
   );
 }

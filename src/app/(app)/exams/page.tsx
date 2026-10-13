@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { EXAM_CATEGORIES } from '@/lib/constants';
+import { EXAM_CATEGORIES, getExamDisplayName } from '@/lib/constants';
 import { ChevronRight } from 'lucide-react';
 import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 
@@ -13,8 +13,9 @@ export default function ExamsPage() {
   const [loadingExam, setLoadingExam] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
 
-  const handleExamClick = (code: string) => {
-    setLoadingExam(code);
+  const handleExamClick = (code: string, customName?: string) => {
+    const displayName = customName || getExamDisplayName(code);
+    setLoadingExam(displayName);
     setTimeout(() => {
       setFinished(true);
       setTimeout(() => {
@@ -39,7 +40,7 @@ export default function ExamsPage() {
               transition={{ delay: i * 0.05, duration: 0.4 }}
             >
               <button
-                onClick={() => handleExamClick(cat.code)}
+                onClick={() => handleExamClick(cat.code, cat.name)}
                 className="w-full text-left group flex items-start gap-4 p-5 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-brand-200 transition-all duration-300"
               >
                 {cat.logo ? (
@@ -70,8 +71,8 @@ export default function ExamsPage() {
           >
             <OmnitrixLoader 
               finished={finished} 
-              text={`PREPARING ${loadingExam.toUpperCase()}...`} 
-              logoUrl={EXAM_CATEGORIES.find(c => c.code === loadingExam)?.logo}
+              text={`PREPARING ${getExamDisplayName(loadingExam).toUpperCase()}...`} 
+              logoUrl={EXAM_CATEGORIES.find(c => c.code === loadingExam || c.name.toLowerCase() === loadingExam.toLowerCase())?.logo}
             />
           </motion.div>
         )}

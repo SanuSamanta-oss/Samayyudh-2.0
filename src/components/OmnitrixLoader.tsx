@@ -1,12 +1,11 @@
 'use client';
 
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export function OmnitrixLoader({ 
   text = 'LOADING...', 
   finished = false,
-  logoUrl
 }: { 
   text?: string;
   finished?: boolean;
@@ -32,21 +31,6 @@ export function OmnitrixLoader({
               className="w-[280px] sm:w-[350px] md:w-[400px] h-auto object-contain pointer-events-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]"
             />
           </picture>
-
-          {/* Finished State: Logo or Success badge overlay */}
-          <AnimatePresence>
-            {finished && logoUrl && (
-              <motion.div
-                className="absolute z-20 flex items-center justify-center w-[88px] h-[88px] rounded-2xl overflow-hidden bg-black/95 shadow-[0_0_30px_rgba(255,255,255,0.25)] border border-white/20 backdrop-blur-md"
-                initial={{ opacity: 0, scale: 0.3 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <img src={logoUrl} alt="Exam Logo" className="w-full h-full object-contain p-2.5" />
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
 
         {/* Dynamic Contextual Text (if specific exam or action is being prepared) */}

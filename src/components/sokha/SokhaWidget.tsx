@@ -35,8 +35,9 @@ export function SokhaWidget() {
   const router = useRouter();
   const { user } = useAuth();
 
-  // Hide during active exams to maintain exam integrity
+  // Hide during active exams to maintain exam integrity, and on settings page where timeline action buttons reside
   const isExamSession = pathname?.startsWith('/exam/') && pathname !== '/exams';
+  const isSettingsPage = pathname === '/settings' || pathname?.startsWith('/settings/');
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<SokhaMessage[]>([]);
@@ -540,8 +541,8 @@ export function SokhaWidget() {
     }
   };
 
-  // If in active exam, hide widget to preserve exam integrity
-  if (isExamSession) return null;
+  // If in active exam or settings page, hide widget so it does not block settings action controls
+  if (isExamSession || isSettingsPage) return null;
 
   const hasMessages = messages.length > 0;
 

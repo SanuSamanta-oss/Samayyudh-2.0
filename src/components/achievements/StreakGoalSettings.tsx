@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Target, Check, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
+import { X, Target, Check, AlertCircle, Bell } from 'lucide-react';
 import { PRESET_STREAK_GOALS, MAX_CUSTOM_GOAL_DAYS } from '@/lib/achievements/definitions';
 
 export interface StreakGoalSettingsProps {
@@ -190,6 +191,26 @@ export function StreakGoalSettings({
                 <span>{error}</span>
               </p>
             )}
+          </div>
+
+          {/* Daily Reminder Link */}
+          <div className="flex items-center justify-between p-3.5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200/60 dark:border-purple-800/40 mb-5">
+            <div className="flex items-center gap-2.5">
+              <span className="p-2 rounded-xl bg-purple-600 text-white shadow-xs">
+                <Bell className="w-4 h-4" />
+              </span>
+              <div>
+                <p className="text-xs font-bold text-foreground">Need a Daily Practice Alarm?</p>
+                <p className="text-[11px] text-muted">Set an 8:00 PM alarm so you never lose your streak</p>
+              </div>
+            </div>
+            <Link
+              href="/settings"
+              onClick={onClose}
+              className="px-3 py-1.5 rounded-xl text-xs font-bold text-purple-700 dark:text-purple-300 bg-white dark:bg-purple-900/60 border border-purple-200 dark:border-purple-700/60 hover:bg-purple-100 transition-colors shadow-2xs"
+            >
+              Set Alarm →
+            </Link>
           </div>
 
           {/* Action Buttons */}

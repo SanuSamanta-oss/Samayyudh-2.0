@@ -16,6 +16,7 @@ import * as localDB from '@/lib/store/local-db';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { AVATARS, getSelectedAvatar, setSelectedAvatarId, clearSelectedAvatar, setCustomAvatar, resizeImageFile, type AvatarDef } from '@/lib/avatars';
 import { ProfilePictureModal } from '@/components/ProfilePictureModal';
+import { ReminderSettingsPanel } from '@/components/notifications/ReminderSettingsPanel';
 
 type SidebarTab = 'profile' | 'sessions' | 'achievements' | 'analytics' | 'settings';
 
@@ -873,9 +874,15 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="space-y-4"
+                className="space-y-6"
               >
-                <h2 className="text-base font-bold text-foreground">Settings</h2>
+                <div>
+                  <h2 className="text-base font-bold text-foreground">Settings & Alarms</h2>
+                  <p className="text-xs text-muted mt-0.5">Manage daily study reminders, audio alarms, and device notifications</p>
+                </div>
+
+                {/* Reminder Settings Panel */}
+                <ReminderSettingsPanel />
 
                 {/* Storage info */}
                 <div className="bg-card rounded-2xl border border-border p-5 space-y-4">

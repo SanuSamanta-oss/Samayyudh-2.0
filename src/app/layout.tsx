@@ -4,6 +4,7 @@ import { AuthProvider } from "@/components/providers/AuthProvider";
 import { ThemeInitializer } from "@/components/providers/ThemeInitializer";
 import { SokhaWidget } from "@/components/sokha/SokhaWidget";
 import { OfflineScreen } from "@/components/offline/OfflineScreen";
+import { ReminderScheduler } from "@/components/notifications/ReminderScheduler";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeInitializer />
         <AuthProvider>
           {children}
+          <ReminderScheduler />
           <SokhaWidget />
           <OfflineScreen />
         </AuthProvider>

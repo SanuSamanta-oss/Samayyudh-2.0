@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, Swords, GraduationCap, Library,
   History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut, Trophy,
-  Bot
+  Bot, Bell, Settings
 } from 'lucide-react';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
@@ -219,6 +219,14 @@ export function Navbar() {
             {/* Right */}
             <div className="flex items-center gap-3">
               <ThemeToggle />
+              <Link
+                href="/settings"
+                className="p-2 rounded-lg text-stone-500 hover:text-purple-600 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
+                title="Study Alarms & Reminders"
+                aria-label="Study Alarms & Reminders"
+              >
+                <Bell className="w-5 h-5" />
+              </Link>
               <button className="p-2 rounded-lg text-stone-500 hover:bg-stone-100 transition-colors">
                 <Search className="w-5 h-5" />
               </button>
@@ -259,8 +267,16 @@ export function Navbar() {
             <span className="text-lg font-bold text-gradient-brand">সময়যুদ্ধ</span>
             <span className="text-[10px] font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1 py-0.5 rounded">2.0</span>
           </Link>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <ThemeToggle />
+            <Link
+              href="/settings"
+              className="p-1.5 rounded-lg text-stone-500 hover:text-purple-600 transition-colors"
+              title="Study Reminders & Settings"
+              aria-label="Settings"
+            >
+              <Bell className="w-5 h-5" />
+            </Link>
             <button className="p-1.5 rounded-lg text-stone-500" aria-label="Search">
               <Search className="w-5 h-5" />
             </button>
@@ -353,6 +369,21 @@ export function Navbar() {
                 </Link>
               );
             })}
+
+            <Link
+              href="/settings"
+              onClick={() => setMobileMenuOpen(false)}
+              className={cn(
+                'flex items-center gap-3 px-4 py-3 rounded-2xl text-base font-semibold transition-all',
+                pathname === '/settings'
+                  ? 'bg-purple-100 dark:bg-purple-950/60 text-purple-950 dark:text-purple-100 border border-purple-300 dark:border-purple-500/50 shadow-[0_0_14px_rgba(168,85,247,0.3)]'
+                  : 'text-stone-950 dark:text-white hover:bg-stone-100 dark:hover:bg-white/10'
+              )}
+            >
+              <Bell className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <span>Reminders & Settings</span>
+            </Link>
+
             {isAuthenticated && (
               <div className="pt-3 mt-2 border-t border-border">
                 <button

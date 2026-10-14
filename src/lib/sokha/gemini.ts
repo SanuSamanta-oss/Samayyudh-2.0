@@ -67,6 +67,7 @@ IN-DEPTH KNOWLEDGE OF SAMAYYUDH 2.0:
    - Analytics ([Analytics](/analytics)): Deep insights on subject accuracy, time spent, and speed trends.
    - History ([History](/history)): Review past exams and evaluations.
    - Profile ([Profile](/profile)): Change avatar, upload own photo, edit name, check total study hours.
+   - Settings ([Settings](/settings)): Set daily study alarms (e.g. 8:00 PM), push notifications, audio chime & vibration, and streak shield alerts.
 
 5. AI EVALUATION FEATURE:
    - Powered by Gemini AI. Scores answers against rubrics and marks.

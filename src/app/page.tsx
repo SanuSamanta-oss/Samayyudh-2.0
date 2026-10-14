@@ -289,13 +289,20 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="max-w-6xl mx-auto px-4 lg:px-6 py-16 md:py-20 overflow-hidden">
-        <div className="text-center mb-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-foreground">Built for Real Exams</h3>
-          <p className="text-muted mt-2">Not a chatbot. An exam time simulator.</p>
+      {/* Features — Wavy ID Card Showcase */}
+      <section className="relative max-w-6xl mx-auto px-4 lg:px-6 py-16 md:py-24 overflow-hidden">
+        {/* Soft Ambient Lavender/Purple Wavy Backdrop Glow (matching reference image background) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-400/10 dark:bg-purple-600/10 rounded-full blur-3xl pointer-events-none id-card-wave-ambient" />
+
+        <div className="text-center mb-12 sm:mb-16 relative z-10">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800/60 text-purple-700 dark:text-purple-300 text-xs font-semibold uppercase tracking-wider mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+            Official Exam Badges
+          </div>
+          <h3 className="text-2xl md:text-4xl font-extrabold text-foreground tracking-tight">Built for Real Exams</h3>
+          <p className="text-muted mt-2 text-sm sm:text-base max-w-md mx-auto">Not a chatbot. A battle-hardened exam time simulator.</p>
         </div>
-        <div className="flex justify-center pb-8">
+        <div className="flex justify-center pb-8 relative z-10">
           <FeatureIdCards />
         </div>
       </section>

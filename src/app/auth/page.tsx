@@ -133,15 +133,20 @@ function AuthPageContent() {
       }
       if (result.error) throw result.error;
 
-      // Check if user has already logged in before or already has a display name
-      const isExistingUser =
-        hasUserLoggedInBefore(result.data?.user) ||
-        !!result.data?.user?.user_metadata?.display_name;
+      // Check if user already has a display name configured
+      const hasDisplayName = !!result.data?.user?.user_metadata?.display_name;
 
-      if (isExistingUser) {
-        // Returning user: NEVER show the hand animation! Immediately route to destination
-        markUserLoggedIn(result.data?.user);
-        router.push(targetUrl);
+      markUserLoggedIn(result.data?.user);
+
+      if (hasDisplayName) {
+        // User already has a profile: show full hand gesture animation then route
+        setRedirecting(true);
+        setTimeout(() => {
+          setRedirectingFinished(true);
+          setTimeout(() => {
+            router.push(targetUrl);
+          }, 700);
+        }, 2200);
         return;
       }
 
@@ -169,20 +174,14 @@ function AuthPageContent() {
       });
       if (updateError) throw updateError;
 
-      const alreadySeen = hasUserLoggedInBefore();
       markUserLoggedIn();
 
-      if (!alreadySeen) {
-        // Brand-new user: show onboarding animation for the first and only time
-        setRedirecting(true);
-        setTimeout(() => {
-          setRedirectingFinished(true);
-          setTimeout(() => router.push(targetUrl), 500);
-        }, 1400);
-      } else {
-        // Already logged in before: navigate directly without animation
-        router.push(targetUrl);
-      }
+      // Show full hand gesture animation upon completing profile setup
+      setRedirecting(true);
+      setTimeout(() => {
+        setRedirectingFinished(true);
+        setTimeout(() => router.push(targetUrl), 700);
+      }, 2200);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save name. Please try again.');
     } finally {
@@ -225,9 +224,9 @@ function AuthPageContent() {
 
   return (
     <>
-      {/* Full-screen redirect overlay: ONLY shown for brand-new users */}
+      {/* Full-screen redirect overlay: shown whenever authentication completes */}
       <AnimatePresence>
-        {redirecting && !hasUserLoggedInBefore() && (
+        {redirecting && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

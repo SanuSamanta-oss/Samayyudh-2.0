@@ -16,7 +16,7 @@ export function OmnitrixLoader({
   logoUrl?: string;
   variant?: 'penspin' | 'boredhand';
 }) {
-  if (variant === 'boredhand' && !hasUserLoggedInBefore()) {
+  if (variant === 'boredhand') {
     return <BoredHandLoader text={text} finished={finished} />;
   }
 

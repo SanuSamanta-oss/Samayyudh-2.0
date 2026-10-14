@@ -769,3 +769,64 @@ body {
 .contant_box_404 {
   margin-top: -50px;
 }
+
+/* ============================================================
+   Wavy ID Card Badge & Lanyard Animations
+   Modeled after realistic hanging lanyard physics:
+   - Gentle natural pendulum sway
+   - Wavy breeze floating motion
+   - Top-center pivot anchor
+   ============================================================ */
+
+@keyframes idCardWavySway {
+  0% {
+    transform: rotate(0deg) translateX(0px);
+  }
+  20% {
+    transform: rotate(2.2deg) translateX(5px) translateY(1px);
+  }
+  42% {
+    transform: rotate(0.4deg) translateX(1px) translateY(0px);
+  }
+  65% {
+    transform: rotate(-2.2deg) translateX(-5px) translateY(1px);
+  }
+  86% {
+    transform: rotate(-0.5deg) translateX(-1px) translateY(0px);
+  }
+  100% {
+    transform: rotate(0deg) translateX(0px);
+  }
+}
+
+@keyframes idCardAmbientWave {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-12px, 8px) scale(1.06);
+    opacity: 0.85;
+  }
+}
+
+.id-card-wavy {
+  animation: idCardWavySway 7.2s ease-in-out infinite;
+  transform-origin: top center;
+  will-change: transform;
+}
+
+.id-card-wavy:hover {
+  animation-play-state: paused;
+}
+
+.id-card-wave-ambient {
+  animation: idCardAmbientWave 12s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .id-card-wavy,
+  .id-card-wave-ambient {
+    animation: none !important;
+  }
+}

@@ -9,34 +9,35 @@ import {
   History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut, Trophy,
   Bot, Bell, Settings
 } from 'lucide-react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import gsap from 'gsap';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { getSelectedAvatar } from '@/lib/avatars';
 import { CurvedTabBar, TabItem } from './CurvedTabBar';
 
 const iconMap: Record<string, React.ReactNode> = {
-  LayoutDashboard: <LayoutDashboard className="w-4.5 h-4.5" />,
-  Swords: <Swords className="w-4.5 h-4.5" />,
-  GraduationCap: <GraduationCap className="w-4.5 h-4.5" />,
-  Bot: <Bot className="w-4.5 h-4.5" />,
-  Library: <Library className="w-4.5 h-4.5" />,
-  History: <History className="w-4.5 h-4.5" />,
-  BarChart3: <BarChart3 className="w-4.5 h-4.5" />,
-  StickyNote: <StickyNote className="w-4.5 h-4.5" />,
-  ShieldAlert: <ShieldAlert className="w-4.5 h-4.5" />,
-  Trophy: <Trophy className="w-4.5 h-4.5" />,
-  User: <User className="w-4.5 h-4.5" />,
+  LayoutDashboard: <LayoutDashboard className="w-5 h-5" />,
+  Swords: <Swords className="w-5 h-5" />,
+  GraduationCap: <GraduationCap className="w-5 h-5" />,
+  Bot: <Bot className="w-5 h-5" />,
+  Library: <Library className="w-5 h-5" />,
+  History: <History className="w-5 h-5" />,
+  BarChart3: <BarChart3 className="w-5 h-5" />,
+  StickyNote: <StickyNote className="w-5 h-5" />,
+  ShieldAlert: <ShieldAlert className="w-5 h-5" />,
+  Trophy: <Trophy className="w-5 h-5" />,
+  User: <User className="w-5 h-5" />,
 };
 
 const navItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard', color: '#7c3aed' },
-  { href: '/practice', label: 'Practice', icon: 'Swords', color: '#6366f1' },
-  { href: '/exams', label: 'Exams', icon: 'GraduationCap', color: '#8b5cf6' },
+  { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard', color: '#9333ea' },
+  { href: '/practice', label: 'Practice', icon: 'Swords', color: '#7c3aed' },
+  { href: '/exams', label: 'Exams', icon: 'GraduationCap', color: '#6366f1' },
   { href: '/achievements', label: 'Badges', icon: 'Trophy', color: '#a855f7' },
-  { href: '/questions', label: 'Questions', icon: 'Library', color: '#9333ea' },
+  { href: '/questions', label: 'Questions', icon: 'Library', color: '#8b5cf6' },
   { href: '/history', label: 'History', icon: 'History', color: '#7e22ce' },
-  { href: '/analytics', label: 'Stats', icon: 'BarChart3', color: '#6b21a8' },
+  { href: '/analytics', label: 'Analytics', icon: 'BarChart3', color: '#6b21a8' },
   { href: '/admin', label: 'Admin', icon: 'ShieldAlert', color: '#581c87' },
 ];
 
@@ -56,6 +57,52 @@ export function Navbar() {
   const { user, signOut, isAuthenticated } = useAuth();
   const [currentAvatar, setCurrentAvatar] = useState<ReturnType<typeof getSelectedAvatar>>(null);
 
+  // Desktop navigation track and bubble animation refs (previous desktop animation)
+  const navRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const bgBubbleRef = useRef<HTMLDivElement>(null);
+  const activeBubbleRef = useRef<HTMLDivElement>(null);
+  const prevIndexRef = useRef<number>(0);
+
+  // Determine active nav index for desktop
+  const activeIndex = Math.max(
+    0,
+    navItems.findIndex((item) => pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href)))
+  );
+
+  // Animate previous desktop gooey fluid bubble to active tab
+  useEffect(() => {
+    const targetElement = itemRefs.current[activeIndex];
+    const navContainer = navRef.current;
+    if (!targetElement || !navContainer || !bgBubbleRef.current || !activeBubbleRef.current) return;
+
+    const navRect = navContainer.getBoundingClientRect();
+    const targetRect = targetElement.getBoundingClientRect();
+    const centerX = targetRect.left - navRect.left + targetRect.width / 2;
+
+    const activeItem = navItems[activeIndex];
+    const bubbleColor = activeItem.color;
+
+    const tl = gsap.timeline();
+
+    if (prevIndexRef.current === activeIndex) {
+      // Initial positioning - droplet hangs downwards below navbar
+      gsap.set(bgBubbleRef.current, { left: centerX, bottom: -18, backgroundColor: bubbleColor });
+      gsap.set(activeBubbleRef.current, { left: centerX, bottom: -24, backgroundColor: '#ffffff', opacity: 1 });
+    } else {
+      // Fluid goo droplet wave dipping downwards below the navigation track
+      tl.to(bgBubbleRef.current, { duration: 0.15, bottom: 2, ease: 'power2.out' }, 0)
+        .to(activeBubbleRef.current, { duration: 0.12, bottom: 6, opacity: 0, ease: 'power2.out' }, 0)
+        .to(bgBubbleRef.current, { duration: 0.28, left: centerX, ease: 'power2.inOut' }, 0.08)
+        .to(bgBubbleRef.current, { duration: 0.22, bottom: -18, ease: 'back.out(1.8)' }, 0.22)
+        .set(activeBubbleRef.current, { left: centerX }, 0.22)
+        .to(activeBubbleRef.current, { duration: 0.25, bottom: -24, opacity: 1, ease: 'back.out(2)' }, 0.24)
+        .to(bgBubbleRef.current, { duration: 0.3, backgroundColor: bubbleColor, ease: 'power2.out' }, 0);
+    }
+
+    prevIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
   useEffect(() => {
     setMounted(true);
     setCurrentAvatar(getSelectedAvatar());
@@ -70,18 +117,7 @@ export function Navbar() {
     };
   }, []);
 
-  // Format tab items for CurvedTabBar
-  const desktopTabs: TabItem[] = useMemo(
-    () =>
-      navItems.map((item) => ({
-        href: item.href,
-        label: item.label,
-        icon: iconMap[item.icon],
-        color: item.color,
-      })),
-    []
-  );
-
+  // Format mobile tab items for the Purrweb animated CurvedTabBar
   const mobileTabs: TabItem[] = useMemo(
     () =>
       mobileNavItems.map((item) => ({
@@ -103,22 +139,97 @@ export function Navbar() {
 
   return (
     <>
-      {/* Desktop Navbar with Purrweb UX Animated Curved Tab Bar */}
-      <header className="hidden md:block sticky top-0 z-30 border-b border-border bg-card/85 backdrop-blur-lg overflow-visible">
+      {/* Desktop Navbar with Previous Gooey Fluid Wave & Bubble Animation */}
+      <header className="hidden md:block sticky top-0 z-30 border-b border-border bg-card/80 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-4 lg:px-6">
-          <div className="flex items-center justify-between h-15 py-1">
+          <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
               <span className="text-xl font-bold text-gradient-brand">সময়যুদ্ধ</span>
               <span className="text-xs font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1.5 py-0.5 rounded-md">2.0</span>
             </Link>
 
-            {/* Exact Purrweb UX Animated Curved Tab Bar for Desktop */}
-            <div className="relative flex items-center justify-center">
-              <CurvedTabBar items={desktopTabs} pathname={pathname} variant="desktop" />
+            {/* Nav Links with Previous Exact Gooey Fluid Wave and Popping Bubble */}
+            <div className="relative flex items-center">
+              {/* SVG Gooey Filter */}
+              <svg width="0" height="0" className="absolute">
+                <defs>
+                  <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" id="blurFilter" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -9" result="goo" />
+                    <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+                  </filter>
+                </defs>
+              </svg>
+
+              {/* Gooey Fluid Canvas Container */}
+              <div 
+                ref={navRef}
+                className="relative flex items-center px-2 py-1.5 rounded-full bg-stone-100/90 dark:bg-stone-900/90 border border-stone-200/70 dark:border-white/10 backdrop-blur-md shadow-inner"
+              >
+                {/* Goo Liquid Background Layer with Filter */}
+                <div 
+                  className="absolute inset-0 rounded-full overflow-visible pointer-events-none -z-10"
+                  style={{ filter: 'url(#goo)' }}
+                >
+                  {/* Fluid Base strip */}
+                  <div 
+                    className="absolute inset-x-0 bottom-0 top-0 rounded-full transition-colors duration-300 opacity-90"
+                    style={{ backgroundColor: navItems[activeIndex]?.color || '#9333ea' }}
+                  />
+                  {/* Goo Bubble (merges and pulls fluidly) */}
+                  <div
+                    ref={bgBubbleRef}
+                    className="absolute -translate-x-1/2 w-14 h-14 rounded-full pointer-events-none"
+                    style={{
+                      backgroundColor: navItems[activeIndex]?.color || '#9333ea',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+                    }}
+                  />
+                </div>
+
+                {/* The Floating / Droplet Bubble with Icon hanging DOWNWARD below navbar */}
+                <div
+                  ref={activeBubbleRef}
+                  className="absolute -translate-x-1/2 w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white/80 dark:border-stone-800 pointer-events-none z-20 text-purple-700 dark:text-purple-400 bg-white dark:bg-stone-900 transition-colors duration-300"
+                  style={{
+                    boxShadow: '0 10px 24px -2px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.2)',
+                  }}
+                >
+                  <span className="scale-100 flex items-center justify-center">
+                    {iconMap[navItems[activeIndex]?.icon]}
+                  </span>
+                </div>
+
+                {/* Navigation Items (perfectly centered in the middle of track) */}
+                <nav className="relative z-10 flex items-center gap-1">
+                  {navItems.map((item, idx) => {
+                    const isActive = idx === activeIndex;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        ref={(el) => {
+                          itemRefs.current[idx] = el;
+                        }}
+                        className={cn(
+                          'relative z-10 flex items-center justify-center min-w-[76px] h-8 px-3.5 rounded-full text-xs transition-all duration-200 select-none cursor-pointer text-center',
+                          isActive
+                            ? 'text-white font-extrabold tracking-wide'
+                            : 'text-white/80 hover:text-white hover:opacity-100 opacity-80 font-semibold'
+                        )}
+                      >
+                        <span className="leading-none text-center block">
+                          {item.label}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </div>
             </div>
 
-            {/* Right Controls */}
+            {/* Right */}
             <div className="flex items-center gap-3">
               <ThemeToggle />
               <Link

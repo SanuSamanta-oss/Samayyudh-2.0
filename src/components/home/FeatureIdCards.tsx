@@ -1,15 +1,14 @@
 'use client';
 
 // ============================================================
-// SamayYudh 2.0 — Realistic Purple Lanyard ID Card Badges (Refined Size)
-// Identical match to reference mockup (https://pin.it/65z4QwIvM):
-// - Vibrant purple woven fabric lanyard ribbon with herringbone/twill weave
-// - Folded bottom hem with horizontal dashed thread stitch line
-// - Polished silver chrome D-ring, cylindrical swivel collar & lobster clip
-// - Hook latches through the oblong punch-hole slot of the card
-// - Refined, slightly smaller white satin PVC badge with rounded corners & gloss sheen
-// - Natural wavy swinging pendulum physics (id-card-wavy)
-// - Fanned 3-card deck with interactive touch/mouse drag & spring transitions
+// SamayYudh 2.0 — Compact, Clean Feature ID Cards
+// Restored to the original clean layout:
+// - Smaller, more compact proportions (fits naturally without overflow)
+// - Simpler presentation: vibrant gradient header, centered emblem,
+//   concise typography & minimalist barcode strip
+// - Completely BORDERLESS (zero border or ring classes, pure soft depth & shadows)
+// - Dual-theme support (light & dark mode)
+// - Woven lanyard strap with smooth chrome clasp and gentle pendulum sway
 // ============================================================
 
 import { useState } from 'react';
@@ -17,146 +16,87 @@ import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from '
 import {
   Timer, PenLine, Target, Brain, Zap, Award,
   BookOpen, BarChart3, Shield, ChevronLeft, ChevronRight,
-  Sparkles,
+  type LucideIcon,
 } from 'lucide-react';
 
 const features = [
   {
     icon: Timer,
     title: 'Persistent Timer',
-    badge: 'TIME INTELLIGENCE',
-    roleTag: 'TIMER',
     desc: 'Survives refresh, tab switches, and network drops. Your time never lies.',
     id: '01',
-    code: 'SY2-TMR-88',
+    color: '#6366f1',
+    light: '#e0e7ff',
   },
   {
     icon: PenLine,
     title: 'Real Answer Writing',
-    badge: 'ACTIVE PRACTICE',
-    roleTag: 'WRITING',
     desc: 'Write full answers, not just click options. Track word count and structure.',
     id: '02',
-    code: 'SY2-RAW-42',
+    color: '#8b5cf6',
+    light: '#ede9fe',
   },
   {
     icon: Target,
     title: 'Time Pressure Analysis',
-    badge: 'SPEED DIAGNOSTICS',
-    roleTag: 'PRESSURE',
     desc: 'Know exactly where you spend too much — or too little — time.',
     id: '03',
-    code: 'SY2-TPA-91',
+    color: '#ec4899',
+    light: '#fce7f3',
   },
   {
     icon: Brain,
     title: 'AI Evaluation',
-    badge: 'GEMINI 2.5 FLASH',
-    roleTag: 'AI ENGINE',
     desc: 'Gemini-powered analysis of correctness, completeness, and exam-readiness.',
     id: '04',
-    code: 'SY2-AIE-17',
+    color: '#0ea5e9',
+    light: '#e0f2fe',
   },
   {
     icon: Zap,
     title: 'Auto-Save & Offline',
-    badge: 'INDEXEDDB BACKUP',
-    roleTag: 'OFFLINE',
     desc: 'Answers save automatically. IndexedDB backup keeps data safe offline.',
     id: '05',
-    code: 'SY2-ASO-63',
+    color: '#f59e0b',
+    light: '#fef3c7',
   },
   {
     icon: Award,
     title: 'Half Century & Century',
-    badge: 'EXAM MILESTONES',
-    roleTag: 'MILESTONE',
     desc: 'Milestone celebrations at 50 and 100 questions. Track your exam readiness.',
     id: '06',
-    code: 'SY2-HCC-50',
+    color: '#10b981',
+    light: '#d1fae5',
   },
   {
     icon: BookOpen,
     title: 'Multi-Exam Support',
-    badge: 'ALL-INDIA PATTERNS',
-    roleTag: 'EXAMS',
     desc: 'GATE, JEE, UPSC, University — one engine, every exam pattern.',
     id: '07',
-    code: 'SY2-MES-09',
+    color: '#f43f5e',
+    light: '#ffe4e6',
   },
   {
     icon: BarChart3,
     title: 'Deep Analytics',
-    badge: 'SCORE DIAGNOSTICS',
-    roleTag: 'ANALYTICS',
     desc: 'Score by topic, time per question, weak areas, and readiness metrics.',
     id: '08',
-    code: 'SY2-DAN-34',
+    color: '#14b8a6',
+    light: '#ccfbf1',
   },
   {
     icon: Shield,
     title: 'Secure & Private',
-    badge: 'ROW-LEVEL SECURITY',
-    roleTag: 'SECURITY',
     desc: 'Your data is yours. RLS protection. No exposed API keys.',
     id: '09',
-    code: 'SY2-SEC-99',
+    color: '#64748b',
+    light: '#f1f5f9',
   },
 ];
 
 type FeatureItem = (typeof features)[number];
 
-function MiniQRCode() {
-  return (
-    <div className="w-8.5 h-8.5 bg-white p-0.5 rounded-md shadow-xs flex items-center justify-center shrink-0 border border-slate-300">
-      <svg viewBox="0 0 29 29" className="w-full h-full text-slate-900" fill="currentColor">
-        {/* Top-Left Target */}
-        <rect x="2" y="2" width="7" height="7" rx="1" fill="#1e1b4b" />
-        <rect x="4" y="4" width="3" height="3" fill="#fff" />
-        <rect x="5" y="5" width="1" height="1" fill="#1e1b4b" />
-
-        {/* Top-Right Target */}
-        <rect x="20" y="2" width="7" height="7" rx="1" fill="#1e1b4b" />
-        <rect x="22" y="4" width="3" height="3" fill="#fff" />
-        <rect x="23" y="5" width="1" height="1" fill="#1e1b4b" />
-
-        {/* Bottom-Left Target */}
-        <rect x="2" y="20" width="7" height="7" rx="1" fill="#1e1b4b" />
-        <rect x="4" y="22" width="3" height="3" fill="#fff" />
-        <rect x="5" y="23" width="1" height="1" fill="#1e1b4b" />
-
-        {/* Interior Matrix Data */}
-        <rect x="11" y="3" width="2" height="2" />
-        <rect x="15" y="3" width="2" height="2" />
-        <rect x="11" y="7" width="2" height="2" />
-        <rect x="15" y="7" width="2" height="2" />
-
-        <rect x="3" y="11" width="2" height="2" />
-        <rect x="7" y="11" width="2" height="2" />
-        <rect x="11" y="11" width="3" height="3" />
-        <rect x="16" y="11" width="2" height="2" />
-        <rect x="21" y="11" width="2" height="2" />
-        <rect x="25" y="11" width="2" height="2" />
-
-        <rect x="3" y="15" width="2" height="2" />
-        <rect x="7" y="15" width="2" height="2" />
-        <rect x="11" y="16" width="2" height="2" />
-        <rect x="15" y="15" width="3" height="3" />
-        <rect x="21" y="15" width="2" height="2" />
-        <rect x="25" y="15" width="2" height="2" />
-
-        <rect x="11" y="21" width="2" height="2" />
-        <rect x="15" y="21" width="2" height="2" />
-        <rect x="11" y="25" width="2" height="2" />
-        <rect x="15" y="25" width="2" height="2" />
-        <rect x="21" y="21" width="3" height="3" />
-        <rect x="25" y="23" width="2" height="2" />
-      </svg>
-    </div>
-  );
-}
-
-// ── Realistic Purple Woven Lanyard Ribbon & Silver Chrome Hardware ──
+// ── Realistic Purple Woven Lanyard Ribbon & Solid Chrome Lobster Clasp Hardware ──
 function LanyardHardware({
   scaleY,
 }: {
@@ -164,201 +104,241 @@ function LanyardHardware({
 }) {
   return (
     <div className="relative flex flex-col items-center z-40 select-none pointer-events-none">
-      {/* 1. Purple Woven Twill Ribbon (Slightly refined compact width) */}
+      {/* 1. Purple Woven Twill Ribbon (Rolled around D-ring top bar) */}
       <motion.div
-        className="w-10 sm:w-11 h-18 sm:h-20 relative overflow-hidden shadow-xl"
+        className="w-12 h-14 relative overflow-hidden shadow-lg rounded-t-sm"
         style={{
           background:
-            'linear-gradient(90deg, #6d28d9 0%, #7c3aed 15%, #8b5cf6 36%, #9d5de6 50%, #8b5cf6 64%, #7c3aed 85%, #6d28d9 100%)',
+            'linear-gradient(90deg, #5b21b6 0%, #7c3aed 14%, #8b5cf6 35%, #a78bfa 50%, #8b5cf6 65%, #7c3aed 86%, #5b21b6 100%)',
           scaleY: scaleY ?? 1,
           transformOrigin: 'top center',
         }}
       >
-        {/* Real woven twill / herringbone texture */}
+        {/* Woven herringbone texture */}
         <svg
           className="absolute inset-0 w-full h-full opacity-35 pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <pattern id="lanyard-twill-pattern-v3" width="4" height="4" patternUnits="userSpaceOnUse">
-              <path d="M0 2 L2 0 L4 2 L2 4 Z" fill="none" stroke="#ffffff" strokeWidth="0.7" />
+            <pattern id="lanyard-twill-v5" width="4" height="4" patternUnits="userSpaceOnUse">
+              <path d="M0 2 L2 0 L4 2 L2 4 Z" fill="none" stroke="#ffffff" strokeWidth="0.65" />
               <line x1="0" y1="2" x2="4" y2="2" stroke="#4c1d95" strokeWidth="0.45" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#lanyard-twill-pattern-v3)" />
+          <rect width="100%" height="100%" fill="url(#lanyard-twill-v5)" />
         </svg>
 
-        {/* 3D fabric edge depth & cylindrical lighting */}
-        <div className="absolute inset-y-0 left-0 w-1 bg-black/45" />
-        <div className="absolute inset-y-0 right-0 w-1 bg-black/45" />
-        <div className="absolute inset-y-0 left-1 w-0.5 bg-white/30" />
-        <div className="absolute inset-y-0 right-1 w-0.5 bg-black/30" />
+        {/* 3D cylindrical lighting depth */}
+        <div className="absolute inset-y-0 left-0 w-1.5 bg-black/45" />
+        <div className="absolute inset-y-0 right-0 w-1.5 bg-black/45" />
+        <div className="absolute inset-y-0 left-1.5 w-0.5 bg-white/30" />
+        <div className="absolute inset-y-0 right-1.5 w-0.5 bg-black/30" />
 
-        {/* Sewn Fold Line with horizontal thread stitches (Identical to Pinterest photo) */}
-        <div className="absolute bottom-4 inset-x-0 px-1 flex flex-col items-center">
-          <div className="w-full h-px bg-purple-950/50 shadow-[0_1px_1px_rgba(0,0,0,0.5)]" />
+        {/* Horizontal thread stitch line above fold */}
+        <div className="absolute bottom-2.5 inset-x-0 px-1 flex flex-col items-center">
+          <div className="w-full h-px bg-purple-950/50" />
           <div className="w-full h-0.5 border-b border-dashed border-purple-200/90 my-[1px]" />
-          <div className="w-full h-px bg-white/25" />
+          <div className="w-full h-px bg-white/30" />
         </div>
 
-        {/* Bottom fold roll shadow */}
-        <div className="absolute bottom-0 inset-x-0 h-3.5 bg-gradient-to-t from-black/45 to-transparent pointer-events-none" />
+        {/* Bottom fold roll shadow wrapping around the D-ring */}
+        <div className="absolute bottom-0 inset-x-0 h-2 bg-gradient-to-t from-black/60 via-purple-950/30 to-transparent pointer-events-none" />
       </motion.div>
 
-      {/* 2. Silver Chrome Hardware: D-Ring, Swivel Joint & Lobster Clasp */}
-      <div className="relative -mt-1.5 flex flex-col items-center z-40">
+      {/* 2. Silver Chrome Hardware: Solid D-Ring, Swivel Joint & 3D Lobster Clasp */}
+      <div className="relative -mt-1 flex flex-col items-center z-40">
         <svg
-          width="50"
-          height="62"
-          viewBox="0 0 54 68"
+          width="64"
+          height="88"
+          viewBox="0 0 64 88"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
+          className="filter drop-shadow-[0_6px_12px_rgba(0,0,0,0.45)]"
         >
           <defs>
-            {/* Polished chrome high-contrast metallic gradient */}
-            <linearGradient id="chrome-shine-v3" x1="0%" y1="0%" x2="100%" y2="100%">
+            {/* Specular Chrome Body Gradient */}
+            <linearGradient id="chrome-body-v5" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="16%" stopColor="#f8fafc" />
-              <stop offset="38%" stopColor="#94a3b8" />
-              <stop offset="65%" stopColor="#e2e8f0" />
-              <stop offset="85%" stopColor="#64748b" />
-              <stop offset="100%" stopColor="#334155" />
+              <stop offset="14%" stopColor="#f8fafc" />
+              <stop offset="30%" stopColor="#cbd5e1" />
+              <stop offset="48%" stopColor="#475569" />
+              <stop offset="52%" stopColor="#1e293b" />
+              <stop offset="68%" stopColor="#94a3b8" />
+              <stop offset="85%" stopColor="#e2e8f0" />
+              <stop offset="100%" stopColor="#64748b" />
             </linearGradient>
 
-            {/* Cylindrical swivel reflection */}
-            <linearGradient id="chrome-cyl-v3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#475569" />
-              <stop offset="15%" stopColor="#cbd5e1" />
-              <stop offset="48%" stopColor="#ffffff" />
-              <stop offset="78%" stopColor="#94a3b8" />
+            {/* Cylindrical Metallic Swivel Gradient */}
+            <linearGradient id="chrome-cyl-v5" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#334155" />
+              <stop offset="18%" stopColor="#94a3b8" />
+              <stop offset="42%" stopColor="#ffffff" />
+              <stop offset="70%" stopColor="#cbd5e1" />
+              <stop offset="88%" stopColor="#64748b" />
+              <stop offset="100%" stopColor="#1e293b" />
+            </linearGradient>
+
+            {/* D-Ring Wire Gradient */}
+            <linearGradient id="dring-grad-v5" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="35%" stopColor="#cbd5e1" />
+              <stop offset="65%" stopColor="#64748b" />
               <stop offset="100%" stopColor="#334155" />
             </linearGradient>
           </defs>
 
-          {/* D-Ring: Curved silver chrome loop where the purple fabric wraps */}
+          {/* ── D-Ring Top Straight Bar (Passes through ribbon, ends emerge at left & right) ── */}
+          <line
+            x1="5"
+            y1="4.5"
+            x2="59"
+            y2="4.5"
+            stroke="url(#chrome-cyl-v5)"
+            strokeWidth="4.2"
+            strokeLinecap="round"
+          />
+          {/* Top edge specular highlight on straight bar */}
+          <line
+            x1="5"
+            y1="3"
+            x2="59"
+            y2="3"
+            stroke="#ffffff"
+            strokeWidth="0.9"
+            strokeLinecap="round"
+            opacity="0.9"
+          />
+
+          {/* ── D-Ring Curved Loop (Seamless solid U-hoop meeting at bottom center) ── */}
+          {/* Left half curving down to swivel */}
           <path
-            d="M 9 2 C 9 20, 47 20, 47 2"
-            stroke="url(#chrome-shine-v3)"
+            d="M 5 4.5 C 4 19, 21 28.5, 29 28.5"
+            stroke="url(#chrome-body-v5)"
             strokeWidth="4.2"
             strokeLinecap="round"
             fill="none"
           />
-          {/* D-Ring specular reflection highlight */}
+          {/* Right half curving down to swivel */}
           <path
-            d="M 10.5 2 C 10.5 18, 45.5 18, 45.5 2"
+            d="M 59 4.5 C 60 19, 43 28.5, 35 28.5"
+            stroke="url(#chrome-body-v5)"
+            strokeWidth="4.2"
+            strokeLinecap="round"
+            fill="none"
+          />
+          {/* Specular inner crest reflection on D-ring loop */}
+          <path
+            d="M 6.5 4.5 C 5.5 17.5, 21.5 27, 28.5 27.2"
+            stroke="#ffffff"
+            strokeWidth="1.1"
+            strokeLinecap="round"
+            opacity="0.85"
+            fill="none"
+          />
+          <path
+            d="M 57.5 4.5 C 58.5 17.5, 42.5 27, 35.5 27.2"
+            stroke="#ffffff"
+            strokeWidth="1.1"
+            strokeLinecap="round"
+            opacity="0.85"
+            fill="none"
+          />
+
+          {/* ── Swivel Collar Mechanism (Cylindrical barrel & retaining collar) ── */}
+          {/* Upper retaining bead on D-ring */}
+          <rect x="25" y="27" width="14" height="3.5" rx="1.75" fill="url(#chrome-cyl-v5)" />
+          {/* Vertical swivel neck pin */}
+          <rect x="28.5" y="30.5" width="7" height="6.5" rx="1" fill="url(#chrome-cyl-v5)" />
+          <line x1="32" y1="31" x2="32" y2="36.5" stroke="#ffffff" strokeWidth="0.8" opacity="0.9" />
+          {/* Lower flange ring */}
+          <rect x="26.5" y="36.5" width="11" height="3" rx="1.5" fill="url(#chrome-cyl-v5)" />
+
+          {/* ── Upper Eyelet Ring connecting to clasp ── */}
+          <circle
+            cx="32"
+            cy="42"
+            r="4.8"
+            stroke="url(#chrome-body-v5)"
+            strokeWidth="2.8"
+            fill="none"
+          />
+          <circle
+            cx="32"
+            cy="42"
+            r="4.8"
+            stroke="#ffffff"
+            strokeWidth="0.8"
+            opacity="0.8"
+            fill="none"
+          />
+
+          {/* ── Pivot Hinge Pin (Dark rivet core with chrome bevel ring) ── */}
+          <circle cx="32" cy="46.5" r="2.2" fill="#1e293b" stroke="url(#chrome-cyl-v5)" strokeWidth="0.8" />
+
+          {/* ── Solid Lobster Clasp Body ── */}
+          {/* Left Shank: Solid chrome beam tapering smoothly down to hook */}
+          <path
+            d="M 29 48 C 26 56, 25 65, 26.5 74"
+            stroke="url(#chrome-body-v5)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            fill="none"
+          />
+          {/* Specular crest line on left shank */}
+          <path
+            d="M 28 49 C 25.2 56, 24.3 64, 25.6 72"
             stroke="#ffffff"
             strokeWidth="1"
             strokeLinecap="round"
             opacity="0.9"
             fill="none"
           />
-
-          {/* Swivel Collar Mechanism */}
-          <rect
-            x="23"
-            y="17"
-            width="10"
-            height="3"
-            rx="1.5"
-            fill="url(#chrome-cyl-v3)"
-            stroke="#475569"
-            strokeWidth="0.5"
-          />
-          <rect
-            x="24.5"
-            y="19.5"
-            width="7"
-            height="5"
-            fill="url(#chrome-cyl-v3)"
+          {/* Inner groove shadow giving 3D channeled cross-section */}
+          <path
+            d="M 30 50 C 27.5 57, 26.8 64, 28 72"
             stroke="#334155"
-            strokeWidth="0.5"
-          />
-          <ellipse
-            cx="28"
-            cy="26"
-            rx="4.5"
-            ry="1.8"
-            fill="url(#chrome-shine-v3)"
-            stroke="#475569"
-            strokeWidth="0.5"
-          />
-
-          {/* Clasp Upper Eye Loop */}
-          <circle cx="28" cy="31" r="4.2" stroke="url(#chrome-shine-v3)" strokeWidth="2.8" fill="none" />
-          <circle cx="28" cy="31" r="4.2" stroke="#ffffff" strokeWidth="0.8" opacity="0.8" fill="none" />
-
-          {/* Lobster Clasp Body */}
-          <path
-            d="M 24.5 34 C 22 40, 23 46, 25 51 L 26 56"
-            stroke="url(#chrome-shine-v3)"
-            strokeWidth="3.4"
+            strokeWidth="1.2"
             strokeLinecap="round"
+            opacity="0.6"
             fill="none"
           />
 
-          {/* Spring Latch Trigger Lever */}
+          {/* ── Spring Gate (Right Latch Lever) ── */}
           <path
-            d="M 31.5 36 L 31.5 47 C 31.5 48.5, 30 50, 28.5 51"
-            stroke="url(#chrome-cyl-v3)"
-            strokeWidth="2.2"
+            d="M 34.5 48.5 L 36.5 70"
+            stroke="url(#chrome-cyl-v5)"
+            strokeWidth="2.6"
             strokeLinecap="round"
             fill="none"
           />
-          <circle cx="32.5" cy="40" r="1.2" fill="#e2e8f0" stroke="#475569" strokeWidth="0.5" />
+          {/* Trigger thumb tab projecting outward */}
+          <path
+            d="M 35.5 53.5 L 39.5 52.5 C 40.5 52.5, 41 53.5, 40.5 55.5 L 36.5 57 Z"
+            fill="url(#chrome-body-v5)"
+          />
+          <line x1="36" y1="53" x2="39.5" y2="52" stroke="#ffffff" strokeWidth="0.6" opacity="0.9" />
 
-          {/* Clasp hook stem entering the card slot */}
+          {/* ── Solid Continuous J-Hook (Curves flawlessly down into punch slot) ── */}
+          {/* Thick solid hook: swoops down from left shank at Y=74 to Y=84.5 and curls up to Y=73 */}
           <path
-            d="M 26 54 C 26 62, 28.5 66, 30.5 66 C 32.5 66, 33.5 62.5, 32.5 58"
-            stroke="url(#chrome-shine-v3)"
-            strokeWidth="3.2"
+            d="M 26.5 73.5 C 26 80, 29 84.5, 33 84.5 C 37 84.5, 39.5 81, 38.5 73"
+            stroke="url(#chrome-body-v5)"
+            strokeWidth="3.6"
             strokeLinecap="round"
+            strokeLinejoin="round"
             fill="none"
           />
+          {/* High-gloss specular highlight along outer bend of the hook */}
           <path
-            d="M 26.5 55 C 26.5 61.5, 29 64.5, 30.5 64.5"
+            d="M 26.2 75 C 26 80.5, 28.5 83.5, 32.5 83.5 C 36.5 83.5, 38.8 80.5, 38 74"
             stroke="#ffffff"
-            strokeWidth="0.8"
+            strokeWidth="1"
             strokeLinecap="round"
-            opacity="0.9"
+            opacity="0.95"
             fill="none"
           />
         </svg>
       </div>
-    </div>
-  );
-}
-
-// ── Hook Lip extending through slot to front ──
-function FrontHookLip() {
-  return (
-    <div className="absolute top-2 left-1/2 -translate-x-1/2 z-50 pointer-events-none select-none">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="hook-lip-chrome-v3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="35%" stopColor="#e2e8f0" />
-            <stop offset="70%" stopColor="#94a3b8" />
-            <stop offset="100%" stopColor="#475569" />
-          </linearGradient>
-        </defs>
-        {/* Curved hook tip coming through the slot to the front */}
-        <path
-          d="M 10 4 C 10 11, 13 15, 15 15 C 17 15, 18 12, 17 8"
-          stroke="url(#hook-lip-chrome-v3)"
-          strokeWidth="3.2"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M 10.5 5 C 10.5 10.5, 13 13.5, 14.8 13.5"
-          stroke="#ffffff"
-          strokeWidth="0.8"
-          strokeLinecap="round"
-          opacity="0.9"
-          fill="none"
-        />
-      </svg>
     </div>
   );
 }
@@ -376,26 +356,26 @@ function IDCard({
   const y = useMotionValue(0);
 
   // 3D physics on card drag
-  const dragRotateZ = useTransform(x, [-240, 240], [-22, 22]);
-  const rotateY = useTransform(x, [-240, 240], [-14, 14]);
-  const rotateX = useTransform(y, [-240, 240], [12, -12]);
+  const dragRotateZ = useTransform(x, [-200, 200], [-18, 18]);
+  const rotateY = useTransform(x, [-200, 200], [-12, 12]);
+  const rotateX = useTransform(y, [-200, 200], [10, -10]);
 
   const isFront = stackIndex === 0;
 
   const handleDragEnd = (_: PointerEvent, info: PanInfo) => {
-    if (Math.abs(info.offset.x) > 70 || Math.abs(info.offset.y) > 75 || Math.abs(info.velocity.x) > 320) {
+    if (Math.abs(info.offset.x) > 65 || Math.abs(info.offset.y) > 70 || Math.abs(info.velocity.x) > 300) {
       onSwipe();
     }
   };
 
   const Icon = feature.icon;
 
-  // Slightly smaller 3-card fanned resting geometry
+  // Compact 3-card fanned resting geometry
   const restingRotation = stackIndex === 0 ? 0 : stackIndex === 1 ? -10 : 10;
-  const restingX = stackIndex === 0 ? 0 : stackIndex === 1 ? -32 : 32;
+  const restingX = stackIndex === 0 ? 0 : stackIndex === 1 ? -30 : 30;
   const restingY = stackIndex === 0 ? 0 : 8;
   const restingScale = stackIndex === 0 ? 1 : 0.94;
-  const restingOpacity = stackIndex === 0 ? 1 : 0.88;
+  const restingOpacity = stackIndex === 0 ? 1 : 0.86;
   const zIndex = stackIndex === 0 ? 30 : stackIndex === 1 ? 20 : 19;
 
   return (
@@ -418,142 +398,112 @@ function IDCard({
       onDragEnd={handleDragEnd}
       transition={{ type: 'spring', stiffness: 290, damping: 25, mass: 1 }}
     >
-      {/* ── Refined ID Card Badge (~276px x 416px, Perfectly Proportioned) ── */}
+      {/* ── Compact ID Card Badge (Smaller, Simpler, Without Bordering) ── */}
       <motion.div
-        className="relative w-[258px] sm:w-[276px] md:w-[286px] h-[396px] sm:h-[416px] md:h-[426px] rounded-[22px] overflow-hidden text-left bg-[#ffffff] border border-slate-200/90 shadow-xl"
+        className="relative w-[252px] sm:w-[264px] h-[356px] sm:h-[370px] rounded-[22px] overflow-hidden text-left bg-white dark:bg-[#16112a]"
         style={{
           boxShadow: isFront
-            ? '0 25px 50px -12px rgba(124, 58, 237, 0.22), 0 12px 28px -8px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(15, 23, 42, 0.05), inset 0 1px 2px rgba(255,255,255,0.95)'
-            : '0 12px 26px -8px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.04)',
+            ? '0 24px 48px -12px rgba(15, 23, 42, 0.16), 0 10px 24px -6px rgba(124, 58, 237, 0.14), inset 0 1px 1px rgba(255,255,255,0.95)'
+            : '0 12px 28px -8px rgba(15, 23, 42, 0.12)',
           cursor: isFront ? 'grab' : 'default',
         }}
         whileDrag={{ cursor: 'grabbing', scale: 1.03 }}
       >
-        {/* Subtle Security Guilloche Watermark Pattern */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-[0.03] pointer-events-none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern id="card-security-pattern-v3" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="#7c3aed" strokeWidth="0.8" />
-              <path
-                d="M 20 4 C 12 12, 12 28, 20 36 C 28 28, 28 12, 20 4 Z"
-                fill="none"
-                stroke="#6d28d9"
-                strokeWidth="0.6"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#card-security-pattern-v3)" />
-        </svg>
-
-        {/* Specular Diagonal Sheen Reflection (Glossy Plastic Badge Finish) */}
+        {/* Specular Diagonal Sheen Reflection (Glossy badge finish) */}
         <div
           className="absolute inset-0 pointer-events-none z-30 rounded-[22px]"
           style={{
             background:
-              'linear-gradient(130deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.2) 36%, transparent 58%, rgba(255,255,255,0.25) 100%)',
+              'linear-gradient(130deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.12) 36%, transparent 58%, rgba(255,255,255,0.18) 100%)',
           }}
         />
 
-        {/* Oblong Punch-Hole Slot at Top Center (Same as Reference Mockup) */}
-        <div className="absolute top-3.5 left-1/2 -translate-x-1/2 w-12 h-3 rounded-full bg-slate-200/90 shadow-[inset_0_2px_4px_rgba(0,0,0,0.35),0_1px_1px_rgba(255,255,255,0.9)] z-20 ring-1 ring-slate-300/80" />
+        {/* Oblong Punch-Hole Slot at Top Center (Borderless, natural depth) */}
+        <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-11 h-2.5 rounded-full bg-slate-200/90 dark:bg-black/50 shadow-[inset_0_2px_3px_rgba(0,0,0,0.35),0_1px_1px_rgba(255,255,255,0.4)] z-30" />
 
-        {/* Front Interlocking Clip Hook Lip (passes through the slot on front card) */}
-        {isFront && <FrontHookLip />}
+        {/* ── Top Header Section: Vibrant Gradient Banner Matching Feature ── */}
+        <div
+          className="h-23 sm:h-24 relative overflow-hidden"
+          style={{ background: `linear-gradient(135deg, ${feature.color}ee, ${feature.color}99)` }}
+        >
+          {/* Subtle Halftone Pattern */}
+          <div
+            className="absolute inset-0 opacity-15"
+            style={{
+              backgroundImage: 'radial-gradient(circle, #fff 1.2px, transparent 1.2px)',
+              backgroundSize: '11px 11px',
+            }}
+          />
 
-        {/* ── Top Header Section ── */}
-        <div className="pt-8 px-4 flex items-center justify-between relative z-20">
-          {/* Brand & Bengali Subtitle */}
-          <div className="flex flex-col">
-            <span className="text-[10px] sm:text-[10.5px] font-black tracking-wider text-slate-900 uppercase drop-shadow-xs flex items-center gap-1">
-              SAMAYYUDH 2.0
-            </span>
-            <span className="text-[7.5px] font-bold text-purple-700 tracking-widest uppercase mt-0.5">
-              সময়যুদ্ধ · OFFICIAL PASS
-            </span>
-          </div>
+          {/* Logo Watermark SY */}
+          <span className="absolute top-2.5 right-3.5 text-white/20 text-2xl font-black tracking-tighter select-none">
+            SY
+          </span>
 
-          {/* Verification Status Pill */}
-          <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-[8px] font-bold tracking-wider uppercase shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse" />
-            PASS #{feature.id}
+          {/* Badge Number Pill (Borderless) */}
+          <span
+            className="absolute top-3 left-3.5 z-10 text-[9.5px] font-mono font-bold tracking-widest px-2.5 py-0.5 rounded-full shadow-xs"
+            style={{ background: 'rgba(0,0,0,0.24)', color: 'rgba(255,255,255,0.95)' }}
+          >
+            FEATURE #{feature.id}
+          </span>
+        </div>
+
+        {/* ── Center Feature Emblem: Overlapping Header and Body (Zero Borders) ── */}
+        <div className="flex justify-center -mt-8 relative z-20 mb-2.5">
+          <div
+            className="w-15 h-15 rounded-2xl flex items-center justify-center transition-transform duration-300"
+            style={{
+              background: feature.light,
+              boxShadow: `0 8px 24px -4px ${feature.color}35`,
+            }}
+          >
+            <Icon className="w-7.5 h-7.5" style={{ color: feature.color }} />
           </div>
         </div>
 
-        {/* ── Center Feature Visual Emblem Box (Scaled slightly compact) ── */}
-        <div className="flex justify-center mt-3 relative z-10 px-4">
-          <div className="w-26 h-26 sm:w-28 sm:h-28 rounded-xl bg-gradient-to-b from-purple-50 via-violet-50/70 to-indigo-50/40 border border-purple-200/90 shadow-inner relative overflow-hidden backdrop-blur-sm flex items-center justify-center ring-1 ring-black/5">
-            {/* Ambient purple radial glow */}
-            <div className="absolute inset-0 bg-radial from-purple-500/15 via-transparent to-transparent pointer-events-none" />
-
-            {/* Radar concentric circular guides */}
-            <div className="absolute w-20 h-20 rounded-full border border-purple-300/40" />
-            <div className="absolute w-14 h-14 rounded-full border border-purple-400/30" />
-
-            {/* Radiant Purple Feature Icon */}
-            <Icon className="w-12 h-12 sm:w-13 sm:h-13 text-purple-600 relative z-10 filter drop-shadow-[0_6px_14px_rgba(124,58,237,0.35)] transition-transform duration-300" />
-
-            {/* Corner reticle marks */}
-            <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 border-t-1.5 border-l-1.5 border-purple-400/60" />
-            <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 border-t-1.5 border-r-1.5 border-purple-400/60" />
-            <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 border-b-1.5 border-l-1.5 border-purple-400/60" />
-            <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 border-b-1.5 border-r-1.5 border-purple-400/60" />
-          </div>
-        </div>
-
-        {/* ── Lower Section: Title, Pill & Description ── */}
-        <div className="px-4 mt-2.5 flex flex-col items-center text-center relative z-20">
-          {/* Bold Feature Title */}
-          <h4 className="text-sm sm:text-[15px] font-black text-slate-900 tracking-tight uppercase leading-snug">
+        {/* ── Lower Section: Title, Description & Clean Barcode Footer ── */}
+        <div className="px-5 pb-5 text-center flex flex-col items-center relative z-20">
+          {/* Feature Title */}
+          <h4 className="text-[14px] sm:text-[15px] font-bold text-slate-900 dark:text-white leading-snug tracking-tight">
             {feature.title}
           </h4>
 
-          {/* Vibrant Purple Pill underneath Title */}
-          <div className="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full bg-purple-600 text-white font-extrabold text-[8px] sm:text-[8.5px] tracking-wider uppercase shadow-xs">
-            {feature.badge}
-          </div>
-
-          {/* Feature Description */}
-          <p className="mt-1.5 text-[10px] sm:text-[10.5px] text-slate-600 leading-relaxed font-medium max-w-[215px] line-clamp-2">
+          {/* Concise Feature Description */}
+          <p className="mt-1.5 text-[11px] sm:text-[11.5px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-[215px] line-clamp-2">
             {feature.desc}
           </p>
 
-          {/* Clean hairline divider */}
-          <div className="w-11/12 h-px bg-slate-200 mt-2.5 mb-2" />
+          {/* Clean Hairline Divider (Borderless) */}
+          <div className="w-12 h-px bg-slate-200 dark:bg-slate-700/60 my-2.5" />
 
-          {/* ── Bottom Information & QR Security Strip ── */}
-          <div className="w-full flex items-center justify-between px-1">
-            {/* Left: Authentic Mini QR Code */}
-            <MiniQRCode />
-
-            {/* Center: ID Code & System Meta */}
-            <div className="flex flex-col text-left pl-2">
-              <span className="text-[8.5px] font-mono font-bold text-slate-800 tracking-wider">
-                ID: {feature.code}
-              </span>
-              <span className="text-[7.5px] font-semibold text-purple-700 tracking-wide uppercase">
-                100% EXAM VERIFIED
-              </span>
-              <span className="text-[7px] font-mono text-slate-400">
-                samayyudh.com
-              </span>
-            </div>
-
-            {/* Right: Security Official Stamp */}
-            <div className="flex flex-col items-end">
-              <div className="flex items-center gap-0.5 text-purple-600">
-                <Sparkles className="w-2 h-2" />
-                <span className="text-[7.5px] font-mono font-bold tracking-widest uppercase">
-                  OFFICIAL
-                </span>
-              </div>
-              <span className="text-[11px] font-black text-slate-900">
-                #SY2
-              </span>
-            </div>
+          {/* Footer ID row */}
+          <div className="flex items-center gap-2 text-[8.5px] font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500">
+            <span>SAMAYYUDH 2.0</span>
+            <span style={{ color: feature.color }}>●</span>
+            <span>VALID: ALL EXAMS</span>
           </div>
+
+          {/* Minimal Barcode Strip */}
+          <div className="flex items-center justify-center gap-[1.5px] mt-2.5 opacity-35 dark:opacity-40">
+            {Array.from({ length: 32 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-[0.5px] bg-slate-800 dark:bg-slate-200"
+                style={{
+                  width: i % 4 === 0 ? 2.5 : i % 3 === 0 ? 1.8 : 1,
+                  height: i % 5 === 0 ? 16 : i % 2 === 0 ? 12 : 9,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom punch holes */}
+        <div className="absolute bottom-3 right-3.5 flex gap-1.5">
+          {[1, 2, 3].map((d) => (
+            <div key={d} className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 opacity-60" />
+          ))}
         </div>
       </motion.div>
     </motion.div>
@@ -597,15 +547,15 @@ export function FeatureIdCards() {
 
   return (
     <div className="flex flex-col items-center w-full max-w-sm mx-auto">
-      {/* ── Realistic Hanging Lanyard Assembly (Anchors the deck at the top) ── */}
+      {/* ── Realistic Hanging Lanyard Assembly with Pendulum Sway ── */}
       <div className="id-card-wavy flex flex-col items-center">
         <LanyardHardware />
 
-        {/* ── 3-Card Fanned Deck Container with Natural Wavy Sway (Refined Height: ~435px) ── */}
+        {/* ── 3-Card Fanned Deck Container (Compact Height: ~385px) ── */}
         <div
-          className="relative w-full max-w-[280px] sm:max-w-[300px] md:max-w-[310px] flex justify-center -mt-3.5"
+          className="relative w-full max-w-[270px] sm:max-w-[285px] flex justify-center -mt-5"
           style={{
-            height: '435px',
+            height: '385px',
             perspective: '1200px',
             transformOrigin: 'top center',
           }}
@@ -636,18 +586,18 @@ export function FeatureIdCards() {
         </div>
       </div>
 
-      {/* ── Interactive Navigation Controls with Ample Clear Spacing ── */}
-      <div className="flex items-center gap-3 mt-6 z-20">
+      {/* ── Interactive Navigation Controls (Completely Borderless) ── */}
+      <div className="flex items-center gap-3 mt-4 z-20">
         <button
           onClick={handlePrev}
-          className="p-1.5 sm:p-2 rounded-full border border-purple-200 dark:border-purple-800/60 bg-white dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/50 hover:text-purple-900 transition-all active:scale-95 shadow-sm"
+          className="p-1.5 sm:p-2 rounded-full bg-purple-100/90 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-900/60 transition-all active:scale-95 shadow-xs"
           aria-label="Previous feature"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
 
-        {/* Feature Pagination Indicators */}
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 dark:bg-purple-950/60 border border-purple-200/80 dark:border-purple-800/50 backdrop-blur-sm shadow-xs">
+        {/* Feature Pagination Indicators (Borderless) */}
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-50/90 dark:bg-purple-950/60 shadow-xs backdrop-blur-sm">
           {features.map((f) => {
             const isActive = queue[0].title === f.title;
             return (
@@ -661,7 +611,7 @@ export function FeatureIdCards() {
                 }}
                 className={`transition-all duration-300 rounded-full ${
                   isActive
-                    ? 'w-4.5 h-1.5 bg-purple-600 shadow-[0_0_8px_rgba(147,51,234,0.6)]'
+                    ? 'w-4 h-1.5 bg-purple-600 shadow-[0_0_8px_rgba(147,51,234,0.6)]'
                     : 'w-1.5 h-1.5 bg-purple-200 dark:bg-purple-800 hover:bg-purple-400'
                 }`}
                 aria-label={`Jump to ${f.title}`}
@@ -672,14 +622,14 @@ export function FeatureIdCards() {
 
         <button
           onClick={handleNext}
-          className="p-1.5 sm:p-2 rounded-full border border-purple-200 dark:border-purple-800/60 bg-white dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/50 hover:text-purple-900 transition-all active:scale-95 shadow-sm"
+          className="p-1.5 sm:p-2 rounded-full bg-purple-100/90 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-900/60 transition-all active:scale-95 shadow-xs"
           aria-label="Next feature"
         >
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 
-      <p className="text-xs text-muted font-medium tracking-wide mt-2.5">
+      <p className="text-xs text-muted font-medium tracking-wide mt-2">
         Drag card or use arrows to inspect all {features.length} battle features
       </p>
     </div>

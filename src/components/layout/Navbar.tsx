@@ -44,6 +44,7 @@ const mobileNavItems = [
   { href: '/dashboard', label: 'Home', icon: 'LayoutDashboard' },
   { href: '/practice', label: 'Practice', icon: 'Swords' },
   { href: '/exams', label: 'Exams', icon: 'GraduationCap' },
+  { href: '/achievements', label: 'Badges', icon: 'Trophy' },
   { href: '/analytics', label: 'Stats', icon: 'BarChart3' },
   { href: '/profile', label: 'Me', icon: 'User' },
 ];
@@ -317,7 +318,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'relative flex flex-col items-center justify-center gap-0.5 px-3 py-1 rounded-xl transition-colors min-w-0 z-10',
+                  'relative flex flex-col items-center justify-center gap-0.5 px-1.5 sm:px-2.5 py-1 rounded-xl transition-colors min-w-0 z-10',
                   isActive ? 'text-white font-bold' : 'text-stone-500 dark:text-stone-400'
                 )}
               >

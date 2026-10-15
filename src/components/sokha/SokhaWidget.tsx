@@ -12,7 +12,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Trash2, Send, Square, Globe, Sparkles, ExternalLink,
-  ChevronDown, ArrowUpRight, Mic, MicOff, Volume2, VolumeX
+  ChevronDown, ArrowUpRight, Mic, MicOff, Volume2, VolumeX,
+  History, Plus, Clock, MessageSquare, ArrowLeft
 } from 'lucide-react';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { SokhaOrb } from './SokhaOrb';
@@ -27,6 +28,13 @@ import {
   loadThreads,
   saveThreads,
   createNewThread,
+  clearAllThreads,
+  clearCurrentThread,
+  deleteThreadById,
+  getActiveThreadId,
+  setActiveThreadId,
+  saveCurrentThread,
+  deleteMessageFromStorage,
 } from '@/lib/sokha/storage';
 import { cn } from '@/lib/utils';
 
@@ -40,11 +48,27 @@ export function SokhaWidget() {
   const isSettingsPage = pathname === '/settings' || pathname?.startsWith('/settings/');
 
   const [isOpen, setIsOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'chat' | 'history'>('chat');
+  const [threads, setThreads] = useState<SokhaThread[]>([]);
+  const [activeThreadId, setActiveThreadIdState] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return getActiveThreadId() || `thread_${Date.now()}`;
+    }
+    return `thread_${Date.now()}`;
+  });
   const [messages, setMessages] = useState<SokhaMessage[]>([]);
   const [inputText, setInputText] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
   const [enableWebSearch, setEnableWebSearch] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // ── Custom Chat History Deletion State (Permanent Delete Confirmation) ──
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteScope, setDeleteScope] = useState<'all' | 'current' | 'single_thread'>('all');
+  const [threadToDelete, setThreadToDelete] = useState<string | null>(null);
+  const [messageToDelete, setMessageToDelete] = useState<string | null>(null);
+  const [deleteFeedback, setDeleteFeedback] = useState<string | null>(null);
+  const [totalSavedThreads, setTotalSavedThreads] = useState<number>(0);
 
   // ── Voice Input & Output (Limit up to 3 voice answers) ──
   const [isListening, setIsListening] = useState(false);
@@ -75,26 +99,62 @@ export function SokhaWidget() {
     .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
     .join(' ') || 'Student';
 
+  // Helper for human-readable time ago
+  const formatTimeAgo = (timestamp?: number): string => {
+    if (!timestamp) return 'Recently';
+    const diff = Math.max(0, Date.now() - timestamp);
+    const minutes = Math.floor(diff / 60000);
+    if (minutes < 1) return 'Just now';
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    if (days < 7) return `${days}d ago`;
+    return new Date(timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  };
+
   // Initialize conversation thread from local storage on mount
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const threads = loadThreads(user?.id);
-    if (threads.length > 0 && threads[0].messages.length > 0) {
-      setMessages(threads[0].messages);
+    const loaded = loadThreads(user?.id);
+    setThreads(loaded);
+    setTotalSavedThreads(loaded.length);
+
+    const savedActiveId = getActiveThreadId();
+    const matchedThread = loaded.find((t) => t.id === savedActiveId) || loaded[0];
+
+    if (matchedThread && matchedThread.messages?.length > 0) {
+      setActiveThreadIdState(matchedThread.id);
+      setActiveThreadId(matchedThread.id);
+      setMessages(matchedThread.messages);
     } else {
+      const newId = `thread_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+      setActiveThreadIdState(newId);
+      setActiveThreadId(newId);
       setMessages([]);
     }
   }, [user?.id]);
 
-  // Persist messages whenever they change
+  // Persist messages to active thread whenever they change
   useEffect(() => {
-    if (messages.length === 0) return;
-    const currentThreads = loadThreads(user?.id);
-    const activeThread: SokhaThread = currentThreads[0] || createNewThread();
-    activeThread.messages = messages;
-    activeThread.updatedAt = Date.now();
-    saveThreads([activeThread, ...currentThreads.slice(1)], user?.id);
-  }, [messages, user?.id]);
+    if (typeof window === 'undefined') return;
+    if (!activeThreadId) return;
+
+    if (messages.length > 0) {
+      const updated = saveCurrentThread(activeThreadId, messages, user?.id);
+      setThreads((prev) => {
+        const idx = prev.findIndex((t) => t.id === activeThreadId);
+        if (idx >= 0) {
+          const clone = [...prev];
+          clone[idx] = updated;
+          return clone;
+        } else {
+          return [updated, ...prev];
+        }
+      });
+      setTotalSavedThreads((prev) => Math.max(1, prev));
+    }
+  }, [messages, activeThreadId, user?.id]);
 
   // Auto-scroll to bottom
   const scrollToBottom = useCallback(() => {
@@ -374,6 +434,21 @@ export function SokhaWidget() {
     const query = (textToSend || inputText).trim();
     if (!query || isStreaming) return;
 
+    // Smart detection: If student asks to delete/clear chat history
+    const lowerQuery = query.toLowerCase().trim();
+    if (
+      lowerQuery === 'clear chat' ||
+      lowerQuery === 'delete chat' ||
+      lowerQuery === 'clear history' ||
+      lowerQuery === 'delete history' ||
+      lowerQuery === 'delete chat history' ||
+      lowerQuery === 'clear chat history'
+    ) {
+      setInputText('');
+      handleOpenDeleteAllModal();
+      return;
+    }
+
     setErrorMessage(null);
     setInputText('');
 
@@ -527,9 +602,113 @@ export function SokhaWidget() {
     }
   };
 
-  const handleClearConversation = () => {
+  // ── Thread Switching & Creation Handlers ──
+  const handleStartNewChat = () => {
+    stopSpeaking();
+    stopListening();
+    const newId = `thread_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+    setActiveThreadIdState(newId);
+    setActiveThreadId(newId);
     setMessages([]);
+    setInputText('');
     setErrorMessage(null);
+    setViewMode('chat');
+    setTimeout(() => inputRef.current?.focus(), 150);
+  };
+
+  const handleSelectThread = (thread: SokhaThread) => {
+    stopSpeaking();
+    stopListening();
+    setActiveThreadIdState(thread.id);
+    setActiveThreadId(thread.id);
+    setMessages(thread.messages || []);
+    setInputText('');
+    setErrorMessage(null);
+    setViewMode('chat');
+  };
+
+  // ── Custom Deletion Handlers with Permanent Delete Confirmation ──
+  const handleOpenDeleteAllModal = () => {
+    setMessageToDelete(null);
+    setThreadToDelete(null);
+    setDeleteScope('all');
+    setDeleteModalOpen(true);
+  };
+
+  const handleOpenDeleteThreadModal = (threadId: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setMessageToDelete(null);
+    setThreadToDelete(threadId);
+    setDeleteScope('single_thread');
+    setDeleteModalOpen(true);
+  };
+
+  const handleOpenDeleteMessageModal = (msgId: string) => {
+    setThreadToDelete(null);
+    setMessageToDelete(msgId);
+    setDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (messageToDelete) {
+      // Delete single message from active conversation & storage
+      deleteMessageFromStorage(messageToDelete, user?.id, activeThreadId);
+      setMessages((prev) => prev.filter((m) => m.id !== messageToDelete));
+      setDeleteFeedback('Message permanently deleted.');
+    } else if (deleteScope === 'single_thread' && threadToDelete) {
+      // Delete specific thread from history
+      const remaining = deleteThreadById(threadToDelete, user?.id);
+      setThreads(remaining);
+      setTotalSavedThreads(remaining.length);
+
+      if (activeThreadId === threadToDelete) {
+        if (remaining.length > 0) {
+          setActiveThreadIdState(remaining[0].id);
+          setActiveThreadId(remaining[0].id);
+          setMessages(remaining[0].messages || []);
+        } else {
+          handleStartNewChat();
+        }
+      }
+      setDeleteFeedback('Chat session deleted.');
+    } else if (deleteScope === 'all') {
+      // Permanently wipe all chatbot history
+      clearAllThreads(user?.id);
+      setThreads([]);
+      setTotalSavedThreads(0);
+      handleStartNewChat();
+      setDeleteFeedback('All chatbot chat history permanently deleted.');
+    } else {
+      // Clear current conversation thread
+      if (activeThreadId) {
+        const remaining = deleteThreadById(activeThreadId, user?.id);
+        setThreads(remaining);
+        setTotalSavedThreads(remaining.length);
+        if (remaining.length > 0) {
+          setActiveThreadIdState(remaining[0].id);
+          setActiveThreadId(remaining[0].id);
+          setMessages(remaining[0].messages || []);
+        } else {
+          handleStartNewChat();
+        }
+      }
+      setDeleteFeedback('Current chat session deleted.');
+    }
+
+    setDeleteModalOpen(false);
+    setMessageToDelete(null);
+    setThreadToDelete(null);
+
+    // Auto-dismiss confirmation notice
+    setTimeout(() => {
+      setDeleteFeedback(null);
+    }, 3500);
+  };
+
+  const handleCancelDelete = () => {
+    setDeleteModalOpen(false);
+    setMessageToDelete(null);
+    setThreadToDelete(null);
   };
 
   const handlePromptClick = (promptItem: typeof SAMAYYUDH_QUICK_PROMPTS[0]) => {
@@ -585,30 +764,62 @@ export function SokhaWidget() {
               'bg-white/98 text-stone-900 shadow-[0_25px_70px_rgba(0,0,0,0.16),0_10px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.04]'
             )}
           >
-            {/* Top Navigation & Controls (No harsh borders) */}
-            <div className="flex items-center justify-between px-6 pt-4 pb-2 z-10">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[11px] font-bold uppercase tracking-wider text-purple-600">
-                  সময়যুদ্ধ Assistant
-                </span>
-              </div>
+            {/* Top Navigation & Controls with Dedicated New Chat & History Section */}
+            <div className="flex items-center justify-between px-5 pt-3.5 pb-2 z-10 border-b border-stone-100">
+              {viewMode === 'history' ? (
+                <button
+                  type="button"
+                  onClick={() => setViewMode('chat')}
+                  className="flex items-center gap-1.5 text-xs font-bold text-purple-700 hover:text-purple-950 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-full transition-colors cursor-pointer"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Back to Chat</span>
+                </button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-purple-600">
+                    সময়যুদ্ধ Assistant
+                  </span>
+                </div>
+              )}
 
-              <div className="flex items-center gap-1">
-                {hasMessages && (
-                  <button
-                    type="button"
-                    onClick={handleClearConversation}
-                    className="p-1.5 rounded-full text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors"
-                    title="Clear conversation"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                )}
+              <div className="flex items-center gap-1.5">
+                {/* "+ New Chat" Button */}
+                <button
+                  type="button"
+                  onClick={handleStartNewChat}
+                  className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-bold transition-colors cursor-pointer"
+                  title="Start a fresh chat"
+                  aria-label="Start new chat"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span className="text-[11px]">New</span>
+                </button>
+
+                {/* "Chat History" Section Toggle Button */}
+                <button
+                  type="button"
+                  onClick={() => setViewMode(viewMode === 'history' ? 'chat' : 'history')}
+                  className={cn(
+                    'flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer',
+                    viewMode === 'history'
+                      ? 'bg-purple-600 text-white shadow-xs'
+                      : 'text-stone-600 hover:text-purple-700 hover:bg-stone-100'
+                  )}
+                  title="View Saved Chat History"
+                  aria-label="View chat history"
+                >
+                  <History className="w-3.5 h-3.5" />
+                  <span className="text-[11px]">
+                    {threads.length > 0 ? `Chats (${threads.length})` : 'Chats'}
+                  </span>
+                </button>
+
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 rounded-full text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors"
+                  className="p-1.5 rounded-full text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer ml-0.5"
                   aria-label="Close assistant"
                 >
                   <X className="w-4 h-4" />
@@ -616,160 +827,326 @@ export function SokhaWidget() {
               </div>
             </div>
 
-            {/* ── Main Tab Content Area ────────────────────────────────────────── */}
-            <div className="flex-1 overflow-y-auto px-5 py-2 flex flex-col scrollbar-thin">
-              {/* Reference Photo 1 Hero Greeting State (Visible when starting or scrollable) */}
-              {!hasMessages ? (
-                <div className="flex-1 flex flex-col items-center justify-center text-center my-auto px-2">
-                  {/* Swirling Luminous Moving Gaseous Circular Body */}
-                  <div className="my-3">
-                    <SokhaOrb size="md" isThinking={isStreaming} />
+            {/* ── Feedback Notification when Chat History is Deleted ── */}
+            <AnimatePresence>
+              {deleteFeedback && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="mx-5 my-1 px-3.5 py-2 rounded-2xl bg-emerald-50 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-xs overflow-hidden"
+                >
+                  <span className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    {deleteFeedback}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setDeleteFeedback(null)}
+                    className="text-emerald-700 hover:text-emerald-950 font-bold text-xs ml-2 cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* ── Main Tab Content Area (History List or Chat View) ───────────── */}
+            {viewMode === 'history' ? (
+              <div className="flex-1 overflow-y-auto px-5 py-3 flex flex-col scrollbar-thin">
+                <div className="flex items-center justify-between pb-3 mb-2 border-b border-stone-100">
+                  <div>
+                    <h3 className="text-sm font-extrabold text-stone-900 flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4 text-purple-600" />
+                      <span>Saved Chat History</span>
+                    </h3>
+                    <p className="text-[11px] text-stone-500 mt-0.5">
+                      Click to resume any study session or delete individual chats
+                    </p>
                   </div>
-
-                  {/* Subtitle & Title matching Photo 1 */}
-                  <p className="text-xs sm:text-sm font-medium text-stone-500 mb-1">
-                    Hello {displayName}
-                  </p>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900 mb-6">
-                    How can I help<br />you today?
-                  </h2>
-
-                  {/* Quick Action Suggestions to use the app prominently (Smooth borderless cards) */}
-                  <div className="w-full space-y-2 mt-1">
-                    {/* Instant Voice Doubt Button */}
+                  {threads.length > 0 && (
                     <button
                       type="button"
-                      onClick={toggleVoiceRecognition}
-                      className="w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-semibold transition-all group cursor-pointer bg-gradient-to-r from-sky-50 to-blue-50 hover:from-sky-100 hover:to-blue-100 text-sky-900 border border-sky-200/60 shadow-xs hover:shadow-sm"
+                      onClick={handleOpenDeleteAllModal}
+                      className="flex items-center gap-1 text-[11px] font-bold text-rose-600 hover:text-rose-700 hover:bg-rose-50 px-2.5 py-1 rounded-full transition-colors cursor-pointer"
+                      title="Clear all saved chats"
                     >
-                      <div className="flex items-center gap-2.5">
-                        <span className="p-1.5 rounded-xl bg-sky-500 text-white shadow-xs">
-                          <Mic className="w-4 h-4 animate-pulse" />
-                        </span>
-                        <div className="flex flex-col text-left">
-                          <span>Ask Doubts with Your Voice</span>
-                          <span className="text-[10px] text-sky-700/80 font-normal">Tap to speak your question</span>
-                        </div>
-                      </div>
-                      <span className="text-[10px] bg-sky-200/80 text-sky-800 font-bold px-2 py-0.5 rounded-full">Voice Mode</span>
+                      <Trash2 className="w-3 h-3" />
+                      <span>Clear All</span>
                     </button>
-
-                    {SAMAYYUDH_QUICK_PROMPTS.slice(0, 3).map((item, idx) => (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => handlePromptClick(item)}
-                        className={cn(
-                          'w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-medium transition-all group cursor-pointer',
-                          'bg-[#F5F6FA] hover:bg-[#ECEEF6] text-stone-800 shadow-xs hover:shadow-sm'
-                        )}
-                      >
-                        <div className="flex items-center gap-2.5 truncate">
-                          <span className="text-sm p-1 rounded-lg bg-purple-100 text-purple-700">
-                            {item.icon}
-                          </span>
-                          <span className="truncate">{item.label}</span>
-                        </div>
-                        {item.routeHref ? (
-                          <ArrowUpRight className="w-3.5 h-3.5 text-purple-600 opacity-60 group-hover:opacity-100 transition-opacity shrink-0" />
-                        ) : (
-                          <span className="text-[10px] text-stone-400 shrink-0">Ask</span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
+                  )}
                 </div>
-              ) : (
-                /* Conversation View */
-                <div className="space-y-4 py-2">
-                  {/* Mini Orb Banner */}
-                  <div className="flex items-center justify-center gap-2 py-1 text-xs text-stone-400">
-                    <SokhaOrb size="sm" isThinking={isStreaming} />
-                    <span className="text-[11px] font-semibold text-purple-600">
-                      SamayYudh AI Companion
-                    </span>
-                  </div>
 
-                  {messages.map((msg) => (
-                    <div
-                      key={msg.id}
-                      className={cn(
-                        'flex gap-2.5',
-                        msg.role === 'user' ? 'justify-end' : 'justify-start'
-                      )}
-                    >
-                      <div
-                        className={cn(
-                          'max-w-[85%] text-sm leading-relaxed transition-all relative group',
-                          msg.role === 'user'
-                            ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-[1.75rem] rounded-br-md px-5 py-3 shadow-[0_4px_16px_rgba(124,58,237,0.22)]'
-                            : 'bg-[#F2F4F8] text-stone-800 rounded-[1.75rem] rounded-tl-md px-5 py-3.5 shadow-xs'
-                        )}
-                      >
-                        {msg.role === 'user' ? (
-                          <p className="whitespace-pre-wrap">{msg.content}</p>
-                        ) : msg.content ? (
-                          <div>
-                            <SokhaMarkdown content={msg.content} sources={msg.sources} />
-                            {/* Voice Speak Button on Assistant Response */}
-                            <div className="mt-2 pt-1 border-t border-stone-200/50 flex items-center justify-between text-xs text-stone-500">
-                              <button
-                                type="button"
-                                onClick={() => speakMessage(msg.id, msg.content)}
-                                className={cn(
-                                  'flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium transition-all cursor-pointer',
-                                  speakingMsgId === msg.id
-                                    ? 'bg-purple-100 text-purple-700 font-semibold'
-                                    : 'hover:bg-stone-200/70 text-stone-600'
-                                )}
-                                title={
-                                  voiceAnswersCount >= 3
-                                    ? 'Voice limit reached (3/3 used)'
-                                    : speakingMsgId === msg.id
-                                    ? 'Stop listening'
-                                    : `Listen to answer (${3 - voiceAnswersCount} voice answers left)`
-                                }
-                              >
-                                {speakingMsgId === msg.id ? (
-                                  <>
-                                    <VolumeX className="w-3.5 h-3.5 text-purple-600 animate-pulse" />
-                                    <span>Speaking…</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <Volume2 className="w-3.5 h-3.5" />
-                                    <span>
-                                      {voiceAnswersCount >= 3 ? 'Voice limit (3/3 used)' : `Listen (${3 - voiceAnswersCount} left)`}
-                                    </span>
-                                  </>
-                                )}
-                              </button>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2 text-xs text-purple-600 py-1">
-                            <Sparkles className="w-3.5 h-3.5 animate-spin" />
-                            <span>Finding answer…</span>
-                          </div>
-                        )}
-                      </div>
+                {threads.length === 0 ? (
+                  <div className="flex-1 flex flex-col items-center justify-center text-center p-6 my-auto">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 mb-3 shadow-xs">
+                      <Clock className="w-6 h-6" />
                     </div>
-                  ))}
+                    <h4 className="text-sm font-extrabold text-stone-800">No Chat History Yet</h4>
+                    <p className="text-xs text-stone-400 mt-1 max-w-[220px] leading-relaxed">
+                      Your questions, study doubts, and AI explanations will be safely saved here.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleStartNewChat}
+                      className="mt-4 px-4 py-2 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-xs shadow-xs hover:shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Start New Doubt Session</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-2 py-1">
+                    {threads.map((t) => {
+                      const isActive = t.id === activeThreadId;
+                      const msgCount = t.messages?.length || 0;
+                      const timeAgo = formatTimeAgo(t.updatedAt || t.createdAt);
+                      const previewSnippet =
+                        t.messages && t.messages.length > 0
+                          ? t.messages[t.messages.length - 1]?.content || t.messages[0]?.content
+                          : 'Empty session';
 
-                  <div ref={messagesEndRef} />
-                </div>
-              )}
+                      return (
+                        <div
+                          key={t.id}
+                          onClick={() => handleSelectThread(t)}
+                          className={cn(
+                            'group relative flex items-start justify-between p-3.5 rounded-2xl border transition-all cursor-pointer text-left',
+                            isActive
+                              ? 'bg-purple-50/70 border-purple-200 shadow-xs ring-1 ring-purple-300/40'
+                              : 'bg-white hover:bg-stone-50 border-stone-200/80 hover:border-stone-300'
+                          )}
+                        >
+                          <div className="min-w-0 flex-1 pr-2.5">
+                            <div className="flex items-center gap-1.5 mb-1">
+                              <span className="text-[10px] font-bold text-stone-400 flex items-center gap-1">
+                                <Clock className="w-2.5 h-2.5" />
+                                {timeAgo}
+                              </span>
+                              {isActive && (
+                                <span className="px-1.5 py-0.2 rounded-full bg-purple-200 text-purple-800 text-[9px] font-extrabold uppercase tracking-wider">
+                                  Current
+                                </span>
+                              )}
+                              <span className="text-[10px] text-stone-400">· {msgCount} msg{msgCount !== 1 ? 's' : ''}</span>
+                            </div>
+                            <h4 className="text-xs font-bold text-stone-900 line-clamp-1 group-hover:text-purple-700 transition-colors">
+                              {t.title || 'Study Session'}
+                            </h4>
+                            <p className="text-[11px] text-stone-500 line-clamp-1 mt-0.5 font-normal">
+                              {previewSnippet}
+                            </p>
+                          </div>
 
-              {/* Error Message */}
-              {errorMessage && (
-                <div className="my-2 p-3.5 rounded-2xl bg-rose-50 text-rose-700 text-xs shadow-xs">
-                  {errorMessage}
-                </div>
-              )}
-            </div>
+                          <div className="flex items-center gap-1 shrink-0 pt-0.5">
+                            <button
+                              type="button"
+                              onClick={(e) => handleOpenDeleteThreadModal(t.id, e)}
+                              className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                              title="Delete this chat session"
+                              aria-label="Delete this chat session"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Conversation View (Greeting or Messages) */
+              <div className="flex-1 overflow-y-auto px-5 py-2 flex flex-col scrollbar-thin">
+                {/* Reference Photo 1 Hero Greeting State (Visible when starting or scrollable) */}
+                {!hasMessages ? (
+                  <div className="flex-1 flex flex-col items-center justify-center text-center my-auto px-2">
+                    {/* Swirling Luminous Moving Gaseous Circular Body */}
+                    <div className="my-3">
+                      <SokhaOrb size="md" isThinking={isStreaming} />
+                    </div>
+
+                    {/* Subtitle & Title matching Photo 1 */}
+                    <p className="text-xs sm:text-sm font-medium text-stone-500 mb-1">
+                      Hello {displayName}
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900 mb-6">
+                      How can I help<br />you today?
+                    </h2>
+
+                    {/* Quick Action Suggestions to use the app prominently (Smooth borderless cards) */}
+                    <div className="w-full space-y-2 mt-1">
+                      {/* Instant Voice Doubt Button */}
+                      <button
+                        type="button"
+                        onClick={toggleVoiceRecognition}
+                        className="w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-semibold transition-all group cursor-pointer bg-gradient-to-r from-sky-50 to-blue-50 hover:from-sky-100 hover:to-blue-100 text-sky-900 border border-sky-200/60 shadow-xs hover:shadow-sm"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span className="p-1.5 rounded-xl bg-sky-500 text-white shadow-xs">
+                            <Mic className="w-4 h-4 animate-pulse" />
+                          </span>
+                          <div className="flex flex-col text-left">
+                            <span>Ask Doubts with Your Voice</span>
+                            <span className="text-[10px] text-sky-700/80 font-normal">Tap to speak your question</span>
+                          </div>
+                        </div>
+                        <span className="text-[10px] bg-sky-200/80 text-sky-800 font-bold px-2 py-0.5 rounded-full">Voice Mode</span>
+                      </button>
+
+                      {SAMAYYUDH_QUICK_PROMPTS.slice(0, 3).map((item, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => handlePromptClick(item)}
+                          className={cn(
+                            'w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-medium transition-all group cursor-pointer',
+                            'bg-[#F5F6FA] hover:bg-[#ECEEF6] text-stone-800 shadow-xs hover:shadow-sm'
+                          )}
+                        >
+                          <div className="flex items-center gap-2.5 truncate">
+                            <span className="text-sm p-1 rounded-lg bg-purple-100 text-purple-700">
+                              {item.icon}
+                            </span>
+                            <span className="truncate">{item.label}</span>
+                          </div>
+                          {item.routeHref ? (
+                            <ArrowUpRight className="w-3.5 h-3.5 text-purple-600 opacity-60 group-hover:opacity-100 transition-opacity shrink-0" />
+                          ) : (
+                            <span className="text-[10px] text-stone-400 shrink-0">Ask</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+
+                    {totalSavedThreads > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setViewMode('history')}
+                        className="mt-3.5 py-1 px-3 rounded-full text-[11px] font-medium text-stone-400 hover:text-purple-600 hover:bg-purple-50 transition-colors inline-flex items-center gap-1.5 cursor-pointer mx-auto"
+                        title="View all saved chat sessions"
+                      >
+                        <History className="w-3.5 h-3.5" />
+                        <span>View Saved Chats ({totalSavedThreads})</span>
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  /* Conversation View */
+                  <div className="space-y-4 py-2">
+                    {/* Mini Orb Banner */}
+                    <div className="flex items-center justify-center gap-2 py-1 text-xs text-stone-400">
+                      <SokhaOrb size="sm" isThinking={isStreaming} />
+                      <span className="text-[11px] font-semibold text-purple-600">
+                        SamayYudh AI Companion
+                      </span>
+                    </div>
+
+                    {messages.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={cn(
+                          'flex gap-2 items-start group relative',
+                          msg.role === 'user' ? 'justify-end' : 'justify-start'
+                        )}
+                      >
+                        {/* Individual Message Delete Button for User Message */}
+                        {msg.role === 'user' && (
+                          <button
+                            type="button"
+                            onClick={() => handleOpenDeleteMessageModal(msg.id)}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 mt-2 rounded-full text-stone-300 hover:text-rose-600 hover:bg-stone-100 cursor-pointer shrink-0"
+                            title="Delete message"
+                            aria-label="Delete message"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+
+                        <div
+                          className={cn(
+                            'max-w-[85%] text-sm leading-relaxed transition-all relative group',
+                            msg.role === 'user'
+                              ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-[1.75rem] rounded-br-md px-5 py-3 shadow-[0_4px_16px_rgba(124,58,237,0.22)]'
+                              : 'bg-[#F2F4F8] text-stone-800 rounded-[1.75rem] rounded-tl-md px-5 py-3.5 shadow-xs'
+                          )}
+                        >
+                          {msg.role === 'user' ? (
+                            <p className="whitespace-pre-wrap">{msg.content}</p>
+                          ) : msg.content ? (
+                            <div>
+                              <SokhaMarkdown content={msg.content} sources={msg.sources} />
+                              {/* Voice Speak Button & Delete on Assistant Response */}
+                              <div className="mt-2 pt-1 border-t border-stone-200/50 flex items-center justify-between text-xs text-stone-500">
+                                <button
+                                  type="button"
+                                  onClick={() => speakMessage(msg.id, msg.content)}
+                                  className={cn(
+                                    'flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium transition-all cursor-pointer',
+                                    speakingMsgId === msg.id
+                                      ? 'bg-purple-100 text-purple-700 font-semibold'
+                                      : 'hover:bg-stone-200/70 text-stone-600'
+                                  )}
+                                  title={
+                                    voiceAnswersCount >= 3
+                                      ? 'Voice limit reached (3/3 used)'
+                                      : speakingMsgId === msg.id
+                                      ? 'Stop listening'
+                                      : `Listen to answer (${3 - voiceAnswersCount} voice answers left)`
+                                  }
+                                >
+                                  {speakingMsgId === msg.id ? (
+                                    <>
+                                      <VolumeX className="w-3.5 h-3.5 text-purple-600 animate-pulse" />
+                                      <span>Speaking…</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Volume2 className="w-3.5 h-3.5" />
+                                      <span>
+                                        {voiceAnswersCount >= 3 ? 'Voice limit (3/3 used)' : `Listen (${3 - voiceAnswersCount} left)`}
+                                      </span>
+                                    </>
+                                  )}
+                                </button>
+
+                                {/* Individual Message Delete Button for Assistant Response */}
+                                <button
+                                  type="button"
+                                  onClick={() => handleOpenDeleteMessageModal(msg.id)}
+                                  className="p-1 rounded-full text-stone-400 hover:text-rose-600 hover:bg-stone-200/60 transition-colors cursor-pointer"
+                                  title="Delete this answer"
+                                  aria-label="Delete answer"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-2 text-xs text-purple-600 py-1">
+                              <Sparkles className="w-3.5 h-3.5 animate-spin" />
+                              <span>Finding answer…</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+
+                    <div ref={messagesEndRef} />
+                  </div>
+                )}
+
+                {/* Error Message */}
+                {errorMessage && (
+                  <div className="my-2 p-3.5 rounded-2xl bg-rose-50 text-rose-700 text-xs shadow-xs">
+                    {errorMessage}
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* ── Voice status banner when microphone is active ── */}
-            {isListening && (
+            {viewMode === 'chat' && isListening && (
               <div className="px-6 py-1.5 bg-purple-50 text-purple-700 text-xs flex items-center justify-between border-t border-purple-100 animate-pulse">
                 <span className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
@@ -785,81 +1162,195 @@ export function SokhaWidget() {
               </div>
             )}
 
-            {/* ── Smooth Bubble Text Box (No black outline, smooth pill design) ── */}
-            <div className="p-4 pt-2 bg-white/90 backdrop-blur-md">
-              <div
-                className={cn(
-                  'relative flex items-center justify-between rounded-full px-4 py-2.5 bg-[#EEF1F7] hover:bg-[#E8ECF4] focus-within:bg-[#EEF1F7] shadow-xs focus-within:shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-200',
-                  isListening && 'ring-2 ring-purple-500 bg-purple-50'
-                )}
-                style={{ outline: 'none' }}
-              >
-                {/* Voice Search Button (Microphone inside the bot) */}
+            {/* ── Bottom Section: Input Box in Chat view OR History Footer in History view ── */}
+            {viewMode === 'history' ? (
+              <div className="p-3.5 bg-white/95 border-t border-stone-100 flex items-center justify-between">
+                <span className="text-[11px] text-stone-400 font-medium">
+                  {threads.length} saved session{threads.length !== 1 ? 's' : ''} on device
+                </span>
                 <button
                   type="button"
-                  onClick={toggleVoiceRecognition}
-                  className={cn(
-                    'p-2 mr-1.5 rounded-full transition-all shrink-0 cursor-pointer flex items-center justify-center',
-                    isListening
-                      ? 'bg-rose-500 text-white animate-pulse shadow-md ring-2 ring-rose-300'
-                      : 'text-sky-600 hover:text-sky-700 bg-sky-100/80 hover:bg-sky-200/80 shadow-2xs'
-                  )}
-                  title={isListening ? 'Stop listening' : 'Voice search (Tap to speak your doubt)'}
-                  aria-label="Voice search"
+                  onClick={handleStartNewChat}
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                 >
-                  {isListening ? (
-                    <MicOff className="w-4 h-4" />
-                  ) : (
-                    <Mic className="w-4 h-4" />
-                  )}
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>New Doubt</span>
                 </button>
-
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      handleSendMessage();
-                    }
-                  }}
-                  placeholder={isListening ? 'Listening to your voice...' : 'Ask anything or speak...'}
-                  className="w-full bg-transparent text-sm text-stone-900 placeholder:text-stone-400 border-0 outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-0 focus-visible:outline-none focus-visible:ring-0 pr-2"
-                  style={{ outline: 'none', border: 'none', boxShadow: 'none' }}
-                />
-
-                {isStreaming ? (
-                  <button
-                    type="button"
-                    onClick={handleStopGeneration}
-                    className="p-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white transition-colors shrink-0 cursor-pointer"
-                    title="Stop"
-                  >
-                    <Square className="w-3.5 h-3.5 fill-current" />
-                  </button>
-                ) : inputText.trim() ? (
-                  <button
-                    type="button"
-                    onClick={() => handleSendMessage()}
-                    className="p-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-105 active:scale-95 text-white transition-all shadow-sm shrink-0 cursor-pointer"
-                    title="Send"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                  </button>
-                ) : (
-                  /* Audio wave visual indicator matching Photo 1 */
-                  <div className="flex items-center gap-1 text-purple-400/80 shrink-0 px-1">
-                    <span className="w-0.5 h-2 rounded-full bg-current animate-pulse" />
-                    <span className="w-0.5 h-3.5 rounded-full bg-current animate-pulse delay-75" />
-                    <span className="w-0.5 h-5 rounded-full bg-current animate-pulse delay-150" />
-                    <span className="w-0.5 h-3 rounded-full bg-current animate-pulse delay-100" />
-                    <span className="w-0.5 h-1.5 rounded-full bg-current animate-pulse" />
-                  </div>
-                )}
               </div>
-            </div>
+            ) : (
+              <div className="p-4 pt-2 bg-white/90 backdrop-blur-md">
+                <div
+                  className={cn(
+                    'relative flex items-center justify-between rounded-full px-4 py-2.5 bg-[#EEF1F7] hover:bg-[#E8ECF4] focus-within:bg-[#EEF1F7] shadow-xs focus-within:shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-200',
+                    isListening && 'ring-2 ring-purple-500 bg-purple-50'
+                  )}
+                  style={{ outline: 'none' }}
+                >
+                  {/* Voice Search Button (Microphone inside the bot) */}
+                  <button
+                    type="button"
+                    onClick={toggleVoiceRecognition}
+                    className={cn(
+                      'p-2 mr-1.5 rounded-full transition-all shrink-0 cursor-pointer flex items-center justify-center',
+                      isListening
+                        ? 'bg-rose-500 text-white animate-pulse shadow-md ring-2 ring-rose-300'
+                        : 'text-sky-600 hover:text-sky-700 bg-sky-100/80 hover:bg-sky-200/80 shadow-2xs'
+                    )}
+                    title={isListening ? 'Stop listening' : 'Voice search (Tap to speak your doubt)'}
+                    aria-label="Voice search"
+                  >
+                    {isListening ? (
+                      <MicOff className="w-4 h-4" />
+                    ) : (
+                      <Mic className="w-4 h-4" />
+                    )}
+                  </button>
+
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleSendMessage();
+                      }
+                    }}
+                    placeholder={isListening ? 'Listening to your voice...' : 'Ask anything or speak...'}
+                    className="w-full bg-transparent text-sm text-stone-900 placeholder:text-stone-400 border-0 outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-0 focus-visible:outline-none focus-visible:ring-0 pr-2"
+                    style={{ outline: 'none', border: 'none', boxShadow: 'none' }}
+                  />
+
+                  {isStreaming ? (
+                    <button
+                      type="button"
+                      onClick={handleStopGeneration}
+                      className="p-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white transition-colors shrink-0 cursor-pointer"
+                      title="Stop"
+                    >
+                      <Square className="w-3.5 h-3.5 fill-current" />
+                    </button>
+                  ) : inputText.trim() ? (
+                    <button
+                      type="button"
+                      onClick={() => handleSendMessage()}
+                      className="p-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-105 active:scale-95 text-white transition-all shadow-sm shrink-0 cursor-pointer"
+                      title="Send"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                    </button>
+                  ) : (
+                    /* Audio wave visual indicator matching Photo 1 */
+                    <div className="flex items-center gap-1 text-purple-400/80 shrink-0 px-1">
+                      <span className="w-0.5 h-2 rounded-full bg-current animate-pulse" />
+                      <span className="w-0.5 h-3.5 rounded-full bg-current animate-pulse delay-75" />
+                      <span className="w-0.5 h-5 rounded-full bg-current animate-pulse delay-150" />
+                      <span className="w-0.5 h-3 rounded-full bg-current animate-pulse delay-100" />
+                      <span className="w-0.5 h-1.5 rounded-full bg-current animate-pulse" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* ── Custom Deletion Confirmation Modal: Ask students for permanent delete Yes or No ── */}
+            <AnimatePresence>
+              {deleteModalOpen && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 z-50 bg-black/45 backdrop-blur-xs flex items-center justify-center p-5"
+                >
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.92, y: 12 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.92, y: 12 }}
+                    transition={{ type: 'spring', damping: 26, stiffness: 340 }}
+                    className="w-full max-w-[340px] bg-white text-stone-900 rounded-[2rem] p-5 shadow-[0_25px_60px_rgba(0,0,0,0.3)] flex flex-col items-center text-center relative overflow-hidden"
+                  >
+                    {/* Glowing Danger Icon Badge */}
+                    <div className="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center mb-3 text-rose-600 shadow-xs">
+                      <Trash2 className="w-6 h-6" />
+                    </div>
+
+                    {/* Modal Title */}
+                    <h3 className="text-base sm:text-lg font-extrabold text-stone-900 tracking-tight">
+                      Permanent Delete?
+                    </h3>
+
+                    {/* Question / Explanation */}
+                    <p className="text-xs text-stone-500 mt-1.5 leading-relaxed">
+                      {messageToDelete
+                        ? 'Do you want to permanently delete this message? This action cannot be undone.'
+                        : deleteScope === 'single_thread'
+                        ? 'Do you want to permanently delete this chat session? It will be removed from your saved history.'
+                        : 'Do you want to permanently delete your chatbot chat history? All doubt sessions will be wiped from this device.'}
+                    </p>
+
+                    {/* Custom Options Selector (when deleting full history) */}
+                    {!messageToDelete && deleteScope !== 'single_thread' && (
+                      <div className="w-full mt-3.5 space-y-1.5 text-left">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 px-1">
+                          Deletion Scope
+                        </span>
+                        <div className="grid grid-cols-2 gap-1.5 p-1 bg-stone-100 rounded-2xl">
+                          <button
+                            type="button"
+                            onClick={() => setDeleteScope('all')}
+                            className={cn(
+                              'py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer',
+                              deleteScope === 'all'
+                                ? 'bg-white text-rose-600 shadow-xs'
+                                : 'text-stone-500 hover:text-stone-900'
+                            )}
+                          >
+                            All History
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setDeleteScope('current')}
+                            className={cn(
+                              'py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer',
+                              deleteScope === 'current'
+                                ? 'bg-white text-purple-700 shadow-xs'
+                                : 'text-stone-500 hover:text-stone-900'
+                            )}
+                          >
+                            Current Only
+                          </button>
+                        </div>
+                        <p className="text-[10px] text-stone-400 px-1">
+                          {deleteScope === 'all'
+                            ? 'Permanently deletes all saved study sessions and transcripts.'
+                            : 'Clears only this active chat conversation.'}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Explicit YES / NO Buttons */}
+                    <div className="w-full flex items-center gap-2.5 mt-5">
+                      <button
+                        type="button"
+                        onClick={handleCancelDelete}
+                        className="flex-1 py-2.5 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-xs transition-colors cursor-pointer"
+                      >
+                        No, Keep It
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleConfirmDelete}
+                        className="flex-1 py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-all shadow-xs hover:shadow-sm cursor-pointer flex items-center justify-center gap-1.5"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>Yes, Delete</span>
+                      </button>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>

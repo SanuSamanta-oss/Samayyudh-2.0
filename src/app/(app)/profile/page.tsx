@@ -9,7 +9,7 @@ import {
   StickyNote, Settings, Trash2, Loader2, Shield, Calendar,
   Zap, Clock, Target, Award, Star, ChevronRight, Edit3,
   CheckCircle2, Lock, Flame, LogIn, LogOut, KeyRound, Sparkles,
-  Upload
+  Upload, ArrowRight
 } from 'lucide-react';
 import { cn, formatDuration } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
@@ -667,6 +667,40 @@ export default function ProfilePage() {
                   ))}
                 </div>
 
+                {/* Mobile & Tablet Badges Showcase Strip */}
+                <div className="lg:hidden bg-card rounded-2xl border border-border p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                      <Trophy className="w-4 h-4 text-amber-500" />
+                      <span>Badges & Medals</span>
+                    </h3>
+                    <Link
+                      href="/achievements"
+                      className="text-xs font-semibold text-purple-600 hover:text-purple-700 flex items-center gap-1"
+                    >
+                      <span>Honor Hall</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {achievements.slice(0, 4).map((a) => (
+                      <div
+                        key={a.title}
+                        className={cn(
+                          'flex items-center gap-2.5 p-2 rounded-xl border border-border/60 transition-all',
+                          a.unlocked ? 'bg-amber-500/5' : 'opacity-50'
+                        )}
+                      >
+                        <span className={cn('text-base', !a.unlocked && 'grayscale')}>{a.emoji}</span>
+                        <div className="min-w-0">
+                          <p className="text-xs font-semibold text-foreground truncate">{a.title}</p>
+                          <p className="text-[10px] text-muted truncate">{a.unlocked ? 'Unlocked' : a.progress ?? a.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Sign in CTA if not authenticated */}
                 {!user && (
                   <Link
@@ -782,6 +816,25 @@ export default function ProfilePage() {
                 transition={{ duration: 0.2 }}
                 className="space-y-4"
               >
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-purple-500/10 to-indigo-500/10 border border-amber-500/20">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-500 shrink-0">
+                      <Trophy className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-foreground">SamayYudh Honor Hall</h3>
+                      <p className="text-xs text-muted">View your full 3D performance pins, streak medals & badges</p>
+                    </div>
+                  </div>
+                  <Link
+                    href="/achievements"
+                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-bold shadow-xs transition-all shrink-0"
+                  >
+                    <span>View All Badges</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
                 <h2 className="text-base font-bold text-foreground">Achievements</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {achievements.map((a, i) => (

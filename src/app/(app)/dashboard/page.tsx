@@ -251,10 +251,10 @@ export default function DashboardPage() {
               <p className="text-white/70 text-sm mt-0.5">Ready for your next battle?</p>
             </div>
 
-            {/* Streak badge — right side */}
+            {/* Streak badge — right side (Visible & clickable on both mobile & desktop) */}
             <Link
               href="/achievements"
-              className="ml-auto hidden sm:flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 flex-shrink-0 shadow-lg cursor-pointer"
+              className="ml-auto flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors backdrop-blur-sm border border-white/20 rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 flex-shrink-0 shadow-lg cursor-pointer"
             >
               <motion.div
                 animate={{ 
@@ -306,9 +306,21 @@ export default function DashboardPage() {
             animate="visible"
             className="grid grid-cols-2 md:grid-cols-4 gap-3"
           >
-            {stats.map((s, i) => (
-              <StatCard key={s.label} {...s} delay={i} />
-            ))}
+            {stats.map((s, i) => {
+              if (s.label === 'Badges' || s.label === 'Day Streak') {
+                return (
+                  <Link
+                    key={s.label}
+                    href="/achievements"
+                    className="block group rounded-2xl transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                    title={`View ${s.label} in Honor Hall`}
+                  >
+                    <StatCard {...s} delay={i} />
+                  </Link>
+                );
+              }
+              return <StatCard key={s.label} {...s} delay={i} />;
+            })}
           </motion.div>
         </section>
 

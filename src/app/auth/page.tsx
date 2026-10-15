@@ -74,6 +74,14 @@ function AuthPageContent() {
     setOtp(otpDigits.join(''));
   }, [otpDigits]);
 
+  // Read error parameter from URL (e.g. from failed OAuth or callback)
+  useEffect(() => {
+    const errorParam = searchParams.get('error_description') || searchParams.get('error');
+    if (errorParam) {
+      setError(decodeURIComponent(errorParam));
+    }
+  }, [searchParams]);
+
   const goTo = useCallback((next: AuthStep, dir = 1) => {
     setDirection(dir);
     setError(null);

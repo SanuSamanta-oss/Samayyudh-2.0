@@ -35,19 +35,36 @@ function AuthCallbackContent() {
         const next = searchParams.get('next') || '/dashboard';
         const targetUrl = next.startsWith('/') && !next.startsWith('//') ? next : '/dashboard';
 
+        // Check for error parameters sent by provider (e.g. Google cancellation or rejection)
+        const authErrorParam = searchParams.get('error_description') || searchParams.get('error');
+        if (authErrorParam) {
+          console.error('Provider auth error:', authErrorParam);
+          setStatusText('AUTHENTICATION ERROR');
+          setTimeout(() => router.replace(`/auth?error=${encodeURIComponent(authErrorParam)}`), 1200);
+          return;
+        }
+
         // 1. If an authorization code is present (PKCE flow)
         if (code) {
           const { error } = await supabase.auth.exchangeCodeForSession(code);
           if (error) {
             console.error('Exchange code error:', error);
-            setStatusText('AUTHENTICATION ERROR');
-            setTimeout(() => router.replace(`/auth?error=${encodeURIComponent(error.message)}`), 1200);
-            return;
+            // Double check if session was already established (e.g. Strict Mode or client auto-detect)
+            const { data: { session: existingSession } } = await supabase.auth.getSession();
+            if (!existingSession) {
+              setStatusText('AUTHENTICATION ERROR');
+              setTimeout(() => router.replace(`/auth?error=${encodeURIComponent(error.message)}`), 1200);
+              return;
+            }
           }
         }
 
         // 2. Fetch confirmed session
         const { data: { session } } = await supabase.auth.getSession();
+        if (!session && !code) {
+          router.replace('/auth');
+          return;
+        }
 
         markUserLoggedIn(session?.user);
 

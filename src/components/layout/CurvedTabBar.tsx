@@ -2,7 +2,14 @@
 
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useVelocity,
+  AnimatePresence,
+} from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export interface TabItem {
@@ -40,14 +47,12 @@ export function CurvedTabBar({
     return idx >= 0 ? idx : 0;
   }, [items, pathname]);
 
-  // Optimistic index for instantaneous 0ms response on user tap/click
-  const [optimisticIndex, setOptimisticIndex] = useState<number | null>(null);
+  // Local active tab index with immediate response
+  const [activeTab, setActiveTab] = useState(computedActiveIndex);
 
   useEffect(() => {
-    setOptimisticIndex(null);
-  }, [pathname]);
-
-  const activeIndex = optimisticIndex !== null ? optimisticIndex : computedActiveIndex;
+    setActiveTab(computedActiveIndex);
+  }, [computedActiveIndex]);
 
   const [mounted, setMounted] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -55,14 +60,23 @@ export function CurvedTabBar({
 
   // Motion value for smooth horizontal tracking
   const centerX = useMotionValue(0);
+
+  // Buttery-smooth, organic spring physics
   const springX = useSpring(centerX, {
-    stiffness: 380,
-    damping: 30,
-    mass: 0.85,
+    stiffness: 240,
+    damping: 25,
+    mass: 0.65,
   });
 
+  // Calculate velocity for subtle liquid squash & stretch
+  const xVelocity = useVelocity(springX);
+  const rawScaleX = useTransform(xVelocity, [-1200, 0, 1200], [1.07, 1, 1.07]);
+  const rawScaleY = useTransform(xVelocity, [-1200, 0, 1200], [0.94, 1, 0.94]);
+  const scaleX = useSpring(rawScaleX, { stiffness: 350, damping: 25 });
+  const scaleY = useSpring(rawScaleY, { stiffness: 350, damping: 25 });
+
   // Active item & accent color
-  const activeItem = items[activeIndex] || items[0];
+  const activeItem = items[activeTab] || items[0];
   const activeColor = activeItem?.color || '#7c3aed';
 
   // Precise geometry matching Purrweb UX curve
@@ -82,7 +96,7 @@ export function CurvedTabBar({
       setContainerWidth(cRect.width);
       setContainerHeight(isMobile ? 64 : cRect.height || 48);
 
-      const targetElement = itemRefs.current[activeIndex];
+      const targetElement = itemRefs.current[activeTab];
       let targetCenter = 0;
 
       if (targetElement) {
@@ -92,7 +106,7 @@ export function CurvedTabBar({
         const sidePadding = isMobile ? 6 : 12;
         const usableWidth = cRect.width - sidePadding * 2;
         const itemWidth = usableWidth / items.length;
-        targetCenter = sidePadding + (activeIndex + 0.5) * itemWidth;
+        targetCenter = sidePadding + (activeTab + 0.5) * itemWidth;
       }
 
       if (instant) {
@@ -101,7 +115,7 @@ export function CurvedTabBar({
         centerX.set(targetCenter);
       }
     },
-    [activeIndex, isMobile, items.length, centerX, springX]
+    [activeTab, isMobile, items.length, centerX, springX]
   );
 
   useEffect(() => {
@@ -132,9 +146,9 @@ export function CurvedTabBar({
     if (mounted) {
       updateActivePosition(false);
     }
-  }, [activeIndex, mounted, updateActivePosition]);
+  }, [activeTab, mounted, updateActivePosition]);
 
-  // Framer Motion transform for background SVG path
+  // Framer Motion transform for background SVG path with silky cubic beziers
   const pathD = useTransform(springX, (x) => {
     const w = containerWidth;
     const h = containerHeight;
@@ -149,10 +163,10 @@ export function CurvedTabBar({
       const xLeft = Math.max(r, x - nw);
       const xRight = Math.min(w - r, x + nw);
 
-      const cp1X = x - nw * 0.55;
-      const cp2X = x - nw * 0.42;
-      const cp3X = x + nw * 0.42;
-      const cp4X = x + nw * 0.55;
+      const cp1X = x - nw * 0.58;
+      const cp2X = x - nw * 0.40;
+      const cp3X = x + nw * 0.40;
+      const cp4X = x + nw * 0.58;
 
       return `M ${r} 0 
         L ${xLeft} 0 
@@ -171,10 +185,10 @@ export function CurvedTabBar({
     const xLeft = Math.max(0, x - nw);
     const xRight = Math.min(w, x + nw);
 
-    const cp1X = x - nw * 0.55;
-    const cp2X = x - nw * 0.42;
-    const cp3X = x + nw * 0.42;
-    const cp4X = x + nw * 0.55;
+    const cp1X = x - nw * 0.58;
+    const cp2X = x - nw * 0.40;
+    const cp3X = x + nw * 0.40;
+    const cp4X = x + nw * 0.58;
 
     return `M 0 0 
       L ${xLeft} 0 
@@ -199,10 +213,10 @@ export function CurvedTabBar({
       const r = h / 2;
       const xLeft = Math.max(r, x - nw);
       const xRight = Math.min(w - r, x + nw);
-      const cp1X = x - nw * 0.55;
-      const cp2X = x - nw * 0.42;
-      const cp3X = x + nw * 0.42;
-      const cp4X = x + nw * 0.55;
+      const cp1X = x - nw * 0.58;
+      const cp2X = x - nw * 0.40;
+      const cp3X = x + nw * 0.40;
+      const cp4X = x + nw * 0.58;
 
       return `M ${r} 0 
         L ${xLeft} 0 
@@ -219,10 +233,10 @@ export function CurvedTabBar({
 
     const xLeft = Math.max(0, x - nw);
     const xRight = Math.min(w, x + nw);
-    const cp1X = x - nw * 0.55;
-    const cp2X = x - nw * 0.42;
-    const cp3X = x + nw * 0.42;
-    const cp4X = x + nw * 0.55;
+    const cp1X = x - nw * 0.58;
+    const cp2X = x - nw * 0.40;
+    const cp3X = x + nw * 0.40;
+    const cp4X = x + nw * 0.58;
 
     return `M 0 0 
       L ${xLeft} 0 
@@ -247,7 +261,7 @@ export function CurvedTabBar({
         className="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-0"
         style={{
           filter: isMobile
-            ? 'drop-shadow(0 -4px 18px rgba(0,0,0,0.08)) drop-shadow(0 -1px 3px rgba(0,0,0,0.05))'
+            ? 'drop-shadow(0 -4px 18px rgba(0,0,0,0.07)) drop-shadow(0 -1px 3px rgba(0,0,0,0.04))'
             : 'drop-shadow(0 6px 20px rgba(0,0,0,0.12))',
         }}
       >
@@ -266,17 +280,19 @@ export function CurvedTabBar({
         />
       </svg>
 
-      {/* 2. Floating Circular Active Button (The Iconic Purrweb Indicator) */}
+      {/* 2. Floating Circular Active Button with Liquid Stretch Physics */}
       <motion.div
         style={{
           x: springX,
           top: circleTop,
+          scaleX,
+          scaleY,
         }}
-        className="absolute -translate-x-1/2 pointer-events-none z-20 flex items-center justify-center"
+        className="absolute -translate-x-1/2 pointer-events-none z-20 flex items-center justify-center will-change-transform"
       >
         {/* Ambient Radial Glow */}
         <div
-          className="absolute rounded-full blur-md opacity-50 dark:opacity-75 transition-colors duration-300"
+          className="absolute rounded-full blur-md opacity-45 dark:opacity-70 transition-colors duration-300"
           style={{
             width: circleDiameter + 10,
             height: circleDiameter + 10,
@@ -286,7 +302,7 @@ export function CurvedTabBar({
 
         {/* Circular Token with Accent Border */}
         <div
-          className="relative rounded-full flex items-center justify-center transition-colors duration-300 bg-white dark:bg-[#0B0F17] shadow-xl"
+          className="relative rounded-full flex items-center justify-center transition-colors duration-300 bg-white dark:bg-[#0B0F17] shadow-xl overflow-hidden"
           style={{
             width: circleDiameter,
             height: circleDiameter,
@@ -294,24 +310,25 @@ export function CurvedTabBar({
             boxShadow: `0 8px 22px -3px ${activeColor}55, 0 3px 8px rgba(0,0,0,0.22)`,
           }}
         >
-          {/* Icon with Spring Pop Animation on Switch */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ scale: 0.45, y: 5, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.45, y: -5, opacity: 0 }}
-              transition={{
-                type: 'spring',
-                stiffness: 480,
-                damping: 24,
-              }}
-              className="flex items-center justify-center"
-              style={{ color: activeColor }}
-            >
-              {activeItem?.icon}
-            </motion.div>
-          </AnimatePresence>
+          {/* Seamless Icon Cross-Fade (no empty circle delay) */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={activeTab}
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.5, opacity: 0, position: 'absolute' }}
+                transition={{
+                  duration: 0.22,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="flex items-center justify-center"
+                style={{ color: activeColor }}
+              >
+                {activeItem?.icon}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </motion.div>
 
@@ -323,7 +340,7 @@ export function CurvedTabBar({
         )}
       >
         {items.map((item, idx) => {
-          const isActive = idx === activeIndex;
+          const isActive = idx === activeTab;
 
           return (
             <Link
@@ -333,40 +350,40 @@ export function CurvedTabBar({
                 itemRefs.current[idx] = el;
               }}
               onClick={() => {
-                setOptimisticIndex(idx);
+                setActiveTab(idx);
                 if (typeof navigator !== 'undefined' && navigator.vibrate) {
                   navigator.vibrate(10);
                 }
               }}
               className={cn(
-                'relative flex items-center justify-center transition-all duration-200 select-none group',
+                'relative flex items-center justify-end select-none group',
                 isMobile
-                  ? 'flex-1 flex-col py-1 h-full min-w-0'
+                  ? 'flex-1 flex-col pb-1.5 h-full min-w-0'
                   : 'flex-row gap-1.5 px-3 py-1 rounded-full text-xs font-semibold'
               )}
             >
-              {/* Inactive Icon: smoothly fades away when active */}
+              {/* Inactive Icon: smoothly fades away when active, zero layout shift */}
               <div
                 className={cn(
-                  'flex items-center justify-center transition-all duration-200',
+                  'w-6 h-6 flex items-center justify-center transition-all duration-250',
                   isActive
-                    ? 'opacity-0 scale-75 pointer-events-none'
+                    ? 'opacity-0 scale-75 -translate-y-1 pointer-events-none'
                     : 'opacity-65 group-hover:opacity-100 group-hover:scale-105 text-stone-500 dark:text-stone-400'
                 )}
               >
                 {item.icon}
               </div>
 
-              {/* Text Label */}
+              {/* Text Label: anchored to bottom baseline, zero vertical jump */}
               <span
                 className={cn(
-                  'transition-all duration-200 text-center truncate',
+                  'text-center truncate transition-colors duration-200 block',
                   isMobile
                     ? cn(
-                        'text-[10px] tracking-tight leading-tight',
+                        'text-[10px] tracking-tight leading-tight mt-0.5',
                         isActive
-                          ? 'font-bold mt-4 text-purple-700 dark:text-purple-300'
-                          : 'font-medium text-stone-500 dark:text-stone-400 mt-0.5 group-hover:text-stone-800 dark:group-hover:text-stone-200'
+                          ? 'font-bold text-purple-700 dark:text-purple-300'
+                          : 'font-medium text-stone-500 dark:text-stone-400 group-hover:text-stone-800 dark:group-hover:text-stone-200'
                       )
                     : cn(
                         'text-xs tracking-tight',

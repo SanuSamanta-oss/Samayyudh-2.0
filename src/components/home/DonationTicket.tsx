@@ -6,19 +6,32 @@ import { X, Download } from 'lucide-react';
 import * as htmlToImage from 'html-to-image';
 import jsPDF from 'jspdf';
 
-type PaymentState = 'idle' | 'selecting' | 'receipt';
+type PaymentState = 'idle' | 'suggestion' | 'selecting' | 'receipt';
 
 export function DonationTicket() {
   const [paymentState, setPaymentState] = useState<PaymentState>('idle');
   const [amount, setAmount] = useState<string>('');
+  const [selectedGateway, setSelectedGateway] = useState<'razorpay' | 'cashfree'>('cashfree');
   const receiptRef = useRef<HTMLDivElement>(null);
 
   const [isLoading, setIsLoading] = useState(false);
 
   const initializeRazorpay = () => {
     return new Promise((resolve) => {
+      if ((window as any).Razorpay) return resolve(true);
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const initializeCashfree = () => {
+    return new Promise((resolve) => {
+      if ((window as any).Cashfree) return resolve(true);
+      const script = document.createElement("script");
+      script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
       script.onload = () => resolve(true);
       script.onerror = () => resolve(false);
       document.body.appendChild(script);
@@ -34,53 +47,98 @@ export function DonationTicket() {
     setIsLoading(true);
     
     try {
-      const res = await initializeRazorpay();
-      if (!res) {
-        alert("Razorpay SDK failed to load. Are you online?");
-        setIsLoading(false);
-        return;
+      if (selectedGateway === 'razorpay') {
+        const res = await initializeRazorpay();
+        if (!res) {
+          alert("Razorpay SDK failed to load. Are you online?");
+          setIsLoading(false);
+          return;
+        }
+
+        // Create an order via our backend API
+        const data = await fetch("/api/razorpay", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: Number(amount) }),
+        }).then((t) => t.json());
+
+        if (!data || !data.id) {
+          alert(data?.error || "Server error. Please try again.");
+          setIsLoading(false);
+          return;
+        }
+
+        // Initialize Razorpay checkout
+        const options = {
+          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_Tlix2vclEDoazj",
+          amount: data.amount,
+          currency: data.currency,
+          name: "SamayYudh",
+          description: "Donation for Improvements",
+          order_id: data.id,
+          handler: function () {
+            // Payment Successful
+            setPaymentState('receipt');
+          },
+          theme: {
+            color: "#f59e0b",
+          },
+        };
+
+        const paymentObject = new (window as any).Razorpay(options);
+        paymentObject.open();
+        
+        paymentObject.on('payment.failed', function () {
+          alert("Payment failed or cancelled!");
+        });
+      } else {
+        // Cashfree Gateway
+        const data = await fetch("/api/cashfree", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: Number(amount) }),
+        }).then((t) => t.json());
+
+        if (!data || data.error) {
+          alert(data?.error || "Failed to create Cashfree session. Please try again.");
+          setIsLoading(false);
+          return;
+        }
+
+        // If in demo test mode (credentials not yet provided in .env.local)
+        if (data.is_demo) {
+          setTimeout(() => {
+            alert("Cashfree Test Simulation: Payment Completed Successfully! (To connect your live sandbox, add CASHFREE_APP_ID in .env.local)");
+            setPaymentState('receipt');
+            setIsLoading(false);
+          }, 600);
+          return;
+        }
+
+        const res = await initializeCashfree();
+        if (!res) {
+          alert("Cashfree SDK failed to load. Are you online?");
+          setIsLoading(false);
+          return;
+        }
+
+        const cashfreeMode = (process.env.NEXT_PUBLIC_CASHFREE_MODE || "sandbox").toLowerCase();
+        const cashfree = (window as any).Cashfree({ mode: cashfreeMode });
+
+        cashfree.checkout({
+          paymentSessionId: data.payment_session_id,
+          redirectTarget: "_modal",
+        }).then((result: any) => {
+          if (result.error) {
+            alert(result.error.message || "Cashfree payment failed or was cancelled.");
+          } else if (result.paymentDetails || result.redirect) {
+            setPaymentState('receipt');
+          }
+        });
       }
-
-      // Create an order via our backend API
-      const data = await fetch("/api/razorpay", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: Number(amount) }),
-      }).then((t) => t.json());
-
-      if (!data || !data.id) {
-        alert("Server error. Please try again.");
-        setIsLoading(false);
-        return;
-      }
-
-      // Initialize Razorpay checkout
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_Tlix2vclEDoazj",
-        amount: data.amount,
-        currency: data.currency,
-        name: "SamayYudh",
-        description: "Donation for Improvements",
-        order_id: data.id,
-        handler: function (response: any) {
-          // Payment Successful
-          setPaymentState('receipt');
-        },
-        theme: {
-          color: "#f59e0b",
-        },
-      };
-
-      const paymentObject = new (window as any).Razorpay(options);
-      paymentObject.open();
-      
-      paymentObject.on('payment.failed', function (response: any) {
-        alert("Payment failed or cancelled!");
-      });
-      
     } catch (error) {
       console.error(error);
-      alert("Something went wrong");
+      alert("Something went wrong with the payment transaction.");
     } finally {
       setIsLoading(false);
     }
@@ -126,8 +184,8 @@ export function DonationTicket() {
       </div>
 
       <div 
-        className="relative inline-block w-full max-w-[600px] mx-auto cursor-pointer group" 
-        onClick={() => setPaymentState('selecting')}
+        className="relative inline-block w-full max-w-[680px] mx-auto cursor-pointer group" 
+        onClick={() => setPaymentState('suggestion')}
       >
         {/* Custom CSS Ticket Component */}
         <div 
@@ -144,13 +202,9 @@ export function DonationTicket() {
             {/* Left notch */}
             <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--background,#0a0a0a)]"></div>
 
-            {/* Top labels */}
-            <div className="w-full flex justify-center items-center gap-3 sm:gap-6 text-[8px] sm:text-xs text-[#233a54]/70 font-bold tracking-widest uppercase mb-4 sm:mb-6">
-              <span>Student First</span>
-              <span className="flex-1 max-w-[60px] h-[1px] bg-[#233a54]/30"></span>
-              <span>Free Forever</span>
-              <span className="flex-1 max-w-[60px] h-[1px] bg-[#233a54]/30"></span>
-              <span>Expert Verified</span>
+            {/* Top banner / message */}
+            <div className="w-full text-center text-[10px] sm:text-xs text-[#233a54]/80 font-medium tracking-normal sm:tracking-wide mb-4 sm:mb-6 px-2 leading-relaxed text-balance">
+              By donating you will allow us to serve you better user experiences
             </div>
             
             {/* Main title block */}
@@ -192,9 +246,100 @@ export function DonationTicket() {
         </div>
       </div>
 
-      {/* Fullscreen Modals */}
+      {/* Modals & Dialogs */}
       <AnimatePresence>
-        {paymentState !== 'idle' && (
+        {/* Step 1: Pre-Amount Cashfree Recommendation Popup */}
+        {paymentState === 'suggestion' && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 15 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-2xl text-center overflow-hidden"
+            >
+              {/* Ambient top light */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-gradient-to-b from-indigo-500/20 via-amber-500/10 to-transparent blur-3xl pointer-events-none" />
+
+              {/* Close Button */}
+              <button
+                onClick={() => setPaymentState('idle')}
+                className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Featured Pleading Photo */}
+              <div className="relative mx-auto mb-4 flex items-center justify-center">
+                <div className="relative w-40 sm:w-48 aspect-[3/4] rounded-3xl overflow-hidden border-2 border-amber-400/50 dark:border-amber-400/30 shadow-[0_12px_40px_rgba(245,158,11,0.25)] ring-4 ring-amber-500/10 bg-zinc-100 dark:bg-zinc-800">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/pleading_baby.jpg"
+                    alt="Please support SamayYudh"
+                    className="w-full h-full object-cover object-center select-none"
+                    loading="eager"
+                  />
+                </div>
+                {/* Cute floating badge */}
+                <div className="absolute -bottom-2 bg-white dark:bg-zinc-800 border border-amber-400/40 dark:border-amber-500/30 rounded-full px-3 py-1 shadow-lg text-xs font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-1.5">
+                  <span className="text-sm">🥺</span>
+                  <span className="text-[10px] text-amber-600 dark:text-amber-400 font-extrabold uppercase tracking-wider">Please Donate</span>
+                </div>
+              </div>
+
+              {/* Mini Recommendation Tag */}
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-600 dark:text-indigo-400 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2.5 mt-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping" />
+                Helpful Recommendation
+              </div>
+
+              {/* Main Headline */}
+              <h3 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight mb-2">
+                Support SamayYudh
+              </h3>
+
+              {/* User's Exact Core Message */}
+              <div className="p-4 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 mb-3 text-left">
+                <p className="text-sm sm:text-base text-zinc-800 dark:text-zinc-100 font-semibold leading-snug">
+                  &ldquo;We suggest you to donate through <span className="text-indigo-600 dark:text-indigo-400 font-bold underline decoration-indigo-400/50 underline-offset-2">Cashfree</span> for better flexibility.&rdquo;
+                </p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1.5 leading-relaxed">
+                  Fastest UPI Intent across Google Pay, PhonePe, Paytm, dynamic QR, and zero payment drops.
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-2 mt-5">
+                <button
+                  onClick={() => {
+                    setSelectedGateway('cashfree');
+                    setPaymentState('selecting');
+                  }}
+                  className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-amber-500 hover:from-indigo-500 hover:to-amber-400 text-white font-bold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 group cursor-pointer"
+                >
+                  <span>Continue with Cashfree</span>
+                  <span className="text-[10px] bg-white/20 font-extrabold px-2 py-0.5 rounded-full tracking-wide">
+                    RECOMMENDED
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setSelectedGateway('razorpay');
+                    setPaymentState('selecting');
+                  }}
+                  className="w-full py-2.5 px-4 text-xs font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors cursor-pointer"
+                >
+                  Or continue with Razorpay
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {/* Fullscreen Amount Entry & Receipt Flow */}
+        {(paymentState === 'selecting' || paymentState === 'receipt') && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -312,6 +457,45 @@ export function DonationTicket() {
                     ))}
                   </motion.div>
                   
+                  {/* Gateway Selector */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="w-full mb-6"
+                  >
+                    <div className="flex items-center justify-between text-xs text-zinc-500 mb-2 px-1">
+                      <span className="font-semibold uppercase tracking-wider text-[10px] text-zinc-400">Payment Gateway</span>
+                      <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full">Test Sandbox Active</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 bg-zinc-100 dark:bg-zinc-900/80 p-1.5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedGateway('razorpay')}
+                        className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
+                          selectedGateway === 'razorpay'
+                            ? 'bg-white dark:bg-zinc-800 text-amber-600 dark:text-amber-400 shadow-sm'
+                            : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                        }`}
+                      >
+                        <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                        Razorpay
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedGateway('cashfree')}
+                        className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
+                          selectedGateway === 'cashfree'
+                            ? 'bg-white dark:bg-zinc-800 text-amber-600 dark:text-amber-400 shadow-sm'
+                            : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                        }`}
+                      >
+                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        Cashfree
+                      </button>
+                    </div>
+                  </motion.div>
+
                   {/* Donate Button */}
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
@@ -333,10 +517,10 @@ export function DonationTicket() {
                         {isLoading ? (
                           <>
                             <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg>
-                            Processing...
+                            Connecting {selectedGateway === 'cashfree' ? 'Cashfree' : 'Razorpay'}...
                           </>
                         ) : (
-                          <>Donate {amount && Number(amount) > 0 ? `₹${amount}` : ''} Securely</>
+                          <>Donate {amount && Number(amount) > 0 ? `₹${amount}` : ''} via {selectedGateway === 'cashfree' ? 'Cashfree' : 'Razorpay'}</>
                         )}
                       </span>
                     </button>
@@ -347,21 +531,25 @@ export function DonationTicket() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.8 }}
-                    className="flex items-center justify-center gap-4 mt-6 text-zinc-400 dark:text-zinc-600"
+                    className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 text-zinc-400 dark:text-zinc-600"
                   >
                     <div className="flex items-center gap-1.5 text-xs font-medium">
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                      Encrypted
+                      SSL 256-bit
                     </div>
                     <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
                     <div className="flex items-center gap-1.5 text-xs font-medium">
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                       Razorpay
                     </div>
                     <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
                     <div className="flex items-center gap-1.5 text-xs font-medium">
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
-                      UPI &amp; Cards
+                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                      Cashfree
+                    </div>
+                    <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
+                    <div className="flex items-center gap-1.5 text-xs font-medium">
+                      UPI, QR &amp; Cards
                     </div>
                   </motion.div>
 
@@ -489,8 +677,8 @@ export function DonationTicket() {
                             <span className="text-white text-xs font-black">₹</span>
                           </div>
                           <div>
-                            <p className="text-sm font-bold text-zinc-800">UPI Payment</p>
-                            <p className="text-xs text-zinc-400">Processed via Razorpay</p>
+                            <p className="text-sm font-bold text-zinc-800">Instant UPI Payment</p>
+                            <p className="text-xs text-zinc-400">Processed via {selectedGateway === 'cashfree' ? 'Cashfree Payments' : 'Razorpay'}</p>
                           </div>
                         </div>
 

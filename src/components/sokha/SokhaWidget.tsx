@@ -16,13 +16,14 @@ import {
   History, Plus, Clock, MessageSquare, ArrowLeft
 } from 'lucide-react';
 import { useAuth } from '@/components/providers/AuthProvider';
-import { SokhaOrb } from './SokhaOrb';
+import { SokhaChakra } from './SokhaChakra';
 import { SokhaBotCharacter } from './SokhaBotCharacter';
 import { SokhaMarkdown } from './SokhaMarkdown';
 import {
   SokhaMessage,
   SokhaThread,
   SAMAYYUDH_QUICK_PROMPTS,
+  WARRIOR_MANTRAS,
 } from '@/lib/sokha/types';
 import {
   loadThreads,
@@ -81,6 +82,12 @@ export function SokhaWidget() {
   });
   const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
+
+  // ── Daily Motivational Warrior Mantra State ──
+  const [mantraIndex, setMantraIndex] = useState(0);
+  const handleNextMantra = () => {
+    setMantraIndex((prev) => (prev + 1) % WARRIOR_MANTRAS.length);
+  };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -727,7 +734,7 @@ export function SokhaWidget() {
 
   return (
     <>
-      {/* ── Compact Floating Bot Character (Voice Search & Chat Inside) ──── */}
+      {/* ── Compact Floating Bot Character with Vibrant Blue Aura Backlight ──── */}
       <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 flex items-center">
         {!isOpen && (
           <motion.div
@@ -739,16 +746,18 @@ export function SokhaWidget() {
             className="relative cursor-pointer flex items-center justify-center"
             aria-label="Open SamayYudh Assistant"
           >
+            {/* Ambient Cyan/Sky-Blue Aura Glow behind launcher (matches previous blue look) */}
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-cyan-500/40 via-sky-400/50 to-blue-600/40 blur-2xl pointer-events-none opacity-80" />
             <SokhaBotCharacter
               size="md"
               showGreeting={true}
-              greetingText="👋 Ask or speak your doubt!"
+              greetingText="🔥 Awaken Your Focus! Ask doubts"
             />
           </motion.div>
         )}
       </div>
 
-      {/* ── Floating Tab Window (Exact Match to Reference Photo 1) ────────────── */}
+      {/* ── Floating Assistant Tab Window (Adapts seamlessly to Site Theme, Zero Outlines) ────────────── */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -758,27 +767,35 @@ export function SokhaWidget() {
             transition={{ type: 'spring', damping: 28, stiffness: 320 }}
             className={cn(
               'fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col overflow-hidden',
-              'w-[calc(100vw-2rem)] sm:w-[420px] h-[580px] max-h-[calc(100dvh-6.5rem)] sm:max-h-[85vh]',
-              'rounded-[2.5rem] backdrop-blur-2xl transition-all duration-300',
-              // Pristine white theme without dark-mode outline strokes
-              'bg-white/98 text-stone-900 shadow-[0_25px_70px_rgba(0,0,0,0.16),0_10px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.04]'
+              'w-[calc(100vw-2rem)] sm:w-[420px] h-[610px] sm:h-[630px] max-h-[calc(100dvh-6.5rem)] sm:max-h-[88vh]',
+              'rounded-[2.5rem] backdrop-blur-3xl transition-all duration-300',
+              // Dynamic Theme: Pure White in Light mode, Deep Obsidian-Navy in Dark mode. ZERO OUTLINES.
+              'bg-white/98 text-stone-900 shadow-[0_20px_70px_rgba(0,0,0,0.14),0_8px_25px_rgba(0,0,0,0.06)]',
+              'dark:bg-[#0B1120]/96 dark:text-slate-100 dark:shadow-[0_25px_80px_rgba(0,0,0,0.7),0_8px_30px_rgba(0,0,0,0.5)]',
+              'border-0 ring-0 outline-none'
             )}
           >
+            {/* ── Soft Ambient Aurora Backlight (Matches site theme smoothly) ── */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2.5rem]">
+              <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-brand-500/10 dark:bg-brand-500/20 blur-3xl" />
+              <div className="absolute -bottom-20 right-0 w-72 h-72 rounded-full bg-accent-500/10 dark:bg-accent-500/15 blur-3xl" />
+            </div>
+
             {/* Top Navigation & Controls with Dedicated New Chat & History Section */}
-            <div className="flex items-center justify-between px-5 pt-3.5 pb-2 z-10 border-b border-stone-100">
+            <div className="relative flex items-center justify-between px-5 pt-3.5 pb-2 z-10 bg-transparent">
               {viewMode === 'history' ? (
                 <button
                   type="button"
                   onClick={() => setViewMode('chat')}
-                  className="flex items-center gap-1.5 text-xs font-bold text-purple-700 hover:text-purple-950 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-full transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 text-xs font-bold text-brand-600 dark:text-brand-300 hover:text-brand-700 bg-stone-100 dark:bg-white/10 hover:bg-stone-200 dark:hover:bg-white/15 px-3 py-1.5 rounded-full transition-colors cursor-pointer border-0"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   <span>Back to Chat</span>
                 </button>
               ) : (
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-purple-600">
+                  <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">
                     সময়যুদ্ধ Assistant
                   </span>
                 </div>
@@ -789,7 +806,7 @@ export function SokhaWidget() {
                 <button
                   type="button"
                   onClick={handleStartNewChat}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-bold transition-colors cursor-pointer"
+                  className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-stone-100 hover:bg-stone-200 dark:bg-white/10 dark:hover:bg-white/15 text-stone-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer border-0"
                   title="Start a fresh chat"
                   aria-label="Start new chat"
                 >
@@ -802,10 +819,10 @@ export function SokhaWidget() {
                   type="button"
                   onClick={() => setViewMode(viewMode === 'history' ? 'chat' : 'history')}
                   className={cn(
-                    'flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer',
+                    'flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer border-0',
                     viewMode === 'history'
-                      ? 'bg-purple-600 text-white shadow-xs'
-                      : 'text-stone-600 hover:text-purple-700 hover:bg-stone-100'
+                      ? 'bg-brand-600 text-white shadow-xs'
+                      : 'text-stone-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-white/10'
                   )}
                   title="View Saved Chat History"
                   aria-label="View chat history"
@@ -819,12 +836,35 @@ export function SokhaWidget() {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 rounded-full text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer ml-0.5"
+                  className="p-1.5 rounded-full text-stone-400 hover:text-stone-700 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-stone-100 dark:hover:bg-white/10 transition-colors cursor-pointer ml-0.5 border-0"
                   aria-label="Close assistant"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
+            </div>
+
+            {/* ── Daily Motivational Warrior Mantra Bar (Smooth, Zero Outlines) ── */}
+            <div className="relative z-10 mx-4 my-1 px-3.5 py-1.5 rounded-2xl bg-brand-50/70 dark:bg-white/[0.04] flex items-center justify-between gap-2 backdrop-blur-sm border-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="text-amber-500 text-xs shrink-0">🕉️</span>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold text-stone-800 dark:text-slate-200 truncate">
+                    &ldquo;{WARRIOR_MANTRAS[mantraIndex].sanskrit}&rdquo;
+                  </p>
+                  <p className="text-[10px] text-stone-500 dark:text-slate-400 truncate font-normal">
+                    {WARRIOR_MANTRAS[mantraIndex].english}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleNextMantra}
+                className="px-2 py-0.5 rounded-full bg-brand-100 dark:bg-white/10 hover:bg-brand-200 dark:hover:bg-white/20 text-brand-700 dark:text-brand-300 text-[10px] font-bold transition-all shrink-0 cursor-pointer border-0"
+                title="Get next motivational mantra"
+              >
+                🔀 New
+              </button>
             </div>
 
             {/* ── Feedback Notification when Chat History is Deleted ── */}
@@ -834,7 +874,7 @@ export function SokhaWidget() {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mx-5 my-1 px-3.5 py-2 rounded-2xl bg-emerald-50 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-xs overflow-hidden"
+                  className="mx-5 my-1 px-3.5 py-2 rounded-2xl bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center justify-between shadow-xs overflow-hidden z-20 border-0"
                 >
                   <span className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -843,7 +883,7 @@ export function SokhaWidget() {
                   <button
                     type="button"
                     onClick={() => setDeleteFeedback(null)}
-                    className="text-emerald-700 hover:text-emerald-950 font-bold text-xs ml-2 cursor-pointer"
+                    className="text-emerald-700 dark:text-emerald-300 hover:opacity-80 font-bold text-xs ml-2 cursor-pointer border-0"
                   >
                     ✕
                   </button>
@@ -851,24 +891,24 @@ export function SokhaWidget() {
               )}
             </AnimatePresence>
 
-            {/* ── Main Tab Content Area (History List or Chat View) ───────────── */}
+            {/* ── Main Tab Content Area (History List or Chat View, Zero Scrollbars/Outlines) ───────────── */}
             {viewMode === 'history' ? (
-              <div className="flex-1 overflow-y-auto px-5 py-3 flex flex-col scrollbar-thin">
-                <div className="flex items-center justify-between pb-3 mb-2 border-b border-stone-100">
+              <div className="flex-1 overflow-y-auto px-5 py-3 flex flex-col scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden relative z-10">
+                <div className="flex items-center justify-between pb-3 mb-2">
                   <div>
-                    <h3 className="text-sm font-extrabold text-stone-900 flex items-center gap-2">
-                      <MessageSquare className="w-4 h-4 text-purple-600" />
+                    <h3 className="text-sm font-extrabold text-stone-900 dark:text-white flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                       <span>Saved Chat History</span>
                     </h3>
-                    <p className="text-[11px] text-stone-500 mt-0.5">
-                      Click to resume any study session or delete individual chats
+                    <p className="text-[11px] text-stone-500 dark:text-slate-400 mt-0.5">
+                      Click to resume any study session or remove old transcripts
                     </p>
                   </div>
                   {threads.length > 0 && (
                     <button
                       type="button"
                       onClick={handleOpenDeleteAllModal}
-                      className="flex items-center gap-1 text-[11px] font-bold text-rose-600 hover:text-rose-700 hover:bg-rose-50 px-2.5 py-1 rounded-full transition-colors cursor-pointer"
+                      className="flex items-center gap-1 text-[11px] font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 px-2.5 py-1 rounded-full transition-colors cursor-pointer border-0"
                       title="Clear all saved chats"
                     >
                       <Trash2 className="w-3 h-3" />
@@ -879,17 +919,17 @@ export function SokhaWidget() {
 
                 {threads.length === 0 ? (
                   <div className="flex-1 flex flex-col items-center justify-center text-center p-6 my-auto">
-                    <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 mb-3 shadow-xs">
+                    <div className="w-12 h-12 rounded-2xl bg-brand-50 dark:bg-white/5 flex items-center justify-center text-brand-600 dark:text-brand-400 mb-3 shadow-xs">
                       <Clock className="w-6 h-6" />
                     </div>
-                    <h4 className="text-sm font-extrabold text-stone-800">No Chat History Yet</h4>
-                    <p className="text-xs text-stone-400 mt-1 max-w-[220px] leading-relaxed">
+                    <h4 className="text-sm font-extrabold text-stone-800 dark:text-slate-200">No Chat History Yet</h4>
+                    <p className="text-xs text-stone-400 dark:text-slate-500 mt-1 max-w-[220px] leading-relaxed">
                       Your questions, study doubts, and AI explanations will be safely saved here.
                     </p>
                     <button
                       type="button"
                       onClick={handleStartNewChat}
-                      className="mt-4 px-4 py-2 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-xs shadow-xs hover:shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                      className="mt-4 px-4 py-2 rounded-2xl bg-gradient-to-r from-brand-600 to-accent-600 text-white font-bold text-xs shadow-xs hover:shadow-md transition-all flex items-center gap-1.5 cursor-pointer border-0"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Start New Doubt Session</span>
@@ -911,29 +951,29 @@ export function SokhaWidget() {
                           key={t.id}
                           onClick={() => handleSelectThread(t)}
                           className={cn(
-                            'group relative flex items-start justify-between p-3.5 rounded-2xl border transition-all cursor-pointer text-left',
+                            'group relative flex items-start justify-between p-3.5 rounded-2xl transition-all cursor-pointer text-left border-0',
                             isActive
-                              ? 'bg-purple-50/70 border-purple-200 shadow-xs ring-1 ring-purple-300/40'
-                              : 'bg-white hover:bg-stone-50 border-stone-200/80 hover:border-stone-300'
+                              ? 'bg-brand-50/80 dark:bg-brand-950/40 shadow-xs'
+                              : 'bg-stone-50 dark:bg-white/[0.04] hover:bg-stone-100 dark:hover:bg-white/[0.08]'
                           )}
                         >
                           <div className="min-w-0 flex-1 pr-2.5">
                             <div className="flex items-center gap-1.5 mb-1">
-                              <span className="text-[10px] font-bold text-stone-400 flex items-center gap-1">
+                              <span className="text-[10px] font-bold text-stone-400 dark:text-slate-500 flex items-center gap-1">
                                 <Clock className="w-2.5 h-2.5" />
                                 {timeAgo}
                               </span>
                               {isActive && (
-                                <span className="px-1.5 py-0.2 rounded-full bg-purple-200 text-purple-800 text-[9px] font-extrabold uppercase tracking-wider">
+                                <span className="px-1.5 py-0.2 rounded-full bg-brand-200 dark:bg-brand-500/25 text-brand-800 dark:text-brand-300 text-[9px] font-extrabold uppercase tracking-wider">
                                   Current
                                 </span>
                               )}
-                              <span className="text-[10px] text-stone-400">· {msgCount} msg{msgCount !== 1 ? 's' : ''}</span>
+                              <span className="text-[10px] text-stone-400 dark:text-slate-500">· {msgCount} msg{msgCount !== 1 ? 's' : ''}</span>
                             </div>
-                            <h4 className="text-xs font-bold text-stone-900 line-clamp-1 group-hover:text-purple-700 transition-colors">
+                            <h4 className="text-xs font-bold text-stone-900 dark:text-slate-100 line-clamp-1 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
                               {t.title || 'Study Session'}
                             </h4>
-                            <p className="text-[11px] text-stone-500 line-clamp-1 mt-0.5 font-normal">
+                            <p className="text-[11px] text-stone-500 dark:text-slate-400 line-clamp-1 mt-0.5 font-normal">
                               {previewSnippet}
                             </p>
                           </div>
@@ -942,7 +982,7 @@ export function SokhaWidget() {
                             <button
                               type="button"
                               onClick={(e) => handleOpenDeleteThreadModal(t.id, e)}
-                              className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors cursor-pointer border-0"
                               title="Delete this chat session"
                               aria-label="Delete this chat session"
                             >
@@ -957,41 +997,54 @@ export function SokhaWidget() {
               </div>
             ) : (
               /* Conversation View (Greeting or Messages) */
-              <div className="flex-1 overflow-y-auto px-5 py-2 flex flex-col scrollbar-thin">
-                {/* Reference Photo 1 Hero Greeting State (Visible when starting or scrollable) */}
+              <div className="flex-1 overflow-y-auto px-5 py-2 flex flex-col scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden relative z-10">
+                {/* Hero Greeting State (Seamless, Zero Outlines, Smooth Animation) */}
                 {!hasMessages ? (
-                  <div className="flex-1 flex flex-col items-center justify-center text-center my-auto px-2">
-                    {/* Swirling Luminous Moving Gaseous Circular Body */}
-                    <div className="my-3">
-                      <SokhaOrb size="md" isThinking={isStreaming} />
+                  <div className="flex-1 flex flex-col items-center justify-center text-center my-auto px-2 py-2">
+                    {/* ── Sacred Rotating Chakra Animation (Exact Pinterest Video, Zero Outlines) ── */}
+                    <div className="my-1 relative flex items-center justify-center">
+                      <SokhaChakra size="md" isThinking={isStreaming} />
                     </div>
 
-                    {/* Subtitle & Title matching Photo 1 */}
-                    <p className="text-xs sm:text-sm font-medium text-stone-500 mb-1">
+                    {/* Motivational Focus Badge (Borderless pill) */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-500/15 text-[10px] font-bold uppercase tracking-wider text-brand-700 dark:text-brand-300 mb-1.5 shadow-2xs border-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-ping" />
+                      <span>Focus Aura Active · Warrior Mode</span>
+                    </div>
+
+                    {/* Subtitle & Title */}
+                    <p className="text-xs sm:text-sm font-medium text-stone-500 dark:text-slate-400 mb-0.5">
                       Hello {displayName}
                     </p>
-                    <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900 mb-6">
-                      How can I help<br />you today?
+                    <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-stone-900 dark:text-white mb-0.5">
+                      Awaken Your Focus.
                     </h2>
+                    <p className="text-[11px] text-stone-500 dark:text-slate-400 mb-2.5 max-w-[280px] leading-relaxed">
+                      The clock is your arena. Step forward and conquer your study goals today.
+                    </p>
 
-                    {/* Quick Action Suggestions to use the app prominently (Smooth borderless cards) */}
+                    {/* Quick Action Suggestions (Completely borderless, smooth cards) */}
                     <div className="w-full space-y-2 mt-1">
                       {/* Instant Voice Doubt Button */}
                       <button
                         type="button"
                         onClick={toggleVoiceRecognition}
-                        className="w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-semibold transition-all group cursor-pointer bg-gradient-to-r from-sky-50 to-blue-50 hover:from-sky-100 hover:to-blue-100 text-sky-900 border border-sky-200/60 shadow-xs hover:shadow-sm"
+                        className="w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-semibold transition-all group cursor-pointer bg-gradient-to-r from-sky-50 to-blue-50 hover:from-sky-100 hover:to-blue-100 dark:from-sky-950/40 dark:via-blue-950/30 dark:to-indigo-950/40 dark:hover:from-sky-900/50 dark:hover:to-blue-900/50 text-sky-900 dark:text-sky-100 shadow-xs hover:shadow-sm border-0"
                       >
                         <div className="flex items-center gap-2.5">
-                          <span className="p-1.5 rounded-xl bg-sky-500 text-white shadow-xs">
+                          <span className="p-2 rounded-xl bg-sky-500 text-white shadow-xs">
                             <Mic className="w-4 h-4 animate-pulse" />
                           </span>
                           <div className="flex flex-col text-left">
-                            <span>Ask Doubts with Your Voice</span>
-                            <span className="text-[10px] text-sky-700/80 font-normal">Tap to speak your question</span>
+                            <span className="font-bold">Speak Your Question</span>
+                            <span className="text-[10px] text-sky-700/80 dark:text-sky-300/80 font-normal">
+                              Instant voice doubt solving
+                            </span>
                           </div>
                         </div>
-                        <span className="text-[10px] bg-sky-200/80 text-sky-800 font-bold px-2 py-0.5 rounded-full">Voice Mode</span>
+                        <span className="text-[10px] bg-sky-200/80 dark:bg-sky-500/25 text-sky-800 dark:text-sky-200 font-bold px-2.5 py-0.5 rounded-full border-0">
+                          Voice Mode
+                        </span>
                       </button>
 
                       {SAMAYYUDH_QUICK_PROMPTS.slice(0, 3).map((item, idx) => (
@@ -1000,20 +1053,29 @@ export function SokhaWidget() {
                           type="button"
                           onClick={() => handlePromptClick(item)}
                           className={cn(
-                            'w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-medium transition-all group cursor-pointer',
-                            'bg-[#F5F6FA] hover:bg-[#ECEEF6] text-stone-800 shadow-xs hover:shadow-sm'
+                            'w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-medium transition-all group cursor-pointer border-0',
+                            'bg-[#F5F6FA] hover:bg-[#ECEEF6] dark:bg-white/[0.05] dark:hover:bg-white/[0.09] text-stone-800 dark:text-slate-100 shadow-xs hover:shadow-sm'
                           )}
                         >
                           <div className="flex items-center gap-2.5 truncate">
-                            <span className="text-sm p-1 rounded-lg bg-purple-100 text-purple-700">
+                            <span className="text-sm p-1.5 rounded-xl bg-brand-100 text-brand-700 dark:bg-brand-500/20 dark:text-brand-300">
                               {item.icon}
                             </span>
-                            <span className="truncate">{item.label}</span>
+                            <div className="flex flex-col truncate">
+                              <span className="truncate font-semibold">{item.label}</span>
+                              {item.badge && (
+                                <span className="text-[9px] text-stone-400 dark:text-slate-400 font-mono">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </div>
                           </div>
                           {item.routeHref ? (
-                            <ArrowUpRight className="w-3.5 h-3.5 text-purple-600 opacity-60 group-hover:opacity-100 transition-opacity shrink-0" />
+                            <ArrowUpRight className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400 opacity-60 group-hover:opacity-100 transition-opacity shrink-0" />
                           ) : (
-                            <span className="text-[10px] text-stone-400 shrink-0">Ask</span>
+                            <span className="text-[10px] text-stone-400 dark:text-slate-400 shrink-0 font-semibold px-2 py-0.5 rounded-full bg-stone-200/60 dark:bg-white/10">
+                              Ask
+                            </span>
                           )}
                         </button>
                       ))}
@@ -1023,7 +1085,7 @@ export function SokhaWidget() {
                       <button
                         type="button"
                         onClick={() => setViewMode('history')}
-                        className="mt-3.5 py-1 px-3 rounded-full text-[11px] font-medium text-stone-400 hover:text-purple-600 hover:bg-purple-50 transition-colors inline-flex items-center gap-1.5 cursor-pointer mx-auto"
+                        className="mt-3.5 py-1 px-3 rounded-full text-[11px] font-medium text-stone-400 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-brand-50 dark:hover:bg-white/5 transition-colors inline-flex items-center gap-1.5 cursor-pointer mx-auto border-0"
                         title="View all saved chat sessions"
                       >
                         <History className="w-3.5 h-3.5" />
@@ -1034,11 +1096,11 @@ export function SokhaWidget() {
                 ) : (
                   /* Conversation View */
                   <div className="space-y-4 py-2">
-                    {/* Mini Orb Banner */}
-                    <div className="flex items-center justify-center gap-2 py-1 text-xs text-stone-400">
-                      <SokhaOrb size="sm" isThinking={isStreaming} />
-                      <span className="text-[11px] font-semibold text-purple-600">
-                        SamayYudh AI Companion
+                    {/* Mini Chakra Banner */}
+                    <div className="flex items-center justify-center gap-2 py-1 text-xs text-stone-400 dark:text-slate-400">
+                      <SokhaChakra size="sm" isThinking={isStreaming} />
+                      <span className="text-[11px] font-semibold text-brand-600 dark:text-brand-400">
+                        SamayYudh Companion
                       </span>
                     </div>
 
@@ -1055,7 +1117,7 @@ export function SokhaWidget() {
                           <button
                             type="button"
                             onClick={() => handleOpenDeleteMessageModal(msg.id)}
-                            className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 mt-2 rounded-full text-stone-300 hover:text-rose-600 hover:bg-stone-100 cursor-pointer shrink-0"
+                            className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 mt-2 rounded-full text-stone-300 dark:text-slate-500 hover:text-rose-600 hover:bg-stone-100 dark:hover:bg-white/10 cursor-pointer shrink-0 border-0"
                             title="Delete message"
                             aria-label="Delete message"
                           >
@@ -1065,10 +1127,10 @@ export function SokhaWidget() {
 
                         <div
                           className={cn(
-                            'max-w-[85%] text-sm leading-relaxed transition-all relative group',
+                            'max-w-[85%] text-sm leading-relaxed transition-all relative group border-0',
                             msg.role === 'user'
-                              ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-[1.75rem] rounded-br-md px-5 py-3 shadow-[0_4px_16px_rgba(124,58,237,0.22)]'
-                              : 'bg-[#F2F4F8] text-stone-800 rounded-[1.75rem] rounded-tl-md px-5 py-3.5 shadow-xs'
+                              ? 'bg-gradient-to-r from-brand-600 to-accent-600 text-white rounded-[1.75rem] rounded-br-md px-5 py-3 shadow-[0_4px_16px_rgba(99,102,241,0.22)]'
+                              : 'bg-[#F2F4F8] dark:bg-[#131D33]/90 text-stone-800 dark:text-slate-100 rounded-[1.75rem] rounded-tl-md px-5 py-3.5 shadow-xs'
                           )}
                         >
                           {msg.role === 'user' ? (
@@ -1077,15 +1139,15 @@ export function SokhaWidget() {
                             <div>
                               <SokhaMarkdown content={msg.content} sources={msg.sources} />
                               {/* Voice Speak Button & Delete on Assistant Response */}
-                              <div className="mt-2 pt-1 border-t border-stone-200/50 flex items-center justify-between text-xs text-stone-500">
+                              <div className="mt-2 pt-1 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between text-xs text-stone-500 dark:text-slate-400">
                                 <button
                                   type="button"
                                   onClick={() => speakMessage(msg.id, msg.content)}
                                   className={cn(
-                                    'flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium transition-all cursor-pointer',
+                                    'flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium transition-all cursor-pointer border-0',
                                     speakingMsgId === msg.id
-                                      ? 'bg-purple-100 text-purple-700 font-semibold'
-                                      : 'hover:bg-stone-200/70 text-stone-600'
+                                      ? 'bg-brand-100 dark:bg-brand-500/25 text-brand-700 dark:text-brand-300 font-semibold'
+                                      : 'hover:bg-stone-200/70 dark:hover:bg-white/10 text-stone-600 dark:text-slate-300'
                                   )}
                                   title={
                                     voiceAnswersCount >= 3
@@ -1097,7 +1159,7 @@ export function SokhaWidget() {
                                 >
                                   {speakingMsgId === msg.id ? (
                                     <>
-                                      <VolumeX className="w-3.5 h-3.5 text-purple-600 animate-pulse" />
+                                      <VolumeX className="w-3.5 h-3.5 text-brand-600 animate-pulse" />
                                       <span>Speaking…</span>
                                     </>
                                   ) : (
@@ -1114,7 +1176,7 @@ export function SokhaWidget() {
                                 <button
                                   type="button"
                                   onClick={() => handleOpenDeleteMessageModal(msg.id)}
-                                  className="p-1 rounded-full text-stone-400 hover:text-rose-600 hover:bg-stone-200/60 transition-colors cursor-pointer"
+                                  className="p-1 rounded-full text-stone-400 hover:text-rose-600 hover:bg-stone-200/60 dark:hover:bg-white/10 transition-colors cursor-pointer border-0"
                                   title="Delete this answer"
                                   aria-label="Delete answer"
                                 >
@@ -1123,7 +1185,7 @@ export function SokhaWidget() {
                               </div>
                             </div>
                           ) : (
-                            <div className="flex items-center gap-2 text-xs text-purple-600 py-1">
+                            <div className="flex items-center gap-2 text-xs text-brand-600 dark:text-brand-400 py-1">
                               <Sparkles className="w-3.5 h-3.5 animate-spin" />
                               <span>Finding answer…</span>
                             </div>
@@ -1138,7 +1200,7 @@ export function SokhaWidget() {
 
                 {/* Error Message */}
                 {errorMessage && (
-                  <div className="my-2 p-3.5 rounded-2xl bg-rose-50 text-rose-700 text-xs shadow-xs">
+                  <div className="my-2 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 text-xs shadow-xs border-0">
                     {errorMessage}
                   </div>
                 )}
@@ -1147,15 +1209,15 @@ export function SokhaWidget() {
 
             {/* ── Voice status banner when microphone is active ── */}
             {viewMode === 'chat' && isListening && (
-              <div className="px-6 py-1.5 bg-purple-50 text-purple-700 text-xs flex items-center justify-between border-t border-purple-100 animate-pulse">
+              <div className="px-6 py-2 bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300 text-xs flex items-center justify-between border-0 animate-pulse relative z-10">
                 <span className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
                   Listening to your voice... Speak now!
                 </span>
                 <button
                   type="button"
                   onClick={stopListening}
-                  className="text-purple-900 font-semibold underline text-[11px]"
+                  className="text-brand-900 dark:text-brand-100 font-semibold underline text-[11px] border-0"
                 >
                   Cancel
                 </button>
@@ -1164,37 +1226,40 @@ export function SokhaWidget() {
 
             {/* ── Bottom Section: Input Box in Chat view OR History Footer in History view ── */}
             {viewMode === 'history' ? (
-              <div className="p-3.5 bg-white/95 border-t border-stone-100 flex items-center justify-between">
-                <span className="text-[11px] text-stone-400 font-medium">
+              <div className="p-3.5 bg-stone-50/80 dark:bg-white/[0.03] flex items-center justify-between relative z-10 border-0">
+                <span className="text-[11px] text-stone-400 dark:text-slate-500 font-medium">
                   {threads.length} saved session{threads.length !== 1 ? 's' : ''} on device
                 </span>
                 <button
                   type="button"
                   onClick={handleStartNewChat}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-brand-600 to-accent-600 hover:opacity-90 text-white text-xs font-bold transition-all shadow-xs cursor-pointer border-0"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>New Doubt</span>
                 </button>
               </div>
             ) : (
-              <div className="p-4 pt-2 bg-white/90 backdrop-blur-md">
+              <div className="p-4 pt-2 bg-transparent relative z-10">
                 <div
                   className={cn(
-                    'relative flex items-center justify-between rounded-full px-4 py-2.5 bg-[#EEF1F7] hover:bg-[#E8ECF4] focus-within:bg-[#EEF1F7] shadow-xs focus-within:shadow-[0_4px_20px_rgba(124,58,237,0.12)] transition-all duration-200',
-                    isListening && 'ring-2 ring-purple-500 bg-purple-50'
+                    'relative flex items-center justify-between rounded-full px-4 py-2.5 transition-all duration-200 border-0 ring-0',
+                    'bg-[#EEF1F7] hover:bg-[#E8ECF4] focus-within:bg-[#EEF1F7]',
+                    'dark:bg-[#131D33]/95 dark:hover:bg-[#18233D] dark:focus-within:bg-[#131D33]',
+                    'shadow-xs focus-within:shadow-[0_4px_20px_rgba(99,102,241,0.18)]',
+                    isListening && 'ring-2 ring-brand-500 bg-brand-50 dark:bg-brand-950/40'
                   )}
-                  style={{ outline: 'none' }}
+                  style={{ outline: 'none', border: 'none' }}
                 >
                   {/* Voice Search Button (Microphone inside the bot) */}
                   <button
                     type="button"
                     onClick={toggleVoiceRecognition}
                     className={cn(
-                      'p-2 mr-1.5 rounded-full transition-all shrink-0 cursor-pointer flex items-center justify-center',
+                      'p-2 mr-1.5 rounded-full transition-all shrink-0 cursor-pointer flex items-center justify-center border-0',
                       isListening
-                        ? 'bg-rose-500 text-white animate-pulse shadow-md ring-2 ring-rose-300'
-                        : 'text-sky-600 hover:text-sky-700 bg-sky-100/80 hover:bg-sky-200/80 shadow-2xs'
+                        ? 'bg-rose-500 text-white animate-pulse shadow-md'
+                        : 'text-sky-600 hover:text-sky-700 bg-sky-100/80 hover:bg-sky-200/80 dark:bg-sky-500/20 dark:text-sky-300 dark:hover:bg-sky-500/30 shadow-2xs'
                     )}
                     title={isListening ? 'Stop listening' : 'Voice search (Tap to speak your doubt)'}
                     aria-label="Voice search"
@@ -1217,8 +1282,8 @@ export function SokhaWidget() {
                         handleSendMessage();
                       }
                     }}
-                    placeholder={isListening ? 'Listening to your voice...' : 'Ask anything or speak...'}
-                    className="w-full bg-transparent text-sm text-stone-900 placeholder:text-stone-400 border-0 outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-0 focus-visible:outline-none focus-visible:ring-0 pr-2"
+                    placeholder={isListening ? 'Listening to your voice...' : 'Ask your study doubt or question...'}
+                    className="w-full bg-transparent text-sm text-stone-900 placeholder:text-stone-400 dark:text-slate-100 dark:placeholder:text-slate-400 border-0 outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-0 focus-visible:outline-none focus-visible:ring-0 pr-2"
                     style={{ outline: 'none', border: 'none', boxShadow: 'none' }}
                   />
 
@@ -1226,7 +1291,7 @@ export function SokhaWidget() {
                     <button
                       type="button"
                       onClick={handleStopGeneration}
-                      className="p-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white transition-colors shrink-0 cursor-pointer"
+                      className="p-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white transition-colors shrink-0 cursor-pointer border-0"
                       title="Stop"
                     >
                       <Square className="w-3.5 h-3.5 fill-current" />
@@ -1235,14 +1300,14 @@ export function SokhaWidget() {
                     <button
                       type="button"
                       onClick={() => handleSendMessage()}
-                      className="p-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:scale-105 active:scale-95 text-white transition-all shadow-sm shrink-0 cursor-pointer"
+                      className="p-2 rounded-full bg-gradient-to-r from-brand-600 to-accent-600 hover:scale-105 active:scale-95 text-white transition-all shadow-sm shrink-0 cursor-pointer border-0"
                       title="Send"
                     >
                       <Send className="w-3.5 h-3.5" />
                     </button>
                   ) : (
-                    /* Audio wave visual indicator matching Photo 1 */
-                    <div className="flex items-center gap-1 text-purple-400/80 shrink-0 px-1">
+                    /* Audio wave visual indicator matching site theme */
+                    <div className="flex items-center gap-1 text-brand-400 dark:text-brand-400/80 shrink-0 px-1">
                       <span className="w-0.5 h-2 rounded-full bg-current animate-pulse" />
                       <span className="w-0.5 h-3.5 rounded-full bg-current animate-pulse delay-75" />
                       <span className="w-0.5 h-5 rounded-full bg-current animate-pulse delay-150" />
@@ -1261,27 +1326,27 @@ export function SokhaWidget() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 z-50 bg-black/45 backdrop-blur-xs flex items-center justify-center p-5"
+                  className="absolute inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-5 border-0"
                 >
                   <motion.div
                     initial={{ opacity: 0, scale: 0.92, y: 12 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.92, y: 12 }}
                     transition={{ type: 'spring', damping: 26, stiffness: 340 }}
-                    className="w-full max-w-[340px] bg-white text-stone-900 rounded-[2rem] p-5 shadow-[0_25px_60px_rgba(0,0,0,0.3)] flex flex-col items-center text-center relative overflow-hidden"
+                    className="w-full max-w-[340px] bg-white dark:bg-[#0E1528] text-stone-900 dark:text-slate-100 rounded-[2rem] p-5 shadow-2xl flex flex-col items-center text-center relative overflow-hidden border-0"
                   >
                     {/* Glowing Danger Icon Badge */}
-                    <div className="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center mb-3 text-rose-600 shadow-xs">
+                    <div className="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-500/20 flex items-center justify-center mb-3 text-rose-600 dark:text-rose-400 shadow-xs border-0">
                       <Trash2 className="w-6 h-6" />
                     </div>
 
                     {/* Modal Title */}
-                    <h3 className="text-base sm:text-lg font-extrabold text-stone-900 tracking-tight">
+                    <h3 className="text-base sm:text-lg font-extrabold text-stone-900 dark:text-white tracking-tight">
                       Permanent Delete?
                     </h3>
 
                     {/* Question / Explanation */}
-                    <p className="text-xs text-stone-500 mt-1.5 leading-relaxed">
+                    <p className="text-xs text-stone-500 dark:text-slate-400 mt-1.5 leading-relaxed">
                       {messageToDelete
                         ? 'Do you want to permanently delete this message? This action cannot be undone.'
                         : deleteScope === 'single_thread'
@@ -1292,18 +1357,18 @@ export function SokhaWidget() {
                     {/* Custom Options Selector (when deleting full history) */}
                     {!messageToDelete && deleteScope !== 'single_thread' && (
                       <div className="w-full mt-3.5 space-y-1.5 text-left">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 px-1">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 dark:text-slate-400 px-1">
                           Deletion Scope
                         </span>
-                        <div className="grid grid-cols-2 gap-1.5 p-1 bg-stone-100 rounded-2xl">
+                        <div className="grid grid-cols-2 gap-1.5 p-1 bg-stone-100 dark:bg-white/[0.05] rounded-2xl border-0">
                           <button
                             type="button"
                             onClick={() => setDeleteScope('all')}
                             className={cn(
-                              'py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer',
+                              'py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer border-0',
                               deleteScope === 'all'
-                                ? 'bg-white text-rose-600 shadow-xs'
-                                : 'text-stone-500 hover:text-stone-900'
+                                ? 'bg-white dark:bg-white/20 text-rose-600 dark:text-rose-400 shadow-xs'
+                                : 'text-stone-500 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white'
                             )}
                           >
                             All History
@@ -1312,16 +1377,16 @@ export function SokhaWidget() {
                             type="button"
                             onClick={() => setDeleteScope('current')}
                             className={cn(
-                              'py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer',
+                              'py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer border-0',
                               deleteScope === 'current'
-                                ? 'bg-white text-purple-700 shadow-xs'
-                                : 'text-stone-500 hover:text-stone-900'
+                                ? 'bg-white dark:bg-white/20 text-brand-700 dark:text-brand-300 shadow-xs'
+                                : 'text-stone-500 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white'
                             )}
                           >
                             Current Only
                           </button>
                         </div>
-                        <p className="text-[10px] text-stone-400 px-1">
+                        <p className="text-[10px] text-stone-400 dark:text-slate-400 px-1">
                           {deleteScope === 'all'
                             ? 'Permanently deletes all saved study sessions and transcripts.'
                             : 'Clears only this active chat conversation.'}
@@ -1334,14 +1399,14 @@ export function SokhaWidget() {
                       <button
                         type="button"
                         onClick={handleCancelDelete}
-                        className="flex-1 py-2.5 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-xs transition-colors cursor-pointer"
+                        className="flex-1 py-2.5 px-3 rounded-xl bg-stone-100 dark:bg-white/10 hover:bg-stone-200 dark:hover:bg-white/15 text-stone-700 dark:text-slate-200 font-bold text-xs transition-colors cursor-pointer border-0"
                       >
                         No, Keep It
                       </button>
                       <button
                         type="button"
                         onClick={handleConfirmDelete}
-                        className="flex-1 py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-all shadow-xs hover:shadow-sm cursor-pointer flex items-center justify-center gap-1.5"
+                        className="flex-1 py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition-all shadow-xs hover:shadow-sm cursor-pointer flex items-center justify-center gap-1.5 border-0"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                         <span>Yes, Delete</span>

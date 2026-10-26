@@ -62,11 +62,11 @@ export function SokhaBotCharacter({
           transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 20 }}
           className="absolute -top-11 right-0 sm:right-2 z-20 pointer-events-none"
         >
-          <div className="relative px-3.5 py-1.5 rounded-2xl bg-[#0c1224]/95 border border-purple-400/40 shadow-[0_8px_25px_rgba(124,58,237,0.45)] backdrop-blur-md text-[11px] font-semibold text-purple-100 whitespace-nowrap flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+          <div className="relative px-3.5 py-1.5 rounded-2xl bg-[#091120]/95 shadow-[0_8px_30px_rgba(14,165,233,0.35)] backdrop-blur-md text-[11px] font-semibold text-sky-100 whitespace-nowrap flex items-center gap-1.5 border-0">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
             <span>{greetingText}</span>
             {/* Bubble arrow tip */}
-            <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-[#0c1224] border-r border-b border-purple-400/40 rotate-45" />
+            <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-[#091120] rotate-45" />
           </div>
         </motion.div>
       )}
@@ -88,12 +88,12 @@ export function SokhaBotCharacter({
         className="relative cursor-pointer"
         style={{ width: dimensions.width, height: dimensions.height }}
       >
-        {/* Soft Ambient Radial Backlight - Vibrant Cyan/Electric Blue */}
+        {/* Soft Ambient Radial Backlight - Vibrant Cyan/Electric Blue (Exact match to previous) */}
         <div
           className={cn(
-            'absolute inset-0 rounded-3xl bg-gradient-to-tr from-sky-500 via-cyan-400 to-blue-500 blur-xl opacity-50 transition-all duration-300 pointer-events-none',
-            isHovered && 'opacity-90 blur-2xl scale-125',
-            isThinking && 'opacity-95 animate-pulse bg-gradient-to-tr from-cyan-300 via-sky-400 to-blue-600'
+            'absolute -inset-3 rounded-full bg-gradient-to-tr from-cyan-500 via-sky-400 to-blue-600 blur-2xl opacity-80 transition-all duration-300 pointer-events-none',
+            isHovered && 'opacity-100 blur-3xl scale-135',
+            isThinking && 'opacity-100 animate-pulse bg-gradient-to-tr from-cyan-300 via-sky-400 to-blue-600'
           )}
         />
 

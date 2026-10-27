@@ -171,21 +171,41 @@ export async function POST(request: Request) {
       return Response.json(emptyResult);
     }
 
-    // Call Gemini
+    // Call Gemini with candidate models for speed and resilience
     const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+    const candidateModels = [
+      process.env.GEMINI_EVALUATION_MODEL,
+      'gemini-flash-lite-latest',
+      'gemini-3.5-flash-lite',
+      'gemini-3.5-flash',
+    ].filter(Boolean) as string[];
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
-      contents: buildEvaluationPrompt(body),
-      config: {
-        systemInstruction: SYSTEM_PROMPT,
-        temperature: 0.3,
-        maxOutputTokens: 2048,
-        responseMimeType: 'application/json',
-      },
-    });
+    let lastError: unknown = null;
+    let text = '';
 
-    const text = response.text ?? '';
+    for (const model of candidateModels) {
+      try {
+        const response = await ai.models.generateContent({
+          model,
+          contents: buildEvaluationPrompt(body),
+          config: {
+            systemInstruction: SYSTEM_PROMPT,
+            temperature: 0.3,
+            maxOutputTokens: 2048,
+            responseMimeType: 'application/json',
+          },
+        });
+        text = response.text ?? '';
+        if (text) break;
+      } catch (err: any) {
+        lastError = err;
+        console.warn(`Model ${model} evaluation failed, trying fallback:`, err?.message || err);
+      }
+    }
+
+    if (!text) {
+      throw lastError || new Error('No response from evaluation models');
+    }
 
     // Parse the JSON response
     let evaluation: EvaluationResponse;

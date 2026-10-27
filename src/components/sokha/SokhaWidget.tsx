@@ -12,7 +12,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Trash2, Send, Square, Globe, Sparkles, ExternalLink,
-  ChevronDown, ArrowUpRight, Mic, MicOff, Volume2, VolumeX,
+  ChevronDown, Mic, MicOff, Volume2, VolumeX,
   History, Plus, Clock, MessageSquare, ArrowLeft
 } from 'lucide-react';
 import { useAuth } from '@/components/providers/AuthProvider';
@@ -22,7 +22,6 @@ import { SokhaMarkdown } from './SokhaMarkdown';
 import {
   SokhaMessage,
   SokhaThread,
-  SAMAYYUDH_QUICK_PROMPTS,
   WARRIOR_MANTRAS,
 } from '@/lib/sokha/types';
 import {
@@ -718,14 +717,6 @@ export function SokhaWidget() {
     setThreadToDelete(null);
   };
 
-  const handlePromptClick = (promptItem: typeof SAMAYYUDH_QUICK_PROMPTS[0]) => {
-    if (promptItem.routeHref) {
-      setIsOpen(false);
-      router.push(promptItem.routeHref);
-    } else {
-      handleSendMessage(promptItem.prompt);
-    }
-  };
 
   // If in active exam or settings page, hide widget so it does not block settings action controls
   if (isExamSession || isSettingsPage) return null;
@@ -746,8 +737,8 @@ export function SokhaWidget() {
             className="relative cursor-pointer flex items-center justify-center"
             aria-label="Open SamayYudh Assistant"
           >
-            {/* Ambient Cyan/Sky-Blue Aura Glow behind launcher (matches previous blue look) */}
-            <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-cyan-500/40 via-sky-400/50 to-blue-600/40 blur-2xl pointer-events-none opacity-80" />
+            {/* Ambient Cyan/Sky-Blue Aura Glow behind launcher */}
+            <div className="absolute -inset-2.5 rounded-full bg-gradient-to-tr from-cyan-500/35 via-sky-400/45 to-blue-600/35 blur-xl pointer-events-none opacity-75" />
             <SokhaBotCharacter
               size="md"
               showGreeting={true}
@@ -844,26 +835,32 @@ export function SokhaWidget() {
               </div>
             </div>
 
-            {/* ── Daily Motivational Warrior Mantra Bar (Smooth, Zero Outlines) ── */}
-            <div className="relative z-10 mx-4 my-1 px-3.5 py-1.5 rounded-2xl bg-brand-50/70 dark:bg-white/[0.04] flex items-center justify-between gap-2 backdrop-blur-sm border-0">
-              <div className="flex items-center gap-2 min-w-0">
-                <span className="text-amber-500 text-xs shrink-0">🕉️</span>
-                <div className="min-w-0">
-                  <p className="text-[11px] font-bold text-stone-800 dark:text-slate-200 truncate">
+            {/* ── Daily Motivational Warrior Mantra Bar ── */}
+            <div className="relative z-10 mx-4 my-1.5 px-3.5 py-2.5 rounded-2xl bg-brand-50/70 dark:bg-white/[0.04] border border-brand-100/50 dark:border-white/[0.06] flex items-start justify-between gap-2.5 backdrop-blur-sm">
+              <div className="flex items-start gap-2.5 min-w-0 flex-1">
+                <span className="text-amber-500 text-sm shrink-0 mt-0.5 select-none" aria-hidden="true">🕉️</span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[12px] font-bold text-stone-900 dark:text-slate-100 leading-snug">
                     &ldquo;{WARRIOR_MANTRAS[mantraIndex].sanskrit}&rdquo;
                   </p>
-                  <p className="text-[10px] text-stone-500 dark:text-slate-400 truncate font-normal">
+                  <p className="text-[11px] text-stone-600 dark:text-slate-300 font-normal leading-relaxed mt-0.5">
                     {WARRIOR_MANTRAS[mantraIndex].english}
                   </p>
+                  {WARRIOR_MANTRAS[mantraIndex].author && (
+                    <span className="text-[10px] font-semibold text-amber-600 dark:text-amber-400/90 mt-0.5 block">
+                      — {WARRIOR_MANTRAS[mantraIndex].author}
+                    </span>
+                  )}
                 </div>
               </div>
               <button
                 type="button"
                 onClick={handleNextMantra}
-                className="px-2 py-0.5 rounded-full bg-brand-100 dark:bg-white/10 hover:bg-brand-200 dark:hover:bg-white/20 text-brand-700 dark:text-brand-300 text-[10px] font-bold transition-all shrink-0 cursor-pointer border-0"
+                className="px-2.5 py-1 rounded-full bg-brand-100 dark:bg-white/10 hover:bg-brand-200 dark:hover:bg-white/20 text-brand-700 dark:text-brand-300 text-[10px] font-bold transition-all shrink-0 cursor-pointer border-0 mt-0.5 flex items-center gap-1 active:scale-95"
                 title="Get next motivational mantra"
               >
-                🔀 New
+                <span>🔀</span>
+                <span>New</span>
               </button>
             </div>
 
@@ -1047,38 +1044,6 @@ export function SokhaWidget() {
                         </span>
                       </button>
 
-                      {SAMAYYUDH_QUICK_PROMPTS.slice(0, 3).map((item, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => handlePromptClick(item)}
-                          className={cn(
-                            'w-full flex items-center justify-between p-3 rounded-2xl text-left text-xs font-medium transition-all group cursor-pointer border-0',
-                            'bg-[#F5F6FA] hover:bg-[#ECEEF6] dark:bg-white/[0.05] dark:hover:bg-white/[0.09] text-stone-800 dark:text-slate-100 shadow-xs hover:shadow-sm'
-                          )}
-                        >
-                          <div className="flex items-center gap-2.5 truncate">
-                            <span className="text-sm p-1.5 rounded-xl bg-brand-100 text-brand-700 dark:bg-brand-500/20 dark:text-brand-300">
-                              {item.icon}
-                            </span>
-                            <div className="flex flex-col truncate">
-                              <span className="truncate font-semibold">{item.label}</span>
-                              {item.badge && (
-                                <span className="text-[9px] text-stone-400 dark:text-slate-400 font-mono">
-                                  {item.badge}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                          {item.routeHref ? (
-                            <ArrowUpRight className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400 opacity-60 group-hover:opacity-100 transition-opacity shrink-0" />
-                          ) : (
-                            <span className="text-[10px] text-stone-400 dark:text-slate-400 shrink-0 font-semibold px-2 py-0.5 rounded-full bg-stone-200/60 dark:bg-white/10">
-                              Ask
-                            </span>
-                          )}
-                        </button>
-                      ))}
                     </div>
 
                     {totalSavedThreads > 0 && (

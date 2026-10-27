@@ -41,10 +41,10 @@ export function SokhaBotCharacter({
   }, []);
 
   const dimensions = {
-    sm: { width: 44, height: 48, scale: 0.7 },
-    md: { width: 64, height: 70, scale: 1 },
-    lg: { width: 84, height: 92, scale: 1.3 },
-    hero: { width: 120, height: 130, scale: 1.8 },
+    sm: { width: 38, height: 42, scale: 0.65 },
+    md: { width: 50, height: 55, scale: 0.8 },
+    lg: { width: 72, height: 80, scale: 1.15 },
+    hero: { width: 110, height: 120, scale: 1.7 },
   }[size];
 
   return (
@@ -57,16 +57,16 @@ export function SokhaBotCharacter({
       {/* ── Interactive Speech Bubble ───────────────────────── */}
       {showGreeting && (
         <motion.div
-          initial={{ opacity: 0, y: 10, scale: 0.9 }}
+          initial={{ opacity: 0, y: 8, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 20 }}
-          className="absolute -top-11 right-0 sm:right-2 z-20 pointer-events-none"
+          className="absolute -top-10 right-0 sm:right-1 z-20 pointer-events-none"
         >
-          <div className="relative px-3.5 py-1.5 rounded-2xl bg-[#091120]/95 shadow-[0_8px_30px_rgba(14,165,233,0.35)] backdrop-blur-md text-[11px] font-semibold text-sky-100 whitespace-nowrap flex items-center gap-1.5 border-0">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+          <div className="relative px-3 py-1.5 rounded-2xl bg-[#091120]/95 shadow-[0_8px_25px_rgba(14,165,233,0.3)] backdrop-blur-md text-[11px] font-semibold text-sky-100 whitespace-nowrap flex items-center gap-1.5 border-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
             <span>{greetingText}</span>
             {/* Bubble arrow tip */}
-            <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-[#091120] rotate-45" />
+            <div className="absolute -bottom-1 right-5 w-2.5 h-2.5 bg-[#091120] rotate-45" />
           </div>
         </motion.div>
       )}
@@ -74,7 +74,7 @@ export function SokhaBotCharacter({
       {/* ── Floating Character Container ─────────────────────── */}
       <motion.div
         animate={{
-          y: isHovered ? -12 : [0, -7, 0],
+          y: isHovered ? -10 : [0, -6, 0],
           rotate: isHovered ? [0, -3, 3, 0] : [0, 1.5, -1.5, 0],
         }}
         transition={{
@@ -91,8 +91,8 @@ export function SokhaBotCharacter({
         {/* Soft Ambient Radial Backlight - Vibrant Cyan/Electric Blue (Exact match to previous) */}
         <div
           className={cn(
-            'absolute -inset-3 rounded-full bg-gradient-to-tr from-cyan-500 via-sky-400 to-blue-600 blur-2xl opacity-80 transition-all duration-300 pointer-events-none',
-            isHovered && 'opacity-100 blur-3xl scale-135',
+            'absolute -inset-2.5 rounded-full bg-gradient-to-tr from-cyan-500 via-sky-400 to-blue-600 blur-xl opacity-80 transition-all duration-300 pointer-events-none',
+            isHovered && 'opacity-100 blur-2xl scale-125',
             isThinking && 'opacity-100 animate-pulse bg-gradient-to-tr from-cyan-300 via-sky-400 to-blue-600'
           )}
         />
@@ -100,7 +100,7 @@ export function SokhaBotCharacter({
         {/* ── 3D Robot SVG ──────────────────────────────────── */}
         <svg
           viewBox="0 0 100 110"
-          className="w-full h-full drop-shadow-[0_12px_24px_rgba(2,132,199,0.45)]"
+          className="w-full h-full drop-shadow-[0_8px_18px_rgba(2,132,199,0.4)]"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

@@ -5,6 +5,7 @@
 import type { AnswerEvaluation, Question, Answer } from '@/types';
 import { getRecommendedTime } from '@/lib/constants';
 import { generateId, now } from '@/lib/utils';
+import { canEvaluateDeterministically, evaluateDeterministicAnswer } from '@/lib/evaluation/hybrid-evaluator';
 
 interface EvaluateAnswerParams {
   question: Question;
@@ -33,11 +34,19 @@ interface APIEvaluationResponse {
 }
 
 /**
- * Evaluate a single answer using the Gemini API.
+ * Evaluate a single answer using the fast-path hybrid engine or Gemini API.
  * Returns a full AnswerEvaluation object or throws on failure.
  */
 export async function evaluateAnswer({ question, answer }: EvaluateAnswerParams): Promise<AnswerEvaluation> {
-  const recommendedTime = getRecommendedTime(question.marks);
+  // 1. Fast-Path: evaluate deterministically in 0ms if applicable (MCQ, MSQ, Numerical)
+  if (canEvaluateDeterministically(question)) {
+    return evaluateDeterministicAnswer(question, answer);
+  }
+
+  // 2. AI-Path: evaluate subjective / descriptive answers using Gemini
+  const recommendedTime = (question.recommended_minutes && question.recommended_minutes > 0)
+    ? question.recommended_minutes * 60
+    : getRecommendedTime(question.marks);
 
   let finalAnswerText = answer.answer_text;
   
@@ -127,7 +136,10 @@ export async function evaluateAnswer({ question, answer }: EvaluateAnswerParams)
 }
 
 /**
- * Evaluate multiple answers in sequence (with rate limiting).
+ * Evaluate multiple answers in sequence.
+ * Uses hybrid architecture:
+ * - Deterministic questions (MCQ/MSQ/Numerical) evaluate instantly in < 1ms.
+ * - Subjective/descriptive questions evaluate via Gemini API.
  * Returns evaluations for successfully evaluated answers.
  */
 export async function evaluateSession(
@@ -146,51 +158,88 @@ export async function evaluateSession(
     return hasText || hasOption || hasOptions;
   });
 
-  const CONCURRENCY = 2;
+  if (answeredQuestions.length === 0) {
+    return evaluations;
+  }
+
+  // Split into fast-path deterministic questions and subjective questions
+  const deterministicQuestions: Question[] = [];
+  const subjectiveQuestions: Question[] = [];
+
+  for (const q of answeredQuestions) {
+    if (canEvaluateDeterministically(q)) {
+      deterministicQuestions.push(q);
+    } else {
+      subjectiveQuestions.push(q);
+    }
+  }
+
   let completed = 0;
 
-  for (let i = 0; i < answeredQuestions.length; i += CONCURRENCY) {
-    const chunk = answeredQuestions.slice(i, i + CONCURRENCY);
-    
-    await Promise.all(chunk.map(async (question) => {
-      const answer = answers.get(question.id);
-      if (!answer) return;
+  // 1. Instant execution for deterministic questions (0ms - instant)
+  for (const question of deterministicQuestions) {
+    const answer = answers.get(question.id);
+    if (!answer) continue;
 
-      let success = false;
-      let attempts = 0;
-      const maxAttempts = 3;
+    try {
+      const evaluation = evaluateDeterministicAnswer(question, answer);
+      evaluations.set(question.id, evaluation);
+    } catch (detErr) {
+      console.warn(`Deterministic evaluation failed for question ${question.id}, falling back to AI:`, detErr);
+      subjectiveQuestions.push(question);
+      continue;
+    }
 
-      while (!success && attempts < maxAttempts) {
-        try {
-          attempts++;
-          const evaluation = await evaluateAnswer({ question, answer });
-          evaluations.set(question.id, evaluation);
-          success = true;
-        } catch (err: any) {
-          if (attempts >= maxAttempts) {
-            console.warn(`Failed to evaluate question ${question.id} after ${maxAttempts} attempts:`, err);
-          } else {
-            const errStr = String(err?.message || err);
-            if (errStr.includes('429') || errStr.includes('RESOURCE_EXHAUSTED')) {
-              // Rate limit hit (usually 15 RPM for flash models on free tier).
-              // Wait 30 seconds before retrying.
-              console.warn(`Rate limit hit on question ${question.id}, waiting 30s...`);
-              await new Promise(resolve => setTimeout(resolve, 30000));
+    completed++;
+    onProgress?.(completed, answeredQuestions.length, question.id);
+  }
+
+  // 2. AI evaluation ONLY for remaining subjective questions (if any)
+  if (subjectiveQuestions.length > 0) {
+    const CONCURRENCY = Math.min(3, subjectiveQuestions.length);
+
+    for (let i = 0; i < subjectiveQuestions.length; i += CONCURRENCY) {
+      const chunk = subjectiveQuestions.slice(i, i + CONCURRENCY);
+      
+      await Promise.all(chunk.map(async (question) => {
+        const answer = answers.get(question.id);
+        if (!answer) return;
+
+        let success = false;
+        let attempts = 0;
+        const maxAttempts = 3;
+
+        while (!success && attempts < maxAttempts) {
+          try {
+            attempts++;
+            const evaluation = await evaluateAnswer({ question, answer });
+            evaluations.set(question.id, evaluation);
+            success = true;
+          } catch (err: unknown) {
+            if (attempts >= maxAttempts) {
+              console.warn(`Failed to evaluate question ${question.id} after ${maxAttempts} attempts:`, err);
             } else {
-              // Exponential backoff for 503 overloaded errors
-              await new Promise(resolve => setTimeout(resolve, 2000 * attempts));
+              const errStr = String(err instanceof Error ? err.message : err);
+              if (errStr.includes('429') || errStr.includes('RESOURCE_EXHAUSTED')) {
+                // Rate limit hit (free tier quota limit).
+                console.warn(`Rate limit hit on question ${question.id}, waiting 15s...`);
+                await new Promise(resolve => setTimeout(resolve, 15000));
+              } else {
+                // Exponential backoff for 503 overloaded errors
+                await new Promise(resolve => setTimeout(resolve, 1500 * attempts));
+              }
             }
           }
         }
-      }
-      
-      completed++;
-      onProgress?.(completed, answeredQuestions.length, question.id);
-    }));
+        
+        completed++;
+        onProgress?.(completed, answeredQuestions.length, question.id);
+      }));
 
-    // Rate limiting between concurrent chunks
-    if (i + CONCURRENCY < answeredQuestions.length) {
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      // Small pause between subjective chunks to avoid burst limits
+      if (i + CONCURRENCY < subjectiveQuestions.length) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
     }
   }
 

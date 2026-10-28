@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, Swords, GraduationCap, Library,
   History, BarChart3, StickyNote, User, Search, Menu, X, ShieldAlert, LogOut, Trophy,
-  Bot, Bell, Settings
+  Bot, Bell, Settings, BookOpen
 } from 'lucide-react';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import gsap from 'gsap';
@@ -20,6 +20,7 @@ const iconMap: Record<string, React.ReactNode> = {
   LayoutDashboard: <LayoutDashboard className="w-5 h-5" />,
   Swords: <Swords className="w-5 h-5" />,
   GraduationCap: <GraduationCap className="w-5 h-5" />,
+  BookOpen: <BookOpen className="w-5 h-5" />,
   Bot: <Bot className="w-5 h-5" />,
   Library: <Library className="w-5 h-5" />,
   History: <History className="w-5 h-5" />,
@@ -34,6 +35,7 @@ const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard', color: '#9333ea' },
   { href: '/practice', label: 'Practice', icon: 'Swords', color: '#7c3aed' },
   { href: '/exams', label: 'Exams', icon: 'GraduationCap', color: '#6366f1' },
+  { href: '/formulas', label: 'Formula Library', icon: 'BookOpen', color: '#0284c7' },
   { href: '/achievements', label: 'Badges', icon: 'Trophy', color: '#a855f7' },
   { href: '/questions', label: 'Questions', icon: 'Library', color: '#8b5cf6' },
   { href: '/history', label: 'History', icon: 'History', color: '#7e22ce' },
@@ -213,7 +215,7 @@ export function Navbar() {
                           itemRefs.current[idx] = el;
                         }}
                         className={cn(
-                          'relative z-10 flex items-center justify-center min-w-[76px] h-8 px-3.5 rounded-full text-xs transition-all duration-200 select-none cursor-pointer text-center',
+                          'relative z-10 flex items-center justify-center min-w-[76px] h-8 px-3.5 rounded-full text-xs transition-all duration-200 select-none cursor-pointer text-center whitespace-nowrap',
                           isActive
                             ? 'text-white font-extrabold tracking-wide'
                             : 'text-white/80 hover:text-white hover:opacity-100 opacity-80 font-semibold'

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "katex/dist/katex.min.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -830,3 +831,76 @@ body {
     animation: none !important;
   }
 }
+
+/* ============================================================
+   KaTeX Formula Typography & Theme Adaptations
+   ============================================================ */
+.katex-rendered-wrapper {
+  color: var(--foreground);
+}
+
+.katex {
+  font-size: 1.25em;
+  text-rendering: auto;
+  line-height: 1.4;
+}
+
+.katex-display {
+  margin: 0.5em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25em 0;
+}
+
+.katex-display > .katex {
+  font-size: 1.35em !important;
+  white-space: normal;
+}
+
+/* Ensure fractions and roots have clear, distinct separation lines */
+.katex .frac-line {
+  border-bottom-width: 1.8px !important;
+}
+
+.katex .sqrt-line {
+  border-top-width: 1.8px !important;
+}
+
+/* Light mode equation readability */
+.katex, .katex * {
+  color: #0F172A;
+}
+
+/* Dark mode equation high-contrast legibility */
+.dark .katex,
+.dark .katex * {
+  color: #F8FAFC !important;
+}
+
+.dark .katex .frac-line {
+  border-bottom: 2px solid #F8FAFC !important;
+}
+
+.dark .katex .sqrt-line {
+  border-top: 2px solid #F8FAFC !important;
+}
+
+.dark .katex svg {
+  fill: #F8FAFC !important;
+  stroke: #F8FAFC !important;
+}
+
+.dark .katex svg path {
+  fill: #F8FAFC !important;
+  stroke: #F8FAFC !important;
+}
+
+.dark .katex .delimsizing svg path {
+  fill: #F8FAFC !important;
+}
+
+.dark .katex .accent svg path {
+  fill: #F8FAFC !important;
+  stroke: #F8FAFC !important;
+}
+

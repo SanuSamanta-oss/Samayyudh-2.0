@@ -355,6 +355,39 @@ export default function DashboardPage() {
           </motion.div>
         </section>
 
+        {/* ── Formula Library Card ──────────────────────── */}
+        <section>
+          <Link
+            href="/formulas"
+            className="group block relative overflow-hidden rounded-2xl border border-border bg-card hover:border-brand-500/40 hover:shadow-md p-5 transition-all duration-300"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-sm shrink-0">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm md:text-base font-bold text-foreground group-hover:text-brand-600 transition-colors">
+                      Formula Library
+                    </h3>
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200/60 dark:border-brand-900/40">
+                      New
+                    </span>
+                  </div>
+                  <p className="text-xs text-stone-500 dark:text-stone-400 truncate mt-0.5">
+                    Browse Class 10, 11, 12, and Higher Education Physics formulas
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 text-xs font-semibold text-brand-600 dark:text-brand-400 shrink-0">
+                <span>Explore</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </div>
+          </Link>
+        </section>
+
         {/* ── Exam Selection ──────────────────────────────── */}
         <section>
           <div className="flex items-center justify-between mb-4">

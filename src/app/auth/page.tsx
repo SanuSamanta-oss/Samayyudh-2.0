@@ -10,6 +10,7 @@
 
 import { useState, useCallback, useRef, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -260,9 +261,19 @@ function AuthPageContent() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
           {/* Logo */}
-          <div className="text-center mb-8 space-y-1">
-            <Link href="/" className="inline-block">
-              <h1 className="text-4xl font-extrabold text-gradient-brand">সময়যুদ্ধ 2.0</h1>
+          <div className="text-center mb-8 space-y-2">
+            <Link href="/" className="inline-flex flex-col items-center gap-2 group">
+              <div className="w-16 h-16 rounded-2xl overflow-hidden bg-black border border-border shadow-md flex items-center justify-center group-hover:scale-105 transition-transform">
+                <Image
+                  src="/icon-512.png"
+                  alt="সময়যুদ্ধ 2.0 Logo"
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              </div>
+              <h1 className="text-3xl font-extrabold text-gradient-brand">সময়যুদ্ধ 2.0</h1>
             </Link>
             <p className="text-sm text-muted">The Battle Between You &amp; The Clock</p>
           </div>

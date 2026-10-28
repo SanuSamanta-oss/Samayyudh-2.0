@@ -35,8 +35,11 @@ export const metadata: Metadata = {
     title: "SamayYudh",
   },
   icons: {
-    icon: "/icon-512.jpg",
-    apple: "/icon-512.jpg",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/icon-512.png",
   },
 };
 

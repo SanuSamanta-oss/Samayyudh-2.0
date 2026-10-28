@@ -87,7 +87,17 @@ export default function LandingPage() {
       {/* Nav */}
       <header className="sticky top-0 z-30 bg-card/80 backdrop-blur-lg border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 lg:px-6 flex items-center justify-between h-14">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="relative w-8 h-8 rounded-xl overflow-hidden bg-black border border-border shadow-xs flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <Image
+                src="/icon-512.png"
+                alt="সময়যুদ্ধ 2.0 Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+                priority
+              />
+            </div>
             <span className="text-xl font-bold text-gradient-brand">সময়যুদ্ধ</span>
             <span className="text-xs font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1.5 py-0.5 rounded-md">2.0</span>
           </Link>

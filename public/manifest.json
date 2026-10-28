@@ -2,7 +2,7 @@
   "name": "সময়যুদ্ধ 2.0 — SamayYudh",
   "short_name": "SamayYudh",
   "description": "Practice real exam questions under realistic time pressure. Supports GATE, JEE, WBJEE, UPSC, and more.",
-  "start_url": "/",
+  "start_url": "/auth?platform=android",
   "display": "standalone",
   "background_color": "#0a0a1a",
   "theme_color": "#7c3aed",

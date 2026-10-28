@@ -17,6 +17,8 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { PullBulbToggle } from '@/components/PullBulbToggle';
 import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import { DonationTicket } from '@/components/home/DonationTicket';
+import { isAndroidApp } from '@/lib/platform';
+import { AndroidSplashScreen } from '@/components/auth/AndroidSplashScreen';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -39,11 +41,26 @@ const examCategories = [
 
 export default function LandingPage() {
   const router = useRouter();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [loadingExam, setLoadingExam] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [currentAvatar, setCurrentAvatar] = useState<ReturnType<typeof getSelectedAvatar>>(null);
+  const [isAndroid, setIsAndroid] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const android = isAndroidApp();
+    setIsAndroid(android);
+    if (android) {
+      if (!authLoading) {
+        if (isAuthenticated) {
+          router.replace('/dashboard');
+        } else {
+          router.replace('/auth?platform=android');
+        }
+      }
+    }
+  }, [isAuthenticated, authLoading, router]);
 
   useEffect(() => {
     setMounted(true);
@@ -81,6 +98,10 @@ export default function LandingPage() {
       }, 800); // 800ms for unlocked animation
     }, 2000);
   };
+
+  if (isAndroid) {
+    return <AndroidSplashScreen />;
+  }
 
   return (
     <div className="min-h-screen bg-background">

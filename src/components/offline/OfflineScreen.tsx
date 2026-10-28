@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { SokhaBotCharacter } from '@/components/sokha/SokhaBotCharacter';
+import React, { useEffect, useState, useCallback } from 'react';
 
 export function OfflineScreen() {
   const [isOffline, setIsOffline] = useState(false);
@@ -9,41 +8,48 @@ export function OfflineScreen() {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     // Initial check on mount
-    if (typeof window !== 'undefined') {
-      setIsOffline(!navigator.onLine);
+    setIsOffline(!navigator.onLine);
 
-      const handleOffline = () => {
+    const handleOffline = () => {
+      setIsOffline(true);
+      setStatusMessage(null);
+    };
+
+    const handleOnline = () => {
+      setIsOffline(false);
+      setStatusMessage(null);
+    };
+
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+
+    // Heartbeat check every 4 seconds in case browser/WebView lags event
+    const interval = setInterval(() => {
+      if (!navigator.onLine && !isOffline) {
         setIsOffline(true);
-        setStatusMessage(null);
-      };
+      }
+    }, 4000);
 
-      const handleOnline = () => {
-        setIsOffline(false);
-        setStatusMessage(null);
-      };
+    // Expose a window helper for testing offline mode in dev console
+    (window as unknown as { __toggleOfflineMode?: (show?: boolean) => void }).__toggleOfflineMode = (show?: boolean) => {
+      setIsOffline((prev) => (typeof show === 'boolean' ? show : !prev));
+    };
 
-      window.addEventListener('offline', handleOffline);
-      window.addEventListener('online', handleOnline);
+    return () => {
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline);
+      clearInterval(interval);
+      delete (window as unknown as { __toggleOfflineMode?: unknown }).__toggleOfflineMode;
+    };
+  }, [isOffline]);
 
-      // Expose a window helper for testing offline mode in dev console
-      (window as unknown as { __toggleOfflineMode?: (show?: boolean) => void }).__toggleOfflineMode = (show?: boolean) => {
-        setIsOffline((prev) => (typeof show === 'boolean' ? show : !prev));
-      };
-
-      return () => {
-        window.removeEventListener('offline', handleOffline);
-        window.removeEventListener('online', handleOnline);
-        delete (window as unknown as { __toggleOfflineMode?: unknown }).__toggleOfflineMode;
-      };
-    }
-  }, []);
-
-  const checkConnection = async () => {
+  const checkConnection = useCallback(async () => {
     setIsChecking(true);
     setStatusMessage('Checking network connection...');
     try {
-      // Ping cache-busted local asset
       const response = await fetch(`/favicon.ico?_=${Date.now()}`, {
         method: 'HEAD',
         cache: 'no-store',
@@ -55,7 +61,7 @@ export function OfflineScreen() {
           setIsOffline(false);
           setIsChecking(false);
           setStatusMessage(null);
-        }, 800);
+        }, 500);
         return;
       }
       throw new Error('No internet');
@@ -63,7 +69,7 @@ export function OfflineScreen() {
       setStatusMessage('Still offline. Please check your Wi-Fi or mobile data.');
       setIsChecking(false);
     }
-  };
+  }, []);
 
   if (!isOffline) {
     return null;
@@ -80,31 +86,28 @@ export function OfflineScreen() {
       <section className="page_404 w-full">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center">
-            {/* Animated GIF Background Container */}
-            <div className="four_zero_four_bg flex flex-col items-center justify-center relative">
-              <div className="mb-2">
-                <SokhaBotCharacter size="lg" isThinking={isChecking} />
-              </div>
+            {/* Animated GIF Background Container with 404 Header */}
+            <div className="four_zero_four_bg flex items-center justify-center">
               <h1 className="text-center font-bold tracking-tight text-[#1c1917] select-none">
-                Offline
+                404
               </h1>
             </div>
 
             {/* Content Box */}
             <div className="contant_box_404">
-              <h3 id="offline-title" className="text-3xl sm:text-4xl font-bold text-stone-900 mb-3">
+              <h3 id="offline-title" className="text-3xl sm:text-4xl font-bold text-stone-900 mb-2">
                 Look like you're offline
               </h3>
 
-              <p className="text-stone-600 text-base sm:text-lg max-w-md mx-auto mb-6">
-                Your internet connection is currently off or unavailable. Check your network connection to continue!
+              <p className="text-stone-600 text-base sm:text-lg max-w-md mx-auto mb-4">
+                The page you are looking for is not available because your network connection is offline!
               </p>
 
               {statusMessage && (
                 <div
-                  className={`text-sm mb-4 px-3 py-1.5 rounded-md inline-block ${
+                  className={`text-sm mb-4 px-3 py-1.5 rounded-md inline-block font-sans ${
                     statusMessage.includes('Connected')
-                      ? 'bg-green-100 text-green-800'
+                      ? 'bg-emerald-100 text-emerald-800'
                       : 'bg-amber-100 text-amber-800'
                   }`}
                 >
@@ -124,15 +127,17 @@ export function OfflineScreen() {
 
                 <button
                   type="button"
-                  onClick={() => setIsOffline(false)}
+                  onClick={() => {
+                    window.location.href = '/';
+                  }}
                   className="px-5 py-2.5 text-stone-600 hover:text-stone-900 text-sm font-semibold hover:bg-stone-100 rounded transition-colors cursor-pointer"
                 >
-                  Dismiss &amp; Continue
+                  Go to Home
                 </button>
               </div>
 
               <div className="mt-8 text-xs text-stone-400">
-                <p>SamayYudh 2.0 • Offline Detection</p>
+                <p>সময়যুদ্ধ 2.0 • Offline Network Mode</p>
               </div>
             </div>
           </div>

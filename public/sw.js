@@ -1,11 +1,13 @@
 // Service Worker for SamayYudh PWA & Push Notifications
-const CACHE_NAME = 'samayyudh-v2';
+const CACHE_NAME = 'samayyudh-v3';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
   '/icon-512.jpg',
+  '/dribbble_1.gif',
+  '/offline.html',
 ];
 
 // Install event - cache static assets
@@ -55,9 +57,11 @@ self.addEventListener('fetch', (event) => {
         // Fallback to cache when offline
         return caches.match(event.request).then((cachedResponse) => {
           if (cachedResponse) return cachedResponse;
-          // For navigation requests, serve the cached homepage
+          // For navigation requests, fallback to offline.html or cached homepage
           if (event.request.mode === 'navigate') {
-            return caches.match('/');
+            return caches.match('/offline.html').then((offlineRes) => {
+              return offlineRes || caches.match('/');
+            });
           }
         });
       })

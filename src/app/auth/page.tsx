@@ -81,13 +81,26 @@ function AuthPageContent() {
     return url;
   }, [searchParams]);
 
-  // If already authenticated, redirect immediately without showing auth forms or loaders
+  // Track if user arrived at the auth page already authenticated
+  const initialAuthCheckedRef = useRef(false);
+  const wasAlreadyAuthenticatedRef = useRef(false);
+
   useEffect(() => {
-    if (isAuthenticated && !authLoading) {
+    if (!authLoading && !initialAuthCheckedRef.current) {
+      if (isAuthenticated) {
+        wasAlreadyAuthenticatedRef.current = true;
+      }
+      initialAuthCheckedRef.current = true;
+    }
+  }, [authLoading, isAuthenticated]);
+
+  // If already authenticated on initial page load, redirect immediately without showing auth forms or loaders
+  useEffect(() => {
+    if (isAuthenticated && !authLoading && wasAlreadyAuthenticatedRef.current && !redirecting) {
       markUserLoggedIn(user);
       router.replace(targetUrl);
     }
-  }, [isAuthenticated, authLoading, user, targetUrl, router]);
+  }, [isAuthenticated, authLoading, user, targetUrl, router, redirecting]);
 
   // Sync otpDigits → otp string
   useEffect(() => {
@@ -251,7 +264,7 @@ function AuthPageContent() {
   };
 
   if (isAndroid) {
-    if (isAuthenticated) {
+    if (isAuthenticated && wasAlreadyAuthenticatedRef.current) {
       return <AndroidSplashScreen />;
     }
 

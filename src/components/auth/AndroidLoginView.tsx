@@ -6,24 +6,18 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import {
   Mail,
-  Lock,
   Phone,
-  Eye,
-  EyeOff,
   User,
-  KeyRound,
-  ArrowRight,
   Loader2,
   AlertCircle,
   CheckCircle2,
-  Sparkles,
 } from 'lucide-react';
 import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { markUserLoggedIn } from '@/lib/auth-welcome';
+import { BoredHandLoader } from '@/components/BoredHandLoader';
 
 type AndroidAuthMode = 'email' | 'phone';
-type AndroidAuthType = 'otp' | 'password';
 type AndroidAuthStep = 'input' | 'verify' | 'name';
 
 interface AndroidLoginViewProps {
@@ -38,21 +32,21 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
 
   // Mode and state
   const [mode, setMode] = useState<AndroidAuthMode>('email');
-  const [authType, setAuthType] = useState<AndroidAuthType>('otp');
   const [step, setStep] = useState<AndroidAuthStep>('input');
 
   // Input states
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState('');
   const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
   const [displayName, setDisplayName] = useState('');
 
-  // Status states
+  // Status and Bored Hand Loader animation states
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [redirecting, setRedirecting] = useState(false);
+  const [redirectingFinished, setRedirectingFinished] = useState(false);
+  const [redirectText, setRedirectText] = useState('AUTHENTICATING...');
 
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -67,13 +61,14 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
     return url;
   }, [searchParams]);
 
-  // If authenticated, navigate straight to destination
+  // If already authenticated on initial mount (e.g. returning session), navigate straight to destination
+  const initialAuthRef = useRef(isAuthenticated);
   useEffect(() => {
-    if (isAuthenticated && !authLoading) {
+    if (initialAuthRef.current && isAuthenticated && !authLoading && !redirecting) {
       markUserLoggedIn(user);
       router.replace(targetUrl);
     }
-  }, [isAuthenticated, authLoading, user, targetUrl, router]);
+  }, [isAuthenticated, authLoading, user, targetUrl, router, redirecting]);
 
   // Read error parameter from URL if any
   useEffect(() => {
@@ -152,40 +147,6 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
     }
   }, [mode, email, phone]);
 
-  // Login with Password
-  const handlePasswordLogin = useCallback(async () => {
-    setError(null);
-    setSuccess(null);
-    setLoading(true);
-
-    try {
-      if (!isSupabaseConfigured) {
-        throw new Error('Supabase is not configured.');
-      }
-      if (!email || !email.includes('@')) {
-        throw new Error('Please enter a valid email address.');
-      }
-      if (!password || password.length < 6) {
-        throw new Error('Password must be at least 6 characters.');
-      }
-
-      const supabase = createClient();
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
-        password,
-      });
-
-      if (signInError) throw signInError;
-
-      markUserLoggedIn(data.user);
-      router.replace(targetUrl);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Incorrect email or password.');
-    } finally {
-      setLoading(false);
-    }
-  }, [email, password, targetUrl, router]);
-
   // Verify OTP Code
   const handleVerifyOTP = useCallback(async () => {
     setError(null);
@@ -219,8 +180,20 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
 
       // Check if new user needs to set their display name
       const hasDisplayName = !!result.data?.user?.user_metadata?.display_name;
+      const userName =
+        result.data?.user?.user_metadata?.display_name ||
+        result.data?.user?.user_metadata?.full_name;
+
       if (hasDisplayName) {
-        router.replace(targetUrl);
+        // Show Bored Hand tapping loading animation then route to target destination
+        setRedirecting(true);
+        setTimeout(() => {
+          setRedirectingFinished(true);
+          setRedirectText(userName ? `WELCOME, ${userName.toUpperCase()}` : 'WELCOME, WARRIOR');
+          setTimeout(() => {
+            router.replace(targetUrl);
+          }, 700);
+        }, 2200);
       } else {
         setStep('name');
       }
@@ -250,7 +223,16 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
       if (updateError) throw updateError;
 
       markUserLoggedIn();
-      router.replace(targetUrl);
+
+      // Show Bored Hand tapping loading animation upon completing profile setup
+      setRedirecting(true);
+      setTimeout(() => {
+        setRedirectingFinished(true);
+        setRedirectText(`WELCOME, ${trimmed.toUpperCase()}`);
+        setTimeout(() => {
+          router.replace(targetUrl);
+        }, 700);
+      }, 2200);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save name. Please try again.');
     } finally {
@@ -277,6 +259,20 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
 
   return (
     <div className="min-h-screen w-full bg-[#FAF9F6] text-slate-900 relative flex flex-col justify-between overflow-x-hidden selection:bg-[#86C5C0]/30 font-sans">
+      {/* Full-screen Bored Hand Loading Animation upon login completion */}
+      <AnimatePresence>
+        {redirecting && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[999999] bg-black flex flex-col items-center justify-center select-none"
+          >
+            <BoredHandLoader finished={redirectingFinished} text={redirectText} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ── TOP RIGHT ORGANIC PEACH DECORATION ── */}
       <div
         className="absolute -top-12 -right-12 w-64 h-64 sm:w-80 sm:h-80 pointer-events-none z-0"
@@ -291,17 +287,17 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
         </svg>
       </div>
 
-      {/* ── BOTTOM LEFT ORGANIC TURQUOISE WAVE ── */}
+      {/* ── BOTTOM LEFT ORGANIC TURQUOISE DECORATION ── */}
       <div
-        className="absolute -bottom-10 -left-10 w-72 h-56 sm:w-96 sm:h-72 pointer-events-none z-0"
+        className="absolute -bottom-16 -left-16 w-64 h-64 sm:w-80 sm:h-80 pointer-events-none z-0"
         aria-hidden="true"
       >
         <svg
-          viewBox="0 0 400 300"
+          viewBox="0 0 320 320"
           className="w-full h-full fill-[#86C5C0]/85"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M0 130 C70 80, 150 70, 220 120 C 290 170, 330 180, 400 150 L 400 300 L 0 300 Z" />
+          <path d="M0 100 C60 40, 140 20, 210 70 C 280 120, 310 190, 280 250 C 250 310, 180 320, 110 320 C 40 320, 0 270, 0 200 Z" />
         </svg>
       </div>
 
@@ -451,73 +447,19 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                     </div>
                   </div>
 
-                  {/* Optional Password Field if Password Auth is chosen */}
-                  {authType === 'password' && (
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-10 h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
-                        <Lock className="w-4 h-4" />
-                      </div>
-                      <div className="flex-1 relative">
-                        <input
-                          type={showPassword ? 'text' : 'password'}
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Password (min. 6 characters)"
-                          autoComplete="current-password"
-                          className="w-full rounded-full border border-[#BCE1DD] bg-white/95 px-5 py-2.5 pr-11 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/25 transition-all font-medium text-center shadow-2xs"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          aria-label={showPassword ? 'Hide password' : 'Show password'}
-                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
-                        >
-                          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
                   {/* Primary Button */}
                   <button
                     type="button"
                     disabled={loading}
-                    onClick={authType === 'otp' ? handleSendOTP : handlePasswordLogin}
+                    onClick={handleSendOTP}
                     className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer mt-1"
                   >
                     {loading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
                     ) : (
-                      <span>{authType === 'otp' ? 'Send Verification Code' : 'Log In'}</span>
+                      <span>Send Verification Code</span>
                     )}
                   </button>
-
-                  {/* Auth Type Switcher */}
-                  <div className="flex items-center justify-center pt-1 text-xs text-slate-500 font-medium">
-                    {authType === 'otp' ? (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setAuthType('password');
-                          setError(null);
-                        }}
-                        className="hover:text-[#2C6F6A] transition-colors"
-                      >
-                        Sign in with Password instead
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setAuthType('otp');
-                          setError(null);
-                        }}
-                        className="hover:text-[#2C6F6A] transition-colors"
-                      >
-                        Sign in with One-Time Code (OTP)
-                      </button>
-                    )}
-                  </div>
                 </>
               ) : (
                 <>
@@ -664,10 +606,10 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
           {/* Social Divider & Google Button (when on input step) */}
           {step === 'input' && (
             <div className="space-y-3 pt-1">
-              <div className="relative flex items-center justify-center">
-                <div className="w-full border-t border-[#DFECE9]" />
-                <span className="bg-[#FAF9F6] px-3 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-                  or
+              {/* Centered Or with straight line removed */}
+              <div className="flex items-center justify-center py-1">
+                <span className="text-xs font-semibold text-slate-400 tracking-wider">
+                  Or
                 </span>
               </div>
 
@@ -710,7 +652,6 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
               type="button"
               onClick={() => {
                 setMode('email');
-                setAuthType('otp');
                 setStep('input');
                 setError(null);
                 setSuccess('Enter your email to create a new warrior account');

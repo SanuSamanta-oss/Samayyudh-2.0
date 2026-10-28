@@ -35,7 +35,7 @@ const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard', color: '#9333ea' },
   { href: '/practice', label: 'Practice', icon: 'Swords', color: '#7c3aed' },
   { href: '/exams', label: 'Exams', icon: 'GraduationCap', color: '#6366f1' },
-  { href: '/formulas', label: 'Formula Library', icon: 'BookOpen', color: '#0284c7' },
+  { href: '/formulas', label: 'Formulas', icon: 'BookOpen', color: '#0284c7' },
   { href: '/achievements', label: 'Badges', icon: 'Trophy', color: '#a855f7' },
   { href: '/questions', label: 'Questions', icon: 'Library', color: '#8b5cf6' },
   { href: '/history', label: 'History', icon: 'History', color: '#7e22ce' },
@@ -47,6 +47,7 @@ const mobileNavItems = [
   { href: '/dashboard', label: 'Home', icon: 'LayoutDashboard', color: '#7c3aed' },
   { href: '/practice', label: 'Practice', icon: 'Swords', color: '#6366f1' },
   { href: '/exams', label: 'Exams', icon: 'GraduationCap', color: '#8b5cf6' },
+  { href: '/formulas', label: 'Formulas', icon: 'BookOpen', color: '#0284c7' },
   { href: '/achievements', label: 'Badges', icon: 'Trophy', color: '#a855f7' },
   { href: '/analytics', label: 'Stats', icon: 'BarChart3', color: '#9333ea' },
   { href: '/profile', label: 'Me', icon: 'User', color: '#7c3aed' },
@@ -227,7 +228,7 @@ export function Navbar() {
                           itemRefs.current[idx] = el;
                         }}
                         className={cn(
-                          'relative z-10 flex items-center justify-center min-w-[76px] h-8 px-3.5 rounded-full text-xs transition-all duration-200 select-none cursor-pointer text-center whitespace-nowrap',
+                          'relative z-10 flex items-center justify-center min-w-[66px] lg:min-w-[72px] h-8 px-2.5 lg:px-3 rounded-full text-xs transition-all duration-200 select-none cursor-pointer text-center whitespace-nowrap',
                           isActive
                             ? 'text-white font-extrabold tracking-wide'
                             : 'text-white/80 hover:text-white hover:opacity-100 opacity-80 font-semibold'

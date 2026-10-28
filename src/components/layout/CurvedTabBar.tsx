@@ -79,11 +79,12 @@ export function CurvedTabBar({
   const activeItem = items[activeTab] || items[0];
   const activeColor = activeItem?.color || '#7c3aed';
 
-  // Precise geometry matching Purrweb UX curve
-  const notchHalfWidth = isMobile ? 36 : 34;
-  const notchDepth = isMobile ? 28 : 24;
-  const circleDiameter = isMobile ? 46 : 40;
-  const circleTop = isMobile ? -13 : -11;
+  // Adaptive geometry matching Purrweb UX curve, scaling cleanly for 7+ items on mobile
+  const isManyItems = isMobile && items.length >= 7;
+  const notchHalfWidth = isMobile ? (isManyItems ? 28 : 36) : 34;
+  const notchDepth = isMobile ? (isManyItems ? 22 : 28) : 24;
+  const circleDiameter = isMobile ? (isManyItems ? 38 : 46) : 40;
+  const circleTop = isMobile ? (isManyItems ? -9 : -13) : -11;
 
   // Measure and align active indicator
   const updateActivePosition = useCallback(
@@ -251,7 +252,7 @@ export function CurvedTabBar({
       className={cn(
         'relative select-none',
         isMobile
-          ? 'w-full h-16 pb-[env(safe-area-inset-bottom)] px-1 sm:px-2'
+          ? 'w-full h-16 pb-[env(safe-area-inset-bottom)] px-0.5 sm:px-1.5'
           : 'flex items-center h-11 px-2',
         className
       )}
@@ -306,7 +307,7 @@ export function CurvedTabBar({
           style={{
             width: circleDiameter,
             height: circleDiameter,
-            border: `3.5px solid ${activeColor}`,
+            border: `${isManyItems ? '2.5px' : '3.5px'} solid ${activeColor}`,
             boxShadow: `0 8px 22px -3px ${activeColor}55, 0 3px 8px rgba(0,0,0,0.22)`,
           }}
         >
@@ -322,7 +323,10 @@ export function CurvedTabBar({
                   duration: 0.22,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="flex items-center justify-center"
+                className={cn(
+                  'flex items-center justify-center',
+                  isManyItems && '[&_svg]:w-4 [&_svg]:h-4'
+                )}
                 style={{ color: activeColor }}
               >
                 {activeItem?.icon}
@@ -365,7 +369,8 @@ export function CurvedTabBar({
               {/* Inactive Icon: smoothly fades away when active, zero layout shift */}
               <div
                 className={cn(
-                  'w-6 h-6 flex items-center justify-center transition-all duration-250',
+                  'flex items-center justify-center transition-all duration-250',
+                  isManyItems ? 'w-5 h-5 [&_svg]:w-4 [&_svg]:h-4' : 'w-6 h-6',
                   isActive
                     ? 'opacity-0 scale-75 -translate-y-1 pointer-events-none'
                     : 'opacity-65 group-hover:opacity-100 group-hover:scale-105 text-stone-500 dark:text-stone-400'
@@ -377,10 +382,11 @@ export function CurvedTabBar({
               {/* Text Label: anchored to bottom baseline, zero vertical jump */}
               <span
                 className={cn(
-                  'text-center truncate transition-colors duration-200 block',
+                  'text-center truncate transition-colors duration-200 block w-full px-0.5',
                   isMobile
                     ? cn(
-                        'text-[10px] tracking-tight leading-tight mt-0.5',
+                        isManyItems ? 'text-[9px] sm:text-[10px]' : 'text-[10px]',
+                        'tracking-tight leading-tight mt-0.5',
                         isActive
                           ? 'font-bold text-purple-700 dark:text-purple-300'
                           : 'font-medium text-stone-500 dark:text-stone-400 group-hover:text-stone-800 dark:group-hover:text-stone-200'

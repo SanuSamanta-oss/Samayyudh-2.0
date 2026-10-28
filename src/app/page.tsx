@@ -19,6 +19,7 @@ import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import { DonationTicket } from '@/components/home/DonationTicket';
 import { isAndroidApp } from '@/lib/platform';
 import { AndroidSplashScreen } from '@/components/auth/AndroidSplashScreen';
+import { AndroidLoginView } from '@/components/auth/AndroidLoginView';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -47,6 +48,7 @@ export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
   const [currentAvatar, setCurrentAvatar] = useState<ReturnType<typeof getSelectedAvatar>>(null);
   const [isAndroid, setIsAndroid] = useState<boolean | null>(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
     const android = isAndroidApp();
@@ -108,7 +110,11 @@ export default function LandingPage() {
       {/* Nav */}
       <header className="sticky top-0 z-30 bg-card/80 backdrop-blur-lg border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 lg:px-6 flex items-center justify-between h-14">
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <button
+            onClick={() => setShowLoginModal(true)}
+            className="flex items-center gap-2.5 group cursor-pointer"
+            aria-label="Open app login"
+          >
             <div className="relative w-8 h-8 rounded-xl overflow-hidden bg-black border border-border shadow-xs flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <Image
                 src="/icon-512.png"
@@ -121,7 +127,7 @@ export default function LandingPage() {
             </div>
             <span className="text-xl font-bold text-gradient-brand">সময়যুদ্ধ</span>
             <span className="text-xs font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1.5 py-0.5 rounded-md">2.0</span>
-          </Link>
+          </button>
           <div className="flex items-center gap-3">
             <ThemeToggle />
             {mounted && isAuthenticated ? (
@@ -416,6 +422,49 @@ export default function LandingPage() {
           <p>Built with 💜 for students who refuse to lose to time.</p>
         </div>
       </footer>
+      {/* Android Login Modal — opens when user clicks the সময়যুদ্ধ brand name */}
+      <AnimatePresence>
+        {showLoginModal && (
+          <motion.div
+            key="login-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center"
+            onClick={() => setShowLoginModal(false)}
+          >
+            {/* Backdrop blur */}
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+
+            {/* Modal panel — slides up from bottom on mobile, centres on desktop */}
+            <motion.div
+              key="login-modal-panel"
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 60 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 38 }}
+              className="relative z-10 w-full max-w-sm max-h-[92dvh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Drag handle (mobile) */}
+              <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-slate-300/60 sm:hidden z-10" />
+
+              {/* Close button */}
+              <button
+                onClick={() => setShowLoginModal(false)}
+                className="absolute top-3 right-3 z-20 w-7 h-7 rounded-full bg-slate-100/80 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-800 transition-colors text-sm font-bold"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+
+              <AndroidLoginView onSwitchToWeb={() => setShowLoginModal(false)} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {loadingExam && (
           <motion.div 

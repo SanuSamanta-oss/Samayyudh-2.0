@@ -24,26 +24,25 @@
     }
     .page_404 {
       width: 100%;
-      max-width: 800px;
+      max-width: 600px;
       margin: 0 auto;
+    }
+    .heading_404 {
+      font-size: clamp(56px, 12vw, 76px);
+      font-weight: 700;
+      color: #1c1917;
+      line-height: 1;
+      margin-bottom: 4px;
     }
     .four_zero_four_bg {
       background-image: url(/dribbble_1.gif);
-      height: 400px;
+      height: clamp(220px, 42vh, 300px);
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .four_zero_four_bg h1 {
-      font-size: clamp(52px, 12vw, 80px);
-      font-weight: 700;
-      color: #1c1917;
     }
     .contant_box_404 {
-      margin-top: -50px;
+      margin-top: 8px;
     }
     .contant_box_404 h3 {
       font-size: clamp(24px, 5vw, 36px);
@@ -108,9 +107,8 @@
 </head>
 <body>
   <section class="page_404">
-    <div class="four_zero_four_bg">
-      <h1>404</h1>
-    </div>
+    <h1 class="heading_404">404</h1>
+    <div class="four_zero_four_bg"></div>
     <div class="contant_box_404">
       <h3>Look like you're offline</h3>
       <p>The page you are looking for is not available because your network connection is offline!</p>

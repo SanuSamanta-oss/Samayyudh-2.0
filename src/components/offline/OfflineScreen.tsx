@@ -80,65 +80,64 @@ export function OfflineScreen() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="offline-title"
-      className="fixed inset-0 z-[999999] bg-white text-stone-900 overflow-y-auto flex flex-col justify-center items-center select-none"
+      className="fixed inset-0 z-[999999] bg-white text-stone-900 overflow-y-auto flex flex-col justify-center items-center select-none py-6 px-4"
       style={{ fontFamily: "var(--font-arvo), 'Arvo', serif" }}
     >
-      <section className="page_404 w-full">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center">
-            {/* Animated GIF Background Container with 404 Header */}
-            <div className="four_zero_four_bg flex items-center justify-center">
-              <h1 className="text-center font-bold tracking-tight text-[#1c1917] select-none">
-                404
-              </h1>
+      <section className="page_404 w-full max-w-xl mx-auto">
+        <div className="text-center">
+          {/* 404 at the top, separate from animation so it never merges */}
+          <h1 className="text-center font-bold tracking-tight text-[#1c1917] select-none text-[56px] sm:text-[76px] leading-none mb-1">
+            404
+          </h1>
+
+          {/* Animated GIF Background - clean and unobstructed */}
+          <div className="four_zero_four_bg my-1" />
+
+          {/* Content Box */}
+          <div className="contant_box_404">
+            <h3 id="offline-title" className="text-2xl sm:text-3xl font-bold text-stone-900 mb-2">
+              Look like you're offline
+            </h3>
+
+            <p className="text-stone-600 text-sm sm:text-base max-w-md mx-auto mb-3">
+              The page you are looking for is not available because your network connection is offline!
+            </p>
+
+            {statusMessage && (
+              <div
+                className={`text-xs sm:text-sm mb-3 px-3 py-1.5 rounded-md inline-block font-sans ${
+                  statusMessage.includes('Connected')
+                    ? 'bg-emerald-100 text-emerald-800'
+                    : 'bg-amber-100 text-amber-800'
+                }`}
+              >
+                {statusMessage}
+              </div>
+            )}
+
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={checkConnection}
+                disabled={isChecking}
+                className="link_404 cursor-pointer font-bold border-none transition-all duration-200 hover:brightness-110 active:scale-95 disabled:opacity-70 rounded shadow-md"
+              >
+                {isChecking ? 'Checking...' : 'Retry Connection'}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = '/';
+                }}
+                className="px-5 py-2.5 text-stone-600 hover:text-stone-900 text-sm font-semibold hover:bg-stone-100 rounded transition-colors cursor-pointer"
+              >
+                Go to Home
+              </button>
             </div>
 
-            {/* Content Box */}
-            <div className="contant_box_404">
-              <h3 id="offline-title" className="text-3xl sm:text-4xl font-bold text-stone-900 mb-2">
-                Look like you're offline
-              </h3>
-
-              <p className="text-stone-600 text-base sm:text-lg max-w-md mx-auto mb-4">
-                The page you are looking for is not available because your network connection is offline!
-              </p>
-
-              {statusMessage && (
-                <div
-                  className={`text-sm mb-4 px-3 py-1.5 rounded-md inline-block font-sans ${
-                    statusMessage.includes('Connected')
-                      ? 'bg-emerald-100 text-emerald-800'
-                      : 'bg-amber-100 text-amber-800'
-                  }`}
-                >
-                  {statusMessage}
-                </div>
-              )}
-
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <button
-                  type="button"
-                  onClick={checkConnection}
-                  disabled={isChecking}
-                  className="link_404 cursor-pointer font-bold border-none transition-all duration-200 hover:brightness-110 active:scale-95 disabled:opacity-70 rounded shadow-md"
-                >
-                  {isChecking ? 'Checking...' : 'Retry Connection'}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    window.location.href = '/';
-                  }}
-                  className="px-5 py-2.5 text-stone-600 hover:text-stone-900 text-sm font-semibold hover:bg-stone-100 rounded transition-colors cursor-pointer"
-                >
-                  Go to Home
-                </button>
-              </div>
-
-              <div className="mt-8 text-xs text-stone-400">
-                <p>সময়যুদ্ধ 2.0 • Offline Network Mode</p>
-              </div>
+            <div className="mt-6 text-xs text-stone-400">
+              <p>সময়যুদ্ধ 2.0 • Offline Network Mode</p>
             </div>
           </div>
         </div>

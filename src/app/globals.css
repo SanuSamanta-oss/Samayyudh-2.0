@@ -727,7 +727,7 @@ body {
    ============================================================ */
 
 .page_404 {
-  padding: 40px 0;
+  padding: 16px 0;
   background: #fff;
   font-family: var(--font-arvo), 'Arvo', serif;
 }
@@ -738,7 +738,7 @@ body {
 
 .four_zero_four_bg {
   background-image: url(/dribbble_1.gif);
-  height: 400px;
+  height: clamp(220px, 42vh, 320px);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -756,7 +756,7 @@ body {
   color: #fff !important;
   padding: 10px 24px;
   background: #39ac31;
-  margin: 16px 0;
+  margin: 12px 0;
   display: inline-block;
   font-weight: 600;
   text-decoration: none;
@@ -768,7 +768,7 @@ body {
 }
 
 .contant_box_404 {
-  margin-top: -50px;
+  margin-top: 8px;
 }
 
 /* ============================================================

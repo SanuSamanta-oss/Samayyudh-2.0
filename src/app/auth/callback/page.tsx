@@ -32,8 +32,8 @@ function AuthCallbackContent() {
 
         const supabase = createClient();
         const code = searchParams.get('code');
-        const next = searchParams.get('next') || '/dashboard';
-        const targetUrl = next.startsWith('/') && !next.startsWith('//') ? next : '/dashboard';
+        const next = searchParams.get('next') || '/?welcome_hint=true';
+        const targetUrl = next.startsWith('/') && !next.startsWith('//') ? next : '/?welcome_hint=true';
 
         // Check for error parameters sent by provider (e.g. Google cancellation or rejection)
         const authErrorParam = searchParams.get('error_description') || searchParams.get('error');
@@ -78,6 +78,9 @@ function AuthCallbackContent() {
           setFinished(true);
           setStatusText(userName ? `WELCOME, ${userName.toUpperCase()}` : 'WELCOME, WARRIOR');
           setTimeout(() => {
+            try {
+              sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+            } catch {}
             router.replace(targetUrl);
           }, 700);
         }, 2200);

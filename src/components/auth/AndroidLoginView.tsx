@@ -50,11 +50,11 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
 
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  // Compute redirect target URL
+  // Compute redirect target URL — defaults to landing page with profile hint
   const targetUrl = useMemo(() => {
     const redirectParam = searchParams.get('redirect') || searchParams.get('next');
     const examParam = searchParams.get('exam');
-    let url = redirectParam || '/dashboard';
+    let url = redirectParam || '/?welcome_hint=true';
     if (examParam && !url.includes('exam=')) {
       url += (url.includes('?') ? '&' : '?') + `exam=${encodeURIComponent(examParam)}`;
     }
@@ -191,6 +191,9 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
           setRedirectingFinished(true);
           setRedirectText(userName ? `WELCOME, ${userName.toUpperCase()}` : 'WELCOME, WARRIOR');
           setTimeout(() => {
+            try {
+              sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+            } catch {}
             router.replace(targetUrl);
           }, 700);
         }, 2200);
@@ -230,6 +233,9 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
         setRedirectingFinished(true);
         setRedirectText(`WELCOME, ${trimmed.toUpperCase()}`);
         setTimeout(() => {
+          try {
+            sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+          } catch {}
           router.replace(targetUrl);
         }, 700);
       }, 2200);

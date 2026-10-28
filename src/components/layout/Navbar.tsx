@@ -149,14 +149,7 @@ export function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
               <div className="relative w-8 h-8 rounded-xl overflow-hidden bg-black border border-stone-200/80 dark:border-stone-800 shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform">
-                <Image
-                  src="/icon-512.png"
-                  alt="সময়যুদ্ধ 2.0 Logo"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-cover"
-                  priority
-                />
+                <Image src="/icon-512.png" alt="সময়যুদ্ধ 2.0 Logo" width={32} height={32} className="w-full h-full object-cover" priority />
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="text-xl font-bold text-gradient-brand">সময়যুদ্ধ</span>
@@ -293,14 +286,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-12 px-4">
           <Link href="/" className="flex items-center gap-2">
             <div className="relative w-7 h-7 rounded-lg overflow-hidden bg-black border border-border shadow-xs flex items-center justify-center shrink-0">
-              <Image
-                src="/icon-512.png"
-                alt="সময়যুদ্ধ 2.0 Logo"
-                width={28}
-                height={28}
-                className="w-full h-full object-cover"
-                priority
-              />
+              <Image src="/icon-512.png" alt="সময়যুদ্ধ 2.0 Logo" width={28} height={28} className="w-full h-full object-cover" priority />
             </div>
             <span className="text-lg font-bold text-gradient-brand">সময়যুদ্ধ</span>
             <span className="text-[10px] font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1 py-0.5 rounded">2.0</span>

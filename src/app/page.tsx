@@ -19,7 +19,6 @@ import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import { DonationTicket } from '@/components/home/DonationTicket';
 import { isAndroidApp } from '@/lib/platform';
 import { AndroidSplashScreen } from '@/components/auth/AndroidSplashScreen';
-import { AndroidLoginView } from '@/components/auth/AndroidLoginView';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -48,21 +47,26 @@ export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
   const [currentAvatar, setCurrentAvatar] = useState<ReturnType<typeof getSelectedAvatar>>(null);
   const [isAndroid, setIsAndroid] = useState<boolean | null>(null);
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [highlightProfile, setHighlightProfile] = useState(false);
 
+  // Android detection — unauthenticated users go to login screen, authenticated users see this interface
   useEffect(() => {
     const android = isAndroidApp();
     setIsAndroid(android);
-    if (android) {
-      if (!authLoading) {
-        if (isAuthenticated) {
-          router.replace('/dashboard');
-        } else {
-          router.replace('/auth?platform=android');
-        }
-      }
+    if (android && !authLoading && !isAuthenticated) {
+      router.replace('/auth?platform=android');
     }
   }, [isAuthenticated, authLoading, router]);
+
+  // Listen for bot hint to highlight profile avatar
+  useEffect(() => {
+    const handleHint = (e: Event) => {
+      const customEvent = e as CustomEvent<{ active: boolean }>;
+      setHighlightProfile(!!customEvent.detail?.active);
+    };
+    window.addEventListener('samayyudh:profile-hint-active', handleHint);
+    return () => window.removeEventListener('samayyudh:profile-hint-active', handleHint);
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -101,7 +105,8 @@ export default function LandingPage() {
     }, 2000);
   };
 
-  if (isAndroid) {
+  // Show splash while detecting session on Android if not authenticated
+  if (isAndroid && !isAuthenticated && authLoading) {
     return <AndroidSplashScreen />;
   }
 
@@ -110,11 +115,7 @@ export default function LandingPage() {
       {/* Nav */}
       <header className="sticky top-0 z-30 bg-card/80 backdrop-blur-lg border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 lg:px-6 flex items-center justify-between h-14">
-          <button
-            onClick={() => setShowLoginModal(true)}
-            className="flex items-center gap-2.5 group cursor-pointer"
-            aria-label="Open app login"
-          >
+          <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative w-8 h-8 rounded-xl overflow-hidden bg-black border border-border shadow-xs flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <Image
                 src="/icon-512.png"
@@ -127,29 +128,49 @@ export default function LandingPage() {
             </div>
             <span className="text-xl font-bold text-gradient-brand">সময়যুদ্ধ</span>
             <span className="text-xs font-semibold text-brand-600 bg-brand-50 dark:bg-brand-950 dark:text-brand-400 px-1.5 py-0.5 rounded-md">2.0</span>
-          </button>
+          </Link>
           <div className="flex items-center gap-3">
             <ThemeToggle />
             {mounted && isAuthenticated ? (
-              <Link
-                href="/profile"
-                className="relative group flex items-center justify-center p-0.5 rounded-full hover:ring-2 hover:ring-brand-500/50 transition-all focus:outline-none"
-                title={`Signed in as ${displayName} — View Profile`}
-                aria-label="View Profile"
-              >
-                <div className="w-8 h-8 rounded-full bg-gradient-brand flex items-center justify-center text-white text-xs font-bold overflow-hidden shadow-sm shadow-brand-500/20 ring-1 ring-border">
-                  {avatarUrl ? (
-                    avatarUrl.startsWith('data:') ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img src={avatarUrl} alt={displayName} className="w-full h-full object-cover" />
+              <div className="relative">
+                <Link
+                  href="/profile"
+                  className={`relative group flex items-center justify-center p-0.5 rounded-full transition-all focus:outline-none ${
+                    highlightProfile
+                      ? 'ring-4 ring-purple-500 shadow-[0_0_25px_rgba(168,85,247,0.85)] scale-110'
+                      : 'hover:ring-2 hover:ring-brand-500/50'
+                  }`}
+                  title={`Signed in as ${displayName} — View Profile`}
+                  aria-label="View Profile"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gradient-brand flex items-center justify-center text-white text-xs font-bold overflow-hidden shadow-sm shadow-brand-500/20 ring-1 ring-border">
+                    {avatarUrl ? (
+                      avatarUrl.startsWith('data:') ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={avatarUrl} alt={displayName} className="w-full h-full object-cover" />
+                      ) : (
+                        <Image src={avatarUrl} alt={displayName} width={32} height={32} className="w-full h-full object-cover" />
+                      )
                     ) : (
-                      <Image src={avatarUrl} alt={displayName} width={32} height={32} className="w-full h-full object-cover" />
-                    )
-                  ) : (
-                    <span>{initial}</span>
+                      <span>{initial}</span>
+                    )}
+                  </div>
+                </Link>
+                <AnimatePresence>
+                  {highlightProfile && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4, scale: 0.85 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -4, scale: 0.85 }}
+                      className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
+                    >
+                      <div className="px-2.5 py-1 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-bold shadow-lg shadow-purple-500/40 whitespace-nowrap animate-bounce flex items-center gap-1">
+                        <span>👆 Unlock Full Potential</span>
+                      </div>
+                    </motion.div>
                   )}
-                </div>
-              </Link>
+                </AnimatePresence>
+              </div>
             ) : (
               <Link href="/auth" className="text-sm font-medium text-muted hover:text-foreground transition-colors px-3 py-2">
                 Log In
@@ -422,49 +443,6 @@ export default function LandingPage() {
           <p>Built with 💜 for students who refuse to lose to time.</p>
         </div>
       </footer>
-      {/* Android Login Modal — opens when user clicks the সময়যুদ্ধ brand name */}
-      <AnimatePresence>
-        {showLoginModal && (
-          <motion.div
-            key="login-modal-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center"
-            onClick={() => setShowLoginModal(false)}
-          >
-            {/* Backdrop blur */}
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-
-            {/* Modal panel — slides up from bottom on mobile, centres on desktop */}
-            <motion.div
-              key="login-modal-panel"
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 60 }}
-              transition={{ type: 'spring', stiffness: 380, damping: 38 }}
-              className="relative z-10 w-full max-w-sm max-h-[92dvh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Drag handle (mobile) */}
-              <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-slate-300/60 sm:hidden z-10" />
-
-              {/* Close button */}
-              <button
-                onClick={() => setShowLoginModal(false)}
-                className="absolute top-3 right-3 z-20 w-7 h-7 rounded-full bg-slate-100/80 hover:bg-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-800 transition-colors text-sm font-bold"
-                aria-label="Close"
-              >
-                ✕
-              </button>
-
-              <AndroidLoginView onSwitchToWeb={() => setShowLoginModal(false)} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <AnimatePresence>
         {loadingExam && (
           <motion.div 

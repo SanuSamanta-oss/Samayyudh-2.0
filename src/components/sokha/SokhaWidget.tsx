@@ -41,7 +41,7 @@ import { cn } from '@/lib/utils';
 export function SokhaWidget() {
   const pathname = usePathname();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
 
   // Hide during active exams to maintain exam integrity, on settings page, and on auth pages
   const isExamSession = pathname?.startsWith('/exam/') && pathname !== '/exams';
@@ -88,6 +88,55 @@ export function SokhaWidget() {
   const handleNextMantra = () => {
     setMantraIndex((prev) => (prev + 1) % WARRIOR_MANTRAS.length);
   };
+
+  // ── Floating Launcher Greeting Text (5s floating hint after login) ──
+  const [greetingText, setGreetingText] = useState("🔥 Awaken Your Focus! Ask doubts");
+
+  useEffect(() => {
+    if (pathname === '/' && (user || isAuthenticated)) {
+      const hintKey = 'samayyudh_profile_hint_seen';
+      const hintSeen = typeof window !== 'undefined' ? sessionStorage.getItem(hintKey) : null;
+      const urlHasHint = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('welcome_hint') === 'true';
+      const justLoggedIn = typeof window !== 'undefined' && sessionStorage.getItem('samayyudh_just_logged_in') === 'true';
+
+      if (urlHasHint || justLoggedIn || !hintSeen) {
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem(hintKey, 'true');
+          sessionStorage.removeItem('samayyudh_just_logged_in');
+          window.dispatchEvent(new CustomEvent('samayyudh:profile-hint-active', { detail: { active: true } }));
+        }
+
+        setGreetingText("👉 Click on your profile photo to unlock full potential!");
+
+        const timer = setTimeout(() => {
+          setGreetingText("🔥 Awaken Your Focus! Ask doubts");
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('samayyudh:profile-hint-active', { detail: { active: false } }));
+          }
+        }, 5000);
+
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [pathname, user, isAuthenticated]);
+
+  useEffect(() => {
+    const handleTrigger = () => {
+      setGreetingText("👉 Click on your profile photo to unlock full potential!");
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('samayyudh:profile-hint-active', { detail: { active: true } }));
+      }
+      const timer = setTimeout(() => {
+        setGreetingText("🔥 Awaken Your Focus! Ask doubts");
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('samayyudh:profile-hint-active', { detail: { active: false } }));
+        }
+      }, 5000);
+      return () => clearTimeout(timer);
+    };
+    window.addEventListener('samayyudh:trigger-profile-hint', handleTrigger);
+    return () => window.removeEventListener('samayyudh:trigger-profile-hint', handleTrigger);
+  }, []);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -743,7 +792,7 @@ export function SokhaWidget() {
             <SokhaBotCharacter
               size="md"
               showGreeting={true}
-              greetingText="🔥 Awaken Your Focus! Ask doubts"
+              greetingText={greetingText}
             />
           </motion.div>
         )}

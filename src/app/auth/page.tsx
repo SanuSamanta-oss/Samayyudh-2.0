@@ -74,7 +74,7 @@ function AuthPageContent() {
   const targetUrl = useMemo(() => {
     const redirectParam = searchParams.get('redirect') || searchParams.get('next');
     const examParam = searchParams.get('exam');
-    let url = redirectParam || '/dashboard';
+    let url = redirectParam || '/?welcome_hint=true';
     if (examParam && !url.includes('exam=')) {
       url += (url.includes('?') ? '&' : '?') + `exam=${encodeURIComponent(examParam)}`;
     }
@@ -185,6 +185,9 @@ function AuthPageContent() {
         setTimeout(() => {
           setRedirectingFinished(true);
           setTimeout(() => {
+            try {
+              sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+            } catch {}
             router.push(targetUrl);
           }, 700);
         }, 2200);
@@ -221,7 +224,12 @@ function AuthPageContent() {
       setRedirecting(true);
       setTimeout(() => {
         setRedirectingFinished(true);
-        setTimeout(() => router.push(targetUrl), 700);
+        setTimeout(() => {
+          try {
+            sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+          } catch {}
+          router.push(targetUrl);
+        }, 700);
       }, 2200);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save name. Please try again.');

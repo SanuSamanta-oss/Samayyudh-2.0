@@ -57,16 +57,18 @@ export function SokhaBotCharacter({
       {/* ── Interactive Speech Bubble ───────────────────────── */}
       {showGreeting && (
         <motion.div
+          key={greetingText}
           initial={{ opacity: 0, y: 8, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 20 }}
+          exit={{ opacity: 0, y: -4, scale: 0.9 }}
+          transition={{ duration: 0.35, type: 'spring', stiffness: 320, damping: 22 }}
           className="absolute -top-10 right-0 sm:right-1 z-20 pointer-events-none"
         >
-          <div className="relative px-3 py-1.5 rounded-2xl bg-[#091120]/95 shadow-[0_8px_25px_rgba(14,165,233,0.3)] backdrop-blur-md text-[11px] font-semibold text-sky-100 whitespace-nowrap flex items-center gap-1.5 border-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+          <div className="relative px-3.5 py-1.5 rounded-2xl bg-[#091120]/95 shadow-[0_8px_25px_rgba(14,165,233,0.3)] backdrop-blur-md text-[11px] font-semibold text-sky-100 whitespace-nowrap flex items-center gap-1.5 border border-sky-400/20">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping shrink-0" />
             <span>{greetingText}</span>
             {/* Bubble arrow tip */}
-            <div className="absolute -bottom-1 right-5 w-2.5 h-2.5 bg-[#091120] rotate-45" />
+            <div className="absolute -bottom-1 right-5 w-2.5 h-2.5 bg-[#091120] rotate-45 border-r border-b border-sky-400/20" />
           </div>
         </motion.div>
       )}

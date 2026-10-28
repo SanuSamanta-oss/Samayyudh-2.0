@@ -1,0 +1,744 @@
+'use client';
+
+import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
+import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import {
+  Mail,
+  Lock,
+  Phone,
+  Eye,
+  EyeOff,
+  User,
+  KeyRound,
+  ArrowRight,
+  Loader2,
+  AlertCircle,
+  CheckCircle2,
+  Sparkles,
+} from 'lucide-react';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
+import { useAuth } from '@/components/providers/AuthProvider';
+import { markUserLoggedIn } from '@/lib/auth-welcome';
+
+type AndroidAuthMode = 'email' | 'phone';
+type AndroidAuthType = 'otp' | 'password';
+type AndroidAuthStep = 'input' | 'verify' | 'name';
+
+interface AndroidLoginViewProps {
+  onSwitchToWeb?: () => void;
+}
+
+export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
+  const prefersReducedMotion = useReducedMotion();
+
+  // Mode and state
+  const [mode, setMode] = useState<AndroidAuthMode>('email');
+  const [authType, setAuthType] = useState<AndroidAuthType>('otp');
+  const [step, setStep] = useState<AndroidAuthStep>('input');
+
+  // Input states
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [phone, setPhone] = useState('');
+  const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
+  const [displayName, setDisplayName] = useState('');
+
+  // Status states
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // Compute redirect target URL
+  const targetUrl = useMemo(() => {
+    const redirectParam = searchParams.get('redirect') || searchParams.get('next');
+    const examParam = searchParams.get('exam');
+    let url = redirectParam || '/dashboard';
+    if (examParam && !url.includes('exam=')) {
+      url += (url.includes('?') ? '&' : '?') + `exam=${encodeURIComponent(examParam)}`;
+    }
+    return url;
+  }, [searchParams]);
+
+  // If authenticated, navigate straight to destination
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      markUserLoggedIn(user);
+      router.replace(targetUrl);
+    }
+  }, [isAuthenticated, authLoading, user, targetUrl, router]);
+
+  // Read error parameter from URL if any
+  useEffect(() => {
+    const errorParam = searchParams.get('error_description') || searchParams.get('error');
+    if (errorParam) {
+      setError(decodeURIComponent(errorParam));
+    }
+  }, [searchParams]);
+
+  // Handle Google OAuth
+  const handleGoogleLogin = useCallback(async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      if (!isSupabaseConfigured) {
+        throw new Error('Supabase is not configured.');
+      }
+      const supabase = createClient();
+      const callbackUrl = `${window.location.origin}/auth/callback?next=${encodeURIComponent(targetUrl)}`;
+      const { error: authError } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: callbackUrl },
+      });
+      if (authError) throw authError;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Google sign-in failed.');
+      setLoading(false);
+    }
+  }, [targetUrl]);
+
+  // Send OTP
+  const handleSendOTP = useCallback(async () => {
+    setError(null);
+    setSuccess(null);
+    setLoading(true);
+
+    try {
+      if (!isSupabaseConfigured) {
+        throw new Error('Supabase is not configured. Add credentials to .env.local');
+      }
+
+      const supabase = createClient();
+
+      if (mode === 'email') {
+        if (!email || !email.includes('@')) {
+          throw new Error('Please enter a valid email address.');
+        }
+
+        const { error: authError } = await supabase.auth.signInWithOtp({
+          email: email.trim(),
+          options: { shouldCreateUser: true },
+        });
+
+        if (authError) throw authError;
+        setSuccess(`Verification code sent to ${email.trim()}`);
+        setStep('verify');
+      } else {
+        const cleanPhone = phone.trim();
+        if (!cleanPhone || cleanPhone.replace(/\D/g, '').length < 10) {
+          throw new Error('Please enter a valid phone number with country code (e.g. +91...).');
+        }
+
+        const { error: authError } = await supabase.auth.signInWithOtp({
+          phone: cleanPhone,
+          options: { shouldCreateUser: true },
+        });
+
+        if (authError) throw authError;
+        setSuccess(`SMS code sent to ${cleanPhone}`);
+        setStep('verify');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send code. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [mode, email, phone]);
+
+  // Login with Password
+  const handlePasswordLogin = useCallback(async () => {
+    setError(null);
+    setSuccess(null);
+    setLoading(true);
+
+    try {
+      if (!isSupabaseConfigured) {
+        throw new Error('Supabase is not configured.');
+      }
+      if (!email || !email.includes('@')) {
+        throw new Error('Please enter a valid email address.');
+      }
+      if (!password || password.length < 6) {
+        throw new Error('Password must be at least 6 characters.');
+      }
+
+      const supabase = createClient();
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+
+      if (signInError) throw signInError;
+
+      markUserLoggedIn(data.user);
+      router.replace(targetUrl);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Incorrect email or password.');
+    } finally {
+      setLoading(false);
+    }
+  }, [email, password, targetUrl, router]);
+
+  // Verify OTP Code
+  const handleVerifyOTP = useCallback(async () => {
+    setError(null);
+    setLoading(true);
+    const token = otpDigits.join('');
+
+    try {
+      if (!isSupabaseConfigured) throw new Error('Supabase is not configured.');
+      if (token.length < 6) throw new Error('Please enter the full 6-digit code.');
+
+      const supabase = createClient();
+      let result;
+
+      if (mode === 'email') {
+        result = await supabase.auth.verifyOtp({
+          email: email.trim(),
+          token,
+          type: 'email',
+        });
+      } else {
+        result = await supabase.auth.verifyOtp({
+          phone: phone.trim(),
+          token,
+          type: 'sms',
+        });
+      }
+
+      if (result.error) throw result.error;
+
+      markUserLoggedIn(result.data?.user);
+
+      // Check if new user needs to set their display name
+      const hasDisplayName = !!result.data?.user?.user_metadata?.display_name;
+      if (hasDisplayName) {
+        router.replace(targetUrl);
+      } else {
+        setStep('name');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Invalid code. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [otpDigits, mode, email, phone, targetUrl, router]);
+
+  // Save Display Name
+  const handleSaveName = useCallback(async () => {
+    const trimmed = displayName.trim();
+    if (!trimmed || trimmed.length < 2) {
+      setError('Please enter at least 2 characters.');
+      return;
+    }
+
+    setError(null);
+    setLoading(true);
+
+    try {
+      const supabase = createClient();
+      const { error: updateError } = await supabase.auth.updateUser({
+        data: { display_name: trimmed, has_logged_in: true, animation_shown: true },
+      });
+      if (updateError) throw updateError;
+
+      markUserLoggedIn();
+      router.replace(targetUrl);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to save name. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [displayName, targetUrl, router]);
+
+  // OTP digit navigation helper
+  const handleOtpInput = (index: number, val: string) => {
+    const digit = val.replace(/\D/g, '').slice(-1);
+    const next = [...otpDigits];
+    next[index] = digit;
+    setOtpDigits(next);
+    if (digit && index < 5) {
+      otpRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && !otpDigits[index] && index > 0) {
+      otpRefs.current[index - 1]?.focus();
+    }
+  };
+
+  return (
+    <div className="min-h-screen w-full bg-[#FAF9F6] text-slate-900 relative flex flex-col justify-between overflow-x-hidden selection:bg-[#86C5C0]/30 font-sans">
+      {/* ── TOP RIGHT ORGANIC PEACH DECORATION ── */}
+      <div
+        className="absolute -top-12 -right-12 w-64 h-64 sm:w-80 sm:h-80 pointer-events-none z-0"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 320 320"
+          className="w-full h-full fill-[#F1B496]/85"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M120 0 C220 0, 320 20, 320 120 C 320 220, 240 290, 160 270 C 80 250, 40 180, 20 120 C 0 60, 20 0, 120 0 Z" />
+        </svg>
+      </div>
+
+      {/* ── BOTTOM LEFT ORGANIC TURQUOISE WAVE ── */}
+      <div
+        className="absolute -bottom-10 -left-10 w-72 h-56 sm:w-96 sm:h-72 pointer-events-none z-0"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 400 300"
+          className="w-full h-full fill-[#86C5C0]/85"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 130 C70 80, 150 70, 220 120 C 290 170, 330 180, 400 150 L 400 300 L 0 300 Z" />
+        </svg>
+      </div>
+
+      {/* ── MAIN CONTENT CONTAINER (NO PURPLE RECTANGULAR OUTLINE) ── */}
+      <div className="relative z-10 w-full max-w-sm mx-auto px-5 py-6 flex-1 flex flex-col justify-center space-y-5">
+        {/* Top Section: App Emblem & Illustration */}
+        <div className="flex flex-col items-center">
+          {/* Subtle app branding tag */}
+          <div className="flex items-center gap-1.5 mb-2 opacity-90">
+            <span className="text-xs font-black tracking-tight text-slate-800">সময়যুদ্ধ</span>
+            <span className="text-[10px] font-bold text-[#358781] bg-[#E3F2F0] px-1.5 py-0.2 rounded">
+              2.0
+            </span>
+          </div>
+
+          {/* Clean Floating Study Illustration */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{
+              opacity: 1,
+              y: prefersReducedMotion ? 0 : [0, -6, 0],
+            }}
+            transition={{
+              opacity: { duration: 0.5 },
+              y: { repeat: Infinity, duration: 4.5, ease: 'easeInOut' },
+            }}
+            className="w-full max-w-[260px] sm:max-w-[290px] h-[210px] sm:h-[230px] relative flex items-center justify-center my-1 select-none"
+          >
+            <Image
+              src="/illustrations/android-login-illustration-transparent.png"
+              alt="Students preparing with SamayYudh"
+              width={520}
+              height={460}
+              className="w-full h-full object-contain drop-shadow-xs"
+              priority
+            />
+          </motion.div>
+
+          {/* Welcome Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.4 }}
+            className="text-center mt-1 mb-2"
+          >
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+              Welcome, Warrior!
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">
+              Your battle against the clock begins here.
+            </p>
+          </motion.div>
+
+          {/* Mode Switcher Pills (Email vs Phone) */}
+          {step === 'input' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex items-center gap-1 p-1 rounded-full bg-[#EBF4F3] border border-[#CDE5E2] mb-1 text-xs font-bold"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setMode('email');
+                  setError(null);
+                }}
+                className={`px-4 py-1.5 rounded-full transition-all ${
+                  mode === 'email'
+                    ? 'bg-white text-[#2C6F6A] shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Email Sign In
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMode('phone');
+                  setError(null);
+                }}
+                className={`px-4 py-1.5 rounded-full transition-all ${
+                  mode === 'phone'
+                    ? 'bg-white text-[#2C6F6A] shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Phone Number
+              </button>
+            </motion.div>
+          )}
+        </div>
+
+        {/* Form Inputs & Interactive Section */}
+        <div className="w-full space-y-3.5">
+          {/* Status Banners */}
+          <AnimatePresence mode="wait">
+            {error && (
+              <motion.div
+                key="error"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="flex items-center gap-2 p-2.5 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium"
+              >
+                <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                <span className="flex-1">{error}</span>
+              </motion.div>
+            )}
+            {success && !error && (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="flex items-center gap-2 p-2.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 font-medium"
+              >
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="flex-1">{success}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* STEP 1: CREDENTIAL INPUTS (Pill fields with circular icons) */}
+          {step === 'input' && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-3"
+            >
+              {mode === 'email' ? (
+                <>
+                  {/* Email Input Field */}
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1 relative">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email address"
+                        autoComplete="email"
+                        className="w-full rounded-full border border-[#BCE1DD] bg-white/95 px-5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/25 transition-all font-medium text-center shadow-2xs"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Optional Password Field if Password Auth is chosen */}
+                  {authType === 'password' && (
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-10 h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
+                        <Lock className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1 relative">
+                        <input
+                          type={showPassword ? 'text' : 'password'}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="Password (min. 6 characters)"
+                          autoComplete="current-password"
+                          className="w-full rounded-full border border-[#BCE1DD] bg-white/95 px-5 py-2.5 pr-11 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/25 transition-all font-medium text-center shadow-2xs"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          aria-label={showPassword ? 'Hide password' : 'Show password'}
+                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                        >
+                          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Primary Button */}
+                  <button
+                    type="button"
+                    disabled={loading}
+                    onClick={authType === 'otp' ? handleSendOTP : handlePasswordLogin}
+                    className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer mt-1"
+                  >
+                    {loading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <span>{authType === 'otp' ? 'Send Verification Code' : 'Log In'}</span>
+                    )}
+                  </button>
+
+                  {/* Auth Type Switcher */}
+                  <div className="flex items-center justify-center pt-1 text-xs text-slate-500 font-medium">
+                    {authType === 'otp' ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAuthType('password');
+                          setError(null);
+                        }}
+                        className="hover:text-[#2C6F6A] transition-colors"
+                      >
+                        Sign in with Password instead
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAuthType('otp');
+                          setError(null);
+                        }}
+                        className="hover:text-[#2C6F6A] transition-colors"
+                      >
+                        Sign in with One-Time Code (OTP)
+                      </button>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Phone Input Field */}
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1 relative">
+                      <input
+                        type="tel"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="+91 98765 43210"
+                        autoComplete="tel"
+                        className="w-full rounded-full border border-[#BCE1DD] bg-white/95 px-5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/25 transition-all font-medium text-center shadow-2xs"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Primary Button for Phone */}
+                  <button
+                    type="button"
+                    disabled={loading}
+                    onClick={handleSendOTP}
+                    className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer mt-1"
+                  >
+                    {loading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <span>Send SMS Code</span>
+                    )}
+                  </button>
+                </>
+              )}
+            </motion.div>
+          )}
+
+          {/* STEP 2: OTP VERIFICATION CODE */}
+          {step === 'verify' && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-4"
+            >
+              <div className="text-center">
+                <p className="text-xs text-slate-600 font-medium">
+                  Enter the 6-digit code sent to:
+                </p>
+                <p className="text-xs font-bold text-slate-900 mt-0.5 font-mono">
+                  {mode === 'email' ? email : phone}
+                </p>
+              </div>
+
+              {/* 6 Digit Input Row */}
+              <div className="flex justify-center gap-2">
+                {otpDigits.map((digit, idx) => (
+                  <input
+                    key={idx}
+                    ref={(el) => {
+                      otpRefs.current[idx] = el;
+                    }}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={digit}
+                    onChange={(e) => handleOtpInput(idx, e.target.value)}
+                    onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                    className="w-10 h-12 rounded-xl text-center font-mono font-bold text-base text-slate-900 border border-[#BCE1DD] bg-white focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/30 transition-all"
+                  />
+                ))}
+              </div>
+
+              {/* Verify Button */}
+              <button
+                type="button"
+                disabled={loading || otpDigits.join('').length < 6}
+                onClick={handleVerifyOTP}
+                className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+              >
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Verify &amp; Continue</span>}
+              </button>
+
+              <div className="flex items-center justify-between text-xs text-slate-500 font-medium px-2">
+                <button
+                  type="button"
+                  onClick={() => setStep('input')}
+                  className="hover:text-slate-800 transition-colors"
+                >
+                  Change {mode === 'email' ? 'email' : 'number'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSendOTP}
+                  className="text-[#358781] hover:underline"
+                >
+                  Resend code
+                </button>
+              </div>
+            </motion.div>
+          )}
+
+          {/* STEP 3: NEW USER DISPLAY NAME */}
+          {step === 'name' && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-3.5"
+            >
+              <div className="text-center">
+                <p className="text-sm font-bold text-slate-900">Choose your Warrior Name</p>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  This will be shown on your certificates &amp; exam reports.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
+                  <User className="w-4 h-4" />
+                </div>
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    placeholder="e.g. Sanu Samanta"
+                    autoFocus
+                    className="w-full rounded-full border border-[#BCE1DD] bg-white/95 px-5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/25 transition-all font-medium text-center shadow-2xs"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                disabled={loading || displayName.trim().length < 2}
+                onClick={handleSaveName}
+                className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+              >
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Start Your Journey</span>}
+              </button>
+            </motion.div>
+          )}
+
+          {/* Social Divider & Google Button (when on input step) */}
+          {step === 'input' && (
+            <div className="space-y-3 pt-1">
+              <div className="relative flex items-center justify-center">
+                <div className="w-full border-t border-[#DFECE9]" />
+                <span className="bg-[#FAF9F6] px-3 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                  or
+                </span>
+              </div>
+
+              {/* Google Button */}
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                disabled={loading}
+                className="w-full py-2.5 px-4 rounded-full border border-[#BCE1DD] bg-white/90 hover:bg-white text-slate-700 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2.5 shadow-2xs hover:border-[#6DB5AE] transition-all cursor-pointer"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24">
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                  />
+                </svg>
+                <span>Continue with Google</span>
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Footer & Secondary Navigation */}
+        <div className="pt-4 text-center space-y-2 select-none">
+          <div className="flex items-center justify-center gap-4 text-[11px] text-slate-500 font-medium">
+            <span>Don&apos;t have an account?</span>
+            <button
+              type="button"
+              onClick={() => {
+                setMode('email');
+                setAuthType('otp');
+                setStep('input');
+                setError(null);
+                setSuccess('Enter your email to create a new warrior account');
+              }}
+              className="font-bold text-[#2A7570] hover:underline"
+            >
+              Get Started
+            </button>
+          </div>
+
+          <p className="text-[10px] text-slate-400 font-medium">
+            By continuing, you agree to our Terms of Service.
+          </p>
+
+          {/* Testing / Preview switcher link */}
+          {onSwitchToWeb && (
+            <div className="pt-1">
+              <button
+                type="button"
+                onClick={onSwitchToWeb}
+                className="text-[10px] text-slate-400 hover:text-slate-600 underline"
+              >
+                Switch to Web View
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

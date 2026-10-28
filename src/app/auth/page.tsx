@@ -21,6 +21,9 @@ import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { BoredHandLoader } from '@/components/BoredHandLoader';
 import { hasUserLoggedInBefore, markUserLoggedIn } from '@/lib/auth-welcome';
+import { isAndroidApp } from '@/lib/platform';
+import { AndroidLoginView } from '@/components/auth/AndroidLoginView';
+import { AndroidSplashScreen } from '@/components/auth/AndroidSplashScreen';
 
 type AuthMethod = 'email' | 'phone' | null;
 type AuthStep = 'choose' | 'input' | 'otp' | 'name';
@@ -48,8 +51,24 @@ function AuthPageContent() {
   const [success, setSuccess] = useState<string | null>(null);
   const [redirecting, setRedirecting] = useState(false);
   const [redirectingFinished, setRedirectingFinished] = useState(false);
+  const [isAndroid, setIsAndroid] = useState<boolean | null>(null);
+  const [showSplash, setShowSplash] = useState(true);
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
+
+  // Platform detection: Android App vs Web
+  useEffect(() => {
+    const androidDetected = isAndroidApp();
+    setIsAndroid(androidDetected);
+    if (androidDetected) {
+      const timer = setTimeout(() => {
+        setShowSplash(false);
+      }, 700);
+      return () => clearTimeout(timer);
+    } else {
+      setShowSplash(false);
+    }
+  }, [searchParams]);
 
   // Target destination after login
   const targetUrl = useMemo(() => {
@@ -230,6 +249,30 @@ function AuthPageContent() {
       otpRefs.current[index - 1]?.focus();
     }
   };
+
+  if (isAndroid) {
+    if (isAuthenticated) {
+      return <AndroidSplashScreen />;
+    }
+
+    return (
+      <>
+        <AnimatePresence>
+          {(showSplash || authLoading) && <AndroidSplashScreen />}
+        </AnimatePresence>
+        {!showSplash && !authLoading && (
+          <AndroidLoginView
+            onSwitchToWeb={() => {
+              setIsAndroid(false);
+              try {
+                localStorage.removeItem('samayyudh_platform');
+              } catch {}
+            }}
+          />
+        )}
+      </>
+    );
+  }
 
   return (
     <>
@@ -586,6 +629,23 @@ function AuthPageContent() {
           <p className="mt-6 text-center text-xs text-muted">
             By continuing, you agree to our Terms of Service.
           </p>
+
+          <div className="mt-3 text-center">
+            <button
+              type="button"
+              onClick={() => {
+                setIsAndroid(true);
+                setShowSplash(true);
+                setTimeout(() => setShowSplash(false), 700);
+                try {
+                  localStorage.setItem('samayyudh_platform', 'android');
+                } catch {}
+              }}
+              className="text-[11px] text-muted hover:text-brand-500 underline transition-colors cursor-pointer"
+            >
+              Switch to Android App View
+            </button>
+          </div>
         </motion.div>
       </div>
     </>

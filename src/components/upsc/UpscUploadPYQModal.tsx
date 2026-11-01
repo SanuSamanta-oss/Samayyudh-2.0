@@ -307,7 +307,7 @@ export function UpscUploadPYQModal({
                     type="submit"
                     className="px-5 py-2 rounded-xl bg-gradient-brand text-white font-bold shadow-md hover:opacity-90 transition-opacity cursor-pointer"
                   >
-                    Save to UPSC Question Bank
+                    Save to UPSC PYQs
                   </button>
                 </div>
               </form>

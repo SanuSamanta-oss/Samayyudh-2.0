@@ -128,7 +128,7 @@ export default function AdminDashboardPage() {
           <ShieldAlert className="w-6 h-6 text-brand-600" />
           Admin Dashboard
         </h1>
-        <p className="text-stone-500 mt-1">Manage question bank and view system statistics</p>
+        <p className="text-stone-500 mt-1">Manage custom question repository and view system statistics</p>
       </div>
 
       {/* System Stats */}
@@ -163,12 +163,12 @@ export default function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Question Bank Management */}
+      {/* Question Repository */}
       <div className="bg-card rounded-2xl border border-border overflow-hidden">
         <div className="p-5 border-b border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Database className="w-5 h-5 text-stone-400" />
-            <h2 className="text-lg font-bold">Question Bank</h2>
+            <h2 className="text-lg font-bold">Question Repository</h2>
             <span className="bg-stone-100 text-stone-600 text-xs px-2 py-0.5 rounded-full font-medium">
               {allQuestions.length} Total ({customQuestions.length} Custom)
             </span>

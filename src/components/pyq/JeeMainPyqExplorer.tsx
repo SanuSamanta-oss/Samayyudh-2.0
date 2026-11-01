@@ -510,7 +510,7 @@ export default function JeeMainPyqExplorer() {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-3">
         <RefreshCw className="w-7 h-7 animate-spin text-brand-500" />
-        <p className="text-sm text-stone-500">Loading PYQ question bank...</p>
+        <p className="text-sm text-stone-500">Loading JEE Main PYQs...</p>
       </div>
     );
   }

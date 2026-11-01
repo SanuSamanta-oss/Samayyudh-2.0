@@ -79,7 +79,7 @@ export function NeetPrepSection() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
           <div>
             <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
-              NEET Question Bank Architecture
+              NEET PYQ & Practice Architecture
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">
               Select category and difficulty level to test the filter navigation.
@@ -144,7 +144,7 @@ export function NeetPrepSection() {
           Awaiting Verified NEET Question Ingestion
         </h4>
         <p className="mt-1 text-xs md:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto font-medium">
-          No questions have been fabricated or inserted. When you provide the question bank, correct answer keys, and explanations, they will appear here organized by chapter and difficulty.
+          No questions have been fabricated or inserted. When you provide the official question papers, correct answer keys, and explanations, they will appear here organized by chapter and difficulty.
         </p>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-700 dark:text-slate-300 font-bold">

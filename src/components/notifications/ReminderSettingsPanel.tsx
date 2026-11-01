@@ -64,10 +64,10 @@ const STUDENT_PRESET_TEMPLATES: {
     notes: 'Warm up with 10 fast questions in Practice Mode.',
   },
   {
-    title: 'Question Bank PYQ Drill',
+    title: 'Explore PYQ Chapter Drill',
     time: '11:30',
     category: 'questions',
-    notes: 'Solve chapter-wise PYQs from Question Bank library.',
+    notes: 'Solve chapter-wise PYQs in Practice mode.',
   },
   {
     title: 'Practice Battle (25 Qs)',
@@ -1426,15 +1426,15 @@ export function ReminderSettingsPanel({ className }: ReminderSettingsPanelProps)
                       onChange={(e) => setNewTaskCategory(e.target.value as TaskCategory)}
                       className="w-full px-4 py-2.5 rounded-2xl bg-[#F0EEF7] dark:bg-[#1C1636] text-[#2A2244] dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#7C71B2] transition-all cursor-pointer"
                     >
-                      <option value="quick_battle">⚡ Quick Battle (10 Qs) — Practice Mode</option>
-                      <option value="practice_battle">⚔️ Practice Battle (25 Qs) — Practice Mode</option>
-                      <option value="century">🏏 Century Run (50/100 Qs) — Practice Mode</option>
-                      <option value="full_exam">🎓 Full Exam Mock Simulation — Exams Section</option>
-                      <option value="questions">📚 Question Bank & PYQ — Questions Library</option>
-                      <option value="history">🕒 History & Mistakes Review — History Section</option>
-                      <option value="analytics">📊 Analytics & Speed Stats — Analytics</option>
-                      <option value="streak">🔥 Streak Shield & Badges — Badges & Goals</option>
-                      <option value="notes">📝 Notes & Formula Sheets — Notes Section</option>
+                      <option value="quick_battle">Quick Battle (10 Qs) — Practice Mode</option>
+                      <option value="practice_battle">Practice Battle (25 Qs) — Practice Mode</option>
+                      <option value="century">Century Run (50/100 Qs) — Practice Mode</option>
+                      <option value="full_exam">Full Exam Mock Simulation — Exams Section</option>
+                      <option value="questions">Explore PYQ — PYQ Hub</option>
+                      <option value="history">History & Mistakes Review — History Section</option>
+                      <option value="analytics">Analytics & Speed Stats — Analytics</option>
+                      <option value="streak">Streak Shield & Badges — Badges & Goals</option>
+                      <option value="notes">Notes & Formula Sheets — Notes Section</option>
                     </select>
                   </div>
                 </div>

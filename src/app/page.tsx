@@ -254,11 +254,11 @@ export default function LandingPage() {
                 <ChevronRight className="w-5 h-5" />
               </Link>
               <Link
-                href="/questions"
+                href="/exams"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold text-brand-700 bg-brand-50 hover:!bg-white hover:text-black transition-all border border-brand-200 hover:border-transparent hover:shadow-[0_0_30px_rgba(255,255,255,0.8)]"
               >
                 <BookOpen className="w-5 h-5" />
-                Explore Question Bank
+                Choose Your Exam
               </Link>
             </motion.div>
 

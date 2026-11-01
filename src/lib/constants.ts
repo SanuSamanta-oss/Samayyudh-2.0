@@ -178,7 +178,7 @@ export const NAV_ITEMS = [
   { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard' },
   { href: '/practice', label: 'Practice', icon: 'Swords' },
   { href: '/exams', label: 'Exams', icon: 'GraduationCap' },
-  { href: '/questions', label: 'Question Bank', icon: 'Library' },
+  { href: '/pyq', label: 'Explore PYQ', icon: 'BookOpen' },
   { href: '/history', label: 'History', icon: 'History' },
   { href: '/analytics', label: 'Analytics', icon: 'BarChart3' },
   { href: '/notes', label: 'Notes', icon: 'StickyNote' },

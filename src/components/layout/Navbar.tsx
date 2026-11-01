@@ -38,7 +38,6 @@ const navItems = [
   { href: '/pyq', label: 'Explore PYQ', icon: 'BookOpen', color: '#0ea5e9' },
   { href: '/formulas', label: 'Formulas', icon: 'BookOpen', color: '#0284c7' },
   { href: '/achievements', label: 'Badges', icon: 'Trophy', color: '#a855f7' },
-  { href: '/questions', label: 'Questions', icon: 'Library', color: '#8b5cf6' },
   { href: '/history', label: 'History', icon: 'History', color: '#7e22ce' },
   { href: '/analytics', label: 'Analytics', icon: 'BarChart3', color: '#6b21a8' },
   { href: '/admin', label: 'Admin', icon: 'ShieldAlert', color: '#581c87' },

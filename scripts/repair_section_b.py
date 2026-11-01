@@ -253,3 +253,4 @@ with open('data/pyq_database.json', 'w', encoding='utf-8') as f:
     json.dump(db, f, indent=2, ensure_ascii=False)
 
 print(f'Successfully updated database. Total questions: {len(sorted_questions)}')
+

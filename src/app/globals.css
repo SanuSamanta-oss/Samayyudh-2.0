@@ -866,6 +866,16 @@ body {
   border-top-width: 1.8px !important;
 }
 
+/* Prevent KaTeX syntax errors from ever showing up in red */
+.katex-error {
+  color: inherit !important;
+  border: none !important;
+}
+
+.dark .katex-error {
+  color: #F8FAFC !important;
+}
+
 /* Light mode equation readability */
 .katex, .katex * {
   color: #0F172A;

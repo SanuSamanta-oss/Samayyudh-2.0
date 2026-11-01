@@ -55,6 +55,8 @@ export interface PyqQuestion {
   };
   diagram_url?: string;
   diagram_caption?: string;
+  is_placeholder?: boolean;
+  clean_source?: string;
   review_required: boolean;
   review_reason?: string;
   source_reference: string;

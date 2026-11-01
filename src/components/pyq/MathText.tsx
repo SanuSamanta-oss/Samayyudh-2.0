@@ -139,7 +139,12 @@ function splitSegments(text: string): Segment[] {
 function KatexSegment({ latex, display }: { latex: string; display: boolean }) {
   const html = useMemo(() => {
     try {
-      return katex.renderToString(latex, {
+      // Auto-escape unescaped % (which is treated as LaTeX comment and breaks the render)
+      const sanitized = latex
+        .replace(/(?<!\\)%/g, '\\%')
+        .replace(/\ufffd/g, '\\times ');
+
+      return katex.renderToString(sanitized, {
         throwOnError: false,
         output: 'html',
         displayMode: display,
@@ -152,7 +157,7 @@ function KatexSegment({ latex, display }: { latex: string; display: boolean }) {
   }, [latex, display]);
 
   if (!html) {
-    return <code className="text-xs font-mono text-purple-600 dark:text-purple-300 font-bold">{latex}</code>;
+    return <span className="font-mono text-sm">{latex}</span>;
   }
 
   return (

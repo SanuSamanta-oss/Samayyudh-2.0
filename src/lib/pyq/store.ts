@@ -78,6 +78,11 @@ export function filterPyqQuestions(
 ): { questions: PyqQuestion[]; total: number } {
   let filtered = [...questions];
 
+  // Exclude placeholder or incomplete questions by default
+  filtered = filtered.filter(
+    (q) => !q.is_placeholder && !q.question_statement.startsWith('Question ') && q.question_statement.trim().length >= 20
+  );
+
   if (filters.subject && filters.subject !== 'All') {
     filtered = filtered.filter((q) => q.subject.toLowerCase() === filters.subject!.toLowerCase());
   }

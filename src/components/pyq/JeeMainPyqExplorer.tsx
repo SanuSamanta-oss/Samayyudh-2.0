@@ -332,8 +332,8 @@ function QuestionCard({ q, index }: { q: PyqQuestion; index: number }) {
 
       {/* Action Footer: Solve in Battle */}
       <div className="pt-3 border-t border-stone-200 dark:border-[#243556] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <span className="text-xs font-semibold text-stone-500 dark:text-stone-300 bg-stone-100 dark:bg-[#18233C] px-3 py-1.5 rounded-lg border border-stone-200/60 dark:border-[#293B60] truncate max-w-md">
-          {q.source_reference}
+        <span className="text-xs font-semibold text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-[#18233C] px-3 py-1.5 rounded-lg border border-stone-200/60 dark:border-[#293B60] truncate max-w-md">
+          {q.clean_source || `${q.exam} ${q.year} • ${q.exam_date_str} • ${q.shift}`}
         </span>
         <button
           onClick={() => {

@@ -1,8 +1,9 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { cn, countWords, formatOptionText } from '@/lib/utils';
+import { cn, countWords } from '@/lib/utils';
 import { FileText, Save, CheckCircle2, Loader2 } from 'lucide-react';
+import { MathText } from '@/components/pyq/MathText';
 
 import type { QuestionOption } from '@/types';
 
@@ -76,7 +77,7 @@ export function AnswerEditor({
                 </div>
                 <div className="flex-1">
                   <span className="text-base text-foreground font-medium mr-2">({opt.id.replace('opt_', '').toUpperCase()})</span>
-                  <span className="text-base text-foreground leading-relaxed">{formatOptionText(opt.text)}</span>
+                  <MathText text={opt.text} className="text-base text-foreground leading-relaxed" />
                 </div>
               </label>
             ))}

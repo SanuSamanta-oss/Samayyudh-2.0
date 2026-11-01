@@ -310,7 +310,7 @@ export const EXAM_SYLLABUS_REGISTRY: Record<string, ExamSyllabusConfig> = {
 export function resolveExamSyllabusKey(codeOrName: string | null | undefined): string | null {
   if (!codeOrName) return null;
   const key = codeOrName.trim().toUpperCase().replace(/[\s-]/g, '_');
-  if (key === 'JEE' || key === 'JEE_MAIN' || key === 'JEE_MAINS') return 'JEE_MAINS';
+  if (key === 'JEE' || key === 'JEE_MAIN' || key === 'JEE_MAINS' || key === 'ENGINEERING_ENTRANCE') return 'JEE_MAINS';
   if (key === 'JEE_ADV' || key === 'JEE_ADVANCED' || key === 'IIT_JEE') return 'JEE_ADVANCED';
   if (key === 'NEET' || key === 'NEET_UG' || key === 'MEDICAL') return 'NEET';
   return null;

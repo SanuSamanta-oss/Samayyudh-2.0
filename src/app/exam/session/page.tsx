@@ -11,10 +11,12 @@ import { StickyNote } from '@/components/exam/StickyNote';
 import { NotesBoard } from '@/components/exam/NotesBoard';
 import { MobileQuestionDrawer } from '@/components/exam/MobileQuestionDrawer';
 import { questionBank, getQuestionsByExam } from '@/lib/questions';
+import { convertPyqListToBattle } from '@/lib/pyq/battleAdapter';
+import type { PyqQuestion } from '@/lib/pyq/types';
 import * as localDB from '@/lib/store/local-db';
 import { generateId, now, formatDuration } from '@/lib/utils';
 import { OmnitrixLoader } from '@/components/OmnitrixLoader';
-import type { ExamSession, ExamMode, BoardNote, StickyNoteColor } from '@/types';
+import type { ExamSession, ExamMode, BoardNote, StickyNoteColor, Question } from '@/types';
 import {
   ChevronLeft, ChevronRight, Flag, Grid3X3, Send, Award,
   AlertTriangle, CheckCircle2
@@ -67,10 +69,38 @@ function ExamSessionInner() {
     const resumeId = searchParams.get('resume') || searchParams.get('session');
 
     const requestedExam = searchParams.get('exam') || 'NEET';
+    const isPyqSource =
+      searchParams.get('source') === 'pyq' ||
+      requestedExam.toUpperCase() === 'JEE_MAIN_2025' ||
+      requestedExam.toUpperCase() === 'JEE_MAINS_PYQ' ||
+      requestedExam.toUpperCase() === 'ENGINEERING_ENTRANCE' ||
+      requestedExam.toUpperCase() === 'JEE_MAINS' ||
+      requestedExam.toUpperCase() === 'JEE' ||
+      (requestedExam.toUpperCase().includes('JEE') && (searchParams.get('year') === '2025' || searchParams.get('pyq') === 'true'));
 
     localDB.getAllCustomQuestions().then(async (customQs) => {
+      let pyqConvertedQs: Question[] = [];
+      if (isPyqSource) {
+        try {
+          const subjectParam = searchParams.get('subject') || 'All';
+          const dateParam = searchParams.get('date') || 'All';
+          const shiftParam = searchParams.get('shift') || 'All';
+          const res = await fetch(
+            `/api/pyq/questions?pageSize=100&subject=${encodeURIComponent(subjectParam)}&date=${encodeURIComponent(dateParam)}&shift=${encodeURIComponent(shiftParam)}`
+          );
+          if (res.ok) {
+            const data = await res.json();
+            if (data.questions && data.questions.length > 0) {
+              pyqConvertedQs = convertPyqListToBattle(data.questions as PyqQuestion[]);
+            }
+          }
+        } catch (err) {
+          console.error('Error fetching PYQ questions for battle:', err);
+        }
+      }
+
       // Strictly isolate questions by the requested exam (NEET, GATE, JEE, etc.)
-      const examSpecific = getQuestionsByExam(requestedExam);
+      const examSpecific = pyqConvertedQs.length > 0 ? pyqConvertedQs : getQuestionsByExam(requestedExam);
       const customForExam = customQs.filter(q => 
         q.exam_code?.toUpperCase() === requestedExam.toUpperCase() ||
         q.exam_category?.toUpperCase() === requestedExam.toUpperCase()

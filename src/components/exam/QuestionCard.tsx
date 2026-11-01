@@ -1,9 +1,10 @@
 'use client';
 
-import { cn, formatTime, formatMathText } from '@/lib/utils';
+import { cn, formatTime } from '@/lib/utils';
 import { getRecommendedTime } from '@/lib/constants';
 import type { Question, Answer } from '@/types';
-import { Award, Clock, Hash } from 'lucide-react';
+import { Award, Clock, Hash, Image as ImageIcon } from 'lucide-react';
+import { MathText } from '@/components/pyq/MathText';
 
 interface QuestionCardProps {
   question: Question;
@@ -41,10 +42,27 @@ export function QuestionCard({ question, answer, questionIndex, totalQuestions }
       </div>
 
       {/* Question Text */}
-      <div className="bg-card border border-border rounded-xl p-5 md:p-6">
-        <p className="text-base md:text-lg leading-relaxed text-foreground whitespace-pre-line">
-          {formatMathText(question.question_text)}
-        </p>
+      <div className="bg-card border border-border rounded-xl p-5 md:p-6 space-y-4">
+        <MathText
+          text={question.question_text}
+          block
+          className="text-base md:text-lg leading-relaxed text-foreground font-normal"
+        />
+
+        {question.diagram_url && (
+          <div className="p-3 rounded-xl border border-border bg-stone-50 dark:bg-stone-900/60 max-w-lg">
+            <div className="flex items-center gap-1.5 text-xs text-stone-500 mb-2 font-medium">
+              <ImageIcon className="w-3.5 h-3.5 text-brand-600" />
+              <span>Reference Figure</span>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={question.diagram_url}
+              alt={`Diagram for question ${questionIndex + 1}`}
+              className="max-w-full rounded-lg"
+            />
+          </div>
+        )}
       </div>
 
       {/* Time Info */}

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen, Search, Filter, ChevronLeft, ChevronRight,
   AlertCircle, RefreshCw, Calendar, Layers, FileText,
-  ArrowLeft, X, Upload, Check, Image as ImageIcon
+  ArrowLeft, X, Upload, Check, Image as ImageIcon, Zap
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { PyqExamPaper, PyqQuestion, PyqStats, PyqSubject, PyqSection, PyqQuestionType } from '@/lib/pyq/types';
@@ -149,12 +149,32 @@ function PaperDateCard({
             Total: {paper.total_questions} questions
           </p>
         </div>
-        <button
-          onClick={() => onBrowse(paper)}
-          className="shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white transition-colors cursor-pointer"
-        >
-          Browse
-        </button>
+        <div className="flex flex-col gap-1.5 shrink-0">
+          <button
+            onClick={() => onBrowse(paper)}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white transition-colors cursor-pointer text-center"
+          >
+            Browse
+          </button>
+          <button
+            onClick={() => {
+              const params = new URLSearchParams({
+                exam: 'JEE_MAINS',
+                source: 'pyq',
+                date: paper.exam_date_str,
+                shift: paper.shift,
+                mode: 'half_century',
+                questions: '50',
+                duration: '5400',
+              });
+              window.location.href = `/exam/session?${params.toString()}`;
+            }}
+            className="flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/60 border border-brand-200 dark:border-brand-800 hover:bg-brand-100 dark:hover:bg-brand-900/40 transition-colors cursor-pointer"
+          >
+            <Zap className="w-3 h-3" />
+            <span>Battle</span>
+          </button>
+        </div>
       </div>
     </motion.div>
   );
@@ -263,6 +283,31 @@ function QuestionCard({ q, index }: { q: PyqQuestion; index: number }) {
           <span>{q.review_reason || 'Question flagged for manual review'}</span>
         </div>
       )}
+
+      {/* Action Footer: Solve in Battle */}
+      <div className="mt-4 pt-3 border-t border-border flex items-center justify-between flex-wrap gap-2">
+        <span className="text-[11px] text-stone-400 truncate max-w-[280px]">
+          {q.source_reference}
+        </span>
+        <button
+          onClick={() => {
+            const params = new URLSearchParams({
+              exam: 'JEE_MAINS',
+              source: 'pyq',
+              subject: q.subject,
+              shift: q.shift,
+              date: q.exam_date_str,
+              mode: 'quick_battle',
+              questions: '10',
+            });
+            window.location.href = `/exam/session?${params.toString()}`;
+          }}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-gradient-brand hover:opacity-90 transition-opacity cursor-pointer shadow-xs"
+        >
+          <Zap className="w-3.5 h-3.5" />
+          <span>Solve in Battle</span>
+        </button>
+      </div>
     </motion.div>
   );
 }
@@ -575,6 +620,42 @@ export default function JeeMainPyqExplorer() {
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
+
+            {/* Battle Mode Launcher Banner */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 rounded-2xl bg-gradient-to-r from-brand-500/10 via-purple-500/10 to-blue-500/10 border border-brand-500/25">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-brand text-white flex items-center justify-center shrink-0 shadow-md">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">
+                    Battle Mode — Solve with Real Exam Timer
+                  </h4>
+                  <p className="text-xs text-stone-500 dark:text-stone-400">
+                    Solve {activeTab === 'all' ? 'JEE Main 2025' : activeTab} PYQs under battle pressure with immediate scoring.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  const params = new URLSearchParams({
+                    exam: 'JEE_MAINS',
+                    source: 'pyq',
+                    mode: 'quick_battle',
+                    questions: '10',
+                    duration: '1800',
+                  });
+                  if (activeTab !== 'all') params.set('subject', activeTab);
+                  if (selectedDate !== 'All') params.set('date', selectedDate);
+                  if (selectedShift !== 'All') params.set('shift', selectedShift);
+                  window.location.href = `/exam/session?${params.toString()}`;
+                }}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-brand hover:opacity-90 transition-all shadow-md shadow-brand-500/25 cursor-pointer shrink-0"
+              >
+                <Zap className="w-4 h-4" />
+                <span>Launch PYQ Battle</span>
+              </button>
+            </div>
 
             {/* Questions list */}
             {questionsLoading ? (

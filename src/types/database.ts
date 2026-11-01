@@ -105,6 +105,7 @@ export interface Question {
   // For objective questions
   options?: QuestionOption[];
   correct_answer?: string | string[];
+  diagram_url?: string;
   // Metadata
   year?: string;
   source?: string;

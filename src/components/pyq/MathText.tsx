@@ -1,28 +1,19 @@
 'use client';
 
 /**
- * MathText — KaTeX-powered math renderer for PYQ questions.
- *
- * The PDF extractor produces text that mixes plain prose with:
- *   • Raw LaTeX commands:  \mu  \varepsilon  \int  \times
- *   • Fragmented fractions: numerator on one line, denominator on the next
- *   • Stray parentheses and equals signs from formula layout
- *
- * This component:
- *   1. Normalises the raw text into clean LaTeX where possible
- *   2. Splits the string into prose segments and math segments
- *   3. Renders math segments with KaTeX inline and falls back to plain text
+ * MathText — KaTeX-powered math and aligned prose renderer.
+ * Supports:
+ *   - Inline math: $ ... $
+ *   - Block/Display math: $$ ... $$
+ *   - Automatic unbreaking of arbitrary newlines in prose paragraphs
+ *   - Safe KaTeX rendering with graceful fallback
  */
 
 import React, { useMemo } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Step 1 — Text normalisation
-// ─────────────────────────────────────────────────────────────────────────────
-
-/** Known single-symbol LaTeX → Unicode substitutions for inline prose */
+// Single-symbol LaTeX replacements for prose outside $...$
 const INLINE_REPLACEMENTS: [RegExp, string][] = [
   [/\\mu\b/g, 'μ'],
   [/\\varepsilon\b/g, 'ε'],
@@ -58,175 +49,147 @@ const INLINE_REPLACEMENTS: [RegExp, string][] = [
   [/\\prod\b/g, 'Π'],
 ];
 
-/**
- * Heuristic: detect lines that look like they are part of a fraction layout —
- * a short number / expression on one line, then another short expression below.
- * Convert    "a\nb"   →   "$\frac{a}{b}$"   when both parts are math-like.
- */
-function reconstructFractions(text: string): string {
-  // Pattern: line1 (short, math-like) \n line2 (short, math-like) near operators
-  // We look for lines that are ONLY a number or simple expression (≤ 8 chars)
-  const lines = text.split('\n');
-  const result: string[] = [];
-  let i = 0;
-  while (i < lines.length) {
-    const cur = lines[i].trim();
-    const next = lines[i + 1]?.trim() ?? '';
-
-    const isMathLike = (s: string) =>
-      s.length > 0 &&
-      s.length <= 12 &&
-      /^[\d\w\s\+\-\*\/\^\(\)\[\]\\,\.\|]+$/.test(s) &&
-      /\d/.test(s);
-
-    // Heuristic: both lines are short and math-like → treat as fraction
-    if (isMathLike(cur) && isMathLike(next)) {
-      result.push(`$\\frac{${cur}}{${next}}$`);
-      i += 2;
-    } else {
-      result.push(lines[i]);
-      i++;
-    }
-  }
-  return result.join('\n');
-}
-
-/**
- * Wraps isolated LaTeX command sequences in $...$ so KaTeX can render them.
- * Skips sequences that are already inside $...$.
- */
-function wrapLatexCommands(text: string): string {
-  // Match \command optionally followed by {...} that are NOT already inside $ $
+function wrapBareLatexCommands(text: string): string {
+  // Wrap bare LaTeX commands like \frac{a}{b} that aren't inside $...$
   return text.replace(
-    /(?<!\$)(\\(?:frac|sqrt|int|sum|prod|lim|log|ln|sin|cos|tan|vec|hat|bar|dot|ddot|overline|underline|mathbf|mathrm|left|right|binom|begin|end)\s*(?:\{[^}]*\})*(?:\{[^}]*\})?)/g,
-    (match) => `$${match.trim()}$`
+    /(?<!\$)(?<!\\)(\\(?:frac|sqrt|int|sum|prod|lim|log|ln|sin|cos|tan|vec|hat|bar|dot|ddot|overline|underline|mathbf|mathrm|left|right|binom)\s*(?:\{[^}]*\})+(?:\{[^}]*\})?)(?!\$)/g,
+    '$$$1$$'
   );
 }
 
-/**
- * Master normaliser — runs all heuristics in order.
- */
-function normalise(raw: string): string {
-  let s = raw;
+function flowParagraphLines(text: string): string {
+  if (!text) return '';
+  // Split into paragraphs by double newlines
+  const paragraphs = text.split(/\n\s*\n/);
+  const unwrappedParas = paragraphs.map((para) => {
+    const lines = para.split('\n').map((l) => l.trim()).filter(Boolean);
+    if (lines.length <= 1) return para.trim();
 
-  // 1. Collapse 3+ blank lines
-  s = s.replace(/\n{3,}/g, '\n\n');
+    // If paragraph contains lists like (i), (1), •, 1., preserve them on new lines
+    const result: string[] = [];
+    for (const line of lines) {
+      const isList = /^(?:\([0-9a-zA-ZivxLCDM]+\)|[0-9a-zA-ZivxLCDM]+\.|\-|\*|\•)\s+/.test(line);
+      if (isList) {
+        result.push('\n' + line);
+      } else if (result.length > 0 && !result[result.length - 1].endsWith('\n')) {
+        result[result.length - 1] += ' ' + line;
+      } else {
+        result.push(line);
+      }
+    }
+    return result.join(' ').replace(/[ \t]+/g, ' ').trim();
+  });
 
-  // 2. Reconstruct fragmented fractions
-  s = reconstructFractions(s);
-
-  // 3. Wrap isolated LaTeX commands
-  s = wrapLatexCommands(s);
-
-  return s.trim();
+  return unwrappedParas.join('\n\n');
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Step 2 — Segment splitting  (prose vs. inline math)
-// ─────────────────────────────────────────────────────────────────────────────
-
-type Segment = { type: 'text'; content: string } | { type: 'math'; content: string };
+type Segment =
+  | { type: 'text'; content: string }
+  | { type: 'math'; content: string; display: boolean };
 
 function splitSegments(text: string): Segment[] {
   const segments: Segment[] = [];
-  // Match $...$ (not $$) — inline math
-  const pattern = /\$([^$]+)\$/g;
-  let last = 0;
-  let m: RegExpExecArray | null;
+  // Match $$...$$ (display math) or $...$ (inline math)
+  const regex = /(\$\$[\s\S]+?\$\$|\$[^\$\n]+?\$)/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
 
-  while ((m = pattern.exec(text)) !== null) {
-    if (m.index > last) {
-      segments.push({ type: 'text', content: text.slice(last, m.index) });
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      segments.push({
+        type: 'text',
+        content: text.slice(lastIndex, match.index),
+      });
     }
-    segments.push({ type: 'math', content: m[1] });
-    last = m.index + m[0].length;
+
+    const raw = match[0];
+    if (raw.startsWith('$$') && raw.endsWith('$$')) {
+      segments.push({
+        type: 'math',
+        content: raw.slice(2, -2).trim(),
+        display: true,
+      });
+    } else {
+      segments.push({
+        type: 'math',
+        content: raw.slice(1, -1).trim(),
+        display: false,
+      });
+    }
+    lastIndex = match.index + raw.length;
   }
-  if (last < text.length) {
-    segments.push({ type: 'text', content: text.slice(last) });
+
+  if (lastIndex < text.length) {
+    segments.push({
+      type: 'text',
+      content: text.slice(lastIndex),
+    });
   }
+
   return segments;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Step 3 — Render a single math segment with KaTeX
-// ─────────────────────────────────────────────────────────────────────────────
-
-function KatexInline({ latex }: { latex: string }) {
+function KatexSegment({ latex, display }: { latex: string; display: boolean }) {
   const html = useMemo(() => {
     try {
       return katex.renderToString(latex, {
         throwOnError: false,
         output: 'html',
-        displayMode: false,
+        displayMode: display,
         strict: false,
         trust: false,
       });
     } catch {
       return null;
     }
-  }, [latex]);
+  }, [latex, display]);
 
   if (!html) {
-    // Fallback: show raw latex in a code-style span
-    return <code className="text-xs font-mono text-purple-700 dark:text-purple-300">{latex}</code>;
+    return <code className="text-xs font-mono text-purple-600 dark:text-purple-300 font-bold">{latex}</code>;
   }
 
   return (
     <span
-      className="katex-inline align-middle"
-      // KaTeX HTML is safe — it is generated server-side from our own data
+      className={display ? 'block my-2 text-center overflow-x-auto py-1' : 'katex-inline align-baseline mx-0.5'}
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Step 4 — Render a prose segment (apply inline symbol substitutions)
-// ─────────────────────────────────────────────────────────────────────────────
-
-function renderProseSegment(raw: string): string {
-  let s = raw;
+function ProseSegment({ text }: { text: string }) {
+  let s = text;
   for (const [pattern, replacement] of INLINE_REPLACEMENTS) {
     s = s.replace(pattern, replacement);
   }
-  return s;
+  return <>{s}</>;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Public component
-// ─────────────────────────────────────────────────────────────────────────────
-
 interface MathTextProps {
-  text: string;
-  /** Tailwind className applied to the outer <span> */
+  text?: string | null;
   className?: string;
-  /** When true the text is rendered block-level (whitespace-pre-line) */
   block?: boolean;
 }
 
 export function MathText({ text, className, block = false }: MathTextProps) {
   const segments = useMemo(() => {
-    const normalised = normalise(text);
-    return splitSegments(normalised);
+    if (!text) return [];
+    const unwrapped = flowParagraphLines(text);
+    const withCommands = wrapBareLatexCommands(unwrapped);
+    return splitSegments(withCommands);
   }, [text]);
 
-  const Tag = block ? 'p' : 'span';
+  if (!text) return null;
+
+  const Tag = block ? 'div' : 'span';
 
   return (
-    <Tag
-      className={className}
-      style={block ? { whiteSpace: 'pre-line' } : undefined}
-    >
+    <Tag className={className} style={block ? { whiteSpace: 'pre-line' } : undefined}>
       {segments.map((seg, i) => {
         if (seg.type === 'math') {
-          return <KatexInline key={i} latex={seg.content} />;
+          return <KatexSegment key={i} latex={seg.content} display={seg.display} />;
         }
-        return (
-          <React.Fragment key={i}>
-            {renderProseSegment(seg.content)}
-          </React.Fragment>
-        );
+        return <ProseSegment key={i} text={seg.content} />;
       })}
     </Tag>
   );

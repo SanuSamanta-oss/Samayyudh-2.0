@@ -83,22 +83,33 @@ export function AnswerEditor({
             ))}
           </div>
         ) : (
-          <textarea
-            ref={textareaRef}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            disabled={disabled}
-            placeholder={placeholder}
-            className={cn(
-              'w-full min-h-[240px] p-4 md:p-5 rounded-xl border border-border bg-card',
-              'text-base leading-relaxed resize-none',
-              'focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400',
-              'transition-all duration-200',
-              'placeholder:text-stone-400',
-              disabled && 'opacity-60 cursor-not-allowed bg-stone-50',
-            )}
-            aria-label="Answer editor"
-          />
+          <div className="p-6 rounded-2xl border-2 border-stone-200 dark:border-[#2A3F68] bg-white dark:bg-[#18253E] space-y-4 shadow-xs">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <span className="text-sm font-bold text-stone-900 dark:text-white">
+                Enter Numerical Answer (Integer or Decimal)
+              </span>
+              <span className="text-xs font-semibold text-stone-500 dark:text-stone-400">
+                Round off to nearest integer / decimal
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="text"
+                inputMode="decimal"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                disabled={disabled}
+                placeholder="e.g. 10 or 2.5"
+                className={cn(
+                  'w-full max-w-sm px-5 py-4 rounded-xl border-2 border-stone-300 dark:border-[#2D436D] bg-stone-50 dark:bg-[#111A2E]',
+                  'text-2xl font-mono font-bold text-stone-900 dark:text-white',
+                  'focus:outline-none focus:border-purple-500 dark:focus:border-purple-400 transition-colors',
+                  disabled && 'opacity-60 cursor-not-allowed'
+                )}
+                aria-label="Numerical answer input"
+              />
+            </div>
+          </div>
         )}
       </div>
 

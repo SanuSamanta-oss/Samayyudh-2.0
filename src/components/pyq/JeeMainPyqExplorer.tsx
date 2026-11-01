@@ -274,11 +274,51 @@ function QuestionCard({ q, index }: { q: PyqQuestion; index: number }) {
         </div>
       )}
 
+      {/* Numerical Type Box & Interactive Answer Tab (Last 5 Questions) */}
       {q.question_type === 'Numerical Value' && (
-        <div className="p-4 sm:p-5 rounded-2xl border-2 border-dashed border-stone-300 dark:border-[#2A3F68] bg-stone-50/70 dark:bg-[#18253E]/60">
-          <p className="text-sm font-semibold text-stone-700 dark:text-stone-200">
-            Numerical Value Type — Enter the exact integer or decimal value
-          </p>
+        <div className="p-5 sm:p-6 rounded-2xl border-2 border-purple-300 dark:border-purple-800/80 bg-purple-50/50 dark:bg-[#162036] space-y-3.5 shadow-xs">
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm font-extrabold text-purple-900 dark:text-purple-200">
+                Section B — Numerical Value Answer
+              </span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-200 dark:bg-purple-900 text-purple-900 dark:text-purple-100">
+                No Options (Direct Value)
+              </span>
+            </div>
+            <span className="text-xs font-semibold text-stone-500 dark:text-stone-400">
+              Round off to nearest integer / decimal
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="relative flex-1 max-w-sm">
+              <input
+                type="text"
+                inputMode="decimal"
+                placeholder="Type numerical answer..."
+                className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 dark:border-[#2A3F68] bg-white dark:bg-[#111A2E] text-stone-900 dark:text-white font-mono text-lg sm:text-xl font-bold focus:outline-none focus:border-purple-500 dark:focus:border-purple-400 transition-colors"
+              />
+            </div>
+            <button
+              onClick={() => {
+                const params = new URLSearchParams({
+                  exam: 'JEE_MAINS',
+                  source: 'pyq',
+                  subject: q.subject,
+                  shift: q.shift,
+                  date: q.exam_date_str,
+                  mode: 'quick_battle',
+                  questions: '10',
+                });
+                window.location.href = `/exam/session?${params.toString()}`;
+              }}
+              className="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold text-white bg-purple-600 hover:bg-purple-700 shadow-sm cursor-pointer transition-colors flex items-center justify-center gap-1.5"
+            >
+              <Zap className="w-4 h-4" />
+              <span>Solve in Battle</span>
+            </button>
+          </div>
         </div>
       )}
 

@@ -173,8 +173,8 @@ export function ChapterWorkspace({
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-none text-sm">
           {[
             { id: 'all', label: `All Questions (${questions.length})` },
-            { id: 'mcq', label: 'Section A (MCQ)' },
-            { id: 'numerical', label: 'Section B (Numerical)' },
+            { id: 'mcq', label: 'Section A — MCQs (Q1–20)' },
+            { id: 'numerical', label: 'Section B — Numerical (Q21–25)' },
           ].map((f) => (
             <button
               key={f.id}
@@ -263,19 +263,25 @@ export function ChapterWorkspace({
             </button>
           </div>
 
-          {/* Quick Question Navigation Tabs */}
+          {/* Quick Question Navigation Tabs (Slide) */}
           <div className="p-4 rounded-2xl border-2 border-stone-200 dark:border-[#243556] bg-white dark:bg-[#111A2E] space-y-2.5 shadow-xs dark:shadow-md">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-stone-500 dark:text-stone-300">
-                Question Quick Tabs
-              </span>
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-extrabold uppercase tracking-wider text-stone-500 dark:text-stone-300">
+                  Question Number Slide
+                </span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-950/80 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                  Section A: Q1–20 | Section B: Q21–25
+                </span>
+              </div>
               <span className="text-xs font-bold text-purple-600 dark:text-purple-300">
-                Click any tab to jump
+                Click any number to jump
               </span>
             </div>
             <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
               {filteredQuestions.map((q) => {
                 const isSelected = selectedQuestionId === q.id;
+                const isSectionB = q.question_number >= 21 || q.section === 'Section B';
                 return (
                   <button
                     key={q.id}
@@ -284,14 +290,25 @@ export function ChapterWorkspace({
                       const el = document.getElementById(`pyq-${q.id}`);
                       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }}
+                    title={isSectionB ? `Section B: Numerical Value Q${q.question_number}` : `Section A: MCQ Q${q.question_number}`}
                     className={cn(
-                      'px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all shrink-0 cursor-pointer',
+                      'px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all shrink-0 cursor-pointer flex items-center gap-1',
                       isSelected
                         ? 'bg-purple-600 text-white shadow-sm dark:shadow-[0_0_12px_rgba(168,85,247,0.5)] scale-105'
-                        : 'bg-stone-100 hover:bg-purple-50 text-stone-800 dark:bg-[#18253E] dark:hover:bg-[#203152] dark:text-stone-200 border border-stone-200 dark:border-[#2A3F68]'
+                        : isSectionB
+                          ? 'bg-purple-50 text-purple-900 dark:bg-[#201D3D] dark:text-purple-200 border-2 border-purple-300 dark:border-purple-600/80 hover:bg-purple-100 dark:hover:bg-[#292452]'
+                          : 'bg-stone-100 hover:bg-purple-50 text-stone-800 dark:bg-[#18253E] dark:hover:bg-[#203152] dark:text-stone-200 border border-stone-200 dark:border-[#2A3F68]'
                     )}
                   >
-                    Q{q.question_number}
+                    <span>Q{q.question_number}</span>
+                    {isSectionB && (
+                      <span className={cn(
+                        'text-[9px] px-1 py-0.2 rounded font-black',
+                        isSelected ? 'bg-white/20 text-white' : 'bg-purple-200 text-purple-900 dark:bg-purple-800 dark:text-purple-100'
+                      )}>
+                        NUM
+                      </span>
+                    )}
                   </button>
                 );
               })}
@@ -391,12 +408,51 @@ export function ChapterWorkspace({
                   </div>
                 )}
 
-                {/* Numerical Type Box */}
+                {/* Numerical Type Box & Interactive Answer Tab (Last 5 Questions) */}
                 {q.question_type === 'Numerical Value' && (
-                  <div className="p-4 sm:p-5 rounded-2xl border-2 border-dashed border-stone-300 dark:border-[#2A3F68] bg-stone-50/70 dark:bg-[#18253E]/60">
-                    <p className="text-sm font-semibold text-stone-700 dark:text-stone-200">
-                      Numerical Value Type — Enter the exact integer or decimal value
-                    </p>
+                  <div className="p-5 sm:p-6 rounded-2xl border-2 border-purple-300 dark:border-purple-800/80 bg-purple-50/50 dark:bg-[#162036] space-y-3.5 shadow-xs">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs sm:text-sm font-extrabold text-purple-900 dark:text-purple-200">
+                          Section B — Numerical Value Answer
+                        </span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-200 dark:bg-purple-900 text-purple-900 dark:text-purple-100">
+                          No Options (Direct Value)
+                        </span>
+                      </div>
+                      <span className="text-xs font-semibold text-stone-500 dark:text-stone-400">
+                        Round off to nearest integer / decimal
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                      <div className="relative flex-1 max-w-sm">
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          placeholder="Type numerical answer..."
+                          className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 dark:border-[#2A3F68] bg-white dark:bg-[#111A2E] text-stone-900 dark:text-white font-mono text-lg sm:text-xl font-bold focus:outline-none focus:border-purple-500 dark:focus:border-purple-400 transition-colors"
+                        />
+                      </div>
+                      <button
+                        onClick={() => {
+                          const params = new URLSearchParams({
+                            exam: 'JEE_MAINS',
+                            source: 'pyq',
+                            subject: q.subject,
+                            shift: q.shift,
+                            date: q.exam_date_str,
+                            mode: 'quick_battle',
+                            questions: '10',
+                          });
+                          window.location.href = `/exam/session?${params.toString()}`;
+                        }}
+                        className="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold text-white bg-purple-600 hover:bg-purple-700 shadow-sm cursor-pointer transition-colors flex items-center justify-center gap-1.5"
+                      >
+                        <Zap className="w-4 h-4" />
+                        <span>Solve in Battle</span>
+                      </button>
+                    </div>
                   </div>
                 )}
 

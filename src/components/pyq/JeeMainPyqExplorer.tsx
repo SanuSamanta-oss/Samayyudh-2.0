@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { PyqExamPaper, PyqQuestion, PyqStats, PyqSubject, PyqSection, PyqQuestionType } from '@/lib/pyq/types';
+import { MathText } from '@/components/pyq/MathText';
 
 // ──────────────────────────────────────────────────────────────
 // Types
@@ -16,21 +17,6 @@ import type { PyqExamPaper, PyqQuestion, PyqStats, PyqSubject, PyqSection, PyqQu
 
 type ActiveTab = 'all' | 'Physics' | 'Chemistry' | 'Mathematics';
 type BrowseView = 'overview' | 'questions';
-
-// ──────────────────────────────────────────────────────────────
-// Helpers
-// ──────────────────────────────────────────────────────────────
-
-function renderMath(text: string): string {
-  return text
-    .replace(/\\mu/g, 'μ')
-    .replace(/\\varepsilon/g, 'ε')
-    .replace(/\\implies/g, '⟹')
-    .replace(/\\int/g, '∫')
-    .replace(/\\times/g, '×')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
-}
 
 // ──────────────────────────────────────────────────────────────
 // SubjectTabBar
@@ -217,9 +203,11 @@ function QuestionCard({ q, index }: { q: PyqQuestion; index: number }) {
       </div>
 
       {/* Question text */}
-      <p className="text-sm text-foreground leading-relaxed whitespace-pre-line font-normal">
-        {renderMath(q.question_statement)}
-      </p>
+      <MathText
+        text={q.question_statement}
+        block
+        className="text-sm text-foreground leading-relaxed font-normal"
+      />
 
       {/* Diagram toggle */}
       {q.diagram_url && (
@@ -253,7 +241,10 @@ function QuestionCard({ q, index }: { q: PyqQuestion; index: number }) {
               className="flex items-start gap-2 px-3 py-2 rounded-lg border border-border bg-stone-50 dark:bg-stone-900/60"
             >
               <span className="text-xs font-bold text-brand-600 shrink-0 mt-0.5">({opt.key})</span>
-              <span className="text-xs text-foreground whitespace-pre-line">{renderMath(opt.text)}</span>
+              <MathText
+                text={opt.text}
+                className="text-xs text-foreground"
+              />
             </div>
           ))}
         </div>
@@ -633,3 +624,4 @@ export default function JeeMainPyqExplorer() {
     </div>
   );
 }
+

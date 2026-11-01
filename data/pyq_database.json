@@ -204,7 +204,7 @@
         },
         {
           "key": "4",
-          "text": "$\\frac{\\varepsilon_0 A}{d} \\frac{K_1 K_2 K_3}{K_1 + K_2 + K_3}$"
+          "text": "$\\frac{\\varepsilon_0 A}{d} \\left( \\frac{K_1 K_2 K_3}{K_1 + K_2 + K_3} \\right)$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift1_physics_q3.png",
@@ -1000,7 +1000,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}ompare crystal field splitting energy(\\Delta ) for given complexes 2 3 4 K [Fe(^\\circ\\text{C}N) ] \n(ii)   4 6 + ^\\circ\\text{C}u(NH ) (i) s Fe(en) ^\\circ\\text{C}l 3 3 K Fe(S^\\circ\\text{C}N) \n(iv)   4 6 (iii)  ",
+      "question_statement": "^\\circ\\text{C}ompare crystal field splitting energy(\\Delta ) for given complexes 2 3 4 K [Fe(^\\circ\\text{C}N) ] \n(ii) [ ] 4 6 + ^\\circ\\text{C}u(NH ) (i) s Fe(en) ^\\circ\\text{C}l 3 3 K Fe(S^\\circ\\text{C}N) \n(iv) [ ] 4 6 (iii) [ ]",
       "options": [
         {
           "key": "1",
@@ -1360,19 +1360,19 @@
       "options": [
         {
           "key": "1",
-          "text": "$w = 0, \\Delta E = q  0$"
+          "text": "$w = 0, \\Delta E = q \\neq 0$"
         },
         {
           "key": "2",
-          "text": "$\\Delta E = w  0, q = 0$"
+          "text": "$\\Delta E = w \\neq 0, q = 0$"
         },
         {
           "key": "3",
-          "text": "$\\Delta E = w = 0, q  0$"
+          "text": "$\\Delta E = w = 0, q \\neq 0$"
         },
         {
           "key": "4",
-          "text": "$\\Delta E = 0, w = q  0$"
+          "text": "$\\Delta E = 0, w = q \\neq 0$"
         }
       ],
       "diagram_url": null,
@@ -1888,7 +1888,7 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "If A = {1, 2, 3, …., 10}. , , and and gcd of ( , ) 1}. m B m n A m n m n n  = ∈ < =  Then number of elements in set B is",
+      "question_statement": "If A = {1, 2, 3, …., 10}. , , and and gcd of ( , ) 1}. m B m n A m n m n n { = ∈ < = Then number of elements in set B is",
       "options": [
         {
           "key": "1",
@@ -2005,7 +2005,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Let ( ) 3 (3 ) (0,3) 3 x g x f f x x   = + ∀∈     and ( ) 0 (0,3) f x x ′′ > ∀∈ then g(x) decreases in interval (0, α), then α is 4",
+      "question_statement": "Let ( ) 3 (3 ) (0,3) 3 x g x f f x x ( ) = + ∀∈ and ( ) 0 (0,3) f x x ′′ > ∀∈ then g(x) decreases in interval (0, α), then α is 4",
       "options": [
         {
           "key": "1",
@@ -3814,7 +3814,7 @@
       "question_number": 1,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "If 2x2 + (cos\\theta)x - 1 = 0, \\theta [0, 2\\pi] has roots \\alpha and \\beta. Then the sum of maximum and minimum value of \\alpha4 + \\beta4. 16 25",
+      "question_statement": "If 2x2 + (cos\\theta)x - 1 = 0, \\theta\\in [0, 2\\pi] has roots \\alpha and \\beta. Then the sum of maximum and minimum value of \\alpha4 + \\beta4. 16 25",
       "options": [
         {
           "key": "1",
@@ -3849,7 +3849,7 @@
       "question_number": 2,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "If \\theta  [0, 2\\pi] satisfying the system of equations 2sin2\\theta = cos2\\theta and 2cos2\\theta = 3sin\\theta. Then the sum of all real values of \\theta is 2 \\pi 3",
+      "question_statement": "If \\theta \\in [0, 2\\pi] satisfying the system of equations 2sin2\\theta = cos2\\theta and 2cos2\\theta = 3sin\\theta. Then the sum of all real values of \\theta is 2 \\pi 3",
       "options": [
         {
           "key": "2",
@@ -4028,11 +4028,11 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Let A and B are two events such that 10  = P A B and P(A/B) and P(B/A) are the 1 ( ) roots of the equation 12x2 - 7x + 1 = 0, then  ( ) ( ) P A B  is equal to P A B 9 4 9 4",
+      "question_statement": "Let A and B are two events such that 10 \\cap = P A B and P(A/B) and P(B/A) are the 1 ( ) roots of the equation 12x2 - 7x + 1 = 0, then \\cap ( ) ( ) P A B \\cup is equal to P A B 9 4 9 4",
       "options": [
         {
           "key": "2",
-          "text": "2 3"
+          "text": "3"
         }
       ],
       "diagram_url": null,
@@ -4113,7 +4113,7 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In the expansion of , where \\alpha, \\beta, \\gamma and  are the coefficient of x, $x_3$, $x_5$ and $x_7$ respectively. If \\alphau - \\betav = 18, \\gammau + v = 20 then u + v equal to. -13 15 15 -14",
+      "question_statement": "In the expansion of , where \\alpha, \\beta, \\gamma and \\delta are the coefficient of x, $x_3$, $x_5$ and $x_7$ respectively. If \\alphau - \\betav = 18, \\gammau + \\deltav = 20 then u + v equal to. -13 15 15 -14",
       "options": [
         {
           "key": "2",
@@ -4167,7 +4167,7 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "If z be a complex number such that |z - 3|  1, then the equation of line with largest slope passing through origin and z x y + = x y",
+      "question_statement": "If z be a complex number such that |z - 3| \\leq 1, then the equation of line with largest slope passing through origin and z x y + = x y",
       "options": [
         {
           "key": "1",
@@ -4623,7 +4623,7 @@
       "question_number": 5,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Two charges +$7^\\circ\\text{C}$ and $-4^\\circ\\text{C}$ are located at (-7, 0, 0) and (7, 0, 0), find electrostatic potential energy of the ( ) \\pi ( ) = = \\times ( ) 4 k 1 9 10 SI units 9 system. 0",
+      "question_statement": "Two charges +$7^\\circ\\text{C}$ and $-4^\\circ\\text{C}$ are located at (-7, 0, 0) and (7, 0, 0), find electrostatic potential energy of the ( ) \\pi\\in ( ) = = \\times ( ) 4 k 1 9 10 SI units 9 system. 0",
       "options": [
         {
           "key": "1",
@@ -4845,23 +4845,23 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A moving coil galvanometer with coil resistance G = 30 , shows full scale deflection when the current through it is 20 mA. The galvanometer is converted to an ammeter of range 3 A by using a shunt resistance S, then resistance S is",
+      "question_statement": "A moving coil galvanometer with coil resistance G = 30 \\Omega, shows full scale deflection when the current through it is 20 mA. The galvanometer is converted to an ammeter of range 3 A by using a shunt resistance S, then resistance S is",
       "options": [
         {
           "key": "1",
-          "text": "0.2 "
+          "text": "0.2 \\Omega"
         },
         {
           "key": "2",
-          "text": ""
+          "text": "\\Omega"
         },
         {
           "key": "3",
-          "text": "0.8 "
+          "text": "0.8 \\Omega"
         },
         {
           "key": "4",
-          "text": ""
+          "text": "\\Omega"
         }
       ],
       "diagram_url": null,
@@ -5605,11 +5605,11 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following reaction 2 2 2 1 X Y(s) X (g) Y (g) 2    . If \\alpha is the degree of dissociation. ^\\circ\\text{C}alculate KP in terms of P (total pressure) 3/2 3/2 P 3/2 2P K 2P K 3  3  (2)",
+      "question_statement": "^\\circ\\text{C}onsider the following reaction 2 2 2 1 X Y(s) X (g) Y (g) 2 +   . If \\alpha is the degree of dissociation. ^\\circ\\text{C}alculate KP in terms of P (total pressure) 3/2 3/2 P 3/2 2P K 2P K 3 = 3 = (2)",
       "options": [
         {
           "key": "1",
-          "text": "P 2P K 3  2P K 3 "
+          "text": "P 2P K 3 = 2P K 3 ="
         },
         {
           "key": "3",
@@ -5640,7 +5640,7 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "An ideal gas undergoes following process from A  B  ^\\circ\\text{C}  D  E. Find work done.",
+      "question_statement": "An ideal gas undergoes following process from A \\rightarrow B \\rightarrow ^\\circ\\text{C} \\rightarrow D \\rightarrow E. Find work done.",
       "options": [
         {
           "key": "1",
@@ -5718,7 +5718,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following E^\\circ values of given half cell 2 Ag /Ag Zn /Zn E 0.8 V, E 0.76 V       2 $2^\\circ\\text{C}$u /^\\circ\\text{C}u Mg /Mg E 0.34 V, E 2.36 V       Then which of the following will have the most negative value of \\Delta G^\\circ?",
+      "question_statement": "^\\circ\\text{C}onsider the following E^\\circ values of given half cell 2 Ag /Ag Zn /Zn E 0.8 V, E 0.76 V + + ^\\circ ^\\circ = =- 2 $2^\\circ\\text{C}$u /^\\circ\\text{C}u Mg /Mg E 0.34 V, E 2.36 V + + ^\\circ ^\\circ = =- Then which of the following will have the most negative value of \\Delta G^\\circ?",
       "options": [
         {
           "key": "1",
@@ -6150,7 +6150,7 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Let 1,1 2 M       be the mid-point of a chord to the 2 2 1, 2 4 x y + = then the length of chord is Ellipse",
+      "question_statement": "Let 1,1 2 M ( ) be the mid-point of a chord to the 2 2 1, 2 4 x y + = then the length of chord is Ellipse",
       "options": [
         {
           "key": "1",
@@ -6267,7 +6267,7 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Evaluate x 7 2   +     +   + 7 2 3 5 (3 1) lim x x x ( ) x x 3 5 2 3 2 x x x →∞ 3 e",
+      "question_statement": "Evaluate x 7 2 ( ) + + + 7 2 3 5 (3 1) lim x x x ( ) x x 3 5 2 3 2 x x x →∞ 3 e",
       "options": [
         {
           "key": "1",
@@ -6368,7 +6368,7 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "If 0 0 4 0 2 1             = = =                   A A A . Then a23 1 0 , 1 1 , 1 0 0 1 3 0 2 0",
+      "question_statement": "If 0 0 4 0 2 1 [] [] [] [] [] [] = = = ] ] ] ] ] ] A A A . Then a23 1 0 , 1 1 , 1 0 0 1 3 0 2 0",
       "options": null,
       "diagram_url": null,
       "review_required": true,
@@ -6412,7 +6412,7 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Let f(x) = 6 + 16cos cos cos 3 3 x x x π π     +         sin3x",
+      "question_statement": "Let f(x) = 6 + 16cos cos cos 3 3 x x x π π ( ) ( ) + sin3x",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -6478,7 +6478,7 @@
       "question_number": 25,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Let 3 sin ( ) = + ∫x xdx g x ^\\circ\\text{C} , where g(0) = 0. If 3 2 8 2 2   π π     ′ + = απ + βπ + γ             g g , where α, β and γ are integers, then the value of α + β + γ is",
+      "question_statement": "Let 3 sin ( ) = + ∫x xdx g x ^\\circ\\text{C} , where g(0) = 0. If 3 2 8 2 2 ( ) π π ( ) ( ) ′ + = απ + βπ + γ g g , where α, β and γ are integers, then the value of α + β + γ is",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -6866,7 +6866,7 @@
       "options": [
         {
           "key": "2",
-          "text": "3 2"
+          "text": "2"
         }
       ],
       "diagram_url": null,
@@ -7174,7 +7174,7 @@
       "question_number": 23,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "A wire of resistance 9  is bent in form of an equilateral \ntriangle. Find equivalent resistance between two vertices of triangle.",
+      "question_statement": "A wire of resistance 9 \\Omega is bent in form of an equilateral \ntriangle. Find equivalent resistance between two vertices of triangle.",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -8214,7 +8214,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "If   + =   +   + 2 2 1 1 ; y(0) = 0, then y",
+      "question_statement": "If ( ) + = + + 2 2 1 1 ; y(0) = 0, then y",
       "options": [
         {
           "key": "1",
@@ -8696,7 +8696,7 @@
       "question_number": 24,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "If f(x) satisfies the functional equation +  =     ( ) 6 1 35 7 , 3 2 f x f x x { } ∈ -0 x R and if   +   α   0 1 lim ( ) x f x x exist finitely and is equal to β, then (α →",
+      "question_statement": "If f(x) satisfies the functional equation + ( )= ( ) 6 1 35 7 , 3 2 f x f x x { } ∈ -0 x R and if ( ) + α 0 1 lim ( ) x f x x exist finitely and is equal to β, then (α →",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -8740,7 +8740,7 @@
       "question_number": 1,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Electric flux  is related with linear charge density \\lambda and surface charge density \\sigma as  = \\alpha\\lambda + \\beta\\sigma where \\alpha ( ) \\alpha ( ) ( ) \\beta and \\beta are of appropriate dimensions of is",
+      "question_statement": "Electric flux \\phi is related with linear charge density \\lambda and surface charge density \\sigma as \\phi = \\alpha\\lambda + \\beta\\sigma where \\alpha ( ) \\alpha ( ) ( ) \\beta and \\beta are of appropriate dimensions of is",
       "options": [
         {
           "key": "1",
@@ -8927,7 +8927,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In given D^\\circ\\text{C} circuit, find current for R = 12  in steady state.",
+      "question_statement": "In given D^\\circ\\text{C} circuit, find current for R = 12 \\Omega in steady state.",
       "options": [
         {
           "key": "1",
@@ -9145,7 +9145,7 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "For the circuit shown below \n(A) ^\\circ\\text{C}urrent in ammeter is 2 A \n(B) Net resistance is 8  (^\\circ\\text{C}) Voltage across B^\\circ\\text{C} is 4 V \n(D) ^\\circ\\text{C}urrent through diode is 1 A ^\\circ\\text{C}hoose the correct option.",
+      "question_statement": "For the circuit shown below \n(A) ^\\circ\\text{C}urrent in ammeter is 2 A \n(B) Net resistance is 8 \\Omega (^\\circ\\text{C}) Voltage across B^\\circ\\text{C} is 4 V \n(D) ^\\circ\\text{C}urrent through diode is 1 A ^\\circ\\text{C}hoose the correct option.",
       "options": [
         {
           "key": "1",
@@ -10411,7 +10411,7 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Value of is ( ) [ ] [ ] ( )  \\pi [ ] x ( ) \\pi , 2 13 x 12 tan 1 +",
+      "question_statement": "Value of is ( ) [ ] [ ] ( ) \\in \\pi [ ] x ( ) \\pi , 2 13 x 12 tan 1 +",
       "options": [
         {
           "key": "1",
@@ -10602,11 +10602,11 @@
       "options": [
         {
           "key": "1",
-          "text": "(1, )"
+          "text": "(1, \\infty)"
         },
         {
           "key": "2",
-          "text": "(0, ) ( ) ( )  ( ) , 2 1"
+          "text": "(0, \\infty) ( ) ( ) \\infty ( ) , 2 1"
         },
         {
           "key": "4",
@@ -10861,7 +10861,7 @@
       "question_number": 21,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "If f(x) is continuous at x = 0, where + + +    0 2 1 2 ( )  x k x k x x sin( 1) sin( 1) =  =  f x ( ) 4 x k x 0 1 2 [ ]   + [ ]   [ ] + 2 log 0 1 x x k x 1 k k + is 2 2 1 2 Then",
+      "question_statement": "If f(x) is continuous at x = 0, where + + +    0 2 1 2 ( ) < x k x k x x sin( 1) sin( 1) =  =  f x ( ) 4 x k x 0 1 2 [ ]  > + [ ]   [ ] + 2 log 0 1 x x k x 1 k k + is 2 2 1 2 Then",
       "options": null,
       "diagram_url": null,
       "review_required": false,

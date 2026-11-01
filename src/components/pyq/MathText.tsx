@@ -1,27 +1,25 @@
 'use client';
 
 /**
- * MathText — KaTeX-powered math and aligned prose renderer.
- * Supports:
+ * MathText — KaTeX-powered math and aligned typography renderer.
+ * Safely renders:
  *   - Inline math: $ ... $
- *   - Block/Display math: $$ ... $$
- *   - Automatic unbreaking of arbitrary newlines in prose paragraphs
- *   - Safe KaTeX rendering with graceful fallback
+ *   - Display / Block math: $$ ... $$
+ *   - Bare LaTeX formulas (e.g. \frac{...}{...})
+ *   - Natural flowing prose paragraphs with preserved lists and line structures
  */
 
 import React, { useMemo } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
-// Single-symbol LaTeX replacements for prose outside $...$
-const INLINE_REPLACEMENTS: [RegExp, string][] = [
+// Replacements for standalone prose outside math delimiters
+const PROSE_REPLACEMENTS: [RegExp, string][] = [
   [/\\mu\b/g, 'μ'],
   [/\\varepsilon\b/g, 'ε'],
-  [/\\epsilon\b/g, 'ε'],
   [/\\implies\b/g, '⟹'],
   [/\\Rightarrow\b/g, '⇒'],
   [/\\rightarrow\b/g, '→'],
-  [/\\leftarrow\b/g, '←'],
   [/\\alpha\b/g, 'α'],
   [/\\beta\b/g, 'β'],
   [/\\gamma\b/g, 'γ'],
@@ -34,7 +32,6 @@ const INLINE_REPLACEMENTS: [RegExp, string][] = [
   [/\\omega\b/g, 'ω'],
   [/\\Omega\b/g, 'Ω'],
   [/\\phi\b/g, 'φ'],
-  [/\\psi\b/g, 'ψ'],
   [/\\infty\b/g, '∞'],
   [/\\pm\b/g, '±'],
   [/\\times\b/g, '×'],
@@ -45,27 +42,15 @@ const INLINE_REPLACEMENTS: [RegExp, string][] = [
   [/\\approx\b/g, '≈'],
   [/\\sqrt\b/g, '√'],
   [/\\int\b/g, '∫'],
-  [/\\sum\b/g, 'Σ'],
-  [/\\prod\b/g, 'Π'],
 ];
-
-function wrapBareLatexCommands(text: string): string {
-  // Wrap bare LaTeX commands like \frac{a}{b} that aren't inside $...$
-  return text.replace(
-    /(?<!\$)(?<!\\)(\\(?:frac|sqrt|int|sum|prod|lim|log|ln|sin|cos|tan|vec|hat|bar|dot|ddot|overline|underline|mathbf|mathrm|left|right|binom)\s*(?:\{[^}]*\})+(?:\{[^}]*\})?)(?!\$)/g,
-    '$$$1$$'
-  );
-}
 
 function flowParagraphLines(text: string): string {
   if (!text) return '';
-  // Split into paragraphs by double newlines
   const paragraphs = text.split(/\n\s*\n/);
   const unwrappedParas = paragraphs.map((para) => {
     const lines = para.split('\n').map((l) => l.trim()).filter(Boolean);
     if (lines.length <= 1) return para.trim();
 
-    // If paragraph contains lists like (i), (1), •, 1., preserve them on new lines
     const result: string[] = [];
     for (const line of lines) {
       const isList = /^(?:\([0-9a-zA-ZivxLCDM]+\)|[0-9a-zA-ZivxLCDM]+\.|\-|\*|\•)\s+/.test(line);
@@ -88,8 +73,30 @@ type Segment =
   | { type: 'math'; content: string; display: boolean };
 
 function splitSegments(text: string): Segment[] {
+  if (!text) return [];
+  const trimmed = text.trim();
+
+  // 1. Entire text is display math $$...$$
+  if (trimmed.startsWith('$$') && trimmed.endsWith('$$') && trimmed.length >= 4) {
+    return [{ type: 'math', content: trimmed.slice(2, -2).trim(), display: true }];
+  }
+  // 2. Entire text is inline math $...$
+  if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length >= 2) {
+    return [{ type: 'math', content: trimmed.slice(1, -1).trim(), display: false }];
+  }
+
+  // 3. Entire text is a bare LaTeX formula (common in math options)
+  if (/^\s*\\[a-zA-Z]+/.test(trimmed) && !trimmed.includes('\n\n')) {
+    try {
+      katex.renderToString(trimmed, { throwOnError: true });
+      return [{ type: 'math', content: trimmed, display: false }];
+    } catch {
+      // not a single formula, continue to segment splitting
+    }
+  }
+
+  // 4. Split mixed prose by $$...$$ and $...$
   const segments: Segment[] = [];
-  // Match $$...$$ (display math) or $...$ (inline math)
   const regex = /(\$\$[\s\S]+?\$\$|\$[^\$\n]+?\$)/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
@@ -159,7 +166,7 @@ function KatexSegment({ latex, display }: { latex: string; display: boolean }) {
 
 function ProseSegment({ text }: { text: string }) {
   let s = text;
-  for (const [pattern, replacement] of INLINE_REPLACEMENTS) {
+  for (const [pattern, replacement] of PROSE_REPLACEMENTS) {
     s = s.replace(pattern, replacement);
   }
   return <>{s}</>;
@@ -174,9 +181,8 @@ interface MathTextProps {
 export function MathText({ text, className, block = false }: MathTextProps) {
   const segments = useMemo(() => {
     if (!text) return [];
-    const unwrapped = flowParagraphLines(text);
-    const withCommands = wrapBareLatexCommands(unwrapped);
-    return splitSegments(withCommands);
+    const formatted = flowParagraphLines(text);
+    return splitSegments(formatted);
   }, [text]);
 
   if (!text) return null;

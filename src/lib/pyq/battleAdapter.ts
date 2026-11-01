@@ -43,3 +43,4 @@ export function pyqToBattleQuestion(q: PyqQuestion): Question {
 export function convertPyqListToBattle(questions: PyqQuestion[]): Question[] {
   return questions.map(pyqToBattleQuestion);
 }
+

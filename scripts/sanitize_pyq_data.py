@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-scripts/sanitize_pyq_data.py - enhanced
-Cleans all 352 questions in data/pyq_database.json with precision.
+scripts/sanitize_pyq_data.py - comprehensive symbol translation
+Cleans and normalizes all 352 questions in data/pyq_database.json.
 """
 
 import json
@@ -22,10 +22,10 @@ papers = db['papers']
 UNICODE_MAP = {
     '\uf06d': r'\mu',
     '\uf065': r'\varepsilon',
-    '\uf0de': r'\implies',
-    '\uf0ba': r'\equiv',
-    '\uf0f2': r'\int',
-    '\uf0b4': r'\times',
+    '\uf0de': r'\implies ',
+    '\uf0ba': r'\equiv ',
+    '\uf0f2': r'\int ',
+    '\uf0b4': r'\times ',
     '\uf044': r'\Delta ',
     '\uf072': r'\rho',
     '\uf074': r'\tau',
@@ -37,6 +37,24 @@ UNICODE_MAP = {
     '\uf071': r'\theta',
     '\uf06c': r'\lambda',
     '\uf073': r'\sigma',
+    '\uf064': r'\delta',
+    '\uf057': r'\Omega',
+    '\uf066': r'\phi',
+    '\uf0a5': r'\infty',
+    '\uf0b9': r'\neq ',
+    '\uf0a3': r'\leq ',
+    '\uf03c': '<',
+    '\uf03e': '>',
+    '\uf03d': '=',
+    '\uf02b': '+',
+    '\uf02d': '-',
+    '\uf0ae': r'\rightarrow ',
+    '\uf0b0': r'^\circ',
+    '\uf0ce': r'\in ',
+    '\uf0c7': r'\cap ',
+    '\uf0c8': r'\cup ',
+    '\uf05b': '[',
+    '\uf05d': ']',
     '\uf02c': ',',
     '\uf0a2': "'",
     '\uf0e6': '(',
@@ -51,11 +69,26 @@ UNICODE_MAP = {
     '\uf0f9': ']',
     '\uf0fa': ']',
     '\uf0fb': ']',
+    '\uf8f1': '{',
+    '\uf8f2': '',
+    '\uf8f3': '',
+    '\uf8eb': '(',
+    '\uf8ec': '',
+    '\uf8ed': '',
+    '\uf8f6': ')',
+    '\uf8f7': '',
+    '\uf8f8': '',
+    '\uf8ee': '[',
+    '\uf8ef': '',
+    '\uf8f0': '',
+    '\uf8f9': ']',
+    '\uf8fa': '',
+    '\uf8fb': ']',
     '\u2013': '-',
     '\u2014': '-',
     '\u2212': '-',
-    '': '',
-    '°': '^\\circ',
+    '°': r'^\circ',
+    '': r'\neq ',
 }
 
 def clean_text_symbols(text: str) -> str:
@@ -100,7 +133,6 @@ def sanitize_option_text(text: str) -> str:
     text = re.sub(r'\s*\([1-4]\)\s*$', '', text)
     text = re.sub(r'\s*\([1-4]\)\s*', ' ', text)
     
-    # fractions: '3\n2' -> '$\frac{3}{2}$'
     m_frac = re.match(r'^(\d+)\s*\n\s*(\d+)(?:\s*([a-zA-Z]+))?$', text.strip())
     if m_frac:
         num, den, unit = m_frac.groups()
@@ -116,7 +148,7 @@ def sanitize_option_text(text: str) -> str:
     cleaned = ' '.join(lines)
     cleaned = re.sub(r'[ \t]+', ' ', cleaned).strip()
     
-    if r'\Delta' in cleaned or r'\mu' in cleaned or r'\varepsilon' in cleaned:
+    if r'\Delta' in cleaned or r'\mu' in cleaned or r'\varepsilon' in cleaned or r'\neq' in cleaned:
         if not cleaned.startswith('$') and not cleaned.endswith('$'):
             cleaned = f"${cleaned}$"
             
@@ -168,7 +200,7 @@ KNOWN_CORRECTIONS = {
             {'key': '1', 'text': '$\\frac{\\varepsilon_0 A}{d} \\left( \\frac{K_1 K_2}{K_1 + K_2} + K_3 \\right)$'},
             {'key': '2', 'text': '$\\frac{2 \\varepsilon_0 A}{d} \\left( \\frac{K_1 K_2 + K_2 K_3 + K_3 K_1}{K_1 + K_2} \\right)$'},
             {'key': '3', 'text': '$\\frac{\\varepsilon_0 A}{2d} \\left( \\frac{K_1 K_2}{K_1 + K_2} + 2K_3 \\right)$'},
-            {'key': '4', 'text': '$\\frac{\\varepsilon_0 A}{d} \\frac{K_1 K_2 K_3}{K_1 + K_2 + K_3}$'},
+            {'key': '4', 'text': '$\\frac{\\varepsilon_0 A}{d} \\left( \\frac{K_1 K_2 K_3}{K_1 + K_2 + K_3} \\right)$'},
         ]
     },
     'jee_main_2025_btech_20250122_shift1_phys_q4': {
@@ -265,4 +297,4 @@ for q in questions:
 with open(DB_PATH, 'w', encoding='utf-8') as f:
     json.dump({'papers': papers, 'questions': questions}, f, indent=2, ensure_ascii=False)
 
-print("Sanitization completed successfully.")
+print("Comprehensive symbol sanitization completed successfully.")

@@ -559,15 +559,23 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The equiconvex lens shown in figure is silvered on one side. For what distance of object from the lens is the image formed on the object itself? R",
+      "question_statement": "The equiconvex lens shown in figure is silvered on one side. For what distance of object from the lens is the image formed on the object itself?",
       "options": [
         {
           "key": "1",
-          "text": "$\\muR$"
+          "text": "$\\mu R$"
         },
         {
           "key": "2",
-          "text": "$\\mu R \\mu- 2 2 R \\mu- 2 1$"
+          "text": "$\\frac{R}{2\\mu - 2}$"
+        },
+        {
+          "key": "3",
+          "text": "$\\frac{R}{2\\mu - 1}$"
+        },
+        {
+          "key": "4",
+          "text": "$\\frac{R}{\\mu}$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift1_physics_q15.png",
@@ -594,7 +602,7 @@
       "options": [
         {
           "key": "1",
-          "text": "^\\circ\\text{C}erium only"
+          "text": "Cerium only"
         },
         {
           "key": "2",
@@ -629,7 +637,7 @@
       "question_number": 17,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The figure shows an electron entering the space between the plates of a parallel plate capacitor with an initial velocity, vx = 106 m/s parallel to the plates. If the length of plates is l = 10 cm and the electric field in the region E = 9.1 N/^\\circ\\text{C}, then the value of vy when the electron comes out of the plates is (Electronic mass = 9.1 × $10^{-31}$ kg)",
+      "question_statement": "The figure shows an electron entering the space between the plates of a parallel plate capacitor with an initial velocity, vx = 106 m/s parallel to the plates. If the length of plates is l = 10 cm and the electric field in the region E = 9.1 N/C, then the value of vy when the electron comes out of the plates is (Electronic mass = 9.1 × $10^{-31}$ kg)",
       "options": null,
       "diagram_url": null,
       "review_required": true,
@@ -805,7 +813,7 @@
       "question_number": 1,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "For complex ion [Ni^\\circ\\text{C}$l_4$]2- what is the charge on metal and shape of complex respectively?",
+      "question_statement": "For complex ion [NiC$l_4$]2- what is the charge on metal and shape of complex respectively?",
       "options": [
         {
           "key": "1",
@@ -844,7 +852,7 @@
       "question_number": 2,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}ompare boiling point of given solutions \n(i) $10^{-4}$ M Na^\\circ\\text{C}l \n(ii) $10^{-3}$ M Na^\\circ\\text{C}l \n(iii) $10^{-2}$ M Na^\\circ\\text{C}l \n(iv) $10^{-4}$ M urea",
+      "question_statement": "Compare boiling point of given solutions \n(i) $10^{-4}$ M NaCl \n(ii) $10^{-3}$ M NaCl \n(iii) $10^{-2}$ M NaCl \n(iv) $10^{-4}$ M urea",
       "options": [
         {
           "key": "1",
@@ -887,19 +895,19 @@
       "options": [
         {
           "key": "1",
-          "text": "F > ^\\circ\\text{C}l > I > Br"
+          "text": "F > Cl > I > Br"
         },
         {
           "key": "2",
-          "text": "^\\circ\\text{C}l > F > Br > I"
+          "text": "Cl > F > Br > I"
         },
         {
           "key": "3",
-          "text": "F > ^\\circ\\text{C}l > Br > I"
+          "text": "F > Cl > Br > I"
         },
         {
           "key": "4",
-          "text": "Br > F > I > ^\\circ\\text{C}l"
+          "text": "Br > F > I > Cl"
         }
       ],
       "diagram_url": null,
@@ -961,7 +969,7 @@
       "question_number": 5,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The IUPA^\\circ\\text{C} name of given specie is",
+      "question_statement": "The IUPAC name of given specie is",
       "options": [
         {
           "key": "1",
@@ -1000,7 +1008,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}ompare crystal field splitting energy(\\Delta ) for given complexes 2 3 4 K [Fe(^\\circ\\text{C}N) ] \n(ii) [ ] 4 6 + ^\\circ\\text{C}u(NH ) (i) s Fe(en) ^\\circ\\text{C}l 3 3 K Fe(S^\\circ\\text{C}N) \n(iv) [ ] 4 6 (iii) [ ]",
+      "question_statement": "Compare crystal field splitting energy(\\Delta ) for given complexes 2 3 4 K [Fe(CN) ] \n(ii) [ ] 4 6 + Cu(NH ) (i) s Fe(en) Cl 3 3 K Fe(SCN) \n(iv) [ ] 4 6 (iii) [ ]",
       "options": [
         {
           "key": "1",
@@ -1039,7 +1047,7 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the given equilibrium reaction ^\\circ\\text{C}O (g) ^\\circ\\text{C}(s) $2^\\circ\\text{C}$O(g) + 2 If initial pressure of ^\\circ\\text{C}$O_2$ is 0.6 atm and after equilibrium is established, total pressure is 0.8 atm. Then, find Kp.",
+      "question_statement": "Consider the given equilibrium reaction CO (g) C(s) $2^\\circ\\text{C}$O(g) + 2 If initial pressure of C$O_2$ is 0.6 atm and after equilibrium is established, total pressure is 0.8 atm. Then, find Kp.",
       "options": [
         {
           "key": "1",
@@ -1078,7 +1086,7 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Statement-I: ^\\circ\\text{C}$H_3$ - O - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}l will show nucleophilic substitution by SN1 mechanism in protic medium. Statement-II: will not undergo nucleophilic substitution via SN2 mechanism easily.",
+      "question_statement": "Statement-I: C$H_3$ - O - C$H_2$ - Cl will show nucleophilic substitution by SN1 mechanism in protic medium. Statement-II: will not undergo nucleophilic substitution via SN2 mechanism easily.",
       "options": [
         {
           "key": "1",
@@ -1117,7 +1125,7 @@
       "question_number": 9,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Which of the following acids is also known as vitamin ^\\circ\\text{C}?",
+      "question_statement": "Which of the following acids is also known as vitamin C?",
       "options": [
         {
           "key": "1",
@@ -1256,7 +1264,7 @@
       "question_number": 13,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Given : If the partial pressure of ^\\circ\\text{C}$O_2$ gas at equilibrium is 0.4 atm and the total pressure is 1 atm, then the value of Kp at the same temperature is",
+      "question_statement": "Given : If the partial pressure of C$O_2$ gas at equilibrium is 0.4 atm and the total pressure is 1 atm, then the value of Kp at the same temperature is",
       "options": [
         {
           "key": "1",
@@ -1317,7 +1325,7 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}$O_2$ gas is taken at 1 atm, 273K. Now it is allowed to pass through 0.1 M ^\\circ\\text{C}a(OH)2 aq. solution. Excess amount of ^\\circ\\text{C}a(OH)2 is neutralised with 40 mL of 0.1 M H^\\circ\\text{C}l. Then find volume of ^\\circ\\text{C}a(OH)2 initially taken if 50% ^\\circ\\text{C}a(OH)2 is react with ^\\circ\\text{C}$O_2$",
+      "question_statement": "C$O_2$ gas is taken at 1 atm, 273K. Now it is allowed to pass through 0.1 M Ca(OH)2 aq. solution. Excess amount of Ca(OH)2 is neutralised with 40 mL of 0.1 M HCl. Then find volume of Ca(OH)2 initially taken if 50% Ca(OH)2 is react with C$O_2$",
       "options": [
         {
           "key": "1",
@@ -1395,23 +1403,23 @@
       "question_number": 17,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Match the column and choose the correct option ^\\circ\\text{C}olumn-I ^\\circ\\text{C}olumn-II (Properties) (Order) (A) Electronegativity",
+      "question_statement": "Match the column and choose the correct option Column-I Column-II (Properties) (Order) (A) Electronegativity",
       "options": [
         {
           "key": "1",
-          "text": "B < ^\\circ\\text{C} < N < O (B) ^\\circ\\text{C}ationic size"
+          "text": "B < C < N < O (B) Cationic size"
         },
         {
           "key": "1",
-          "text": "A-1, B-2, ^\\circ\\text{C}-3, D-4"
+          "text": "A-1, B-2, C-3, D-4"
         },
         {
           "key": "2",
-          "text": "Li > Mg > Be (^\\circ\\text{C}) Metallic ^\\circ\\text{C}haracter"
+          "text": "Li > Mg > Be (C) Metallic Character"
         },
         {
           "key": "2",
-          "text": "A-4, B-3, ^\\circ\\text{C}-2, D-1"
+          "text": "A-4, B-3, C-2, D-1"
         },
         {
           "key": "3",
@@ -1419,15 +1427,15 @@
         },
         {
           "key": "3",
-          "text": "A-2, B-3, ^\\circ\\text{C}-4, D-1"
+          "text": "A-2, B-3, C-4, D-1"
         },
         {
           "key": "4",
-          "text": "^\\circ\\text{C}l > F > Br > I"
+          "text": "Cl > F > Br > I"
         },
         {
           "key": "4",
-          "text": "A-3, B-2, ^\\circ\\text{C}-4, D-1"
+          "text": "A-3, B-2, C-4, D-1"
         }
       ],
       "diagram_url": null,
@@ -1450,7 +1458,7 @@
       "question_number": 18,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Identify ^\\circ\\text{C}.",
+      "question_statement": "Identify C.",
       "options": [],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift1_chemistry_q18.png",
       "review_required": false,
@@ -1538,7 +1546,7 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "^\\circ\\text{C}alculate Number of stereoisomers of = ^\\circ\\text{C}H - ^\\circ\\text{C}H ^\\circ\\text{C}H - ^\\circ\\text{C}H -^\\circ\\text{C}H | 3 3 OH",
+      "question_statement": "Calculate Number of stereoisomers of = CH - CH CH - CH -CH | 3 3 OH",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -1560,7 +1568,7 @@
       "question_number": 23,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "How many compounds have linear shape SO2, + N , I , NO , NO 3 3 2 2 Be^\\circ\\text{C}$l_2$, ?",
+      "question_statement": "How many compounds have linear shape SO2, + N , I , NO , NO 3 3 2 2 BeC$l_2$, ?",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -1582,7 +1590,7 @@
       "question_number": 24,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "In ^\\circ\\text{C}arius method 180 mg of organic compound gives 143.5 mg of Ag^\\circ\\text{C}l. Find the percentage of ^\\circ\\text{C}l in the organic compound. (Nearest integer)",
+      "question_statement": "In Carius method 180 mg of organic compound gives 143.5 mg of AgCl. Find the percentage of Cl in the organic compound. (Nearest integer)",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -1604,7 +1612,7 @@
       "question_number": 25,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Two ampere current is allowed to pass through molten Al^\\circ\\text{C}$l_3$ for 30 min. Find the mass (in mg) of aluminium deposited at cathode. (Nearest integer)",
+      "question_statement": "Two ampere current is allowed to pass through molten AlC$l_3$ for 30 min. Find the mass (in mg) of aluminium deposited at cathode. (Nearest integer)",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -1857,7 +1865,7 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}oefficient of x2012 in (1 - x)2008 (1 + x + $x_2$)2007",
+      "question_statement": "Coefficient of x2012 in (1 - x)2008 (1 + x + $x_2$)2007",
       "options": [
         {
           "key": "1",
@@ -1931,19 +1939,19 @@
       "options": [
         {
           "key": "1",
-          "text": "26 5 ^\\circ\\text{C} .5!"
+          "text": "26 $5^\\circ\\text{C}$ .5!"
         },
         {
           "key": "2",
-          "text": "25 4 ^\\circ\\text{C} .4!"
+          "text": "25 $4^\\circ\\text{C}$ .4!"
         },
         {
           "key": "3",
-          "text": "26 4 ^\\circ\\text{C} .4!"
+          "text": "26 $4^\\circ\\text{C}$ .4!"
         },
         {
           "key": "4",
-          "text": "25 5 ^\\circ\\text{C} .5!"
+          "text": "25 $5^\\circ\\text{C}$ .5!"
         }
       ],
       "diagram_url": null,
@@ -2538,7 +2546,7 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In a series L^\\circ\\text{C}R circuit the maximum amplitude of current is $I_0$ when the resistance is R. What is the maximum amplitude of current if the resistor is R replaced by a resistor of resistance . 2",
+      "question_statement": "In a series LCR circuit the maximum amplitude of current is $I_0$ when the resistance is R. What is the maximum amplitude of current if the resistor is R replaced by a resistor of resistance . 2",
       "options": [
         {
           "key": "1",
@@ -2569,7 +2577,7 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Statement-I : Fringe width of red light is more than fringe width of violet light. Statement-II : Fringe width is directly proportional to the wavelength of light used. ^\\circ\\text{C}hoose the correct option.",
+      "question_statement": "Statement-I : Fringe width of red light is more than fringe width of violet light. Statement-II : Fringe width is directly proportional to the wavelength of light used. Choose the correct option.",
       "options": [
         {
           "key": "1",
@@ -2842,7 +2850,7 @@
       "question_number": 16,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In the R^\\circ\\text{C} circuit shown, find I. V R 5 3 R 5 V",
+      "question_statement": "In the RC circuit shown, find I. V R 5 3 R 5 V",
       "options": [
         {
           "key": "2",
@@ -2869,23 +2877,23 @@
       "question_number": 17,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A glass slab of refractive index \\mug = 1.44 is coated with a thin film of refractive index \\muf = 2. The minimum thickness of the film so that maximum transmission of \\lambda= (incident A 5000 o green light of wavelength normally) takes place is",
+      "question_statement": "A glass slab of refractive index \\mu g = 1.44 is coated with a thin film of refractive index \\mu f = 2. The minimum thickness of the film so that maximum transmission of \\lambda= (incident A 5000 o green light of wavelength normally) takes place is",
       "options": [
         {
           "key": "1",
-          "text": "$0.500 \\mum$"
+          "text": "$0.500 \\mu m$"
         },
         {
           "key": "2",
-          "text": "$0.250 \\mum$"
+          "text": "$0.250 \\mu m$"
         },
         {
           "key": "3",
-          "text": "$0.125 \\mum$"
+          "text": "$0.125 \\mu m$"
         },
         {
           "key": "4",
-          "text": "$00 \\mum$"
+          "text": "$00 \\mu m$"
         }
       ],
       "diagram_url": null,
@@ -2961,7 +2969,7 @@
       "question_number": 20,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "^\\circ\\text{C}hoose the correct answer:",
+      "question_statement": "Choose the correct answer:",
       "options": null,
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift2_physics_q20.png",
       "review_required": false,
@@ -2983,7 +2991,7 @@
       "question_number": 21,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "A projectile is fired with speed of 20 m/s at angle of 60^\\circ with horizontal. The speed at highest point of trajectory is x m/s then x is",
+      "question_statement": "A projectile is fired with speed of 20 m/s at angle of 60° with horizontal. The speed at highest point of trajectory is x m/s then x is",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -3128,7 +3136,7 @@
       "question_number": 3,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Arrange according to ^\\circ\\text{C}FSE. \n(i) [^\\circ\\text{C}o(NH3)4]2+ \n(ii) [^\\circ\\text{C}o(NH3)6]3+ \n(iii) [^\\circ\\text{C}o(NH3)6]2+ \n(iv) [^\\circ\\text{C}o(en)3]3+",
+      "question_statement": "Arrange according to CFSE. \n(i) [Co(NH3)4]2+ \n(ii) [Co(NH3)6]3+ \n(iii) [Co(NH3)6]2+ \n(iv) [Co(en)3]3+",
       "options": [
         {
           "key": "1",
@@ -3206,7 +3214,7 @@
       "question_number": 5,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Which of the following anion will not undergoe disproportionation? ^\\circ\\text{C}lO -",
+      "question_statement": "Which of the following anion will not undergoe disproportionation? ClO -",
       "options": [
         {
           "key": "1",
@@ -3214,11 +3222,11 @@
         },
         {
           "key": "2",
-          "text": "^\\circ\\text{C}lO"
+          "text": "ClO"
         },
         {
           "key": "4",
-          "text": "^\\circ\\text{C}lO - ^\\circ\\text{C}lO2"
+          "text": "ClO - ClO2"
         }
       ],
       "diagram_url": null,
@@ -3241,7 +3249,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}ompare dipole moment of \n(I) NF3 \n(II) ^\\circ\\text{C}H^\\circ\\text{C}$l_3$ \n(III) H2S \n(IV) HBr",
+      "question_statement": "Compare dipole moment of \n(I) NF3 \n(II) CHC$l_3$ \n(III) H2S \n(IV) HBr",
       "options": [
         {
           "key": "1",
@@ -3419,7 +3427,7 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}orrect structure of L-Glyceraldehyde is",
+      "question_statement": "Correct structure of L-Glyceraldehyde is",
       "options": [],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift2_chemistry_q11.png",
       "review_required": false,
@@ -3538,23 +3546,23 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Match the column and choose the correct option (A) (P) ^\\circ\\text{C}P ( )  ( ) ( ) H T P (B) (Q) ^\\circ\\text{C}V ( )  ( ) ( ) G P T (^\\circ\\text{C}) (R) -S ( )  ( ) ( ) U T V (D) (S) V ( )  ( ) ( ) G T P",
+      "question_statement": "Match the column and choose the correct option (A) (P) CP ( )  ( ) ( ) H T P (B) (Q) CV ( )  ( ) ( ) G P T (C) (R) -S ( )  ( ) ( ) U T V (D) (S) V ( )  ( ) ( ) G T P",
       "options": [
         {
           "key": "1",
-          "text": "- (P), (B) - (S), (^\\circ\\text{C}) - (Q), (D) - (R)"
+          "text": "- (P), (B) - (S), (C) - (Q), (D) - (R)"
         },
         {
           "key": "2",
-          "text": "- (P), (B) - (S), (^\\circ\\text{C}) - (R), (D) - (Q)"
+          "text": "- (P), (B) - (S), (C) - (R), (D) - (Q)"
         },
         {
           "key": "3",
-          "text": "- (P), (B) - (R), (^\\circ\\text{C}) - (Q), (D) - (S)"
+          "text": "- (P), (B) - (R), (C) - (Q), (D) - (S)"
         },
         {
           "key": "4",
-          "text": "- (Q), (B) - (S), (^\\circ\\text{C}) - (P), (D) - (R)"
+          "text": "- (Q), (B) - (S), (C) - (P), (D) - (R)"
         }
       ],
       "diagram_url": null,
@@ -3577,7 +3585,7 @@
       "question_number": 16,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following statements S-1 and S-2 and choose the correct option. S-1 : During corrosion pure metal acts as anode and impure metal acts as cathode. S-2 : Rate of corrosion is more in alkaline medium than in acidic medium.",
+      "question_statement": "Consider the following statements S-1 and S-2 and choose the correct option. S-1 : During corrosion pure metal acts as anode and impure metal acts as cathode. S-2 : Rate of corrosion is more in alkaline medium than in acidic medium.",
       "options": [
         {
           "key": "1",
@@ -3726,7 +3734,7 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "2 Ni 2DMG ^\\circ\\text{C}omplex + + ⎯⎯→ How many hydrogen bonds are present in a molecule of the complex?",
+      "question_statement": "2 Ni 2DMG Complex + + ⎯⎯→ How many hydrogen bonds are present in a molecule of the complex?",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -3770,7 +3778,7 @@
       "question_number": 24,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Find the number of \\pi-electrons in ^\\circ\\text{C}6H6.",
+      "question_statement": "Find the number of \\pi-electrons in C6H6.",
       "options": null,
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift2_chemistry_q24.png",
       "review_required": false,
@@ -3792,7 +3800,7 @@
       "question_number": 25,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "^\\circ\\text{C}alculate the radius of first excited state of He+ ion (in Å)",
+      "question_statement": "Calculate the radius of first excited state of He+ ion (in Å)",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -3993,7 +4001,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider a function . The e 0 number of points of extrema are",
+      "question_statement": "Consider a function . The e 0 number of points of extrema are",
       "options": [
         {
           "key": "2",
@@ -4029,12 +4037,7 @@
       "section": "Section A",
       "question_type": "MCQ",
       "question_statement": "Let A and B are two events such that 10 \\cap = P A B and P(A/B) and P(B/A) are the 1 ( ) roots of the equation 12x2 - 7x + 1 = 0, then \\cap ( ) ( ) P A B \\cup is equal to P A B 9 4 9 4",
-      "options": [
-        {
-          "key": "2",
-          "text": "3"
-        }
-      ],
+      "options": [],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
@@ -4140,7 +4143,7 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Let A(6, 8), B(10 cos\\alpha, - 10sin\\alpha) and ^\\circ\\text{C}(-10sin\\alpha, -10cos\\alpha) be 3 points and if orthocentre of the triangle AB^\\circ\\text{C} is (0, 9) then 100sin2\\alpha is equal to 4 25",
+      "question_statement": "Let A(6, 8), B(10 cos\\alpha, - 10sin\\alpha) and C(-10sin\\alpha, -10cos\\alpha) be 3 points and if orthocentre of the triangle ABC is (0, 9) then 100sin2\\alpha is equal to 4 25",
       "options": [
         {
           "key": "2",
@@ -4409,7 +4412,7 @@
       "question_number": 23,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "^\\circ\\text{C}onsider two curves with E 1 2 2 A B + = x y : 1 2 2 eccentricity $e_1$ and with E 2 e = e 1 3 1 eccentricity $e_2$. If and distance between foci 2 of both curves is 2 3 and a - A = 4, then the sum of lengths of latus rectum of both curves is",
+      "question_statement": "Consider two curves with E 1 2 2 A B + = x y : 1 2 2 eccentricity $e_1$ and with E 2 e = e 1 3 1 eccentricity $e_2$. If and distance between foci 2 of both curves is 2 3 and a - A = 4, then the sum of lengths of latus rectum of both curves is",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -4592,7 +4595,7 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In a series L^\\circ\\text{C}R circuit, inductance L = 100 mH and capacitance ^\\circ\\text{C} = 1nF. The angular frequency of the source when current has maximum amplitude in the circuit is 5 rad 10 2\\pi s 4 rad 10 2\\pi s",
+      "question_statement": "In a series LCR circuit, inductance L = 100 mH and capacitance C = 1nF. The angular frequency of the source when current has maximum amplitude in the circuit is 5 rad 10 2\\pi s 4 rad 10 2\\pi s",
       "options": [
         {
           "key": "2",
@@ -4705,7 +4708,7 @@
       "options": [
         {
           "key": "1",
-          "text": "$\\muf$"
+          "text": "$\\mu f$"
         },
         {
           "key": "2",
@@ -4923,7 +4926,7 @@
       "question_number": 13,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "During charging of capacitor of 2.5 \\muF in D^\\circ\\text{C} circuit, the displacement current is found to be 0.25 mA then dt find rate of change of voltage V w.r.t. time . dV",
+      "question_statement": "During charging of capacitor of 2.5 \\mu F in DC circuit, the displacement current is found to be 0.25 mA then dt find rate of change of voltage V w.r.t. time . dV",
       "options": [
         {
           "key": "1",
@@ -5142,7 +5145,7 @@
       "question_number": 21,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Find charge on the capacitor (in \\muF) at steady state.",
+      "question_statement": "Find charge on the capacitor (in \\mu F) at steady state.",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -5164,7 +5167,7 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "A particle of mass m is projected at angle 60^\\circ with \nhorizontal. If initial kinetic energy is KE0 and kinetic KE 0 energy at maximum height is , find value of x. x",
+      "question_statement": "A particle of mass m is projected at angle 60° with \nhorizontal. If initial kinetic energy is KE0 and kinetic KE 0 energy at maximum height is , find value of x. x",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -5256,19 +5259,19 @@
       "options": [
         {
           "key": "1",
-          "text": "^\\circ\\text{C} > Si > Ge > Sn > Pb"
+          "text": "C > Si > Ge > Sn > Pb"
         },
         {
           "key": "2",
-          "text": "Si > ^\\circ\\text{C} > Ge > Sn > Pb"
+          "text": "Si > C > Ge > Sn > Pb"
         },
         {
           "key": "3",
-          "text": "Ge > Sn > ^\\circ\\text{C} > Si > Pb"
+          "text": "Ge > Sn > C > Si > Pb"
         },
         {
           "key": "4",
-          "text": "^\\circ\\text{C} > Si > Ge > Pb > Sn"
+          "text": "C > Si > Ge > Pb > Sn"
         }
       ],
       "diagram_url": null,
@@ -5369,23 +5372,23 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Match the following List I with List II. List-I (Alloys) List-II (Metals) A. Bronze (i) Fe, ^\\circ\\text{C}r, and Ni B Stainless steel (ii) ^\\circ\\text{C}u and Sn ^\\circ\\text{C} UK Gold ^\\circ\\text{C}oin (iii) ^\\circ\\text{C}u and Zn D Brass (iv) Au, Ag, ^\\circ\\text{C}u, Zn and Ni",
+      "question_statement": "Match the following List I with List II. List-I (Alloys) List-II (Metals) A. Bronze (i) Fe, Cr, and Ni B Stainless steel (ii) Cu and Sn C UK Gold Coin (iii) Cu and Zn D Brass (iv) Au, Ag, Cu, Zn and Ni",
       "options": [
         {
           "key": "1",
-          "text": "A-(ii), B-(i), ^\\circ\\text{C}-(iv), D-(iii)"
+          "text": "A-(ii), B-(i), C-(iv), D-(iii)"
         },
         {
           "key": "2",
-          "text": "A-(iii), B-(iv), ^\\circ\\text{C}-(i), D-(ii)"
+          "text": "A-(iii), B-(iv), C-(i), D-(ii)"
         },
         {
           "key": "3",
-          "text": "A-(iv), B-(iii), ^\\circ\\text{C}-(ii), D-(i)"
+          "text": "A-(iv), B-(iii), C-(ii), D-(i)"
         },
         {
           "key": "4",
-          "text": "A-(i), B-(ii), ^\\circ\\text{C}-(iii), D-(iv)"
+          "text": "A-(i), B-(ii), C-(iii), D-(iv)"
         }
       ],
       "diagram_url": null,
@@ -5539,7 +5542,7 @@
       "options": [
         {
           "key": "1",
-          "text": "[Fe(^\\circ\\text{C}N)6]3-"
+          "text": "[Fe(CN)6]3-"
         },
         {
           "key": "2",
@@ -5547,11 +5550,11 @@
         },
         {
           "key": "3",
-          "text": "[^\\circ\\text{C}o(^\\circ\\text{C}N)6]3-"
+          "text": "[Co(CN)6]3-"
         },
         {
           "key": "4",
-          "text": "[^\\circ\\text{C}o^\\circ\\text{C}l4]2-"
+          "text": "[CoCl4]2-"
         }
       ],
       "diagram_url": null,
@@ -5574,7 +5577,7 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The total number of isomers possible (aldehyde & ketones) for ^\\circ\\text{C}4H8O are",
+      "question_statement": "The total number of isomers possible (aldehyde & ketones) for C4H8O are",
       "options": [
         {
           "key": "3",
@@ -5605,7 +5608,7 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following reaction 2 2 2 1 X Y(s) X (g) Y (g) 2 +   . If \\alpha is the degree of dissociation. ^\\circ\\text{C}alculate KP in terms of P (total pressure) 3/2 3/2 P 3/2 2P K 2P K 3 = 3 = (2)",
+      "question_statement": "Consider the following reaction 2 2 2 1 X Y(s) X (g) Y (g) 2 +   . If \\alpha is the degree of dissociation. Calculate KP in terms of P (total pressure) 3/2 3/2 P 3/2 2P K 2P K 3 = 3 = (2)",
       "options": [
         {
           "key": "1",
@@ -5640,7 +5643,7 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "An ideal gas undergoes following process from A \\rightarrow B \\rightarrow ^\\circ\\text{C} \\rightarrow D \\rightarrow E. Find work done.",
+      "question_statement": "An ideal gas undergoes following process from A \\rightarrow B \\rightarrow C \\rightarrow D \\rightarrow E. Find work done.",
       "options": [
         {
           "key": "1",
@@ -5718,11 +5721,11 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following E^\\circ values of given half cell 2 Ag /Ag Zn /Zn E 0.8 V, E 0.76 V + + ^\\circ ^\\circ = =- 2 $2^\\circ\\text{C}$u /^\\circ\\text{C}u Mg /Mg E 0.34 V, E 2.36 V + + ^\\circ ^\\circ = =- Then which of the following will have the most negative value of \\Delta G^\\circ?",
+      "question_statement": "Consider the following E° values of given half cell 2 Ag /Ag Zn /Zn E 0.8 V, E 0.76 V + + ° ° = =- 2 $2^\\circ\\text{C}$u /Cu Mg /Mg E 0.34 V, E 2.36 V + + ° ° = =- Then which of the following will have the most negative value of \\Delta G°?",
       "options": [
         {
           "key": "1",
-          "text": "Zn|Zn2+||^\\circ\\text{C}u2+|^\\circ\\text{C}u"
+          "text": "Zn|Zn2+||Cu2+|Cu"
         },
         {
           "key": "2",
@@ -5734,7 +5737,7 @@
         },
         {
           "key": "4",
-          "text": "^\\circ\\text{C}u|^\\circ\\text{C}u2+||Ag2+|Ag"
+          "text": "Cu|Cu2+||Ag2+|Ag"
         }
       ],
       "diagram_url": null,
@@ -5757,23 +5760,23 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Match the following Reactant Product (A) (i) (B) (ii) (^\\circ\\text{C}) (iii) (D) (iv) Give correct product of oxidative ozonolysis ($O_3$/H2O)",
+      "question_statement": "Match the following Reactant Product (A) (i) (B) (ii) (C) (iii) (D) (iv) Give correct product of oxidative ozonolysis ($O_3$/H2O)",
       "options": [
         {
           "key": "1",
-          "text": "A-ii, B-i, ^\\circ\\text{C}-iii, D-iv"
+          "text": "A-ii, B-i, C-iii, D-iv"
         },
         {
           "key": "2",
-          "text": "A-i, B-ii, ^\\circ\\text{C}-iii, D-iv"
+          "text": "A-i, B-ii, C-iii, D-iv"
         },
         {
           "key": "3",
-          "text": "A-i, B-ii, ^\\circ\\text{C}-iv, D-iii"
+          "text": "A-i, B-ii, C-iv, D-iii"
         },
         {
           "key": "4",
-          "text": "A-i, B-iv, ^\\circ\\text{C}-ii, D-iii"
+          "text": "A-i, B-iv, C-ii, D-iii"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250123_shift2_chemistry_q15.png",
@@ -5835,23 +5838,23 @@
       "question_number": 17,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "0.01 mole of an organic compound (Hydrocarbon) gives 1.76 gm ^\\circ\\text{C}$O_2$ and 0.9 gm H2O on complete combustion. Find out chemical formula of compound.",
+      "question_statement": "0.01 mole of an organic compound (Hydrocarbon) gives 1.76 gm C$O_2$ and 0.9 gm H2O on complete combustion. Find out chemical formula of compound.",
       "options": [
         {
           "key": "1",
-          "text": "^\\circ\\text{C}3H8"
+          "text": "C3H8"
         },
         {
           "key": "2",
-          "text": "^\\circ\\text{C}4H10"
+          "text": "C4H10"
         },
         {
           "key": "3",
-          "text": "^\\circ\\text{C}5H12"
+          "text": "C5H12"
         },
         {
           "key": "4",
-          "text": "^\\circ\\text{C}6H14"
+          "text": "C6H14"
         }
       ],
       "diagram_url": null,
@@ -5940,7 +5943,7 @@
       "question_number": 21,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Number of sp3 hybridised carbon atoms in ^\\circ\\text{C} is :",
+      "question_statement": "Number of sp3 hybridised carbon atoms in C is :",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -6111,7 +6114,7 @@
       "question_number": 3,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the terms 8, 21, 34, 47, …, 320. The variance of the given data set is",
+      "question_statement": "Consider the terms 8, 21, 34, 47, …, 320. The variance of the given data set is",
       "options": [
         {
           "key": "1",
@@ -6434,7 +6437,7 @@
       "question_number": 23,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "{ } ( , ) | | | 3 A x y x y = + ≥ ; { } ( , ) | | | | | 3 B x y x y = + ≤ Let ^\\circ\\text{C} A B =  . Find the sum of ( , ) , ∀ ∈ x y x y ^\\circ\\text{C} .",
+      "question_statement": "{ } ( , ) | | | 3 A x y x y = + ≥ ; { } ( , ) | | | | | 3 B x y x y = + ≤ Let C A B =  . Find the sum of ( , ) , ∀ ∈ x y x y C .",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -6478,7 +6481,7 @@
       "question_number": 25,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Let 3 sin ( ) = + ∫x xdx g x ^\\circ\\text{C} , where g(0) = 0. If 3 2 8 2 2 ( ) π π ( ) ( ) ′ + = απ + βπ + γ g g , where α, β and γ are integers, then the value of α + β + γ is",
+      "question_statement": "Let 3 sin ( ) = + ∫x xdx g x C , where g(0) = 0. If 3 2 8 2 2 ( ) π π ( ) ( ) ′ + = απ + βπ + γ g g , where α, β and γ are integers, then the value of α + β + γ is",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -6609,7 +6612,7 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "An electron jumps from principle quantum state A to ^\\circ\\text{C} by releasing photon of wavelength 2000 Å and from state B to ^\\circ\\text{C} by releasing of photon of wavelength 6000 Å, then final the wavelength of photon for transition from A to B.",
+      "question_statement": "An electron jumps from principle quantum state A to C by releasing photon of wavelength 2000 Å and from state B to C by releasing of photon of wavelength 6000 Å, then final the wavelength of photon for transition from A to B.",
       "options": [
         {
           "key": "1",
@@ -6714,7 +6717,7 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In a process pressure of the gas is directly proportional to temperature then choose correct option. A : Process is isochoric. B : Work done in process is zero. ^\\circ\\text{C} : Internal energy increase with increase in temperature.",
+      "question_statement": "In a process pressure of the gas is directly proportional to temperature then choose correct option. A : Process is isochoric. B : Work done in process is zero. C : Internal energy increase with increase in temperature.",
       "options": [
         {
           "key": "1",
@@ -6722,15 +6725,15 @@
         },
         {
           "key": "2",
-          "text": "A and ^\\circ\\text{C} are correct"
+          "text": "A and C are correct"
         },
         {
           "key": "3",
-          "text": "A, B and ^\\circ\\text{C} are correct"
+          "text": "A, B and C are correct"
         },
         {
           "key": "4",
-          "text": "B and ^\\circ\\text{C} are correct"
+          "text": "B and C are correct"
         }
       ],
       "diagram_url": null,
@@ -6831,7 +6834,7 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A body of mass m is projected with initial velocity $v_0$ at 45^\\circ with horizontal. Find it’s angular momentum at highest point about point of projection. 0 g 4 mv3 mv3 0",
+      "question_statement": "A body of mass m is projected with initial velocity $v_0$ at 45° with horizontal. Find it’s angular momentum at highest point about point of projection. 0 g 4 mv3 mv3 0",
       "options": [
         {
           "key": "2",
@@ -6862,13 +6865,8 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A Plano convex lens of refractive index 1.5 & radius of curvature of curved surface of 20 cm present in air is having focal length of $f_1$. There is another Plano convex lens of refractive index of 1.5 & RO^\\circ\\text{C} of 30 cm placed in f f 1 liquid of RI of 1.2 having focal length of $f_2$ the is 2 3 2 2 1",
-      "options": [
-        {
-          "key": "2",
-          "text": "2"
-        }
-      ],
+      "question_statement": "A Plano convex lens of refractive index 1.5 & radius of curvature of curved surface of 20 cm present in air is having focal length of $f_1$. There is another Plano convex lens of refractive index of 1.5 & ROC of 30 cm placed in f f 1 liquid of RI of 1.2 having focal length of $f_2$ the is 2 3 2 2 1",
+      "options": [],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
@@ -6959,7 +6957,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In a parallel plate capacitor length l and width b are 3 cm and 1 cm respectively. Separation between plates d is 3 \\mum. By which of the following values capacitance increases by a factor of 10. \n(A) l = 6 cm, b = 5 cm, d = 3 \\mum \n(B) l = 5 cm, b = 2 cm, d = 1 \\mum (^\\circ\\text{C}) l = 5 cm, b = 1 cm, d = 30 \\mum \n(D) l = 1 cm, b = 1 cm, d = 30 \\mum",
+      "question_statement": "In a parallel plate capacitor length l and width b are 3 cm and 1 cm respectively. Separation between plates d is 3 \\mu m. By which of the following values capacitance increases by a factor of 10. \n(A) l = 6 cm, b = 5 cm, d = 3 \\mu m \n(B) l = 5 cm, b = 2 cm, d = 1 \\mu m (C) l = 5 cm, b = 1 cm, d = 30 \\mu m \n(D) l = 1 cm, b = 1 cm, d = 30 \\mu m",
       "options": [
         {
           "key": "1",
@@ -6967,15 +6965,15 @@
         },
         {
           "key": "2",
-          "text": "A, ^\\circ\\text{C}"
+          "text": "A, C"
         },
         {
           "key": "3",
-          "text": "B, ^\\circ\\text{C}"
+          "text": "B, C"
         },
         {
           "key": "4",
-          "text": "B, ^\\circ\\text{C}, D"
+          "text": "B, C, D"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250124_shift1_physics_q14.png",
@@ -7152,7 +7150,7 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "In a square loop of side length a current of 5 A is \nflowing. Find magnetic field at its centre in (\\muT).",
+      "question_statement": "In a square loop of side length a current of 5 A is \nflowing. Find magnetic field at its centre in (\\mu T).",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -7226,11 +7224,11 @@
         },
         {
           "key": "2",
-          "text": "^\\circ\\text{C}e2+"
+          "text": "Ce2+"
         },
         {
           "key": "3",
-          "text": "^\\circ\\text{C}e4+"
+          "text": "Ce4+"
         },
         {
           "key": "4",
@@ -7296,11 +7294,11 @@
       "question_number": 3,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Ribose present in DNA is \n(A) A pentose sugar \n(B) Present in pyranose form (^\\circ\\text{C}) \\alpha anomeric carbon is present \n(D) Present in D configuration \n(E) A reducing sugar in free form ^\\circ\\text{C}hoose the correct statement :",
+      "question_statement": "Ribose present in DNA is \n(A) A pentose sugar \n(B) Present in pyranose form (C) \\alpha anomeric carbon is present \n(D) Present in D configuration \n(E) A reducing sugar in free form Choose the correct statement :",
       "options": [
         {
           "key": "1",
-          "text": "A, ^\\circ\\text{C} & E only"
+          "text": "A, C & E only"
         },
         {
           "key": "2",
@@ -7308,7 +7306,7 @@
         },
         {
           "key": "3",
-          "text": "A, B, ^\\circ\\text{C}, D & E"
+          "text": "A, B, C, D & E"
         },
         {
           "key": "4",
@@ -7335,7 +7333,7 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following reaction 2+ 2 4 \\equiv ⎯⎯⎯⎯⎯→ ( ) i Hg /H SO $3^\\circ\\text{C}$H -^\\circ\\text{C} ^\\circ\\text{C}H P ii H^\\circ\\text{C}N (iii)H /Ni ( ) 2 Product P is",
+      "question_statement": "Consider the following reaction 2+ 2 4 \\equiv ⎯⎯⎯⎯⎯→ ( ) i Hg /H SO $3^\\circ\\text{C}$H -C CH P ii HCN (iii)H /Ni ( ) 2 Product P is",
       "options": [],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250124_shift1_chemistry_q4.png",
       "review_required": false,
@@ -7418,7 +7416,7 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following statements about H2O, NH3 and ^\\circ\\text{C}$H_4$ \n(A) All central atoms are sp3 hybridised \n(B) Order of dipole moment is ^\\circ\\text{C}$H_4$ < NH3 < H2O (^\\circ\\text{C}) NH3 in H2O is basic in nature, NH3 and H2O are Bronsted-Lowry acid and base respectively \n(D) Bond angle of H2O, NH3 and ^\\circ\\text{C}$H_4$ respectively are 104.5^\\circ, 107^\\circ and 109.5^\\circ Which of the above statements are correct",
+      "question_statement": "Consider the following statements about H2O, NH3 and C$H_4$ \n(A) All central atoms are sp3 hybridised \n(B) Order of dipole moment is C$H_4$ < NH3 < H2O (C) NH3 in H2O is basic in nature, NH3 and H2O are Bronsted-Lowry acid and base respectively \n(D) Bond angle of H2O, NH3 and C$H_4$ respectively are 104.5°, 107° and 109.5° Which of the above statements are correct",
       "options": [
         {
           "key": "1",
@@ -7426,11 +7424,11 @@
         },
         {
           "key": "2",
-          "text": "A, B and ^\\circ\\text{C} only"
+          "text": "A, B and C only"
         },
         {
           "key": "3",
-          "text": "A, B, ^\\circ\\text{C} and D"
+          "text": "A, B, C and D"
         },
         {
           "key": "4",
@@ -7613,7 +7611,7 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "An electron jumps from A → ^\\circ\\text{C} by emitting a wavelength of 2000 Å and also jumps from B → ^\\circ\\text{C} by emitting a wavelength of 6000 Å, then wavelength of that electron; if it jumps from A → B",
+      "question_statement": "An electron jumps from A → C by emitting a wavelength of 2000 Å and also jumps from B → C by emitting a wavelength of 6000 Å, then wavelength of that electron; if it jumps from A → B",
       "options": [
         {
           "key": "1",
@@ -7652,7 +7650,7 @@
       "question_number": 13,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}alculate the value of cell E for given cell based on given information Fe2+ + Ag+ → Fe3+ + Ag; Ag+ + e- → Ag; E^\\circ = xV Fe2+ + 2e- → Fe; E^\\circ = yV Fe3+ + 3e- → Fe; E^\\circ = zV",
+      "question_statement": "Calculate the value of cell E for given cell based on given information Fe2+ + Ag+ → Fe3+ + Ag; Ag+ + e- → Ag; E° = xV Fe2+ + 2e- → Fe; E° = yV Fe3+ + 3e- → Fe; E° = zV",
       "options": [
         {
           "key": "1",
@@ -7691,7 +7689,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the given reactions and choose proper solvent. OH→ Reaction-I: ^\\circ\\text{C}$H_3$ - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}l ^\\circ\\text{C}$H_3$ - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}$H_2$ - OH R3N → Reaction -II: ^\\circ\\text{C}$H_3$ - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}$H_2$ - ^\\circ\\text{C}l +",
+      "question_statement": "Consider the given reactions and choose proper solvent. OH→ Reaction-I: C$H_3$ - C$H_2$ - C$H_2$ - C$H_2$ - Cl C$H_3$ - C$H_2$ - C$H_2$ - C$H_2$ - OH R3N → Reaction -II: C$H_3$ - C$H_2$ - C$H_2$ - C$H_2$ - Cl +",
       "options": [
         {
           "key": "1",
@@ -7730,7 +7728,7 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "2.32 × 103 kg of Fe3O4 reacts with 2.8 × 103 kg of ^\\circ\\text{C}O according to the following reaction : Fe3O4 + ^\\circ\\text{C}O → ^\\circ\\text{C}$O_2$ + Fe If x kg of Fe is formed. Find the value of x?",
+      "question_statement": "2.32 × 103 kg of Fe3O4 reacts with 2.8 × 103 kg of CO according to the following reaction : Fe3O4 + CO → C$O_2$ + Fe If x kg of Fe is formed. Find the value of x?",
       "options": [
         {
           "key": "1",
@@ -7769,23 +7767,23 @@
       "question_number": 16,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following reaction of a complex compound The formula of complex is",
+      "question_statement": "Consider the following reaction of a complex compound The formula of complex is",
       "options": [
         {
           "key": "1",
-          "text": "[^\\circ\\text{C}o(NH3)5^\\circ\\text{C}l] ^\\circ\\text{C}l2"
+          "text": "[Co(NH3)$5^\\circ\\text{C}$l] Cl2"
         },
         {
           "key": "2",
-          "text": "[^\\circ\\text{C}o(NH3)6] ^\\circ\\text{C}l3"
+          "text": "[Co(NH3)6] Cl3"
         },
         {
           "key": "3",
-          "text": "[^\\circ\\text{C}o(NH3)3^\\circ\\text{C}l3] .3NH3"
+          "text": "[Co(NH3)$3^\\circ\\text{C}$l3] .3NH3"
         },
         {
           "key": "4",
-          "text": "[^\\circ\\text{C}o(NH3)4^\\circ\\text{C}l2] ^\\circ\\text{C}l"
+          "text": "[Co(NH3)$4^\\circ\\text{C}$l2] Cl"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250124_shift1_chemistry_q16.png",
@@ -7808,7 +7806,7 @@
       "question_number": 17,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following plots of vapour pressure of a solution containing non-volatile solute versus temperature (in K) and choose the correct graph which represents depression in freezing of solvent.",
+      "question_statement": "Consider the following plots of vapour pressure of a solution containing non-volatile solute versus temperature (in K) and choose the correct graph which represents depression in freezing of solvent.",
       "options": [],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250124_shift1_chemistry_q17.png",
       "review_required": false,
@@ -7830,7 +7828,7 @@
       "question_number": 18,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A student synthesised the compound given below By using one of the following compounds available in the lab and using following reagents. -+ Reactant Me ^\\circ\\text{C}O K (i)B H /THF NBS P^\\circ\\text{C}^\\circ\\text{C} Me ^\\circ\\text{C}OH (ii)H O /OH 2 2 3 →⎯⎯→ ⎯⎯→⎯⎯⎯⎯→⎯⎯⎯⎯⎯ 3 2 $6^\\circ\\text{C}$hoose the suitable compound which can be used as reactant",
+      "question_statement": "A student synthesised the compound given below By using one of the following compounds available in the lab and using following reagents. -+ Reactant Me CO K (i)B H /THF NBS PCC Me COH (ii)H O /OH 2 2 3 →⎯⎯→ ⎯⎯→⎯⎯⎯⎯→⎯⎯⎯⎯⎯ 3 2 $6^\\circ\\text{C}$hoose the suitable compound which can be used as reactant",
       "options": [],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250124_shift1_chemistry_q18.png",
       "review_required": false,
@@ -7913,7 +7911,7 @@
       "question_number": 21,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "If the Ksp of ^\\circ\\text{C}r(OH)3 is 1.6 × $10^{-30}$ $M_4$. The molar solubility of salt in water is 1.56 × 10-x, then value of x is",
+      "question_statement": "If the Ksp of Cr(OH)3 is 1.6 × $10^{-30}$ $M_4$. The molar solubility of salt in water is 1.56 × 10-x, then value of x is",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -7935,7 +7933,7 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "When x g of Benzoic acid reacts with NaH^\\circ\\text{C}$O_3$, 11.2 L of ^\\circ\\text{C}$O_2$ is released at 273 K and 1 atm pressure, calculate mass of benzoic acid in gram?",
+      "question_statement": "When x g of Benzoic acid reacts with NaHC$O_3$, 11.2 L of C$O_2$ is released at 273 K and 1 atm pressure, calculate mass of benzoic acid in gram?",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -7957,7 +7955,7 @@
       "question_number": 23,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "How many of the following cation shows characteristic coloured ppt. with $K_4$[Fe(^\\circ\\text{C}N)6]? ^\\circ\\text{C}$u_2$+, ^\\circ\\text{C}$a_2$+, Ba2+, Fe3+, Zn2+, Mg2+, Mn2+",
+      "question_statement": "How many of the following cation shows characteristic coloured ppt. with $K_4$[Fe(CN)6]? C$u_2$+, C$a_2$+, Ba2+, Fe3+, Zn2+, Mg2+, Mn2+",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -8818,7 +8816,7 @@
       "question_number": 3,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The displacement of a particle as function of time is x(t) = A sin(t) + B cos2(t) + ^\\circ\\text{C}$t_2$ + D. Find dimension of D [ ] AB^\\circ\\text{C} [ ] [ ]",
+      "question_statement": "The displacement of a particle as function of time is x(t) = A sin(t) + B cos2(t) + C$t_2$ + D. Find dimension of D [ ] ABC [ ] [ ]",
       "options": [
         {
           "key": "1",
@@ -8888,7 +8886,7 @@
       "question_number": 5,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Match the column appropriately regarding thermodynamic process. ^\\circ\\text{C}olumn-I ^\\circ\\text{C}olumn-II (i) \\Delta W = 0 (P) When volume change is zero (ii) \\Delta Q = 0 (Q) When pressure is constant (R) When no heat is exchanged (iii) Isobaric (S) Work done by the gas is equal to heat given to the gas (iv) Isothermal",
+      "question_statement": "Match the column appropriately regarding thermodynamic process. Column-I Column-II (i) \\Delta W = 0 (P) When volume change is zero (ii) \\Delta Q = 0 (Q) When pressure is constant (R) When no heat is exchanged (iii) Isobaric (S) Work done by the gas is equal to heat given to the gas (iv) Isothermal",
       "options": [
         {
           "key": "1",
@@ -8927,7 +8925,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In given D^\\circ\\text{C} circuit, find current for R = 12 \\Omega in steady state.",
+      "question_statement": "In given DC circuit, find current for R = 12 \\Omega in steady state.",
       "options": [
         {
           "key": "1",
@@ -9005,11 +9003,11 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The key shown in the circuit is closed at t = 0. ^\\circ\\text{C}hoose the incorrect option regarding the conditions at t = 0.",
+      "question_statement": "The key shown in the circuit is closed at t = 0. Choose the incorrect option regarding the conditions at t = 0.",
       "options": [
         {
           "key": "1",
-          "text": "^\\circ\\text{C}urrent in the circuit is zero"
+          "text": "Current in the circuit is zero"
         },
         {
           "key": "2",
@@ -9017,7 +9015,7 @@
         },
         {
           "key": "3",
-          "text": "^\\circ\\text{C}urrent in the circuit is maximum"
+          "text": "Current in the circuit is maximum"
         },
         {
           "key": "4",
@@ -9044,7 +9042,7 @@
       "question_number": 9,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A uniform solid sphere of mass m rolls down from rest to achieve speed $v_1$ on an inclined plane of 30^\\circ. Sphere achieves speed $v_2$ on an inclined plane of 45^\\circ 2 1 2 2 v v when released from same height then is (assume no slipping) 2 5",
+      "question_statement": "A uniform solid sphere of mass m rolls down from rest to achieve speed $v_1$ on an inclined plane of 30°. Sphere achieves speed $v_2$ on an inclined plane of 45° 2 1 2 2 v v when released from same height then is (assume no slipping) 2 5",
       "options": [
         {
           "key": "2",
@@ -9071,19 +9069,19 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Find the equation of magnetic field for the give equation of electric field (for EM wave). 4 3 cos( ) E E i j t kz = \\omegaˆ ˆ ( ) 0 = + \\omegaB i j t kz ^\\circ\\text{C} 3 4 cos E ˆ ˆ ( ) ( ) 0",
+      "question_statement": "Find the equation of magnetic field for the give equation of electric field (for EM wave). 4 3 cos( ) E E i j t kz = \\omegaˆ ˆ ( ) 0 = + \\omegaB i j t kz C 3 4 cos E ˆ ˆ ( ) ( ) 0",
       "options": [
         {
           "key": "1",
-          "text": "= - - \\omega- B i j t kz ^\\circ\\text{C} 3 4 cos E ˆ ˆ ( ) ( ) 0"
+          "text": "= - - \\omega- B i j t kz C 3 4 cos E ˆ ˆ ( ) ( ) 0"
         },
         {
           "key": "2",
-          "text": "= - \\omega- B i j t kz ^\\circ\\text{C} 3 4 sin E ˆ ˆ ( ) ( ) 0"
+          "text": "= - \\omega- B i j t kz C 3 4 sin E ˆ ˆ ( ) ( ) 0"
         },
         {
           "key": "3",
-          "text": "= - - \\omega- B i j t kz ^\\circ\\text{C} 3 4 sin E ˆ ˆ ( ) ( ) 0"
+          "text": "= - - \\omega- B i j t kz C 3 4 sin E ˆ ˆ ( ) ( ) 0"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250123_shift1_physics_q10.png",
@@ -9145,15 +9143,15 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "For the circuit shown below \n(A) ^\\circ\\text{C}urrent in ammeter is 2 A \n(B) Net resistance is 8 \\Omega (^\\circ\\text{C}) Voltage across B^\\circ\\text{C} is 4 V \n(D) ^\\circ\\text{C}urrent through diode is 1 A ^\\circ\\text{C}hoose the correct option.",
+      "question_statement": "For the circuit shown below \n(A) Current in ammeter is 2 A \n(B) Net resistance is 8 \\Omega (C) Voltage across BC is 4 V \n(D) Current through diode is 1 A Choose the correct option.",
       "options": [
         {
           "key": "1",
-          "text": "Only AB^\\circ\\text{C} are correct"
+          "text": "Only ABC are correct"
         },
         {
           "key": "2",
-          "text": "Only A^\\circ\\text{C}D are correct"
+          "text": "Only ACD are correct"
         },
         {
           "key": "3",
@@ -9219,7 +9217,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Adiabatic constant of a gas is . If volume of gas initially at 0^\\circ^\\circ\\text{C} is reduced to one fourth of the original volume then new temperature is",
+      "question_statement": "Adiabatic constant of a gas is . If volume of gas initially at $0^\\circ\\text{C}$ is reduced to one fourth of the original volume then new temperature is",
       "options": [
         {
           "key": "1",
@@ -9231,7 +9229,7 @@
         },
         {
           "key": "3",
-          "text": "546^\\circ^\\circ\\text{C}"
+          "text": "546°C"
         },
         {
           "key": "4",
@@ -9447,7 +9445,7 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "A bullet of kinetic energy of 125 J strikes a lead block where temperature rises by 50^\\circ^\\circ\\text{C}. If specific heat of lead is 0.1 J/g-^\\circ^\\circ\\text{C} then mass of lead block is (Assume half of kinetic energy of bullet is converted to heat) m gram then 2m is",
+      "question_statement": "A bullet of kinetic energy of 125 J strikes a lead block where temperature rises by $50^\\circ\\text{C}$. If specific heat of lead is 0.1 J/g-°C then mass of lead block is (Assume half of kinetic energy of bullet is converted to heat) m gram then 2m is",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -9535,7 +9533,7 @@
       "question_number": 1,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Which of the following compound can react with Hinsberg reagent? \n(A) Aniline \n(B) N,N-Dimethyl aniline (^\\circ\\text{C}) Methyl amine \n(D) N-phenyl aniline",
+      "question_statement": "Which of the following compound can react with Hinsberg reagent? \n(A) Aniline \n(B) N,N-Dimethyl aniline (C) Methyl amine \n(D) N-phenyl aniline",
       "options": [
         {
           "key": "1",
@@ -9543,11 +9541,11 @@
         },
         {
           "key": "2",
-          "text": "A and ^\\circ\\text{C} only"
+          "text": "A and C only"
         },
         {
           "key": "3",
-          "text": "A, ^\\circ\\text{C} and D"
+          "text": "A, C and D"
         },
         {
           "key": "4",
@@ -9600,19 +9598,19 @@
       "options": [
         {
           "key": "1",
-          "text": "[^\\circ\\text{C}o(NH3)6]^\\circ\\text{C}l3"
+          "text": "[Co(NH3)6]Cl3"
         },
         {
           "key": "2",
-          "text": "[^\\circ\\text{C}o(NH3)3^\\circ\\text{C}l3]"
+          "text": "[Co(NH3)$3^\\circ\\text{C}$l3]"
         },
         {
           "key": "3",
-          "text": "[^\\circ\\text{C}o(en)2(NH3)2]^\\circ\\text{C}l3"
+          "text": "[Co(en)2(NH3)2]Cl3"
         },
         {
           "key": "4",
-          "text": "[^\\circ\\text{C}o(H2O)6]^\\circ\\text{C}l3"
+          "text": "[Co(H2O)6]Cl3"
         }
       ],
       "diagram_url": null,
@@ -9643,11 +9641,11 @@
         },
         {
           "key": "2",
-          "text": "^\\circ\\text{C}r2+, ^\\circ\\text{C}u2+"
+          "text": "Cr2+, Cu2+"
         },
         {
           "key": "3",
-          "text": "^\\circ\\text{C}r3+, Ni2+"
+          "text": "Cr3+, Ni2+"
         },
         {
           "key": "4",
@@ -9713,7 +9711,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Identify the product formed in the following reaction ^\\circ\\text{C}H ^\\circ\\text{C}H ^\\circ\\text{C}HO H^\\circ\\text{C}HO OH 3 2 → + ⎯⎯⎯⎯ Excess Reflux",
+      "question_statement": "Identify the product formed in the following reaction CH CH CHO HCHO OH 3 2 → + ⎯⎯⎯⎯ Excess Reflux",
       "options": [],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250123_shift1_chemistry_q6.png",
       "review_required": false,
@@ -9774,7 +9772,7 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following sequence of reactions and find the molecular mass of the final product (A) formed in g mol-1.",
+      "question_statement": "Consider the following sequence of reactions and find the molecular mass of the final product (A) formed in g mol-1.",
       "options": [
         {
           "key": "1",
@@ -9813,23 +9811,23 @@
       "question_number": 9,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Match the ^\\circ\\text{C}olumn I with ^\\circ\\text{C}olumn II and choose the correct option. ^\\circ\\text{C}olumn I ^\\circ\\text{C}olumn II A. BF3 (i) Odd e- species B. ^\\circ\\text{C}^\\circ\\text{C}$l_4$, ^\\circ\\text{C}$O_2$ (ii) Expanded octet ^\\circ\\text{C}. P^\\circ\\text{C}$l_5$, BrF5 (iii) ^\\circ\\text{C}omplete octet D. NO (iv) Electron deficient",
+      "question_statement": "Match the Column I with Column II and choose the correct option. Column I Column II A. BF3 (i) Odd e- species B. CC$l_4$, C$O_2$ (ii) Expanded octet C. PC$l_5$, BrF5 (iii) Complete octet D. NO (iv) Electron deficient",
       "options": [
         {
           "key": "1",
-          "text": "A - (iii), B - (iv), ^\\circ\\text{C} - (i), D - (ii)"
+          "text": "A - (iii), B - (iv), C - (i), D - (ii)"
         },
         {
           "key": "2",
-          "text": "A - (iv), B - (ii), ^\\circ\\text{C} - (iii), D - (i)"
+          "text": "A - (iv), B - (ii), C - (iii), D - (i)"
         },
         {
           "key": "3",
-          "text": "A - (iv), B - (iii), ^\\circ\\text{C} - (ii), D - (i)"
+          "text": "A - (iv), B - (iii), C - (ii), D - (i)"
         },
         {
           "key": "4",
-          "text": "A - (i), B - (ii), ^\\circ\\text{C} - (iii), D - (iv)"
+          "text": "A - (i), B - (ii), C - (iii), D - (iv)"
         }
       ],
       "diagram_url": null,
@@ -9852,23 +9850,23 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Match the column and choose the correct option ^\\circ\\text{C}olumn-I ^\\circ\\text{C}olumn-II (A) (P) Sandmeyer reaction (B) (Q) Fittig reaction (^\\circ\\text{C}) (R) Wurtz-Fittig reaction (D) ^\\circ\\text{C}$H_3$ - ^\\circ\\text{C}I + AgF → (S) Swarts reaction",
+      "question_statement": "Match the column and choose the correct option Column-I Column-II (A) (P) Sandmeyer reaction (B) (Q) Fittig reaction (C) (R) Wurtz-Fittig reaction (D) C$H_3$ - CI + AgF → (S) Swarts reaction",
       "options": [
         {
           "key": "1",
-          "text": "- (Q), (B) - (P), (^\\circ\\text{C}) - (R), (D) - (S)"
+          "text": "- (Q), (B) - (P), (C) - (R), (D) - (S)"
         },
         {
           "key": "2",
-          "text": "- (Q), (B) - (P), (^\\circ\\text{C}) - (S), (D) - (R)"
+          "text": "- (Q), (B) - (P), (C) - (S), (D) - (R)"
         },
         {
           "key": "3",
-          "text": "- (Q), (B) - (R), (^\\circ\\text{C}) - (S), (D) - (P)"
+          "text": "- (Q), (B) - (R), (C) - (S), (D) - (P)"
         },
         {
           "key": "4",
-          "text": "- (P), (B) - (Q), (^\\circ\\text{C}) - (R), (D) - (S)"
+          "text": "- (P), (B) - (Q), (C) - (R), (D) - (S)"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250123_shift1_chemistry_q10.png",
@@ -9891,7 +9889,7 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}$o_2$+ is forming an octahedral complex with spin only magnetic moment 3.83 BM. The correct electronic configuration for cobalt in the complex is? t e 5 2 2g g",
+      "question_statement": "C$o_2$+ is forming an octahedral complex with spin only magnetic moment 3.83 BM. The correct electronic configuration for cobalt in the complex is? t e 5 2 2g g",
       "options": [
         {
           "key": "1",
@@ -9930,7 +9928,7 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Given below are two statements : Statement-I : During Lassaigne’s test, covalent compound is converted to ionic compound. Statement-II : Na4[Fe(^\\circ\\text{C}N)6] gives Prussian blue colour on reaction with Fe2(SO4)3.",
+      "question_statement": "Given below are two statements : Statement-I : During Lassaigne’s test, covalent compound is converted to ionic compound. Statement-II : Na4[Fe(CN)6] gives Prussian blue colour on reaction with Fe2(SO4)3.",
       "options": [
         {
           "key": "1",
@@ -10008,7 +10006,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the following statements and choose the correct option. Statement-I: Fructose does not contain aldehyde group but it gives Tollen's test. Statement-II: In disaccharides, if the reducing groups are bonded, these are non-reducing sugar e.g., sucrose. If these functional groups are free then they are reducing sugar e.g. maltose and Lactose.",
+      "question_statement": "Consider the following statements and choose the correct option. Statement-I: Fructose does not contain aldehyde group but it gives Tollen's test. Statement-II: In disaccharides, if the reducing groups are bonded, these are non-reducing sugar e.g., sucrose. If these functional groups are free then they are reducing sugar e.g. maltose and Lactose.",
       "options": [
         {
           "key": "1",
@@ -10218,7 +10216,7 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "When 1021 molecules are removed from x mg of ^\\circ\\text{C}$O_2$(g), then 2.4 × $10^{-3}$ moles of ^\\circ\\text{C}$O_2$ are left. ^\\circ\\text{C}alculate the value of x. [Take \\implies NA = 6 × 1023]",
+      "question_statement": "When 1021 molecules are removed from x mg of C$O_2$(g), then 2.4 × $10^{-3}$ moles of C$O_2$ are left. Calculate the value of x. [Take \\implies NA = 6 × 1023]",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -10240,7 +10238,7 @@
       "question_number": 23,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "^\\circ\\text{C}onsider the following Latimer diagram ⎯⎯⎯→ ⎯⎯⎯→ ⎯⎯⎯⎯ + + FeO Fe Fe Fe 2.0 V 0.8 V 0.5 V 2 3 2 0 4 → E + FeO /Fe 4 Find 2 2",
+      "question_statement": "Consider the following Latimer diagram ⎯⎯⎯→ ⎯⎯⎯→ ⎯⎯⎯⎯ + + FeO Fe Fe Fe 2.0 V 0.8 V 0.5 V 2 3 2 0 4 → E + FeO /Fe 4 Find 2 2",
       "options": null,
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250123_shift1_chemistry_q23.png",
       "review_required": false,
@@ -10262,7 +10260,7 @@
       "question_number": 24,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "^\\circ\\text{C}onsider the given values : \\Delta H = 55 kJ mol-1 \\Delta S = 175 J mol-1 K-1 T = 25^\\circ^\\circ\\text{C} ^\\circ\\text{C}alculate the value of Gibbs free energy change (\\Delta G) in J mol-1.",
+      "question_statement": "Consider the given values : \\Delta H = 55 kJ mol-1 \\Delta S = 175 J mol-1 K-1 T = $25^\\circ\\text{C}$ Calculate the value of Gibbs free energy change (\\Delta G) in J mol-1.",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -10284,7 +10282,7 @@
       "question_number": 25,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "In estimation of sulphur by ^\\circ\\text{C}arius method, 160 g of organic compound gives 466 g of Barium sulphate. % of sulphur in the organic compound is _____.",
+      "question_statement": "In estimation of sulphur by Carius method, 160 g of organic compound gives 466 g of Barium sulphate. % of sulphur in the organic compound is _____.",
       "options": null,
       "diagram_url": null,
       "review_required": false,
@@ -10524,7 +10522,7 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "^\\circ\\text{C}onsider the set S = {1, 2, 3, …, 1000}. Then the number of arithmetic progression that can be formed using elements of set S such that first term is 1 and last term is 1000 is",
+      "question_statement": "Consider the set S = {1, 2, 3, …, 1000}. Then the number of arithmetic progression that can be formed using elements of set S such that first term is 1 and last term is 1000 is",
       "options": [
         {
           "key": "1",
@@ -10672,19 +10670,19 @@
       "options": [
         {
           "key": "1",
-          "text": "+ ^\\circ\\text{C} 2 13 ( ) + ( ) - ( ) x x 32 1 13 15"
+          "text": "+ C 2 13 ( ) + ( ) - ( ) x x 32 1 13 15"
         },
         {
           "key": "2",
-          "text": "+ ^\\circ\\text{C} 2 13 ( ) - ( ) + ( ) x x 1 15 32 1"
+          "text": "+ C 2 13 ( ) - ( ) + ( ) x x 1 15 32 1"
         },
         {
           "key": "3",
-          "text": "+ ^\\circ\\text{C} 15 13 ( ) - ( ) + ( ) x x 13 15 32 1"
+          "text": "+ C 15 13 ( ) - ( ) + ( ) x x 13 15 32 1"
         },
         {
           "key": "4",
-          "text": "+ ^\\circ\\text{C}"
+          "text": "+ C"
         }
       ],
       "diagram_url": null,

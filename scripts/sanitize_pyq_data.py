@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-scripts/sanitize_pyq_data.py - comprehensive symbol translation
+scripts/sanitize_pyq_data.py - comprehensive symbol translation (clean)
 Cleans and normalizes all 352 questions in data/pyq_database.json.
 """
 
@@ -20,27 +20,27 @@ questions = db['questions']
 papers = db['papers']
 
 UNICODE_MAP = {
-    '\uf06d': r'\mu',
-    '\uf065': r'\varepsilon',
+    '\uf06d': r'\mu ',
+    '\uf065': r'\varepsilon ',
     '\uf0de': r'\implies ',
     '\uf0ba': r'\equiv ',
     '\uf0f2': r'\int ',
     '\uf0b4': r'\times ',
     '\uf044': r'\Delta ',
-    '\uf072': r'\rho',
-    '\uf074': r'\tau',
-    '\uf077': r'\omega',
-    '\uf070': r'\pi',
-    '\uf061': r'\alpha',
-    '\uf062': r'\beta',
-    '\uf067': r'\gamma',
-    '\uf071': r'\theta',
-    '\uf06c': r'\lambda',
-    '\uf073': r'\sigma',
-    '\uf064': r'\delta',
-    '\uf057': r'\Omega',
-    '\uf066': r'\phi',
-    '\uf0a5': r'\infty',
+    '\uf072': r'\rho ',
+    '\uf074': r'\tau ',
+    '\uf077': r'\omega ',
+    '\uf070': r'\pi ',
+    '\uf061': r'\alpha ',
+    '\uf062': r'\beta ',
+    '\uf067': r'\gamma ',
+    '\uf071': r'\theta ',
+    '\uf06c': r'\lambda ',
+    '\uf073': r'\sigma ',
+    '\uf064': r'\delta ',
+    '\uf057': r'\Omega ',
+    '\uf066': r'\phi ',
+    '\uf0a5': r'\infty ',
     '\uf0b9': r'\neq ',
     '\uf0a3': r'\leq ',
     '\uf03c': '<',
@@ -87,7 +87,6 @@ UNICODE_MAP = {
     '\u2013': '-',
     '\u2014': '-',
     '\u2212': '-',
-    '°': r'^\circ',
     '': r'\neq ',
 }
 
@@ -148,6 +147,9 @@ def sanitize_option_text(text: str) -> str:
     cleaned = ' '.join(lines)
     cleaned = re.sub(r'[ \t]+', ' ', cleaned).strip()
     
+    # ensure space after \mu
+    cleaned = re.sub(r'\\mu([a-zA-Z])', r'\\mu \1', cleaned)
+    
     if r'\Delta' in cleaned or r'\mu' in cleaned or r'\varepsilon' in cleaned or r'\neq' in cleaned:
         if not cleaned.startswith('$') and not cleaned.endswith('$'):
             cleaned = f"${cleaned}$"
@@ -156,14 +158,14 @@ def sanitize_option_text(text: str) -> str:
 
 def format_math_expressions(statement: str, subject: str) -> str:
     statement = re.sub(r'\b10-(\d+)\b', r'$10^{-\1}$', statement)
-    statement = re.sub(r'(-?\d+)\s*C\b', r'$\1^\\circ\\text{C}$', statement)
-    statement = re.sub(r'(-?\d+)\s*\^\s*\\circ\\text\{C\}', r'$\1^\\circ\\text{C}$', statement)
+    statement = re.sub(r'(-?\d+)\s*(?:°C|° C)\b', r'$\1^\\circ\\text{C}$', statement)
     
     statement = re.sub(r'\bHe\+\b', r'$\\text{He}^+$', statement)
     statement = re.sub(r'\bAl3\+\b', r'$\\text{Al}^{3+}$', statement)
     statement = re.sub(r'\bMg2\+\b', r'$\\text{Mg}^{2+}$', statement)
     statement = re.sub(r'\bNa\+\b', r'$\\text{Na}^+$', statement)
     statement = re.sub(r'\bF-\b', r'$\\text{F}^-$', statement)
+    statement = re.sub(r'\\mu([a-zA-Z])', r'\\mu \1', statement)
     statement = re.sub(r'\$\$+', r'$', statement)
     return statement
 
@@ -244,6 +246,15 @@ KNOWN_CORRECTIONS = {
             {'key': '2', 'text': '$\\Delta Q = 900\\text{ cal}$'},
             {'key': '3', 'text': '$\\Delta Q = 1210\\text{ cal}$'},
             {'key': '4', 'text': '$\\Delta Q = 870\\text{ cal}$'},
+        ]
+    },
+    'jee_main_2025_btech_20250122_shift1_phys_q15': {
+        'statement': "The equiconvex lens shown in figure is silvered on one side. For what distance of object from the lens is the image formed on the object itself?",
+        'options': [
+            {'key': '1', 'text': '$\\mu R$'},
+            {'key': '2', 'text': '$\\frac{R}{2\\mu - 2}$'},
+            {'key': '3', 'text': '$\\frac{R}{2\\mu - 1}$'},
+            {'key': '4', 'text': '$\\frac{R}{\\mu}$'},
         ]
     },
     'jee_main_2025_btech_20250122_shift1_math_q1': {

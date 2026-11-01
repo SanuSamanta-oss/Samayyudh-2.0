@@ -10,7 +10,7 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     name: 'GATE',
     description: 'Graduate Aptitude Test in Engineering',
     icon: '🎓',
-    logo: '/logos/gate.jpg',
+    logo: '/logos/gate.png',
     exams: [
       { id: 'gate-ae-24', exam_code: 'GATE-AE', exam_name: 'Aerospace Engineering (AE)', category: 'ENGINEERING', description: 'GATE 2024 Aerospace Engineering', icon: '🚀', duration_seconds: 10800, total_questions: 65, total_marks: 100, negative_marking: true, marking_rules: [], question_types: ['mcq', 'numerical', 'msq'], subjects: [], sections: [], time_rules: [], is_active: true, created_at: '', updated_at: '' },
       { id: 'gate-ag-24', exam_code: 'GATE-AG', exam_name: 'Agricultural Engineering (AG)', category: 'ENGINEERING', description: 'GATE 2024 Agricultural Engineering', icon: '🌾', duration_seconds: 10800, total_questions: 65, total_marks: 100, negative_marking: true, marking_rules: [], question_types: ['mcq', 'numerical', 'msq'], subjects: [], sections: [], time_rules: [], is_active: true, created_at: '', updated_at: '' },
@@ -54,8 +54,8 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
   },
   {
     code: 'JEE_MAINS',
-    name: 'JEE Mains',
-    description: 'Joint Entrance Examination — Mains',
+    name: 'JEE Main',
+    description: 'Joint Entrance Examination — Main',
     icon: '🚀',
     logo: '/logos/jee_mains.png',
     exams: [],
@@ -66,6 +66,14 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     description: 'Joint Entrance Examination — Advanced (IIT)',
     icon: '⭐',
     logo: '/logos/jee_advanced.jpg',
+    exams: [],
+  },
+  {
+    code: 'NEET',
+    name: 'NEET UG',
+    description: 'National Eligibility cum Entrance Test',
+    icon: '🩺',
+    logo: '/logos/neet.jpg',
     exams: [],
   },
   {
@@ -101,35 +109,6 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
     exams: [],
   },
   {
-    code: 'MEDICAL',
-    name: 'NEET',
-    description: 'National Eligibility cum Entrance Test (UG)',
-    icon: '🩺',
-    logo: '/logos/neet.jpg',
-    exams: [
-      {
-        id: 'neet-2024',
-        exam_code: 'NEET',
-        exam_name: 'NEET UG 2024 (Rigud Q4 Official Paper)',
-        category: 'MEDICAL',
-        description: 'Actual 200 Questions (Physics, Chemistry, Botany, Zoology)',
-        icon: '🩺',
-        duration_seconds: 12000,
-        total_questions: 200,
-        total_marks: 720,
-        negative_marking: true,
-        marking_rules: [],
-        question_types: ['mcq'],
-        subjects: ['Physics', 'Chemistry', 'Botany', 'Zoology'],
-        sections: [],
-        time_rules: [],
-        is_active: true,
-        created_at: '',
-        updated_at: ''
-      }
-    ],
-  },
-  {
     code: 'CUSTOM',
     name: 'Custom Exam',
     description: 'Create your own practice exam',
@@ -139,15 +118,15 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
 ];
 
 export const EXAM_MODES: ExamModeConfig[] = [
-  { mode: 'quick_battle', label: 'Quick Battle', description: '10 questions to warm up', questionCount: 10, icon: '⚡' },
-  { mode: 'practice_battle', label: 'Practice Battle', description: '25 questions for a solid session', questionCount: 25, icon: '📝' },
-  { mode: 'half_century', label: 'Half Century', description: '50 questions — earn your 🏏', questionCount: 50, icon: '🏏' },
-  { mode: 'full_century', label: 'Full Century', description: '100 questions — the ultimate test', questionCount: 100, icon: '🏆' },
-  { mode: 'full_exam', label: 'Full Exam', description: 'Complete exam simulation', questionCount: 0, icon: '📋' },
-  { mode: 'topic_practice', label: 'Topic Practice', description: 'Focus on specific topics', questionCount: 0, icon: '🎯' },
-  { mode: 'previous_year', label: 'Previous Year', description: 'Practice with past questions', questionCount: 0, icon: '📚' },
-  { mode: 'speed_battle', label: 'Speed Battle', description: 'Race against the clock', questionCount: 0, icon: '🏎️' },
-  { mode: 'custom', label: 'Custom', description: 'Choose your own settings', questionCount: 0, icon: '⚙️' },
+  { mode: 'quick_battle', label: 'Quick Battle', description: '10 questions to warm up', questionCount: 10, icon: 'Zap' },
+  { mode: 'practice_battle', label: 'Practice Battle', description: '25 questions for a solid session', questionCount: 25, icon: 'FileText' },
+  { mode: 'half_century', label: 'Half Century', description: '50 questions for focused practice', questionCount: 50, icon: 'Target' },
+  { mode: 'full_century', label: 'Full Century', description: '100 questions — the ultimate test', questionCount: 100, icon: 'Award' },
+  { mode: 'full_exam', label: 'Full Exam', description: 'Complete exam simulation', questionCount: 0, icon: 'Layers' },
+  { mode: 'topic_practice', label: 'Topic Practice', description: 'Focus on specific topics', questionCount: 0, icon: 'Compass' },
+  { mode: 'previous_year', label: 'Previous Year', description: 'Practice with past questions', questionCount: 0, icon: 'BookOpen' },
+  { mode: 'speed_battle', label: 'Speed Battle', description: 'Race against the clock', questionCount: 0, icon: 'Clock' },
+  { mode: 'custom', label: 'Custom', description: 'Choose your own settings', questionCount: 0, icon: 'Sliders' },
 ];
 
 export const EXAM_DURATIONS: ExamDurationOption[] = [

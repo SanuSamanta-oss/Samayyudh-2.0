@@ -22105,7 +22105,14 @@ export function getQuestionsByExam(examCodeOrCategory: string): Question[] {
 
   // Strict GATE isolation
   if (code.startsWith('GATE')) {
-    const branchQs = GATE_QUESTIONS.filter((q) => q.exam_code.toUpperCase() === code);
+    const branchQs = GATE_QUESTIONS.filter((q) => {
+      const qCode = q.exam_code.toUpperCase();
+      return (
+        qCode === code ||
+        qCode.startsWith(code + '-') ||
+        code.startsWith(qCode + '-')
+      );
+    });
     return branchQs.length > 0 ? branchQs : GATE_QUESTIONS;
   }
   if (code === 'ENGINEERING') {

@@ -9,14 +9,21 @@ import { Clock, Hash, Award, Zap, FileText, Crosshair, Trophy, Cog } from 'lucid
    ============================================================ */
 
 const EXAM_LOGO_MAP: Record<string, { logo?: string; abbrev: string }> = {
-  ENGINEERING:           { logo: '/logos/gate.jpg',       abbrev: 'GATE' },
-  ENGINEERING_ENTRANCE:  { logo: '/logos/jee.jpg',        abbrev: 'JEE' },
-  STATE_ENTRANCE:        { logo: '/logos/wbjee.jpg',      abbrev: 'WBJEE' },
-  CIVIL_SERVICES:        { logo: '/logos/upsc.jpg',       abbrev: 'UPSC' },
-  UNIVERSITY:            { logo: '/logos/university.jpg', abbrev: 'UNIV' },
-  COMPETITIVE:           { logo: '/logos/ssc.jpg',        abbrev: 'SSC+' },
-  MEDICAL:               { logo: '/logos/neet.jpg',       abbrev: 'NEET' },
-  CUSTOM:                {                                abbrev: 'CSTM' },
+  ENGINEERING:           { logo: '/logos/gate.jpg',         abbrev: 'GATE' },
+  ENGINEERING_ENTRANCE:  { logo: '/logos/jee.jpg',          abbrev: 'JEE' },
+  JEE:                   { logo: '/logos/jee.jpg',          abbrev: 'JEE' },
+  JEE_MAINS:             { logo: '/logos/jee_mains.png',    abbrev: 'JEE-M' },
+  JEE_ADVANCED:          { logo: '/logos/jee_advanced.jpg', abbrev: 'JEE-A' },
+  STATE_ENTRANCE:        { logo: '/logos/wbjee.jpg',        abbrev: 'WBJEE' },
+  WBJEE:                 { logo: '/logos/wbjee.jpg',        abbrev: 'WBJEE' },
+  CIVIL_SERVICES:        { logo: '/logos/upsc.jpg',         abbrev: 'UPSC' },
+  UPSC:                  { logo: '/logos/upsc.jpg',         abbrev: 'UPSC' },
+  UNIVERSITY:            { logo: '/logos/university.jpg',   abbrev: 'UNIV' },
+  COMPETITIVE:           { logo: '/logos/ssc.jpg',          abbrev: 'SSC+' },
+  MEDICAL:               { logo: '/logos/neet.jpg',         abbrev: 'NEET' },
+  NEET:                  { logo: '/logos/neet.jpg',         abbrev: 'NEET' },
+  GATE:                  { logo: '/logos/gate.jpg',         abbrev: 'GATE' },
+  CUSTOM:                {                                  abbrev: 'CSTM' },
 };
 
 /* ============================================================
@@ -47,6 +54,8 @@ interface NewspaperBattleSummaryProps {
   questionCount: number;
   durationLabel: string;
   estimatedMarks: number;
+  subjectName?: string | null;
+  chapterName?: string | null;
 }
 
 /* ============================================================
@@ -61,8 +70,15 @@ export function NewspaperBattleSummary({
   questionCount,
   durationLabel,
   estimatedMarks,
+  subjectName,
+  chapterName,
 }: NewspaperBattleSummaryProps) {
-  const examLogo = examCode ? EXAM_LOGO_MAP[examCode] : undefined;
+  const examLogo = examCode
+    ? EXAM_LOGO_MAP[examCode] ||
+      (examCode.startsWith('GATE')
+        ? { logo: '/logos/gate.jpg', abbrev: examCode.replace('GATE-', '') || 'GATE' }
+        : undefined)
+    : undefined;
   const modeIcon = MODE_ICON_MAP[modeKey] ?? <Zap className="w-3.5 h-3.5" />;
   const currentYear = new Date().getFullYear();
 
@@ -90,6 +106,19 @@ export function NewspaperBattleSummary({
       ),
       icon: null,
     },
+    ...(subjectName
+      ? [
+          {
+            label: 'Topic',
+            value: (
+              <span className="font-semibold truncate max-w-[220px]">
+                {subjectName} {chapterName ? `• ${chapterName}` : '(All Chapters)'}
+              </span>
+            ),
+            icon: null,
+          },
+        ]
+      : []),
     {
       label: 'Mode',
       value: (

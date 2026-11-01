@@ -8,6 +8,7 @@ export type ExamCategoryCode =
   | 'ENGINEERING_ENTRANCE'
   | 'JEE_MAINS'
   | 'JEE_ADVANCED'
+  | 'NEET'
   | 'ENGINEERING'
   | 'STATE_ENTRANCE'
   | 'CIVIL_SERVICES'

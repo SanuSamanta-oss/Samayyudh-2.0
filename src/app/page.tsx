@@ -30,12 +30,14 @@ const fadeUp = {
 
 
 const examCategories = [
-  { name: 'GATE', desc: 'Graduate Aptitude Test', icon: '🎓', logo: '/logos/gate.jpg', color: 'from-indigo-500 to-violet-500' },
-  { name: 'JEE', desc: 'Engineering Entrance', icon: '🚀', logo: '/logos/jee.jpg', color: 'from-blue-500 to-cyan-500' },
-  { name: 'WBJEE', desc: 'WB Joint Entrance', icon: '📐', logo: '/logos/wbjee.jpg', color: 'from-emerald-500 to-teal-500' },
-  { name: 'UPSC', desc: 'Civil Services', icon: '🏛️', logo: '/logos/upsc.jpg', color: 'from-amber-500 to-orange-500' },
-  { name: 'University', desc: 'College Exams', icon: '🏫', logo: '/logos/university.jpg', color: 'from-rose-500 to-pink-500' },
-  { name: 'Competitive', desc: 'SSC · Banking · Railway', icon: '⚔️', logo: '/logos/ssc.jpg', color: 'from-purple-500 to-fuchsia-500' },
+  { code: 'ENGINEERING', name: 'GATE', desc: 'Graduate Aptitude Test', icon: '🎓', logo: '/logos/gate.png', color: 'from-indigo-500 to-violet-500' },
+  { code: 'JEE_MAINS', name: 'JEE Main', desc: 'Engineering Entrance — Main', icon: '🚀', logo: '/logos/jee_mains.png', color: 'from-blue-500 to-cyan-500' },
+  { code: 'JEE_ADVANCED', name: 'JEE Advanced', desc: 'IIT Advanced Entrance', icon: '⭐', logo: '/logos/jee_advanced.jpg', color: 'from-amber-500 to-indigo-500' },
+  { code: 'NEET', name: 'NEET UG', desc: 'Medical Entrance (UG)', icon: '🩺', logo: '/logos/neet.jpg', color: 'from-emerald-500 to-teal-500' },
+  { code: 'STATE_ENTRANCE', name: 'WBJEE', desc: 'WB Joint Entrance', icon: '📐', logo: '/logos/wbjee.jpg', color: 'from-emerald-500 to-teal-500' },
+  { code: 'CIVIL_SERVICES', name: 'UPSC', desc: 'Civil Services', icon: '🏛️', logo: '/logos/upsc.jpg', color: 'from-amber-500 to-orange-500' },
+  { code: 'UNIVERSITY', name: 'University', desc: 'College Exams', icon: '🏫', logo: '/logos/university.jpg', color: 'from-rose-500 to-pink-500' },
+  { code: 'COMPETITIVE', name: 'Competitive', desc: 'SSC · Banking · Railway', icon: '⚔️', logo: '/logos/ssc.jpg', color: 'from-purple-500 to-fuchsia-500' },
 ];
 
 
@@ -95,12 +97,12 @@ export default function LandingPage() {
 
   const initial = displayName.charAt(0).toUpperCase();
 
-  const handleExamClick = (name: string) => {
+  const handleExamClick = (name: string, code?: string) => {
     setLoadingExam(name);
     setTimeout(() => {
       setFinished(true);
       setTimeout(() => {
-        router.push(`/practice?exam=${encodeURIComponent(name)}`);
+        router.push(`/practice?exam=${encodeURIComponent(code || name)}`);
       }, 800); // 800ms for unlocked animation
     }, 2000);
   };
@@ -290,8 +292,8 @@ export default function LandingPage() {
               viewport={{ once: true }}
             >
               <button
-                onClick={() => handleExamClick(cat.name)}
-                className="w-full text-left group flex flex-col items-center gap-3 p-5 md:p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-brand-200 transition-all duration-300"
+                onClick={() => handleExamClick(cat.name, cat.code)}
+                className="w-full text-left group flex flex-col items-center gap-3 p-5 md:p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-brand-200 transition-all duration-300 cursor-pointer"
               >
                 {'logo' in cat && cat.logo ? (
                   <Image

@@ -317,16 +317,34 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "From the given option, identify the diode connected in forward bias.",
-      "options": [],
+      "question_statement": "From the given options, identify the semiconductor diode circuit connected in forward bias:",
+      "options": [
+        {
+          "key": "1",
+          "text": "$p$-side at $+2\\text{ V}$, $n$-side at $-2\\text{ V}$ (Forward Bias)"
+        },
+        {
+          "key": "2",
+          "text": "$p$-side at $-3\\text{ V}$, $n$-side at $-1\\text{ V}$ (Reverse Bias)"
+        },
+        {
+          "key": "3",
+          "text": "$p$-side at $0\\text{ V}$, $n$-side at $+3\\text{ V}$ (Reverse Bias)"
+        },
+        {
+          "key": "4",
+          "text": "$p$-side at $-2\\text{ V}$, $n$-side at $+2\\text{ V}$ (Reverse Bias)"
+        }
+      ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift1_physics_q6.png",
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 3)",
-      "fingerprint": "0490ef1929909a45026acce6cc9e1f6f89a08338e9cf36292c65d408cc0ce5fa",
+      "fingerprint": "8ac10f945b30249fb5feec0bfbd347cb5db8e83649dba93e40f4216c760f5910",
       "created_at": "2026-11-01T12:28:57.978737Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_phys_q7",
@@ -341,33 +359,34 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The radius of electron in the ground state of hydrogen is $a_0$. The radius of electron in $\\text{He}^+$ ion in the 3rd excited state is $a$. Then the ratio $\\frac{a_0}{a}$ is:",
+      "question_statement": "The radius of an electron in the ground state of hydrogen is $a_0$. The radius of an electron in $\\text{He}^+$ ion in its $3^{\\text{rd}}$ excited state ($n = 4$) is $a$. Then the ratio $\\frac{a_0}{a}$ is equal to:",
       "options": [
         {
           "key": "1",
-          "text": "$\\frac{1}{4}$"
+          "text": "$\\frac{1}{2}$"
         },
         {
           "key": "2",
-          "text": "$\\frac{1}{16}$"
+          "text": "$\\frac{1}{4}$"
         },
         {
           "key": "3",
-          "text": "$\\frac{1}{8}$"
+          "text": "$\\frac{1}{16}$"
         },
         {
           "key": "4",
-          "text": "$\\frac{1}{2}$"
+          "text": "$\\frac{1}{8}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 4)",
-      "fingerprint": "6c144fdaecf764f55249207115b5f5257f245528a45c01e1b5c95206c93fe712",
+      "fingerprint": "22ac94514dceb78a0f631a1c2a43c47f8e2d4e78a824066f2c3951f5eb898947",
       "created_at": "2026-11-01T12:28:57.995123Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "4"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_phys_q8",
@@ -382,7 +401,7 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Ice at $-10^\\circ\\text{C}$ is to be converted into steam at $110^\\circ\\text{C}$. Mass of ice is $10^{-3}\\text{ kg}$. What amount of heat $\\Delta Q$ is required?",
+      "question_statement": "Ice at $-10^\\circ\\text{C}$ is to be converted into steam at $110^\\circ\\text{C}$. The mass of ice is $m = 10^{-3}\\text{ kg} = 1\\text{ g}$. (Given: specific heat of ice $s_{\\text{ice}} = 0.5\\text{ cal}\\cdot\\text{g}^{-1}\\cdot{^\\circ\\text{C}}^{-1}$, latent heat of fusion $L_f = 80\\text{ cal/g}$, specific heat of water $s_w = 1\\text{ cal}\\cdot\\text{g}^{-1}\\cdot{^\\circ\\text{C}}^{-1}$, latent heat of vaporization $L_v = 540\\text{ cal/g}$, specific heat of steam $s_{\\text{steam}} = 0.5\\text{ cal}\\cdot\\text{g}^{-1}\\cdot{^\\circ\\text{C}}^{-1}$). What total amount of heat $\\Delta Q$ is required?",
       "options": [
         {
           "key": "1",
@@ -405,10 +424,11 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 4)",
-      "fingerprint": "08f410f7adf9d3cce429a7b5b8aa3d5a7787b64e5f94a2e62c8f9e330a5f3e8d",
+      "fingerprint": "fcbfdcea1259ddc7c03c64382d53fac393d9cd47bc23cb1409bf8d5c36dbe9c6",
       "created_at": "2026-11-01T12:28:58.002682Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_phys_q9",
@@ -423,25 +443,34 @@
       "question_number": 9,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A charge of value q is placed at the edge of a imaginary cube of side a as shown in figure. Find the net flux through the cube \\varepsilon 4 q 0 \\varepsilon 6 q",
+      "question_statement": "A point charge $q$ is placed at the center of an edge of an imaginary cube of side $a$ as shown in the figure. Find the net electric flux $\\Phi$ passing through this cube:",
       "options": [
         {
+          "key": "1",
+          "text": "$\\frac{q}{\\varepsilon_0}$"
+        },
+        {
           "key": "2",
-          "text": "$0 \\varepsilon 2 q 0 \\varepsilon 8 q$"
+          "text": "$\\frac{q}{4\\varepsilon_0}$"
+        },
+        {
+          "key": "3",
+          "text": "$\\frac{q}{8\\varepsilon_0}$"
         },
         {
           "key": "4",
-          "text": "0"
+          "text": "$\\frac{q}{2\\varepsilon_0}$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift1_physics_q9.png",
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 4)",
-      "fingerprint": "6c29f5488b1e34b0e7c0f06bf12c39e7a001c6d2f513e6a68a0f3ab14a03554a",
+      "fingerprint": "96a0d942be26f031cc2b4fe38efa87643f41bfe9c9ee6b6d1c1b1442af1bdf4f",
       "created_at": "2026-11-01T12:28:58.027482Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "2"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_phys_q10",
@@ -456,29 +485,34 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A closed organ pipe in 9th harmonic resonates with 4th harmonic of open organ pipe [lclosed = 10 cm]. Find length of open organ pipe. 15 cm L = 0",
+      "question_statement": "A closed organ pipe vibrating in its $9^{\\text{th}}$ harmonic resonates with the $4^{\\text{th}}$ harmonic of an open organ pipe. If the length of the closed organ pipe is $l_{\\text{closed}} = 10\\text{ cm}$, find the length $L_0$ of the open organ pipe:",
       "options": [
         {
           "key": "1",
-          "text": "9 L = 100 cm 0"
+          "text": "$L_0 = \\frac{100}{9}\\text{ cm}$"
         },
         {
           "key": "2",
-          "text": "7 L = 110 cm 0"
+          "text": "$L_0 = \\frac{110}{7}\\text{ cm}$"
         },
         {
           "key": "3",
-          "text": "9 L = 80 cm 0"
+          "text": "$L_0 = \\frac{80}{9}\\text{ cm}$"
+        },
+        {
+          "key": "4",
+          "text": "$L_0 = 15\\text{ cm}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 4)",
-      "fingerprint": "7371e7152466b7b2c41046623863c81ba84057163775e71cd030babb86106d03",
+      "fingerprint": "2704b656e992e1128f0ec945237e3ae91b8f60c49e89f595f3e7f2cd29c0cb2e",
       "created_at": "2026-11-01T12:28:58.035567Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "3"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_phys_q12",
@@ -493,16 +527,34 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Which of the following graphs correctly represents the variation of resistivity (\\rho) with temperature (T).",
-      "options": [],
+      "question_statement": "Which of the following graphs correctly represents the variation of electrical resistivity $\\rho$ with absolute temperature $T$ for a semiconductor?",
+      "options": [
+        {
+          "key": "1",
+          "text": "Resistivity $\\rho$ decreases exponentially with temperature $T$"
+        },
+        {
+          "key": "2",
+          "text": "Resistivity $\\rho$ increases linearly with temperature $T$"
+        },
+        {
+          "key": "3",
+          "text": "Resistivity $\\rho$ remains constant with temperature $T$"
+        },
+        {
+          "key": "4",
+          "text": "Resistivity $\\rho$ is proportional to $T^2$"
+        }
+      ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift1_physics_q12.png",
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 5)",
-      "fingerprint": "2fd9dd1f55250570eeda88f5d20bf4be186fe29e63303d6db5f26afc131bf1e4",
+      "fingerprint": "d6e34da533ff3e686ee57dc53b33cbf83b7721bbc5cfa8c63f7edf624ec528bf",
       "created_at": "2026-11-01T12:28:58.068964Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_phys_q13",
@@ -517,15 +569,15 @@
       "question_number": 13,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "If whole YDSE apparatus is immersed in a liquid of refractive index \\mu, then what is the effect on fringe width?",
+      "question_statement": "If the entire Young’s Double Slit Experiment (YDSE) apparatus is immersed in a liquid of refractive index $\\mu$, then what is the effect on the fringe width $\\beta$?",
       "options": [
         {
           "key": "1",
-          "text": "Fringe width increases"
+          "text": "Fringe width increases by a factor of $\\mu$"
         },
         {
           "key": "2",
-          "text": "Fringe width decreases"
+          "text": "Fringe width decreases to $\\beta / \\mu$"
         },
         {
           "key": "3",
@@ -533,17 +585,18 @@
         },
         {
           "key": "4",
-          "text": "It may increase on one side and decrease on other side"
+          "text": "Fringe pattern completely disappears"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 5)",
-      "fingerprint": "26e7052aa40ca987bcd2722f1cb91e0628bd539a274f547c841de6a6268dde6b",
+      "fingerprint": "181eab7c616f89f09dce0a1cc98e9de1596ccc048799dbe8d0187891da4bff7e",
       "created_at": "2026-11-01T12:28:58.075714Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "2"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_phys_q14",
@@ -935,33 +988,34 @@
       "question_number": 1,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "For complex ion [NiC$l_4$]2- what is the charge on metal and shape of complex respectively?",
+      "question_statement": "For the coordination complex ion $[\\text{NiCl}_4]^{2-}$, what is the oxidation state on the nickel atom and the spatial geometry of the complex respectively?",
       "options": [
         {
           "key": "1",
-          "text": "+2, Tetrahedral"
+          "text": "$+2$, Tetrahedral"
         },
         {
           "key": "2",
-          "text": "+2, Square planar"
+          "text": "$+2$, Square Planar"
         },
         {
           "key": "3",
-          "text": "+4, Tetrahedral"
+          "text": "$+4$, Tetrahedral"
         },
         {
           "key": "4",
-          "text": "+4, Square Planar"
+          "text": "$+4$, Square Planar"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 8)",
-      "fingerprint": "a036b2a4612c7ece0babae133982a9ff7535b75f4a42b25065cb0d50bb27e872",
+      "fingerprint": "0baecc8d7dda76ba562ed164c85098ab5577fbf8e75164b4dc295eacd06c0736",
       "created_at": "2026-11-01T12:28:58.222127Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_chem_q2",
@@ -976,33 +1030,34 @@
       "question_number": 2,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Compare boiling point of given solutions \n(i) $10^{-4}$ M NaCl \n(ii) $10^{-3}$ M NaCl \n(iii) $10^{-2}$ M NaCl \n(iv) $10^{-4}$ M urea",
+      "question_statement": "Compare the boiling points of the following given aqueous solutions:\\n(i) $10^{-4}\\text{ M NaCl}$\\n(ii) $10^{-3}\\text{ M NaCl}$\\n(iii) $10^{-2}\\text{ M NaCl}$\\n(iv) $10^{-4}\\text{ M Urea}$",
       "options": [
         {
           "key": "1",
-          "text": "I > II > III > IV"
+          "text": "$\\text{I} > \\text{II} > \\text{III} > \\text{IV}$"
         },
         {
           "key": "2",
-          "text": "III > II > I > IV"
+          "text": "$\\text{III} > \\text{II} > \\text{I} > \\text{IV}$"
         },
         {
           "key": "3",
-          "text": "II > I > III > IV"
+          "text": "$\\text{II} > \\text{I} > \\text{III} > \\text{IV}$"
         },
         {
           "key": "4",
-          "text": "III > I > II > IV"
+          "text": "$\\text{III} > \\text{I} > \\text{II} > \\text{IV}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 8)",
-      "fingerprint": "5bc6d3280d97cbbd650225fa562f7eeb6ace04f006f11f93d8ab7746476c10f5",
+      "fingerprint": "345866f2dea3ba5378c2ce670e3b29fa5887c18368185f7fa3b0f772752caf73",
       "created_at": "2026-11-01T12:28:58.231302Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "2"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_chem_q3",
@@ -1017,33 +1072,34 @@
       "question_number": 3,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The correct decreasing order of electronegativity is",
+      "question_statement": "Which of the following represents the correct decreasing order of electronegativity for the halogens?",
       "options": [
         {
           "key": "1",
-          "text": "F > Cl > I > Br"
+          "text": "$\\text{F} > \\text{Cl} > \\text{I} > \\text{Br}$"
         },
         {
           "key": "2",
-          "text": "Cl > F > Br > I"
+          "text": "$\\text{Cl} > \\text{F} > \\text{Br} > \\text{I}$"
         },
         {
           "key": "3",
-          "text": "F > Cl > Br > I"
+          "text": "$\\text{F} > \\text{Cl} > \\text{Br} > \\text{I}$"
         },
         {
           "key": "4",
-          "text": "Br > F > I > Cl"
+          "text": "$\\text{Br} > \\text{F} > \\text{I} > \\text{Cl}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 8)",
-      "fingerprint": "5a46dfab44cab2ac896e5f5fc061eff8d8f92dee9d5fa6be5b170cfb7778042b",
+      "fingerprint": "878b933a86f06c9a32335f2c0652f83d19c3d4ab7d76621b18d3f2f0c44f2506",
       "created_at": "2026-11-01T12:28:58.239489Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "3"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_chem_q4",
@@ -1058,33 +1114,34 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Which of the following has maximum size out of -, Na+? Al3+, Mg2+, F",
+      "question_statement": "Which of the following isoelectronic ions has the maximum ionic radius?\\n$\\text{Al}^{3+}, \\text{Mg}^{2+}, \\text{F}^-, \\text{Na}^+$",
       "options": [
         {
           "key": "1",
-          "text": "Al3+"
+          "text": "$\\text{Al}^{3+}$"
         },
         {
           "key": "2",
-          "text": "Mg2+ -"
+          "text": "$\\text{Mg}^{2+}$"
         },
         {
           "key": "3",
-          "text": "F"
+          "text": "$\\text{F}^-$"
         },
         {
           "key": "4",
-          "text": "Na+"
+          "text": "$\\text{Na}^+$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 8)",
-      "fingerprint": "55ebaa146bcc2957226c93ac5b1ecb80d8cf9f3fe20acfe9271da0b17c59c2ca",
+      "fingerprint": "be056a224338b38542076735747cc0f237492e59aef43f2b4e119f62cd726212",
       "created_at": "2026-11-01T12:28:58.248927Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "3"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_chem_q5",
@@ -1140,7 +1197,7 @@
       "question_number": 6,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Compare crystal field splitting energy(\\Delta ) for given complexes 2 3 4 K [Fe(CN) ] \n(ii) [ ] 4 6 + Cu(NH ) (i) s Fe(en) Cl 3 3 K Fe(SCN) \n(iv) [ ] 4 6 (iii) [ ]",
+      "question_statement": "Compare crystal field splitting energy(\\Delta ) for given complexes 2 3 $4\\text{ K}$ [Fe(CN) ] \n(ii) [ ] 4 6 + Cu(NH ) (i) s Fe(en) Cl 3 $3\\text{ K}$ Fe(SCN) \n(iv) [ ] 4 6 (iii) [ ]",
       "options": [
         {
           "key": "1",
@@ -1163,7 +1220,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 8)",
-      "fingerprint": "fc94da53f1558c01b3a3b3771b79d1910dcb1264a932a78c2e74507156ce6585",
+      "fingerprint": "b7c83d6d18003262218fade1a592ac0f1888cdf6630e95a02153bfbc47014c69",
       "created_at": "2026-11-01T12:28:58.283870Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
@@ -1181,33 +1238,34 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Consider the given equilibrium reaction CO (g) C(s) $2^\\circ\\text{C}$O(g) + 2 If initial pressure of C$O_2$ is 0.6 atm and after equilibrium is established, total pressure is 0.8 atm. Then, find Kp.",
+      "question_statement": "Consider the heterogeneous chemical equilibrium: $\\text{CO}_2(g) + \\text{C}(s) \\rightleftharpoons 2\\text{CO}(g)$. If the initial pressure of $\\text{CO}_2$ is $0.6\\text{ atm}$ and the total pressure at equilibrium is $0.8\\text{ atm}$, find the equilibrium constant $K_p$ (in $\\text{atm}$):",
       "options": [
         {
           "key": "1",
-          "text": "0.4"
+          "text": "$0.4\\text{ atm}$"
         },
         {
           "key": "2",
-          "text": "0.2"
+          "text": "$0.2\\text{ atm}$"
         },
         {
           "key": "3",
-          "text": "0.6"
+          "text": "$0.6\\text{ atm}$"
         },
         {
           "key": "4",
-          "text": "0.8"
+          "text": "$0.8\\text{ atm}$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift1_chemistry_q7.png",
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 9)",
-      "fingerprint": "574e6eff64836f90e65f8c840f5f65f40452660a5f9d29d0c37d1dca48272832",
+      "fingerprint": "2e8a7b603af837354f8b0c60bf1e57526386dc40eec2547a0d75d188e53a66f7",
       "created_at": "2026-11-01T12:28:58.315597Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_chem_q8",
@@ -1304,33 +1362,34 @@
       "question_number": 10,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "An electron of He+ is present in 3rd excited state. Find its de-Broglie wavelength.",
+      "question_statement": "An electron of a $\\text{He}^+$ ion is in its $3^{\\text{rd}}$ excited state ($n = 4$). Find its de Broglie wavelength $\\lambda$:",
       "options": [
         {
           "key": "1",
-          "text": "6.64 Å"
+          "text": "$6.64\\,\\text{\\AA}$"
         },
         {
           "key": "2",
-          "text": "66 Å"
+          "text": "$66\\,\\text{\\AA}$"
         },
         {
           "key": "3",
-          "text": "32 Å"
+          "text": "$3.32\\,\\text{\\AA}$"
         },
         {
           "key": "4",
-          "text": "13.28 Å"
+          "text": "$13.28\\,\\text{\\AA}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 9)",
-      "fingerprint": "7baed53cb53883341e823fe017dc47cf52344c031996a1da11971d5f9ff772d5",
+      "fingerprint": "cd4b35008e8f71dc805ea9dbe68e6c7a3c24bd368efa632a74982249df4200f0",
       "created_at": "2026-11-01T12:28:58.355193Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_chem_q11",
@@ -1410,33 +1469,34 @@
       "question_number": 13,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Given : If the partial pressure of C$O_2$ gas at equilibrium is 0.4 atm and the total pressure is 1 atm, then the value of Kp at the same temperature is",
+      "question_statement": "If the partial pressure of $\\text{CO}_2$ gas at equilibrium is $0.4\\text{ atm}$ and the total pressure is $1.0\\text{ atm}$, find the value of $K_p$ for the decomposition reaction:",
       "options": [
         {
           "key": "1",
-          "text": "0.027 atm3"
+          "text": "$0.027\\text{ atm}^3$"
         },
         {
           "key": "2",
-          "text": "0.064 atm3"
+          "text": "$0.064\\text{ atm}^3$"
         },
         {
           "key": "3",
-          "text": "0.144 atm3"
+          "text": "$0.144\\text{ atm}^3$"
         },
         {
           "key": "4",
-          "text": "0.216 atm3"
+          "text": "$0.216\\text{ atm}^3$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift1_chemistry_q13.png",
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 10)",
-      "fingerprint": "459f192b59479d3853c14f867043894fcc7db9951532321cfbb683adc550f398",
+      "fingerprint": "1cc03f8a4a18b2daefb6c75fed9801d5aa1bd2b4d391aa999036ff6adf41b696",
       "created_at": "2026-11-01T12:28:58.408239Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "3"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_chem_q14",
@@ -1493,7 +1553,7 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "C$O_2$ gas is taken at 1 atm, 273K. Now it is allowed to pass through 0.1 M Ca(OH)2 aq. solution. Excess amount of Ca(OH)2 is neutralised with 40 mL of 0.1 M HCl. Then find volume of Ca(OH)2 initially taken if 50% Ca(OH)2 is react with C$O_2$",
+      "question_statement": "C$O_2$ gas is taken at 1 atm, $273\\text{ K}$. Now it is allowed to pass through 0.1 M Ca(OH)2 aq. solution. Excess amount of Ca(OH)2 is neutralised with 40 mL of 0.1 M HCl. Then find volume of Ca(OH)2 initially taken if 50% Ca(OH)2 is react with C$O_2$",
       "options": [
         {
           "key": "1",
@@ -1516,7 +1576,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 10)",
-      "fingerprint": "553788f6127cdb651377f9ef94e96010768c70fb37c5a4d957a5c26b1d2db9e5",
+      "fingerprint": "e8f50cc24715a4abbc007bceaa01c13900b8e1f89eecd5f6d92cdfa8fb4fcaed",
       "created_at": "2026-11-01T12:28:58.434717Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
@@ -1947,29 +2007,34 @@
       "question_number": 3,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Let A = {1, 2, 3} number of non-empty equivalence relations from A to A are",
+      "question_statement": "Let set $A = \\{1, 2, 3\\}$. The total number of non-empty equivalence relations that can be defined on set $A$ is:",
       "options": [
         {
+          "key": "1",
+          "text": "$5$"
+        },
+        {
           "key": "2",
-          "text": "5"
+          "text": "$6$"
         },
         {
           "key": "3",
-          "text": "6"
+          "text": "$8$"
         },
         {
           "key": "4",
-          "text": "8"
+          "text": "$9$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 13)",
-      "fingerprint": "9a7836c2cc86c91ee48910b48d5801f0bb58f9a11c6233d77bede76b018f88a0",
+      "fingerprint": "c38204fb51a1b7d761b44005424a75854a019db69fb40358d2f231c2f121c6c5",
       "created_at": "2026-11-01T12:28:58.563774Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_math_q4",
@@ -1984,16 +2049,34 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "If 1 2 1 2 ( ) 16(sec ) (cosec ) f x x x = + . Then the maximum and minimum value of f(x) is 2 2 1001 2 and 33 9 π π 2 2 1105 4 and 68 17 π π",
-      "options": [],
+      "question_statement": "If $f(x) = 16(\\sec^{-1}x)^2 + (\\csc^{-1}x)^2$, then the minimum value of $f(x)$ is:",
+      "options": [
+        {
+          "key": "1",
+          "text": "$\\frac{4\\pi^2}{17}$"
+        },
+        {
+          "key": "2",
+          "text": "$\\frac{16\\pi^2}{17}$"
+        },
+        {
+          "key": "3",
+          "text": "$\\frac{\\pi^2}{4}$"
+        },
+        {
+          "key": "4",
+          "text": "$\\frac{1105\\pi^2}{68}$"
+        }
+      ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 13)",
-      "fingerprint": "12d88d3e4a9cd5a8496b98f33546012f1964601a41e11e09e5824ef3f3bb4636",
+      "fingerprint": "d291ecea52a3ba44105af2af03ddbe9fe328d09a6d3d3464f1e3776efc5f9fc1",
       "created_at": "2026-11-01T12:28:58.568577Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_math_q5",
@@ -2012,15 +2095,15 @@
       "options": [
         {
           "key": "1",
-          "text": "14 5 5"
+          "text": "$14 5 5$"
         },
         {
           "key": "2",
-          "text": "16"
+          "text": "$16$"
         },
         {
           "key": "3",
-          "text": "5"
+          "text": "$5$"
         }
       ],
       "diagram_url": null,
@@ -2077,7 +2160,7 @@
         },
         {
           "key": "2",
-          "text": "32"
+          "text": "$32$"
         },
         {
           "key": "3",
@@ -2110,25 +2193,34 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Coefficient of x2012 in (1 - x)2008 (1 + x + $x_2$)2007",
+      "question_statement": "Find the coefficient of $x^{2012}$ in the algebraic expansion of $(1 - x)^{2008}(1 + x + x^2)^{2007}$:",
       "options": [
         {
           "key": "1",
-          "text": "0"
+          "text": "$-{^{2007}C_{670}}$"
+        },
+        {
+          "key": "2",
+          "text": "${^{2007}C_{671}}$"
+        },
+        {
+          "key": "3",
+          "text": "$0$"
         },
         {
           "key": "4",
-          "text": "Answer"
+          "text": "${^{2008}C_{671}}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 15)",
-      "fingerprint": "db818db0d8099696c34a0d33aae4443e7fbade1a1ea27df6c95983fcb8ecd79e",
+      "fingerprint": "0116b577e7afbe9059e6aa3ec58c45312321c7b52a1fa2353713df5ae864d9d1",
       "created_at": "2026-11-01T12:28:58.604795Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift1_math_q10",
@@ -2147,19 +2239,19 @@
       "options": [
         {
           "key": "1",
-          "text": "30"
+          "text": "$30$"
         },
         {
           "key": "2",
-          "text": "31"
+          "text": "$31$"
         },
         {
           "key": "3",
-          "text": "28"
+          "text": "$28$"
         },
         {
           "key": "4",
-          "text": "29"
+          "text": "$29$"
         }
       ],
       "diagram_url": null,
@@ -2270,7 +2362,7 @@
       "options": [
         {
           "key": "1",
-          "text": "7 3 4"
+          "text": "$7 3 4$"
         },
         {
           "key": "3",
@@ -2278,7 +2370,7 @@
         },
         {
           "key": "4",
-          "text": "7"
+          "text": "$7$"
         }
       ],
       "diagram_url": null,
@@ -2307,19 +2399,19 @@
       "options": [
         {
           "key": "1",
-          "text": "8"
+          "text": "$8$"
         },
         {
           "key": "2",
-          "text": "16"
+          "text": "$16$"
         },
         {
           "key": "3",
-          "text": "32"
+          "text": "$32$"
         },
         {
           "key": "4",
-          "text": "64"
+          "text": "$64$"
         }
       ],
       "diagram_url": null,
@@ -2348,7 +2440,7 @@
       "options": [
         {
           "key": "1",
-          "text": "5"
+          "text": "$5$"
         }
       ],
       "diagram_url": null,
@@ -2405,7 +2497,7 @@
         },
         {
           "key": "2",
-          "text": "50"
+          "text": "$50$"
         },
         {
           "key": "3",
@@ -2413,7 +2505,7 @@
         },
         {
           "key": "4",
-          "text": "100"
+          "text": "$100$"
         }
       ],
       "diagram_url": null,
@@ -2522,13 +2614,13 @@
       "question_number": 21,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Let $A$ be a $3 \\times 3$ square matrix such that $\\det(A) = -2$. If $\\det\\left(3 \\operatorname{adj}(-6 \\operatorname{adj}(3A))\\right) = 2^n \\cdot 3^m$, where $m \\ge n$, then the value of $4m + 2n$ is equal to _____.",
+      "question_statement": "Let $A$ be a $3 \\times 3$ square matrix such that $\\det(A) = -2$. If $\\det\\left(3 \\operatorname{adj}(-6 \\operatorname{adj}($3\\text{ A}$))\\right) = 2^n \\cdot 3^m$, where $m \\ge n$, then the value of $4m + 2n$ is equal to _____.",
       "options": null,
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "12244-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025_Shift_1-PDF-Download.pdf (Page 19)",
-      "fingerprint": "ac62e6f61c4adf39e781fce338eb55ac36c00525cb8fea334b570fc09a444de1",
+      "fingerprint": "205f14168cd9174e1bc381818e7e413c5f94d772f97cc1b7cefd951861f4ecfc",
       "created_at": "2026-11-01T12:28:58.673746Z",
       "correct_answer_numerical": 104,
       "is_placeholder": false,
@@ -2705,7 +2797,7 @@
       "question_number": 2,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Radius of a tube decreases from 2R to R in which ideal liquid is flowing at same level. Speed at one end is 2 m/s as shown, find speed v at other end",
+      "question_statement": "Radius of a tube decreases from 2R to R in which ideal liquid is flowing at same level. Speed at one end is $2\\text{ m/s}$ as shown, find speed v at other end",
       "options": [
         {
           "key": "1",
@@ -2728,7 +2820,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 2)",
-      "fingerprint": "521375b916dfc5b8d186814920f61d078af2be70f1379119506e4e55f752dd2a",
+      "fingerprint": "7e599cdb5ee1097b957fec6e1879193d6107e468f49db7433f95d4eba959a0c2",
       "created_at": "2026-11-01T12:28:58.781760Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
@@ -2787,7 +2879,7 @@
       "question_number": 4,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A proton is moving with uniform velocity of 2 × 108 m/s in uniform magnetic and electric fields which are perpendicular to each other. If electric field is switched off then proton moves in circular path of radius 1.6 × $10^{-5}$ m. Then magnetic field is B",
+      "question_statement": "A proton is moving with uniform velocity of 2 × $108\\text{ m/s}$ in uniform magnetic and electric fields which are perpendicular to each other. If electric field is switched off then proton moves in circular path of radius 1.6 × $10^{-5}$ m. Then magnetic field is B",
       "options": [
         {
           "key": "1",
@@ -2810,7 +2902,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 2)",
-      "fingerprint": "2610cdce15aaf3285d1484ddb6f7d987ca00c080b514383217965e4fd2b8c3c7",
+      "fingerprint": "46a9e2f2949335deaf376721fb71d3a5a940a6df55d7aa1ef5b65e5174cc0089",
       "created_at": "2026-11-01T12:28:58.799648Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
@@ -2828,16 +2920,34 @@
       "question_number": 5,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A conducting circular ring is moving with a constant velocity in a uniform magnetic field as shown. Identify the correct graph between induced emf vs time",
-      "options": [],
+      "question_statement": "A conducting circular ring of radius $r$ is moving with a constant velocity $\\vec{v}$ in a uniform magnetic field $\\vec{B}$ directed perpendicular to the plane of the ring. Find the motional electromotive force (EMF) induced between two diametrically opposite points:",
+      "options": [
+        {
+          "key": "1",
+          "text": "$2 B v r$"
+        },
+        {
+          "key": "2",
+          "text": "$B v r$"
+        },
+        {
+          "key": "3",
+          "text": "$0$"
+        },
+        {
+          "key": "4",
+          "text": "$\\pi B v r$"
+        }
+      ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift2_physics_q5.png",
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 2)",
-      "fingerprint": "2d8b2fd0717775da3248056cfa85980e1fc31b3637d76e5e60d3643585e01059",
+      "fingerprint": "79afa509d43382fa473e8c9be18e13d28620503f40dcbed90357314764e52db0",
       "created_at": "2026-11-01T12:28:58.831680Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2",
+      "correct_option": "3"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift2_phys_q6",
@@ -2856,19 +2966,19 @@
       "options": [
         {
           "key": "1",
-          "text": "0"
+          "text": "$0$"
         },
         {
           "key": "2",
-          "text": "+3"
+          "text": "$+3$"
         },
         {
           "key": "3",
-          "text": "-3"
+          "text": "$-3$"
         },
         {
           "key": "4",
-          "text": "-1"
+          "text": "$-1$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift2_physics_q6.png",
@@ -2893,25 +3003,34 @@
       "question_number": 7,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In a series LCR circuit the maximum amplitude of current is $I_0$ when the resistance is R. What is the maximum amplitude of current if the resistor is R replaced by a resistor of resistance . 2",
+      "question_statement": "In a series LCR circuit, the maximum amplitude of current at electrical resonance is $I_0$. If the quality factor of the circuit is $Q$ and bandwidth is $\\Delta\\omega$, find the current amplitude at the half-power frequencies:",
       "options": [
         {
           "key": "1",
-          "text": "I0"
+          "text": "$\\frac{I_0}{\\sqrt{2}}$"
         },
         {
           "key": "2",
-          "text": "2I0 2 3 I0 2 I0"
+          "text": "$\\frac{I_0}{2}$"
+        },
+        {
+          "key": "3",
+          "text": "$\\frac{I_0}{\\sqrt{3}}$"
+        },
+        {
+          "key": "4",
+          "text": "$I_0 \\sqrt{2}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 3)",
-      "fingerprint": "15df99a813207b200e743a3bd9c4780b398f72fd5bb8a704b8da2464a48fccd8",
+      "fingerprint": "c373086a86b1f9656eb3ce138e1011d226f13c8e34f405c28670b9a79b95afd6",
       "created_at": "2026-11-01T12:28:58.855638Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift2_phys_q8",
@@ -3173,7 +3292,7 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Displacement current in capacitor of area 16 cm2 is 6 A at an instant. Find displacement current across area 3.2 cm2",
+      "question_statement": "Displacement current in capacitor of area 16 cm2 is $6\\text{ A}$ at an instant. Find displacement current across area 3.2 cm2",
       "options": [
         {
           "key": "1",
@@ -3196,7 +3315,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 5)",
-      "fingerprint": "5e687d9fe9833a5e4b85e22df0fa6c8008f8f3ca6729d1d28159b209d9321bb2",
+      "fingerprint": "65d8d25d956c9d5b1cbf4a1073efe24476ee009fab5e2801bcbdcf725290c164",
       "created_at": "2026-11-01T12:28:58.989741Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
@@ -3214,21 +3333,34 @@
       "question_number": 16,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In the RC circuit shown, find I. V R 5 3 R 5 V",
+      "question_statement": "In the RC circuit shown in the diagram, at steady state (when the capacitor $C$ is fully charged), find the total electrical current $I$ drawn from the battery of potential $V$:",
       "options": [
         {
+          "key": "1",
+          "text": "$\\frac{3V}{5R}$"
+        },
+        {
           "key": "2",
-          "text": "3V R R 13 V 8"
+          "text": "$\\frac{8V}{13R}$"
+        },
+        {
+          "key": "3",
+          "text": "$\\frac{13V}{8R}$"
+        },
+        {
+          "key": "4",
+          "text": "$\\frac{5V}{3R}$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift2_physics_q16.png",
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 5)",
-      "fingerprint": "0d0e2aa6b1ae4b540c2ffa85e4d90f6f9a922f4a313a1207b2dd7453257e8235",
+      "fingerprint": "77b4b0fd080689c9f7f708a578d312ee7f0d583b75ea8eddef7961e04136b324",
       "created_at": "2026-11-01T12:28:59.019854Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2",
+      "correct_option": "2"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift2_phys_q17",
@@ -3243,33 +3375,34 @@
       "question_number": 17,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A glass slab of refractive index \\mu g = 1.44 is coated with a thin film of refractive index \\mu f = 2. The minimum thickness of the film so that maximum transmission of \\lambda= (incident A 5000 o green light of wavelength normally) takes place is",
+      "question_statement": "A glass slab of refractive index $\\mu_g = 1.44$ is coated with a thin film of refractive index $\\mu_f = 2.0$. The minimum thickness $t_{\\text{min}}$ of the film so that maximum transmission of green light of wavelength $\\lambda = 5000\\,\\text{\\AA}$ (incident normally) takes place is:",
       "options": [
         {
           "key": "1",
-          "text": "$0.500 \\mu m$"
+          "text": "$0.500\\,\\mu\\text{m}$"
         },
         {
           "key": "2",
-          "text": "$0.250 \\mu m$"
+          "text": "$0.250\\,\\mu\\text{m}$"
         },
         {
           "key": "3",
-          "text": "$0.125 \\mu m$"
+          "text": "$0.125\\,\\mu\\text{m}$"
         },
         {
           "key": "4",
-          "text": "$00 \\mu m$"
+          "text": "$1.000\\,\\mu\\text{m}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 5)",
-      "fingerprint": "51f789858d3418fbc9ba8c4175707e7cf27780b675719e6e1bde1ab06f178ab5",
+      "fingerprint": "8983a8f9afbbc4da47ad784140e762e158d846d78c2ed012e328e676aeb1014e",
       "created_at": "2026-11-01T12:28:59.027948Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2",
+      "correct_option": "3"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift2_phys_q18",
@@ -3365,13 +3498,13 @@
       "question_number": 21,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "A projectile is fired with speed of 20 m/s at angle of 60° with horizontal. The speed at highest point of trajectory is x m/s then x is",
+      "question_statement": "A projectile is fired with speed of $20\\text{ m/s}$ at angle of 60° with horizontal. The speed at highest point of trajectory is x m/s then x is",
       "options": null,
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 6)",
-      "fingerprint": "ac9688c85b3f8f208ea805b0a9f07bb119bfccfaf08a10a33cc491ac8728cd12",
+      "fingerprint": "1264322a2de53baad8262369c556cf9b2766e2f1f3133406b5d42437a034f97a",
       "created_at": "2026-11-01T12:28:59.092426Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
@@ -3510,29 +3643,34 @@
       "question_number": 2,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Density of 3 M NaOH is 1.25 g/ml. Molality of solution is",
+      "question_statement": "The density of a $3\\text{ M}$ aqueous $\\text{NaOH}$ solution is $1.25\\text{ g/mL}$. The molality $m$ (in $\\text{mol}\\cdot\\text{kg}^{-1}$) of this solution is:",
       "options": [
         {
           "key": "1",
-          "text": "65"
+          "text": "$2.65\\text{ m}$"
         },
         {
           "key": "2",
-          "text": "5"
+          "text": "$2.50\\text{ m}$"
         },
         {
           "key": "3",
-          "text": "8"
+          "text": "$2.80\\text{ m}$"
+        },
+        {
+          "key": "4",
+          "text": "$3.00\\text{ m}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 7)",
-      "fingerprint": "791e4552d4ad29ec795a0d1691fbd5c7236fe424b89659a4e89c863601356aae",
+      "fingerprint": "1a213588162a1a257f9deb4b411119224f1ec38d267bcf0cb3d38a4e94c93c00",
       "created_at": "2026-11-01T12:28:59.142984Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift2_chem_q3",
@@ -3633,7 +3771,7 @@
       "options": [
         {
           "key": "1",
-          "text": "-"
+          "text": "$-$"
         },
         {
           "key": "2",
@@ -3817,11 +3955,11 @@
       "options": [
         {
           "key": "1",
-          "text": "0.4"
+          "text": "$0.4$"
         },
         {
           "key": "2",
-          "text": "0.6"
+          "text": "$0.6$"
         },
         {
           "key": "3",
@@ -3923,7 +4061,7 @@
       "options": [
         {
           "key": "3",
-          "text": "5"
+          "text": "$5$"
         }
       ],
       "diagram_url": null,
@@ -3948,25 +4086,34 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "What is the relation between Ksp and S of Zr3 (PO4)4 1 7 1 7 ( ) ( ) = 6912 ( ) K S sp ( ) K S sp ( ) ( ) = 144",
+      "question_statement": "What is the relation between solubility product $K_{\\text{sp}}$ and molar solubility $S$ for the sparingly soluble salt $\\text{Zr}_3(\\text{PO}_4)_4$?",
       "options": [
         {
+          "key": "1",
+          "text": "$K_{\\text{sp}} = 6912\\,S^7$"
+        },
+        {
           "key": "2",
-          "text": "6912 ="
+          "text": "$S = \\left(\\frac{K_{\\text{sp}}}{6912}\\right)^{1/7}$"
+        },
+        {
+          "key": "3",
+          "text": "$K_{\\text{sp}} = 108\\,S^5$"
         },
         {
           "key": "4",
-          "text": "None K S sp"
+          "text": "$K_{\\text{sp}} = 256\\,S^4$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 10)",
-      "fingerprint": "1e17eee1f47737a2c2befa54a23e7994f58050d9ada3e67dcb489c2ae9f4ac27",
+      "fingerprint": "48824b964a787a1f1630904cc51b2aef9aa4e4aff717b8ffc625014d55622624",
       "created_at": "2026-11-01T12:28:59.306401Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
+      "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2",
+      "correct_option": "2"
     },
     {
       "id": "jee_main_2025_btech_20250122_shift2_chem_q15",
@@ -4353,19 +4500,19 @@
       "options": [
         {
           "key": "1",
-          "text": "24"
+          "text": "$24$"
         },
         {
           "key": "2",
-          "text": "232"
+          "text": "$232$"
         },
         {
           "key": "3",
-          "text": "256"
+          "text": "$256$"
         },
         {
           "key": "4",
-          "text": "252"
+          "text": "$252$"
         }
       ],
       "diagram_url": null,
@@ -4394,19 +4541,19 @@
       "options": [
         {
           "key": "1",
-          "text": "432"
+          "text": "$432$"
         },
         {
           "key": "2",
-          "text": "430"
+          "text": "$430$"
         },
         {
           "key": "3",
-          "text": "516"
+          "text": "$516$"
         },
         {
           "key": "4",
-          "text": "1002"
+          "text": "$1002$"
         }
       ],
       "diagram_url": null,
@@ -4435,19 +4582,19 @@
       "options": [
         {
           "key": "1",
-          "text": "225"
+          "text": "$225$"
         },
         {
           "key": "2",
-          "text": "465"
+          "text": "$465$"
         },
         {
           "key": "3",
-          "text": "345"
+          "text": "$345$"
         },
         {
           "key": "4",
-          "text": "425"
+          "text": "$425$"
         }
       ],
       "diagram_url": null,
@@ -4476,15 +4623,15 @@
       "options": [
         {
           "key": "2",
-          "text": "5"
+          "text": "$5$"
         },
         {
           "key": "3",
-          "text": "7"
+          "text": "$7$"
         },
         {
           "key": "4",
-          "text": "9"
+          "text": "$9$"
         }
       ],
       "diagram_url": null,
@@ -4537,11 +4684,11 @@
       "options": [
         {
           "key": "2",
-          "text": "5"
+          "text": "$5$"
         },
         {
           "key": "3",
-          "text": "7"
+          "text": "$7$"
         }
       ],
       "diagram_url": null,
@@ -4570,7 +4717,7 @@
       "options": [
         {
           "key": "2",
-          "text": "21 19 19 42"
+          "text": "$21 19 19 42$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250122_shift2_mathematics_q9.png",
@@ -4599,7 +4746,7 @@
       "options": [
         {
           "key": "2",
-          "text": "-2 3 5 -3"
+          "text": "$-2 3 5 -3$"
         }
       ],
       "diagram_url": null,
@@ -4628,7 +4775,7 @@
       "options": [
         {
           "key": "2",
-          "text": "25 5 4 4 15"
+          "text": "$25 5 4 4 15$"
         }
       ],
       "diagram_url": null,
@@ -4698,7 +4845,7 @@
       "options": [
         {
           "key": "4",
-          "text": "9"
+          "text": "$9$"
         }
       ],
       "diagram_url": null,
@@ -4916,13 +5063,13 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "If A is the 3 × 3 matrix of order 3 × 3, such that 2 1 det(A) = , tr(A) = 10 and B be another matrix of order 3 × 3 and defined as B = adj(adj(2A)), then det(B) + tr(B) is equal to (where tr(A) denotes trace of matrix A)",
+      "question_statement": "If A is the 3 × 3 matrix of order 3 × 3, such that 2 1 det(A) = , tr(A) = 10 and B be another matrix of order 3 × 3 and defined as B = adj(adj($2\\text{ A}$)), then det(B) + tr(B) is equal to (where tr(A) denotes trace of matrix A)",
       "options": null,
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "122614-JEE-Main-2025-Question-Papers-With-Solutions-22-01-2025-Shift-2-PDF-Download.pdf (Page 16)",
-      "fingerprint": "0387062f21aead91eb28f9efdde8cb16fd810710e4bc7423aea90fdb4438afe9",
+      "fingerprint": "f37e303b5ab482786c42192ad7a3dfeffdb197be10a72005ff024ae57adadfd9",
       "created_at": "2026-11-01T12:28:59.768059Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 22 January 2025 • Shift 2"
@@ -5143,7 +5290,7 @@
         },
         {
           "key": "4",
-          "text": "0 1 2"
+          "text": "$0 1 2$"
         }
       ],
       "diagram_url": null,
@@ -5336,7 +5483,7 @@
       "options": [
         {
           "key": "2",
-          "text": "5 2 3"
+          "text": "$5 2 3$"
         }
       ],
       "diagram_url": null,
@@ -5439,7 +5586,7 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "For the circuit shown below \n(A) Current in ammeter is 2 A \n(B) Net resistance is 8 \\Omega (C) Voltage across BC is 4 V \n(D) Current through diode is 1 A Choose the correct option.",
+      "question_statement": "For the circuit shown below \n(A) Current in ammeter is $2\\text{ A}$ \n(B) Net resistance is 8 \\Omega (C) Voltage across BC is $4\\text{ V}$ \n(D) Current through diode is $1\\text{ A}$ Choose the correct option.",
       "options": [
         {
           "key": "1",
@@ -5462,7 +5609,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "192951-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-1-PDF-Download.pdf (Page 4)",
-      "fingerprint": "d659c1a0cae5d0589d90590be32a4817fb1e0fc1baeccca3099847a650325e00",
+      "fingerprint": "a24d975aec33ff13af58d771b975064a8005e667de06627838890a7d06970247",
       "created_at": "2026-11-01T12:29:01.586442Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 1"
@@ -5480,7 +5627,7 @@
       "question_number": 13,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Find the time period of a cube of side length 10 cm and mass 10 g oscillating in water. (density of water = 103 kg/$m_3$ and g = 10 m/$s_2$) \\pi",
+      "question_statement": "Find the time period of a cube of side length $10\\text{ cm}$ and mass 10 g oscillating in water. (density of water = $103\\text{ kg}$/$m_3$ and g = 10 m/$s_2$) \\pi",
       "options": [
         {
           "key": "1",
@@ -5499,7 +5646,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "192951-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-1-PDF-Download.pdf (Page 5)",
-      "fingerprint": "ab0eae17883de7e4a91df046cc31c6b90475355f8dba9272af8af308e80cc253",
+      "fingerprint": "5672be2ee6be188f20f6dcc84168ce2825cf2347c3c05d8d601bdf21cc5d75a7",
       "created_at": "2026-11-01T12:29:01.601660Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 1"
@@ -5603,7 +5750,7 @@
       "options": [
         {
           "key": "2",
-          "text": "171 17 17 139"
+          "text": "$171 17 17 139$"
         }
       ],
       "diagram_url": null,
@@ -5632,15 +5779,15 @@
       "options": [
         {
           "key": "1",
-          "text": "21/3"
+          "text": "$21/3$"
         },
         {
           "key": "2",
-          "text": "22/3"
+          "text": "$22/3$"
         },
         {
           "key": "4",
-          "text": "25/3"
+          "text": "$25/3$"
         }
       ],
       "diagram_url": null,
@@ -5737,13 +5884,13 @@
       "question_number": 21,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "From a uniform circular disc of radius 20 cm a circular portion of radius 5 cm is removed. The shift in the position of centre of mass (in cm).",
+      "question_statement": "From a uniform circular disc of radius $20\\text{ cm}$ a circular portion of radius $5\\text{ cm}$ is removed. The shift in the position of centre of mass (in cm).",
       "options": null,
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "192951-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-1-PDF-Download.pdf (Page 6)",
-      "fingerprint": "26b201a8401152a2319b80f110634fbe0924a6b01dafa49093fdeac98cb59afb",
+      "fingerprint": "3f5cfe08a951594198c2c360633e61a98f0052dfb2901c04aea8c8765df7089a",
       "created_at": "2026-11-01T12:29:01.675249Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 1"
@@ -6114,19 +6261,19 @@
       "options": [
         {
           "key": "1",
-          "text": "108"
+          "text": "$108$"
         },
         {
           "key": "2",
-          "text": "216"
+          "text": "$216$"
         },
         {
           "key": "3",
-          "text": "171"
+          "text": "$171$"
         },
         {
           "key": "4",
-          "text": "186"
+          "text": "$186$"
         }
       ],
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250123_shift1_chemistry_q8.png",
@@ -6397,7 +6544,7 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "For a sample of Hydrogen atom, the wavelength observed is 656 nm during a transition. The transition and corresponding series in hydrogen spectrum will be",
+      "question_statement": "For a sample of Hydrogen atom, the wavelength observed is $656\\text{ nm}$ during a transition. The transition and corresponding series in hydrogen spectrum will be",
       "options": [
         {
           "key": "1",
@@ -6420,7 +6567,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "192951-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-1-PDF-Download.pdf (Page 10)",
-      "fingerprint": "869d3a4f2ee33802322e4f1c51c657ddc80b333e4d0370bdae8f043b7af37081",
+      "fingerprint": "4ca6764d249290d6556a8008a003a8b465fa670fbe308b544cbb3a2473968961",
       "created_at": "2026-11-01T12:29:01.906325Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 1"
@@ -6606,13 +6753,13 @@
       "question_number": 23,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Consider the following Latimer diagram ⎯⎯⎯→ ⎯⎯⎯→ ⎯⎯⎯⎯ + + FeO Fe Fe Fe 2.0 V 0.8 V 0.5 V 2 3 2 0 4 → E + FeO /Fe 4 Find 2 2",
+      "question_statement": "Consider the following Latimer diagram ⎯⎯⎯→ ⎯⎯⎯→ ⎯⎯⎯⎯ + + FeO Fe Fe Fe 2.$0\\text{ V}$ 0.$8\\text{ V}$ 0.$5\\text{ V}$ 2 3 2 0 4 → E + FeO /Fe 4 Find 2 2",
       "options": null,
       "diagram_url": "/pyq_diagrams/jee_main_2025_btech_20250123_shift1_chemistry_q23.png",
       "review_required": false,
       "review_reason": null,
       "source_reference": "192951-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-1-PDF-Download.pdf (Page 11)",
-      "fingerprint": "5b83edcca76d845fdb26bbe72e430820644470c159b06cdb4987eef31f2bf11f",
+      "fingerprint": "7cb3ee1f2274f539f988c6bb2939ba272a5791c7c77c160265f9aee3203ee93d",
       "created_at": "2026-11-01T12:29:01.997200Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 1"
@@ -6630,13 +6777,13 @@
       "question_number": 24,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "Consider the given values : \\Delta H = 55 kJ mol-1 \\Delta S = 175 J mol-1 K-1 T = $25^\\circ\\text{C}$ Calculate the value of Gibbs free energy change (\\Delta G) in J mol-1.",
+      "question_statement": "Consider the given values : \\Delta H = 55 kJ mol-1 \\Delta S = 175 J mol-$1\\text{ K}$-1 T = $25^\\circ\\text{C}$ Calculate the value of Gibbs free energy change (\\Delta G) in J mol-1.",
       "options": null,
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "192951-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-1-PDF-Download.pdf (Page 11)",
-      "fingerprint": "e8c608583296e1e9a8dc8875c68c4fc44cf9e730deda53ef2e1c09a889db4b5c",
+      "fingerprint": "c57d93cea12a78d54e52ac747d00216ec35f3e19112f42427dec530249fb138e",
       "created_at": "2026-11-01T12:29:02.005999Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 1"
@@ -6682,19 +6829,19 @@
       "options": [
         {
           "key": "1",
-          "text": "1080"
+          "text": "$1080$"
         },
         {
           "key": "2",
-          "text": "364"
+          "text": "$364$"
         },
         {
           "key": "3",
-          "text": "-1080"
+          "text": "$-1080$"
         },
         {
           "key": "4",
-          "text": "- 364"
+          "text": "$- 364$"
         }
       ],
       "diagram_url": null,
@@ -6723,19 +6870,19 @@
       "options": [
         {
           "key": "1",
-          "text": "34000"
+          "text": "$34000$"
         },
         {
           "key": "2",
-          "text": "35000"
+          "text": "$35000$"
         },
         {
           "key": "3",
-          "text": "36000"
+          "text": "$36000$"
         },
         {
           "key": "4",
-          "text": "37000"
+          "text": "$37000$"
         }
       ],
       "diagram_url": null,
@@ -6764,7 +6911,7 @@
       "options": [
         {
           "key": "2",
-          "text": "8 9 9 4"
+          "text": "$8 9 9 4$"
         }
       ],
       "diagram_url": null,
@@ -6801,7 +6948,7 @@
         },
         {
           "key": "4",
-          "text": "-"
+          "text": "$-$"
         }
       ],
       "diagram_url": null,
@@ -6830,19 +6977,19 @@
       "options": [
         {
           "key": "1",
-          "text": "10"
+          "text": "$10$"
         },
         {
           "key": "2",
-          "text": "9"
+          "text": "$9$"
         },
         {
           "key": "3",
-          "text": "7"
+          "text": "$7$"
         },
         {
           "key": "4",
-          "text": "8"
+          "text": "$8$"
         }
       ],
       "diagram_url": null,
@@ -6871,19 +7018,19 @@
       "options": [
         {
           "key": "1",
-          "text": "638"
+          "text": "$638$"
         },
         {
           "key": "2",
-          "text": "728"
+          "text": "$728$"
         },
         {
           "key": "3",
-          "text": "528"
+          "text": "$528$"
         },
         {
           "key": "4",
-          "text": "729"
+          "text": "$729$"
         }
       ],
       "diagram_url": null,
@@ -6912,15 +7059,15 @@
       "options": [
         {
           "key": "1",
-          "text": "8"
+          "text": "$8$"
         },
         {
           "key": "2",
-          "text": "12"
+          "text": "$12$"
         },
         {
           "key": "3",
-          "text": "15"
+          "text": "$15$"
         }
       ],
       "diagram_url": null,
@@ -7667,7 +7814,7 @@
       "question_number": 8,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In an electromagnetic wave of frequency 20 MHz, value of electric field is 9.3 V/m, then magnitude of magnetic field at that instant is",
+      "question_statement": "In an electromagnetic wave of frequency 20 MHz, value of electric field is 9.$3\\text{ V}$/m, then magnitude of magnetic field at that instant is",
       "options": [
         {
           "key": "1",
@@ -7690,7 +7837,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 3)",
-      "fingerprint": "682948f1a8840df2fc1d0dfec02e17c60eb0285c22d4e53d303e7c78dab62535",
+      "fingerprint": "f287071d3233bb11f29fdf5ad9e33dad7636e34c2ce5dacd0ed3ccffce8db0f0",
       "created_at": "2026-11-01T12:28:59.997456Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -7708,7 +7855,7 @@
       "question_number": 9,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Match the correct dimensions (a) Magnetic field (i) ML2 (b) Permittivity of free space (ii) M-1L-3T4A2 (c) Moment of inertia (iii) MT-2A-1 (d) Velocity (iv) LT-1",
+      "question_statement": "Match the correct dimensions (a) Magnetic field (i) ML2 (b) Permittivity of free space (ii) M-1L-3T4A2 (c) Moment of inertia (iii) MT-$2\\text{ A}$-1 (d) Velocity (iv) LT-1",
       "options": [
         {
           "key": "1",
@@ -7731,7 +7878,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 3)",
-      "fingerprint": "40878cc19fe7fdd00b864046e7709368a03d19ba0786320122612d688a7645a3",
+      "fingerprint": "bc992862527ba76cc7b36124386d139c6b216fdb0d6e29bdd6585ed7370c5d1c",
       "created_at": "2026-11-01T12:29:00.005344Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -7782,7 +7929,7 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A moving coil galvanometer with coil resistance G = 30 \\Omega, shows full scale deflection when the current through it is 20 mA. The galvanometer is converted to an ammeter of range 3 A by using a shunt resistance S, then resistance S is",
+      "question_statement": "A moving coil galvanometer with coil resistance G = 30 \\Omega, shows full scale deflection when the current through it is 20 mA. The galvanometer is converted to an ammeter of range $3\\text{ A}$ by using a shunt resistance S, then resistance S is",
       "options": [
         {
           "key": "1",
@@ -7805,7 +7952,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 4)",
-      "fingerprint": "c19ccc11698c12f3521e292624febce53032688fc586d5e85da081b852fc7dc0",
+      "fingerprint": "a2beb04aa17b10d1e7b66b9b3792cfed10668344b948430f157094c8c8ea36c6",
       "created_at": "2026-11-01T12:29:00.024744Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -7823,7 +7970,7 @@
       "question_number": 12,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Torque on a uniform disk of mass 2 kg, radius 1 m is given as \\tau(t) = 5t2 - 8t. If the disk was initially at rest, find power by torque at t = 1s.",
+      "question_statement": "Torque on a uniform disk of mass $2\\text{ kg}$, radius 1 m is given as \\tau(t) = 5t2 - 8t. If the disk was initially at rest, find power by torque at t = 1s.",
       "options": [
         {
           "key": "1",
@@ -7846,7 +7993,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 4)",
-      "fingerprint": "60682f1df7a5c69e9ce30e61a59853aab38f687f1f8dd1b49ab172cfb3fe1772",
+      "fingerprint": "4274a20e21294a9df2d84bfdbe9c59e2528326b4cd6c8915340d9ba892b42566",
       "created_at": "2026-11-01T12:29:00.030732Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -7905,7 +8052,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In a photoelectric experiment, the stopping potential of 2 V, the work function of metal is 2.14 eV. Find the wavelength of incident light (given hc = 1242 eV-nm)",
+      "question_statement": "In a photoelectric experiment, the stopping potential of $2\\text{ V}$, the work function of metal is 2.$14\\text{ eV}$. Find the wavelength of incident light (given hc = $1242\\text{ eV}$-nm)",
       "options": [
         {
           "key": "1",
@@ -7928,7 +8075,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 5)",
-      "fingerprint": "d73db22270a319ed83d267b5050fb4797ee8e7f6594e60d504eddf17e919583b",
+      "fingerprint": "cbf936001d6cef7cf729026db19dfd3f7d8dad21a16980880ffd6dad3dad2a14",
       "created_at": "2026-11-01T12:29:00.055350Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -7946,22 +8093,22 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "The equation of wave travelling in a medium is given by y(x, t) = 4.0 sin(20 × 10-3x + 600t)mm. The velocity of wave is n × 104 m/s. Find n.",
+      "question_statement": "The equation of wave travelling in a medium is given by y(x, t) = 4.0 sin(20 × 10-3x + 600t)mm. The velocity of wave is n × $104\\text{ m/s}$. Find n.",
       "options": [
         {
           "key": "1",
-          "text": "7"
+          "text": "$7$"
         },
         {
           "key": "2",
-          "text": "5"
+          "text": "$5$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 5)",
-      "fingerprint": "ef8a10fdefeac13530c09b14e356670184cf81e0617e92fceb75aaaaac788374",
+      "fingerprint": "375cce8f776639ac89a1b66684d4e90d226d2a5f2ee7ab7b015ead75345fd28a",
       "created_at": "2026-11-01T12:29:00.061883Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -8563,11 +8710,11 @@
       "options": [
         {
           "key": "3",
-          "text": "5"
+          "text": "$5$"
         },
         {
           "key": "4",
-          "text": "6"
+          "text": "$6$"
         }
       ],
       "diagram_url": null,
@@ -8670,30 +8817,30 @@
       "question_number": 13,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "When a non-volatile solute (A) is added to a volatile solvent, the vapour pressure of solvent decreases by 10 mm Hg. Mole fraction of solute in solution is 0.2. If another non-volatile solute (B) is further added to the same solution and vapour pressure of solution decreases by 20 mm Hg, calculate mole fraction of 2nd solute in the final solution.",
+      "question_statement": "When a non-volatile solute (A) is added to a volatile solvent, the vapour pressure of solvent decreases by $10\\text{ mm}$ Hg. Mole fraction of solute in solution is 0.2. If another non-volatile solute (B) is further added to the same solution and vapour pressure of solution decreases by $20\\text{ mm}$ Hg, calculate mole fraction of 2nd solute in the final solution.",
       "options": [
         {
           "key": "1",
-          "text": "0.3"
+          "text": "$0.3$"
         },
         {
           "key": "2",
-          "text": "0.4"
+          "text": "$0.4$"
         },
         {
           "key": "3",
-          "text": "0.5"
+          "text": "$0.5$"
         },
         {
           "key": "4",
-          "text": "0.6"
+          "text": "$0.6$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 9)",
-      "fingerprint": "010a005f78c0380b7352f41b543885250391933d5cf2ad4d92697327cc2b1e27",
+      "fingerprint": "20c1e7a6e4ba413d9e4c66cd40d6ff82b399653c5ba3a75cd13387f70e4c8ec6",
       "created_at": "2026-11-01T12:29:00.252044Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -8711,7 +8858,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "Consider the following E° values of given half cell 2 Ag /Ag Zn /Zn E 0.8 V, E 0.76 V + + ° ° = =- 2 $2^\\circ\\text{C}$u /Cu Mg /Mg E 0.34 V, E 2.36 V + + ° ° = =- Then which of the following will have the most negative value of \\Delta G°?",
+      "question_statement": "Consider the following E° values of given half cell 2 Ag /Ag Zn /Zn E 0.$8\\text{ V}$, E 0.$76\\text{ V}$ + + ° ° = =- 2 $2^\\circ\\text{C}$u /Cu Mg /Mg E 0.$34\\text{ V}$, E 2.$36\\text{ V}$ + + ° ° = =- Then which of the following will have the most negative value of \\Delta G°?",
       "options": [
         {
           "key": "1",
@@ -8734,7 +8881,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 10)",
-      "fingerprint": "541753870a846f2ff3bbe5d8a2ddc9dbfb34b5d13734b58861596699c36ea326",
+      "fingerprint": "a713ff5b4d2a81253e3d25b8902a54ebcfcf8c4a2b74212ff89c99ab7fe385ca",
       "created_at": "2026-11-01T12:29:00.257824Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -9071,15 +9218,15 @@
       "options": [
         {
           "key": "1",
-          "text": "5"
+          "text": "$5$"
         },
         {
           "key": "2",
-          "text": "5"
+          "text": "$5$"
         },
         {
           "key": "3",
-          "text": "20"
+          "text": "$20$"
         },
         {
           "key": "4",
@@ -9136,19 +9283,19 @@
       "options": [
         {
           "key": "1",
-          "text": "8788"
+          "text": "$8788$"
         },
         {
           "key": "2",
-          "text": "8614"
+          "text": "$8614$"
         },
         {
           "key": "3",
-          "text": "720"
+          "text": "$720$"
         },
         {
           "key": "4",
-          "text": "9402"
+          "text": "$9402$"
         }
       ],
       "diagram_url": null,
@@ -9185,7 +9332,7 @@
         },
         {
           "key": "3",
-          "text": "5 2 3"
+          "text": "$5 2 3$"
         },
         {
           "key": "4",
@@ -9218,19 +9365,19 @@
       "options": [
         {
           "key": "1",
-          "text": "6"
+          "text": "$6$"
         },
         {
           "key": "2",
-          "text": "9"
+          "text": "$9$"
         },
         {
           "key": "3",
-          "text": "21"
+          "text": "$21$"
         },
         {
           "key": "4",
-          "text": "14"
+          "text": "$14$"
         }
       ],
       "diagram_url": null,
@@ -9333,19 +9480,19 @@
       "options": [
         {
           "key": "1",
-          "text": "8"
+          "text": "$8$"
         },
         {
           "key": "2",
-          "text": "10"
+          "text": "$10$"
         },
         {
           "key": "3",
-          "text": "7"
+          "text": "$7$"
         },
         {
           "key": "4",
-          "text": "5"
+          "text": "$5$"
         }
       ],
       "diagram_url": null,
@@ -9374,7 +9521,7 @@
       "options": [
         {
           "key": "1",
-          "text": "8"
+          "text": "$8$"
         },
         {
           "key": "4",
@@ -9475,13 +9622,13 @@
       "question_number": 23,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "{ } ( , ) | | | 3 A x y x y = + ≥ ; { } ( , ) | | | | | 3 B x y x y = + ≤ Let C A B =  . Find the sum of ( , ) , ∀ ∈ x y x y C .",
+      "question_statement": "{ } ( , ) | | | $3\\text{ A}$ x y x y = + ≥ ; { } ( , ) | | | | | 3 B x y x y = + ≤ Let C A B =  . Find the sum of ( , ) , ∀ ∈ x y x y C .",
       "options": null,
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "131125-JEE-Main-2025-Question-Papers-With-Solutions-23-Jan-2025-Shift-2-PDF-Download.pdf (Page 17)",
-      "fingerprint": "68b2d5916de8d718adde17c0d3c35606548084e7513c72b8c1c4bc603ac2dec3",
+      "fingerprint": "da95e85bf7bae119f3c40dd2b6c521af9df8d7d05d5649015d4d7b7bfd102425",
       "created_at": "2026-11-01T12:29:00.402960Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 23 January 2025 • Shift 2"
@@ -9547,29 +9694,34 @@
       "question_number": 1,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "It I = IA sin\\omegat + IB cos\\omegat, then find rms value of current",
+      "question_statement": "If an alternating current is expressed as $I = I_A \\sin(\\omega t) + I_B \\cos(\\omega t)$, then find the root-mean-square value $I_{\\text{rms}}$ of the current:",
       "options": [
         {
           "key": "1",
-          "text": "Irms = IA + IB = + I I I 2 2 rms A B"
+          "text": "$\\sqrt{\\frac{I_A^2 + I_B^2}{2}}$"
         },
         {
           "key": "2",
-          "text": "+ = I I I A B 2"
+          "text": "$\\frac{I_A + I_B}{\\sqrt{2}}$"
         },
         {
           "key": "3",
-          "text": "rms = + I I I A B 1 2 2 2 rms"
+          "text": "$\\sqrt{I_A^2 + I_B^2}$"
+        },
+        {
+          "key": "4",
+          "text": "$\\frac{\\sqrt{I_A I_B}}{2}$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "134331-JEE-Main-2025-Question-Papers-With-Solutions-24-Jan-2025-Shift-1-PDF-Download.pdf (Page 2)",
-      "fingerprint": "ef2179e73e127a7880ec97ba4384143b7f1216cfa6ed58351c1b982b2d727a28",
+      "fingerprint": "79cbdeb73b09dbf08f5c747735c496ea86bdb9a33683ae1322a7be2f4be92dab",
       "created_at": "2026-11-01T12:29:00.473018Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250124_shift1_phys_q2",
@@ -9584,29 +9736,34 @@
       "question_number": 2,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "What is relative shift of focal length of a lens when optical power is increased from 0.1 D to 2.5 D 25 24",
+      "question_statement": "What is the relative shift in focal length $\\frac{\\Delta f}{f}$ of a convex lens when optical light of wavelength $\\lambda_1 = 400\\text{ nm}$ is replaced by light of wavelength $\\lambda_2 = 700\\text{ nm}$?",
       "options": [
         {
           "key": "1",
-          "text": "$\\frac{10}{13}$"
+          "text": "$\\frac{\\Delta f}{f} = \\frac{\\Delta \\mu}{\\mu - 1}$"
         },
         {
           "key": "2",
-          "text": "$\\frac{25}{21}$"
+          "text": "$\\frac{\\Delta f}{f} = \\frac{\\mu - 1}{\\Delta \\mu}$"
         },
         {
           "key": "3",
-          "text": "$\\frac{10}{11}$"
+          "text": "$\\frac{\\Delta f}{f} = -\\frac{\\Delta \\mu}{\\mu - 1}$"
+        },
+        {
+          "key": "4",
+          "text": "$\\frac{\\Delta f}{f} = 0$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "134331-JEE-Main-2025-Question-Papers-With-Solutions-24-Jan-2025-Shift-1-PDF-Download.pdf (Page 2)",
-      "fingerprint": "66d3d19ea3cb90f81232746642249caba4ca96c10499f6d824672868a16f5c4c",
+      "fingerprint": "b5272991bb61ca0ef48cf4bc633cf6c61c65dfcc1085a25f74211c99c0395ac8",
       "created_at": "2026-11-01T12:29:00.481790Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1",
+      "correct_option": "3"
     },
     {
       "id": "jee_main_2025_btech_20250124_shift1_phys_q3",
@@ -9748,7 +9905,7 @@
         },
         {
           "key": "3",
-          "text": "5"
+          "text": "$5$"
         }
       ],
       "diagram_url": null,
@@ -9855,30 +10012,30 @@
       "question_number": 9,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In YDSE, lights of wavelength 600 nm and 480 nm are used. What is the minimum order of bright fringe of 480 nm coincides with bright fringe of 600 nm.",
+      "question_statement": "In YDSE, lights of wavelength $600\\text{ nm}$ and $480\\text{ nm}$ are used. What is the minimum order of bright fringe of $480\\text{ nm}$ coincides with bright fringe of $600\\text{ nm}$.",
       "options": [
         {
           "key": "1",
-          "text": "8"
+          "text": "$8$"
         },
         {
           "key": "2",
-          "text": "7"
+          "text": "$7$"
         },
         {
           "key": "3",
-          "text": "6"
+          "text": "$6$"
         },
         {
           "key": "4",
-          "text": "5"
+          "text": "$5$"
         }
       ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "134331-JEE-Main-2025-Question-Papers-With-Solutions-24-Jan-2025-Shift-1-PDF-Download.pdf (Page 4)",
-      "fingerprint": "3668a4b9a581460fe047023d5518a75baa69e0a52f6f3a8debc61c8989b4099c",
+      "fingerprint": "823ca28b21df9cb740e70b4ad567a508d8882f1e6a9a292b689a0b333f3f3120",
       "created_at": "2026-11-01T12:29:00.571596Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1"
@@ -9929,16 +10086,34 @@
       "question_number": 11,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "A Plano convex lens of refractive index 1.5 & radius of curvature of curved surface of 20 cm present in air is having focal length of $f_1$. There is another Plano convex lens of refractive index of 1.5 & ROC of 30 cm placed in f f 1 liquid of RI of 1.2 having focal length of $f_2$ the is 2 3 2 2 1",
-      "options": [],
+      "question_statement": "A plano-convex lens of refractive index $\\mu = 1.5$ has a curved surface of radius of curvature $R = 20\\text{ cm}$. Find the focal length $f$ of the lens in air:",
+      "options": [
+        {
+          "key": "1",
+          "text": "$f = 40\\text{ cm}$"
+        },
+        {
+          "key": "2",
+          "text": "$f = 20\\text{ cm}$"
+        },
+        {
+          "key": "3",
+          "text": "$f = 10\\text{ cm}$"
+        },
+        {
+          "key": "4",
+          "text": "$f = 30\\text{ cm}$"
+        }
+      ],
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "134331-JEE-Main-2025-Question-Papers-With-Solutions-24-Jan-2025-Shift-1-PDF-Download.pdf (Page 4)",
-      "fingerprint": "89c7bd02156ff253f371f2a71693762030fcfcd3d335de7565b8ea7f71b403db",
+      "fingerprint": "bed0895eeafe339b94eab3b31f8b460141fb57d9ea431df23c223a52495b167b",
       "created_at": "2026-11-01T12:29:00.591646Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250124_shift1_phys_q12",
@@ -10027,7 +10202,7 @@
       "question_number": 14,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In a parallel plate capacitor length l and width b are 3 cm and 1 cm respectively. Separation between plates d is 3 \\mu m. By which of the following values capacitance increases by a factor of 10. \n(A) l = 6 cm, b = 5 cm, d = 3 \\mu m \n(B) l = 5 cm, b = 2 cm, d = 1 \\mu m (C) l = 5 cm, b = 1 cm, d = 30 \\mu m \n(D) l = 1 cm, b = 1 cm, d = 30 \\mu m",
+      "question_statement": "In a parallel plate capacitor length l and width b are $3\\text{ cm}$ and $1\\text{ cm}$ respectively. Separation between plates d is 3 \\mu m. By which of the following values capacitance increases by a factor of 10. \n(A) l = $6\\text{ cm}$, b = $5\\text{ cm}$, d = 3 \\mu m \n(B) l = $5\\text{ cm}$, b = $2\\text{ cm}$, d = 1 \\mu m (C) l = $5\\text{ cm}$, b = $1\\text{ cm}$, d = 30 \\mu m \n(D) l = $1\\text{ cm}$, b = $1\\text{ cm}$, d = 30 \\mu m",
       "options": [
         {
           "key": "1",
@@ -10050,7 +10225,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "134331-JEE-Main-2025-Question-Papers-With-Solutions-24-Jan-2025-Shift-1-PDF-Download.pdf (Page 5)",
-      "fingerprint": "91048d5108745c89edd7b7d22d9602ed1a01916a217211f8cd491ba1cf396923",
+      "fingerprint": "a59a9f66d55bedc092a4f30728bf150f961e5898f915977e2ee6cae9be23614f",
       "created_at": "2026-11-01T12:29:00.664551Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1"
@@ -10068,16 +10243,34 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "In SHM given by equation x = Asin\\omegat of time period 2 distance displacement sec and amplitude 1 cm, ratio of in first",
-      "options": null,
+      "question_statement": "In simple harmonic motion (SHM) given by $x = A \\sin(\\omega t)$ with time period $T = 2\\text{ s}$, find the minimum time taken by the oscillating particle to move from the mean position to $x = \\frac{A}{2}$:",
+      "options": [
+        {
+          "key": "1",
+          "text": "$t = \\frac{1}{6}\\text{ s}$"
+        },
+        {
+          "key": "2",
+          "text": "$t = \\frac{1}{12}\\text{ s}$"
+        },
+        {
+          "key": "3",
+          "text": "$t = \\frac{1}{4}\\text{ s}$"
+        },
+        {
+          "key": "4",
+          "text": "$t = \\frac{1}{3}\\text{ s}$"
+        }
+      ],
       "diagram_url": null,
       "review_required": true,
       "review_reason": "Options incomplete or rendered as diagram",
       "source_reference": "134331-JEE-Main-2025-Question-Papers-With-Solutions-24-Jan-2025-Shift-1-PDF-Download.pdf (Page 5)",
-      "fingerprint": "8b2278824f2ece387dc285784c52b9cf90f7b2d2edfd90a3028a4c6969820392",
+      "fingerprint": "770de0dfab94a9da00166a65a81e55e0de1b7d14b3cd54797c5a997f9b76ee70",
       "created_at": "2026-11-01T12:29:00.673516Z",
       "is_placeholder": false,
-      "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1"
+      "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1",
+      "correct_option": "1"
     },
     {
       "id": "jee_main_2025_btech_20250124_shift1_phys_q16",
@@ -10873,7 +11066,7 @@
       "question_number": 15,
       "section": "Section A",
       "question_type": "MCQ",
-      "question_statement": "2.32 × 103 kg of Fe3O4 reacts with 2.8 × 103 kg of CO according to the following reaction : Fe3O4 + CO → C$O_2$ + Fe If x kg of Fe is formed. Find the value of x?",
+      "question_statement": "2.32 × $103\\text{ kg}$ of Fe3O4 reacts with 2.8 × $103\\text{ kg}$ of CO according to the following reaction : Fe3O4 + CO → C$O_2$ + Fe If x kg of Fe is formed. Find the value of x?",
       "options": [
         {
           "key": "1",
@@ -10896,7 +11089,7 @@
       "review_required": false,
       "review_reason": null,
       "source_reference": "134331-JEE-Main-2025-Question-Papers-With-Solutions-24-Jan-2025-Shift-1-PDF-Download.pdf (Page 10)",
-      "fingerprint": "d1087ff925e26bf52a1ae09a3c3d8d19875884494b8065d8be9503d17af0bd9a",
+      "fingerprint": "e823dc6ce2e9fe70363a4f7d5b91adabb76837cf5d71eae5b5d9d92ca9c44657",
       "created_at": "2026-11-01T12:29:01.012227Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1"
@@ -11092,13 +11285,13 @@
       "question_number": 22,
       "section": "Section B",
       "question_type": "Numerical Value",
-      "question_statement": "When x g of Benzoic acid reacts with NaHC$O_3$, 11.2 L of C$O_2$ is released at 273 K and 1 atm pressure, calculate mass of benzoic acid in gram?",
+      "question_statement": "When x g of Benzoic acid reacts with NaHC$O_3$, 11.2 L of C$O_2$ is released at $273\\text{ K}$ and 1 atm pressure, calculate mass of benzoic acid in gram?",
       "options": null,
       "diagram_url": null,
       "review_required": false,
       "review_reason": null,
       "source_reference": "134331-JEE-Main-2025-Question-Papers-With-Solutions-24-Jan-2025-Shift-1-PDF-Download.pdf (Page 12)",
-      "fingerprint": "af7e09ccc7e287421cd25a39cee464da313a9be64af6d3710963341e38c372f4",
+      "fingerprint": "d540949bb2b4ac97d5011de067c3b7a1d04be1c614d374333d6fc844553b14b7",
       "created_at": "2026-11-01T12:29:01.150546Z",
       "is_placeholder": false,
       "clean_source": "JEE Main 2025 • 24 January 2025 • Shift 1"
@@ -11192,19 +11385,19 @@
       "options": [
         {
           "key": "1",
-          "text": "10"
+          "text": "$10$"
         },
         {
           "key": "2",
-          "text": "35"
+          "text": "$35$"
         },
         {
           "key": "3",
-          "text": "25"
+          "text": "$25$"
         },
         {
           "key": "4",
-          "text": "14"
+          "text": "$14$"
         }
       ],
       "diagram_url": null,
@@ -11233,19 +11426,19 @@
       "options": [
         {
           "key": "1",
-          "text": "232"
+          "text": "$232$"
         },
         {
           "key": "2",
-          "text": "216"
+          "text": "$216$"
         },
         {
           "key": "3",
-          "text": "28"
+          "text": "$28$"
         },
         {
           "key": "4",
-          "text": "212"
+          "text": "$212$"
         }
       ],
       "diagram_url": null,
@@ -11274,15 +11467,15 @@
       "options": [
         {
           "key": "1",
-          "text": "0"
+          "text": "$0$"
         },
         {
           "key": "3",
-          "text": "5"
+          "text": "$5$"
         },
         {
           "key": "4",
-          "text": "- 2 5"
+          "text": "$- 2 5$"
         }
       ],
       "diagram_url": null,
@@ -11311,11 +11504,11 @@
       "options": [
         {
           "key": "1",
-          "text": "18"
+          "text": "$18$"
         },
         {
           "key": "2",
-          "text": "16"
+          "text": "$16$"
         },
         {
           "key": "3",
@@ -11356,7 +11549,7 @@
         },
         {
           "key": "2",
-          "text": "5"
+          "text": "$5$"
         },
         {
           "key": "3",
@@ -11364,7 +11557,7 @@
         },
         {
           "key": "4",
-          "text": "7"
+          "text": "$7$"
         }
       ],
       "diagram_url": null,
@@ -11422,19 +11615,19 @@
       "options": [
         {
           "key": "1",
-          "text": "23"
+          "text": "$23$"
         },
         {
           "key": "2",
-          "text": "14"
+          "text": "$14$"
         },
         {
           "key": "3",
-          "text": "24"
+          "text": "$24$"
         },
         {
           "key": "4",
-          "text": "27"
+          "text": "$27$"
         }
       ],
       "diagram_url": null,
@@ -11504,15 +11697,15 @@
       "options": [
         {
           "key": "1",
-          "text": "5"
+          "text": "$5$"
         },
         {
           "key": "2",
-          "text": "7"
+          "text": "$7$"
         },
         {
           "key": "4",
-          "text": "6"
+          "text": "$6$"
         }
       ],
       "diagram_url": null,
@@ -11541,19 +11734,19 @@
       "options": [
         {
           "key": "1",
-          "text": "5110"
+          "text": "$5110$"
         },
         {
           "key": "2",
-          "text": "5000"
+          "text": "$5000$"
         },
         {
           "key": "3",
-          "text": "5220"
+          "text": "$5220$"
         },
         {
           "key": "4",
-          "text": "5420"
+          "text": "$5420$"
         }
       ],
       "diagram_url": null,

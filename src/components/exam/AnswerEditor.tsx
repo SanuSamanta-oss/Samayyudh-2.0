@@ -42,15 +42,15 @@ export function AnswerEditor({
       {/* Editor */}
       <div className="relative">
         {options && options.length > 0 ? (
-          <div className="flex flex-col gap-3 pt-2">
+          <div className="flex flex-col gap-3.5 pt-2">
             {options.map((opt) => (
               <label
                 key={opt.id}
                 className={cn(
-                  'flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-all',
+                  'flex items-center gap-4 p-4 sm:p-5 rounded-2xl border-2 cursor-pointer transition-all',
                   value === opt.id
-                    ? 'border-brand-500 bg-brand-50/50'
-                    : 'border-border bg-card hover:bg-stone-50',
+                    ? 'border-purple-600 bg-purple-50/90 dark:border-purple-500 dark:bg-purple-950/70 shadow-sm'
+                    : 'border-stone-200/90 dark:border-[#2A3F68] bg-white dark:bg-[#18253E] hover:border-purple-400 dark:hover:border-purple-400 hover:bg-purple-50/30 dark:hover:bg-[#1F3050] text-stone-900 dark:text-white shadow-xs',
                   disabled && 'opacity-60 cursor-not-allowed'
                 )}
               >
@@ -63,21 +63,21 @@ export function AnswerEditor({
                   disabled={disabled}
                   className="sr-only"
                 />
-                <div className="pt-0.5">
-                  <div
-                    className={cn(
-                      'w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors',
-                      value === opt.id
-                        ? 'border-brand-600 bg-brand-600'
-                        : 'border-stone-300'
-                    )}
-                  >
-                    {value === opt.id && <div className="w-2 h-2 rounded-full bg-white" />}
-                  </div>
+                <div
+                  className={cn(
+                    'w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-base shrink-0 border transition-transform',
+                    value === opt.id
+                      ? 'border-purple-600 bg-purple-600 text-white shadow-xs scale-105'
+                      : 'border-purple-200 dark:border-purple-600 bg-purple-100 dark:bg-purple-900/80 text-purple-900 dark:text-purple-100'
+                  )}
+                >
+                  {opt.id.replace('opt_', '').toUpperCase()}
                 </div>
-                <div className="flex-1">
-                  <span className="text-base text-foreground font-medium mr-2">({opt.id.replace('opt_', '').toUpperCase()})</span>
-                  <MathText text={opt.text} className="text-base text-foreground leading-relaxed" />
+                <div className="flex-1 min-w-0">
+                  <MathText
+                    text={opt.text}
+                    className="text-base sm:text-lg font-medium text-stone-900 dark:text-white leading-relaxed"
+                  />
                 </div>
               </label>
             ))}

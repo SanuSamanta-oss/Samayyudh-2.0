@@ -42,24 +42,26 @@ export function QuestionCard({ question, answer, questionIndex, totalQuestions }
       </div>
 
       {/* Question Text */}
-      <div className="bg-card border border-border rounded-xl p-5 md:p-6 space-y-4">
-        <MathText
-          text={question.question_text}
-          block
-          className="text-base md:text-lg leading-relaxed text-foreground font-normal"
-        />
+      <div className="bg-white dark:bg-[#0f1424] border-2 border-stone-200 dark:border-stone-800 rounded-3xl p-6 md:p-8 space-y-5 shadow-xs dark:shadow-md">
+        <div className="p-5 md:p-6 rounded-2xl bg-stone-50/90 dark:bg-[#151D33] border border-stone-200/90 dark:border-stone-800/90">
+          <MathText
+            text={question.question_text}
+            block
+            className="text-base sm:text-lg md:text-xl leading-relaxed text-stone-900 dark:text-stone-50 font-medium"
+          />
+        </div>
 
         {question.diagram_url && (
-          <div className="p-3 rounded-xl border border-border bg-stone-50 dark:bg-stone-900/60 max-w-lg">
-            <div className="flex items-center gap-1.5 text-xs text-stone-500 mb-2 font-medium">
-              <ImageIcon className="w-3.5 h-3.5 text-brand-600" />
+          <div className="p-4 rounded-2xl border-2 border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 max-w-lg shadow-xs">
+            <div className="flex items-center gap-2 text-xs font-bold text-purple-700 dark:text-purple-300 mb-2">
+              <ImageIcon className="w-4 h-4" />
               <span>Reference Figure</span>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={question.diagram_url}
               alt={`Diagram for question ${questionIndex + 1}`}
-              className="max-w-full rounded-lg"
+              className="max-w-full rounded-xl"
             />
           </div>
         )}

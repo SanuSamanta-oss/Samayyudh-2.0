@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
 
     const filters: PyqFilterParams = {
+      exam: searchParams.get('exam') || 'All',
       subject: (searchParams.get('subject') || 'All') as PyqSubject | 'All',
       date: searchParams.get('date') || 'All',
       shift: searchParams.get('shift') || 'All',

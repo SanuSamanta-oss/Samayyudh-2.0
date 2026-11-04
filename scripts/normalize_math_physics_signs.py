@@ -496,3 +496,4 @@ def normalize_all():
 
 if __name__ == '__main__':
     normalize_all()
+

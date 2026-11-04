@@ -83,6 +83,10 @@ export function filterPyqQuestions(
     (q) => !q.is_placeholder && !q.question_statement.startsWith('Question ') && q.question_statement.trim().length >= 20
   );
 
+  if (filters.exam && filters.exam !== 'All') {
+    filtered = filtered.filter((q) => q.exam.toLowerCase() === filters.exam!.toLowerCase());
+  }
+
   if (filters.subject && filters.subject !== 'All') {
     filtered = filtered.filter((q) => q.subject.toLowerCase() === filters.subject!.toLowerCase());
   }

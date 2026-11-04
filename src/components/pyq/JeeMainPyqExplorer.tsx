@@ -255,9 +255,9 @@ function QuestionCard({ q, index }: { q: PyqQuestion; index: number }) {
       {/* MCQ Options as Interactive Tabs */}
       {q.question_type === 'MCQ' && q.options && q.options.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-          {q.options.map((opt) => (
+          {q.options.map((opt, optIdx) => (
             <div
-              key={opt.key}
+              key={`${q.id}-opt-${opt.key || optIdx}-${optIdx}`}
               className="flex items-center gap-4 p-4 sm:p-5 rounded-2xl border-2 border-stone-200/90 dark:border-[#2A3F68] bg-white dark:bg-[#18253E] hover:border-purple-500 dark:hover:border-purple-400 hover:bg-purple-50/30 dark:hover:bg-[#1F3050] text-stone-900 dark:text-white shadow-xs transition-all cursor-pointer group"
             >
               <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-900 dark:bg-purple-900/80 dark:text-purple-100 dark:border dark:border-purple-600 font-extrabold text-base flex items-center justify-center shrink-0 border border-purple-200 shadow-2xs group-hover:scale-105 transition-transform">
@@ -451,7 +451,15 @@ function FiltersPanel({
 // PYQ Explorer — Main Component
 // ──────────────────────────────────────────────────────────────
 
-export default function JeeMainPyqExplorer() {
+interface JeeMainPyqExplorerProps {
+  examName?: string;
+  defaultTitle?: string;
+}
+
+export default function JeeMainPyqExplorer({
+  examName = 'JEE Main',
+  defaultTitle = 'JEE Main 2025 — B.Tech',
+}: JeeMainPyqExplorerProps) {
   const [stats, setStats] = useState<PyqStats | null>(null);
   const [papers, setPapers] = useState<PyqExamPaper[]>([]);
   const [questions, setQuestions] = useState<PyqQuestion[]>([]);
@@ -478,7 +486,7 @@ export default function JeeMainPyqExplorer() {
   // Load papers + stats
   useEffect(() => {
     setLoading(true);
-    fetch('/api/pyq/papers')
+    fetch(`/api/pyq/papers?exam=${encodeURIComponent(examName)}`)
       .then((r) => r.json())
       .then((data) => {
         setPapers(data.papers || []);
@@ -486,12 +494,13 @@ export default function JeeMainPyqExplorer() {
       })
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, []);
+  }, [examName]);
 
   // Load questions with filters + debounce
   const loadQuestions = useCallback(() => {
     setQuestionsLoading(true);
     const params = new URLSearchParams();
+    params.set('exam', examName);
     if (activeTab !== 'all') params.set('subject', activeTab);
     if (selectedDate !== 'All') params.set('date', selectedDate);
     if (selectedShift !== 'All') params.set('shift', selectedShift);
@@ -514,7 +523,7 @@ export default function JeeMainPyqExplorer() {
       })
       .catch(console.error)
       .finally(() => setQuestionsLoading(false));
-  }, [activeTab, selectedDate, selectedShift, selectedSection, selectedType, searchQuery, page, selectedPaper]);
+  }, [examName, activeTab, selectedDate, selectedShift, selectedSection, selectedType, searchQuery, page, selectedPaper]);
 
   useEffect(() => {
     if (view === 'questions') {
@@ -556,7 +565,7 @@ export default function JeeMainPyqExplorer() {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-3">
         <RefreshCw className="w-7 h-7 animate-spin text-brand-500" />
-        <p className="text-sm text-stone-500">Loading JEE Main PYQs...</p>
+        <p className="text-sm text-stone-500">Loading {examName} PYQs...</p>
       </div>
     );
   }
@@ -578,7 +587,7 @@ export default function JeeMainPyqExplorer() {
           <h2 className="text-lg font-bold text-foreground">
             {selectedPaper
               ? `${selectedPaper.exam_date_str} — ${selectedPaper.shift}`
-              : 'JEE Main 2025 — B.Tech'}
+              : defaultTitle}
           </h2>
           <p className="text-xs text-stone-500 mt-0.5">
             {view === 'questions'

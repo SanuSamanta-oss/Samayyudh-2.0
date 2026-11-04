@@ -49,9 +49,13 @@ export function ChapterWorkspace({
     async function loadQuestions() {
       setLoading(true);
       try {
-        const res = await fetch(
-          `/api/pyq/questions?subject=${encodeURIComponent(subjectName)}&pageSize=50`
-        );
+        const examParam = examCode === 'JEE_ADVANCED' ? 'JEE Advanced' : examCode === 'JEE_MAINS' ? 'JEE Main' : '';
+        const params = new URLSearchParams();
+        if (examParam) params.set('exam', examParam);
+        params.set('subject', subjectName);
+        params.set('pageSize', '50');
+
+        const res = await fetch(`/api/pyq/questions?${params.toString()}`);
         if (res.ok) {
           const data = await res.json();
           if (isMounted && data.questions) {
@@ -68,7 +72,7 @@ export function ChapterWorkspace({
     return () => {
       isMounted = false;
     };
-  }, [subjectName]);
+  }, [subjectName, examCode]);
 
   const filteredQuestions = questions
     .filter((q) => !q.is_placeholder && !q.question_statement.startsWith('Question ') && q.question_statement.trim().length >= 20)
@@ -391,9 +395,9 @@ export function ChapterWorkspace({
                 {/* Options as Interactive Tabs — Enhanced Font Size & Theme Visibility */}
                 {q.question_type === 'MCQ' && q.options && q.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                    {q.options.map((opt) => (
+                    {q.options.map((opt, optIdx) => (
                       <div
-                        key={opt.key}
+                        key={`${q.id}-opt-${opt.key || optIdx}-${optIdx}`}
                         className="flex items-center gap-4 p-4 sm:p-5 rounded-2xl border-2 border-stone-200/90 dark:border-[#2A3F68] bg-white dark:bg-[#18253E] hover:border-purple-500 dark:hover:border-purple-400 hover:bg-purple-50/30 dark:hover:bg-[#1F3050] text-stone-900 dark:text-white shadow-xs transition-all cursor-pointer group"
                       >
                         <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-900 dark:bg-purple-900/80 dark:text-purple-100 dark:border dark:border-purple-600 font-extrabold text-base flex items-center justify-center shrink-0 border border-purple-200 shadow-2xs group-hover:scale-105 transition-transform">

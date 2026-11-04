@@ -7,22 +7,22 @@ import { cn } from '@/lib/utils';
 import JeeMainPyqExplorer from '@/components/pyq/JeeMainPyqExplorer';
 import { PyqAdminUpload } from '@/components/pyq/PyqAdminUpload';
 
-type ExamView = 'home' | 'jee_main' | 'admin_upload';
+type ExamView = 'home' | 'jee_main' | 'jee_advanced' | 'admin_upload';
 
 const examEntries = [
   {
     key: 'jee_main' as const,
     label: 'JEE Main',
     sublabel: '2025 B.Tech — 5 Papers Imported',
-    description: 'Physics, Chemistry and Mathematics — 352 questions across 5 examination dates and shifts.',
+    description: 'Physics, Chemistry and Mathematics — 358 questions across 5 examination dates and shifts.',
     status: 'active' as const,
   },
   {
     key: 'jee_advanced' as const,
     label: 'JEE Advanced',
-    sublabel: 'Coming Soon',
-    description: 'Previous year questions for JEE Advanced will be available here.',
-    status: 'soon' as const,
+    sublabel: 'Full Archive Live — 994 Questions',
+    description: 'Physics (362), Chemistry (309), and Mathematics (323) across 95 chapters with KaTeX formulas, reaction schemes & diagrams.',
+    status: 'active' as const,
   },
   {
     key: 'wbjee' as const,
@@ -126,7 +126,7 @@ export default function ExplorePYQPage() {
                   >
                     <button
                       disabled={entry.status === 'soon'}
-                      onClick={() => entry.status === 'active' && setView('jee_main')}
+                      onClick={() => entry.status === 'active' && setView(entry.key)}
                       className={cn(
                         'w-full text-left p-5 rounded-2xl border transition-all',
                         entry.status === 'active'
@@ -167,7 +167,7 @@ export default function ExplorePYQPage() {
           </motion.div>
         ) : (
           <motion.div
-            key="explorer"
+            key={view}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -182,10 +182,15 @@ export default function ExplorePYQPage() {
                 Explore PYQ
               </button>
               <ChevronRight className="w-3.5 h-3.5" />
-              <span className="font-bold text-foreground">JEE Main 2025 — B.Tech</span>
+              <span className="font-bold text-foreground">
+                {view === 'jee_advanced' ? 'JEE Advanced — Chapter-wise Archive' : 'JEE Main 2025 — B.Tech'}
+              </span>
             </div>
 
-            <JeeMainPyqExplorer />
+            <JeeMainPyqExplorer
+              examName={view === 'jee_advanced' ? 'JEE Advanced' : 'JEE Main'}
+              defaultTitle={view === 'jee_advanced' ? 'JEE Advanced — Chapter-wise Archive (PCM)' : 'JEE Main 2025 — B.Tech'}
+            />
           </motion.div>
         )}
       </AnimatePresence>

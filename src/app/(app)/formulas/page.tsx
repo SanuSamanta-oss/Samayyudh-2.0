@@ -19,9 +19,10 @@ import {
 import { ChapterAccordion } from '@/components/formulas/ChapterAccordion';
 import { FormulaCard } from '@/components/formulas/FormulaCard';
 import { PhysicalConstantsSection } from '@/components/formulas/PhysicalConstantsSection';
-import { MathematicsPlaceholder } from '@/components/formulas/MathematicsPlaceholder';
+import { MathematicsSection } from '@/components/formulas/MathematicsSection';
 import { NeetPrepSection } from '@/components/formulas/NeetPrepSection';
 import { ConstantsModal } from '@/components/formulas/ConstantsModal';
+import { getMathematicsStats } from '@/data/formulas/mathematics';
 import type { SubjectId } from '@/types/formulas';
 import { cn } from '@/lib/utils';
 
@@ -33,6 +34,7 @@ export default function FormulaLibraryPage() {
   const [isConstantsModalOpen, setIsConstantsModalOpen] = useState(false);
 
   const stats = useMemo(() => getPhysicsStats(), []);
+  const mathStats = useMemo(() => getMathematicsStats(), []);
 
   // Filtered search results across physics
   const searchResults = useMemo(() => {
@@ -77,8 +79,8 @@ export default function FormulaLibraryPage() {
       id: 'mathematics' as SubjectId,
       name: 'Mathematics',
       icon: Calculator,
-      count: 'Coming Soon',
-      ready: false,
+      count: `${mathStats.totalFormulas} Formulas`,
+      ready: true,
     },
     {
       id: 'neet' as SubjectId,
@@ -216,8 +218,8 @@ export default function FormulaLibraryPage() {
         {/* Render Dedicated Physical Constants Section */}
         {activeSubject === 'constants' && <PhysicalConstantsSection />}
 
-        {/* Render Mathematics Placeholder View */}
-        {activeSubject === 'mathematics' && <MathematicsPlaceholder />}
+        {/* Render Complete Mathematics Formula Library */}
+        {activeSubject === 'mathematics' && <MathematicsSection />}
 
         {/* Render NEET Preparation Track */}
         {activeSubject === 'neet' && <NeetPrepSection />}

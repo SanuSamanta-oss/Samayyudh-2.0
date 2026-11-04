@@ -48,3 +48,7 @@ __pycache__/
 
 # scratch
 scratch/
+
+# Scraped raw dumps
+data/jee_adv_raw/
+data/esaral_jee_adv_landing.html

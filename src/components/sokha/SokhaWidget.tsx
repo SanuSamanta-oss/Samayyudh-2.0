@@ -584,6 +584,7 @@ export function SokhaWidget() {
         body: JSON.stringify({
           message: query,
           userName: displayName,
+          currentPath: pathname,
           history: historyPayload.slice(0, -1),
           enableWebSearch,
         }),

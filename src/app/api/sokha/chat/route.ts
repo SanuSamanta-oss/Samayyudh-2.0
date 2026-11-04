@@ -23,6 +23,7 @@ export const maxDuration = 60; // Up to 60s for streaming completions
 interface RequestBody {
   message: string;
   userName?: string;
+  currentPath?: string;
   history?: ChatMessageInput[];
   enableWebSearch?: boolean;
 }
@@ -124,6 +125,7 @@ export async function POST(req: NextRequest) {
     const enableWebSearch = body.enableWebSearch !== false; // Default enabled
     const rawUserName = typeof body?.userName === 'string' ? body.userName.trim() : '';
     const userName = rawUserName ? rawUserName.slice(0, 50) : 'Student';
+    const currentPath = typeof body?.currentPath === 'string' ? body.currentPath.slice(0, 100) : undefined;
 
     // 6. Format contents for Gemini
     const contents = formatConversationContents(history, cleanMessage);
@@ -136,7 +138,7 @@ export async function POST(req: NextRequest) {
 
     // 8. Stream response via Server-Sent Events (SSE)
     const encoder = new TextEncoder();
-    const systemInstruction = getSamayyudhSystemInstruction(userName);
+    const systemInstruction = getSamayyudhSystemInstruction(userName, currentPath);
 
     const stream = new ReadableStream({
       async start(controller) {

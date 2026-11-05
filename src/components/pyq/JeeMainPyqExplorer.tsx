@@ -727,7 +727,7 @@ export default function JeeMainPyqExplorer({
             ) : (
               <div className="space-y-3">
                 {questions.map((q, idx) => (
-                  <QuestionCard key={q.id} q={q} index={idx} />
+                  <QuestionCard key={`${q.id || 'q'}-${idx}`} q={q} index={idx} />
                 ))}
               </div>
             )}

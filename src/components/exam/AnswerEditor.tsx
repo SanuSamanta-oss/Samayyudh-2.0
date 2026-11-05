@@ -43,9 +43,9 @@ export function AnswerEditor({
       <div className="relative">
         {options && options.length > 0 ? (
           <div className="flex flex-col gap-3.5 pt-2">
-            {options.map((opt) => (
+            {options.map((opt, optIdx) => (
               <label
-                key={opt.id}
+                key={`${opt.id || optIdx}-${optIdx}`}
                 className={cn(
                   'flex items-center gap-4 p-4 sm:p-5 rounded-2xl border-2 cursor-pointer transition-all',
                   value === opt.id

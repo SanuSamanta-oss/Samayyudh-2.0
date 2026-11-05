@@ -50,10 +50,10 @@ def create_complete_template_presentation(output_path="SamayYudh_2.0_Business_Te
     else:
         add_solid_bg(slide1, NAVY_DARK)
 
-    # 2. Main Visual Element: Hanging Pocket Stopwatch with Cord (Animated GIF Pendulum)
+    # 2. Main Visual Element: Hanging Golden Pocket Stopwatch with Chain (Animated GIF Pendulum)
     sw_gif_path = "public/images/presentation/stopwatch_pendulum.gif"
     if os.path.exists(sw_gif_path):
-        slide1.shapes.add_picture(sw_gif_path, Inches(8.8), Inches(0), Inches(3.8), Inches(5.7))
+        slide1.shapes.add_picture(sw_gif_path, Inches(9.1), Inches(0), Inches(3.5), Inches(5.1))
 
     # Color Constants for Times New Roman Typography
     NAVY_HEAD = RGBColor(11, 27, 61)       # #0B1B3D Deep Navy
@@ -879,13 +879,21 @@ def create_complete_template_presentation(output_path="SamayYudh_2.0_Business_Te
     p.font.color.rgb = TEXT_MUTED
     p.alignment = PP_ALIGN.CENTER
 
-    try:
-        prs.save(output_path)
-        print(f"Presentation saved successfully to: {output_path}")
-    except PermissionError:
-        alt_path = "SamayYudh_2.0_Business_Template_Deck.pptx"
-        prs.save(alt_path)
-        print(f"Note: '{output_path}' was locked by another application. Saved presentation successfully to: {alt_path}")
+    saved_path = None
+    targets = [
+        "SamayYudh_2.0_Cinematic_Presentation.pptx",
+        "SamayYudh_2.0_Business_Template_Presentation.pptx",
+        "SamayYudh_2.0_Business_Template_Deck.pptx"
+    ]
+    for target in targets:
+        try:
+            prs.save(target)
+            print(f"Presentation saved successfully to: {target}")
+            saved_path = target
+            break
+        except PermissionError:
+            print(f"File {target} is locked by PowerPoint. Trying next...")
+            continue
 
 if __name__ == "__main__":
     create_complete_template_presentation()

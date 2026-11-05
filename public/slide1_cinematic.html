@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAMAYYUDH 2.0 — Slide 1 Cinematic Animation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #060d1a;
+      color: #fff;
+      font-family: 'Tinos', 'Times New Roman', Times, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .toolbar button {
+      background: #00b4d8;
+      color: #0b1b3d;
+      border: none;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .toolbar button:hover {
+      background: #48cae4;
+      transform: scale(1.04);
+    }
+    .toolbar .status {
+      font-size: 13px;
+      color: #94a3b8;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* 16:9 Slide Stage */
+    .slide-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      background: #0b1b3d;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    /* 1. Airplane Background Photograph */
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('/images/presentation/cinematic_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    /* 2. Dim White Translucent Overlay */
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.22);
+      z-index: 2;
+      opacity: 0;
+      animation: fadeInOverlay 1.8s ease-in-out 0.8s forwards;
+    }
+
+    /* 3 & 4. Stopwatch with Cord & True Harmonic Pendulum Animation */
+    .stopwatch-anchor {
+      position: absolute;
+      top: 0;
+      right: 10%;
+      width: 15%;
+      max-width: 190px;
+      z-index: 10;
+      opacity: 0;
+      transform-origin: 53.4% 0%;
+      animation:
+        revealStopwatch 1.4s ease-out 1.6s forwards,
+        pendulumSwing 2.6s cubic-bezier(0.445, 0.05, 0.55, 0.95) 2.4s infinite alternate;
+      pointer-events: none;
+      filter: drop-shadow(0 15px 25px rgba(11, 27, 61, 0.45));
+    }
+    .stopwatch-anchor img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Content Area */
+    .content-container {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      padding: 5.5% 7%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #0b1b3d;
+      pointer-events: none;
+    }
+
+    /* Top Left Title Block */
+    .title-block {
+      max-width: 62%;
+    }
+
+    /* Step 5: Heading */
+    .main-title {
+      font-size: clamp(2rem, 4.4vw, 3.8rem);
+      font-weight: 700;
+      color: #0b1b3d;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards;
+    }
+
+    /* Step 6: Subtitle */
+    .subtitle {
+      font-size: clamp(0.9rem, 1.8vw, 1.45rem);
+      font-weight: 700;
+      color: #0b1b3d;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.6vw;
+      line-height: 1.2;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 3.6s forwards;
+    }
+
+    /* Step 7: Tagline */
+    .tagline {
+      font-size: clamp(0.85rem, 1.5vw, 1.25rem);
+      font-style: italic;
+      color: #1a202c;
+      margin-top: 0.5vw;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 4.2s forwards;
+    }
+
+    /* Accent Divider Line */
+    .divider-line {
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #028090, #00b4d8);
+      margin: 1.4vw 0 1.2vw 0;
+      opacity: 0.9;
+      animation: expandDivider 1.2s cubic-bezier(0.16, 1, 0.3, 1) 4.8s forwards;
+    }
+
+    /* Bottom Left Group Info Block */
+    .group-block {
+      max-width: 58%;
+    }
+
+    /* Step 8: Group Title */
+    .group-title {
+      font-size: clamp(1rem, 2.1vw, 1.7rem);
+      font-weight: 700;
+      color: #0b1b3d;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: revealUp 1.0s cubic-bezier(0.16, 1, 0.3, 1) 5.1s forwards;
+    }
+
+    /* Step 9: Department */
+    .department-info {
+      font-size: clamp(0.75rem, 1.4vw, 1.15rem);
+      font-weight: 700;
+      color: #2d3748;
+      letter-spacing: 0.03em;
+      margin-top: 0.2vw;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: revealUp 1.0s cubic-bezier(0.16, 1, 0.3, 1) 5.6s forwards;
+    }
+
+    /* Step 10: Members Subsection */
+    .members-heading {
+      font-size: clamp(0.85rem, 1.5vw, 1.25rem);
+      font-weight: 700;
+      color: #0b1b3d;
+      margin-top: 0.9vw;
+      margin-bottom: 0.4vw;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: revealUp 1.0s cubic-bezier(0.16, 1, 0.3, 1) 6.1s forwards;
+    }
+
+    .members-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35vw;
+    }
+    .member-item {
+      font-size: clamp(0.75rem, 1.35vw, 1.1rem);
+      color: #1a202c;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    .member-item:nth-child(1) { animation: revealMember 0.9s cubic-bezier(0.16, 1, 0.3, 1) 6.6s forwards; }
+    .member-item:nth-child(2) { animation: revealMember 0.9s cubic-bezier(0.16, 1, 0.3, 1) 7.0s forwards; }
+    .member-item:nth-child(3) { animation: revealMember 0.9s cubic-bezier(0.16, 1, 0.3, 1) 7.4s forwards; }
+    .member-item:nth-child(4) { animation: revealMember 0.9s cubic-bezier(0.16, 1, 0.3, 1) 7.8s forwards; }
+
+    /* Keyframes */
+    @keyframes fadeInOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes revealStopwatch {
+      0% { opacity: 0; transform: translateY(-40px) rotate(0deg); }
+      100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    }
+    @keyframes pendulumSwing {
+      0% { transform: rotate(-9.5deg); }
+      100% { transform: rotate(9.5deg); }
+    }
+    @keyframes revealUp {
+      0% { opacity: 0; transform: translateY(14px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes expandDivider {
+      0% { width: 0; }
+      100% { width: clamp(180px, 32vw, 380px); }
+    }
+    @keyframes revealMember {
+      0% { opacity: 0; transform: translateX(-10px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <button onclick="replayAnimation()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      Replay Cinematic Animation
+    </button>
+    <button onclick="toggleFullscreen()" style="background: rgba(255,255,255,0.1); color: #fff;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      Fullscreen
+    </button>
+    <span class="status" id="timelineStatus">Sequence: 10-Step Opening</span>
+  </div>
+
+  <div class="slide-wrapper" id="slideStage">
+    <!-- Step 1: Background Photograph -->
+    <div class="slide-bg"></div>
+
+    <!-- Step 2: Dim White Translucent Overlay -->
+    <div class="slide-overlay"></div>
+
+    <!-- Step 3 & 4: Pocket Stopwatch with Chain & Pendulum Animation -->
+    <div class="stopwatch-anchor">
+      <img src="/images/presentation/stopwatch_cropped.png" alt="Pocket Stopwatch and Chain">
+    </div>
+
+    <!-- Slide Content -->
+    <div class="content-container">
+      <div class="title-block">
+        <!-- Step 5: Main Heading -->
+        <h1 class="main-title">SAMAYYUDH 2.0</h1>
+        <!-- Step 6: Subtitle -->
+        <h2 class="subtitle">EXAMINATION TIME-PRESSURE SIMULATOR</h2>
+        <!-- Step 7: Tagline -->
+        <p class="tagline">The Battle Between You &amp; The Clock</p>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="group-block">
+        <!-- Step 8: Group Code -->
+        <h3 class="group-title">GROUP - 010</h3>
+        <!-- Step 9: Department -->
+        <h4 class="department-info">DEPARTMENT - CSE-AIML (2ND YEAR)</h4>
+        <!-- Step 10: Group Members -->
+        <h5 class="members-heading">GROUP MEMBERS</h5>
+        <ul class="members-list">
+          <li class="member-item">1. SAMBITA SINGHA ROY (JIS/2025/0424)</li>
+          <li class="member-item">2. SHREYA BOSE (JIS/2025/0577)</li>
+          <li class="member-item">3. SARBAJIT SAHA (JIS/2025/1177)</li>
+          <li class="member-item">4. SANU SAMANTA (JIS/2025/0721)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function replayAnimation() {
+      const stage = document.getElementById('slideStage');
+      const clone = stage.cloneNode(true);
+      stage.parentNode.replaceChild(clone, stage);
+      updateStatus();
+    }
+
+    function toggleFullscreen() {
+      const stage = document.getElementById('slideStage');
+      if (!document.fullscreenElement) {
+        stage.requestFullscreen().catch(err => alert(`Error entering fullscreen: ${err.message}`));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function updateStatus() {
+      const status = document.getElementById('timelineStatus');
+      const sequence = [
+        { t: 0, msg: "1. Photograph Background Loaded" },
+        { t: 800, msg: "2. Dim White Translucent Overlay Fading In" },
+        { t: 1600, msg: "3. Pocket Stopwatch & Chain Entering" },
+        { t: 2400, msg: "4. Realistic Pendulum Swing Active" },
+        { t: 2800, msg: "5. Revealing SAMAYYUDH 2.0" },
+        { t: 3600, msg: "6. Revealing Examination Subtitle" },
+        { t: 4200, msg: "7. Revealing Project Tagline" },
+        { t: 5100, msg: "8. Revealing GROUP - 010" },
+        { t: 5600, msg: "9. Revealing Department Information" },
+        { t: 6100, msg: "10. Revealing Group Members Sequentially" },
+        { t: 8000, msg: "All 10 Sequence Steps Complete" }
+      ];
+      sequence.forEach(step => {
+        setTimeout(() => {
+          if (status) status.textContent = step.msg;
+        }, step.t);
+      });
+    }
+    updateStatus();
+  </script>
+</body>
+</html>

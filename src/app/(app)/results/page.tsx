@@ -6,15 +6,17 @@ import { Suspense, useCallback, useEffect, useState } from 'react';
 import {
   Trophy, Clock, Target, BarChart3, ChevronRight, ArrowLeft,
   CheckCircle2, XCircle, AlertTriangle, Zap, ChevronDown, ChevronUp,
-  Sparkles, Brain, TrendingUp, FileText, Timer, Loader2, Printer
+  Sparkles, Brain, TrendingUp, FileText, Timer, Loader2, Printer,
+  StickyNote as StickyNoteIcon
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { formatDuration, formatTime, percentage } from '@/lib/utils';
+import { formatDuration, formatTime, percentage, generateId, now } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
 import { evaluateSession, checkGeminiStatus } from '@/lib/gemini';
 import { canEvaluateDeterministically } from '@/lib/evaluation/hybrid-evaluator';
 import { questionBank } from '@/lib/questions';
-import type { ExamSession, Answer, AnswerEvaluation, Question } from '@/types';
+import type { ExamSession, Answer, AnswerEvaluation, Question, StickyNote, StickyNoteColor } from '@/types';
+import { NotesBoard } from '@/components/exam/NotesBoard';
 import { processCompletedMockTest } from '@/lib/achievements/client';
 import { AchievementUnlockModal } from '@/components/achievements/AchievementUnlockModal';
 import type { AchievementDefinition, UserAchievement } from '@/types/achievements';
@@ -97,6 +99,10 @@ function ResultsInner() {
     achievement: AchievementDefinition;
     record: UserAchievement;
   } | null>(null);
+  const [sessionNotes, setSessionNotes] = useState<Map<string, StickyNote>>(new Map());
+  const [showResultsNotesBoard, setShowResultsNotesBoard] = useState(false);
+  const [editingNoteQId, setEditingNoteQId] = useState<string | null>(null);
+  const [editingNoteContent, setEditingNoteContent] = useState<string>('');
 
   // Load session data from IndexedDB
   useEffect(() => {
@@ -116,6 +122,16 @@ function ResultsInner() {
       const allQuestions = [...questionBank, ...customQs];
       const matched = allQuestions.filter(q => questionIds.has(q.id));
       setQuestions(matched);
+
+      // Load session notes from IndexedDB
+      const savedNotes = await localDB.getStickyNotesBySession(sessionId);
+      const nMap = new Map<string, StickyNote>();
+      savedNotes.forEach((n) => {
+        if (n.content && n.content.trim()) {
+          nMap.set(n.question_id, n);
+        }
+      });
+      setSessionNotes(nMap);
 
       // Load cached evaluations
       const answerIds = ans.map(a => a.id);
@@ -432,24 +448,83 @@ function ResultsInner() {
       {/* Per-Question Results */}
       {hasEvaluations && (
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-2">
             <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
               <FileText className="w-5 h-5 text-brand-600 dark:text-brand-400" />
               Question-by-Question Breakdown
             </h3>
-            <button
-              onClick={() => {
-                if (expandedCards.size === questions.length) {
-                  setExpandedCards(new Set());
-                } else {
-                  setExpandedCards(new Set(questions.map(q => q.id)));
-                }
-              }}
-              className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-stone-50 dark:hover:bg-slate-800 text-stone-600 dark:text-slate-300 hover:text-foreground dark:hover:text-white transition-colors cursor-pointer"
-            >
-              {expandedCards.size === questions.length ? 'Collapse All' : 'Expand All'}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowResultsNotesBoard(!showResultsNotesBoard)}
+                className={cn(
+                  'text-xs font-semibold px-3 py-1.5 rounded-lg border transition-colors cursor-pointer inline-flex items-center gap-1.5',
+                  showResultsNotesBoard
+                    ? 'border-amber-400 bg-amber-50 text-amber-900 dark:bg-amber-950/60 dark:text-amber-200'
+                    : 'border-border bg-card hover:bg-stone-50 dark:hover:bg-slate-800 text-stone-600 dark:text-slate-300'
+                )}
+                title="Toggle Notes Board for this exam"
+              >
+                <StickyNoteIcon className="w-3.5 h-3.5 text-amber-500" />
+                <span>Notes Board {sessionNotes.size > 0 && `(${sessionNotes.size})`}</span>
+              </button>
+              <button
+                onClick={() => {
+                  if (expandedCards.size === questions.length) {
+                    setExpandedCards(new Set());
+                  } else {
+                    setExpandedCards(new Set(questions.map(q => q.id)));
+                  }
+                }}
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-stone-50 dark:hover:bg-slate-800 text-stone-600 dark:text-slate-300 hover:text-foreground dark:hover:text-white transition-colors cursor-pointer"
+              >
+                {expandedCards.size === questions.length ? 'Collapse All' : 'Expand All'}
+              </button>
+            </div>
           </div>
+
+          {/* Browser-Inspired Notes Board inside Results Analysis */}
+          {showResultsNotesBoard && (
+            <div className="mb-2">
+              <NotesBoard
+                notes={Array.from(sessionNotes.values()).map((n) => ({
+                  id: n.id,
+                  session_id: n.session_id,
+                  question_id: n.question_id,
+                  question_index: n.question_index ?? 0,
+                  question_number: n.question_number,
+                  content: n.content,
+                  color: n.color ?? 'yellow',
+                  is_pinned: n.is_pinned !== false,
+                  pinned_at: n.created_at,
+                  updated_at: n.updated_at,
+                }))}
+                onDelete={(id) => {
+                  localDB.deleteStickyNote(id);
+                  setSessionNotes((prev) => {
+                    const updated = new Map(prev);
+                    for (const [qid, note] of updated.entries()) {
+                      if (note.id === id) updated.delete(qid);
+                    }
+                    return updated;
+                  });
+                }}
+                onColorChange={(id, color) => {
+                  setSessionNotes((prev) => {
+                    const updated = new Map(prev);
+                    for (const [qid, note] of updated.entries()) {
+                      if (note.id === id) {
+                        const u = { ...note, color, updated_at: now() };
+                        localDB.saveStickyNote(u);
+                        updated.set(qid, u);
+                      }
+                    }
+                    return updated;
+                  });
+                }}
+                examTitle={session?.title}
+              />
+            </div>
+          )}
 
           {questions.map((q, idx) => {
             const answer = answers.find(a => a.question_id === q.id);
@@ -678,6 +753,103 @@ function ResultsInner() {
                         </div>
                       </details>
                     )}
+
+                    {/* 7. Personal Notes (My Notes) — Distinct from AI Grading */}
+                    {(() => {
+                      const note = sessionNotes.get(q.id);
+                      const isEditing = editingNoteQId === q.id;
+
+                      if (!note && !isEditing) return null;
+
+                      return (
+                        <div className="rounded-xl border border-amber-300 dark:border-amber-800/80 bg-amber-50/70 dark:bg-[#1C160C] p-4 space-y-2.5 shadow-2xs">
+                          <div className="flex items-center justify-between gap-2 flex-wrap">
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-lg bg-amber-200 dark:bg-amber-900/80 text-amber-900 dark:text-amber-200 flex items-center justify-center">
+                                <StickyNoteIcon className="w-3.5 h-3.5" />
+                              </div>
+                              <span className="text-xs font-bold text-amber-950 dark:text-amber-100 uppercase tracking-wider">
+                                My Notes
+                              </span>
+                              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-200/80 dark:bg-amber-900/90 text-amber-900 dark:text-amber-200">
+                                Private Student Annotation
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-2 text-xs">
+                              {note && (
+                                <span className="text-[10px] text-amber-800/70 dark:text-amber-300/70 flex items-center gap-1">
+                                  <Clock className="w-3 h-3" />
+                                  Edited {new Date(note.updated_at || note.created_at).toLocaleDateString('en-IN', {
+                                    day: 'numeric',
+                                    month: 'short',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                  })}
+                                </span>
+                              )}
+                              <button
+                                onClick={() => {
+                                  if (isEditing) {
+                                    setEditingNoteQId(null);
+                                  } else {
+                                    setEditingNoteQId(q.id);
+                                    setEditingNoteContent(note?.content || '');
+                                  }
+                                }}
+                                className="text-[11px] font-bold text-amber-700 dark:text-amber-300 hover:underline cursor-pointer"
+                              >
+                                {isEditing ? 'Cancel' : 'Edit Note'}
+                              </button>
+                            </div>
+                          </div>
+
+                          {isEditing ? (
+                            <div className="space-y-2 pt-1">
+                              <textarea
+                                value={editingNoteContent}
+                                onChange={(e) => setEditingNoteContent(e.target.value)}
+                                placeholder="Reflect on this question, record what to revise..."
+                                rows={3}
+                                className="w-full p-2.5 rounded-lg border border-amber-300 dark:border-amber-700 bg-white dark:bg-[#0E1624] text-stone-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 font-sans leading-relaxed"
+                              />
+                              <div className="flex justify-end gap-2">
+                                <button
+                                  onClick={async () => {
+                                    if (!session) return;
+                                    const updatedNote: StickyNote = note
+                                      ? { ...note, content: editingNoteContent, updated_at: now() }
+                                      : {
+                                          id: generateId(),
+                                          user_id: session.user_id || 'local',
+                                          question_id: q.id,
+                                          session_id: session.id,
+                                          question_index: idx,
+                                          question_number: idx + 1,
+                                          exam_name: session.title,
+                                          content: editingNoteContent,
+                                          color: 'yellow',
+                                          created_at: now(),
+                                          updated_at: now(),
+                                        };
+                                    await localDB.saveStickyNote(updatedNote);
+                                    setSessionNotes((prev) => new Map(prev).set(q.id, updatedNote));
+                                    setEditingNoteQId(null);
+                                  }}
+                                  className="px-3.5 py-1.5 rounded-lg bg-amber-600 text-white font-bold text-xs hover:bg-amber-700 transition-colors cursor-pointer shadow-2xs"
+                                >
+                                  Save Note
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <p className="text-xs sm:text-sm text-stone-900 dark:text-amber-50 leading-relaxed whitespace-pre-wrap font-sans">
+                              {note?.content}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })()}
                   </div>
                 )}
               </div>

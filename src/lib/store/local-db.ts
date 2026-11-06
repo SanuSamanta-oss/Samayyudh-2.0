@@ -150,6 +150,12 @@ export async function saveStickyNote(note: StickyNote): Promise<void> {
   await db.put('sticky_notes', note);
 }
 
+export async function deleteStickyNote(id: string): Promise<void> {
+  const db = await getDB();
+  if (!db) return;
+  await db.delete('sticky_notes', id);
+}
+
 export async function getStickyNotesBySession(sessionId: string): Promise<StickyNote[]> {
   const db = await getDB();
   if (!db) return [];

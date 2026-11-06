@@ -37,26 +37,134 @@ function ExamSessionInner() {
   const [showMilestone, setShowMilestone] = useState<string | null>(null);
   const [boardNotes, setBoardNotes] = useState<BoardNote[]>([]);
 
+  // Load saved notes for session from IndexedDB
+  useEffect(() => {
+    if (!state.session?.id) return;
+    localDB.getStickyNotesBySession(state.session.id).then((saved) => {
+      if (saved && saved.length > 0) {
+        const mapped: BoardNote[] = saved
+          .filter((n) => n.content && n.content.trim().length > 0)
+          .map((n) => ({
+            id: n.id,
+            session_id: n.session_id,
+            question_id: n.question_id,
+            question_index: n.question_index ?? 0,
+            question_number: n.question_number ?? (n.question_index !== undefined ? n.question_index + 1 : 1),
+            content: n.content,
+            color: n.color ?? 'yellow',
+            is_pinned: n.is_pinned !== false,
+            position_x: n.position_x,
+            position_y: n.position_y,
+            pinned_at: n.created_at,
+            updated_at: n.updated_at,
+          }));
+        setBoardNotes(mapped);
+      }
+    });
+  }, [state.session?.id]);
+
   const handlePin = (content: string, color: StickyNoteColor) => {
     if (!currentQuestion || !state.session) return;
-    const note: BoardNote = {
-      id: generateId(),
+    const noteId = currentStickyNote?.id || generateId();
+    const qIndex = state.currentQuestionIndex;
+    const qNumber = qIndex + 1;
+    const timestamp = now();
+
+    const newBoardNote: BoardNote = {
+      id: noteId,
       session_id: state.session.id,
       question_id: currentQuestion.id,
-      question_index: state.currentQuestionIndex,
+      question_index: qIndex,
+      question_number: qNumber,
       content,
       color,
-      pinned_at: now(),
+      is_pinned: true,
+      pinned_at: timestamp,
+      updated_at: timestamp,
     };
-    setBoardNotes((prev) => [...prev, note]);
+
+    setBoardNotes((prev) => {
+      const filtered = prev.filter((n) => n.question_id !== currentQuestion.id);
+      return [...filtered, newBoardNote];
+    });
+
+    // Save to IndexedDB
+    localDB.saveStickyNote({
+      id: noteId,
+      user_id: state.session.user_id || 'local',
+      session_id: state.session.id,
+      question_id: currentQuestion.id,
+      question_index: qIndex,
+      question_number: qNumber,
+      exam_name: state.session.title || 'Exam',
+      category: state.session.exam_code || 'Practice',
+      content,
+      color,
+      is_pinned: true,
+      created_at: timestamp,
+      updated_at: timestamp,
+    });
   };
 
   const handleDeleteBoardNote = (id: string) => {
     setBoardNotes((prev) => prev.filter((n) => n.id !== id));
+    localDB.deleteStickyNote(id);
   };
 
   const handleBoardNoteColorChange = (id: string, color: StickyNoteColor) => {
-    setBoardNotes((prev) => prev.map((n) => n.id === id ? { ...n, color } : n));
+    setBoardNotes((prev) =>
+      prev.map((n) => {
+        if (n.id === id) {
+          const updated = { ...n, color, updated_at: now() };
+          localDB.saveStickyNote({
+            id: n.id,
+            user_id: state.session?.user_id || 'local',
+            session_id: n.session_id,
+            question_id: n.question_id,
+            question_index: n.question_index,
+            question_number: n.question_number,
+            exam_name: state.session?.title,
+            content: n.content,
+            color,
+            is_pinned: n.is_pinned,
+            position_x: n.position_x,
+            position_y: n.position_y,
+            created_at: n.pinned_at,
+            updated_at: now(),
+          });
+          return updated;
+        }
+        return n;
+      })
+    );
+  };
+
+  const handlePositionChange = (id: string, x: number, y: number) => {
+    setBoardNotes((prev) =>
+      prev.map((n) => {
+        if (n.id === id) {
+          const updated = { ...n, position_x: x, position_y: y, updated_at: now() };
+          localDB.saveStickyNote({
+            id: n.id,
+            user_id: state.session?.user_id || 'local',
+            session_id: n.session_id,
+            question_id: n.question_id,
+            question_index: n.question_index,
+            question_number: n.question_number,
+            exam_name: state.session?.title,
+            content: n.content,
+            color: n.color,
+            is_pinned: n.is_pinned,
+            position_x: x,
+            position_y: y,
+            created_at: n.pinned_at,
+            updated_at: now(),
+          });
+          return updated;
+        }
+        return n;
+      })
+    );
   };
 
   // Initialize session from URL params
@@ -300,8 +408,39 @@ function ExamSessionInner() {
                 <div className="flex items-center gap-2">
                   <StickyNote
                     content={currentStickyNote?.content || ''}
-                    onChange={(c) => updateStickyNote(currentQuestion.id, c)}
+                    onChange={(c) =>
+                      updateStickyNote(currentQuestion.id, c, {
+                        color: currentStickyNote?.color || 'yellow',
+                      })
+                    }
                     onPin={handlePin}
+                    questionNumber={state.currentQuestionIndex + 1}
+                    questionSubject={currentQuestion.subject}
+                    color={currentStickyNote?.color || 'yellow'}
+                    onColorChange={(newCol) =>
+                      updateStickyNote(
+                        currentQuestion.id,
+                        currentStickyNote?.content || '',
+                        { color: newCol }
+                      )
+                    }
+                    isPinned={boardNotes.some(
+                      (b) => b.question_id === currentQuestion.id && b.is_pinned !== false
+                    )}
+                    onTogglePin={() => {
+                      const existingBoardNote = boardNotes.find(
+                        (b) => b.question_id === currentQuestion.id
+                      );
+                      if (existingBoardNote) {
+                        handleDeleteBoardNote(existingBoardNote.id);
+                      } else {
+                        handlePin(
+                          currentStickyNote?.content || '',
+                          currentStickyNote?.color || 'yellow'
+                        );
+                      }
+                    }}
+                    saveStatus={state.saveStatus === 'error' ? 'offline' : state.saveStatus}
                   />
                   <button
                     onClick={() => flagQuestion(currentQuestion.id)}
@@ -326,11 +465,19 @@ function ExamSessionInner() {
                 options={currentQuestion.options}
               />
 
-              {/* Notes Board */}
+              {/* Modern Browser-Inspired Notes Board */}
               <NotesBoard
                 notes={boardNotes}
                 onDelete={handleDeleteBoardNote}
                 onColorChange={handleBoardNoteColorChange}
+                onPositionChange={handlePositionChange}
+                onSelectNote={(note) => goToQuestion(note.question_index)}
+                onTogglePin={(id) => {
+                  setBoardNotes((prev) =>
+                    prev.map((n) => (n.id === id ? { ...n, is_pinned: !n.is_pinned } : n))
+                  );
+                }}
+                examTitle={state.session?.title}
               />
             </div>
 

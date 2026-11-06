@@ -234,15 +234,23 @@ export interface AnswerEvaluation {
 
 // --- Sticky Notes ---
 
-export type StickyNoteColor = 'yellow' | 'orange' | 'seagreen' | 'white';
+export type StickyNoteColor = 'yellow' | 'orange' | 'seagreen' | 'white' | 'blue' | 'purple' | 'rose' | 'amber';
 
 export interface StickyNote {
   id: string;
   user_id: string;
   question_id: string;
   session_id: string;
+  question_index?: number;
+  question_number?: number;
+  exam_name?: string;
+  category?: string;
   content: string;
   color?: StickyNoteColor;
+  is_pinned?: boolean;
+  position_x?: number;
+  position_y?: number;
+  rotation?: number;
   created_at: string;
   updated_at: string;
 }
@@ -253,9 +261,16 @@ export interface BoardNote {
   session_id: string;
   question_id: string;   // which question it was pinned from
   question_index: number;
+  question_number?: number;
+  exam_name?: string;
   content: string;
   color: StickyNoteColor;
+  is_pinned?: boolean;
+  position_x?: number;
+  position_y?: number;
+  rotation?: number;
   pinned_at: string;
+  updated_at?: string;
 }
 
 // --- User ---

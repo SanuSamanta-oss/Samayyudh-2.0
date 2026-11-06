@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useReducer, useCallback, useEffect, useRef } from 'react';
-import type { Answer, AnswerStatus, ExamSession, Question, StickyNote } from '@/types';
+import type { Answer, AnswerStatus, ExamSession, Question, StickyNote, StickyNoteColor } from '@/types';
 import { generateId, now, countWords } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
 import { AUTOSAVE_DEBOUNCE_MS } from '@/lib/constants';
@@ -25,7 +25,16 @@ type ExamAction =
   | { type: 'SET_QUESTION_INDEX'; index: number }
   | { type: 'UPDATE_ANSWER'; questionId: string; text: string }
   | { type: 'SET_ANSWER_STATUS'; questionId: string; status: AnswerStatus }
-  | { type: 'UPDATE_STICKY_NOTE'; questionId: string; content: string }
+  | {
+      type: 'UPDATE_STICKY_NOTE';
+      questionId: string;
+      content: string;
+      color?: StickyNoteColor;
+      is_pinned?: boolean;
+      position_x?: number;
+      position_y?: number;
+    }
+  | { type: 'DELETE_STICKY_NOTE'; questionId: string }
   | { type: 'SET_SAVE_STATUS'; status: ExamState['saveStatus'] }
   | { type: 'SET_TIME_UP' }
   | { type: 'FLAG_QUESTION'; questionId: string }
@@ -118,18 +127,39 @@ function examReducer(state: ExamState, action: ExamAction): ExamState {
     case 'UPDATE_STICKY_NOTE': {
       const existing = state.stickyNotes.get(action.questionId);
       const note: StickyNote = existing
-        ? { ...existing, content: action.content, updated_at: now() }
+        ? {
+            ...existing,
+            content: action.content,
+            color: action.color ?? existing.color ?? 'yellow',
+            is_pinned: action.is_pinned !== undefined ? action.is_pinned : existing.is_pinned,
+            position_x: action.position_x !== undefined ? action.position_x : existing.position_x,
+            position_y: action.position_y !== undefined ? action.position_y : existing.position_y,
+            updated_at: now(),
+          }
         : {
             id: generateId(),
             user_id: state.session?.user_id ?? 'local',
             question_id: action.questionId,
             session_id: state.session?.id ?? '',
+            question_index: state.currentQuestionIndex,
+            question_number: state.currentQuestionIndex + 1,
+            exam_name: state.session?.title ?? 'Exam',
+            category: state.session?.exam_code ?? 'Practice',
             content: action.content,
+            color: action.color ?? 'yellow',
+            is_pinned: action.is_pinned ?? false,
+            position_x: action.position_x,
+            position_y: action.position_y,
             created_at: now(),
             updated_at: now(),
           };
       const newNotes = new Map(state.stickyNotes);
       newNotes.set(action.questionId, note);
+      return { ...state, stickyNotes: newNotes };
+    }
+    case 'DELETE_STICKY_NOTE': {
+      const newNotes = new Map(state.stickyNotes);
+      newNotes.delete(action.questionId);
       return { ...state, stickyNotes: newNotes };
     }
     case 'SET_SAVE_STATUS':
@@ -187,7 +217,17 @@ interface ExamContextValue {
   initSession: (session: ExamSession, questions: Question[]) => Promise<void>;
   goToQuestion: (index: number) => void;
   updateAnswer: (questionId: string, text: string) => void;
-  updateStickyNote: (questionId: string, content: string) => void;
+  updateStickyNote: (
+    questionId: string,
+    content: string,
+    options?: {
+      color?: StickyNoteColor;
+      is_pinned?: boolean;
+      position_x?: number;
+      position_y?: number;
+    }
+  ) => void;
+  deleteStickyNote: (questionId: string) => void;
   flagQuestion: (questionId: string) => void;
   submitExam: () => Promise<void>;
   currentQuestion: Question | null;
@@ -282,13 +322,63 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
     }, AUTOSAVE_DEBOUNCE_MS);
   }, [state.isTimeUp, state.answers, persistAnswer]);
 
-  const updateStickyNote = useCallback((questionId: string, content: string) => {
-    dispatch({ type: 'UPDATE_STICKY_NOTE', questionId, content });
-    // Persist immediately
-    const note = state.stickyNotes.get(questionId);
-    if (note) {
-      localDB.saveStickyNote({ ...note, content, updated_at: now() });
+  const updateStickyNote = useCallback((
+    questionId: string,
+    content: string,
+    options?: {
+      color?: StickyNoteColor;
+      is_pinned?: boolean;
+      position_x?: number;
+      position_y?: number;
     }
+  ) => {
+    dispatch({
+      type: 'UPDATE_STICKY_NOTE',
+      questionId,
+      content,
+      color: options?.color,
+      is_pinned: options?.is_pinned,
+      position_x: options?.position_x,
+      position_y: options?.position_y,
+    });
+    // Persist immediately to IndexedDB
+    const existing = state.stickyNotes.get(questionId);
+    const noteToSave: StickyNote = existing
+      ? {
+          ...existing,
+          content,
+          color: options?.color ?? existing.color ?? 'yellow',
+          is_pinned: options?.is_pinned !== undefined ? options.is_pinned : existing.is_pinned,
+          position_x: options?.position_x !== undefined ? options.position_x : existing.position_x,
+          position_y: options?.position_y !== undefined ? options.position_y : existing.position_y,
+          updated_at: now(),
+        }
+      : {
+          id: generateId(),
+          user_id: state.session?.user_id ?? 'local',
+          question_id: questionId,
+          session_id: state.session?.id ?? '',
+          question_index: state.currentQuestionIndex,
+          question_number: state.currentQuestionIndex + 1,
+          exam_name: state.session?.title ?? 'Exam',
+          category: state.session?.exam_code ?? 'Practice',
+          content,
+          color: options?.color ?? 'yellow',
+          is_pinned: options?.is_pinned ?? false,
+          position_x: options?.position_x,
+          position_y: options?.position_y,
+          created_at: now(),
+          updated_at: now(),
+        };
+    localDB.saveStickyNote(noteToSave);
+  }, [state.stickyNotes, state.session, state.currentQuestionIndex]);
+
+  const deleteStickyNote = useCallback((questionId: string) => {
+    const existing = state.stickyNotes.get(questionId);
+    if (existing) {
+      localDB.deleteStickyNote(existing.id);
+    }
+    dispatch({ type: 'DELETE_STICKY_NOTE', questionId });
   }, [state.stickyNotes]);
 
   const flagQuestion = useCallback((questionId: string) => {
@@ -363,6 +453,7 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
         goToQuestion,
         updateAnswer,
         updateStickyNote,
+        deleteStickyNote,
         flagQuestion,
         submitExam,
         currentQuestion,

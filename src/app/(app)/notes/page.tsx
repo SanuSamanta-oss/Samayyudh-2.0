@@ -11,21 +11,13 @@ import * as localDB from '@/lib/store/local-db';
 import { questionBank } from '@/lib/questions';
 import type { StickyNote, ExamSession, Question } from '@/types';
 
+import { getColorConfig, NOTE_COLORS } from '@/components/exam/StickyNote';
+
 interface NoteWithContext {
   note: StickyNote;
   question: Question | undefined;
   session: ExamSession | undefined;
 }
-
-// Pastel sticky note colors
-const noteColors = [
-  'bg-yellow-50 border-yellow-200 hover:border-yellow-300',
-  'bg-pink-50 border-pink-200 hover:border-pink-300',
-  'bg-blue-50 border-blue-200 hover:border-blue-300',
-  'bg-green-50 border-green-200 hover:border-green-300',
-  'bg-purple-50 border-purple-200 hover:border-purple-300',
-  'bg-orange-50 border-orange-200 hover:border-orange-300',
-];
 
 export default function NotesPage() {
   const [notes, setNotes] = useState<NoteWithContext[]>([]);
@@ -62,7 +54,7 @@ export default function NotesPage() {
   }, []);
 
   async function deleteNote(noteId: string) {
-    // Remove from state (IndexedDB delete would need a dedicated function)
+    await localDB.deleteStickyNote(noteId);
     setNotes(prev => prev.filter(n => n.note.id !== noteId));
   }
 
@@ -159,70 +151,90 @@ export default function NotesPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map((item, index) => (
-            <div
-              key={item.note.id}
-              className={cn(
-                'rounded-xl border p-4 space-y-3 transition-all group relative',
-                noteColors[index % noteColors.length]
-              )}
-            >
-              {/* Note Content */}
-              <p className="text-sm text-stone-700 leading-relaxed whitespace-pre-wrap line-clamp-6">
-                {item.note.content}
-              </p>
+          {filtered.map((item, index) => {
+            const cfg = getColorConfig(item.note.color);
+            const qNum = item.note.question_number ?? (item.note.question_index !== undefined ? item.note.question_index + 1 : undefined);
 
-              {/* Question Context */}
-              {item.question && (
-                <div className="pt-2 border-t border-stone-200/60">
-                  <p className="text-xs text-stone-500 line-clamp-2">
-                    <span className="font-semibold text-stone-600">Q:</span>{' '}
-                    {item.question.question_text.slice(0, 100)}
-                    {item.question.question_text.length > 100 ? '…' : ''}
-                  </p>
-                  <div className="flex items-center gap-2 mt-1.5 text-[10px] text-stone-400">
-                    <span className="px-1.5 py-0.5 rounded bg-card/60 font-medium">
-                      {item.question.subject}
+            return (
+              <div
+                key={item.note.id}
+                className={cn(
+                  'rounded-2xl border-2 p-4 space-y-3 transition-all duration-200 group relative shadow-sm hover:shadow-md hover:scale-[1.01]',
+                  cfg.cardClass
+                )}
+              >
+                {/* Note Header */}
+                <div className="flex items-center justify-between pb-1 border-b border-black/5 dark:border-white/5">
+                  <div className="flex items-center gap-1.5">
+                    <span className={cn('text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-2xs', cfg.badgeClass)}>
+                      {qNum !== undefined ? `Q${qNum}` : 'Note'}
                     </span>
-                    <span>·</span>
-                    <span>{item.question.topic}</span>
-                    <span>·</span>
-                    <span>{item.question.marks}m</span>
+                    {item.question?.subject && (
+                      <span className="text-[10px] opacity-60 font-semibold uppercase tracking-wider">
+                        {item.question.subject}
+                      </span>
+                    )}
+                  </div>
+                  {item.session?.title && (
+                    <span className="text-[10px] opacity-50 truncate max-w-[120px]">
+                      {item.session.title}
+                    </span>
+                  )}
+                </div>
+
+                {/* Note Content */}
+                <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap line-clamp-6 font-sans">
+                  {item.note.content}
+                </p>
+
+                {/* Question Context */}
+                {item.question && (
+                  <div className="pt-2 border-t border-black/5 dark:border-white/5">
+                    <p className="text-xs opacity-75 line-clamp-2">
+                      <span className="font-semibold">Q:</span>{' '}
+                      {item.question.question_text.slice(0, 100)}
+                      {item.question.question_text.length > 100 ? '…' : ''}
+                    </p>
+                    <div className="flex items-center gap-2 mt-1 text-[10px] opacity-60">
+                      <span>{item.question.topic}</span>
+                      <span>·</span>
+                      <span>{item.question.marks}m</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Footer */}
+                <div className="flex items-center justify-between pt-1 border-t border-black/5 dark:border-white/5">
+                  <div className="flex items-center gap-1.5 text-[10px] opacity-60">
+                    <Clock className="w-3 h-3" />
+                    <span>
+                      {new Date(item.note.updated_at).toLocaleDateString('en-IN', {
+                        day: 'numeric', month: 'short', year: 'numeric'
+                      })}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    {item.session && (
+                      <Link
+                        href={`/results?session=${item.session.id}`}
+                        className="p-1.5 rounded-lg opacity-70 hover:opacity-100 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                        title="View in exam results"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
+                    <button
+                      onClick={() => deleteNote(item.note.id)}
+                      className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-500/10 transition-colors"
+                      title="Delete note"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 </div>
-              )}
-
-              {/* Footer */}
-              <div className="flex items-center justify-between pt-1">
-                <div className="flex items-center gap-1.5 text-[10px] text-stone-400">
-                  <Clock className="w-3 h-3" />
-                  <span>
-                    {new Date(item.note.updated_at).toLocaleDateString('en-IN', {
-                      day: 'numeric', month: 'short', year: 'numeric'
-                    })}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  {item.session && (
-                    <Link
-                      href={`/results?session=${item.session.id}`}
-                      className="p-1.5 rounded-lg text-stone-400 hover:text-brand-600 hover:bg-card/80 transition-colors"
-                      title="View exam results"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </Link>
-                  )}
-                  <button
-                    onClick={() => deleteNote(item.note.id)}
-                    className="p-1.5 rounded-lg text-stone-400 hover:text-red-500 hover:bg-card/80 transition-colors"
-                    title="Delete note"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 

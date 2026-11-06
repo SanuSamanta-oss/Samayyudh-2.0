@@ -484,7 +484,7 @@ export function QuestionNavigator({
       <div className="space-y-2">
         <div
           className={cn(
-            'grid gap-2 max-h-[360px] overflow-y-auto pr-1 select-none custom-scrollbar',
+            'grid gap-2.5 max-h-[360px] overflow-y-auto p-1.5 select-none custom-scrollbar',
             totalQuestions <= 25 ? 'grid-cols-5' : 'grid-cols-5 sm:grid-cols-5'
           )}
         >
@@ -497,8 +497,8 @@ export function QuestionNavigator({
                 key={q.questionNumber}
                 ref={isCurrent ? activeTileRef : null}
                 onClick={() => onNavigate(q.index)}
-                whileHover={{ scale: 1.06, y: -1 }}
-                whileTap={{ scale: 0.94 }}
+                whileHover={{ scale: 1.03, y: -1 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 500, damping: 28 }}
                 className={cn(
                   'relative aspect-square flex flex-col items-center justify-center rounded-2xl font-bold text-sm transition-all cursor-pointer',
@@ -516,10 +516,11 @@ export function QuestionNavigator({
                   q.baseStatus === 'wrong' &&
                     'bg-[#FF5C68]/25 border-2 border-[#FF5C68] text-[#DC2626] dark:text-[#FCA5A5]',
 
-                  // Active Highlight: prominent glowing outline that works on ANY status
+                  // Active Highlight: prominent glowing outline that sits cleanly without clipping at corners
                   isCurrent && [
-                    'ring-2 ring-brand-500 dark:ring-brand-400 ring-offset-2 ring-offset-white dark:ring-offset-[#111A2E]',
-                    'scale-[1.06] shadow-md shadow-brand-500/30 z-10 font-extrabold',
+                    'ring-2 ring-brand-500 dark:ring-brand-400',
+                    'shadow-[0_0_0_2px_rgba(99,102,241,0.25),0_0_12px_rgba(99,102,241,0.35)]',
+                    'z-10 font-black',
                   ]
                 )}
                 title={`Question ${q.questionNumber} — ${q.baseStatus.replace('_', ' ')}${

@@ -20,6 +20,7 @@ import { NotesBoard } from '@/components/exam/NotesBoard';
 import { processCompletedMockTest } from '@/lib/achievements/client';
 import { AchievementUnlockModal } from '@/components/achievements/AchievementUnlockModal';
 import type { AchievementDefinition, UserAchievement } from '@/types/achievements';
+import { MathText } from '@/components/pyq/MathText';
 
 // --- Correctness badge helpers ---
 const correctnessConfig = {
@@ -580,9 +581,9 @@ function ResultsInner() {
                           {(q.question_type || 'question').replace('_', ' ')} · {q.marks || 1} mark{(q.marks || 1) > 1 ? 's' : ''}
                         </span>
                       </div>
-                      <p className="text-sm text-stone-800 dark:text-slate-100 font-medium leading-relaxed whitespace-pre-wrap select-text">
-                        {q.question_text}
-                      </p>
+                      <div className="text-sm text-stone-900 dark:text-white font-medium leading-relaxed select-text">
+                        <MathText text={q.question_text} block />
+                      </div>
                     </div>
 
                     {/* Submitted vs Expected Answer Banner */}

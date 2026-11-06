@@ -715,9 +715,11 @@ function PracticeContent() {
               </button>
               <button
                 onClick={handleStart}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-brand hover:opacity-90 transition-opacity shadow-lg shadow-brand-500/25 cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-sm sm:text-base font-extrabold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-xl shadow-brand-500/35 hover:shadow-brand-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer ring-1 ring-white/20"
               >
-                Start Battle <ChevronRight className="w-4 h-4" />
+                <Zap className="w-4 h-4 text-amber-300 fill-amber-300" />
+                <span>Start Battle</span>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>

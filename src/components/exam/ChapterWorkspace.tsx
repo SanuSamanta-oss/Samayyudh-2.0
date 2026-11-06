@@ -453,9 +453,9 @@ export function ChapterWorkspace({
                           });
                           window.location.href = `/exam/session?${params.toString()}`;
                         }}
-                        className="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold text-white bg-purple-600 hover:bg-purple-700 shadow-sm cursor-pointer transition-colors flex items-center justify-center gap-1.5"
+                        className="px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-md shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 active:scale-95 cursor-pointer transition-all flex items-center justify-center gap-2"
                       >
-                        <Zap className="w-4 h-4" />
+                        <Zap className="w-4 h-4 text-amber-300 fill-amber-300" />
                         <span>Solve in Battle</span>
                       </button>
                     </div>
@@ -480,9 +480,9 @@ export function ChapterWorkspace({
                       });
                       window.location.href = `/exam/session?${params.toString()}`;
                     }}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-brand hover:opacity-95 shadow-sm hover:scale-[1.02] transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-md shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
                   >
-                    <Zap className="w-4 h-4" />
+                    <Zap className="w-4 h-4 text-amber-300 fill-amber-300" />
                     <span>Solve in Battle</span>
                   </button>
                 </div>

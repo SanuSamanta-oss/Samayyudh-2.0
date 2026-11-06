@@ -23,19 +23,19 @@ export function QuestionCard({ question, answer, questionIndex, totalQuestions }
     <div className="space-y-4">
       {/* Question Header */}
       <div className="flex flex-wrap items-center gap-3">
-        <span className="flex items-center gap-1.5 text-sm font-medium text-muted bg-surface-2 px-3 py-1 rounded-lg">
-          <Hash className="w-3.5 h-3.5" />
+        <span className="flex items-center gap-1.5 text-sm font-medium text-stone-700 dark:text-stone-300 bg-stone-100 dark:bg-stone-800/80 px-3 py-1 rounded-lg border border-stone-200/60 dark:border-stone-700/60">
+          <Hash className="w-3.5 h-3.5 text-stone-500 dark:text-stone-400" />
           Question {questionIndex + 1} of {totalQuestions}
         </span>
-        <span className="flex items-center gap-1.5 text-sm font-medium text-brand-700 bg-brand-50 px-3 py-1 rounded-lg">
+        <span className="flex items-center gap-1.5 text-sm font-semibold text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/70 border border-brand-200/80 dark:border-brand-800/80 px-3 py-1 rounded-lg">
           <Award className="w-3.5 h-3.5" />
           {question.marks} {question.marks === 1 ? 'Mark' : 'Marks'}
         </span>
         <span className={cn(
-          'text-xs font-medium px-2.5 py-1 rounded-full',
-          question.difficulty === 'easy' && 'bg-emerald-100 text-emerald-700',
-          question.difficulty === 'medium' && 'bg-amber-100 text-amber-700',
-          question.difficulty === 'hard' && 'bg-red-100 text-red-700',
+          'text-xs font-bold px-2.5 py-1 rounded-full border',
+          question.difficulty === 'easy' && 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60',
+          question.difficulty === 'medium' && 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/60',
+          question.difficulty === 'hard' && 'bg-red-100 dark:bg-red-950/60 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800/60',
         )}>
           {question.difficulty.charAt(0).toUpperCase() + question.difficulty.slice(1)}
         </span>
@@ -47,7 +47,7 @@ export function QuestionCard({ question, answer, questionIndex, totalQuestions }
           <MathText
             text={question.question_text}
             block
-            className="text-base sm:text-lg md:text-xl leading-relaxed text-stone-900 dark:text-stone-50 font-medium"
+            className="text-base sm:text-lg md:text-xl leading-relaxed text-stone-900 dark:text-white font-medium"
           />
         </div>
 
@@ -68,7 +68,7 @@ export function QuestionCard({ question, answer, questionIndex, totalQuestions }
       </div>
 
       {/* Time Info */}
-      <div className="flex flex-wrap items-center gap-4 text-sm">
+      <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
         <div className="flex items-center gap-1.5 text-muted">
           <Clock className="w-4 h-4" />
           <span>Recommended: <strong className="text-foreground">{formatTime(recommendedSeconds)}</strong></span>
@@ -76,13 +76,13 @@ export function QuestionCard({ question, answer, questionIndex, totalQuestions }
         <div className="flex items-center gap-1.5 text-muted">
           <Clock className="w-4 h-4" />
           <span>Actual: <strong className={cn(
-            isOverTime ? 'text-red-600' : 'text-emerald-600'
+            isOverTime ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'
           )}>{formatTime(actualSeconds)}</strong></span>
         </div>
         {actualSeconds > 0 && (
           <span className={cn(
-            'text-xs font-medium px-2 py-0.5 rounded-full',
-            isOverTime ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'
+            'text-xs font-semibold px-2.5 py-0.5 rounded-full border',
+            isOverTime ? 'bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800' : 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
           )}>
             {isOverTime ? `${formatTime(timeDiff)} Over Time` : 'On Track'}
           </span>

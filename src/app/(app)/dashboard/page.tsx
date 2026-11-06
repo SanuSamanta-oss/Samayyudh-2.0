@@ -18,6 +18,7 @@ import * as localDB from '@/lib/store/local-db';
 import type { ExamSession } from '@/types';
 import { getSelectedAvatar } from '@/lib/avatars';
 import { ProfilePictureModal } from '@/components/ProfilePictureModal';
+import { cn } from '@/lib/utils';
 
 /* ─── Helpers ────────────────────────────────────────────────── */
 
@@ -83,20 +84,33 @@ function ActionCard({
   label: string; desc: string; icon: React.ElementType;
   gradient: string; onClick: () => void; delay: number;
 }) {
+  const isQuickBattle = label === 'Quick Battle';
   return (
     <motion.div custom={delay} variants={fadeUp}>
       <button
         onClick={onClick}
-        className="w-full group text-left flex items-center gap-3 p-4 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-transparent hover:-translate-y-0.5 transition-all duration-300"
+        className={cn(
+          "w-full group text-left flex items-center gap-3.5 p-4 rounded-2xl border transition-all duration-300 cursor-pointer",
+          isQuickBattle
+            ? "border-brand-500/80 bg-gradient-to-r from-brand-50/70 via-card to-accent-50/40 dark:from-brand-950/60 dark:via-card dark:to-accent-950/40 shadow-md shadow-brand-500/15 hover:shadow-xl hover:shadow-brand-500/25 hover:border-brand-400 hover:-translate-y-1 ring-1 ring-brand-500/30"
+            : "border-border bg-card hover:shadow-lg hover:border-transparent hover:-translate-y-0.5"
+        )}
       >
-        <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center text-white shadow-sm flex-shrink-0`}>
-          <Icon className="w-5 h-5" />
+        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center text-white shadow-md flex-shrink-0 group-hover:scale-105 transition-transform`}>
+          <Icon className="w-6 h-6" />
         </div>
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-foreground group-hover:text-brand-600 transition-colors truncate">{label}</p>
-          <p className="text-xs text-muted truncate">{desc}</p>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-bold text-foreground group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors truncate">{label}</p>
+            {isQuickBattle && (
+              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-600 text-white shadow-xs">
+                Popular
+              </span>
+            )}
+          </div>
+          <p className="text-xs text-muted truncate mt-0.5">{desc}</p>
         </div>
-        <ArrowRight className="w-4 h-4 text-muted ml-auto opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all" />
+        <ArrowRight className="w-4 h-4 text-brand-600 ml-auto opacity-70 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1.5 transition-all" />
       </button>
     </motion.div>
   );
@@ -251,10 +265,25 @@ export default function DashboardPage() {
               <p className="text-white/70 text-sm mt-0.5">Ready for your next battle?</p>
             </div>
 
+            {/* Quick Battle CTA in Hero */}
+            <button
+              onClick={() => {
+                setLoadingExam('Quick Battle');
+                setTimeout(() => {
+                  setFinished(true);
+                  setTimeout(() => router.push('/practice?mode=quick_battle'), 800);
+                }, 1200);
+              }}
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-black text-brand-950 bg-white hover:bg-stone-100 transition-all shadow-lg shadow-black/15 hover:scale-105 active:scale-95 cursor-pointer ml-auto shrink-0 ring-2 ring-white/50"
+            >
+              <Swords className="w-3.5 h-3.5 text-brand-600" />
+              <span>Battle Now</span>
+            </button>
+
             {/* Streak badge — right side (Visible & clickable on both mobile & desktop) */}
             <Link
               href="/achievements"
-              className="ml-auto flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors backdrop-blur-sm border border-white/20 rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 flex-shrink-0 shadow-lg cursor-pointer"
+              className="ml-auto md:ml-0 flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors backdrop-blur-sm border border-white/20 rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 flex-shrink-0 shadow-lg cursor-pointer"
             >
               <motion.div
                 animate={{ 

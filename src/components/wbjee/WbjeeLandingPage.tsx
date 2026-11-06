@@ -84,9 +84,9 @@ export function WbjeeLandingPage({
 
         <button
           onClick={() => onSelectSubjectForBattle(activeSubject)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-brand hover:opacity-90 shadow-sm transition-all cursor-pointer self-start sm:self-auto"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-lg shadow-brand-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer self-start sm:self-auto ring-1 ring-white/20"
         >
-          <Swords className="w-3.5 h-3.5" />
+          <Swords className="w-4 h-4" />
           <span>Battle All {activeSubject.name}</span>
         </button>
       </div>
@@ -269,9 +269,9 @@ export function WbjeeLandingPage({
                       e.stopPropagation();
                       onSelectChapterForBattle(ch, activeSubject);
                     }}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold text-brand-700 bg-brand-50 hover:bg-brand-100 dark:bg-brand-950/60 dark:text-brand-300 dark:hover:bg-brand-900 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-md shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
                   >
-                    <Zap className="w-3 h-3" />
+                    <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
                     <span>Battle</span>
                   </button>
                 </div>

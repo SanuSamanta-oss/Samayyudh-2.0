@@ -251,10 +251,10 @@ export function GatePaperWorkspace({
 
           <button
             onClick={() => onSelectSectionForBattle(activeSection, paper)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/60 border border-brand-200 dark:border-brand-800 hover:bg-brand-100 transition-colors cursor-pointer shrink-0 self-start sm:self-auto"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-md shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 active:scale-95 transition-all cursor-pointer shrink-0 self-start sm:self-auto"
           >
             <Swords className="w-3.5 h-3.5" />
-            <span>Practice This Section</span>
+            <span>Battle This Section</span>
           </button>
         </motion.div>
       </AnimatePresence>

@@ -169,9 +169,9 @@ function PaperDateCard({
               });
               window.location.href = `/exam/session?${params.toString()}`;
             }}
-            className="flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/60 border border-brand-200 dark:border-brand-800 hover:bg-brand-100 dark:hover:bg-brand-900/40 transition-colors cursor-pointer"
+            className="flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-md shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
-            <Zap className="w-3 h-3" />
+            <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
             <span>Battle</span>
           </button>
         </div>
@@ -705,7 +705,7 @@ export default function JeeMainPyqExplorer({
                   if (selectedShift !== 'All') params.set('shift', selectedShift);
                   window.location.href = `/exam/session?${params.toString()}`;
                 }}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-brand hover:opacity-90 transition-all shadow-md shadow-brand-500/25 cursor-pointer shrink-0"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-gradient-to-r from-brand-600 via-brand-500 to-accent-600 hover:from-brand-500 hover:to-accent-500 transition-all shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-105 active:scale-95 cursor-pointer shrink-0 ring-1 ring-white/20"
               >
                 <Zap className="w-4 h-4" />
                 <span>Launch PYQ Battle</span>

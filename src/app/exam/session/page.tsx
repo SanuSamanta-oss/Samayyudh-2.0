@@ -521,6 +521,8 @@ function ExamSessionInner() {
                 questionIds={questionIds}
                 onNavigate={goToQuestion}
                 stats={stats}
+                answers={state.answers}
+                onToggleFlag={flagQuestion}
               />
             </div>
           </div>
@@ -537,6 +539,8 @@ function ExamSessionInner() {
         questionIds={questionIds}
         onNavigate={goToQuestion}
         stats={stats}
+        answers={state.answers}
+        onToggleFlag={flagQuestion}
       />
 
       {/* Submit Dialog */}

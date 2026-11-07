@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
-  Clock, ChevronRight, ChevronLeft, Zap, FileText, Target, Award, Sliders, BookOpen
+  Clock, ChevronRight, ChevronLeft, Zap, FileText, Target, Award, Sliders, BookOpen, Check, Sparkles, ArrowRight, Flame, Timer
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { EXAM_CATEGORIES, EXAM_MODES, EXAM_DURATIONS, getExamDisplayName } from '@/lib/constants';
@@ -320,63 +320,81 @@ function PracticeContent() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-2xl md:text-3xl font-bold text-foreground">Start a Battle</h1>
-        <p className="text-stone-500 mt-1">
-          {structuredSyllabus ? `${structuredSyllabus.fullName} Workspace` : 'Set up your exam session'}
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-400 text-xs font-semibold tracking-wide mb-2.5">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Exam Battle Arena</span>
+        </div>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Start a Battle
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
+          {structuredSyllabus ? `${structuredSyllabus.fullName} Workspace` : 'Set up your personalized battle session'}
         </p>
       </motion.div>
 
-      {/* Step progression slider matching Picture 3 */}
-      <div className="flex items-center justify-center gap-1.5 sm:gap-3 mb-8">
-        {stepLabels.map((label, index) => {
-          let actualStepForIndex = index;
-          if (!hasSubExams && index >= 1) actualStepForIndex = index + 1;
-          const isActive = actualStepForIndex === step;
-          const isCompleted = actualStepForIndex < step;
-          const isUpcoming = actualStepForIndex > step;
+      {/* Modern Illuminated Stepper */}
+      <div className="mb-8 p-3 sm:p-4 rounded-2xl bg-white/80 dark:bg-slate-900/70 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 shadow-sm shadow-slate-950/5">
+        <div className="flex items-center justify-between max-w-xl mx-auto px-1 sm:px-4">
+          {stepLabels.map((label, index) => {
+            let actualStepForIndex = index;
+            if (!hasSubExams && index >= 1) actualStepForIndex = index + 1;
+            const isActive = actualStepForIndex === step;
+            const isCompleted = actualStepForIndex < step;
+            const isUpcoming = actualStepForIndex > step;
 
-          return (
-            <div key={label} className="flex items-center gap-1.5 sm:gap-3">
-              <motion.button
-                onClick={() => {
-                  if (actualStepForIndex < step) setStep(actualStepForIndex);
-                }}
-                whileHover={isCompleted ? { scale: 1.08 } : {}}
-                whileTap={isCompleted ? { scale: 0.95 } : {}}
-                className={cn(
-                  'relative w-9 h-9 sm:w-10 sm:h-10 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center transition-colors',
-                  isActive && 'text-white font-black',
-                  isCompleted && 'bg-[#e0e7ff] dark:bg-indigo-950/80 text-[#4338ca] dark:text-indigo-300 hover:bg-[#d5dffc] cursor-pointer',
-                  isUpcoming && 'bg-[#f3f4f6] dark:bg-stone-800 text-[#9ca3af] dark:text-stone-500 cursor-default'
-                )}
-                title={label}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="stepSliderActivePill"
-                    className="absolute inset-0 rounded-full bg-[#5b52f9] shadow-md shadow-indigo-500/35"
-                    transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{index + 1}</span>
-              </motion.button>
-
-              {index < stepLabels.length - 1 && (
-                <div className="relative w-7 sm:w-12 h-1 rounded-full overflow-hidden bg-[#e5e7eb] dark:bg-stone-800">
-                  <motion.div
-                    className="absolute inset-0 bg-[#818cf8] dark:bg-indigo-500"
-                    initial={false}
-                    animate={{
-                      scaleX: actualStepForIndex < step ? 1 : 0,
+            return (
+              <div key={label} className="flex items-center flex-1 last:flex-none">
+                <div className="flex flex-col items-center">
+                  <motion.button
+                    onClick={() => {
+                      if (actualStepForIndex < step) setStep(actualStepForIndex);
                     }}
-                    transition={{ duration: 0.35, ease: 'easeInOut' }}
-                    style={{ transformOrigin: 'left' }}
-                  />
+                    disabled={isUpcoming}
+                    whileHover={isCompleted ? { scale: 1.1 } : {}}
+                    whileTap={isCompleted ? { scale: 0.95 } : {}}
+                    className={cn(
+                      'relative w-9 h-9 sm:w-10 sm:h-10 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center transition-all duration-200',
+                      isActive && 'bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/40 ring-4 ring-indigo-500/20 scale-105',
+                      isCompleted && 'bg-emerald-500 dark:bg-emerald-600 text-white shadow-sm ring-2 ring-emerald-500/25 hover:bg-emerald-600 cursor-pointer',
+                      isUpcoming && 'bg-slate-100 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 border border-slate-200/60 dark:border-slate-700/60 cursor-default'
+                    )}
+                    title={label}
+                  >
+                    {isCompleted ? (
+                      <Check className="w-4 h-4 stroke-[2.5]" />
+                    ) : (
+                      <span className="relative z-10">{index + 1}</span>
+                    )}
+                  </motion.button>
+                  <span
+                    className={cn(
+                      'mt-1.5 text-[10px] sm:text-xs font-semibold tracking-tight transition-colors hidden sm:block',
+                      isActive && 'text-indigo-600 dark:text-indigo-400 font-bold',
+                      isCompleted && 'text-slate-700 dark:text-slate-300',
+                      isUpcoming && 'text-slate-400 dark:text-slate-500'
+                    )}
+                  >
+                    {label}
+                  </span>
                 </div>
-              )}
-            </div>
-          );
-        })}
+
+                {index < stepLabels.length - 1 && (
+                  <div className="flex-1 mx-2 sm:mx-3 h-1 sm:h-1.5 rounded-full overflow-hidden bg-slate-200/80 dark:bg-slate-800">
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-emerald-500 via-indigo-500 to-indigo-600"
+                      initial={false}
+                      animate={{
+                        scaleX: actualStepForIndex < step ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.35, ease: 'easeInOut' }}
+                      style={{ transformOrigin: 'left' }}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Step Content */}
@@ -589,100 +607,341 @@ function PracticeContent() {
 
         {/* Step 2: Choose Mode */}
         {step === 2 && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <h2 className="text-lg font-semibold text-foreground">Choose Mode</h2>
+          <div className="space-y-6">
+            {/* Header + Subject Pill */}
+            <div className="flex items-center justify-between flex-wrap gap-3 pb-3 border-b border-slate-200/80 dark:border-white/10">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+                    Choose Battle Mode
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                  Select a calibrated drill format or customize your question volume
+                </p>
+              </div>
+
               {selectedSubject && (
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-50 text-brand-700 dark:bg-brand-950/80 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
-                  {selectedSubject.name} {selectedChapter ? `• ${selectedChapter.name}` : ''}
-                </span>
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 shadow-xs backdrop-blur-xs">
+                  <BookOpen className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                  <span className="text-xs font-semibold tracking-tight truncate max-w-[260px]">
+                    {selectedSubject.name} {selectedChapter ? `• ${selectedChapter.name}` : ''}
+                  </span>
+                </div>
               )}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {EXAM_MODES.filter(m => ['quick_battle', 'practice_battle', 'half_century', 'full_century', 'custom'].includes(m.mode)).map((mode) => {
-                const isSelected = selectedMode === mode.mode;
-                const iconInfo = MODE_ICON_MAP[mode.mode] || {
-                  icon: <Zap className="w-5 h-5 text-brand-500" />,
-                  bg: 'bg-brand-500/10 dark:bg-brand-400/15',
-                  border: 'border-brand-500/30',
-                };
+
+            {/* Mode Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                {
+                  mode: 'quick_battle' as ExamMode,
+                  title: 'Quick Battle',
+                  badge: '10 Qs · ~10m',
+                  badgeStyle: 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/25',
+                  description: 'Rapid-fire warmup to test core recall and prime your speed.',
+                  icon: Zap,
+                  gradient: 'from-amber-500 to-orange-500',
+                  iconBg: 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30',
+                  hoverBorder: 'hover:border-amber-500/50 dark:hover:border-amber-400/50',
+                  glow: 'hover:shadow-amber-500/15',
+                },
+                {
+                  mode: 'practice_battle' as ExamMode,
+                  title: 'Practice Battle',
+                  badge: '25 Qs · Most Popular',
+                  badgeStyle: 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/25',
+                  description: 'Ideal comprehensive drill balancing analytical depth and accuracy.',
+                  icon: Flame,
+                  gradient: 'from-indigo-500 to-blue-500',
+                  iconBg: 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border-indigo-500/30',
+                  hoverBorder: 'hover:border-indigo-500/50 dark:hover:border-indigo-400/50',
+                  glow: 'hover:shadow-indigo-500/15',
+                },
+                {
+                  mode: 'half_century' as ExamMode,
+                  title: 'Half Century',
+                  badge: '50 Qs · Section Drill',
+                  badgeStyle: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/25',
+                  description: 'Deep endurance workout targeting syllabus mastery and mental stamina.',
+                  icon: Target,
+                  gradient: 'from-emerald-500 to-teal-500',
+                  iconBg: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30',
+                  hoverBorder: 'hover:border-emerald-500/50 dark:hover:border-emerald-400/50',
+                  glow: 'hover:shadow-emerald-500/15',
+                },
+                {
+                  mode: 'full_century' as ExamMode,
+                  title: 'Full Century',
+                  badge: '100 Qs · Full Simulation',
+                  badgeStyle: 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/25',
+                  description: 'The ultimate high-stakes simulation matching standard competitive exam rigors.',
+                  icon: Award,
+                  gradient: 'from-purple-500 to-pink-500',
+                  iconBg: 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30',
+                  hoverBorder: 'hover:border-purple-500/50 dark:hover:border-purple-400/50',
+                  glow: 'hover:shadow-purple-500/15',
+                },
+              ].map((m) => {
+                const IconComponent = m.icon;
+                const isSelected = selectedMode === m.mode;
+
                 return (
-                  <button
-                    key={mode.mode}
-                    onClick={() => { setSelectedMode(mode.mode); setStep(3); }}
+                  <motion.button
+                    key={m.mode}
+                    type="button"
+                    whileHover={{ y: -3 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setSelectedMode(m.mode);
+                      setStep(3);
+                    }}
                     className={cn(
-                      'flex items-center gap-3.5 p-4 rounded-2xl border-2 transition-all text-left cursor-pointer group',
+                      'group relative flex flex-col justify-between p-5 rounded-2xl border transition-all duration-200 text-left cursor-pointer overflow-hidden backdrop-blur-xl',
+                      'bg-white/80 dark:bg-slate-900/70',
                       isSelected
-                        ? 'border-brand-500 bg-brand-50/80 dark:bg-brand-950/50 shadow-sm ring-1 ring-brand-500/30'
-                        : 'border-border bg-card hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-xs'
+                        ? 'border-indigo-500 dark:border-indigo-400 ring-2 ring-indigo-500/30 shadow-lg shadow-indigo-500/15'
+                        : cn('border-slate-200/90 dark:border-white/10 hover:shadow-lg', m.hoverBorder, m.glow)
                     )}
                   >
-                    <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-transform group-hover:scale-105', iconInfo.bg, iconInfo.border)}>
-                      {iconInfo.icon}
+                    {/* Top Row: Icon + Badge */}
+                    <div className="flex items-start justify-between gap-3 mb-3">
+                      <div className={cn('w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-200 group-hover:scale-105 shadow-xs', m.iconBg)}>
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      <span className={cn('text-[11px] font-bold px-2.5 py-1 rounded-full border', m.badgeStyle)}>
+                        {m.badge}
+                      </span>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-sm font-bold text-foreground group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
-                        {mode.label}
+
+                    {/* Middle: Title & Description */}
+                    <div className="space-y-1 mb-4">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                          {m.title}
+                        </h3>
+                        <ArrowRight className="w-4 h-4 text-slate-400 dark:text-slate-500 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-indigo-500 transition-all duration-200" />
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                        {m.description}
                       </p>
-                      <p className="text-xs text-stone-500 dark:text-stone-400">{mode.description}</p>
-                      {mode.questionCount > 0 && (
-                        <p className="text-xs text-brand-600 dark:text-brand-400 font-semibold mt-0.5">
-                          {mode.questionCount} questions
-                        </p>
-                      )}
                     </div>
-                  </button>
+
+                    {/* Bottom subtle accent line */}
+                    <div className="h-0.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <div className={cn('h-full w-0 group-hover:w-full transition-all duration-300 bg-gradient-to-r', m.gradient)} />
+                    </div>
+                  </motion.button>
                 );
               })}
-            </div>
-            {selectedMode === 'custom' && (
-              <div className="bg-card rounded-xl border border-border p-4">
-                <label className="text-sm font-medium text-foreground block mb-2">Number of Questions</label>
-                <input
-                  type="number"
-                  value={customCount}
-                  onChange={(e) => setCustomCount(Math.min(100, Math.max(1, Number(e.target.value))))}
-                  min={1} max={100}
-                  className="w-full px-4 py-2.5 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/30"
-                />
-                <button
-                  onClick={() => setStep(3)}
-                  className="mt-3 w-full px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-gradient-brand cursor-pointer"
+
+              {/* Custom Battle Card: Spans 2 columns */}
+              <motion.div
+                layout
+                className={cn(
+                  'sm:col-span-2 rounded-2xl border transition-all duration-200 p-5 sm:p-6 backdrop-blur-xl relative overflow-hidden',
+                  'bg-white/80 dark:bg-slate-900/70',
+                  selectedMode === 'custom'
+                    ? 'border-indigo-500/80 dark:border-indigo-400 ring-2 ring-indigo-500/25 shadow-xl shadow-indigo-500/10'
+                    : 'border-slate-200/90 dark:border-white/10 hover:border-pink-500/40 hover:shadow-lg'
+                )}
+              >
+                <div
+                  onClick={() => setSelectedMode('custom')}
+                  className="flex items-start justify-between gap-3 cursor-pointer"
                 >
-                  Continue
-                </button>
-              </div>
-            )}
-            <button onClick={() => setStep(hasSubExams ? 1 : 0)} className="flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700 cursor-pointer">
-              <ChevronLeft className="w-4 h-4" /> Back
-            </button>
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border border-pink-500/30 bg-pink-500/15 text-pink-600 dark:text-pink-400 shadow-xs">
+                      <Sliders className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                          Custom Battle
+                        </h3>
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-pink-500/10 text-pink-700 dark:text-pink-300 border border-pink-500/20">
+                          {customCount} Questions Selected
+                        </span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-0.5 font-normal">
+                        Tailor the exact number of questions from 1 to 100 according to your schedule.
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedMode('custom');
+                    }}
+                    className={cn(
+                      'text-xs font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer border',
+                      selectedMode === 'custom'
+                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                    )}
+                  >
+                    {selectedMode === 'custom' ? 'Configuring' : 'Configure'}
+                  </button>
+                </div>
+
+                {/* Unfolded Custom Configuration Drawer */}
+                {selectedMode === 'custom' && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="mt-5 pt-5 border-t border-slate-200/80 dark:border-white/10 space-y-4"
+                  >
+                    {/* Quick Presets */}
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider block mb-2">
+                        Quick Presets
+                      </label>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {[10, 20, 30, 50, 75, 100].map((num) => (
+                          <button
+                            key={num}
+                            type="button"
+                            onClick={() => setCustomCount(num)}
+                            className={cn(
+                              'px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer',
+                              customCount === num
+                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-indigo-600 shadow-sm shadow-indigo-500/20 scale-105'
+                                : 'bg-slate-100/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-indigo-400'
+                            )}
+                          >
+                            {num} Qs
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Interactive Slider */}
+                    <div>
+                      <div className="flex items-center justify-between text-xs font-semibold text-slate-600 dark:text-slate-400 mb-2">
+                        <span>Adjust Slider</span>
+                        <span className="text-indigo-600 dark:text-indigo-400 font-bold">
+                          {customCount} questions (~{Math.round(customCount * 1.5)} mins)
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min={1}
+                        max={100}
+                        value={customCount}
+                        onChange={(e) => setCustomCount(Number(e.target.value))}
+                        className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-600 dark:accent-indigo-500"
+                      />
+                      <div className="flex justify-between text-[10px] text-slate-400 mt-1">
+                        <span>1 Q</span>
+                        <span>25 Qs</span>
+                        <span>50 Qs</span>
+                        <span>75 Qs</span>
+                        <span>100 Qs</span>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setStep(3)}
+                        className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all cursor-pointer"
+                      >
+                        <span>Continue with {customCount} Questions</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </motion.div>
+            </div>
+
+            {/* Back Button */}
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => setStep(hasSubExams ? 1 : 0)}
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100/80 dark:bg-slate-800/70 hover:bg-slate-200/80 dark:hover:bg-slate-800 transition-all border border-slate-200/80 dark:border-white/5 cursor-pointer shadow-xs"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Back</span>
+              </button>
+            </div>
           </div>
         )}
 
         {/* Step 3: Choose Duration */}
         {step === 3 && (
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-foreground">Set Duration</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {EXAM_DURATIONS.map((dur) => (
-                <button
-                  key={dur.seconds}
-                  onClick={() => handleDurationSelect(dur.seconds)}
-                  className={cn(
-                    'flex flex-col items-center gap-1 p-4 rounded-xl border-2 transition-all cursor-pointer',
-                    selectedDuration === dur.seconds
-                      ? 'border-brand-500 bg-brand-50'
-                      : 'border-border bg-card hover:border-brand-200',
-                  )}
-                >
-                  <Clock className="w-5 h-5 text-brand-600" />
-                  <span className="text-sm font-semibold text-foreground">{dur.label}</span>
-                </button>
-              ))}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between flex-wrap gap-2 pb-3 border-b border-slate-200/80 dark:border-white/10">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+                  Set Exam Duration
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                  Pick the time limit for your {questionCount}-question session
+                </p>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/10 text-brand-700 dark:text-brand-300 border border-brand-500/20 text-xs font-semibold">
+                <Timer className="w-3.5 h-3.5 text-brand-500" />
+                <span>{questionCount} Questions</span>
+              </div>
             </div>
-            <button onClick={() => setStep(2)} className="flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700 cursor-pointer">
-              <ChevronLeft className="w-4 h-4" /> Back
-            </button>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
+              {EXAM_DURATIONS.map((dur) => {
+                const isSelected = selectedDuration === dur.seconds;
+                const paceBadges: Record<number, string> = {
+                  1800: '⚡ Sprint Pace',
+                  3600: '⏱️ Standard Pace',
+                  5400: '🎯 In-depth Pace',
+                  7200: '🔥 Full Drill',
+                  10800: '🏆 Real Mock',
+                  14400: '🧘 Marathon',
+                };
+                return (
+                  <motion.button
+                    key={dur.seconds}
+                    type="button"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleDurationSelect(dur.seconds)}
+                    className={cn(
+                      'group relative flex flex-col items-center justify-center p-5 rounded-2xl border transition-all duration-200 text-center cursor-pointer backdrop-blur-xl',
+                      'bg-white/80 dark:bg-slate-900/70',
+                      isSelected
+                        ? 'border-indigo-500 dark:border-indigo-400 ring-2 ring-indigo-500/30 shadow-lg shadow-indigo-500/15'
+                        : 'border-slate-200/90 dark:border-white/10 hover:border-indigo-400 hover:shadow-md'
+                    )}
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-2.5 group-hover:scale-105 transition-transform">
+                      <Clock className="w-5 h-5" />
+                    </div>
+                    <span className="text-sm font-bold text-slate-900 dark:text-white">
+                      {dur.label}
+                    </span>
+                    <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 mt-1">
+                      {paceBadges[dur.seconds] || 'Custom Pace'}
+                    </span>
+                  </motion.button>
+                );
+              })}
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100/80 dark:bg-slate-800/70 hover:bg-slate-200/80 dark:hover:bg-slate-800 transition-all border border-slate-200/80 dark:border-white/5 cursor-pointer shadow-xs"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Back to Mode</span>
+              </button>
+            </div>
           </div>
         )}
 

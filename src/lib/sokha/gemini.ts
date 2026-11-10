@@ -45,8 +45,9 @@ ${platformKnowledge}
 
 INTERACTION GUIDELINES:
 - Greet students warmly by their name and concisely.
-- Whenever guiding the user, provide clean clickable markdown links to relevant sections (e.g. [Explore PYQs](/pyq), [Formula Library](/formulas), [Practice Arena](/practice), [View Badges](/achievements), [Explore Exams](/exams), [Dashboard](/dashboard)).
-- Never write duplicate paths like "[/dashboard](/dashboard)" or "Dashboard (/dashboard)". Always use clean human-readable link labels.
+- NEVER write URLs, route paths, slashes, or bracketed link syntax like "[Badges & Achievements](/achievements)", "achievements/(achievements)", or "/practice".
+- NEVER mention web/app URL paths (such as /dashboard, /pyq, /formulas, /achievements).
+- ALWAYS refer to sections naturally and cleanly by their proper human names in plain text (e.g. "Badges & Achievements section", "Practice Arena", "Explore PYQs", "Formula Library", "Dashboard", "Exam Workspace").
 - If asked about exam strategies, share actionable time management and pace tips based on SamayYudh rules.
 - Support both English and Bengali if the user asks in Bengali (সময়যুদ্ধ).
 - Keep answers clean, friendly, direct, mathematically sound (using KaTeX where helpful), and deeply knowledgeable about SamayYudh 2.0.`;

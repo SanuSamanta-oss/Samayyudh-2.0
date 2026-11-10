@@ -167,7 +167,8 @@ function MarkdownSegment({ text }: { text: string }) {
   );
 }
 
-function formatInline(text: string): React.ReactNode[] {
+function formatInline(rawText: string): React.ReactNode[] {
+  const text = cleanInternalLinks(rawText);
   const parts: React.ReactNode[] = [];
   const regex = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)/g;
   let lastIdx = 0;
@@ -219,6 +220,13 @@ interface ParsedSegment {
   language?: string;
 }
 
+function cleanInternalLinks(text: string): string {
+  // Strips bracketed route syntax like [Badges & Achievements](/achievements) into clean text
+  return text
+    .replace(/\[([^\]]+)\]\(\/[^)]*\)/g, '$1')
+    .replace(/\(\/[a-zA-Z0-9_-]+\)/g, '');
+}
+
 function parseContent(raw: string): ParsedSegment[] {
   const segments: ParsedSegment[] = [];
   const codeBlockRegex = /```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g;
@@ -229,7 +237,7 @@ function parseContent(raw: string): ParsedSegment[] {
     if (match.index > lastIndex) {
       segments.push({
         type: 'text',
-        text: raw.substring(lastIndex, match.index),
+        text: cleanInternalLinks(raw.substring(lastIndex, match.index)),
         code: '',
       });
     }
@@ -247,7 +255,7 @@ function parseContent(raw: string): ParsedSegment[] {
   if (lastIndex < raw.length) {
     segments.push({
       type: 'text',
-      text: raw.substring(lastIndex),
+      text: cleanInternalLinks(raw.substring(lastIndex)),
       code: '',
     });
   }

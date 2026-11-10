@@ -161,17 +161,17 @@ export function getPlatformKnowledgePrompt(currentPath?: string): string {
 
   if (normalizedPath) {
     if (normalizedPath.includes('pyq')) {
-      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is currently browsing the [Explore PYQs](/pyq) section. Highlight relevant previous year papers, shifts, section A/B questions, or offer guidance on solving them in Battle Mode.`;
+      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is currently browsing the Explore PYQs section. Highlight relevant previous year papers, shifts, section A/B questions, or offer guidance on solving them in Battle Mode.`;
     } else if (normalizedPath.includes('formula')) {
-      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is currently browsing the [Formula Library](/formulas). Help them with mathematical or physics formulas, derivations, variable definitions, or navigating between the 6 Mathematics divisions and Physics levels.`;
+      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is currently browsing the Formula Library. Help them with mathematical or physics formulas, derivations, variable definitions, or navigating between the 6 Mathematics divisions and Physics levels.`;
     } else if (normalizedPath.includes('practice')) {
-      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is on the [Practice Arena](/practice). Guide them to select the right battle mode (Quick Battle, Practice, Half Century, Full Century) for their available time.`;
+      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is on the Practice Arena. Guide them to select the right battle mode (Quick Battle, Practice, Half Century, Full Century) for their available time.`;
     } else if (normalizedPath.includes('exam')) {
       currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is on an Exam page or Active Battle session. Focus on pacing, clock management, answer structuring, and remaining calm under time pressure.`;
     } else if (normalizedPath.includes('analytics')) {
-      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is inspecting [Analytics](/analytics). Offer actionable insights on improving their speed vs. score ratio and tackling weak chapters.`;
+      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is inspecting Analytics. Offer actionable insights on improving their speed vs. score ratio and tackling weak chapters.`;
     } else if (normalizedPath.includes('dashboard')) {
-      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is on their [Dashboard](/dashboard). Welcome them warmly, review their streak progress, and recommend an immediate battle session.`;
+      currentPageContext = `\nSTUDENT'S CURRENT LOCATION: The student is on their Dashboard. Welcome them warmly, review their streak progress, and recommend an immediate battle session.`;
     }
   }
 
@@ -190,7 +190,7 @@ EXTENSIVE PLATFORM KNOWLEDGE — SAMAYYUDH 2.0 (সময়যুদ্ধ 2.0)
    - Timers persist across reloads (timestamp-based tracking).
    - "Golden Rule of SamayYudh": Allocate time strictly proportional to marks. Write the core formulation/equation first, state assumptions, compute methodically, and conclude.
 
-3. EXPLORE PREVIOUS YEAR QUESTIONS (PYQ) SECTION ([Explore PYQs](/pyq)):
+3. EXPLORE PREVIOUS YEAR QUESTIONS (PYQ) SECTION:
    - JEE Main 2025: Fully digitized archive of 22 January Shift 1 and Shift 2 papers.
      • Section A: 20 Multiple Choice Questions with verified answer keys, detailed explanations, and instant options checking.
      • Section B: 5 Numerical Value Questions with direct numerical input fields.
@@ -204,7 +204,7 @@ EXTENSIVE PLATFORM KNOWLEDGE — SAMAYYUDH 2.0 (সময়যুদ্ধ 2.0)
      • All 394 local diagram graphics in public/jee_advanced_diagrams/ with zero broken images.
      • Rigorous KaTeX mathematical rendering and standard IUPAC chemical reactions.
 
-4. FORMULA LIBRARY SECTION ([Formula Library](/formulas)):
+4. FORMULA LIBRARY SECTION:
    - Physics Formula Library: Complete topic-wise catalog for Class 10, Class 11, Class 12, and Higher Education.
    - Physical Constants Database: 20 fundamental SI physical constants (Universal, Electromagnetism, Thermodynamics, Atomic/Nuclear) with standard numerical values, SI units, dimensional formulas, and defining relationships.
    - Mathematics Formula Library: Fully populated with 206+ formulas across all 6 core divisions:
@@ -216,42 +216,42 @@ EXTENSIVE PLATFORM KNOWLEDGE — SAMAYYUDH 2.0 (সময়যুদ্ধ 2.0)
      • Division 6: Probability and Statistics (Measures of Central Tendency and Dispersion, Conditional Probability and Bayes' Theorem, Probability Distributions).
    - Features: Smooth spring slide-in detail drawer, keyboard shortcuts (Left/Right arrow keys for prev/next formula, Esc to close), variable breakdown tables, domain constraints, and one-click LaTeX code copying.
 
-5. PRACTICE MODES ([Practice Arena](/practice)):
+5. PRACTICE MODES:
    - Quick Battle: 10 questions (~10 minutes) for daily streak maintenance.
    - Practice Battle: 25 questions (~25 minutes) standard revision session.
    - Half Century: 50 questions (~50 minutes) endurance workout.
    - Full Century: 100 questions (~100 minutes) full marathon test.
 
-6. ACTIVE EXAM WORKSPACE ([Active Exam](/exam/session)):
+6. ACTIVE EXAM WORKSPACE:
    - Split layout: question prompt on left, countdown timer on top, answer text editor with Markdown and LaTeX support on right.
    - Auto-saves every 2 seconds to local IndexedDB.
    - Timer persistence: timer survives page reloads and browser restarts.
    - Built-in Sticky Notes drawer for quick scratchpad work without leaving the battle.
    - Full-screen distraction-free battle mode.
 
-7. AI EVALUATION ENGINE ([History & Evaluations](/history)):
+7. AI EVALUATION ENGINE:
    - Powered by Gemini AI. Scores answers against rubrics and marks.
    - Analyzes time management: classifies answer pace into "Too fast" (rushed, lacking key steps), "On time" (balanced), or "Too slow" (time overrun penalty).
    - Identifies missing points, provides model answers, and examiner feedback.
 
-8. COMPLETE NAVIGATION LINKS GUIDE (ALWAYS USE CLEAN MARKDOWN):
-   - [Dashboard](/dashboard)
-   - [Explore PYQs](/pyq)
-   - [Formula Library](/formulas)
-   - [Explore Exams](/exams)
-   - [Practice Arena](/practice)
-   - [Active Exam](/exam/session)
-   - [History & Evaluations](/history)
-   - [Analytics & Telemetry](/analytics)
-   - [Badges & Achievements](/achievements)
-   - [Notes & Scratchpad](/notes)
-   - [Student Profile](/profile)
-   - [Settings](/settings)
+8. PLATFORM SECTIONS (REFER ONLY BY PLAIN NATURAL NAMES, NEVER OUTPUT URLS OR PATHS):
+   - Dashboard
+   - Explore PYQs
+   - Formula Library
+   - Explore Exams
+   - Practice Arena
+   - Active Exam Workspace
+   - History & Evaluations
+   - Analytics
+   - Badges & Achievements
+   - Notes & Scratchpad
+   - Student Profile
+   - Settings
 
 9. FUTURE PLATFORM CHANGES & ADAPTABILITY:
    - SOKHA has a living memory. When students ask about upcoming features (e.g., additional years of JEE shifts, NEET Mock series, multiplayer peer battles, custom PDF test generation):
      • Enthusiastically confirm that SamayYudh 2.0 is actively expanding.
-     • Point them to the current live equivalent (e.g., recommend [Explore PYQs](/pyq) for solving real questions, or [Practice Arena](/practice) for custom battle runs).
+     • Point them to the current live equivalent (e.g., recommend the Explore PYQs section for solving real questions, or the Practice Arena for custom battle runs).
      • Never claim a feature is completely absent if it is already in the platform. Always consult this comprehensive platform guide first!
 ${currentPageContext}`;
 }

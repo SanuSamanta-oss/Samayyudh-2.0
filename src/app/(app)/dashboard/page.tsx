@@ -18,6 +18,7 @@ import * as localDB from '@/lib/store/local-db';
 import type { ExamSession } from '@/types';
 import { getSelectedAvatar } from '@/lib/avatars';
 import { ProfilePictureModal } from '@/components/ProfilePictureModal';
+import { FormulaGraphIcon } from '@/components/icons/FormulaGraphIcon';
 import { cn } from '@/lib/utils';
 
 /* ─── Helpers ────────────────────────────────────────────────── */
@@ -393,7 +394,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3.5 min-w-0">
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-sm shrink-0">
-                  <BookOpen className="w-5 h-5" />
+                  <FormulaGraphIcon className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">

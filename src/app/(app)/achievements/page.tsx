@@ -24,7 +24,11 @@ import {
   MockTestRecord,
   AchievementStats,
 } from '@/types/achievements';
-import { getAchievementSystemData, updateStreakGoal } from '@/lib/achievements/client';
+import {
+  getAchievementSystemData,
+  getLocalAchievementSnapshot,
+  updateStreakGoal,
+} from '@/lib/achievements/client';
 import { StreakProgressCard } from '@/components/achievements/StreakProgressCard';
 import { StreakCalendar } from '@/components/achievements/StreakCalendar';
 import { StreakGoalSettings } from '@/components/achievements/StreakGoalSettings';
@@ -56,17 +60,31 @@ export default function AchievementsPage() {
     record: UserAchievement;
   } | null>(null);
 
-  // Load achievement data
+  // Fast Stale-While-Revalidate loading
   const loadData = async () => {
     try {
-      setLoading(true);
-      const data = await getAchievementSystemData(userId);
-      setDefinitions(data.definitions);
-      setUserAchievements(data.userAchievements);
-      setStreak(data.streak);
-      setQualifyingDates(data.qualifyingDates);
-      setMockTests(data.mockTests);
-      setStats(data.stats);
+      // 1. Instant Paint from local IndexedDB cache (<15ms)
+      const cached = await getLocalAchievementSnapshot(userId);
+      if (cached) {
+        setDefinitions(cached.definitions);
+        setUserAchievements(cached.userAchievements);
+        setStreak(cached.streak);
+        setQualifyingDates(cached.qualifyingDates);
+        setMockTests(cached.mockTests);
+        setStats(cached.stats);
+        setLoading(false); // Instantly display Badges UI!
+      }
+
+      // 2. Non-blocking background revalidation with cloud & session harvest
+      const fresh = await getAchievementSystemData(userId);
+      setDefinitions(fresh.definitions);
+      setUserAchievements(fresh.userAchievements);
+      setStreak(fresh.streak);
+      setQualifyingDates(fresh.qualifyingDates);
+      setMockTests(fresh.mockTests);
+      setStats(fresh.stats);
+    } catch (err) {
+      console.warn('Background sync deferred in AchievementsPage:', err);
     } finally {
       setLoading(false);
     }

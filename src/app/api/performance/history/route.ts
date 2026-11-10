@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { getOrSetCache } from '@/lib/cache';
 
 // GET /api/performance/history — Return completed mock tests for user
 export async function GET(request: Request) {
@@ -12,26 +13,38 @@ export async function GET(request: Request) {
     }
 
     const { searchParams } = new URL(request.url);
-    const category = searchParams.get('category');
+    const category = searchParams.get('category') || 'all';
 
-    let query = supabase
-      .from('mock_tests')
-      .select('*')
-      .eq('user_id', user.id)
-      .eq('status', 'completed')
-      .order('completed_at', { ascending: true });
+    const cacheKey = `samayyudh:user:${user.id}:perf_history:${category.toLowerCase()}`;
 
-    if (category) {
-      query = query.eq('exam_category', category);
-    }
+    const { data, source } = await getOrSetCache(
+      cacheKey,
+      async () => {
+        let query = supabase
+          .from('mock_tests')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('status', 'completed')
+          .order('completed_at', { ascending: true });
 
-    const { data, error } = await query;
+        if (category !== 'all') {
+          query = query.eq('exam_category', category);
+        }
 
-    if (error) {
-      return NextResponse.json({ mock_tests: [] });
-    }
+        const { data: tests, error } = await query;
+        if (error) {
+          return { mock_tests: [] };
+        }
+        return { mock_tests: tests || [] };
+      },
+      { ttlSeconds: 60 }
+    );
 
-    return NextResponse.json({ mock_tests: data || [] });
+    return NextResponse.json(data, {
+      headers: {
+        'X-Cache-Status': source.toUpperCase(),
+      },
+    });
   } catch (err) {
     return NextResponse.json({ error: 'Failed to fetch performance history' }, { status: 500 });
   }

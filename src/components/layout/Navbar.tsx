@@ -250,20 +250,18 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Mobile / Android App Floating Bottom Bar with Light Nav Bar Animation (Bethel Reference) */}
+      {/* Mobile / Android App Docked Bottom Navigation Bar */}
       <div
         className={cn(
-          'fixed bottom-3 inset-x-0 z-40 px-2 flex justify-center pointer-events-none pb-[env(safe-area-inset-bottom,0px)]',
+          'fixed bottom-0 inset-x-0 z-40 w-full',
           isAndroid ? 'block' : 'md:hidden'
         )}
       >
-        <div className="pointer-events-auto w-full max-w-[430px]">
-          <LightNavBar
-            items={mobileStockItems}
-            pathname={pathname}
-            variant="mobile"
-          />
-        </div>
+        <LightNavBar
+          items={mobileStockItems}
+          pathname={pathname}
+          variant="mobile"
+        />
       </div>
 
       {/* Mobile / Android App Menu Drawer Overlay */}

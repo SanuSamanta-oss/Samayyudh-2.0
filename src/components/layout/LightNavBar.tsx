@@ -148,11 +148,10 @@ export function LightNavBar({
   return (
     <nav
       className={cn(
-        // Capsule container: Perfectly rounded and styled for desktop and mobile app
-        'relative inline-flex items-center justify-center select-none rounded-full backdrop-blur-2xl transition-all duration-300 overflow-hidden',
+        // General phone app docked bottom bar for mobile, capsule for desktop
         isMobile
-          ? 'bg-white/95 dark:bg-[#141419]/95 text-stone-900 dark:text-white shadow-[0_10px_35px_rgba(0,0,0,0.12)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.8)] border border-stone-200/90 dark:border-white/10 h-[60px] px-1.5 w-full max-w-[430px] mx-auto justify-between'
-          : 'bg-stone-100/90 dark:bg-[#16161c]/95 text-stone-900 dark:text-white shadow-[0_4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.65)] border border-stone-200/90 dark:border-white/[0.08] h-[50px] px-1.5 max-w-fit mx-auto gap-0.5',
+          ? 'w-full flex items-center justify-around select-none backdrop-blur-2xl transition-all duration-300 overflow-hidden bg-white/95 dark:bg-[#121217]/95 text-stone-900 dark:text-white border-t border-stone-200/80 dark:border-white/[0.08] shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_30px_rgba(0,0,0,0.6)] h-[calc(56px+env(safe-area-inset-bottom,0px))] pb-[env(safe-area-inset-bottom,4px)] pt-1 px-1'
+          : 'relative inline-flex items-center justify-center select-none rounded-full backdrop-blur-2xl transition-all duration-300 overflow-hidden bg-stone-100/90 dark:bg-[#16161c]/95 text-stone-900 dark:text-white shadow-[0_4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.65)] border border-stone-200/90 dark:border-white/[0.08] h-[50px] px-1.5 max-w-fit mx-auto gap-0.5',
         className
       )}
       aria-label={isMobile ? 'Mobile Navigation' : 'Main Navigation'}

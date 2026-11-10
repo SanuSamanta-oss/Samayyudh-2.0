@@ -1,0 +1,1039 @@
+
+--- PAGE 1 ---
+2012109989
+Question
+PC-2022
+Bookler Series
+Subjcct:PHIYSICS&CHEMISTRY
+(Booklet Namber)
+Duration:2Hours
+Full Mnrks:100
+INSTRUCTIONS
+All qucstions are of objcetive type having four answer options for each.
+Category-l:Cary 1 mark each and only ona option is correct,Incase of incorrcct answer or
+any conbination of more than one answer,  mark will be deducted.
+3.
+Category-ll: Carry 2marks each and only one option is correct.In case of incorrect answer or
+any combination ofmore thanone answee,/mark will be dediucted.
+4.
+Calegory-ll:Carry 2 marks each and one or more Option(s) is/are eoriect. If all correct
+answers are not marked and no incorrect answer is marked, then score -2 × number of
+correct answers marked+Bctualnumbcrof correctanswers.If anywrong optionis marked or
+if any combination including a wrong option is marked,the answer witl be considered wrong
+but there is no ncgntive maaricing for the samc and zero mark will be awarded.
+Questions must be answered on OMR sheet bydarkcning the appropriate bubble marked A,
+B, C,or D.Question booklet serioscode (A,B,C, orD)must beproporly marked on the
+OMR.
+6.
+Use only Black/Blae ball point pon to mark tlse answer by complote filling up of the
+respective bubbles.
+Write question booklet mumber and your roll number carefully in the spocified focations of
+theOMR.Alsofillappropriatebubbkes.
+8.
+Write your name (in block leter),namc ofthe examination center and put your full signature
+in appropriate boxes in the OMR.
+9.
+The OMR is liable to become imvalid if there is any mistake in filling tho conect bubbles for
+question booklet number/rollnumber orif thiere is any discrepancy in the namo/signature of
+the candidate, name of the examination centee.The OMR may also becomc invalid due to
+folding os putting siray mmrks on it or any damago to it. The consequcnco of such
+imvalidation duc to incorrect marking or careless handing by thc candidate will be sole
+responsibility of candidate.
+10.
+Candidates mre not allowedto carry any writton or printed imaterial,calculator,pen, log-tbc,
+wristwntch, any commumication device likemobile phones etc, inside tho cxamination hall.
+Any candidinte found with such items will bc reporled against and his/her candidature will
+be summarily cancelled.
+11.
+Rough work must be done on the question paper itseif. Additional blank pagus are given in
+the question paper for rough work.
+12.
+Hund over the OMR lo the invigilator before leaving the Exanination Hnll.
+13.
+This papet coistains questions in hoth English and Bengali. Necessary cane and procaution
+wure taken whileframing tho Bengali version,Howeyer,if any discrepancy(ics)is/are found
+between the two yersions, the information provided in the English version will stand and will
+be treated as fimal.
+PC-2022
+
+--- PAGE 2 ---
+PC-2022
+SPACEFORROUGHWORK
+
+--- PAGE 3 ---
+PC-2022
+PHYSICS
+Category-1 (Q1 to 30)
+(Carry Imark esch.Only one option is correct,Negative marks--)
+1.
+Three particles, each ofmass'm'grams situated al the vertices ofan epuilatcral AABC of
+side'a'cm (as shown in the figure).The moment of inertia of the systcm about a line AX
+pcrpendicularto ABand in theplane of ABC in g-cm2units will be
+mgsoacmAABC-o
+（）ABCABAX（g-）
+-3
+(A) 2ma2
+(B)
+(C)
+ma?
+(D)
+ma?
+ma
+Abodyofmassmis thrownverticallyupwardwithspeed/3ye.whereyis thie escape
+2.
+velocity ofa body from earth surface.Thefinal velocity ofthe body is
+(A)0
+(B)2
+(D) 2 ve
+3.
+A particle is subjected to two simple harmonic motions in the same direction havimg
+equal amplitudes and equal frequency.Iftheresultant amplitude is cqual to the amplitude
+of the individual motion,thc phasc difference (8)between thetwo motions is
+(A)8-号
+(C)87元
+Abody ofmassm is thrownwich velocityufrom tlieoriginof a co-ordinate axes atan
+angle B with thc horizon.The magnitude of the angular momentum of the parlicle about
+the origin at timet when it is at the maximum height of the trajectory is proportional to
+(A)
+(B)
+(C) 
+(D)independentofu
+(A)u
+(B)
+(C)u
+(D)
+P.T.O.
+
+--- PAGE 4 ---
+PC-2022
+5.27 drops of mercury coalesce io form a bigger drop.What is the relative increase im
+surfaceenergy?
+213
+(C)
+(B)
+(v)
+(D)
+Certain amount of an idcal gas is takon from its initial state 1 to final state 4 through thc
+paths1-→2-→3→4as shown in figure.AB,CD,EF are all isotherms.1fv,ts themost
+probablespeedofthemolecules, then
+(B)
+Vat3-ypa14>y,at2>at1
+(A)
+Vat3>ypat>y,at2>y,4
+(C)
+(D)Vpat2=,at3>pat1>ypat4
+7.
+f a string, suspended from the ceiling is given a downwardforce F,its Jength becomes
+L, Its longth is L, ifthe dowiward force is P2.What is its aciual length?
+BL+EL2
+LI+L2
+BL-RL2
+(B)L2
+(C)
+(D)
+(A)
+B-R
+
+--- PAGE 5 ---
+PC-2022
+One mole of a diatomic ideal gas undergoes a process shown in P-V diagram. The total
+heatgiven to thcgas (ln 2=0.7) is
+2P
+Isothermal
+Po
+2V.
+(A) 2.5 P,Vo
+(B)
+3.9PVo
+(C) 1.1 P,V,
+(D) 1.4PoVo
+Two charges, each equalto-q arekeptat (-a,0) and (a,0).A charge q isplaced at th
+origin.If q is given a small displacement along y direction, the force acting on g is
+proportionalto
+(A)
+(B)-y
+(C)
+(D)
+10.
+Consider a thermodynamic process where imternal energy UAp2v (A- constant).
+If the process is performed aciabatically,then
+(A)Ap2(V+1)=constant
+(B)(AP+1)2V=constant
+(C)(AP+1)V2.constant
+(D)
+(AP+)
+constanit
+=（1+V(V)
+(B)(AP+1)2V-事
+(C)（AP+1)V2=
+PT.O.
+
+--- PAGE 6 ---
+PC-2022
+A neutral conducting solid sphere of radius Rhas two spherical cavities of radius a and b
+as shown in the figure. Centre to centre distance between two cavities is c.qaand qp
+charges are placed at the oentres of cavities respectively. The force beriween q, and q, is
+(A)
+(B)
+ATED
+ATED
+(C)
+zero
+(D)insufficientdata
+9.96
+(A)
+(B)
+(D) 
+(C)
+12.
+Consider two concentric condlucting sphere of radi R and 2R respectively.The immcr
+3R
+sphere is given a charge + Q, The other.sphere is grounded.The poteutial at r
+120
+(G)
+(A)
+4803R
+(D)
+4元66R
+
+--- PAGE 7 ---
+PC-2022
+13.
+Two infinite line-charges parallel to each other are moving with a constant velocity v in
+the same direction as shown in the figure. The separation belween two line-charges is d.
+The magnetic attraction balances the electrie repulsion when, fe-speed of light in free
+space]
+(A)V-V2e
+(B)
+(C)
+(D)
+14,The electric potential for an elcctric field directed parallel to X-axis is shown in the
+figurc. Choose the correct piot of elcctric field sturength.
+y(X)
+10
+12
+(A)
+(B)
+P.T.O.
+
+--- PAGE 8 ---
+PC-2022
+15.A siraighr wire is placcd in a muguetic ficid that varics with distanee y from origin as
+B-Bo2icEndsfwireareat (a)and(2n)nditcris&currentfforc
+on wire is F=IBol
+j.theivalueofkis
+(C)
+(A)
+(B)
+(D)
+In a closed cireuit there is only a coil of inductance Land resistanco 1002 The coil is
+situated in a uniform magnetic field.A3l on a suddco, the magnetic flux linked with the
+circuit changes by5 Weber.What amount of charge will flow in the circuit as a result?
+(B)
+0.05 C
+(C)20 C
+(D)Vahic of.istobe known to find thecharge flowa
+R100
+(A)
+500C
+(B)
+0.05C
+(C)
+20C
+(D)
+17.
+An lectron revolves around the nucleus in acircular path with angular momentam L.A
+uniform magnetic field Bis applied perpendicular to the plane ofis orbit, Ifthe electron
+experiences n torque T,then
+(A)TIL
+(3)Tis anti-parallelwL
+(C)TL-0
+(D)AnglebetweenTannLis 45
+(A) TIL
+(B)：T9 工 酮
+(D)
+TL-0
+(C)
+
+--- PAGE 9 ---
+PC-2022
+8,When an AC source of emf Ewith frequency o=100 Hz.is connected across a circuit,
+the figure,Ifthe circuit coasistofonly RC or RLin geries, then
+-100
+(A)
+R=1ko,C=5μF
+(B)
+R=Ik2,L-10H
+R=1ko,L-1H
+(C)
+(D)
+R=1k2,C=10μF
+19.
+E,r
+Abattery of enf Eand internal rcsistunce ris connected with umi externul resistancc Ras
+shown in the figure. The batiery will act tis a constant voltage source if
+(A) TR
+(B) 1>R
+(C)
+T=R
+(D)Itwillneveractasa constantvolage souroe,
+(A)-T<R
+(B)
+(C)
+P.T.O.
+
+--- PAGE 10 ---
+PC-2022
+20.In Young's double slit experiment with a monochuomatic light, maximum intensity is 4
+times the minimum intensity in the interference pattetn,What is the ratio of the
+intensities of the two interfering waves?
+(B)13
+1/16
+(A) 1/9
+(C)
+(D)1/2
+21.The human eye has an approximate angular resolution of e=5.8 × 10-4rad and typical
+photo printer prints a minimum of 300 dpi (dots per inch, 1 inch =2.54 cm).At whal
+minimal distance d should a printed page be hcld so that one does nol'sce the individuaf
+dots?
+0510-
+300dpi-fdpi21inch=2.54cm）
+(C)14.59cm
+(D)
+(B)29.50cm
+(A)20.32cm
+6.85 cm
+22.If.the kinetic energies of an electron, an alpha particle and a proton having same
+de-Bogliewavelengthare E,e, ande,respectively.then
+(C) E)<E, <8
+(B)"6
+(A)>E>62
+(D)6,>E>
+23,In a Young's double slit experiment, the intensity of light at a point on the screen where
+.the path difference beiween the interfering waves is , (a being the wavelength of light.
+used) is IThe intetisity at a point where the path difference iswitl be (usstume lwo
+waves have sameamplitude)
+(D)
+(B)1
+(A)zero
+(C)
+(C)
+(B)
+(v)
+(a)
+10
+
+--- PAGE 11 ---
+PC-2022
+24.AZener diode having break down voltage Vz-6V is used in a voltage regulator circuit
+as shown in the figure.Theminimum current required to pass throughthe Zencrto actas
+a voltagcregulatorig 10mAandmaximumallowed cunrentthroughZeneris 40mA.The
+maximum valueof R,for Zonertoactas avoltageregulator is
+10A40A
+AO1
+(A)
+100Q
+(B)
+4002
+(C)
+0.42
+(D)
+950 2
+25.ThecxpressionA(A+B)+(B+AA)(A+B)simplificsto
+A(A+B)(B+AA(A+B)
+(A) A+B
+(B)AB
+(C)
+A+B
+(D)
+26.Suppose in a hypothetical world the angular momentum is quantiyed to be even integral
+range in a world according to Bohr's modiel will be,
+(Considerhc=1242Mey-fim)
+ 1242 Mev-fm)
+(A)153mm
+(B)
+409 nm
+(C)
+121mm
+(D)
+487mm
+11
+P.T.O.
+
+--- PAGE 12 ---
+PC-2022
+27.Given:The percentage error m the measuremcnts of A,B,CandD nre respectively,4%,
+CD2
+A'B3
+ABD4%2%3%1%
+CD2
+127%
+127
+(A)
+(B)
+127%
+127
+(D)
+(C)
+28.The Entropy (S) of a black hole can be writen-as S=βkgA,where kg is the Boltzmann
+constant and A is the.area of the black hole, Then β has dimension of
+(B)
+(A)
+ML2T-!
+(C)
+(D)dimensionless
+(A)
+(B)ML2T-
+(C)
+L-2
+12
+
+--- PAGE 13 ---
+PC-2022
+29.Thekinetic energy (E) ofa particle moving along X-axis varies with its position (X) as
+shown in the figure.The force acting on the particle at X= 10 m is
+40
+20
+12
+10
++X(m)
+(A)
+5iN
+ON
+(B)
+(C)
+97.5iN
+(D)-si N
+30.
+Aparticle is moving in am elliptical orbit as shown in figure,If p.Land denote the
+linear momentm, angular momentumand position vector of the particle (from focus O)
+respectively at a pointA, then thedirection of a=xLis along.
+(A)+vexaxis
+(B) vex axis
+(C) +veyaxis
+(D) -vey axis
+(B)
+(C)：
+(D)
+13
+P.T.O.
+
+--- PAGE 14 ---
+PC-2022
+Category-I (Q.31to35)
+(Cary 2marks each.Only one option is ccrrect.Negative marks --Y)
+31.One moleofan idealmonoatomic gas expands along thepolyropePy-constantfrom
+V,to Vz ataconstantpressure PrTheemperature dhuringthe process issuch thatmolar
+specifio heat Cy-
+(A)
+(B)
+(C)
+32.Three coucentric mctallic shells A,B and Cof radi a,b and e (a<b<c)havesurface
+charge densities +o,-c and +a respectively.The potential of shell B is
+(B)
+(A)
+(atb+o
+(C)
+(a)
+14
+
+--- PAGE 15 ---
+PC-2022
+33.A horizontal semi-circular wire of radius ris connected to a battery through two similar
+springs X and y to an electric cell, which sends current I through it A vertically
+downwardumiform magnetic field Bis applied on thewire,as shown in the figure,What
+is the force acting on each spring?
+(A)2元rBF
+(B)
+(C)
+(D)
+2BI
+34.Find the equivalent capacitance between A and Bof the following arrangement:
+(A) C
+(B)
+(C)
+3C
+(D)
+35.AgolfballofmassS0gm placed ona tee,is struck byagolf-club.Thespced ofthegolf
+ball us it leaves the tee is 100m/s,the time of contact on the ball is 0.02 s.If the fove
+decreases to zero linearlywith time, thcn theforce at tlje beginning of the contnct is
+100002
+(A)100N
+(3)
+200N
+(C):250N
+(D)
+500N
+15
+P.T.O.
+
+--- PAGE 16 ---
+PC-2022
+Category -l (Q36 to 40)
+(Carry 2 marks each. One or more options are correet. No niegative marks)
+36折F
+Two wires A and B of same lcngth are made of same material Load (F) vs.elongation (x)
+graph for these two wires.is shown in thefigure.Then which of the following statcment(s)
+is/aretrte?
+(A)
+The cross-section area of A is greater.than that of B.
+(B)
+Youngsmodulus of Ais greater than Young's modulus of B.
+(C)
+The cross-sectional area of B is greater.than that of A.
+(D)
+Young's modulns of both Ammd Bare same.
+(C)
+(D）可
+16
+
+--- PAGE 17 ---
+PC-2022
+37.
+A hemisphere of radius Ris placed in a tniform electric field E so that its axis is parallel
+to thefield,Whichof the followingstatement(s)is /aretrue?
+(A)
+Flux through the curved surface of hemisphere is R3B.
+(B)
+Flux through the circular surface of hemisphere is rR2E.
+(C)
+Total fhux.enclosediszero
+(D)
+Work donc inmoving a point chargeqfirom Ato Bvia the pathACBdepends upon
+R.
+()
+(C)
+(D)
+ABACBR
+17
+P.T.O.
+
+--- PAGE 18 ---
+PC-2022
+38.
+As shown in figure, arectangular loop of length 'a' and wideh 'b'andmade of a
+conducting material of uniform crogs-section is kept in a horizonlal plane where a
+uniform magnetice field of intensity B is acting vertically downward.Resistance per unit
+length of theloopis/m.If theloop is pulled withimiform velocityy in horizontal
+direction, which of thefollowing statemenut isfare true?
+CurrentintheloopI=
+(A)
+Bbv
+2(2b+2a)
+(B)
+Current will be in clockwise direction, looking from the top.
+(C)
+Vp-VsVo-Vr.whereVis thepotential.
+(D)
+There cannot be any induction in part SR.
+Bby
+(2b+2a)
+(B)
+(C)
+Vp-V=Vo-VR.cIVaFRa1
+(D)
+18
+
+--- PAGE 19 ---
+PC-2022
+39.Asample of hydrogen atominits ground stale is radiated with photons.of 10.2eV
+energies. The radiation firom the sample is absorbed by excited ionized Het. Then which
+of the following statement/s is/are true?
+(A)He*electronmovesfromn=2ton=4.
+(B)
+In the Heenission spectra, there will be 6 lines
+(C)
+Smallest wavelength of Ile*spectrum is obtained when transition talcen placefrom
+n=4ton=3.
+(D)Hetelectronmoves fromn=2ton=3,
+10.2
+(A）He+（0=21=4-
+19
+P.T.O.
+
+--- PAGE 20 ---
+PC-2022
+40.Aparticleismoving in x-y plane according to Fb cos oti+b sin otj.Where@is
+constant.Which of thefollowing statement(s) is/aret true?
+(A)
+is a constant where Eis the total energy ofthe particle.
+(a)
+The trajectory ofthe particle in x-y plane is a circle.
+(C)
+In ayayplane,urajectory of the particle is an ellipse (ay denotes the
+components.ofaccelcration)
+(D)a=02
+(A)
+(B)
+(D)
+20
+
+--- PAGE 21 ---
+PC-2022
+CHEMISTRY
+Category-1 (Q41 to 70)
+(Carry1 mnrk ench,Only one option is-correct.Negative mnrks-)
+4i.How many monobriminated prortuci(s) (iachuding stereoisomers) wonld form in the free
+adicalbromination ofn-butame?
+(A) 2
+(B)1
+(D)4
+42.
+Whal is the correct order of ncidiy of salicylic acid, 4-hydroxybenzoic ucid, and 2, 6-
+dihydroxybenzoic acid ?
+(A)2,6-dihydroxybenzoic acid > salicylic acid>4-hydroxybenzoic acid
+(B)2, 6-dihydroxybenzoic acid>4-hydroxybenzoic acid> salicylic acid
+(C)salicylie acid>2,6-dihydroxybeanzoic acid>4-hydroxybenzoic ncid
+(D)salicylic acid>4-hydroxybenzoic acid >2, 6-dihydroxybenzoic acid
+，4-2、6-
+(A)
+(B)
+264可可
+(C)
+264-店
+(D)
+13.
+The enol fonm in whichethyle-3-oxobuianpate exists is
+OH
+OH
+(A)HC
+CHCOC,Hs
+(B)
+co,CH,
+OH
+COC2Hs
+H.
+(0)
+(D)
+OCHs
+P.T.O.
+
+--- PAGE 22 ---
+PC-2022
+44.The correct order ofrelative stability of the given conformers of n-butane is
+CB,
+CH
+cal,
+I>I>
+(C)
+(A)II>I=II
+(B)
+(D)
+Benzene burns in oxygen according to the above equation What is the volutme of oxygen
+(alSTP)needed forcompletecombustionof39gram of liquidbenzene?
+(B)22.4 litre
+(C)84 litre
+(D)
+(A)-112litre
+168litre
+(C)84
+(B）22.4间
+(A)112向
+（D)168假有
+46.
+How much solid oxalic acid (Molecular weight 126)has lo be weighed to prepare
+100mLexactly0.1 (N)oxalicacidsolutioninwater?
+100m0.1(N）oxalicacidaoxalicacid（）
+0.63g
+(D) 
+(B)0.126g
+(C)
+(A)1.26g
+0.0638
+47
+The major product ofthefollowing reaction is
+FgC-C=CHh+HBr
+CHBr
+(B)
+FC-
+-CH
+(A)
+-CH
+-CH”
+F2.CCHO)
+PSCH-
+(C)
+(D)
+Br
+22
+
+--- PAGE 23 ---
+PC-2022
+g8.In Bohrmodel of atom, radius of hydrogen atom in ground state is r, and radius of He*
+ion in ground state is t2, Wbich of the following is corect?
+(C)
+()
+(B)
+(A)
+49.
+Which one of thefollowing is the correctset of four quantum numbers (n, l,m,s)?
+(A)
+(B)
+3,0,
+4,3,
+(C)
+(D)
+3,1,-
+4,2,-3, +
+50.
+Avogadro'slawisvalid for
+(B)
+(A)allgases
+ideni gas
+(D)
+(C)Van der Waals gas
+Teal gas
+(B)
+(D)
+(real)
+51.
+Ametal (M)forms wo oxides.The ratioM:O (byweight) in the twooxides are25:4and
+25:6.Theminimumvalueofatomicmassof Mis
+（M）M：0（食25：4
+(C)150
+(B)100
+(A)50
+(D)200
+The de-Broglie wavelength (a) for clectron (e),proton (p)and He2+ ion (a)are in the
+following order.Speed ofe,p and aare the samc
+(e)C）He2n(a)e
+(B)>>α
+0>α>p
+(C)
+(D)
+(A)a>p>e
+p>e
+I mL of' water has 25 drops, Let N. be the Avogadro numbur.What is the nunber of
+molecules preseut inI dropof water? (Density ofwater=1g/mL)
+0.02No
+(c)
+(B)
+(A)
+(D)
+18
+25
+25
+23
+P.T.O.
+
+--- PAGE 24 ---
+PC-2022
+54.The numbcr ofunpaired eleciron in Mn2+ion is
+Mn2395(unpaired)&cedicR
+(A) 2
+(B) 3
+(C)-5
+(D)
+5s.Theaverage speedofH,arT,Kisequal to that of'O,atTK.ThenatioT,:T,is
+(A1:6
+(B) 16:1
+(C)
+(D)1:1
+56.A sample of MgCO is disstlved in dil HCI and the solution is ncutralized with
+ammonia and buffered with NH,CI /NH,OH,Disodiun bydrogen phosphate reagent is
+udded to the resalting solution. A white precipitate is formed. What is the fomula ofthe
+precipitate ?
+(A)Mg;(PON2
+(B)Mg(NH)PO(C)MgHPO
+(D)Mg2P20)
+$7.XeF2NO,HCN,CIO,CO.
+Identify thc non-lincar molecule-puir from the above mentioned molecules.
+(A)XeF2,ClO2
+(B)CONO
+(C)HCN,NO,
+S8.The numberof aloms inbodly centned and face centred cubic unit cell respectively are
+(A)2and4
+(B)4and3
+(C)Tand2
+(D)4and6
+bodycentredfacecenined
+(A)
+294
+(B)
+4643
+(C)
+15452
+(D)
+46
+24
+
+--- PAGE 25 ---
+PC-2022
+S9.The metal-pair thal can produce niscent hydrogen in alkcaline medium is:
+(B)Fc,Ni
+(C)ALMg
+(D)
+(A)Zn,A)
+Mg,Zn
+60.
+The correct bond order of B-F bond in BF, molecule-is :
+BFB-(bondonder）
+(A)1
+(B)
+(C)
+(D)
+61.Sodium nitropnusside is :
+(A)Na,Fc(CN),NO,)
+(B)  Na,[Fe(CN), NO]
+(C)Na,[Fe(CN),NO)
+(D) Na,[Fe(CN), NO,]
+Choosc thc correct statement forthe[Ni(CN),)2-complex ion (Atomic no.ofNi-28)
+(A):The complex is square planar and paramagnetic.
+(B)The complex is tetrahedral and diamagnetic:
+(C) The complex is sqtmre planar:and diamagnetic,
+(D)The complex is tetruhedral and paramagnetic,
+[NCN（N=28）
+(A)
+（squarcplanar）(paramagnetic
+(B)
+ec-(diamaghctic)
+(C)
+(D)
+63
+The boiling point ofthe water is higher than liquid HF. The reason is that
+(A) Hydrogen bonds are stronger in water.
+(B)Hydrogen bonds aro stronger in HF.
+(C)Hydrogen bonds arc larger in number in HF.
+(D)Hydrogen bonds are larger in number in water.
+(A)
+(B)
+(C)
+25
+P.T.O.
+
+--- PAGE 26 ---
+PC-2022
+64,To a sohution of colourless sodium salt, a solution of lead nitrate was added to have a
+white precipitate which dissolves in warm water and reprecipitates on cooling.Which of
+thefollowing acid radical is present in the salt?
+(A)
+(B)SOF
+(C)s2
+(D)NO)
+Oxidatian states of Cr inK,Cr,O,andCr,are,respectively
+(A)
++6, +5
+(B)
++6, +10
+(C)
++6, +6
+(D)
+Noneof these/
+66.
+Which of the following is radioactive?
+(A)Hydrogen
+(B) Deuterium
+(C)
+Tritium
+(D)
+none
+（A）
+(B)
+(C)
+(D）
+67.The correctonder ofacidity ofthefollowing hydraacids is
+(A)
+HF>HC1>HBr>HI
+(B)
+HF≤HCI<HBr<HI
+(C)
+HF <HCI>HBr>HI
+(D)
+HF>HCI<HBr>HI
+26
+
+--- PAGE 27 ---
+PC-2022
+68.
+HC
+CHOCH
+()
+(2)
+Hybridisation of the negative carbons in (1) and (2) are
+(A)spandsp3
+(B)sp and sp?
+(C)both sp2
+(D)
+both sp3
+(A)spandsp)
+(B)  sp: and'sp2
+(C)
+sp3
+Me
+69.
+OH
+Me
+OH
+Me
+The correct relationship between moleculesIand Il is
+(A)Enantiomer
+(B)
+Homomer
+(C)Diastereomer
+(D)
+Constitutionalisomer
+(B)
+(D)
+70
+The correct ordcr ofrelative stabilityforthe given free radicals is:
+COOEI
+CH
+CH
+-CH
+N(CH)2
+N(CH)2
+(A)
+I>>
+(B)
+(C)
+(D)
+27
+P.T.O.
+
+--- PAGE 28 ---
+PC-2022
+Category-11 (Q71to75)
+(Carry2marks eaeh.Only one option is correct Negative muarks :/)
+7l,The product of thie following hydrogenation reaction is:
+Catalym
++H2
++ H2
+Highs tempeture
+and preasurd
+(I ev.)
+(1 eqv.)
+(A)
+(B)
+(teqy.)
+(0.33 eqy)
+(0.66eqv.)
+(C)
+(D)
+(0.66 eqv.)
+(.33.cqv)
+(1 eqv.)
+72,Piek the comectstatement.
+(A)
+Relative lowering of vapourpressure is independent of T.
+(B)
+Osmotic pressure always deponds on the niture of shlute.
+(C)Elevation of boiling point is independent of nature of the solvent.
+(D)Lowering of freezing point is proporional to the molar concentration of solute
+(A)
+c(relativeloweringofvaporpressure)（）
+(B)
+(C)
+ble(elevationofboilingpoint）fope
+(D)
+73.
+Let (Comon,is ther.m.s speed of H, at150K.At what temperature, the most probable
+speed of heliun I(Cmp)hte) will be halr'of (Cyms/hn,?
+150Km.s(C可most
+probablespeed（(）Cpel（Cms
+(A75K
+(C)225 K
+(B)
+112.5K
+(D)900 K
+28
+
+--- PAGE 29 ---
+PC-2022
+74,Thecorrectpairofelectronaffinityorder is
+(A)0>S,F>CI
+(B)O<S,CI>F
+(C)
+S>0,F>CI
+(D)
+S<0,CI>F
+75.Theproductofthefollowing rcaction is:
+1.Mg,E0(dy)
+1.Mg.E120 (dry)
+2.4-chlorobenznldehyd
+2.4-c
+3. g: NH,C)
+OH
+HO
+(A)
+(B)
+Br
+(C)
+(D)
+Cntegory-ml (Q76 to 80)
+(Carry 2 marks each.One or more options are correct. No negative marks)
+76.
+CH
+CH,
+Theabove conversion can be carried outby,
+(A)Zn-Hg/Conc.HC)
+(B)i.HNNH,i.NaOHinetbyleneglycol,A
+(C)A.HSCH,CHSH/HO.H/N(D)
+Bromine waicr
+(A)Zn-Hg/Conc.HCi
+(B)
+(C)
+.HSCHCHSH/Hi.H/
+(D)
+29
+
+--- PAGE 30 ---
+PC-2022
+77.
+Which of the statements nre incorrect?
+(A)pH ofa solution of salt of strong acid and weak base is less than 7.
+(B)
+pH of a solution ofa weak acid and wcak base is basic if Kg<K.
+(C)
+pHofanaqucoussolutionof1o(M)HClis8.
+(D)
+Conjugate acid of NIL is NIly
+(B)
+(C)
+78.
+During the preparation ofNH, inHaber's process, the promoter(s)used is /are
+Tod(v)
+(B)Mo
+(C)MixofAl,O,andK,O
+(D)Feand Mn
+od (v)
+(B)
+Mo
+(D)
+FeMn
+79.
+Thecorrectstatement(s)aboutB,H,is/are:
+(A)AllBatoms are sphybridiscd.
+(B)
+It is paramagnctic.
+(C)It contains 3C-4e bonding.
+(D) There are two types of'H present.
+(C）3C-4
+D）
+80.
+Which of the following would produce enantiomeric products when reacied with methyl
+magnesium iodide?
+(A)Benzaldehyde(B)Propiophenane (C)Acetone
+(D)Acetaldehyde
+(B)PP
+(C)
+30
+
+--- PAGE 31 ---
+PC-2022
+SPACEFORROUGH WORK
+31
+P.T.O.
+
+--- PAGE 32 ---
+Questlon
+Booklet Series
+PC-2022
+Subjeet:PHYSICS & CHEMISTRY
+0.
+Catoy-2
+8.
+Category-
+OMRABCD新
+9.
+50.
+58.

@@ -1,0 +1,1165 @@
+
+--- PAGE 1 ---
+M-2024.
+Subject : MATHEMATICS
+4011153897
+(Booklet Number)
+Duration : 2 Hours
+Full Marks : 100
+INSTRUCTIONS
+1.
+All questions are of objective type having four answer options for each.
+2.
+Category-l: Carries 1 mark each and only onc option 'is correct. In case of incorrect.
+answer or any combination of more than one answer. ' mark will be deducted.
+3.
+Category-2: Carries 2 marks each and only one option is correct. In case of incorrect.
+answer or any combination of more than one answer. 'z mark will be deducted.
+4.
+Category-3: Carries 2 marks each and one or more option(s) is/are correct. If all correct
+answers are not marked and no incorrect answer is marked, thcn score = 2 × number of
+correct answers marked + actual number of correct answers. If any wrong option is
+marked or if any combination including a wrong option is marked, the answer will be
+considered wrong. but there is no negative marking for the same and zero mark will be
+awarded.
+5.
+Questions must be answered on OMR sheet by darkening the appropriate bubble marked
+A, B, C, or D.
+6.
+Use only Black/Blue ink ball point pen to mark the answer by filling up of the
+respective bubbles completely.
+7.
+Write Question Booklet number and your roll number carefully in the specified locations
+of the OMR Sheet. Alao fill appropriate bubbles.
+8.
+Write your name (in block letter), namc of the examination center and put your sigmature
+(as is appeared in Admit Card) in appropriate boxes in the OMR Sheet.
+9.
+The OMR Sheet is liable to become invalid if there is any mistake in filling the correct
+bubbles for Question Booklet number/roll number or if there is any discrepancy in the
+namel signature of the candidate, name of the examination center. The OMR Shcet may
+also become invalid due to folding or putting stray marks on it or any damage to it. The
+consequence af such invalidation due to incorrect marking or careless handling by the
+candidate will be the sole responsibility of candidate..
+10.
+Candidates are not allowed to carry any written or printed material, calculator, pen, log-
+table, wristwatch, any communication device like mobile phones, bluctooth device etc.
+inside the examination hall. Any candidate found with such prohihited items will be
+reported against and his/her candidature will be summarily caneelled.
+1l. Rough work must be done on the Question Booklet itself. Additional blank pages are
+given in the Question Booklet for rough work.
+12. Hand over the OMR Sheet to the invigilator before leaving the Examination Hall.
+13. This Booklet contains questions in both English and Bengali. Necessary care and
+precaution were taken while framing the Bengali version. However, if any
+discrepancy(ies) is lare found between the two versions, the information provided in the
+English version will stand and will be treated as final.
+14. Candidates are allowed to take the Question Booklet after examination is over.
+Signature of the Candidate :
+(as in Admit Card)
+Signature of the Invigilator :
+154
+M-2024
+
+--- PAGE 2 ---
+M-2024
+SPACEFORROUGHWORK/
+
+--- PAGE 3 ---
+M-2024
+VNMATHEMATICS
+Category-1 (Q. 1 to 50)
+(Carry 1 mark each. Only one option is correct. Negative marks: -1)
+cos g
+-sinの)
+2元
+and =
+If A=
+then A100 = A × A × .... (100 times) is equal
+1.
+(sing:cos
+to
+(cos -sin)
+2元
+30 =
+,  A100 = A × A × ... (100 ) 34
+(sinecose
+cos日
+- sin 20
+cos 20
+-sino
+(B)
+(A)
+(sin 
+cos 20
+(sin 20
+cos0
+(0.-1)
+(D)
+(C)
+If(1+x+2+)= Z
+Z(-1)k -a2k is equal to
+2.
+k=0
+k=0
+k=0
+(C)
+(D)
+(B) 45
+(A) 25
+44
+ The coefficient of a10b'c3 in the expansion of (bc + ca + ab)10 is
+(bc + ca + ab)10 f a10b'c3 -
+(D)
+(C) 120
+(B) 150
+(A) 
+140
+160
+4.
+The numbers l, 2, 3, .... m are arranged in random order. The number of
+ways this can be done, so that the numbers l, 2, ...., r (r < m) appears as
+neighbours is
+1, 2, 3, .., m    f   1, 2, ., r (r < m)
+(A) (m -r)!
+(B)  (m - r + 1)!
+(C) (m - r)! r!
+(D) (m - r + 1)! r!
+P.T.O.
+
+--- PAGE 4 ---
+M-2024
++h+2
+k+3
+If
+.k+3
+= (r -y) (y -a)(e-m)
+ then
+zk
+yk+2
+yk
+=(x-y) (y -) (c-x)
+zk
+2k+2
+k=-3
+(A)
+(B) k=3
+(C)
+(D) k=-1
+If
+then A =
+例,  A =
+(A)
+(B)
+(C) 
+(D)
+01
+cos x
+lim f
+x3
+Let f(x) =
+f(x)
+7.
+2 sin x
+2x
+, then
+x-0
+x?
+tan x
+coS x
+lim
+第()=
+f(x)
+2 sin x
+2x
+x-0
+tan x
+(A)
+(B)
+(C)
+(D)
+ -1
+
+--- PAGE 5 ---
+M-2024
+8.  In R. a relation p is defined as follows :
+Va, b e R, a p b holds iff a? - 4ab + 3b? = 0. Then
+(A)  p is equivalence relation
+(B)  p is only symmetric
+(C)  p is only reflexive
+(D) p is only transitive
+:     d -
+ a, b e R- a p b ( a2 - 4ab + 3b2 = 0  1
+(A)p可
+(B) p 
+(C)
+kek bkeak khaa d  (a)
+Let f : R -→ R be a function defined by f(x) :
+9.
+then
+e'+e-r
+(A)  fis both one-one and onto
+(B)  f is one-one but not,onto
+(C) f is onto but not one-one
+(D) f is neither one-one nor onto
+ff : R-→R f() =
+(A)  
+(B)  
+(C)
+(D) 
+10. Let A be the set of even natural numbers that are < 8 &
+B be the set of prime integers that are < 7
+The number of relations from A to B are
+A8
+B    < 7
+A  B-
+(C)  92
+(B) 29-1
+(A)  32
+(D)  29
+P.T.O.
+
+--- PAGE 6 ---
+M-2024
+1l. Two integers r and s are drawn one at a time without replacement from the set ?
+(1, 2, ., n). Then P(r ≤ k/s ≤k) =
+(1, 2,., n C   r ( ,  可 ( s  
+k-1
+k-1
+(B)
+(A)
+(D)
+n-1
+n-1
+(k is an integer <n)
+12. A biased coin with probability p (0 < p < 1) of getting head is tossed until a
+head appears for the first time. If the probability that the number of tosses
+. 2, then p=
+required is even is
+      (0 1)       (
+(B)
+(A)
+(C)
+(D)
+13. The exprcssion cos? Φ + cos2 (0 + Φ) - 2 cos 0 cos o cos( + Φ) is
+(A) independent of e
+(B) independent of $
+(C)  independent of e and $
+(D)  dependent on  and 
+ (Φ + 0)503 Φ s03 0 500 2 - (Φ + 0) ±500 + Φ z50)
+(A) 
+()
+()
+(D)  0 
+14. Two smallest squares are chosen one by one on a chess board. The probability
+that they have a side in common is
+           1  
+(B)
+(C)
+(A)
+(D)
+18
+18
+
+--- PAGE 7 ---
+. M-2024
+15. The equation r cos  = 2a sin" 0 represents the curvc
+r cos  = 2a sin?  @    
+(A) x3 = y2(2a + x)
+(B)x2 = y2(2a + m)
+(C) x3 = y(2a -x)
+(D) x3 = y2(a + x)
+16.  If (1, 5) be the midpoint of the segment of a line between the line 5x - y - 4 = 0
+and 3x + 4y - 4 = 0, then the equation of the line will be
+5x - y - 4 = 0  3x + 4y - 4 = 0  (  可  (1. 5) 可 
+(A)83x + 35y - 92 = 0
+(B)83x - 35y + 92 = 0
+(C)83x - 35y - 92 = 0
+(D) 83x + 35y + 92 = 0
+17. In AABC, co-ordinates of A are (1, 2) and the equation of the medians through
+B and C are x + y = 5 and x = 4 respectively. Then the midpoint of BC is
+ ABC- A   (1, 2), B  C     x + y = 5
+=4BC-
+(A)
+If0<<
+18.
+and tan 39 ± 0, then tan  + tan 2e + tan 30 = 0 if tan  : tan 20 = k
+where k =
+ tan 30 ± 0 ,  tan e + tan 20 + tan 30 = 0 , f
+tan  tan 20 = k , k =
+(B) 2
+(C)
+(D)
+(A) 1
+P.T.O.
+
+--- PAGE 8 ---
+M-2024
+19. A line of fixed length a + b, a .± b moves so that its ends are always on two
+y fixed perpendicular straight lines. The locus of a point which divides the line
+into two parts of length a and b is
+ (A) a parabola (B) a circle : (C) an ellipse
+(D) a hyperbola
+-  a + b  f t (a + b)    
+ f 度 3     1@   a 8 b 
+(A)、(B)
+(C) (D)  
+20. With origin as a focus and x = 4 as corresponding directrix, a family of ellipse
+are drawn. Then the locus of an end of minor axis is
+(A) a circle
+(B) a parabola (C) a straight line (D) a hyperbola
+ 4    可  x = 4  k    1 
+(A)
+(B)(C)  C (D) 
+21. Chords AB & CD of a circle intersect at right angle at the point P. If the length
+of AP, PB, CP, PD are 2, 6, 3, 4 units respectively, then the radius of the circle
+is
+V67
+66
+(C)
+(D)
+(B)
+units
+units
+ 4 units
+(A) 
+units
+   AB  CD   P-( (  1 AP, PB, CP  PD-
+ 2, 6, 3, 4  ,   
+V67
+V65
+66
+(C)
+(B)
+(D)
+(A)  4 
+
+--- PAGE 9 ---
+M-2024
+22. The plane 2r - y + 3z + 5 = 0 is rotated through 90° about its line of 1
+imtersection with the plane r + y + z = 1. The equation of the plane in new
+position is
+2x - y + 3z + 5 = 0 aft r + y + z = 1   (e 9 90" (9
+(B) 3x + 9y + z = 17
+(A) 3x + 9y +z+ 17 = 0
+(D) 3x + 9y -2 = 17
+(C) 3r - 9y - z = 17
+23. If the relation between the dircction ratios of two lines in R3 are given by
+I + m + n= 0, 2 lm + 2mn - ln= 0
+then the angle between the lines is
+(l, m, n have their usual meaning)
+R3-    F  可t F 
+l + m +n = 0, 2 lm + 2mn - ln = 0
+元-6
+(C)
+(D)
+(B)
+(A)
+(l, m, n  可)
+24. - AOAB is an equilateral triangle inscribed in the parabola y? = 4ax, a ≥ 0 with
+ O as the vertex, then the length of the side of OAB is
+(C)  4a3 unit (D) 4a unit
+(A) 8a/3 unit  (B) 8a unit
+y2 = 4ax, a > 0 f (7  1  FR  @g  AOAB,
+C 0   1AOAB-   A
+(D)
+(C)  4a V 
+4a 4
+(A) 8a VB  
+(B)
+P.T.O.
+
+--- PAGE 10 ---
+M-2024
+Lr+ M
+25. If U, (n = 1, 2) denotes the nth derivative (n = 1, 2) of U(t) =
+12 - 2Bx + C
+(L, M, B, C are constants), then PU, + QU + RU = 0, holds for ir.
+Lr+ M
+ U(x) = 
+(L, M, B, C )- n- 可  U, (n = 1, 2)
+2 -2Br+C
+   G PU, + QU1 + RU = 0, 3 Q
+(A) P = x2 - 2B, Q= 2x, R = 3x
+(B)
+ P = x2 _ 2Bx + C, Q = 4(x - B), R = 2
+(C) P= 2x, Q= 2B, R = 2
+(D) P = x2, Q = x, R = 3
+26. For every real number x ± -1, let f(x) =
+x+1
+(2-)'  (-)j . (-)f  (a)-") = ()f 3 f  () = (g)f 
+must be
+= ()      T- ± x
+x+1
+- (7-) (2-) 2 1 (a)I - ug) = (g)'  上-2z u  () = (g)f 8 b
+f.(-2)
+2"
+(B)
+(A)
+1. 3. 5....(2n - 1)
+2n
+1(2n
+(D)
+(C)
+10
+
+--- PAGE 11 ---
+M-2024
+27. The equation 2 + 5' = 3'+ 4' has
+(A)  no real solution
+(B) -only one non-zero real solution
+(C)  infinitely many solutions
+(D) only three non-ncgative real solutions
+0kx + 18 = x9 + xz
+(A)
+(B)
+(C)
+(D)
+(A) has at least one root in (1, 2)
+(B)has no root in (1, 2)
+(C)  is not at all solvable
+(D)  has infinitely many roots in (-2, 1)
+0b x - 7 = x80[ x 2 1 ±  2 801 (2 - x) = (3)
+(A)  (1, 2)-耐 可
+(B) (1, 2)-( (
+(C)  
+(D) (-2, 1)- 可可
+then
+29. If α, β are the roots of the equation ax² + bx + c =
+x→β
+(x -β)?
+lim 1- cos (ar2 + br + c)
+z(d-r)
+-(α-β)2 
+(D) 
+(α- β)2
+(C)
+(B)
+(A) (α-β)2
+(α- β)2
+P.T.O.
+
+--- PAGE 12 ---
+M-2024
+f(a)
+f(a)
+x g(r(1 - r) dx and I, =
+g(x(1 - x) dx, then the
+30. If f(r)
+1+e
+f(-a)
+f(-a)
+value of 
+is
+f(a)
+f(a)
+x g(r(1 - x) dx  I, =
+g(x(1 - x) dx G
+滑 f(x)
+I+er
+f(-a)
+f(-a)
+12
+(C)
+(D)1
+(A) -1
+(B) -3
+31.
+ Let f : R → R be a differcntiable function and f(1) = 4. Then the value rof
+f()
+2t
+lim
+dt, if f'(1) = 2 is
+x-→1
+x-1
+f :      (  f(1) = 4.
+f(0)
+lim
+2t
+dt,耐
+ f(1) = 2 , 
+x-→1
+x-1
+(D) 2
+(B)
+(C)
+(A)  16
+32. Ir loge (a+/1+ x)
+dx = f(g(r) + c then
+V1+x?
+f Flog (&+v1+x3)
+dx = f(g(x) + c 
+1+x2
+x?
+, g(m) = 10ge (x+ V1+ x2)
+(A)
+f() :
+f(c) = 1og (x + /1+ x2), g(x) =
+(B)
+(C)
+f(x) = x2, g(c) = log。 (x + V1+ x2 )
+(D)
+f(s) = log, (x - V1 + x2 ), g(a) = x2
+12
+
+--- PAGE 13 ---
+.M-2024
+33. For any integer n, [ecos*+- cos? (2n + 1) r dx has the value
+[ ecos*x - co3 (2n + 1) x dx -  3
+3元
+(C)
+(D)
+(B)
+(A) T
+34. Let f be a differential function with
+lim f(x)= 0
+  f   可9, x 
+(B) y +1 = e-f(t) + f(c)
+(A) y + 1 = ef(c) + f(t)
+(D) y - 1 = e-f(t) + f(x)
+(C) y + 2 =e-f(x) + f(g)
+(B) e2 + ab -e-a
+(A) e+ 2ab-ea
+dy
+(D) e+ab-ea,
+(C) e-ab+ea
+dx
+dr < 4 is satisfied,
+36.All values of a for which the inequality.
+lie in the interval
+dx < 4   ,  向 
+可可, cf 
+(C)  (0, 4)
+(D) (1, 4)
+(A)  (1, 2)
+(B)  (0, 3)
+P.T.O.
+13
+
+--- PAGE 14 ---
+M-2024
+(37.  The area bounded by the curves x = 4 - ye and the Y-axis is orm w 
+32
+16
+(C)
+(D) 32 sq. unit
+(B)
+sq. unit
+(A) 16 sq. unit
+sq. unit
+x = 4 - y2  Y-   C 
+32
+16
+下(B)
+(C)
+(A)  16  
+38. f(x) = cos x - 1
+teR
+2!
+Then f(α) is
+(B) increasing function
+(A)  decreasing function
+(C) neither increasing nor decrcasing (D) constant Vx≥ 0
+f(α) = cos x - 1 +
+xeR
+2!
+ f() 
+(B) 
+(A)
+(D) ,  >0 -
+39. Let y = f(x) be any curve on the X-Y planc & P be a point on the curve. Let C be
+a fixed point not on the curvc. The length PC is either a maximum or a
+minimum, then
+(A) PC is perpendicular to the tangent at P
+(B) PC is parallel to the tangent at P
+(C)PC meets the tangent at an angle of 45°
+(D) PC meets the tangent at an angle of 60°
+,  = (), X-    B P   1 C 
+(A) PC, P F 
+(B)  PC, P    可 
+(C) - PC, 可 45%  可
+(D)  PC,  60°   
+14
+
+--- PAGE 15 ---
+M-2024
+40. If a particle moves in a straight line according to the law x = a sin (V t + b)
+then the particle will come to rest at two points whose distance is [symbols
+have their usual meaningl
+x = a sin ( t + b)        1 f G
+传     [ ]
+a-2
+(C)  2a
+(D)
+(B)
+4a
+(A) a
+41. A unit vector in XY-plane making an angle 45° with i + j and an angle 60°
+with 31.-4i is
+XY-可 1 + - 可 45   8 31 - 4- 可 60°  可 下
+13
+13
+(B)
+(A)
+14
+14
+14
+1-4
+13
+13
+(C)
+(D)
+14
+14
+42.
+(A) f has a local minima at x = ± 1 but no local maxima 
+(B) - f has a local maxima at x = 0, but no local minima
+(C) f has a local minima at x =  1 and a local maxima at x = 0
+(D) f has neither any local maxima nor any local minima
+f : R →R   f() = / x - 1 / 
+(A)  = ± 1  f-   ( 1
+(B)  f- x= 0      ( 1
+(C)  x = ± 1  f-可   可  B x = 0     可 1
+  a2k   k    ()
+P.T.O.
+15
+
+--- PAGE 16 ---
+M-2024
+ar -ar + i: then ay, a, ag .... are in
+(B)
+A.P.
+(A)
+G.P.
+H.P.
+(C)
+(D)  Any other series
+ a1, 2. ag, .. f  a, - a + 1 B a, a + 1 4  4f 4 , 0
+a, a, ag .. f  4f
+(B) 
+A.P.
+(A)
+G.P.
+(C)
+H.P.
+(D) 可可 ( 
+44. Given an A.P. and a G.P. with positive terms, with the first and second terms
+of the progressions being equal. If a, and b, be the nth term of A.P. and G.P.
+respectively then
+(A)
+an >b, for all n > 2
+(B) an <b, for all n >2
+(C) a, =b, for some n> 2
+(D) a, = b, for some odd n
+ F    (C (A.P) 3  ( (G.P.)   3 F
+  1 A.P.  G.P.  n-  a,  b, 
+(A)an >b,  n > 2-)
+(B) an<b, 可 n > 2-
+(C) a, = b,  n > 2- 可
+(D) a, = b,  可R RC n- 
+16
+
+--- PAGE 17 ---
+'M-2024
+45. If z, and z, be two roots of the equation z’ + az + b = 0 a < 4b, then the origin,
+zi and z, form an cquilateral triangle if
+ z1  z,  22 + az + b = 0- f   ( a2 < 4b,   ,
+21 8 2, F 4 1 5 f 4 34, 
+(A) a2 = 3b2
+(B) a2 = 3b
+(C)
+ b2 = 3a
+(D) . b2 = 3a2
+46. If.cos  + i sin e, e e R, is a root of the equation
+ao + airn-+ ..+ an-+ + a, = , ag, ay,... a, e IR, ao * 0,
+then the value of a, sin o + a, sin 20 + ... + a, sin ne is
+tb Ebdlgk (0 * 0g  = "e  e g) 0 = "e ++ -"g +* + 1- uxl + 0e
+ cos  + i sin 0 (0 e R) 
+ai sin e + a, sin 20 + .... + an sin ne -  
+(A)
+2n
+(B) n
+(C)
+(D)
+n+1
+47. If (r log, 27) loggt = x+ 4 then the value of x is
+f (x2 1og, 27) : 1oggx = x + 4 ( x-4  
+(A)  2
+(B)
+(C) -2
+(D)
+13
+17
+P.T.O.
+
+--- PAGE 18 ---
+M-2024
+48. If P(x) = ar2 + br + c and Q(x) = -ax2 + dx + c where ac ± 0, then P(x) : Q(x) = 0
+has (a, b, c, d are real)
+(A) 2 real roots
+(B)  at least two real roots
+(C) 4 real roots
+(D)  no real root
+ P(α) = ax2 + bx + c  Q(x),= -ax2 + dx + c ,  ac ± 0,  P() : Q(c)
+= 0  (a, b, c, d )
+ ()
+()
+(C)    
+(D)  (
+49. Let N be the number of quadratic equations with coefficients from
+(0, 1, 2, .., 9) such that 0 is a solution of each equation. Then the value of N is
+(0, 1, 2, , 9]        N 可 3  
+(C)  90
+(D)
+(B) 39
+(A)  29
+81
+50. If a, b, c are distinct odd natural numbers, then the number of rational roots of
+the equation ax2 + bx + c = 0
+(A) must be 0
+(B)
+must be 1
+(C) 
+must be 2
+(D)
+ cannot be determined from the given data
+ a, b, c F f    , c ax + bx + c = 0  
+(A) 
+(B)
+ 1
+(C)
+(D)
+18
+
+--- PAGE 19 ---
+M-2024
+Category-2 (Q. 51 to 65)
+(Carry 2 marks each. Only one option is correct. Negative marks: --/2)
+51. For the real numbers x & y, we write x p. y iff x - y + V2 is an irrational
+number. Then relation p is
+(A) reflexive
+(B)
+symmetric
+(C) 
+transitive
+(D) equivalence relation
+, y    x p y 34 8 (  x - y + v2    1 p 3
+(A)
+kke
+(B) f
+(C)
+kek ILa@k()
+52.
+Let A =
+-1
+ then
+-1
+(A)
+A is a null matrix
+(B)A is skew symmetric matrix
+A-l does not exist
+(C)
+(D) A2=1
+-1
+-1
+-1
+(A)
+(B) Afafo
+(C)  A-1 
+(D) A2=I
+53. If 1000! = 3n × m where m is an integer not divisible by 3, then n =
+ 1000! = 3 ×   m   3    n =
+(A) 498
+(B)  298
+(C)398 
+(D)-98
+19
+P.T.O.
+
+--- PAGE 20 ---
+M-2024
+54. If two circles which pass through the points (0, a) and (0, -a) and touch the line
+y = mx + c, cut orthogonally then
+f (0, a)  (0, -a) , y = mx + c (  3 可 ( 1 C
+(B) c2 = a2(2 + m²)
+(A) c2 = a²(1 + m2)
+(D) 2c² = a2(1 + m2)
+(C)c² = a2(1 + 2m²)
+55. The locus of the midpoint of the system of parallel chords parallel to the line
+y = 2x to the hyperbola 9x2 - 4y? = 36 is
+ 6k k elb8-1 bk b-x =   98 = g4f - 2x6
+(B)9x- 8y = 0 
+0 =  - x6 ()0 = 6 + xg(0)
+(A)8x - 9y = 0 
+56. Angle between two diagonals of a cube will be
+1-8
+(B)
+sin-1
+(A)
+Cos-1
+1-3
+(D)
+sin-1
+(C)
+- cos-1
+57. If A and B are acute angles such that sin A = sin² B and 2 cos? A = 3 cos2 B,
+then (A, B) =
+A 3 B可,  sin A = sin2 B 双 2 cos? A = 3 cos2 B ,  (A, B) =
+()面 ()
+()
+元元
+()
+(C)
+(A)
+20
+
+--- PAGE 21 ---
+M-2024
+lim
+58.
+[2k + 4k + 6k + .... + (2n)] =
+n→8k+1
+2k
+(A)
+2k+1
+(B)
+k+1
+2k
+(C)
+k+1
+2k
+(D)
+k-1
+loge
+3+2loge x
+59. If y = tan-1
++ tan
+ then
+1-6-logex
+dx2
+loge
+3+2loge x
+f y = tan-1
++ tan-1
+loge (ex2)
+1-6-loge x
+(B)
+(A)
+(D)
+(C)
+21
+P.T.O.
+
+--- PAGE 22 ---
+M-2024
+60. . Consider the function f(t) = x(x - 1) (x -2) ... (x -- 100). Which one of the
+following is correct ?
+(A)
+This function has 100 local maxima
+(B)
+This function has 50 local maxima
+(C)
+ This function has 5i local maxima
+(D)  Local minima do not exist for this function
+f() = x(x - 1) (x - 2) ... (x - 100) 可 b可  1
+ (f 可 ?
+22  sp2k  001 622
+(B)
+ 50%    可
+(C) 
+可 51  可可
+(D)
+e-R sin + dx, R > 0.
+61. Let I(R) =
+then,
+I(R)<
+(B)
+(1-e-R)
+(1 -
+I(R) >
+e-R)
+(A)
+2R
+2R
+ (1 - e-R) are not comparable
+(D)
+I(R) and
+I(R) =
+(C)
+2R
+, I(R)= 
+e-R sin x dx, R > 0.
+(B)  I(R) <
+(1-e-R)
+(1 - e
+e-R)
+I(R) >
+(A)
+2R
+I(R) 
+(1 -e-R) Q 可
+e-R)
+(D)
+I(R) =
+(C)
+2R
+2R
+22
+
+--- PAGE 23 ---
+M-2024
+62. In a plane a and b are the position vectors of two points A and B
+respectively. A point P with position vector r moves on that plane in such a
+section whose eccentricity is
+a-b
+(A)
+ a + b l
+(B)
+(C)
+2c
+I a + bl
+(D)
+2c
+ g  bd   1g   k2k g kn     oa
+1 I P-- C 4 sfo 
+~=c()
+la-b]
+la+b]
+(A)
+(B)
+la-b
+a+bl
+(C)
+(D)
+2c
+2c
+23
+P.T.O.
+
+--- PAGE 24 ---
+M-2024
+6a. Five balls of different colours are to be placed in three boxes of different sizes.
+The number of ways in which we can place the balls in the boxes so that no box
+remains empty is
+ R 可   可    1 ( 可 C 
+(D)150
+(C)
+180
+(B)
+140
+(A)
+ 160
+NFIDERYAL
+,B=
+64 Let A =
+Then for the validity of the result AX = B, X is
+(2)
+-1
+B=
+,A=
+AX =B  X 
+(1
+(D)
+(-1)
+(C)
+(B)
+(A)
+65. If α, α2, .., α, are in A.P, with common difference e, then the sum of the series
+sec αi sec d, + sec a, sec αg + ... + sec αn -1 sec αn = k(tan αn - tan αl)
+where k =
+α, , ,  A.P.-C,   可 0 1 
+sec α, sec α2 + sec αg sec αg + ... + sec αn - 1 sec αn = k(tan αn - tan α)
+(D)  cosec 0
+(C)
+sec 0
+(B)
+cos 0
+(A)s
+sin e
+24
+
+--- PAGE 25 ---
+M-2024
+Category-3 (Q. 66 to 75)
+(Carry 2 marks each. One or more options are correct. No negative marks)
+66. The function f: R -→ R defined by f(αc) = er + e-" is :
+(A)
+ one-one
+ (B)  onto
+(C)
+bijective
+(D)  not bijective
+f() = e + e-- t  f : R → R ff
+(A)
+b (a)
+(C)  
+(D)     
+ai+bix aix+br ci
+67. If a, b, c e R (i = 1, 2, 3) and xe R and 
+a2+b2x a2x+b2 C2
+2 / = 0, then
+[a3 +bax agr+b3 C3
+(A)
+(B)
+=1
+ x=-1
+arbici
+(C)
+a2 b2  c2
+=0
+(D)
+x=2
+[agb.
+ai+bix aix+br c1
+f a, b, c,e R (i = 1, 2, 3) xe R ,  
+a2 + b2x .a2x + b2C2= 0 3, f
+ag+bax agx+b C3
+x=1
+(A)
+(B) =-1 
+abicj
+(C)
+b² C2
+=0
+a2
+(D) ×= 2 
+ba c3
+25
+P.T.O.
+
+--- PAGE 26 ---
+M-2024
+68. If ABC is an isosceles triangle and the coordinates of the base points are
+B(1, 3) and C(-2, 7). The coordinates of A can be
+ -V 1 2  (-)  (8 1)       8
+(B)
+(A)
+(1, 6)
+(D)
+69. A square with each side equal to'a' above the x-axis and has one vertex at the
+origin. One of the sides passing through the origin makes an angle α
+>0>0
+with the positive direction of the axis. Equation of the diagonals of
+the square
+f a'   x-       F
+0>0
+ 1       α
+(A) y (cos α- sin α) = x (sin α + cos α)
+(B) y (cos α + sin α) = x (cos α- sin α)
+(C) y (sin α+ cos α) + x (cos α- sin α) = a
+(D) y (cos α- sin α) + x (cos α + sin α) = a
+26
+
+--- PAGE 27 ---
+M-2024
+70. Choose the correct statement :
+(A)  x + sin 2x is a periodic function
+(B) x + sin 2x is not a periodic function
+(C)  cos (Vx + 1) is a periodic function
+(D) cos (V + 1) is not a periodic function
+(A)  x + sin 2x可
+(B)x + sin 2x  
+(C) COs (V + 1) 可
+(D) cOs (V + 1) 可丽
+5t +4
+71. The points of extremum of
+dt are
+2+et
+5t + 4
+dt-/向
+2+et
+±1
+(B)
+(A)
+±2
+(D) 
+±3
+(C)
+27
+P.T.O.
+
+--- PAGE 28 ---
+M-2024
+Y=iwherea.be R.
+72. Let r be the curve y = be-va & L be the straight line
+Then
+(A) 
+L touches the curve I at the point where the curve crosscs the axis of y.
+(B) - L does not touch the curve at the point where the curve crosses the axis
+of y.
+(C)
+I touches the axis of x at a point.
+(D) I never touches the axis of x.
+ａb
+(A)L, T(   y- ( 
+(B) L, T (而 B y- (  可T ,
+(C)T x( 
+  e a-x   ()
+73. The acceleration f ft/sec? of a particle after a time t sec starting from rest is
+given by f = 6 - V1.2t . Then the maximum velocity v and time T to attend this
+velocity are
+ (  t      f= 6 - V1.2 t ,   v
+8 白 0 c  T 3 ( f ft/sec2)
+(B)
+(A) T= 20 sec
+v = 60 ft/sec
+(D)
+(C)  T= 30 sec
+v = 40 tt/sec
+28
+
+--- PAGE 29 ---
+.M-2024
+74. If the quadratic equation ar? + bx + c = 0 (a> 0) has two roots α and β such
+that α<-2 and β> 2, then
+ax2 + bx + c= 0 (a > 0)  α  β1α<-2  β> 2 , 
+(A) 
+ c<0
+(B) a+b+c>0
+(C) a-b+c<0
+(D) a-b+c>0
+75. If n is a positive integer, the value of (2n + 1) nCo + (2n - 1) nC, + (2n - 3) nC2
++ ... + 1 . nC, is
+(A) 
+(n + 1) 2n
+(B)
+3n
+(C)  f'(2) where f(a) = xn+1
+(D) (n + 1)2n + 1
+(2n + 1) nC, + (2n - 1) nC + (2n - 3) "C, + .... + 1 : nC,  可 3
+(A)
+(n + 1) 2n
+(B)
+3n
+(C)
+f'(2)  f() = xn + 1
+(D)  (n + 1)2n + 1
+29
+P.T.O.
+
+--- PAGE 30 ---
+154
+M-2024
+Subject : MATHEMATICS
+g: 500
+5.    可      ( 1
+3. Category-1 : 4f   1   f 1   1     (
+(     1
+6. ± Catego1y-2 :    1   F可 2   1   F t (T
+8. Category-3 : 可 1  2 可 1  (
+(   +       1 ( 可 
+  4 可 31 1   ( 31 
+6. OMR  A, B, C, D      f  1.
+。 OMR  可可 ( 1
+1.  MR 能  可可 ( (  C对 1
+. 0MR  能     可 可    
+    1
+s. OMR 能      (Admit Card
+k HNO 1 6 2  b 6g 5 12 12b 2&   22(gk
+         1    
+          
+S. ,可, , 可, , ,  (  
+       1    
+S6.  可 OMR 可   1
+8.           
+ 可     1 可  ( 可
+2.      

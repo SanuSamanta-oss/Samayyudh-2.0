@@ -329,7 +329,7 @@ function AuthPageContent() {
             <Link href="/" className="inline-flex flex-col items-center gap-2 group">
               <div className="w-16 h-16 rounded-2xl overflow-hidden bg-black border border-border shadow-md flex items-center justify-center group-hover:scale-105 transition-transform">
                 <Image
-                  src="/icon-512.png"
+                  src="/samayyudh-logo.png"
                   alt="সময়যুদ্ধ 2.0 Logo"
                   width={64}
                   height={64}

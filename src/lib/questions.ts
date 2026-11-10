@@ -5,6 +5,7 @@
 // ============================================================
 
 import { Question, ExamCategoryCode, QuestionType, Difficulty } from '@/types';
+import { WBJEE_QUESTIONS_DATA } from '@/data/wbjee/wbjeeQuestionsData';
 
 type RawQuestionItem = Omit<Question, 'exam_category' | 'question_type'> & {
   exam_category?: ExamCategoryCode;
@@ -22061,10 +22062,43 @@ export const JEE_ADVANCED_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
   (q) => q.exam_code === 'JEE-ADVANCED' || q.exam_category === 'JEE_ADVANCED'
 );
 
+const MAPPED_WBJEE_QUESTIONS: Question[] = WBJEE_QUESTIONS_DATA.map((q, idx) => ({
+  id: q.id,
+  question_number: idx + 1,
+  question_text: q.question_statement,
+  exam_category: 'STATE_ENTRANCE' as ExamCategoryCode,
+  exam_code: 'WBJEE',
+  subject: q.subject,
+  topic: q.chapter,
+  subtopic: q.section,
+  question_type: (q.category === 3 ? 'msq' : 'mcq') as QuestionType,
+  marks: q.marks,
+  difficulty: (q.category === 1 ? 'easy' : q.category === 2 ? 'medium' : 'hard') as Difficulty,
+  recommended_minutes: q.category === 1 ? 1 : 2,
+  expected_points: [q.correct_option],
+  keywords: [q.subject, q.chapter, `WBJEE ${q.year}`],
+  model_answer: q.explanation,
+  evaluation_rubric: `Correct option: ${q.correct_option}. Marks: +${q.marks}, Negative: -${q.negative_marks}`,
+  options: q.options.map((opt) => ({
+    id: opt.id,
+    text: opt.text,
+    is_correct: opt.is_correct,
+  })),
+  correct_answer: q.correct_option,
+  year: String(q.year),
+  source: 'WBJEEB Official Question Paper',
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+}));
+
 /** WBJEE — West Bengal Joint Entrance Examination */
-export const WBJEE_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(
+const rawWbjee = SAMPLE_QUESTIONS.filter(
   (q) => q.exam_code === 'WBJEE' || q.exam_category === 'STATE_ENTRANCE'
 );
+export const WBJEE_QUESTIONS: Question[] = [
+  ...MAPPED_WBJEE_QUESTIONS,
+  ...rawWbjee.filter((rq) => !MAPPED_WBJEE_QUESTIONS.some((mq) => mq.id === rq.id))
+];
 
 /** UPSC Civil Services */
 export const UPSC_QUESTIONS: Question[] = SAMPLE_QUESTIONS.filter(

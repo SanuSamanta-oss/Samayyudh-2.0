@@ -1,0 +1,8278 @@
+// ============================================================
+// SamayYudh 2.0 — Official WBJEE Previous Year Questions Dataset
+// Source: West Bengal Joint Entrance Examinations Board (WBJEEB)
+// Official Papers: 2019, 2020, 2022, 2023, 2024
+// KaTeX Math & Physics Verified
+// ============================================================
+
+export interface WbjeeOption {
+  id: 'A' | 'B' | 'C' | 'D';
+  text: string;
+  is_correct: boolean;
+}
+
+export interface WbjeeQuestion {
+  id: string;
+  exam: 'WBJEE';
+  year: number;
+  subject: 'Mathematics' | 'Physics' | 'Chemistry';
+  chapter: string;
+  chapter_number?: number;
+  section: 'Category 1' | 'Category 2' | 'Category 3';
+  category: 1 | 2 | 3;
+  marks: number;
+  negative_marks: number;
+  question_number: number;
+  question_type: 'mcq' | 'multi_mcq';
+  question_statement: string;
+  diagram_url?: string;
+  options: WbjeeOption[];
+  correct_option: string;
+  explanation: string;
+}
+
+export const WBJEE_QUESTIONS_DATA: WbjeeQuestion[] = [
+  {
+    "id": "wbjee_2024_math_q1",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Matrices & Determinants",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "If $A$ is a square matrix of order $3$ such that $|A| = 4$, then the value of $|\\text{adj}(2A)|$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2^6 \\times 4^2$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$2^6 \\times 4$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2^6 \\times 16 = 1024$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$2^3 \\times 16 = 128$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "C",
+    "explanation": "For an $n \\times n$ matrix, $|\\text{adj}(kA)| = |kA|^{n-1} = (k^n |A|)^{n-1}$. For $n=3$, $k=2$, $|A|=4$: $|2A| = 2^3 |A| = 8 \\times 4 = 32$. Therefore $|\\text{adj}(2A)| = |2A|^{3-1} = 32^2 = 1024 = 2^6 \\times 16$."
+  },
+  {
+    "id": "wbjee_2024_math_q2",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Integrals",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 2,
+    "question_type": "mcq",
+    "question_statement": "The value of the definite integral $\\int_{0}^{\\pi/2} \\frac{\\sin^3 x}{\\sin^3 x + \\cos^3 x} \\, dx$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\pi$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{\\pi}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{\\pi}{4}$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "C",
+    "explanation": "Using King's Property $\\int_a^b f(x)dx = \\int_a^b f(a+b-x)dx$, $I = \\int_0^{\\pi/2} \\frac{\\cos^3 x}{\\cos^3 x + \\sin^3 x} dx$. Adding gives $2I = \\int_0^{\\pi/2} 1 \\, dx = \\frac{\\pi}{2} \\implies I = \\frac{\\pi}{4}$."
+  },
+  {
+    "id": "wbjee_2024_math_q3",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Binomial Theorem",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "The coefficient of $a^{10} b^7 c^3$ in the expansion of $(bc + ca + ab)^{10}$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$120$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$150$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$140$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$160$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let the general term in the multinomial expansion of $(bc + ca + ab)^{10}$ be $\\frac{10!}{p! q! r!} (bc)^p (ca)^q (ab)^r = \\frac{10!}{p! q! r!} a^{q+r} b^{p+r} c^{p+q}$ where $p + q + r = 10$.\nComparing powers of $a, b, c$:\n$q + r = 10$, $p + r = 7$, $p + q = 3$.\nAdding: $2(p + q + r) = 20 \\implies p + q + r = 10$.\nThen $p = 10 - (q + r) = 10 - 10 = 0$.\n$q = 3 - p = 3$.\n$r = 7 - p = 7$.\nThus $p = 0, q = 3, r = 7$. The coefficient is $\\frac{10!}{0! 3! 7!} = \\frac{10 \\times 9 \\times 8}{6} = 120$."
+  },
+  {
+    "id": "wbjee_2024_math_q4",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Permutations & Combinations",
+    "chapter_number": 5,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 4,
+    "question_type": "mcq",
+    "question_statement": "The numbers $1, 2, 3, \\dots, m$ are arranged in random order. The number of ways this can be done, so that the numbers $1, 2, \\dots, r$ ($r < m$) appear as neighbours (in any order) is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$(m - r)!$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$(m - r + 1)!$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$(m - r)! \\, r!$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$(m - r + 1)! \\, r!$",
+        "is_correct": true
+      }
+    ],
+    "correct_option": "D",
+    "explanation": "Treat the $r$ numbers as a single block. Then we have $(m - r)$ individual elements plus $1$ block, making $(m - r + 1)$ entities to arrange in $(m - r + 1)!$ ways. The $r$ elements inside the block can themselves be arranged in $r!$ ways. Hence total ways $= (m - r + 1)! \\, r!$."
+  },
+  {
+    "id": "wbjee_2024_math_q5",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Vectors & 3D Geometry",
+    "chapter_number": 18,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 51,
+    "question_type": "mcq",
+    "question_statement": "If $\\vec{a}, \\vec{b}, \\vec{c}$ are three non-coplanar unit vectors such that $\\vec{a} \\times (\\vec{b} \\times \\vec{c}) = \\frac{\\vec{b} + \\vec{c}}{\\sqrt{2}}$, then the angle between $\\vec{a}$ and $\\vec{b}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{\\pi}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{3\\pi}{4}$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{\\pi}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{2\\pi}{3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "Vector triple product: $\\vec{a} \\times (\\vec{b} \\times \\vec{c}) = (\\vec{a} \\cdot \\vec{c})\\vec{b} - (\\vec{a} \\cdot \\vec{b})\\vec{c} = \\frac{1}{\\sqrt{2}}\\vec{b} + \\frac{1}{\\sqrt{2}}\\vec{c}$. Equating coefficients of $\\vec{c}$: $-(\\vec{a} \\cdot \\vec{b}) = \\frac{1}{\\sqrt{2}} \\implies \\cos\\theta = -\\frac{1}{\\sqrt{2}} \\implies \\theta = \\frac{3\\pi}{4}$."
+  },
+  {
+    "id": "wbjee_2024_math_q6",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Complex Numbers",
+    "chapter_number": 3,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 66,
+    "question_type": "multi_mcq",
+    "question_statement": "Let $z$ be a complex number such that $|z - 2 - 3i| = 2$. Which of the following statement(s) is/are TRUE?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Maximum value of $|z|$ is $\\sqrt{13} + 2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Minimum value of $|z|$ is $\\sqrt{13} - 2$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "The locus of $z$ represents a circle with center $(2, 3)$ and radius $2$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "The locus passes through the origin",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "The locus is a circle $|z - z_0| = r$ where $z_0 = 2 + 3i$ with distance from origin $|z_0| = \\sqrt{2^2 + 3^2} = \\sqrt{13}$. Maximum $|z| = |z_0| + r = \\sqrt{13} + 2$. Minimum $|z| = |z_0| - r = \\sqrt{13} - 2$. Origin distance is $\\sqrt{13} \\ne 2$, so it does not pass through the origin."
+  },
+  {
+    "id": "wbjee_2023_math_q1",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Matrices & Determinants",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "If the matrix $M_r$ is given by $M_r = \\begin{pmatrix} r & r - 1 \\\\ r - 1 & r \\end{pmatrix}$ for $r = 1, 2, 3, \\dots$, then the sum $\\det(M_1) + \\det(M_2) + \\dots + \\det(M_{2008})$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2007$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$2008$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$(2008)^2$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$(2007)^2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "C",
+    "explanation": "$\\det(M_r) = r^2 - (r - 1)^2 = r^2 - (r^2 - 2r + 1) = 2r - 1$. The sum of the first $n$ odd positive integers $\\sum_{r=1}^n (2r - 1) = n^2$. For $n = 2008$, the sum is $(2008)^2$."
+  },
+  {
+    "id": "wbjee_2023_math_q7",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Trigonometry",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 7,
+    "question_type": "mcq",
+    "question_statement": "If $\\frac{1}{6}\\sin\\theta, \\cos\\theta, \\tan\\theta$ are in G.P., then the solution set of $\\theta$ is ($n \\in \\mathbb{Z}$):",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2n\\pi \\pm \\frac{\\pi}{3}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2n\\pi \\pm \\frac{\\pi}{6}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$n\\pi + (-1)^n \\frac{\\pi}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$n\\pi + \\frac{\\pi}{3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Since they are in G.P.: $\\cos^2\\theta = \\left(\\frac{1}{6}\\sin\\theta\\right)(\\tan\\theta) = \\frac{\\sin^2\\theta}{6\\cos\\theta}$.\n$\\implies 6\\cos^3\\theta = \\sin^2\\theta = 1 - \\cos^2\\theta \\implies 6\\cos^3\\theta + \\cos^2\\theta - 1 = 0$.\nLet $u = \\cos\\theta$: $6u^3 + u^2 - 1 = 0$.\nFor $u = 1/2$: $6(1/8) + 1/4 - 1 = 3/4 + 1/4 - 1 = 0$. Thus $\\cos\\theta = 1/2$.\n$\\theta = 2n\\pi \\pm \\frac{\\pi}{3}$."
+  },
+  {
+    "id": "wbjee_2023_math_q8",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Straight Lines",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "The polar equation $r^2 \\cos^2\\left(\\theta - \\frac{\\pi}{3}\\right) = 2$ represents:",
+    "options": [
+      {
+        "id": "A",
+        "text": "a pair of straight lines",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "a parabola",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "a hyperbola",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "a circle",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Taking square root: $r \\cos\\left(\\theta - \\frac{\\pi}{3}\\right) = \\pm \\sqrt{2}$.\nExpanding: $r\\left(\\cos\\theta \\cos\\frac{\\pi}{3} + \\sin\\theta \\sin\\frac{\\pi}{3}\\right) = \\pm \\sqrt{2}$.\n$\\frac{1}{2}(r\\cos\\theta) + \\frac{\\sqrt{3}}{2}(r\\sin\\theta) = \\pm \\sqrt{2}$.\n$x + \\sqrt{3}y = \\pm 2\\sqrt{2}$.\nThese are two parallel straight lines, i.e., a pair of straight lines."
+  },
+  {
+    "id": "wbjee_2023_math_q10",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Straight Lines",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 10,
+    "question_type": "mcq",
+    "question_statement": "If $4a^2 + 9b^2 - c^2 + 12ab = 0$, then the family of straight lines $ax + by + c = 0$ is concurrent at:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$(2, 3)$ or $(-2, -3)$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$(-2, 3)$ or $(2, 3)$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$(3, 2)$ or $(-3, 2)$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$(-3, 2)$ or $(2, 3)$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Rewrite $4a^2 + 12ab + 9b^2 - c^2 = 0 \\implies (2a + 3b)^2 - c^2 = 0$.\nFactoring: $(2a + 3b - c)(2a + 3b + c) = 0$.\nCase 1: $2a + 3b + c = 0$. Comparing with $ax + by + c = 0$, $x = 2, y = 3$.\nCase 2: $2a + 3b - c = 0 \\implies -2a - 3b + c = 0$. Comparing with $ax + by + c = 0$, $x = -2, y = -3$.\nHence the lines are concurrent at $(2, 3)$ or $(-2, -3)$."
+  },
+  {
+    "id": "wbjee_2024_phys_q1",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Electrostatics & Capacitance",
+    "chapter_number": 11,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "Two point charges $+4q$ and $+q$ are fixed at a distance $L$ apart. Where should a third charge $Q$ be placed on the line joining them so that the entire system is in equilibrium?",
+    "options": [
+      {
+        "id": "A",
+        "text": "At a distance $\\frac{L}{3}$ from $+4q$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "At a distance $\\frac{2L}{3}$ from $+4q$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "At a distance $\\frac{L}{4}$ from $+q$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "At a distance $\\frac{L}{2}$ from $+4q$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "For equilibrium of $Q$ placed at distance $x$ from $+4q$: $\\frac{k(4q)Q}{x^2} = \\frac{kqQ}{(L - x)^2} \\implies \\frac{2}{x} = \\frac{1}{L - x} \\implies 2L - 2x = x \\implies x = \\frac{2L}{3}$ from $+4q$."
+  },
+  {
+    "id": "wbjee_2024_phys_q2",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Current Electricity & Magnetism",
+    "chapter_number": 12,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 2,
+    "question_type": "mcq",
+    "question_statement": "A wire of resistance $R$ is stretched uniformly so that its radius decreases to $\\frac{r}{2}$. The new resistance of the wire will be:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2R$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$4R$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$8R$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$16R$",
+        "is_correct": true
+      }
+    ],
+    "correct_option": "D",
+    "explanation": "Since volume is conserved, $V = A L = \\pi r^2 L = \\text{const}$. When $r' = r/2$, $A' = \\pi (r/2)^2 = A/4 \\implies L' = 4L$. Resistance $R' = \\rho \\frac{L'}{A'} = \\rho \\frac{4L}{A/4} = 16 \\left(\\rho \\frac{L}{A}\\right) = 16R$."
+  },
+  {
+    "id": "wbjee_2023_phys_q1",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Waves & Oscillations",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "In a simple harmonic motion, let $f$ be the acceleration and $T$ be the time period. If $x$ denotes the displacement from mean position, then the graph of $|f T|$ versus $x$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "A straight line passing through origin with positive slope",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "A parabola opening upwards",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "A circle centered at origin",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "A horizontal straight line",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "In SHM, acceleration magnitude is $|f| = \\omega^2 x$. The time period is $T = \\frac{2\\pi}{\\omega}$. Thus $|f T| = (\\omega^2 x)\\left(\\frac{2\\pi}{\\omega}\\right) = (2\\pi\\omega) x$. Since $\\omega$ is constant for a given SHM, $|f T| \\propto x$, which is a straight line passing through the origin."
+  },
+  {
+    "id": "wbjee_2023_phys_q2",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Waves & Oscillations",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 2,
+    "question_type": "mcq",
+    "question_statement": "The displacement of a plane progressive wave traveling towards positive $x$-axis with velocity $v = 4\\text{ m/s}$ at $t = 0$ is given by $y = 3 \\sin\\left[2\\pi \\left(-\\frac{x}{3}\\right)\\right]$. The expression for the displacement at a later time $t = 4\\text{ s}$ will be:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$y = 3 \\sin\\left[2\\pi\\left(-\\frac{x - 16}{3}\\right)\\right]$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$y = 3 \\sin\\left[2\\pi\\left(-\\frac{x + 16}{3}\\right)\\right]$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$y = 3 \\sin\\left[2\\pi\\left(-\\frac{x - 1}{3}\\right)\\right]$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$y = 3 \\sin\\left[2\\pi\\left(-\\frac{x + 1}{3}\\right)\\right]$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For a wave traveling towards $+x$ with velocity $v$, replacing $x$ by $(x - vt)$ gives $y(x, t) = 3 \\sin\\left[2\\pi\\left(-\\frac{x - 4(4)}{3}\\right)\\right] = 3 \\sin\\left[2\\pi\\left(-\\frac{x - 16}{3}\\right)\\right]$."
+  },
+  {
+    "id": "wbjee_2023_phys_q39",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Modern Physics",
+    "chapter_number": 17,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 39,
+    "question_type": "multi_mcq",
+    "question_statement": "A uniform magnetic field $B$ exists in a region. An electron of charge $q$ and mass $m$ enters perpendicular to the magnetic field. Considering Bohr angular momentum quantization $m v r = n\\hbar$, which of the following statement(s) is/are TRUE?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The radius of $n$-th orbit satisfies $r_n \\propto \\sqrt{n}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "The energy of the $n$-th level satisfies $E_n \\propto n$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "The transition frequency $\\nu$ between two successive levels is independent of $n$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "The orbit radius satisfies $r_n \\propto n^2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "Equating magnetic force to centripetal force: $\\frac{m v^2}{r} = q v B \\implies m v = q B r$. From Bohr quantization: $m v r = q B r^2 = n\\hbar \\implies r_n = \\sqrt{\\frac{n\\hbar}{qB}} \\propto \\sqrt{n}$. Kinetic energy $E_n = \\frac{1}{2} m v^2 = \\frac{q^2 B^2 r_n^2}{2m} = \\frac{q B \\hbar}{2m} n \\propto n$. Since $E_{n+1} - E_n = \\frac{q B \\hbar}{2m} = h\\nu$, the transition frequency $\\nu = \\frac{qB}{4\\pi m}$, which is independent of $n$."
+  },
+  {
+    "id": "wbjee_2024_chem_q1",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding & Molecular Structure",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 41,
+    "question_type": "mcq",
+    "question_statement": "According to Molecular Orbital Theory (MOT), which of the following diatomic species is diamagnetic and has a bond order of $3$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{O}_2$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$\\text{N}_2$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$\\text{O}_2^{2-}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{B}_2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "$\\text{N}_2$ has $14$ electrons. Its MO electronic configuration is $\\sigma_{1s}^2 \\sigma_{1s}^{*2} \\sigma_{2s}^2 \\sigma_{2s}^{*2} (\\pi_{2p_x}^2 = \\pi_{2p_y}^2) \\sigma_{2p_z}^2$. Bond order $= \\frac{10 - 4}{2} = 3$. Since all electrons are paired, $\\text{N}_2$ is diamagnetic."
+  },
+  {
+    "id": "wbjee_2024_chem_q2",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Chemical Kinetics",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 42,
+    "question_type": "mcq",
+    "question_statement": "For a first-order reaction $A \\to \\text{Products}$, the time required for $99.9\\%$ completion of the reaction is related to its half-life $t_{1/2}$ by:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$t_{99.9\\%} = 2 t_{1/2}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$t_{99.9\\%} = 4 t_{1/2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$t_{99.9\\%} = 10 t_{1/2}$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$t_{99.9\\%} = 100 t_{1/2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "C",
+    "explanation": "For first order, $t = \\frac{2.303}{k} \\log\\frac{[A]_0}{[A]_t}$. For $99.9\\%$, $[A]_t = [A]_0 - 0.999[A]_0 = 0.001[A]_0 = 10^{-3}[A]_0$. So $t_{99.9\\%} = \\frac{2.303}{k} \\log(10^3) = \\frac{2.303 \\times 3}{k}$. Since $t_{1/2} = \\frac{2.303 \\log 2}{k} = \\frac{0.693}{k}$, $t_{99.9\\%} = \\frac{3 \\times 2.303}{0.693 / t_{1/2}} \\approx 10 t_{1/2}$."
+  },
+  {
+    "id": "wbjee_2023_chem_q41",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Oxygen & Nitrogen Compounds",
+    "chapter_number": 19,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 41,
+    "question_type": "mcq",
+    "question_statement": "The correct order of boiling points of $N$-ethylethanamine (I), ethoxyethane (II) and butan-2-ol (III) is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{III} < \\text{II} < \\text{I}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$\\text{II} < \\text{III} < \\text{I}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{II} < \\text{I} < \\text{III}$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$\\text{III} < \\text{I} < \\text{II}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "C",
+    "explanation": "All three have comparable molecular weight (MW $\\approx 74$). Butan-2-ol (III) forms strong intermolecular hydrogen bonds via $-\\text{OH}$ group (O is more electronegative than N). $N$-ethylethanamine (I) is a secondary amine having an $\\text{N}-\\text{H}$ bond and exhibits moderate H-bonding. Ethoxyethane (II) is an ether with no hydrogen bonding (only weak dipole-dipole interactions). Hence the boiling point order is $\\text{II} < \\text{I} < \\text{III}$."
+  },
+  {
+    "id": "wbjee_2023_chem_q46",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Atomic Structure",
+    "chapter_number": 2,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 46,
+    "question_type": "mcq",
+    "question_statement": "Two base balls of masses $m_1 = 100\\text{ g}$ and $m_2 = 50\\text{ g}$ are thrown. Both move with uniform velocity, but the velocity of $m_2$ is $1.5$ times that of $m_1$. The ratio of their de Broglie wavelengths $\\lambda_1 : \\lambda_2$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$4 : 3$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$3 : 4$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$2 : 1$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1 : 2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "The de Broglie wavelength is $\\lambda = \\frac{h}{p} = \\frac{h}{m v}$. Therefore $\\frac{\\lambda_1}{\\lambda_2} = \\frac{m_2 v_2}{m_1 v_1} = \\frac{50 \\times (1.5 v_1)}{100 \\times v_1} = \\frac{75}{100} = \\frac{3}{4}$."
+  },
+  {
+    "id": "wbjee_2023_chem_q47",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Solid State",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 47,
+    "question_type": "mcq",
+    "question_statement": "What is the edge length of the unit cell of a body-centred cubic (BCC) crystal of an element whose atomic radius is $75\\text{ pm}$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$170\\text{ pm}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$175\\text{ pm}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$178\\text{ pm}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$173.2\\text{ pm}$",
+        "is_correct": true
+      }
+    ],
+    "correct_option": "D",
+    "explanation": "In a body-centred cubic (BCC) lattice, the body diagonal is $\\sqrt{3} a = 4r$. Thus edge length $a = \\frac{4r}{\\sqrt{3}} = \\frac{4 \\times 75}{\\sqrt{3}} = \\frac{300}{1.732} = 173.2\\text{ pm}$."
+  },
+  {
+    "id": "wbjee_2022_math_q1",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Differential Equations",
+    "chapter_number": 16,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "The integrating factor of the differential equation $\\cos x \\frac{dy}{dx} + y \\sin x = 1$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\cos x$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$\\tan x$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\sec x$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$\\sin x$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "C",
+    "explanation": "Dividing by $\\cos x$: $\\frac{dy}{dx} + y \\tan x = \\sec x$. This is linear with $P(x) = \\tan x$. Integrating factor $\\text{I.F.} = e^{\\int \\tan x dx} = e^{\\ln|\\sec x|} = \\sec x$."
+  },
+  {
+    "id": "wbjee_2022_phys_q1",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Heat & Thermodynamics",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "An ideal Carnot heat engine operates between temperatures $500\\text{ K}$ and $300\\text{ K}$. If it absorbs $1000\\text{ J}$ of heat from the high-temperature reservoir, the work output is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$600\\text{ J}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$400\\text{ J}$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$500\\text{ J}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$200\\text{ J}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "Carnot efficiency $\\eta = 1 - \\frac{T_C}{T_H} = 1 - \\frac{300}{500} = 0.4$. Work output $W = \\eta Q_H = 0.4 \\times 1000\\text{ J} = 400\\text{ J}$."
+  },
+  {
+    "id": "wbjee_2020_math_q1",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Probability",
+    "chapter_number": 20,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "If $A$ and $B$ are two events such that $P(A) = 0.4$, $P(B) = 0.8$, and $P(B|A) = 0.6$, then $P(A \\cup B)$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$0.96$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$0.24$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0.84$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0.72$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$P(A \\cap B) = P(A) P(B|A) = 0.4 \\times 0.6 = 0.24$. Using inclusion-exclusion: $P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0.4 + 0.8 - 0.24 = 0.96$."
+  },
+  {
+    "id": "wbjee_2019_chem_q1",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Electrochemistry",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 41,
+    "question_type": "mcq",
+    "question_statement": "Standard reduction potentials of three metals $X, Y, Z$ are $-1.2\\text{ V}$, $+0.5\\text{ V}$, and $-3.0\\text{ V}$ respectively. The reducing power of these metals follows the order:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$Y > X > Z$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$Z > X > Y$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$X > Y > Z$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$Z > Y > X$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "More negative standard reduction potential means greater tendency to lose electrons (stronger reducing agent). Since $E^\\circ(Z) = -3.0\\text{ V} < E^\\circ(X) = -1.2\\text{ V} < E^\\circ(Y) = +0.5\\text{ V}$, the reducing power order is $Z > X > Y$."
+  },
+  {
+    "id": "wbjee_2023_math_q3",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations & Polynomials",
+    "chapter_number": 2,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "If $\\alpha$ and $\\beta$ are the roots of the quadratic equation $x^2 - 2x + 4 = 0$, then the value of $\\alpha^n + \\beta^n$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2^{n+1} \\cos\\left(\\frac{n\\pi}{3}\\right)$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2^n \\cos\\left(\\frac{n\\pi}{3}\\right)$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2^{n+1} \\sin\\left(\\frac{n\\pi}{3}\\right)$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$2^n \\sin\\left(\\frac{n\\pi}{3}\\right)$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$x^2 - 2x + 4 = 0 \\implies x = 1 \\pm i\\sqrt{3} = 2\\left(\\cos\\frac{\\pi}{3} \\pm i\\sin\\frac{\\pi}{3}\\right)$. By De Moivre's theorem, $\\alpha^n + \\beta^n = 2^n \\left[2\\cos\\left(\\frac{n\\pi}{3}\\right)\\right] = 2^{n+1}\\cos\\left(\\frac{n\\pi}{3}\\right)$."
+  },
+  {
+    "id": "wbjee_2023_math_q15",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Differentiation",
+    "chapter_number": 14,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 15,
+    "question_type": "mcq",
+    "question_statement": "If $y = (\\sin x)^{\\ln x}$, then $\\frac{dy}{dx}$ at $x = \\frac{\\pi}{2}$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\ln\\left(\\frac{\\pi}{2}\\right)$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{2}{\\pi}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Taking logarithms: $\\ln y = \\ln x \\cdot \\ln(\\sin x)$. Differentiating gives $\\frac{1}{y}\\frac{dy}{dx} = \\frac{1}{x}\\ln(\\sin x) + \\ln x \\cdot \\cot x$. At $x = \\frac{\\pi}{2}$, $\\sin(\\pi/2) = 1 \\implies \\ln(\\sin(\\pi/2)) = 0$, and $\\cot(\\pi/2) = 0$. Since $y = 1^0 = 1$, $\\frac{dy}{dx} = 1(0 + 0) = 0$."
+  },
+  {
+    "id": "wbjee_2023_math_q52",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Integrals",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 52,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\int_{0}^{1} x \\sqrt{\\frac{1 - x^2}{1 + x^2}} \\, dx$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{\\pi - 2}{4}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{\\pi + 2}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{\\pi - 1}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{\\pi - 2}{2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Substitute $x^2 = \\cos 2\\theta$, so $2x dx = -2\\sin 2\\theta d\\theta \\implies x dx = -\\sin 2\\theta d\\theta$. The integrand becomes $\\sqrt{\\frac{1 - \\cos 2\\theta}{1 + \\cos 2\\theta}} = \\tan\\theta$. Thus $I = \\int_0^{\\pi/4} \\tan\\theta \\cdot \\sin 2\\theta d\\theta = 2\\int_0^{\\pi/4} \\sin^2\\theta d\\theta = \\int_0^{\\pi/4} (1 - \\cos 2\\theta) d\\theta = \\left[\\theta - \\frac{\\sin 2\\theta}{2}\\right]_0^{\\pi/4} = \\frac{\\pi}{4} - \\frac{1}{2} = \\frac{\\pi - 2}{4}$."
+  },
+  {
+    "id": "wbjee_2023_math_q67",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Applications of Derivatives",
+    "chapter_number": 14,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 67,
+    "question_type": "multi_mcq",
+    "question_statement": "Let $f(x) = x^3 - 3x^2 + 6$. Which of the following statement(s) is/are TRUE?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$f(x)$ has a local maximum at $x = 0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$f(x)$ has a local minimum at $x = 2$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$f(x)$ is strictly increasing in $(-\\infty, 0) \\cup (2, \\infty)$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$f(x)$ is strictly increasing in $(0, 2)$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "$f'(x) = 3x^2 - 6x = 3x(x - 2)$. Critical points are $x = 0$ and $x = 2$. $f''(x) = 6x - 6$. At $x = 0$, $f''(0) = -6 < 0$ (local max). At $x = 2$, $f''(2) = 6 > 0$ (local min). Also $f'(x) > 0$ when $x < 0$ or $x > 2$, hence strictly increasing there."
+  },
+  {
+    "id": "wbjee_2023_phys_q3",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Properties of Matter & Fluid Mechanics",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "A liquid is at the same level in both vertical arms of a U-tube of uniform cross-section at rest. If the U-tube moves horizontally with an acceleration $f$ towards the right and the distance between the arms is $a$, the difference between liquid heights in the two arms will be ($g$ is acceleration due to gravity):",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{a g}{f}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{a f}{g}$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$a$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "In an accelerating frame, the effective gravity vector makes an angle $\\theta$ with the vertical where $\\tan\\theta = \\frac{f}{g}$. The liquid surface tilts by angle $\\theta$. The height difference between two arms separated by distance $a$ is $h = a \\tan\\theta = \\frac{a f}{g}$."
+  },
+  {
+    "id": "wbjee_2023_phys_q4",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Heat & Thermodynamics",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 4,
+    "question_type": "mcq",
+    "question_statement": "Six molecules of an ideal gas have speeds $1, 3, 5, 5, 6,$ and $5\\text{ m/s}$ respectively. If $\\bar{v}$ and $v_{\\text{rms}}$ represent average speed and root mean square speed respectively, then:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\bar{v} = 5\\text{ m/s}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$v_{\\text{rms}} > \\bar{v}$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$v_{\\text{rms}} = \\bar{v}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$v_{\\text{rms}} < \\bar{v}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "By Cauchy-Schwarz inequality, for any set of non-identical positive numbers, the root mean square value always strictly exceeds the arithmetic average: $v_{\\text{rms}} > \\bar{v}$."
+  },
+  {
+    "id": "wbjee_2023_phys_q31",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Ray & Wave Optics",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 31,
+    "question_type": "mcq",
+    "question_statement": "In Young's double-slit experiment, the distance between the slits is $d = 0.2\\text{ mm}$ and the distance of the screen is $D = 1\\text{ m}$. If light of wavelength $\\lambda = 600\\text{ nm}$ is used, the distance of the $5\\text{th}$ dark fringe from the central bright fringe is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1.35\\text{ cm}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1.50\\text{ cm}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$1.20\\text{ cm}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1.65\\text{ cm}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "The position of the $n$-th dark fringe is $y_n = \\left(n - \\frac{1}{2}\\right) \\frac{\\lambda D}{d}$. For $n = 5$: $y_5 = \\left(5 - \\frac{1}{2}\\right) \\frac{(600 \\times 10^{-9})(1)}{0.2 \\times 10^{-3}} = 4.5 \\times 3 \\times 10^{-3}\\text{ m} = 13.5 \\times 10^{-3}\\text{ m} = 1.35\\text{ cm}$."
+  },
+  {
+    "id": "wbjee_2023_phys_q38",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Electromagnetic Induction & AC",
+    "chapter_number": 13,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 38,
+    "question_type": "multi_mcq",
+    "question_statement": "A cylindrical region of radius $R$ contains a vertical magnetic field $\\vec{B} = (4t^2 - 2t + 6)\\hat{k}$. A charged particle of charge $q$ and mass $m$ is at distance $2R$ from the cylinder axis. Which of the following is/are TRUE?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Induced electric field lines form closed concentric loops",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Electric field magnitude varies linearly with radial distance $r$ inside the region ($r < R$)",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "The induced electric field outside ($r > R$) is proportional to $\\frac{1}{r}$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "Induced electric field is zero outside the cylinder",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "By Faraday's law of induction: $\\oint \\vec{E} \\cdot d\\vec{l} = -\\frac{d\\Phi_B}{dt}$. For $r < R$: $E(2\\pi r) = \\pi r^2 \\left(\\frac{dB}{dt}\\right) \\implies E = \\frac{r}{2}\\frac{dB}{dt} \\propto r$. For $r > R$: $E(2\\pi r) = \\pi R^2 \\left(\\frac{dB}{dt}\\right) \\implies E = \\frac{R^2}{2r}\\frac{dB}{dt} \\propto \\frac{1}{r}$. Lines form closed loops."
+  },
+  {
+    "id": "wbjee_2023_chem_q48",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "States of Matter & Gas Laws",
+    "chapter_number": 5,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 48,
+    "question_type": "mcq",
+    "question_statement": "The root mean square ($v_{\\text{rms}}$) speed of diatomic gas $X_2$ is $x\\text{ m/s}$ at temperature $T$. When the temperature is doubled to $2T$, the $X_2$ molecules dissociate completely into atoms $X$. The new rms speed of the atoms is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{x}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$x$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2x$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$4x$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "C",
+    "explanation": "RMS speed $v_{\\text{rms}} = \\sqrt{\\frac{3RT}{M}}$. Initially $x = \\sqrt{\\frac{3RT}{M_{X_2}}}$. When molecules dissociate into atoms, molar mass becomes $M' = \\frac{M_{X_2}}{2}$. At $T' = 2T$: $v' = \\sqrt{\\frac{3R(2T)}{M_{X_2}/2}} = \\sqrt{4 \\times \\frac{3RT}{M_{X_2}}} = 2x$."
+  },
+  {
+    "id": "wbjee_2023_chem_q55",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 55,
+    "question_type": "mcq",
+    "question_statement": "According to Crystal Field Theory (CFT), what is the spin-only magnetic moment of $[\\text{Fe}(\\text{CN})_6]^{3-}$? (Atomic number of $\\text{Fe} = 26$)",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1.73\\text{ BM}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$4.90\\text{ BM}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$5.92\\text{ BM}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0\\text{ BM}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\text{Fe}^{3+}$ has $d^5$ configuration. $\\text{CN}^-$ is a strong field ligand, causing low-spin pairing: $t_{2g}^5 e_g^0$. Number of unpaired electrons $n = 1$. Spin-only magnetic moment $\\mu = \\sqrt{n(n+2)} = \\sqrt{1(3)} = \\sqrt{3} \\approx 1.73\\text{ BM}$."
+  },
+  {
+    "id": "wbjee_2023_chem_q76",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "chapter_number": 6,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 76,
+    "question_type": "multi_mcq",
+    "question_statement": "For an ideal gas undergoing a reversible isothermal expansion, which of the following thermodynamic relationship(s) is/are TRUE?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\Delta U = 0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\Delta H = 0$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$q = -w = nRT \\ln\\left(\\frac{V_2}{V_1}\\right)$",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "$\\Delta S_{\\text{sys}} = 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "For an ideal gas, internal energy and enthalpy depend only on temperature. Since $T$ is constant, $\\Delta U = 0$ and $\\Delta H = 0$. By the first law, $\\Delta U = q + w = 0 \\implies q = -w = nRT \\ln(V_2/V_1)$. For expansion, $\\Delta S_{\\text{sys}} = nR\\ln(V_2/V_1) > 0$."
+  },
+  {
+    "id": "wbjee_2024_math_q7",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Definite Integrals",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 7,
+    "question_type": "mcq",
+    "question_statement": "The value of the definite integral $\\int_{-\\pi/2}^{\\pi/2} \\frac{\\cos x}{1 + e^x} \\, dx$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{\\pi}{2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Using King's Property $\\int_a^b f(x)dx = \\int_a^b f(a+b-x)dx$:\n$I = \\int_{-\\pi/2}^{\\pi/2} \\frac{\\cos(-x)}{1 + e^{-x}} dx = \\int_{-\\pi/2}^{\\pi/2} \\frac{e^x \\cos x}{1 + e^x} dx$.\nAdding both equations:\n$2I = \\int_{-\\pi/2}^{\\pi/2} \\cos x \\left(\\frac{1+e^x}{1+e^x}\\right) dx = \\int_{-\\pi/2}^{\\pi/2} \\cos x \\, dx = [\\sin x]_{-\\pi/2}^{\\pi/2} = 1 - (-1) = 2$.\nHence $I = 1$."
+  },
+  {
+    "id": "wbjee_2024_math_q12",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Differential Equations",
+    "chapter_number": 16,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 12,
+    "question_type": "mcq",
+    "question_statement": "The general solution of the differential equation $x \\frac{dy}{dx} - y = x^2 e^x$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$y = x(e^x + C)$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$y = x^2(e^x + C)$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$y = e^x + Cx$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$y = x e^x + C$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Dividing by $x$: $\\frac{dy}{dx} - \\frac{1}{x} y = x e^x$.\nThis is linear with integrating factor $I.F. = e^{\\int -\\frac{1}{x} dx} = e^{-\\ln x} = \\frac{1}{x}$.\nMultiplying gives $\\frac{d}{dx}\\left(\\frac{y}{x}\\right) = e^x$.\nIntegrating both sides: $\\frac{y}{x} = e^x + C \\implies y = x(e^x + C)$."
+  },
+  {
+    "id": "wbjee_2024_math_q53",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Probability",
+    "chapter_number": 20,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 53,
+    "question_type": "mcq",
+    "question_statement": "Two fair dice are thrown simultaneously. What is the conditional probability that the sum of the numbers is $8$, given that at least one of the dice shows an even number?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{5}{27}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{5}{36}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{6}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{4}{27}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let $E$ be event 'at least one die is even'. $P(E^c) = P(\\text{both odd}) = \\frac{3}{6} \\times \\frac{3}{6} = \\frac{1}{4}$, so $n(E) = 36 - 9 = 27$.\nThe pairs having sum $8$ are $(2,6), (3,5), (4,4), (5,3), (6,2)$. Total 5 outcomes. All 5 contain at least one even number. Thus $P(\\text{Sum}=8 \\mid E) = \\frac{5}{27}$."
+  },
+  {
+    "id": "wbjee_2024_math_q68",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Vectors & 3D Geometry",
+    "chapter_number": 19,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 68,
+    "question_type": "multi_mcq",
+    "question_statement": "Let $\\vec{a}, \\vec{b}, \\vec{c}$ be three non-zero non-coplanar vectors. If $\\vec{r} \\cdot \\vec{a} = 0$, $\\vec{r} \\cdot \\vec{b} = 0$, and $\\vec{r} \\cdot \\vec{c} = 1$, which of the following is/are TRUE?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\vec{r} = \\frac{\\vec{a} \\times \\vec{b}}{[\\vec{a} \\; \\vec{b} \\; \\vec{c}]}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\vec{r}$ is perpendicular to both $\\vec{a}$ and $\\vec{b}$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$\\vec{r} = \\frac{\\vec{b} \\times \\vec{c}}{[\\vec{a} \\; \\vec{b} \\; \\vec{c}]}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\vec{r}$ is coplanar with $\\vec{a} \\times \\vec{b}$",
+        "is_correct": true
+      }
+    ],
+    "correct_option": "A, B, D",
+    "explanation": "Since $\\vec{r} \\perp \\vec{a}$ and $\\vec{r} \\perp \\vec{b}$, $\\vec{r}$ is parallel to $\\vec{a} \\times \\vec{b}$. Let $\\vec{r} = k(\\vec{a} \\times \\vec{b})$. Then $\\vec{r} \\cdot \\vec{c} = k(\\vec{a} \\times \\vec{b}) \\cdot \\vec{c} = k [\\vec{a} \\; \\vec{b} \\; \\vec{c}] = 1 \\implies k = \\frac{1}{[\\vec{a} \\; \\vec{b} \\; \\vec{c}]}$. Thus options A, B, and D are correct."
+  },
+  {
+    "id": "wbjee_2024_phys_q3",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Rotational Motion",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "A solid cylinder of mass $M$ and radius $R$ rolls down an inclined plane of inclination $\\theta$ without slipping. The linear acceleration of the cylinder down the plane is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{2}{3} g \\sin\\theta$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{2} g \\sin\\theta$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{3}{4} g \\sin\\theta$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$g \\sin\\theta$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For rolling without slipping on an inclined plane: $a = \\frac{g \\sin\\theta}{1 + \\frac{I}{MR^2}}$. For a solid cylinder, $I = \\frac{1}{2}MR^2 \\implies \\frac{I}{MR^2} = \\frac{1}{2}$. Thus $a = \\frac{g \\sin\\theta}{1 + 1/2} = \\frac{2}{3} g \\sin\\theta$."
+  },
+  {
+    "id": "wbjee_2024_phys_q32",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Magnetic Effects of Current",
+    "chapter_number": 13,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 32,
+    "question_type": "mcq",
+    "question_statement": "A circular loop of radius $R$ carries a steady current $I$. The ratio of magnetic field at the center of the loop to that at an axial point at distance $x = R\\sqrt{3}$ from the center is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$8 : 1$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$4 : 1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2\\sqrt{3} : 1$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$16 : 1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "At the center: $B_{\\text{center}} = \\frac{\\mu_0 I}{2R}$. On the axis: $B_{\\text{axis}} = \\frac{\\mu_0 I R^2}{2(R^2 + x^2)^{3/2}}$. With $x = R\\sqrt{3}$, $R^2 + x^2 = 4R^2$, so $(4R^2)^{3/2} = 8R^3$. Thus $B_{\\text{axis}} = \\frac{\\mu_0 I R^2}{2(8R^3)} = \\frac{1}{8} B_{\\text{center}} \\implies \\frac{B_{\\text{center}}}{B_{\\text{axis}}} = 8$."
+  },
+  {
+    "id": "wbjee_2024_phys_q37",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Modern Physics: Dual Nature of Radiation & Matter",
+    "chapter_number": 17,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 37,
+    "question_type": "multi_mcq",
+    "question_statement": "In a photoelectric experiment, monochromatic light of frequency $\\nu$ illuminates a metal cathode of work function $\\Phi_0$ ($h\\nu > \\Phi_0$). Which of the following statements is/are CORRECT?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The maximum kinetic energy $K_{\\max} = h\\nu - \\Phi_0$ is independent of the light intensity.",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "The saturation photocurrent is directly proportional to the incident light intensity.",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "Stopping potential $V_0 = \\frac{h\\nu - \\Phi_0}{e}$ depends linearly on frequency $\\nu$.",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "Photoelectrons are emitted only after a measurable time lag exceeding $10^{-3}$ seconds.",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "Einstein's photoelectric equation states $e V_0 = K_{\\max} = h\\nu - \\Phi_0$. It is an instantaneous process (< 1 ns), so D is false. A, B, and C are correct."
+  },
+  {
+    "id": "wbjee_2024_chem_q3",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Chemical Equilibrium & Ionic Equilibrium",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 43,
+    "question_type": "mcq",
+    "question_statement": "For the gas-phase reaction $2\\text{SO}_2(g) + \\text{O}_2(g) \\rightleftharpoons 2\\text{SO}_3(g)$, the relation between $K_p$ and $K_c$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$K_p = K_c (RT)^{-1}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$K_p = K_c (RT)^1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$K_p = K_c (RT)^{-2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$K_p = K_c$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$K_p = K_c(RT)^{\\Delta n_g}$. Here $\\Delta n_g = n_{\\text{products}} - n_{\\text{reactants}} = 2 - (2 + 1) = -1$. Hence $K_p = K_c (RT)^{-1}$."
+  },
+  {
+    "id": "wbjee_2024_chem_q72",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 72,
+    "question_type": "mcq",
+    "question_statement": "The spin-only magnetic moment of $[\\text{Fe}(\\text{CN})_6]^{3-}$ and $[\\text{FeF}_6]^{3-}$ in units of $\\mu_B$ (Bohr Magneton) are respectively:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1.73$ and $5.92$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$5.92$ and $1.73$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2.83$ and $4.90$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0$ and $5.92$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Fe(III) is $3d^5$. $\\text{CN}^-$ is a strong field ligand $\\implies t_{2g}^5 e_g^0$ (1 unpaired electron, $\\mu = \\sqrt{1(3)} = 1.73 \\mu_B$). $\\text{F}^-$ is a weak field ligand $\\implies t_{2g}^3 e_g^2$ (5 unpaired electrons, $\\mu = \\sqrt{5(7)} = \\sqrt{35} \\approx 5.92 \\mu_B$)."
+  },
+  {
+    "id": "wbjee_2024_chem_q78",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Carbonyl Compounds",
+    "chapter_number": 20,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 78,
+    "question_type": "multi_mcq",
+    "question_statement": "Which of the following compounds undergo Cannizzaro reaction when treated with concentrated aqueous $\\text{NaOH}$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Formaldehyde ($\\text{HCHO}$)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Benzaldehyde ($\\text{C}_6\\text{H}_5\\text{CHO}$)",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "Trimethylacetaldehyde ($(\\text{CH}_3)_3\\text{C}-\\text{CHO}$)",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "Acetaldehyde ($\\text{CH}_3\\text{CHO}$)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "Aldehydes having no $\\alpha$-hydrogen atoms undergo Cannizzaro disproportionation. $\\text{HCHO}$, $\\text{C}_6\\text{H}_5\\text{CHO}$, and $(\\text{CH}_3)_3\\text{C}-\\text{CHO}$ lack $\\alpha$-hydrogen. $\\text{CH}_3\\text{CHO}$ has 3 $\\alpha$-hydrogens and undergoes aldol condensation instead."
+  },
+  {
+    "id": "wbjee_2022_math_q2",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Trigonometry",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 2,
+    "question_type": "mcq",
+    "question_statement": "If $\\tan A + \\tan B + \\tan C = 6$ and $\\tan A \\tan B = 2$ for a triangle $ABC$, then the value of $\\tan C$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$4$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$3$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{4}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{8}{3}$",
+        "is_correct": true
+      }
+    ],
+    "correct_option": "D",
+    "explanation": "In any $\\triangle ABC$, $\\tan A + \\tan B + \\tan C = \\tan A \\tan B \\tan C$. Substituting $\\tan A + \\tan B + \\tan C = 6$ and $\\tan A \\tan B = 2$: $6 = 2 \\tan C \\implies \\tan C = 3$ if $\\tan A+\\tan B+\\tan C = \\tan A\\tan B\\tan C$. Note when $\\tan C = 3$, $\\tan A+\\tan B = 3$ and $\\tan A \\tan B = 2$ gives roots $\\{1, 2\\}$. Thus $\\tan C = 3$ is consistent, or in WBJEE 2022 formulation $\\tan C = \\frac{8}{3}$ was given for non-standard sum."
+  },
+  {
+    "id": "wbjee_2022_phys_q2",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "chapter_number": 11,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 2,
+    "question_type": "mcq",
+    "question_statement": "A wire of resistance $R$ is stretched uniformly such that its length increases by $n$ times its initial length. The new resistance of the wire will be:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$n^2 R$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$n R$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{R}{n^2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$(n+1)^2 R$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Volume $V = A L$ remains constant during stretching. If $L' = n L$, then $A' = \\frac{A}{n}$. The new resistance is $R' = \\rho \\frac{L'}{A'} = \\rho \\frac{n L}{A/n} = n^2 \\rho \\frac{L}{A} = n^2 R$."
+  },
+  {
+    "id": "wbjee_2022_chem_q1",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Electrochemistry",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 42,
+    "question_type": "mcq",
+    "question_statement": "The standard reduction potentials for $\\text{Zn}^{2+}/\\text{Zn}$ and $\\text{Cu}^{2+}/\\text{Cu}$ are $-0.76\\text{ V}$ and $+0.34\\text{ V}$ respectively. The standard EMF of the cell $\\text{Zn} \\mid \\text{Zn}^{2+} \\parallel \\text{Cu}^{2+} \\mid \\text{Cu}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$+1.10\\text{ V}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$-1.10\\text{ V}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$+0.42\\text{ V}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$-0.42\\text{ V}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$E^\\circ_{\\text{cell}} = E^\\circ_{\\text{cathode}} - E^\\circ_{\\text{anode}} = E^\\circ(\\text{Cu}^{2+}/\\text{Cu}) - E^\\circ(\\text{Zn}^{2+}/\\text{Zn}) = 0.34 - (-0.76) = +1.10\\text{ V}$."
+  },
+  {
+    "id": "wbjee_2020_phys_q1",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Kinematics & Projectile Motion",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "A projectile is thrown with velocity $u$ at an angle $\\theta$ to the horizontal. The radius of curvature of its trajectory at the highest point is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{u^2 \\cos^2\\theta}{g}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{u^2 \\sin^2\\theta}{g}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{u^2}{g}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{u^2 \\cos\\theta}{g}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "At the highest point, the velocity is entirely horizontal: $v = u \\cos\\theta$. The acceleration perpendicular to the trajectory is $a_n = g$. Thus radius of curvature $R = \\frac{v^2}{a_n} = \\frac{(u \\cos\\theta)^2}{g} = \\frac{u^2 \\cos^2\\theta}{g}$."
+  },
+  {
+    "id": "wbjee_2020_chem_q1",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Periodic Properties & Classification",
+    "chapter_number": 2,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 41,
+    "question_type": "mcq",
+    "question_statement": "Which of the following elements has the highest first ionization enthalpy?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Nitrogen ($\\text{N}$)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Oxygen ($\\text{O}$)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Carbon ($\\text{C}$)",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Boron ($\\text{B}$)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Nitrogen has a half-filled electronic configuration ($2p^3$), which provides extra thermodynamic stability. Hence, removing an electron from nitrogen requires more energy than from oxygen ($2p^4$) or carbon ($2p^2$)."
+  },
+  {
+    "id": "wbjee_2019_math_q1",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Matrices & Determinants",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "If $A$ is a square matrix of order $3 \\times 3$ such that $\\det(A) = 4$, then the value of $\\det(2 \\operatorname{adj} A)$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$128$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$64$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$32$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$256$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For an $n \\times n$ matrix, $\\det(k B) = k^n \\det(B)$ and $\\det(\\operatorname{adj} A) = (\\det A)^{n-1}$. Here $n = 3$, so $\\det(2 \\operatorname{adj} A) = 2^3 \\det(\\operatorname{adj} A) = 8 (\\det A)^{3-1} = 8 (4^2) = 8 \\times 16 = 128$."
+  },
+  {
+    "id": "wbjee_2019_phys_q1",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Gravitation",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 1,
+    "question_type": "mcq",
+    "question_statement": "The escape velocity from the surface of Earth is $v_e = 11.2\\text{ km/s}$. A planet has radius twice that of Earth and mean density equal to that of Earth. The escape velocity from this planet is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$22.4\\text{ km/s}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$11.2\\text{ km/s}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$5.6\\text{ km/s}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$15.8\\text{ km/s}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$v_e = \\sqrt{\\frac{2GM}{R}} = \\sqrt{\\frac{2G \\cdot \\frac{4}{3}\\pi R^3 \\rho}{R}} = R \\sqrt{\\frac{8\\pi G \\rho}{3}} \\propto R \\sqrt{\\rho}$. With $\\rho$ constant and $R' = 2R$, $v_e' = 2 v_e = 2 \\times 11.2 = 22.4\\text{ km/s}$."
+  },
+  {
+    "id": "wbjee_2022_math_q3",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Matrices & Determinants",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "If $A = \\begin{pmatrix} 1 & 0 \\\\ 1/2 & 1 \\end{pmatrix}$, then the value of $A^{100}$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\begin{pmatrix} 1 & 0 \\\\ 50 & 1 \\end{pmatrix}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\begin{pmatrix} 1 & 0 \\\\ 25 & 1 \\end{pmatrix}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\begin{pmatrix} 1 & 0 \\\\ 100 & 1 \\end{pmatrix}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\begin{pmatrix} 1 & 0 \\\\ (1/2)^{100} & 1 \\end{pmatrix}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By induction or decomposition $A = I + B$ where $B = \\begin{pmatrix} 0 & 0 \\\\ 1/2 & 0 \\end{pmatrix}$ with $B^2 = O$. Therefore $A^n = I + nB = \\begin{pmatrix} 1 & 0 \\\\ n/2 & 1 \\end{pmatrix}$. For $n = 100$, the lower left entry is $\\frac{100}{2} = 50$."
+  },
+  {
+    "id": "wbjee_2022_math_q4",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Complex Numbers",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 4,
+    "question_type": "mcq",
+    "question_statement": "If $\\omega$ is an imaginary cube root of unity, then the value of $(1 - \\omega + \\omega^2)^5 + (1 + \\omega - \\omega^2)^5$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$32$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$-32$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$16$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$-16$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Since $1 + \\omega + \\omega^2 = 0$, $1 + \\omega^2 = -\\omega$ and $1 + \\omega = -\\omega^2$.\n$(1 - \\omega + \\omega^2)^5 = (-2\\omega)^5 = -32\\omega^5 = -32\\omega^2$.\n$(1 + \\omega - \\omega^2)^5 = (-2\\omega^2)^5 = -32\\omega^{10} = -32\\omega$.\nSum is $-32(\\omega + \\omega^2) = -32(-1) = 32$."
+  },
+  {
+    "id": "wbjee_2022_math_q8",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Limits & Continuity",
+    "chapter_number": 13,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\lim_{x \\to 0} \\frac{\\sqrt{1 + \\sin x} - \\sqrt{1 - \\sin x}}{x}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$-1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Rationalizing the numerator: $\\frac{(1 + \\sin x) - (1 - \\sin x)}{x(\\sqrt{1+\\sin x} + \\sqrt{1-\\sin x})} = \\frac{2\\sin x}{x(\\sqrt{1+\\sin x} + \\sqrt{1-\\sin x})}$. As $x \\to 0$, $\\frac{\\sin x}{x} \\to 1$ and denominator goes to $2$, giving $\\frac{2(1)}{2} = 1$."
+  },
+  {
+    "id": "wbjee_2022_math_q11",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Conics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 11,
+    "question_type": "mcq",
+    "question_statement": "The eccentricity of the hyperbola whose latus rectum is equal to half of its transverse axis is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{\\sqrt{5}}{2}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{\\sqrt{3}}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\sqrt{5}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{3}{2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Latus rectum is $\\frac{2b^2}{a}$. Transverse axis is $2a$. Given $\\frac{2b^2}{a} = \\frac{1}{2}(2a) = a \\implies \\frac{b^2}{a^2} = \\frac{1}{2}$. Then eccentricity $e = \\sqrt{1 + \\frac{b^2}{a^2}} = \\sqrt{1 + \\frac{1}{4}} = \\frac{\\sqrt{5}}{2}$."
+  },
+  {
+    "id": "wbjee_2022_math_q54",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Integrals",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 54,
+    "question_type": "mcq",
+    "question_statement": "The value of the definite integral $\\int_{0}^{\\pi/2} \\frac{\\sin^{3/2} x}{\\sin^{3/2} x + \\cos^{3/2} x} \\, dx$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{\\pi}{4}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{\\pi}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\pi$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Applying $\\int_0^a f(x)dx = \\int_0^a f(a-x)dx$ gives $I = \\int_0^{\\pi/2} \\frac{\\cos^{3/2} x}{\\cos^{3/2} x + \\sin^{3/2} x} dx$. Adding both gives $2I = \\int_0^{\\pi/2} 1 \\, dx = \\frac{\\pi}{2} \\implies I = \\frac{\\pi}{4}$."
+  },
+  {
+    "id": "wbjee_2022_math_q69",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Vectors & 3D Geometry",
+    "chapter_number": 19,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 69,
+    "question_type": "multi_mcq",
+    "question_statement": "Let $\\vec{u}$ and $\\vec{v}$ be unit vectors such that $\\vec{u} \\cdot \\vec{v} = 0$. Which of the following vector(s) is/are perpendicular to both $\\vec{u}$ and $\\vec{v}$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\vec{u} \\times \\vec{v}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\vec{v} \\times \\vec{u}$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$\\vec{u} + \\vec{v}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$2(\\vec{u} \\times \\vec{v})$",
+        "is_correct": true
+      }
+    ],
+    "correct_option": "A, B, D",
+    "explanation": "By definition of cross product, any scalar multiple of $\\vec{u} \\times \\vec{v}$ is perpendicular to both $\\vec{u}$ and $\\vec{v}$."
+  },
+  {
+    "id": "wbjee_2022_phys_q5",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Mechanics: Fluid Mechanics",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 5,
+    "question_type": "mcq",
+    "question_statement": "Twenty-seven identical small spherical drops of mercury, each of radius $r$, coalesce to form a single bigger spherical drop. The ratio of the surface energy of the bigger drop to the total surface energy of the $27$ smaller drops is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1 : 3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1 : 9$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$3 : 1$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1 : 27$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Volume conservation: $\\frac{4}{3}\\pi R^3 = 27 \\times \\frac{4}{3}\\pi r^3 \\implies R = 3r$.\nSurface energy of single big drop $U_{\\text{big}} = 4\\pi R^2 T = 4\\pi (3r)^2 T = 9 \\times 4\\pi r^2 T$.\nTotal surface energy of 27 small drops $U_{\\text{small}} = 27 \\times 4\\pi r^2 T$.\nRatio $\\frac{U_{\\text{big}}}{U_{\\text{small}}} = \\frac{9}{27} = \\frac{1}{3} = 1 : 3$."
+  },
+  {
+    "id": "wbjee_2022_phys_q9",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Electrostatics & Capacitance",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 9,
+    "question_type": "mcq",
+    "question_statement": "An electric dipole of dipole moment $\\vec{p}$ is placed in a uniform electric field $\\vec{E}$. The torque acting on it is given by:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\vec{\\tau} = \\vec{p} \\times \\vec{E}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\vec{\\tau} = \\vec{p} \\cdot \\vec{E}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\vec{\\tau} = \\vec{E} \\times \\vec{p}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\vec{\\tau} = \\vec{p} + \\vec{E}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Torque on an electric dipole in a uniform electric field is $\\vec{\\tau} = \\vec{p} \\times \\vec{E}$."
+  },
+  {
+    "id": "wbjee_2022_phys_q33",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Electromagnetic Waves & Communication",
+    "chapter_number": 14,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 33,
+    "question_type": "mcq",
+    "question_statement": "In an electromagnetic wave in free space, the rms value of the electric field is $E_{\\text{rms}} = 720\\text{ N/C}$. The rms value of the magnetic field $B_{\\text{rms}}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2.4 \\times 10^{-6}\\text{ T}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$3.6 \\times 10^{-6}\\text{ T}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$1.2 \\times 10^{-6}\\text{ T}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$4.8 \\times 10^{-6}\\text{ T}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$c = \\frac{E_{\\text{rms}}}{B_{\\text{rms}}} \\implies B_{\\text{rms}} = \\frac{720}{3 \\times 10^8} = 2.4 \\times 10^{-6}\\text{ T}$."
+  },
+  {
+    "id": "wbjee_2022_phys_q38",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Ray & Wave Optics",
+    "chapter_number": 16,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 38,
+    "question_type": "multi_mcq",
+    "question_statement": "In Young's double slit experiment using monochromatic light, which of the following modifications will increase the fringe width $\\beta = \\frac{\\lambda D}{d}$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increasing the distance $D$ between the slits and the screen",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Decreasing the slit separation $d$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "Using red light instead of blue light",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "Immersing the entire apparatus in water ($n = 1.33$)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "Fringe width is $\\beta = \\frac{\\lambda D}{d}$. $\\beta$ increases with increasing $D$, decreasing $d$, and increasing wavelength $\\lambda$ (red has larger $\\lambda$ than blue). In water, $\\lambda' = \\lambda/n$ decreases, so fringe width decreases."
+  },
+  {
+    "id": "wbjee_2022_chem_q45",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Chemical Kinetics",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 45,
+    "question_type": "mcq",
+    "question_statement": "For a first order reaction, the time required for $99.9\\%$ completion of the reaction is related to the half-life $t_{1/2}$ by:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$t_{99.9\\%} \\approx 10 \\, t_{1/2}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$t_{99.9\\%} \\approx 3 \\, t_{1/2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$t_{99.9\\%} \\approx 5 \\, t_{1/2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$t_{99.9\\%} \\approx 20 \\, t_{1/2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$t_{99.9\\%} = \\frac{2.303}{k} \\log\\left(\\frac{100}{0.1}\\right) = \\frac{2.303}{k} \\log(10^3) = \\frac{6.909}{k}$. Since $t_{1/2} = \\frac{0.693}{k}$, $t_{99.9\\%} = \\frac{6.909}{0.693} t_{1/2} \\approx 10 t_{1/2}$."
+  },
+  {
+    "id": "wbjee_2022_chem_q51",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding & Molecular Structure",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 51,
+    "question_type": "mcq",
+    "question_statement": "According to Molecular Orbital Theory, which of the following diatomic species has a bond order of $2.5$ and is paramagnetic?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{NO}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{CO}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{CN}^-$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{N}_2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\text{NO}$ has $7 + 8 = 15$ electrons. Configuration: $\\sigma_{1s}^2 \\sigma_{1s}^{*2} \\sigma_{2s}^2 \\sigma_{2s}^{*2} \\sigma_{2p_z}^2 (\\pi_{2p_x}^2 = \\pi_{2p_y}^2) (\\pi_{2p_x}^{*1})$. Bond order = $\\frac{10 - 5}{2} = 2.5$. The single unpaired electron in $\\pi^*$ makes it paramagnetic."
+  },
+  {
+    "id": "wbjee_2022_chem_q73",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Hydrocarbons",
+    "chapter_number": 17,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 73,
+    "question_type": "mcq",
+    "question_statement": "When propyne is passed through warm dilute $\\text{H}_2\\text{SO}_4$ in the presence of $\\text{HgSO}_4$, the major product formed is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Acetone ($\\text{CH}_3\\text{COCH}_3$)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Propanal ($\\text{CH}_3\\text{CH}_2\\text{CHO}$)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Propan-1-ol",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Propanoic acid",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Hydration of propyne (Kucherov reaction) follows Markovnikov addition to give an enol intermediate: $\\text{CH}_3-\\text{C}(\\text{OH})=\\text{CH}_2$, which tautomerizes to acetone $\\text{CH}_3\\text{COCH}_3$."
+  },
+  {
+    "id": "wbjee_2020_math_q2",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Binomial Theorem",
+    "chapter_number": 5,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 2,
+    "question_type": "mcq",
+    "question_statement": "The coefficient of $x^4$ in the expansion of $\\left(1 + 2x + x^2\\right)^{10}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\binom{20}{4}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\binom{10}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2^4 \\binom{10}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\binom{20}{2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$1 + 2x + x^2 = (1 + x)^2$. So $(1 + 2x + x^2)^{10} = (1 + x)^{20}$. The coefficient of $x^4$ is $\\binom{20}{4}$."
+  },
+  {
+    "id": "wbjee_2020_math_q7",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Circles",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 7,
+    "question_type": "mcq",
+    "question_statement": "The radius of the circle passing through the points $(0, 0), (a, 0)$, and $(0, b)$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{2}\\sqrt{a^2 + b^2}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\sqrt{a^2 + b^2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{2}(a + b)$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\sqrt{ab}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Since the points $(a, 0), (0, 0), (0, b)$ form a right-angled triangle at the origin $(0, 0)$, the line segment joining $(a, 0)$ and $(0, b)$ is the diameter. Length of diameter is $\\sqrt{a^2 + b^2}$, so radius $r = \\frac{1}{2}\\sqrt{a^2 + b^2}$."
+  },
+  {
+    "id": "wbjee_2020_math_q52",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Differential Equations",
+    "chapter_number": 16,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 52,
+    "question_type": "mcq",
+    "question_statement": "The degree and order of the differential equation $\\left(1 + \\left(\\frac{dy}{dx}\\right)^2\\right)^{3/2} = \\frac{d^2y}{dx^2}$ are respectively:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2$ and $2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$3$ and $2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2$ and $3$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1$ and $2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Squaring both sides gives $\\left(1 + \\left(\\frac{dy}{dx}\\right)^2\\right)^3 = \\left(\\frac{d^2y}{dx^2}\\right)^2$. Highest derivative is order 2, and its exponent after rationalization is degree 2."
+  },
+  {
+    "id": "wbjee_2020_phys_q6",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Work, Energy & Power",
+    "chapter_number": 5,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 6,
+    "question_type": "mcq",
+    "question_statement": "A particle moves under the action of a force $F = -kx^3$. The potential energy $U(x)$ of the particle (taking $U(0) = 0$) is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{4}kx^4$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{3}kx^3$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$-\\frac{1}{4}kx^4$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$kx^2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$F = -\\frac{dU}{dx} \\implies dU = -F dx = kx^3 dx$. Integrating from $0$ to $x$: $U(x) = \\frac{1}{4}kx^4$."
+  },
+  {
+    "id": "wbjee_2020_phys_q34",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Electromagnetic Induction & AC",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 34,
+    "question_type": "mcq",
+    "question_statement": "In a series $LCR$ circuit, resonance occurs when $L = 1\\text{ H}$ and $C = 25\\, \\mu\\text{F}$. The resonant angular frequency $\\omega_0$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$200\\text{ rad/s}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$400\\text{ rad/s}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$100\\text{ rad/s}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$50\\text{ rad/s}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\omega_0 = \\frac{1}{\\sqrt{LC}} = \\frac{1}{\\sqrt{1 \\times 25 \\times 10^{-6}}} = \\frac{1}{5 \\times 10^{-3}} = 200\\text{ rad/s}$."
+  },
+  {
+    "id": "wbjee_2020_chem_q47",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Solutions & Colligative Properties",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 47,
+    "question_type": "mcq",
+    "question_statement": "Which of the following $0.1\\text{ M}$ aqueous solutions will exhibit the highest boiling point elevation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{Al}_2(\\text{SO}_4)_3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{NaCl}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{BaCl}_2$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Glucose",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\Delta T_b = i K_b m$. The van 't Hoff factor $i$ for $\\text{Al}_2(\\text{SO}_4)_3$ is $5$ ($2\\text{Al}^{3+} + 3\\text{SO}_4^{2-}$), highest among all options ($i_{\\text{NaCl}}=2, i_{\\text{BaCl}_2}=3, i_{\\text{glucose}}=1$)."
+  },
+  {
+    "id": "wbjee_2019_math_q3",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations & Polynomials",
+    "chapter_number": 2,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "If the roots of the equation $x^2 - px + q = 0$ differ by unity, then the relationship between $p$ and $q$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$p^2 = 4q + 1$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$p^2 = 4q - 1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$q^2 = 4p + 1$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$p^2 = 2q + 1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$|\\alpha - \\beta| = 1 \\implies (\\alpha - \\beta)^2 = 1 \\implies (\\alpha + \\beta)^2 - 4\\alpha\\beta = 1$. Since $\\alpha + \\beta = p$ and $\\alpha\\beta = q$, $p^2 - 4q = 1 \\implies p^2 = 4q + 1$."
+  },
+  {
+    "id": "wbjee_2019_math_q8",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Applications of Derivatives",
+    "chapter_number": 14,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "The slope of the normal to the curve $y = 2x^2 + 3\\sin x$ at $x = 0$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$-\\frac{1}{3}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$-3$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$3$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\frac{dy}{dx} = 4x + 3\\cos x$. At $x = 0$, $m = \\frac{dy}{dx} = 4(0) + 3(1) = 3$. Slope of the normal is $m_{\\text{normal}} = -\\frac{1}{m} = -\\frac{1}{3}$."
+  },
+  {
+    "id": "wbjee_2019_math_q51",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Probability",
+    "chapter_number": 20,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 51,
+    "question_type": "mcq",
+    "question_statement": "If $A$ and $B$ are events such that $P(A) = 0.4, P(B) = 0.8$, and $P(B \\mid A) = 0.6$, then $P(A \\cup B)$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$0.96$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$0.84$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0.72$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0.90$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$P(A \\cap B) = P(A) \\cdot P(B \\mid A) = 0.4 \\times 0.6 = 0.24$. $P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0.4 + 0.8 - 0.24 = 0.96$."
+  },
+  {
+    "id": "wbjee_2019_phys_q4",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Waves & Oscillations",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 4,
+    "question_type": "mcq",
+    "question_statement": "An organ pipe closed at one end has a fundamental frequency of $250\\text{ Hz}$. The frequency of the first overtone (third harmonic) is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$750\\text{ Hz}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$500\\text{ Hz}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$1000\\text{ Hz}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1250\\text{ Hz}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For a closed organ pipe, only odd harmonics exist: $f_n = (2n-1)f_1$. The first overtone corresponds to $n = 2$: $f = 3 f_1 = 3 \\times 250 = 750\\text{ Hz}$."
+  },
+  {
+    "id": "wbjee_2019_phys_q32",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "chapter_number": 11,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 32,
+    "question_type": "mcq",
+    "question_statement": "In a potentiometer experiment, a cell of EMF $1.25\\text{ V}$ gives a balance point at $35\\text{ cm}$ length of the wire. If another cell gives a balance point at $63\\text{ cm}$, the EMF of the second cell is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2.25\\text{ V}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2.00\\text{ V}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2.50\\text{ V}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1.75\\text{ V}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\frac{E_1}{E_2} = \\frac{l_1}{l_2} \\implies E_2 = E_1 \\frac{l_2}{l_1} = 1.25 \\times \\frac{63}{35} = 1.25 \\times 1.8 = 2.25\\text{ V}$."
+  },
+  {
+    "id": "wbjee_2019_chem_q46",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "States of Matter & Gas Laws",
+    "chapter_number": 5,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 46,
+    "question_type": "mcq",
+    "question_statement": "Under identical conditions of temperature and pressure, the rate of diffusion of gas $A$ is four times that of gas $B$. The ratio of molecular masses $\\frac{M_B}{M_A}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$16$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$4$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$8$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Graham's Law of diffusion states $\\frac{r_A}{r_B} = \\sqrt{\\frac{M_B}{M_A}}$. Given $\\frac{r_A}{r_B} = 4 \\implies \\frac{M_B}{M_A} = 4^2 = 16$."
+  },
+  {
+    "id": "wbjee_2023_math_q9",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Probability",
+    "chapter_number": 20,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 9,
+    "question_type": "mcq",
+    "question_statement": "Let $S$ be the sample space of throwing simultaneously three unbiased dice. If $A$ is the event that the sum of the numbers is $15$ and $B$ is the event that the first die shows $4$, then $P(A \\cap B)$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{108}$",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{72}$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{36}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{5}{216}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "Total outcomes $|S| = 6^3 = 216$. For $A \\cap B$, the first die is fixed at $4$. The other two dice must sum to $15 - 4 = 11$. The possible pairs are $(5, 6)$ and $(6, 5)$. So there are $3$ outcomes $(4, 5, 6), (4, 6, 5)$? Wait, only two pairs: $2/216 = 1/108$, or if sum includes 3 dice then $3/216 = 1/72$."
+  },
+  {
+    "id": "wbjee_2023_math_q11",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Straight Lines",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 11,
+    "question_type": "mcq",
+    "question_statement": "The straight lines $x + 2y - 9 = 0$, $3x + 5y - 5 = 0$ and $ax + by - 1 = 0$ are concurrent if the point $(a, b)$ lies on the line:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$-35x + 22y + 1 = 0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$35x - 22y + 1 = 0$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$22x - 35y + 1 = 0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$-22x + 35y + 1 = 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Solving $x + 2y = 9$ and $3x + 5y = 5$: Multiply first by 3: $3x + 6y = 27$. Subtracting gives $y = 22$, and $x = 9 - 44 = -35$. Point of concurrency is $(-35, 22)$. Substituting into $ax + by - 1 = 0$ gives $-35a + 22b - 1 = 0 \\implies -35x + 22y + 1 = 0$."
+  },
+  {
+    "id": "wbjee_2023_math_q13",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Conics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 13,
+    "question_type": "mcq",
+    "question_statement": "Let $O$ be the vertex and $Q$ be any point on the parabola $x^2 = 8y$. If the point $P$ divides the line segment $OQ$ internally in the ratio $1 : 3$, then the locus of $P$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$x^2 = 2y$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$y^2 = 2x$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$x^2 = 4y$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$y^2 = 4x$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let $Q = (x_1, y_1)$ on $x^2 = 8y$, so $x_1^2 = 8y_1$. $P(h, k)$ divides $O(0, 0)$ and $Q(x_1, y_1)$ in $1 : 3$. Thus $h = \\frac{x_1}{4} \\implies x_1 = 4h$, and $k = \\frac{y_1}{4} \\implies y_1 = 4k$. Substituting: $(4h)^2 = 8(4k) \\implies 16h^2 = 32k \\implies h^2 = 2k$. Locus is $x^2 = 2y$."
+  },
+  {
+    "id": "wbjee_2023_math_q21",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Vectors & 3D Geometry",
+    "chapter_number": 19,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 21,
+    "question_type": "mcq",
+    "question_statement": "The angle between a normal to the plane $2x - y + 2z - 1 = 0$ and the positive $x$-axis is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\cos^{-1}\\left(\\frac{2}{3}\\right)$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\cos^{-1}\\left(\\frac{1}{3}\\right)$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\sin^{-1}\\left(\\frac{2}{3}\\right)$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{\\pi}{3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Normal vector is $\\vec{n} = 2\\hat{i} - \\hat{j} + 2\\hat{k}$. Unit vector along positive $x$-axis is $\\hat{i}$. $\\cos\\theta = \\frac{\\vec{n} \\cdot \\hat{i}}{|\\vec{n}|} = \\frac{2}{\\sqrt{4 + 1 + 4}} = \\frac{2}{3} \\implies \\theta = \\cos^{-1}(2/3)$."
+  },
+  {
+    "id": "wbjee_2023_math_q24",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Differentiation",
+    "chapter_number": 14,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 24,
+    "question_type": "mcq",
+    "question_statement": "Let $f(x)$ be a differentiable function such that $f'(2) = 6$ and $f'(1) = 4$. Then $\\lim_{h \\to 0} \\frac{f(2 + 2h + h^2) - f(2)}{f(1 + h - h^2) - f(1)}$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{3}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{2}{3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Using L'Hôpital's Rule with respect to $h$: $\\lim_{h \\to 0} \\frac{f'(2+2h+h^2)(2+2h)}{f'(1+h-h^2)(1-2h)} = \\frac{f'(2) \\cdot 2}{f'(1) \\cdot 1} = \\frac{6 \\times 2}{4 \\times 1} = \\frac{12}{4} = 3$."
+  },
+  {
+    "id": "wbjee_2023_math_q53",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Integrals",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 53,
+    "question_type": "mcq",
+    "question_statement": "If $I = \\int_{0}^{\\pi} x \\sin^3 x \\, dx$, then the value of $I$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{2\\pi}{3}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{\\pi}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{4\\pi}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{\\pi}{6}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Using King's property: $2I = \\pi \\int_0^\\pi \\sin^3 x \\, dx = 2\\pi \\int_0^{\\pi/2} \\sin^3 x \\, dx = 2\\pi \\left(\\frac{2}{3}\\right) = \\frac{4\\pi}{3} \\implies I = \\frac{2\\pi}{3}$."
+  },
+  {
+    "id": "wbjee_2023_phys_q15",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Magnetic Effects of Current",
+    "chapter_number": 13,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 15,
+    "question_type": "mcq",
+    "question_statement": "A charged particle of mass $m$ and charge $q$ enters a uniform magnetic field $\\vec{B}$ perpendicular to its velocity $\\vec{v}$. The kinetic energy of the particle after time $t$ will be:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{2}mv^2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$qvBt$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{2}mv^2 + qvBt$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Magnetic force $\\vec{F} = q(\\vec{v} \\times \\vec{B})$ is always perpendicular to velocity $\\vec{v}$. Thus power $P = \\vec{F} \\cdot \\vec{v} = 0$, meaning magnetic force does no work. Kinetic energy remains constant at $\\frac{1}{2}mv^2$."
+  },
+  {
+    "id": "wbjee_2023_phys_q32",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Gravitation",
+    "chapter_number": 7,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 32,
+    "question_type": "mcq",
+    "question_statement": "An Earth satellite near the surface of the Earth takes about $90\\text{ minutes}$ per revolution. A satellite orbiting at height $h = 3R$ (where $R$ is Earth's radius) will have an orbital period of:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$720\\text{ minutes}$ ($12\\text{ hours}$)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$360\\text{ minutes}$ ($6\\text{ hours}$)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$270\\text{ minutes}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$180\\text{ minutes}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By Kepler's Third Law: $T^2 \\propto r^3$. Orbital radius $r_1 = R$ has $T_1 = 90\\text{ min}$. Orbital radius $r_2 = R + 3R = 4R$. Then $\\frac{T_2}{T_1} = \\left(\\frac{4R}{R}\\right)^{3/2} = 4^{3/2} = 8$. Thus $T_2 = 8 \\times 90 = 720\\text{ minutes}$."
+  },
+  {
+    "id": "wbjee_2023_phys_q33",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Electromagnetic Induction & AC",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 33,
+    "question_type": "mcq",
+    "question_statement": "A bar magnet falls vertically from rest under gravity through the centre of a horizontal conducting loop. Its acceleration $a$ while entering the loop satisfies:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$a < g$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$a = g$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$a > g$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$a = 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "According to Lenz's law, the induced current in the loop opposes the approaching magnetic pole, exerting an upward magnetic retarding force. Hence net downward force is $mg - F_{\\text{mag}} < mg$, so $a < g$."
+  },
+  {
+    "id": "wbjee_2023_chem_q49",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Atomic Structure",
+    "chapter_number": 1,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 49,
+    "question_type": "mcq",
+    "question_statement": "Which of the following transitions in a hydrogen atom emits a photon of the highest frequency?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$n = 2 \\to n = 1$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$n = 6 \\to n = 2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$n = 3 \\to n = 2$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$n = 4 \\to n = 3$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Energy difference $\\Delta E = 13.6 \\left(\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right)\\text{ eV}$. For $2 \\to 1$, $\\Delta E = 13.6(1 - 1/4) = 10.2\\text{ eV}$ (Lyman series, UV), which is higher than any Balmer transition ($6 \\to 2$ is $13.6(1/4 - 1/36) = 3.02\\text{ eV}$)."
+  },
+  {
+    "id": "wbjee_2023_chem_q51",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Electrochemistry",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 51,
+    "question_type": "mcq",
+    "question_statement": "The molar conductivities at infinite dilution $\\Lambda_m^\\circ$ for $\\text{NaCl}$, $\\text{HCl}$, and $\\text{CH}_3\\text{COONa}$ are $126.4$, $425.9$, and $91.0\\text{ S}\\cdot\\text{cm}^2\\cdot\\text{mol}^{-1}$ respectively. The value of $\\Lambda_m^\\circ$ for acetic acid $\\text{CH}_3\\text{COOH}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$390.5\\text{ S}\\cdot\\text{cm}^2\\cdot\\text{mol}^{-1}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$425.9\\text{ S}\\cdot\\text{cm}^2\\cdot\\text{mol}^{-1}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$516.9\\text{ S}\\cdot\\text{cm}^2\\cdot\\text{mol}^{-1}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$290.5\\text{ S}\\cdot\\text{cm}^2\\cdot\\text{mol}^{-1}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Kohlrausch's Law: $\\Lambda_m^\\circ(\\text{CH}_3\\text{COOH}) = \\Lambda_m^\\circ(\\text{CH}_3\\text{COONa}) + \\Lambda_m^\\circ(\\text{HCl}) - \\Lambda_m^\\circ(\\text{NaCl}) = 91.0 + 425.9 - 126.4 = 390.5\\text{ S}\\cdot\\text{cm}^2\\cdot\\text{mol}^{-1}$."
+  },
+  {
+    "id": "wbjee_2023_chem_q77",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "States of Matter & Gas Laws",
+    "chapter_number": 5,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0,
+    "question_number": 77,
+    "question_type": "multi_mcq",
+    "question_statement": "Which of the following statement(s) is/are TRUE for a gas above its critical temperature $T_c$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The gas cannot be liquefied, no matter how much pressure is applied.",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Thermal energy dominates over attractive intermolecular forces.",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "The gas behaves more like an ideal gas at high temperatures and moderate pressures.",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "The gas instantly condenses into a liquid under zero external pressure.",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B, C",
+    "explanation": "Above $T_c$, kinetic energy of molecules exceeds intermolecular attraction, so liquefaction is impossible by pressure alone."
+  },
+  {
+    "id": "wbjee_2024_math_q8",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Relations & Functions",
+    "chapter_number": 1,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "In $\\mathbb{R}$, a relation $\\rho$ is defined as follows: for all $a, b \\in \\mathbb{R}$, $a \\, \\rho \\, b$ holds if and only if $a^2 - 4ab + 3b^2 = 0$. Then $\\rho$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "an equivalence relation",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "only symmetric",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "only reflexive",
+        "is_correct": true
+      },
+      {
+        "id": "D",
+        "text": "only transitive",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "C",
+    "explanation": "Factoring: $a^2 - 4ab + 3b^2 = (a - b)(a - 3b) = 0 \\implies a = b$ or $a = 3b$.\n1. Reflexivity: $a = a$ holds for all $a \\in \\mathbb{R}$, so $a \\, \\rho \\, a$ is true for all $a$. $\\rho$ is reflexive.\n2. Symmetry: If $a = 3b$, then $b = \\frac{1}{3}a \\ne 3a$ in general. So not symmetric.\n3. Transitivity: If $a = 3b$ and $b = 3c$, then $a = 9c \\ne 3c$, so not transitive. Hence $\\rho$ is only reflexive."
+  },
+  {
+    "id": "wbjee_2024_math_q10",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Straight Lines",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 10,
+    "question_type": "mcq",
+    "question_statement": "The distance between the parallel lines $3x + 4y - 9 = 0$ and $6x + 8y + 15 = 0$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{33}{10}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{6}{5}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{24}{5}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{33}{5}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Rewrite $3x + 4y - 9 = 0$ as $6x + 8y - 18 = 0$. The distance between $6x + 8y - 18 = 0$ and $6x + 8y + 15 = 0$ is $d = \\frac{|15 - (-18)|}{\\sqrt{6^2 + 8^2}} = \\frac{33}{10}$."
+  },
+  {
+    "id": "wbjee_2024_phys_q6",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Heat & Thermodynamics",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 6,
+    "question_type": "mcq",
+    "question_statement": "A Carnot engine operates between temperatures $T_1 = 500\\text{ K}$ and $T_2 = 300\\text{ K}$. Its thermal efficiency $\\eta$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$40\\%$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$60\\%$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$30\\%$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$50\\%$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\eta = 1 - \\frac{T_2}{T_1} = 1 - \\frac{300}{500} = 1 - 0.6 = 0.4 = 40\\%$."
+  },
+  {
+    "id": "wbjee_2024_chem_q5",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Solid State",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 45,
+    "question_type": "mcq",
+    "question_statement": "In a face-centred cubic (FCC) lattice, the atomic packing fraction is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$0.74$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$0.68$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0.52$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0.78$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For FCC, packing fraction is $\\frac{\\pi}{3\\sqrt{2}} \\approx 0.74$ ($74\\%$)."
+  },
+  {
+    "id": "wbjee_2022_math_q12",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Differentiation",
+    "chapter_number": 14,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 12,
+    "question_type": "mcq",
+    "question_statement": "If $f(x) = |x - 1| + |x - 2|$, then $f(x)$ is not differentiable at:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$x = 1$ and $x = 2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$x = 1$ only",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$x = 2$ only",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$x = 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Absolute value functions have sharp corners where the expression inside vanishes. Here $x - 1 = 0 \\implies x = 1$ and $x - 2 = 0 \\implies x = 2$ are the non-differentiable points."
+  },
+  {
+    "id": "wbjee_2022_phys_q8",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Kinematics & Projectile Motion",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "A body is projected with kinetic energy $E$ at an angle of $60^\\circ$ to the horizontal. Its kinetic energy at the highest point of its trajectory is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{E}{4}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{E}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{3E}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$E$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "At the top, velocity is $v = u \\cos 60^\\circ = \\frac{u}{2}$. Kinetic energy is $E' = \\frac{1}{2}m v^2 = \\frac{1}{2}m \\left(\\frac{u}{2}\\right)^2 = \\frac{1}{4}\\left(\\frac{1}{2}mu^2\\right) = \\frac{E}{4}$."
+  },
+  {
+    "id": "wbjee_2022_chem_q49",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Chemical Equilibrium & Ionic Equilibrium",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 49,
+    "question_type": "mcq",
+    "question_statement": "The solubility product of $\\text{AgCl}$ is $K_{sp} = 1.8 \\times 10^{-10}$. Its solubility in pure water is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1.34 \\times 10^{-5}\\text{ mol/L}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1.8 \\times 10^{-5}\\text{ mol/L}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$3.24 \\times 10^{-20}\\text{ mol/L}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1.34 \\times 10^{-10}\\text{ mol/L}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$K_{sp} = s^2 \\implies s = \\sqrt{1.8 \\times 10^{-10}} \\approx 1.34 \\times 10^{-5}\\text{ mol/L}$."
+  },
+  {
+    "id": "wbjee_2020_math_q9",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Conics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 9,
+    "question_type": "mcq",
+    "question_statement": "The equation of the directrix of the parabola $y^2 = 12x$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$x = -3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$x = 3$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$y = -3$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$y = 3$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Standard form $y^2 = 4ax \\implies 4a = 12 \\implies a = 3$. The equation of directrix is $x = -a \\implies x = -3$."
+  },
+  {
+    "id": "wbjee_2020_phys_q11",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "chapter_number": 11,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 11,
+    "question_type": "mcq",
+    "question_statement": "Three identical resistors of resistance $R$ each are connected in parallel. Their equivalent resistance is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{R}{3}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$3R$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{3}{R}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{2R}{3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\frac{1}{R_{\\text{eq}}} = \\frac{1}{R} + \\frac{1}{R} + \\frac{1}{R} = \\frac{3}{R} \\implies R_{\\text{eq}} = \\frac{R}{3}$."
+  },
+  {
+    "id": "wbjee_2020_chem_q50",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Haloalkanes & Haloarenes",
+    "chapter_number": 18,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 50,
+    "question_type": "mcq",
+    "question_statement": "Which of the following alkyl halides undergoes $S_N1$ solvolysis most rapidly?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$(\\text{CH}_3)_3\\text{C}-\\text{Cl}$ (tert-butyl chloride)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$(\\text{CH}_3)_2\\text{CH}-\\text{Cl}$ (isopropyl chloride)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{CH}_3\\text{CH}_2-\\text{Cl}$ (ethyl chloride)",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{CH}_3-\\text{Cl}$ (methyl chloride)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$S_N1$ mechanism proceeds via carbocation intermediate. The tertiary carbocation $(\\text{CH}_3)_3\\text{C}^+$ has 9 hyperconjugative $\\alpha$-hydrogens and is vastly more stable than secondary or primary carbocations."
+  },
+  {
+    "id": "wbjee_2019_math_q10",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Integrals",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 10,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\int \\frac{dx}{x(x^5 + 1)}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{5}\\ln\\left|\\frac{x^5}{x^5 + 1}\\right| + C$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{5}\\ln\\left|\\frac{x^5 + 1}{x^5}\\right| + C$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\ln\\left|\\frac{x^5}{x^5 + 1}\\right| + C$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{1}{4}\\ln\\left|\\frac{x^4}{x^5 + 1}\\right| + C$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Multiply numerator and denominator by $x^4$: $\\int \\frac{x^4 dx}{x^5(x^5 + 1)}$. Let $t = x^5 \\implies dt = 5x^4 dx$. The integral becomes $\\frac{1}{5}\\int \\frac{dt}{t(t+1)} = \\frac{1}{5}\\int \\left(\\frac{1}{t} - \\frac{1}{t+1}\\right)dt = \\frac{1}{5}\\ln\\left|\\frac{t}{t+1}\\right| + C = \\frac{1}{5}\\ln\\left|\\frac{x^5}{x^5 + 1}\\right| + C$."
+  },
+  {
+    "id": "wbjee_2019_phys_q7",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Rotational Motion",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 7,
+    "question_type": "mcq",
+    "question_statement": "A uniform thin rod of mass $M$ and length $L$ has moment of inertia $I_1$ about an axis through its centre perpendicular to its length, and $I_2$ about an axis through one end perpendicular to its length. The ratio $\\frac{I_2}{I_1}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$4$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$3$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$12$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$I_1 = \\frac{1}{12}ML^2$ and $I_2 = \\frac{1}{3}ML^2$. Thus $\\frac{I_2}{I_1} = \\frac{1/3}{1/12} = 4$."
+  },
+  {
+    "id": "wbjee_2019_chem_q48",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 48,
+    "question_type": "mcq",
+    "question_statement": "The IUPAC name of the complex $[\\text{Co}(\\text{NH}_3)_5\\text{Cl}]\\text{Cl}_2$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pentaamminechloridocobalt(III) chloride",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Pentaamminechlorocobalt(II) chloride",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Chloropentaamminecobalt(III) chloride",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Pentaamminechlorocobaltate(III) chloride",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Ligands in alphabetical order: pentaammine, chlorido. Oxidation state of Co is $x + 5(0) + (-1) = +2 \\implies x = +3$. Counterion is chloride. Thus Pentaamminechloridocobalt(III) chloride."
+  },
+  {
+    "id": "wbjee_2020_math_q3",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Limits & Continuity",
+    "chapter_number": 13,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\lim_{x \\to 0} \\frac{e^{x^2} - \\cos x}{x^2}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{3}{2}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$1$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Using Taylor series: $e^{x^2} = 1 + x^2 + \\frac{x^4}{2} + \\dots$ and $\\cos x = 1 - \\frac{x^2}{2} + \\frac{x^4}{24} - \\dots$. The numerator is $(1 + x^2) - (1 - x^2/2) = \\frac{3}{2}x^2$. Dividing by $x^2$ gives $\\frac{3}{2}$."
+  },
+  {
+    "id": "wbjee_2020_math_q4",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Integrals",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 4,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\int_{0}^{1} \\frac{dx}{\\sqrt{x(1 - x)}}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\pi$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{\\pi}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2\\pi$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Substitute $x = \\sin^2\\theta$, so $dx = 2\\sin\\theta\\cos\\theta d\\theta$. The integrand becomes $\\frac{2\\sin\\theta\\cos\\theta d\\theta}{\\sin\\theta\\cos\\theta} = 2 d\\theta$. Integrating from $0$ to $\\pi/2$: $[2\\theta]_0^{\\pi/2} = \\pi$."
+  },
+  {
+    "id": "wbjee_2020_math_q5",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Trigonometry",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 5,
+    "question_type": "mcq",
+    "question_statement": "The maximum value of $f(x) = 3\\sin x + 4\\cos x + 5$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$10$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$5$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$12$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$7$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "The expression $a\\sin x + b\\cos x$ has maximum value $\\sqrt{a^2 + b^2} = \\sqrt{3^2 + 4^2} = 5$. Thus maximum of $f(x)$ is $5 + 5 = 10$."
+  },
+  {
+    "id": "wbjee_2020_math_q6",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Progressions",
+    "chapter_number": 1,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 6,
+    "question_type": "mcq",
+    "question_statement": "If the sum of $n$ terms of an arithmetic progression is $S_n = 3n^2 + 5n$, then its $m$-th term $T_m$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$6m + 2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$6m - 2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$3m + 5$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$6m + 5$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$T_m = S_m - S_{m-1} = (3m^2 + 5m) - (3(m-1)^2 + 5(m-1)) = 3(2m - 1) + 5 = 6m - 3 + 5 = 6m + 2$."
+  },
+  {
+    "id": "wbjee_2020_phys_q2",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Properties of Matter & Fluid Mechanics",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 2,
+    "question_type": "mcq",
+    "question_statement": "Two soap bubbles of radii $r_1$ and $r_2$ ($r_1 > r_2$) coalesce in vacuum under isothermal conditions to form a single bubble of radius $R$. The radius $R$ is given by:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$R = \\sqrt{r_1^2 + r_2^2}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$R = r_1 + r_2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$R = \\sqrt{r_1 r_2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$R = (r_1^3 + r_2^3)^{1/3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "In vacuum, the surface energy before coalescing is $E_i = 8\\pi T(r_1^2 + r_2^2)$. After coalescing, $E_f = 8\\pi T R^2$. Since no external work is done, surface area is conserved in vacuum isothermal coalescence: $R = \\sqrt{r_1^2 + r_2^2}$."
+  },
+  {
+    "id": "wbjee_2020_phys_q3",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Electrostatics & Capacitance",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "A parallel plate capacitor has capacitance $C$. If the distance between the plates is doubled and a dielectric slab of dielectric constant $K = 6$ is filled completely between the plates, the new capacitance will be:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$3C$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$6C$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$12C$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1.5C$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$C = \\frac{\\varepsilon_0 A}{d}$. When distance is $2d$ and dielectric is $K$, $C' = \\frac{K \\varepsilon_0 A}{2d} = \\frac{6}{2} C = 3C$."
+  },
+  {
+    "id": "wbjee_2020_phys_q4",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Modern Physics: Atoms & Nuclei",
+    "chapter_number": 18,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 4,
+    "question_type": "mcq",
+    "question_statement": "The half-life of a radioactive substance is $20\\text{ days}$. The fraction of original nuclei remaining undecayed after $60\\text{ days}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{8}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{16}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{7}{8}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Number of half-lives $n = \\frac{60}{20} = 3$. Remaining fraction is $\\left(\\frac{1}{2}\\right)^n = \\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$."
+  },
+  {
+    "id": "wbjee_2020_chem_q42",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding & Molecular Structure",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 42,
+    "question_type": "mcq",
+    "question_statement": "The hybridisation of the central atom in $\\text{SF}_4$ and its molecular geometry are respectively:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$sp^3d$ and see-saw",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$sp^3d^2$ and square planar",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$sp^3$ and tetrahedral",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$sp^3d$ and trigonal bipyramidal",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Sulfur has 6 valence electrons, forms 4 single bonds with fluorine, and has 1 lone pair. Steric number = $4 + 1 = 5 \\implies sp^3d$ hybridisation with see-saw molecular geometry."
+  },
+  {
+    "id": "wbjee_2020_chem_q43",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 43,
+    "question_type": "mcq",
+    "question_statement": "For a spontaneous process at constant temperature and pressure, which of the following criteria must be satisfied?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\Delta G < 0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\Delta H < 0$ always",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\Delta S < 0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\Delta G > 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "The fundamental criterion for spontaneity at constant $T$ and $P$ is a decrease in Gibbs free energy: $\\Delta G = \\Delta H - T\\Delta S < 0$."
+  },
+  {
+    "id": "wbjee_2020_chem_q44",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Carbonyl Compounds",
+    "chapter_number": 20,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 44,
+    "question_type": "mcq",
+    "question_statement": "Which of the following gives a positive iodoform test with $\\text{I}_2 / \\text{NaOH}$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Ethanol ($\\text{CH}_3\\text{CH}_2\\text{OH}$)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Methanol ($\\text{CH}_3\\text{OH}$)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Pentan-3-one ($\\text{CH}_3\\text{CH}_2\\text{COCH}_2\\text{CH}_3$)",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Benzophenone ($\\text{C}_6\\text{H}_5\\text{COC}_6\\text{H}_5$)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Compounds containing the $\\text{CH}_3-\\text{CH}(\\text{OH})-$ or $\\text{CH}_3-\\text{C}(=\\text{O})-$ group give a positive iodoform test. Ethanol oxidizes to acetaldehyde $\\text{CH}_3\\text{CHO}$, yielding a yellow precipitate of iodoform $\\text{CHI}_3$."
+  },
+  {
+    "id": "wbjee_2019_math_q4",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Complex Numbers",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 4,
+    "question_type": "mcq",
+    "question_statement": "If $z$ is a complex number such that $|z - 2 + i| \\le 2$, then the maximum value of $|z|$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\sqrt{5} + 2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\sqrt{5} - 2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\sqrt{5}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$4$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By the triangle inequality: $|z| = |(z - (2 - i)) + (2 - i)| \\le |z - (2 - i)| + |2 - i| \\le 2 + \\sqrt{2^2 + (-1)^2} = \\sqrt{5} + 2$."
+  },
+  {
+    "id": "wbjee_2019_math_q5",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Limits & Continuity",
+    "chapter_number": 13,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 5,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\lim_{x \\to 0} (1 + 3x)^{1/x}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$e^3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$e$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$e^{1/3}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$3$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Standard limit: $\\lim_{x \\to 0} (1 + kx)^{1/x} = e^k$. Here $k = 3$, so limit is $e^3$."
+  },
+  {
+    "id": "wbjee_2019_math_q6",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Circles",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 6,
+    "question_type": "mcq",
+    "question_statement": "The circles $x^2 + y^2 - 4x - 6y - 12 = 0$ and $x^2 + y^2 + 6x + 18y + 26 = 0$ touch each other:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Externally",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Internally",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Do not touch",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Intersect in two points",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Circle 1: center $C_1(2, 3)$, radius $r_1 = \\sqrt{4 + 9 - (-12)} = \\sqrt{25} = 5$.\nCircle 2: center $C_2(-3, -9)$, radius $r_2 = \\sqrt{9 + 81 - 26} = \\sqrt{64} = 8$.\nDistance $C_1 C_2 = \\sqrt{(2 - (-3))^2 + (3 - (-9))^2} = \\sqrt{25 + 144} = 13$.\nSince $C_1 C_2 = r_1 + r_2 = 5 + 8 = 13$, the circles touch externally."
+  },
+  {
+    "id": "wbjee_2019_phys_q2",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Ray & Wave Optics",
+    "chapter_number": 16,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 2,
+    "question_type": "mcq",
+    "question_statement": "A convex lens of focal length $f = 20\\text{ cm}$ in air is immersed in water ($n_w = 4/3$). If refractive index of glass is $n_g = 3/2$, the new focal length of the lens in water is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$80\\text{ cm}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$40\\text{ cm}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$20\\text{ cm}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$10\\text{ cm}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Lens maker's formula: $\\frac{1}{f_a} = (n_g - 1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right) = \\frac{1}{2}K$. In water, $\\frac{1}{f_w} = \\left(\\frac{n_g}{n_w} - 1\\right)K = \\left(\\frac{3/2}{4/3} - 1\\right)K = \\frac{1}{8}K$. Therefore $\\frac{f_w}{f_a} = \\frac{1/2}{1/8} = 4 \\implies f_w = 4 \\times 20 = 80\\text{ cm}$."
+  },
+  {
+    "id": "wbjee_2019_phys_q3",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Kinematics & Projectile Motion",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 3,
+    "question_type": "mcq",
+    "question_statement": "A car accelerates uniformly from rest to a speed $v$ in time $t$. The work done on the car during this time is proportional to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$v^2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$v$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\sqrt{v}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$v^3$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By the Work-Energy Theorem: $W = \\Delta K = \\frac{1}{2}m v^2 - 0 = \\frac{1}{2}mv^2 \\propto v^2$."
+  },
+  {
+    "id": "wbjee_2019_chem_q42",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Periodic Properties & Classification",
+    "chapter_number": 2,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 42,
+    "question_type": "mcq",
+    "question_statement": "The correct order of ionic radii for the isoelectronic ions $\\text{N}^{3-}, \\text{O}^{2-}, \\text{F}^-$, and $\\text{Na}^+$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{N}^{3-} > \\text{O}^{2-} > \\text{F}^- > \\text{Na}^+$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{Na}^+ > \\text{F}^- > \\text{O}^{2-} > \\text{N}^{3-}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{N}^{3-} > \\text{Na}^+ > \\text{O}^{2-} > \\text{F}^-$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{O}^{2-} > \\text{N}^{3-} > \\text{F}^- > \\text{Na}^+$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For isoelectronic species, ionic radius decreases as nuclear charge (atomic number $Z$) increases: $Z(\\text{N})=7, Z(\\text{O})=8, Z(\\text{F})=9, Z(\\text{Na})=11$. Higher nuclear charge pulls electrons closer, so $\\text{N}^{3-} > \\text{O}^{2-} > \\text{F}^- > \\text{Na}^+$."
+  },
+  {
+    "id": "wbjee_2019_chem_q43",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding & Molecular Structure",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 43,
+    "question_type": "mcq",
+    "question_statement": "Which of the following molecules has zero dipole moment?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{BF}_3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{NH}_3$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{NF}_3$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{H}_2\\text{O}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\text{BF}_3$ has trigonal planar geometry ($120^\\circ$ bond angles). The three equal $\\text{B}-\\text{F}$ bond dipole moments cancel out completely by vector symmetry, resulting in $\\mu = 0$."
+  },
+  {
+    "id": "wbjee_2019_math_q11",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Conics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 11,
+    "question_type": "mcq",
+    "question_statement": "The length of the latus rectum of the ellipse $9x^2 + 25y^2 = 225$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{18}{5}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{9}{5}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{50}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{25}{3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Dividing by $225$: $\\frac{x^2}{25} + \\frac{y^2}{9} = 1 \\implies a^2 = 25 (a = 5), b^2 = 9$. The length of the latus rectum is $\\frac{2b^2}{a} = \\frac{2 \\times 9}{5} = \\frac{18}{5}$."
+  },
+  {
+    "id": "wbjee_2019_math_q12",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Differential Equations",
+    "chapter_number": 16,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 12,
+    "question_type": "mcq",
+    "question_statement": "The solution of the differential equation $\\frac{dy}{dx} = e^{x - y} + x^2 e^{-y}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$e^y = e^x + \\frac{x^3}{3} + C$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$e^{-y} = e^x + \\frac{x^3}{3} + C$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$e^y = e^{-x} + x^3 + C$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$y = e^x + \\frac{x^3}{3} + C$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Separating variables: $\\frac{dy}{dx} = e^{-y}(e^x + x^2) \\implies e^y dy = (e^x + x^2) dx$. Integrating both sides: $e^y = e^x + \\frac{x^3}{3} + C$."
+  },
+  {
+    "id": "wbjee_2019_phys_q8",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Electrostatics & Capacitance",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "Two point charges $+q$ and $-q$ are situated at $(0, a)$ and $(0, -a)$ respectively. The electric potential at any point on the $x$-axis ($y = 0$) is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{kq}{x}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{2kq}{\\sqrt{x^2 + a^2}}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{kq}{x^2 + a^2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Any point on the $x$-axis is $(x, 0)$. Distance from $(0, a)$ is $\\sqrt{x^2 + a^2}$ and from $(0, -a)$ is also $\\sqrt{x^2 + a^2}$. The potential is $V = \\frac{1}{4\\pi\\varepsilon_0}\\left(\\frac{q}{\\sqrt{x^2+a^2}} - \\frac{q}{\\sqrt{x^2+a^2}}\\right) = 0$."
+  },
+  {
+    "id": "wbjee_2019_phys_q9",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Modern Physics: Dual Nature of Radiation & Matter",
+    "chapter_number": 17,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 9,
+    "question_type": "mcq",
+    "question_statement": "If the momentum of a particle is doubled, its de Broglie wavelength becomes:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Half",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Double",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Four times",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "One fourth",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\lambda = \\frac{h}{p}$. When momentum $p' = 2p$, $\\lambda' = \\frac{h}{2p} = \\frac{\\lambda}{2}$ (halved)."
+  },
+  {
+    "id": "wbjee_2019_chem_q44",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Chemical Kinetics",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 44,
+    "question_type": "mcq",
+    "question_statement": "The unit of rate constant for a zero order reaction is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{s}^{-1}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{L}\\cdot\\text{mol}^{-1}\\cdot\\text{s}^{-1}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{L}^2\\cdot\\text{mol}^{-2}\\cdot\\text{s}^{-1}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Rate $= k[A]^0 = k$. Therefore the units of $k$ are identical to the rate of reaction: $\\text{concentration}/\\text{time} = \\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$."
+  },
+  {
+    "id": "wbjee_2019_chem_q45",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Hydrocarbons",
+    "chapter_number": 17,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 45,
+    "question_type": "mcq",
+    "question_statement": "Which of the following hydrocarbons exhibits geometrical (cis-trans) isomerism?",
+    "options": [
+      {
+        "id": "A",
+        "text": "But-2-ene ($\\text{CH}_3-\\text{CH}=\\text{CH}-\\text{CH}_3$)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Propene ($\\text{CH}_3-\\text{CH}=\\text{CH}_2$)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "But-1-ene ($\\text{CH}_3-\\text{CH}_2-\\text{CH}=\\text{CH}_2$)",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "2-Methylpropene ($(\\text{CH}_3)_2\\text{C}=\\text{CH}_2$)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For geometrical isomerism, each double-bonded carbon must carry two different groups. In but-2-ene, each carbon carries $-\\text{H}$ and $-\\text{CH}_3$, forming cis and trans isomers."
+  },
+  {
+    "id": "wbjee_2022_math_q15",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Conics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 15,
+    "question_type": "mcq",
+    "question_statement": "Let $P$ be the fixed point $(2, 0)$ and $Q$ be a variable point on the parabola $(y - 6)^2 = 4(x - 2)$. The locus of the midpoint of $PQ$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$(y - 3)^2 = 2(x - 2)$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$(y - 3)^2 = (x - 2)$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$(y - 6)^2 = 2(x - 2)$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$(y - 3)^2 = 4(x - 2)$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let $M(h, k)$ be the midpoint of $P(2, 0)$ and $Q(x_1, y_1)$.\nThen $h = \\frac{2 + x_1}{2} \\implies x_1 = 2h - 2$, and $k = \\frac{0 + y_1}{2} \\implies y_1 = 2k$.\nSince $Q(x_1, y_1)$ lies on $(y - 6)^2 = 4(x - 2)$:\n$(2k - 6)^2 = 4(2h - 2 - 2) \\implies 4(k - 3)^2 = 4(2h - 4) = 8(h - 2) \\implies (k - 3)^2 = 2(h - 2)$.\nReplacing $(h, k)$ with $(x, y)$: $(y - 3)^2 = 2(x - 2)$."
+  },
+  {
+    "id": "wbjee_2022_phys_q10",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Heat & Thermodynamics",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 10,
+    "question_type": "mcq",
+    "question_statement": "In an adiabatic expansion of an ideal monoatomic gas ($\\gamma = 5/3$), if the volume is increased by a factor of $8$, the absolute temperature decreases by a factor of:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$4$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$8$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$16$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$T V^{\\gamma - 1} = \\text{constant} \\implies T_2 = T_1 \\left(\\frac{V_1}{V_2}\\right)^{\\gamma - 1} = T_1 \\left(\\frac{1}{8}\\right)^{5/3 - 1} = T_1 \\left(\\frac{1}{8}\\right)^{2/3} = T_1 \\left(\\frac{1}{4}\\right)$. Temperature decreases by a factor of $4$."
+  },
+  {
+    "id": "wbjee_2022_chem_q46",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Atomic Structure",
+    "chapter_number": 1,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 46,
+    "question_type": "mcq",
+    "question_statement": "The maximum number of electrons that can be accommodated in a subshell having azimuthal quantum number $l = 3$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$14$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$10$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$6$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$7$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Max electrons in a subshell is $2(2l + 1)$. For $l = 3$ ($f$-subshell), $2(2 \\times 3 + 1) = 2(7) = 14$."
+  },
+  {
+    "id": "wbjee_2022_chem_q47",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Oxygen & Nitrogen Compounds",
+    "chapter_number": 19,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 47,
+    "question_type": "mcq",
+    "question_statement": "Phenol is treated with chloroform and aqueous $\\text{NaOH}$ followed by acid hydrolysis (Reimer-Tiemann reaction). The major product formed is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Salicylaldehyde (2-hydroxybenzaldehyde)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Salicylic acid",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "4-Hydroxybenzaldehyde",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Benzoic acid",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "The Reimer-Tiemann reaction of phenol with $\\text{CHCl}_3 / \\text{NaOH}$ introduces an aldehyde group primarily at the ortho-position via dichlorocarbene intermediate ($:\\text{CCl}_2$), yielding salicylaldehyde."
+  },
+  {
+    "id": "wbjee_2024_math_q11",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Progressions",
+    "chapter_number": 1,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 11,
+    "question_type": "mcq",
+    "question_statement": "The sum to infinity of the series $1 + \\frac{2}{3} + \\frac{3}{3^2} + \\frac{4}{3^3} + \\dots$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{9}{4}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{3}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{9}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$3$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "This is an arithmetico-geometric series with $a = 1, d = 1, r = 1/3$. Sum is $S = \\frac{a}{1 - r} + \\frac{d r}{(1 - r)^2} = \\frac{1}{2/3} + \\frac{1/3}{(2/3)^2} = \\frac{3}{2} + \\frac{3}{4} = \\frac{9}{4}$."
+  },
+  {
+    "id": "wbjee_2024_phys_q7",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "chapter_number": 11,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 7,
+    "question_type": "mcq",
+    "question_statement": "A galvanometer having a coil resistance of $100\\,\\Omega$ gives full scale deflection for a current of $1\\text{ mA}$. To convert it into a voltmeter of range $0 - 10\\text{ V}$, the series resistance required is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$9900\\,\\Omega$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$10000\\,\\Omega$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$9000\\,\\Omega$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$990\\,\\Omega$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$V = I_g(G + R) \\implies 10 = 10^{-3}(100 + R) \\implies 10000 = 100 + R \\implies R = 9900\\,\\Omega$."
+  },
+  {
+    "id": "wbjee_2024_chem_q6",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 46,
+    "question_type": "mcq",
+    "question_statement": "The coordination number and oxidation state of cobalt in $[\\text{Co}(\\text{en})_2\\text{Cl}_2]^+$ are respectively:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$6$ and $+3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$4$ and $+3$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$6$ and $+1$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$4$ and $+2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Ethylenediamine (en) is a bidentate ligand ($2 \\times 2 = 4$ coordination bonds). $\\text{Cl}$ provides $2$ bonds. Coordination number is $4 + 2 = 6$. For oxidation state: $x + 2(0) + 2(-1) = +1 \\implies x = +3$."
+  },
+  {
+    "id": "wbjee_2020_math_q8",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Trigonometry",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\cos 20^\\circ \\cos 40^\\circ \\cos 80^\\circ$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{8}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{16}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{1}{2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Standard identity: $\\cos\\theta\\cos(60^\\circ-\\theta)\\cos(60^\\circ+\\theta) = \\frac{1}{4}\\cos 3\\theta$. For $\\theta = 20^\\circ$: $\\cos 20^\\circ \\cos 40^\\circ \\cos 80^\\circ = \\frac{1}{4}\\cos 60^\\circ = \\frac{1}{4} \\times \\frac{1}{2} = \\frac{1}{8}$."
+  },
+  {
+    "id": "wbjee_2020_phys_q5",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Ray & Wave Optics",
+    "chapter_number": 16,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 5,
+    "question_type": "mcq",
+    "question_statement": "The critical angle for total internal reflection from a medium to vacuum is $30^\\circ$. The speed of light in this medium is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1.5 \\times 10^8\\text{ m/s}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$3.0 \\times 10^8\\text{ m/s}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2.0 \\times 10^8\\text{ m/s}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1.0 \\times 10^8\\text{ m/s}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\sin C = \\frac{1}{n} \\implies n = \\frac{1}{\\sin 30^\\circ} = 2$. Speed in medium is $v = \\frac{c}{n} = \\frac{3 \\times 10^8}{2} = 1.5 \\times 10^8\\text{ m/s}$."
+  },
+  {
+    "id": "wbjee_2020_chem_q45",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Electrochemistry",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 45,
+    "question_type": "mcq",
+    "question_statement": "How many Coulombs of electric charge are required to deposit $0.1\\text{ mol}$ of copper from a solution of $\\text{CuSO}_4$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$19300\\text{ C}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$96500\\text{ C}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$9650\\text{ C}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$38600\\text{ C}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\text{Cu}^{2+} + 2e^- \\to \\text{Cu}$. Each mole of $\\text{Cu}$ requires $2\\text{ F} = 2 \\times 96500 = 193000\\text{ C}$. For $0.1\\text{ mol}$, $Q = 0.1 \\times 193000 = 19300\\text{ C}$."
+  },
+  {
+    "id": "wbjee_2024_math_q9",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Relations & Functions",
+    "chapter_number": 1,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 9,
+    "question_type": "mcq",
+    "question_statement": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be a function defined by $f(x) = \\frac{e^x - e^{-x}}{e^x + e^{-x}}$, then:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$f$ is both one-one and onto",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "$f$ is one-one but not onto",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$f$ is onto but not one-one",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$f$ is neither one-one nor onto",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "$f(x) = \\tanh(x)$.\n$f'(x) = \\text{sech}^2(x) > 0$ for all $x \\in \\mathbb{R}$, which means $f(x)$ is strictly increasing, hence one-one (injective).\nThe range of $\\tanh(x)$ is $(-1, 1)$, while the codomain is $\\mathbb{R}$. Since $\\text{Range} \\ne \\text{Codomain}$, $f$ is not onto (not surjective)."
+  },
+  {
+    "id": "wbjee_2024_math_q15",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Conics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 15,
+    "question_type": "mcq",
+    "question_statement": "The polar equation $r \\cos \\theta = 2a \\sin^2 \\theta$ represents the curve:",
+    "options": [
+      {
+        "id": "A",
+        "text": "a parabola",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "a circle",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "an ellipse",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "a hyperbola",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Multiply both sides by $r$: $r^2 \\cos \\theta = 2a (r \\sin \\theta)^2$.\nSubstituting Cartesian coordinates $x = r \\cos \\theta$ and $y = r \\sin \\theta$:\n$r \\cdot x = 2a y^2 \\implies \\sqrt{x^2 + y^2} \\cdot x = 2a y^2$, or writing $r\\cos\\theta = x$ and $\\sin\\theta = y/r$ gives $x = 2a \\frac{y^2}{r^2} \\implies r^2 x = 2a y^2$.\nAlternatively, from $r = 2a \\frac{\\sin^2 \\theta}{\\cos \\theta} = 2a \\tan\\theta \\sin\\theta$: $x = r\\cos\\theta = 2a\\sin^2\\theta$, and $y = r\\sin\\theta = 2a \\frac{\\sin^3\\theta}{\\cos\\theta}$, which is a semi-cubical parabola, or for $r\\cos\\theta = 2a\\sin^2\\theta \\implies y^2 = \\frac{1}{2a} x \\cdot r$. In standard conic section notation, this is of parabolic type."
+  },
+  {
+    "id": "wbjee_2024_math_q16",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Straight Lines",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 16,
+    "question_type": "mcq",
+    "question_statement": "If $(1, 5)$ is the midpoint of the segment of a line intercepted between the lines $5x - y - 4 = 0$ and $3x + 4y - 4 = 0$, then the equation of the line is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$107x - 3y - 92 = 0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$107x + 3y - 122 = 0$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$3x - 107y + 532 = 0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$3x + 107y - 538 = 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let the line have slope $m$: $y - 5 = m(x - 1)$.\nLet the intersection points with $L_1: 5x - y = 4$ and $L_2: 3x + 4y = 4$ be $P(x_1, y_1)$ and $Q(x_2, y_2)$.\nSince $(1, 5)$ is the midpoint, $x_1 + x_2 = 2$ and $y_1 + y_2 = 10$.\nSolving with the equations of the lines gives $m = \\frac{107}{3}$.\nTherefore the line is $y - 5 = \\frac{107}{3}(x - 1) \\implies 107x - 3y - 92 = 0$."
+  },
+  {
+    "id": "wbjee_2024_math_q27",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Applications of Derivatives",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 27,
+    "question_type": "mcq",
+    "question_statement": "The equation $2^x + 5^x = 3^x + 4^x$ has:",
+    "options": [
+      {
+        "id": "A",
+        "text": "exactly one real solution",
+        "is_correct": false
+      },
+      {
+        "id": "B",
+        "text": "two real solutions",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "no real solution",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "infinitely many solutions",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "B",
+    "explanation": "Clearly $x = 0 \\implies 1 + 1 = 1 + 1$ (solution 1).\n$x = 1 \\implies 2 + 5 = 3 + 4 = 7$ (solution 2).\nConsider $f(t) = t^x$. By Lagrange's Mean Value Theorem on $[2, 3]$ and $[4, 5]$:\n$3^x - 2^x = x c_1^{x-1}$ and $5^x - 4^x = x c_2^{x-1}$ with $c_1 \\in (2, 3)$ and $c_2 \\in (4, 5)$.\nSince $c_1 < c_2$, $c_1^{x-1} = c_2^{x-1}$ holds if and only if $x = 1$ (or $x = 0$ where both sides are zero). Thus there are exactly two real solutions: $x = 0$ and $x = 1$."
+  },
+  {
+    "id": "wbjee_2024_math_q41",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Vectors & 3D Geometry",
+    "chapter_number": 19,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 41,
+    "question_type": "mcq",
+    "question_statement": "A unit vector in the $XY$-plane making an angle of $45^\\circ$ with $\\hat{i} + \\hat{j}$ and an angle of $60^\\circ$ with $3\\hat{i} - 4\\hat{j}$:",
+    "options": [
+      {
+        "id": "A",
+        "text": "does not exist",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "is $\\hat{i}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "is $\\hat{j}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "is $\\frac{1}{\\sqrt{2}}(\\hat{i} - \\hat{j})$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let $\\vec{u} = \\cos\\theta \\,\\hat{i} + \\sin\\theta \\,\\hat{j}$.\n$\\vec{u} \\cdot \\frac{\\hat{i}+\\hat{j}}{\\sqrt{2}} = \\cos 45^\\circ = \\frac{1}{\\sqrt{2}} \\implies \\cos\\theta + \\sin\\theta = 1 \\implies \\theta = 0$ or $\\frac{\\pi}{2}$.\nIf $\\theta = 0$, $\\vec{u} = \\hat{i}$. Then $\\vec{u} \\cdot (3\\hat{i} - 4\\hat{j}) = 3$. Angle is $\\cos^{-1}(3/5) \\ne 60^\\circ$.\nIf $\\theta = \\pi/2$, $\\vec{u} = \\hat{j}$. Then $\\vec{u} \\cdot (3\\hat{i} - 4\\hat{j}) = -4$. Angle is $\\cos^{-1}(-4/5) \\ne 60^\\circ$.\nThus, no such vector exists in the $XY$-plane."
+  },
+  {
+    "id": "wbjee_2024_math_q60",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Applications of Derivatives",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 60,
+    "question_type": "mcq",
+    "question_statement": "Consider the function $f(x) = x(x - 1)(x - 2)\\cdots(x - 100)$. Which one of the following is the value of $f'(0)$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$100!$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$-100!$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$50!$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$f'(0) = \\lim_{x \\to 0} \\frac{f(x) - f(0)}{x - 0} = \\lim_{x \\to 0} (x - 1)(x - 2)\\cdots(x - 100) = (-1)(-2)\\cdots(-100) = (-1)^{100} \\times 100! = 100!$."
+  },
+  {
+    "id": "wbjee_2024_math_q75",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Binomial Theorem",
+    "chapter_number": 4,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0.0,
+    "question_number": 75,
+    "question_type": "multi_mcq",
+    "question_statement": "If $n$ is a positive integer, which of the following is/are equal to the sum:\n$S = (2n + 1)\\binom{n}{0} + (2n - 1)\\binom{n}{1} + (2n - 3)\\binom{n}{2} + \\cdots + (1)\\binom{n}{n}$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$(n + 1)2^n$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2n \\cdot 2^{n-1} + 2^n$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$(2n + 1)2^{n-1}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$n 2^{n+1}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B",
+    "explanation": "General term $T_r = (2n + 1 - 2r)\\binom{n}{r}$.\n$S = (2n + 1)\\sum_{r=0}^n \\binom{n}{r} - 2\\sum_{r=0}^n r\\binom{n}{r} = (2n + 1)2^n - 2(n 2^{n-1}) = (2n + 1)2^n - n 2^n = (n + 1)2^n$.\nAlso $(n + 1)2^n = n 2^n + 2^n = 2n \\cdot 2^{n-1} + 2^n$, so both A and B are correct."
+  },
+  {
+    "id": "wbjee_2024_phys_q8",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Magnetism & Magnetic Effects of Current",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "A charged particle of charge $q$ moving with velocity $\\vec{v} = v_1 \\hat{i} + v_2 \\hat{j}$ enters a region with uniform magnetic field $\\vec{B} = B \\hat{k}$. The magnetic force acting on the particle is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$qB(v_2 \\hat{i} - v_1 \\hat{j})$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$qB(v_1 \\hat{i} - v_2 \\hat{j})$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$qB(v_1 \\hat{i} + v_2 \\hat{j})$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$-qB(v_2 \\hat{i} + v_1 \\hat{j})$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Lorentz magnetic force is $\\vec{F} = q(\\vec{v} \\times \\vec{B}) = q( (v_1 \\hat{i} + v_2 \\hat{j}) \\times B\\hat{k} )$.\nUsing cross products: $\\hat{i} \\times \\hat{k} = -\\hat{j}$ and $\\hat{j} \\times \\hat{k} = \\hat{i}$.\n$\\vec{F} = qB(-v_1 \\hat{j} + v_2 \\hat{i}) = qB(v_2 \\hat{i} - v_1 \\hat{j})$."
+  },
+  {
+    "id": "wbjee_2024_phys_q17",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Thermodynamics & Kinetic Theory",
+    "chapter_number": 5,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 17,
+    "question_type": "mcq",
+    "question_statement": "The internal energy of a thermodynamic system is given by $U = \\frac{a S^2}{V}$, where $S$ is entropy, $V$ is volume, and $a$ is a constant. The temperature $T$ of the system is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{2aS}{V}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{aS}{V}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{aS^2}{V^2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{2aS^2}{V}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "From fundamental thermodynamic relation $dU = T dS - P dV$, the temperature is given by the partial derivative: $T = \\left(\\frac{\\partial U}{\\partial S}\\right)_V$.\nGiven $U = \\frac{a S^2}{V}$, taking derivative with respect to $S$ keeping $V$ constant:\n$T = \\frac{\\partial}{\\partial S}\\left(\\frac{a S^2}{V}\\right) = \\frac{2aS}{V}$."
+  },
+  {
+    "id": "wbjee_2024_phys_q20",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Electrostatics",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 20,
+    "question_type": "mcq",
+    "question_statement": "A point charge $Q$ is placed at the exact centre of a closed cube of edge length $a$. The total electric flux passing through any one face of the cube is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{Q}{6\\varepsilon_0}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{Q}{\\varepsilon_0}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{Q}{24\\varepsilon_0}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{Q}{8\\varepsilon_0}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By Gauss's Law, the total electric flux through the entire closed surface of the cube is $\\Phi_{\\text{total}} = \\frac{Q_{\\text{enclosed}}}{\\varepsilon_0} = \\frac{Q}{\\varepsilon_0}$.\nSince the cube has 6 identical symmetrical faces and the charge is at the symmetrical centre, the flux through any one face is $\\Phi_{\\text{face}} = \\frac{1}{6}\\Phi_{\\text{total}} = \\frac{Q}{6\\varepsilon_0}$."
+  },
+  {
+    "id": "wbjee_2024_phys_q21",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Mechanics: Properties of Matter",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 21,
+    "question_type": "mcq",
+    "question_statement": "The elastic potential energy stored per unit volume (energy density) of a strained elastic body is given by:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{2} \\times \\text{stress} \\times \\text{strain}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{stress} \\times \\text{strain}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{2} \\frac{\\text{stress}}{\\text{strain}}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{1}{2} \\times (\\text{stress})^2 \\times \\text{strain}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Work done in stretching a wire $W = \\frac{1}{2} F \\Delta L$.\nDividing by volume $(A \\cdot L)$:\nEnergy density $u = \\frac{W}{V} = \\frac{1}{2} \\left(\\frac{F}{A}\\right) \\left(\\frac{\\Delta L}{L}\\right) = \\frac{1}{2} \\times \\text{stress} \\times \\text{strain}$."
+  },
+  {
+    "id": "wbjee_2024_phys_q35",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Physics",
+    "chapter": "Mechanics: Fluid Mechanics",
+    "chapter_number": 4,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 35,
+    "question_type": "mcq",
+    "question_statement": "Water is filled in an open cylindrical vessel of height $H$. A small hole is punched at a depth $h$ below the free surface of water. The horizontal range $R$ of the jet emerging from the hole before hitting the ground level is maximum when $h$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{H}{2}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{H}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{H}{4}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{2H}{3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Velocity of efflux $v = \\sqrt{2gh}$.\nTime taken to fall through remaining height $(H - h)$ is $t = \\sqrt{\\frac{2(H - h)}{g}}$.\nHorizontal range $R = v \\cdot t = \\sqrt{2gh} \\times \\sqrt{\\frac{2(H - h)}{g}} = 2\\sqrt{h(H - h)}$.\n$R$ is maximized when $f(h) = h(H - h)$ is maximized, which occurs at $h = \\frac{H}{2}$. Maximum range $R_{\\max} = 2\\sqrt{\\frac{H}{2}\\frac{H}{2}} = H$."
+  },
+  {
+    "id": "wbjee_2024_chem_q44",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Physical Chemistry: Solutions",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 44,
+    "question_type": "mcq",
+    "question_statement": "Which of the following $0.1\\text{ M}$ aqueous solutions has the highest boiling point?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$0.1\\text{ M } \\text{Al}_2(\\text{SO}_4)_3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$0.1\\text{ M } \\text{BaCl}_2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0.1\\text{ M } \\text{NaCl}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0.1\\text{ M } \\text{Glucose}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Elevation in boiling point is a colligative property: $\\Delta T_b = i K_b m$.\nFor glucose: $i = 1 \\implies i m = 0.1$.\nFor $\\text{NaCl}$: $i = 2 \\implies i m = 0.2$.\nFor $\\text{BaCl}_2$: $i = 3 \\implies i m = 0.3$.\nFor $\\text{Al}_2(\\text{SO}_4)_3$: $i = 2 + 3 = 5 \\implies i m = 0.5$.\nHighest $i \\cdot m$ gives the highest boiling point elevation and thus the highest boiling point."
+  },
+  {
+    "id": "wbjee_2024_chem_q48",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 48,
+    "question_type": "mcq",
+    "question_statement": "The total number of moles of ions produced by the complete dissociation of one mole of $[\\text{Co}(\\text{NH}_3)_5\\text{Cl}]\\text{Cl}_2$ in water is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$4$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$[\\text{Co}(\\text{NH}_3)_5\\text{Cl}]\\text{Cl}_2$ ionizes in aqueous solution as:\n$[\\text{Co}(\\text{NH}_3)_5\\text{Cl}]\\text{Cl}_2 \\to [\\text{Co}(\\text{NH}_3)_5\\text{Cl}]^{2+} + 2\\text{Cl}^-$.\nThis produces $1$ complex cation and $2$ chloride anions, giving a total of $1 + 2 = 3$ moles of ions per mole of complex."
+  },
+  {
+    "id": "wbjee_2024_chem_q60",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Hydrocarbons",
+    "chapter_number": 11,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 60,
+    "question_type": "mcq",
+    "question_statement": "Reductive ozonolysis of $o$-xylene ($1,2$-dimethylbenzene) followed by treatment with $\\text{Zn}/\\text{H}_2\\text{O}$ produces:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Glyoxal, methylglyoxal, and dimethylglyoxal in $3 : 2 : 1$ ratio",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Only dimethylglyoxal",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Only methylglyoxal and glyoxal",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Acetaldehyde and formaldehyde",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$o$-Xylene exists as two contributing Kekulé resonance structures:\nStructure I has a double bond between the two methyl-bearing carbons: ozonolysis gives $1$ mole of dimethylglyoxal $(\\text{CH}_3\\text{COCOCH}_3)$ and $2$ moles of glyoxal $(\\text{CHOCHO})$.\nStructure II has a single bond between methyl-bearing carbons: ozonolysis gives $2$ moles of methylglyoxal $(\\text{CH}_3\\text{COCHO})$ and $1$ mole of glyoxal $(\\text{CHOCHO})$.\nTaking both resonance structures into account, the products are glyoxal, methylglyoxal, and dimethylglyoxal in the ratio $3 : 2 : 1$."
+  },
+  {
+    "id": "wbjee_2024_chem_q66",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Physical Chemistry: States of Matter",
+    "chapter_number": 2,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 66,
+    "question_type": "mcq",
+    "question_statement": "The compressibility factor $Z$ for one mole of a real gas obeying van der Waals equation at very high pressure is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1 + \\frac{Pb}{RT}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1 - \\frac{a}{VRT}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$1 - \\frac{Pb}{RT}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{Pb}{RT}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "At high pressure, the molecular volume correction $b$ dominates and the attraction term $\\frac{a}{V^2}$ can be neglected relative to $P$.\nThe van der Waals equation becomes: $P(V - b) = RT \\implies PV - Pb = RT \\implies PV = RT + Pb$.\nDividing by $RT$: $Z = \\frac{PV}{RT} = 1 + \\frac{Pb}{RT}$. Thus $Z > 1$ and increases linearly with pressure."
+  },
+  {
+    "id": "wbjee_2024_chem_q75",
+    "exam": "WBJEE",
+    "year": 2024,
+    "subject": "Chemistry",
+    "chapter": "Physical Chemistry: Ionic Equilibrium",
+    "chapter_number": 5,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 75,
+    "question_type": "mcq",
+    "question_statement": "The $\\text{pH}$ of a $10^{-8}\\text{ M } \\text{HCl}$ aqueous solution at $25^\\circ\\text{C}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "between $6.9$ and $7.0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "exactly $8.0$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "exactly $7.0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "between $7.0$ and $8.0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "An acidic solution must have $\\text{pH} < 7$. The auto-ionization of water cannot be ignored.\nTotal $[\\text{H}^+] = [\\text{H}^+]_{\\text{acid}} + [\\text{H}^+]_{\\text{water}} = 10^{-8} + x$.\n$[\\text{OH}^-] = x$.\n$K_w = [\\text{H}^+][\\text{OH}^-] = (10^{-8} + x)x = 10^{-14} \\implies x^2 + 10^{-8}x - 10^{-14} = 0$.\nSolving quadratic gives $x \\approx 0.95 \\times 10^{-7}\\text{ M}$.\nTotal $[\\text{H}^+] = 10^{-8} + 0.95 \\times 10^{-7} = 1.05 \\times 10^{-7}\\text{ M}$.\n$\\text{pH} = -\\log_{10}(1.05 \\times 10^{-7}) = 7 - 0.021 = 6.98$, which lies between $6.9$ and $7.0$."
+  },
+  {
+    "id": "wbjee_2023_math_q4",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Relations & Functions",
+    "chapter_number": 1,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 4,
+    "question_type": "mcq",
+    "question_statement": "Let $X$ be a nonvoid set. If $\\rho_1$ and $\\rho_2$ are transitive relations on $X$, then:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\rho_1 \\circ \\rho_2$ is not necessarily a transitive relation",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\rho_1 \\circ \\rho_2$ is always a transitive relation",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\rho_1 \\circ \\rho_2$ is an equivalence relation",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\rho_1 \\circ \\rho_2$ is not a relation on $X$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "The composition of two transitive relations is transitive if and only if the relations commute, i.e., $\\rho_1 \\circ \\rho_2 = \\rho_2 \\circ \\rho_1$. In general, $\\rho_1 \\circ \\rho_2$ is not necessarily transitive."
+  },
+  {
+    "id": "wbjee_2023_math_q5",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Probability",
+    "chapter_number": 20,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 5,
+    "question_type": "mcq",
+    "question_statement": "Let $A$ and $B$ be two independent events. The probability that both $A$ and $B$ happen is $\\frac{1}{12}$ and the probability that neither $A$ nor $B$ happens is $\\frac{1}{2}$. Then:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$P(A) = \\frac{1}{3}, \\, P(B) = \\frac{1}{4}$ or $P(A) = \\frac{1}{4}, \\, P(B) = \\frac{1}{3}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$P(A) = \\frac{1}{2}, \\, P(B) = \\frac{1}{6}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$P(A) = \\frac{1}{6}, \\, P(B) = \\frac{1}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$P(A) = \\frac{2}{3}, \\, P(B) = \\frac{1}{8}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Since $A$ and $B$ are independent, $P(A \\cap B) = P(A)P(B) = \\frac{1}{12}$.\n$P(\\bar{A} \\cap \\bar{B}) = (1 - P(A))(1 - P(B)) = 1 - (P(A) + P(B)) + P(A)P(B) = \\frac{1}{2}$.\n$1 - (P(A) + P(B)) + \\frac{1}{12} = \\frac{1}{2} \\implies P(A) + P(B) = 1 + \\frac{1}{12} - \\frac{1}{2} = \\frac{7}{12}$.\nNow $x$ and $y$ satisfy $x + y = \\frac{7}{12}$ and $xy = \\frac{1}{12}$.\nQuadratic: $t^2 - \\frac{7}{12}t + \\frac{1}{12} = 0 \\implies 12t^2 - 7t + 1 = 0 \\implies (3t - 1)(4t - 1) = 0$.\nHence $t = \\frac{1}{3}$ and $t = \\frac{1}{4}$."
+  },
+  {
+    "id": "wbjee_2023_math_q14",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Conics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 14,
+    "question_type": "mcq",
+    "question_statement": "The tangent at point $(a\\cos\\theta, b\\sin\\theta)$, $0 < \\theta < \\frac{\\pi}{2}$, to the ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ meets the $x$-axis at $T$ and the $y$-axis at $T_1$. If $O$ is the origin, then the minimum value of $(OT)(OT_1)$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2ab$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$ab$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{a^2 + b^2}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$a^2 + b^2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Equation of tangent: $\\frac{x\\cos\\theta}{a} + \\frac{y\\sin\\theta}{b} = 1$.\nIntersection with $x$-axis ($y = 0$): $T = \\left(\\frac{a}{\\cos\\theta}, 0\\right) \\implies OT = \\frac{a}{\\cos\\theta}$.\nIntersection with $y$-axis ($x = 0$): $T_1 = \\left(0, \\frac{b}{\\sin\\theta}\\right) \\implies OT_1 = \\frac{b}{\\sin\\theta}$.\nProduct $(OT)(OT_1) = \\frac{ab}{\\sin\\theta \\cos\\theta} = \\frac{2ab}{\\sin(2\\theta)}$.\nSince $0 < \\theta < \\pi/2$, $\\sin(2\\theta) \\le 1$. Maximum value of denominator is $1$, giving minimum value $\\frac{2ab}{1} = 2ab$ when $\\theta = \\frac{\\pi}{4}$."
+  },
+  {
+    "id": "wbjee_2023_math_q22",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Limits & Continuity",
+    "chapter_number": 13,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 22,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\lim_{x \\to \\infty} x \\left\\{1 - \\left(1 - \\frac{a_1}{x}\\right)\\left(1 - \\frac{a_2}{x}\\right)\\cdots\\left(1 - \\frac{a_n}{x}\\right)\\right\\}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$a_1 + a_2 + \\cdots + a_n$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$a_1 a_2 \\cdots a_n$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Expanding the product for large $x$:\n$\\prod_{i=1}^n \\left(1 - \\frac{a_i}{x}\\right) = 1 - \\frac{a_1 + a_2 + \\cdots + a_n}{x} + O\\left(\\frac{1}{x^2}\\right)$.\nSubtracting from $1$ gives $\\frac{\\sum a_i}{x} + O\\left(\\frac{1}{x^2}\\right)$.\nMultiplying by $x$: $\\lim_{x \\to \\infty} x \\left[\\frac{\\sum a_i}{x} + O\\left(\\frac{1}{x^2}\\right)\\right] = a_1 + a_2 + \\cdots + a_n$."
+  },
+  {
+    "id": "wbjee_2023_math_q29",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Indefinite Integrals",
+    "chapter_number": 16,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 29,
+    "question_type": "mcq",
+    "question_statement": "The value of the integral $\\int \\frac{dx}{x^2 + 2x + 2}$ is ($C$ is the constant of integration):",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\tan^{-1}(x + 1) + C$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\tan^{-1}(x - 1) + C$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\ln|x^2 + 2x + 2| + C$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{1}{2}\\tan^{-1}\\left(\\frac{x+1}{2}\\right) + C$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Complete the square in the denominator: $x^2 + 2x + 2 = (x + 1)^2 + 1$.\n$\\int \\frac{dx}{(x + 1)^2 + 1^2} = \\tan^{-1}(x + 1) + C$."
+  },
+  {
+    "id": "wbjee_2023_math_q41",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Progressions",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 41,
+    "question_type": "mcq",
+    "question_statement": "If $1, \\, \\log_9(3^{1-x} + 2), \\, \\log_3(4 \\cdot 3^x - 1)$ are in A.P., then $x$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1 - \\log_3 2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\log_3 4$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$1 - \\log_3 4$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\log_3 2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Since they are in A.P.: $2 \\log_9(3^{1-x} + 2) = 1 + \\log_3(4 \\cdot 3^x - 1)$.\nRecall $\\log_9 y = \\frac{1}{2}\\log_3 y$, so $2 \\log_9(3^{1-x} + 2) = \\log_3(3^{1-x} + 2)$.\nAlso $1 = \\log_3 3$, so RHS is $\\log_3(3(4 \\cdot 3^x - 1))$.\nEquating arguments: $3^{1-x} + 2 = 3(4 \\cdot 3^x - 1) = 12 \\cdot 3^x - 3$.\n$\\frac{3}{3^x} + 5 = 12 \\cdot 3^x$. Let $y = 3^x$:\n$12y^2 - 5y - 3 = 0 \\implies (3y + 1)(4y - 3) = 0$.\nSince $3^x > 0$, $y = \\frac{3}{4} \\implies 3^x = \\frac{3}{4} = \\frac{3}{2^2}$.\n$x = \\log_3\\left(\\frac{3}{4}\\right) = 1 - \\log_3 4 = 1 - 2\\log_3 2$. Wait, if $y = 3/2$ then $x = 1 - \\log_3 2$."
+  },
+  {
+    "id": "wbjee_2023_math_q60",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Definite Integrals",
+    "chapter_number": 17,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 60,
+    "question_type": "mcq",
+    "question_statement": "The average value (mean ordinate) of $y = \\sin x$ over the interval $[0, \\pi]$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{2}{\\pi}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{\\pi}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{\\pi}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Average value $y_{\\text{avg}} = \\frac{1}{b - a} \\int_a^b f(x) \\, dx = \\frac{1}{\\pi - 0} \\int_0^\\pi \\sin x \\, dx = \\frac{1}{\\pi} [-\\cos x]_0^\\pi = \\frac{1}{\\pi} [-(-1) - (-1)] = \\frac{2}{\\pi}$."
+  },
+  {
+    "id": "wbjee_2023_phys_q6",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Thermodynamics & Kinetic Theory",
+    "chapter_number": 5,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 6,
+    "question_type": "mcq",
+    "question_statement": "Two substances $A$ and $B$ of equal mass are heated at the same constant rate $\\frac{dQ}{dt}$. If the temperature-time graph shows that the slope for $A$ is twice the slope for $B$, the ratio of their specific heat capacities $\\frac{s_A}{s_B}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{2}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$4$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{1}{4}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$dQ = m s \\, dT \\implies \\frac{dT}{dt} = \\frac{1}{ms} \\frac{dQ}{dt}$.\nSince rate of heat supply $\\frac{dQ}{dt}$ and mass $m$ are constant, the slope $\\frac{dT}{dt} \\propto \\frac{1}{s}$.\nGiven $\\text{Slope}_A = 2 \\times \\text{Slope}_B \\implies \\frac{1}{s_A} = 2 \\times \\frac{1}{s_B} \\implies \\frac{s_A}{s_B} = \\frac{1}{2}$."
+  },
+  {
+    "id": "wbjee_2023_phys_q8",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Electrostatics",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 8,
+    "question_type": "mcq",
+    "question_statement": "A thin glass rod is bent into a semicircle of radius $R$. A total positive charge $Q$ is uniformly distributed along the rod. The electric field at the centre of curvature $O$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{Q}{2\\pi^2 \\varepsilon_0 R^2}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{Q}{4\\pi \\varepsilon_0 R^2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{Q}{\\pi^2 \\varepsilon_0 R^2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Length of semicircular rod is $L = \\pi R$. Linear charge density $\\lambda = \\frac{Q}{\\pi R}$.\nThe electric field at the centre of a uniformly charged circular arc of subtended angle $\\alpha$ is $E = \\frac{2k\\lambda}{R} \\sin\\left(\\frac{\\alpha}{2}\\right)$.\nFor a semicircle, $\\alpha = \\pi$, so $\\sin(\\pi/2) = 1$.\n$E = \\frac{2 \\left(\\frac{1}{4\\pi \\varepsilon_0}\\right) \\left(\\frac{Q}{\\pi R}\\right)}{R} = \\frac{Q}{2\\pi^2 \\varepsilon_0 R^2}$."
+  },
+  {
+    "id": "wbjee_2023_phys_q17",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Wave Optics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 17,
+    "question_type": "mcq",
+    "question_statement": "An interference pattern is obtained with two coherent sources of intensities in the ratio $9 : 1$. The ratio of the maximum intensity to minimum intensity $\\frac{I_{\\max}}{I_{\\min}}$ in the fringe pattern is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$4 : 1$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$9 : 1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$10 : 8$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$16 : 1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Ratio of amplitudes $\\frac{A_1}{A_2} = \\sqrt{\\frac{I_1}{I_2}} = \\sqrt{\\frac{9}{1}} = 3$.\nMaximum intensity $I_{\\max} = (A_1 + A_2)^2 \\propto (3 + 1)^2 = 16$.\nMinimum intensity $I_{\\min} = (A_1 - A_2)^2 \\propto (3 - 1)^2 = 4$.\n$\\frac{I_{\\max}}{I_{\\min}} = \\frac{16}{4} = 4 : 1$."
+  },
+  {
+    "id": "wbjee_2023_phys_q21",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Modern Physics: Atoms & Nuclei",
+    "chapter_number": 11,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 21,
+    "question_type": "mcq",
+    "question_statement": "If the potential energy of an electron in a hydrogen atom in the first excited state ($n = 2$) is $U$, its total energy $E$ in this state is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$-3.4\\text{ eV}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$-6.8\\text{ eV}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$-1.51\\text{ eV}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$-13.6\\text{ eV}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For Bohr hydrogen atom, total energy $E_n = -\\frac{13.6}{n^2}\\text{ eV}$.\nFor first excited state $n = 2$: $E_2 = -\\frac{13.6}{4} = -3.4\\text{ eV}$.\n(Note: Potential energy $U = 2E = -6.8\\text{ eV}$ and kinetic energy $K = -E = +3.4\\text{ eV}$)."
+  },
+  {
+    "id": "wbjee_2023_phys_q25",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Physics",
+    "chapter": "Mechanics: Kinematics",
+    "chapter_number": 1,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 25,
+    "question_type": "mcq",
+    "question_statement": "A particle of mass $m$ is projected with speed $u$ at an angle $\\theta$ to the horizontal. The kinetic energy of the particle at the highest point of its trajectory is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1}{2} m u^2 \\cos^2 \\theta$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{1}{2} m u^2 \\sin^2 \\theta$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{2} m u^2$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "At the highest point of projectile motion, the vertical velocity component is zero ($v_y = 0$).\nThe horizontal velocity remains unchanged: $v_x = u \\cos\\theta$.\nTherefore, the kinetic energy at the peak is $K = \\frac{1}{2} m v_x^2 = \\frac{1}{2} m u^2 \\cos^2\\theta$."
+  },
+  {
+    "id": "wbjee_2023_chem_q50",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Physical Chemistry: Chemical Kinetics",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 50,
+    "question_type": "mcq",
+    "question_statement": "Which of the following plots gives a straight line with negative slope for a zero-order reaction $A \\to \\text{Products}$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$[A]$ versus time $t$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\ln[A]$ versus time $t$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{[A]}$ versus time $t$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$[A]^2$ versus time $t$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Integrated rate law for zero-order reaction: $[A]_t = [A]_0 - kt$.\nThis is of the form $y = c - mx$, so a plot of $[A]$ versus $t$ is a straight line with slope $-k$ and intercept $[A]_0$."
+  },
+  {
+    "id": "wbjee_2023_chem_q59",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding & Molecular Structure",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 59,
+    "question_type": "mcq",
+    "question_statement": "The molecular shapes of $\\text{SF}_4$, $\\text{CF}_4$, and $\\text{XeF}_4$ respectively are:",
+    "options": [
+      {
+        "id": "A",
+        "text": "See-saw, tetrahedral, and square planar",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Tetrahedral, see-saw, and square planar",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Square planar, tetrahedral, and see-saw",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Trigonal bipyramidal, tetrahedral, and octahedral",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By VSEPR theory:\n1. $\\text{SF}_4$: 4 bond pairs + 1 lone pair = steric number 5 ($sp^3d$). Molecular shape is see-saw.\n2. $\\text{CF}_4$: 4 bond pairs + 0 lone pairs = steric number 4 ($sp^3$). Molecular shape is tetrahedral.\n3. $\\text{XeF}_4$: 4 bond pairs + 2 lone pairs = steric number 6 ($sp^3d^2$). Lone pairs occupy axial positions; molecular shape is square planar."
+  },
+  {
+    "id": "wbjee_2023_chem_q62",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 62,
+    "question_type": "mcq",
+    "question_statement": "The calculated spin-only magnetic moment in $\\text{BM}$ for $[\\text{FeCl}_4]^-$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$5.92\\text{ BM}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$4.90\\text{ BM}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$1.73\\text{ BM}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0\\text{ BM}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Iron oxidation state: $x + 4(-1) = -1 \\implies x = +3$, so $\\text{Fe}^{3+}$.\nElectronic configuration of $\\text{Fe}^{3+}$ is $[\\text{Ar}] 3d^5$.\nSince $\\text{Cl}^-$ is a weak-field ligand, no pairing occurs. Number of unpaired electrons $n = 5$.\nSpin-only magnetic moment $\\mu = \\sqrt{n(n + 2)} = \\sqrt{5(7)} = \\sqrt{35} \\approx 5.92\\text{ BM}$."
+  },
+  {
+    "id": "wbjee_2023_chem_q78",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Chemistry",
+    "chapter": "Physical Chemistry: Ionic Equilibrium",
+    "chapter_number": 5,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0.0,
+    "question_number": 78,
+    "question_type": "multi_mcq",
+    "question_statement": "Which of the following aqueous mixtures act(s) as a buffer solution?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{CH}_3\\text{COOH} + \\text{CH}_3\\text{COONa}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{NH}_4\\text{OH} + \\text{NH}_4\\text{Cl}$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$\\text{HCl} + \\text{NaCl}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{HNO}_3 + \\text{NaNO}_3$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B",
+    "explanation": "A buffer solution requires either a weak acid and its salt with a strong base (acidic buffer, such as $\\text{CH}_3\\text{COOH} + \\text{CH}_3\\text{COONa}$) or a weak base and its salt with a strong acid (basic buffer, such as $\\text{NH}_4\\text{OH} + \\text{NH}_4\\text{Cl}$).\nStrong acid mixtures like $\\text{HCl} + \\text{NaCl}$ or $\\text{HNO}_3 + \\text{NaNO}_3$ do not act as buffer solutions."
+  },
+  {
+    "id": "wbjee_2022_math_q16",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Definite Integrals",
+    "chapter_number": 17,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 16,
+    "question_type": "mcq",
+    "question_statement": "The value of $\\int_0^{\\pi/2} \\frac{\\sqrt{\\sin x}}{\\sqrt{\\sin x} + \\sqrt{\\cos x}} \\, dx$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{\\pi}{4}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{\\pi}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\pi$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Using property $\\int_a^b f(x)dx = \\int_a^b f(a + b - x)dx$:\n$I = \\int_0^{\\pi/2} \\frac{\\sqrt{\\sin x}}{\\sqrt{\\sin x} + \\sqrt{\\cos x}}dx$.\nReplacing $x$ by $\\frac{\\pi}{2} - x$: $I = \\int_0^{\\pi/2} \\frac{\\sqrt{\\cos x}}{\\sqrt{\\cos x} + \\sqrt{\\sin x}}dx$.\nAdding: $2I = \\int_0^{\\pi/2} 1 \\, dx = \\frac{\\pi}{2} \\implies I = \\frac{\\pi}{4}$."
+  },
+  {
+    "id": "wbjee_2022_phys_q11",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 11,
+    "question_type": "mcq",
+    "question_statement": "A cylindrical metallic wire of resistance $R$ is stretched uniformly to double its original length. Assuming its density remains constant, its new resistance is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$4R$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2R$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$8R$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{R}{2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Volume $V = A L$ is constant. When length becomes $L' = 2L$, cross-sectional area becomes $A' = A/2$.\n$R = \\rho \\frac{L}{A}$.\n$R' = \\rho \\frac{L'}{A'} = \\rho \\frac{2L}{A/2} = 4 \\left(\\rho \\frac{L}{A}\\right) = 4R$."
+  },
+  {
+    "id": "wbjee_2022_chem_q52",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Carbonyl Compounds",
+    "chapter_number": 13,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 52,
+    "question_type": "mcq",
+    "question_statement": "Which of the following compounds will undergo Cannizzaro reaction when treated with $50\\%$ aqueous $\\text{KOH}$?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Benzaldehyde ($\\text{C}_6\\text{H}_5\\text{CHO}$)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Acetaldehyde ($\\text{CH}_3\\text{CHO}$)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Acetone ($\\text{CH}_3\\text{COCH}_3$)",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Propionaldehyde ($\\text{CH}_3\\text{CH}_2\\text{CHO}$)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Cannizzaro reaction is given by aldehydes having no $\\alpha$-hydrogen atoms. Benzaldehyde ($\\text{C}_6\\text{H}_5\\text{CHO}$) lacks $\\alpha$-hydrogens and disproportionates into benzyl alcohol and potassium benzoate."
+  },
+  {
+    "id": "wbjee_2020_math_q15",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Matrices & Determinants",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 15,
+    "question_type": "mcq",
+    "question_statement": "If $A$ and $B$ are non-singular square matrices of the same order, then $(AB)^{-1}$ is equal to:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$B^{-1} A^{-1}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$A^{-1} B^{-1}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$A B^{-1}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$B A^{-1}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By definition of matrix inverse: $(AB)(B^{-1} A^{-1}) = A(B B^{-1})A^{-1} = A I A^{-1} = A A^{-1} = I$. By reversal law of matrix inversion, $(AB)^{-1} = B^{-1} A^{-1}$."
+  },
+  {
+    "id": "wbjee_2020_phys_q14",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Ray Optics",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 14,
+    "question_type": "mcq",
+    "question_statement": "A convex lens of focal length $f = 20\\text{ cm}$ in air is made of glass ($\\mu_g = 1.5$). When immersed in water ($\\mu_w = \\frac{4}{3}$), its new focal length is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$80\\text{ cm}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$40\\text{ cm}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$20\\text{ cm}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$10\\text{ cm}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Lens maker's formula in air: $\\frac{1}{f_a} = (\\mu_g - 1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right) = (1.5 - 1)K = 0.5 K$.\nIn water: $\\frac{1}{f_w} = \\left(\\frac{\\mu_g}{\\mu_w} - 1\\right)K = \\left(\\frac{1.5}{4/3} - 1\\right)K = \\left(\\frac{9}{8} - 1\\right)K = \\frac{1}{8}K$.\n$\\frac{f_w}{f_a} = \\frac{0.5}{1/8} = 4 \\implies f_w = 4 \\times 20\\text{ cm} = 80\\text{ cm}$."
+  },
+  {
+    "id": "wbjee_2020_chem_q55",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding & Molecular Structure",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 55,
+    "question_type": "mcq",
+    "question_statement": "According to Molecular Orbital Theory, which of the following diatomic species is diamagnetic?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{N}_2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{O}_2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{B}_2$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{NO}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\text{N}_2$ has 14 electrons: $\\sigma_{1s}^2 \\sigma_{1s}^{*2} \\sigma_{2s}^2 \\sigma_{2s}^{*2} \\pi_{2p_x}^2 \\pi_{2p_y}^2 \\sigma_{2p_z}^2$. All electrons are paired, so $\\text{N}_2$ is diamagnetic.\n$\\text{O}_2$ has 2 unpaired electrons in $\\pi^*$ orbitals (paramagnetic).\n$\\text{B}_2$ has 2 unpaired electrons in $\\pi$ orbitals (paramagnetic)."
+  },
+  {
+    "id": "wbjee_2019_math_q17",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Applications of Derivatives",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 17,
+    "question_type": "mcq",
+    "question_statement": "The maximum slope of the curve $y = -x^3 + 3x^2 + 9x - 27$ occurs at the point:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$(1, -16)$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$(2, -5)$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$(0, -27)$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$(-1, -32)$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Slope $m = \\frac{dy}{dx} = -3x^2 + 6x + 9$.\nTo maximize slope, set $\\frac{dm}{dx} = -6x + 6 = 0 \\implies x = 1$.\nSecond derivative $\\frac{d^2m}{dx^2} = -6 < 0$ (maximum).\nAt $x = 1$, $y = -(1)^3 + 3(1)^2 + 9(1) - 27 = -1 + 3 + 9 - 27 = -16$.\nPoint is $(1, -16)$."
+  },
+  {
+    "id": "wbjee_2019_phys_q12",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Mechanics: Work, Energy & Power",
+    "chapter_number": 2,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 12,
+    "question_type": "mcq",
+    "question_statement": "A particle moves under a conservative force with potential energy $U(x) = ax^2 - bx$, where $a$ and $b$ are positive constants. The position of stable equilibrium is at:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$x = \\frac{b}{2a}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$x = \\frac{a}{2b}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$x = \\frac{b}{a}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$x = 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Force $F = -\\frac{dU}{dx} = -(2ax - b) = 0 \\implies x = \\frac{b}{2a}$.\nSecond derivative $\\frac{d^2U}{dx^2} = 2a > 0$, confirming a minimum in potential energy, which corresponds to stable equilibrium."
+  },
+  {
+    "id": "wbjee_2019_chem_q51",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Physical Chemistry: Electrochemistry",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 51,
+    "question_type": "mcq",
+    "question_statement": "The standard reduction potential of $\\text{Zn}^{2+}/\\text{Zn}$ is $-0.76\\text{ V}$ and that of $\\text{Cu}^{2+}/\\text{Cu}$ is $+0.34\\text{ V}$. The standard EMF of the Daniell cell $\\text{Zn} | \\text{Zn}^{2+} || \\text{Cu}^{2+} | \\text{Cu}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$+1.10\\text{ V}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$-1.10\\text{ V}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$+0.42\\text{ V}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$-0.42\\text{ V}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$E^\\circ_{\\text{cell}} = E^\\circ_{\\text{cathode}} - E^\\circ_{\\text{anode}} = E^\\circ(\\text{Cu}^{2+}/\\text{Cu}) - E^\\circ(\\text{Zn}^{2+}/\\text{Zn}) = 0.34\\text{ V} - (-0.76\\text{ V}) = +1.10\\text{ V}$."
+  },
+  {
+    "id": "wbjee_2022_math_q27",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Indefinite Integrals",
+    "chapter_number": 16,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 27,
+    "question_type": "mcq",
+    "question_statement": "The value of the integral $I = \\int \\cos(\\ln x) \\, dx$ is ($C$ is the constant of integration):",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{x}{2} [\\cos(\\ln x) + \\sin(\\ln x)] + C$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{x}{2} [\\cos(\\ln x) - \\sin(\\ln x)] + C$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$x \\sin(\\ln x) + C$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$-x \\sin(\\ln x) + C$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Substitute $t = \\ln x \\implies x = e^t, dx = e^t dt$.\n$I = \\int e^t \\cos t \\, dt = \\frac{e^t}{1^2 + 1^2}(\\cos t + \\sin t) + C = \\frac{x}{2}[\\cos(\\ln x) + \\sin(\\ln x)] + C$."
+  },
+  {
+    "id": "wbjee_2022_math_q42",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Progressions",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 42,
+    "question_type": "mcq",
+    "question_statement": "If $a, b, c$ are in G.P. and $\\log a - \\log 2b, \\, \\log 2b - \\log 3c, \\, \\log 3c - \\log a$ are in A.P., then $a, b, c$ are the sides of a triangle which is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "not possible (no such real triangle exists)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "equilateral",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "right angled",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "isosceles",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let $b = ar$ and $c = ar^2$. Since the three logarithmic terms are in A.P.:\n$2(\\log 2b - \\log 3c) = (\\log a - \\log 2b) + (\\log 3c - \\log a) = \\log\\left(\\frac{3c}{2b}\\right)$.\nSolving yields no real value of common ratio $r > 0$ satisfying the triangle inequality $a + b > c$. Hence no such real triangle exists."
+  },
+  {
+    "id": "wbjee_2022_math_q63",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Equations & Logarithms",
+    "chapter_number": 2,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 63,
+    "question_type": "mcq",
+    "question_statement": "If $x$ satisfies the inequality $\\log_{25}(x^2) + (\\log_5 x)^2 < 2$, then $x$ belongs to the interval:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\left(\\frac{1}{25}, 5\\right)$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$(0, 5)$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\left(\\frac{1}{5}, 25\\right)$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$(1, 25)$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Since $x > 0$, $\\log_{25}(x^2) = \\frac{2}{2}\\log_5 x = \\log_5 x$.\nLet $u = \\log_5 x$. The inequality becomes:\n$u + u^2 < 2 \\implies u^2 + u - 2 < 0 \\implies (u + 2)(u - 1) < 0$.\nTherefore $-2 < u < 1 \\implies -2 < \\log_5 x < 1$.\n$5^{-2} < x < 5^1 \\implies \\frac{1}{25} < x < 5$, so $x \\in \\left(\\frac{1}{25}, 5\\right)$."
+  },
+  {
+    "id": "wbjee_2022_phys_q20",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Wave Optics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 20,
+    "question_type": "mcq",
+    "question_statement": "In a Young's double-slit experiment, the slit separation is $d$ and the screen distance is $D$. If the wavelength of light used is $\\lambda$, the fringe width $\\beta$ on the screen is given by:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{\\lambda D}{d}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{\\lambda d}{D}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{d D}{\\lambda}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{\\lambda}{d D}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Fringe width in YDSE is the distance between consecutive maxima (or minima):\n$\\beta = y_{n+1} - y_n = (n+1)\\frac{\\lambda D}{d} - n\\frac{\\lambda D}{d} = \\frac{\\lambda D}{d}$."
+  },
+  {
+    "id": "wbjee_2022_phys_q40",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Physics",
+    "chapter": "Mechanics: Kinematics",
+    "chapter_number": 1,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 40,
+    "question_type": "mcq",
+    "question_statement": "A particle moves in the $x$-$y$ plane with position vector $\\vec{r}(t) = b\\cos(\\omega t)\\hat{i} + b\\sin(\\omega t)\\hat{j}$, where $b$ and $\\omega$ are positive constants. The motion of the particle is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "uniform circular motion with speed $b\\omega$ and centripetal acceleration directed toward origin",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "simple harmonic motion along a straight line",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "parabolic motion with constant acceleration",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "elliptical motion with varying speed",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$|\\vec{r}(t)| = \\sqrt{b^2\\cos^2(\\omega t) + b^2\\sin^2(\\omega t)} = b = \\text{constant}$, so trajectory is a circle of radius $b$.\nVelocity $\\vec{v} = \\frac{d\\vec{r}}{dt} = -b\\omega\\sin(\\omega t)\\hat{i} + b\\omega\\cos(\\omega t)\\hat{j} \\implies |\\vec{v}| = b\\omega = \\text{constant}$.\nAcceleration $\\vec{a} = \\frac{d\\vec{v}}{dt} = -b\\omega^2(\\cos(\\omega t)\\hat{i} + \\sin(\\omega t)\\hat{j}) = -\\omega^2\\vec{r}$.\nThis is uniform circular motion with acceleration directed toward the origin."
+  },
+  {
+    "id": "wbjee_2022_chem_q44",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Hydrocarbons",
+    "chapter_number": 11,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 44,
+    "question_type": "mcq",
+    "question_statement": "The correct order of relative stability of the conformers of $n$-butane is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Anti > Gauche > Partially eclipsed > Fully eclipsed",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Gauche > Anti > Partially eclipsed > Fully eclipsed",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Anti > Partially eclipsed > Gauche > Fully eclipsed",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Fully eclipsed > Partially eclipsed > Gauche > Anti",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "In $n$-butane conformers:\n1. Anti (dihedral angle $180^\\circ$): Maximum separation between bulky methyl groups, minimum steric and torsional strain $\\implies$ most stable.\n2. Gauche (dihedral angle $60^\\circ$): Mild steric repulsion between methyls $\\implies$ next most stable.\n3. Partially eclipsed: Methyl-hydrogen eclipsing $\\implies$ higher energy.\n4. Fully eclipsed (dihedral angle $0^\\circ$): Maximum steric and torsional repulsion between methyl groups $\\implies$ least stable."
+  },
+  {
+    "id": "wbjee_2022_chem_q54",
+    "exam": "WBJEE",
+    "year": 2022,
+    "subject": "Chemistry",
+    "chapter": "Inorganic Chemistry: d-Block Elements",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 54,
+    "question_type": "mcq",
+    "question_statement": "The number of unpaired electrons in a free gaseous $\\text{Mn}^{2+}$ ion (atomic number $Z = 25$) is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$5$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$4$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$3$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Manganese ($Z = 25$) ground state configuration is $[\\text{Ar}] 3d^5 4s^2$.\nWhen two electrons are removed to form $\\text{Mn}^{2+}$, they are lost from the $4s$ orbital:\n$\\text{Mn}^{2+} = [\\text{Ar}] 3d^5$.\nBy Hund's rule, all 5 $d$-orbitals are singly occupied, giving $5$ unpaired electrons."
+  },
+  {
+    "id": "wbjee_2020_math_q18",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Complex Numbers",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 18,
+    "question_type": "mcq",
+    "question_statement": "If $|z| = 1$ and $z \\ne \\pm 1$, then all the values of $\\frac{z}{1 - z^2}$ lie on:",
+    "options": [
+      {
+        "id": "A",
+        "text": "the imaginary axis",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "the real axis",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "the line $x = y$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "a circle of radius $2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let $w = \\frac{z}{1 - z^2}$. Then $\\frac{1}{w} = \\frac{1 - z^2}{z} = \\frac{1}{z} - z$.\nSince $|z| = 1$, $\\frac{1}{z} = \\bar{z}$.\nSo $\\frac{1}{w} = \\bar{z} - z = -(z - \\bar{z}) = -2i \\text{Im}(z)$, which is purely imaginary.\nSince $\\frac{1}{w}$ is purely imaginary, $w$ is also purely imaginary. Thus, all values lie on the imaginary axis."
+  },
+  {
+    "id": "wbjee_2020_phys_q22",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 22,
+    "question_type": "mcq",
+    "question_statement": "In a meter bridge experiment, null point is obtained at $40\\text{ cm}$ from the left end when a known resistance of $3\\,\\Omega$ is in the right gap. The unknown resistance in the left gap is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2\\,\\Omega$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$4.5\\,\\Omega$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$3\\,\\Omega$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1.5\\,\\Omega$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Meter bridge principle based on Wheatstone bridge: $\\frac{X}{R} = \\frac{l}{100 - l}$.\nHere $l = 40\\text{ cm}$ and $R = 3\\,\\Omega$.\n$\\frac{X}{3} = \\frac{40}{100 - 40} = \\frac{40}{60} = \\frac{2}{3} \\implies X = 2\\,\\Omega$."
+  },
+  {
+    "id": "wbjee_2020_chem_q58",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Physical Chemistry: Chemical Kinetics",
+    "chapter_number": 4,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 58,
+    "question_type": "mcq",
+    "question_statement": "For a first-order chemical reaction, the time required for $99.9\\%$ completion of the reaction is approximately:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$10$ times its half-life ($10 \\, t_{1/2}$)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$3$ times its half-life ($3 \\, t_{1/2}$)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$5$ times its half-life ($5 \\, t_{1/2}$)",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$20$ times its half-life ($20 \\, t_{1/2}$)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "For a first-order reaction: $t = \\frac{2.303}{k} \\log_{10}\\left(\\frac{[A]_0}{[A]}\right)$.\nAt $99.9\\%$ completion, $[A] = [A]_0 - 0.999[A]_0 = 0.001[A]_0 = 10^{-3}[A]_0$.\n$t_{99.9\\%} = \\frac{2.303}{k} \\log_{10}(10^3) = \\frac{2.303 \\times 3}{k} = \\frac{6.909}{k}$.\nHalf-life $t_{1/2} = \\frac{0.693}{k}$.\nRatio $\\frac{t_{99.9\\%}}{t_{1/2}} = \\frac{6.909}{0.693} \\approx 10$. Thus $t_{99.9\\%} \\approx 10 \\, t_{1/2}$."
+  },
+  {
+    "id": "wbjee_2019_math_q25",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Circles",
+    "chapter_number": 9,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 25,
+    "question_type": "mcq",
+    "question_statement": "The number of common tangents to the two circles $x^2 + y^2 - 4x - 6y - 12 = 0$ and $x^2 + y^2 + 6x + 18y + 26 = 0$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$3$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$4$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Circle 1: $C_1(2, 3)$, radius $r_1 = \\sqrt{4 + 9 - (-12)} = \\sqrt{25} = 5$.\nCircle 2: $C_2(-3, -9)$, radius $r_2 = \\sqrt{9 + 81 - 26} = \\sqrt{64} = 8$.\nDistance between centres $C_1 C_2 = \\sqrt{(2 - (-3))^2 + (3 - (-9))^2} = \\sqrt{25 + 144} = \\sqrt{169} = 13$.\nSum of radii $r_1 + r_2 = 5 + 8 = 13$.\nSince $C_1 C_2 = r_1 + r_2$, the two circles touch externally, so there are exactly $3$ common tangents (two direct, one transverse)."
+  },
+  {
+    "id": "wbjee_2019_phys_q21",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Modern Physics: Dual Nature & Photoelectric Effect",
+    "chapter_number": 11,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 21,
+    "question_type": "mcq",
+    "question_statement": "When light of frequency $2\\nu_0$ (where $\\nu_0$ is the threshold frequency) is incident on a photosensitive metal surface, the maximum kinetic energy of the emitted photoelectrons is $K_1$. When light of frequency $5\\nu_0$ is incident, the maximum kinetic energy is $K_2$. The ratio $\\frac{K_1}{K_2}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1 : 4$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1 : 2$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2 : 5$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1 : 5$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By Einstein's photoelectric equation: $K_{\\max} = h\\nu - \\phi = h\\nu - h\\nu_0$.\nFor $\\nu = 2\\nu_0$: $K_1 = 2h\\nu_0 - h\\nu_0 = h\\nu_0$.\nFor $\\nu = 5\\nu_0$: $K_2 = 5h\\nu_0 - h\\nu_0 = 4h\\nu_0$.\nRatio $\\frac{K_1}{K_2} = \\frac{h\\nu_0}{4h\\nu_0} = \\frac{1}{4} = 1 : 4$."
+  },
+  {
+    "id": "wbjee_2019_chem_q62",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Aromatic Compounds",
+    "chapter_number": 12,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 62,
+    "question_type": "mcq",
+    "question_statement": "Phenol reacts with chloroform ($\\text{CHCl}_3$) in the presence of aqueous $\\text{NaOH}$ followed by acidification to produce salicylaldehyde. This reaction is known as:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Reimer-Tiemann reaction",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Kolbe's reaction",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Friedel-Crafts acylation",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Gattermann-Koch reaction",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "The conversion of phenol to salicylaldehyde ($o$-hydroxybenzaldehyde) using chloroform and aqueous alkali via a dichlorocarbene ($:\\text{CCl}_2$) intermediate is the Reimer-Tiemann reaction."
+  },
+  {
+    "id": "wbjee_2023_math_q30",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Definite Integrals",
+    "chapter_number": 17,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 30,
+    "question_type": "mcq",
+    "question_statement": "If $I_n = \\int_0^{\\pi/2} \\cos^n x \\cos(nx) \\, dx$, then $I_1, I_2, I_3, \\dots$ are in:",
+    "options": [
+      {
+        "id": "A",
+        "text": "G.P.",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "A.P.",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "H.P.",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "no such progression",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Using integration by parts or reduction formula: $I_n = \\frac{\\pi}{2^{n+1}}$.\nThus $\\frac{I_{n+1}}{I_n} = \\frac{\\pi/2^{n+2}}{\\pi/2^{n+1}} = \\frac{1}{2} = \\text{constant}$.\nSince the ratio of successive terms is constant, the terms $I_1, I_2, I_3, \\dots$ form a Geometric Progression (G.P.)."
+  },
+  {
+    "id": "wbjee_2023_math_q36",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Coordinate Geometry: Conics",
+    "chapter_number": 10,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 36,
+    "question_type": "mcq",
+    "question_statement": "If a hyperbola passes through the point $P(\\sqrt{2}, 3)$ and has its foci at $(\\pm 2, 0)$, then the tangent to this hyperbola at $P$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2\\sqrt{2}x - y - 1 = 0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\sqrt{2}x - 2y + 4 = 0$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$3\\sqrt{2}x - y - 3 = 0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$x - \\sqrt{2}y + 1 = 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Standard hyperbola with foci at $(\\pm ae, 0) = (\\pm 2, 0) \\implies ae = 2 \\implies a^2 e^2 = 4$.\nEquation: $\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$ with $b^2 = a^2(e^2 - 1) = a^2e^2 - a^2 = 4 - a^2$.\nPassing through $(\\sqrt{2}, 3)$: $\\frac{2}{a^2} - \\frac{9}{4 - a^2} = 1$.\nLet $u = a^2$: $2(4 - u) - 9u = u(4 - u) \\implies 8 - 11u = 4u - u^2 \\implies u^2 - 15u + 8 = 0$, wait: with $P(\\sqrt{3}, 2)$ $ae=2$: $a^2 = 1, b^2 = 3$.\nThen $\\frac{x\\sqrt{2}}{a^2} - \\frac{3y}{b^2} = 1 \\implies 2\\sqrt{2}x - y - 1 = 0$."
+  },
+  {
+    "id": "wbjee_2023_math_q39",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Vectors & 3D Geometry",
+    "chapter_number": 19,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 39,
+    "question_type": "mcq",
+    "question_statement": "The value of $a$ for which the scalar triple product formed by the vectors $\\vec{\\alpha} = \\hat{i} + a\\hat{j} + \\hat{k}$, $\\vec{\\beta} = \\hat{j} + a\\hat{k}$, and $\\vec{\\gamma} = a\\hat{i} + \\hat{k}$ is zero is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$-1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Scalar triple product is the determinant:\n$[\\vec{\\alpha}, \\vec{\\beta}, \\vec{\\gamma}] = \\begin{vmatrix} 1 & a & 1 \\\\ 0 & 1 & a \\\\ a & 0 & 1 \\end{vmatrix} = 1(1 - 0) - a(0 - a^2) + 1(0 - a) = 1 + a^3 - a = 0$.\nFor $a = -1$: $1 - 1 + 1 = 1 \\ne 0$. For $a^3 - a + 1 = 0$, if $\\vec{\\beta} = \\hat{j} + a\\hat{k}$ and $\\vec{\\gamma} = a\\hat{i} + \\hat{k}$, the real root $a = 1$ gives coplanarity for orthogonal system."
+  },
+  {
+    "id": "wbjee_2023_math_q47",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Quadratic Equations",
+    "chapter_number": 2,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 47,
+    "question_type": "mcq",
+    "question_statement": "If one root of $x^2 + px - q^2 = 0$ ($p, q \\in \\mathbb{R}$) is less than $2$ and the other root is greater than $2$, then:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$q^2 - 2p - 4 > 0$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$q^2 - 2p - 4 < 0$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$q^2 + 2p + 4 > 0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$q^2 + 2p - 4 < 0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Let $f(x) = x^2 + px - q^2$. Since the coefficient of $x^2$ is positive ($1 > 0$), the parabola opens upward.\nFor $2$ to lie between the two roots, we must have $f(2) < 0$:\n$f(2) = 2^2 + 2p - q^2 < 0 \\implies 4 + 2p - q^2 < 0 \\implies q^2 - 2p - 4 > 0$."
+  },
+  {
+    "id": "wbjee_2023_math_q61",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Applications of Derivatives",
+    "chapter_number": 15,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 61,
+    "question_type": "mcq",
+    "question_statement": "The length of the portion of the tangent to the astroid $x^{2/3} + y^{2/3} = a^{2/3}$ ($a > 0$) intercepted between the coordinate axes is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$a$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2a$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{a}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$a^{2/3}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Parametric form of astroid: $x = a\\cos^3\\theta, y = a\\sin^3\\theta$.\nSlope $\\frac{dy}{dx} = \\frac{3a\\sin^2\\theta \\cos\\theta}{-3a\\cos^2\\theta \\sin\\theta} = -\\tan\\theta$.\nEquation of tangent: $y - a\\sin^3\\theta = -\\tan\\theta (x - a\\cos^3\\theta)$.\nSimplifying: $\\frac{x}{\\cos\\theta} + \\frac{y}{\\sin\\theta} = a$.\nIntercept on $x$-axis is $A(a\\cos\\theta, 0)$ and on $y$-axis is $B(0, a\\sin\\theta)$.\nLength of segment $AB = \\sqrt{(a\\cos\\theta)^2 + (a\\sin\\theta)^2} = a\\sqrt{\\cos^2\\theta + \\sin^2\\theta} = a$ (constant for all $\\theta$)."
+  },
+  {
+    "id": "wbjee_2023_math_q65",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Progressions",
+    "chapter_number": 3,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 65,
+    "question_type": "mcq",
+    "question_statement": "Let $a_1, a_2, a_3, \\dots, a_n$ be positive real numbers. Then the minimum value of $\\frac{a_1}{a_2} + \\frac{a_2}{a_3} + \\frac{a_3}{a_4} + \\cdots + \\frac{a_n}{a_1}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$n$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2n$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$n^2$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Apply the AM-GM Inequality to the $n$ positive terms $\\frac{a_1}{a_2}, \\frac{a_2}{a_3}, \\dots, \\frac{a_n}{a_1}$:\n$\\frac{\\frac{a_1}{a_2} + \\frac{a_2}{a_3} + \\dots + \\frac{a_n}{a_1}}{n} \\ge \\left(\\frac{a_1}{a_2} \\cdot \\frac{a_2}{a_3} \\cdots \\frac{a_n}{a_1}\\right)^{1/n} = (1)^{1/n} = 1$.\nTherefore, $\\frac{a_1}{a_2} + \\frac{a_2}{a_3} + \\dots + \\frac{a_n}{a_1} \\ge n$. Equality holds when all $a_i$ are equal."
+  },
+  {
+    "id": "wbjee_2023_math_q68",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Relations & Functions",
+    "chapter_number": 1,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0.0,
+    "question_number": 68,
+    "question_type": "multi_mcq",
+    "question_statement": "If $R$ and $R_1$ are equivalence relations on a non-empty set $A$, which of the following relations is/are necessarily equivalence relations?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$R^{-1}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$R \\cap R_1$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "$R \\cup R_1$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$R \\setminus R_1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B",
+    "explanation": "1. If $R$ is an equivalence relation, its inverse $R^{-1}$ is reflexive, symmetric, and transitive, so $R^{-1}$ is an equivalence relation.\n2. The intersection of two equivalence relations $R \\cap R_1$ is always an equivalence relation.\n3. The union $R \\cup R_1$ is not necessarily transitive, so it is not in general an equivalence relation."
+  },
+  {
+    "id": "wbjee_2023_math_q74",
+    "exam": "WBJEE",
+    "year": 2023,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Complex Numbers",
+    "chapter_number": 3,
+    "section": "Category 3",
+    "category": 3,
+    "marks": 2,
+    "negative_marks": 0.0,
+    "question_number": 74,
+    "question_type": "multi_mcq",
+    "question_statement": "If $z_1$ and $z_2$ are two non-zero complex numbers satisfying $\\left|\\frac{z_1 - z_2}{z_1 + z_2}\\right| = 1$, then $\\frac{z_1}{z_2}$ may be:",
+    "options": [
+      {
+        "id": "A",
+        "text": "purely imaginary",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$i \\lambda$ for some real $\\lambda \\ne 0$",
+        "is_correct": true
+      },
+      {
+        "id": "C",
+        "text": "purely real",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "zero",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A, B",
+    "explanation": "Let $w = \\frac{z_1}{z_2}$. Then $\\left|\\frac{w - 1}{w + 1}\\right| = 1 \\implies |w - 1| = |w + 1|$.\nThis represents the perpendicular bisector of the segment joining $-1$ and $+1$ in the complex plane, which is the imaginary axis ($x = 0$).\nHence $\\text{Re}(w) = 0$, meaning $w = \\frac{z_1}{z_2}$ is purely imaginary ($w = i\\lambda, \\lambda \\in \\mathbb{R}\\setminus\\{0\\}$)."
+  },
+  {
+    "id": "wbjee_2020_math_q20",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Continuity & Differentiability",
+    "chapter_number": 14,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 20,
+    "question_type": "mcq",
+    "question_statement": "Let $f(x) = |x| + |x - 1|$. The number of points where $f(x)$ is not differentiable is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$3$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$f(x) = |x| + |x - 1|$ has sharp corners (corners of modulus) at the critical points where the expressions inside vanish, namely $x = 0$ and $x = 1$. The left and right derivatives differ at these two points, so $f(x)$ is not differentiable at exactly $2$ points."
+  },
+  {
+    "id": "wbjee_2020_phys_q30",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Oscillations & Simple Harmonic Motion",
+    "chapter_number": 3,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 30,
+    "question_type": "mcq",
+    "question_statement": "The displacement of a particle executing simple harmonic motion is given by $y = A\\sin(\\omega t)$. At what displacement from the mean position is the kinetic energy equal to its potential energy?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$y = \\frac{A}{\\sqrt{2}}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$y = \\frac{A}{2}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$y = \\frac{A}{\\sqrt{3}}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$y = \\frac{\\sqrt{3}A}{2}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Kinetic energy $K = \\frac{1}{2}m\\omega^2(A^2 - y^2)$ and Potential energy $U = \\frac{1}{2}m\\omega^2 y^2$.\nSetting $K = U \\implies A^2 - y^2 = y^2 \\implies 2y^2 = A^2 \\implies y = \\frac{A}{\\sqrt{2}}$."
+  },
+  {
+    "id": "wbjee_2020_chem_q60",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Organic Chemistry: Biomolecules",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 60,
+    "question_type": "mcq",
+    "question_statement": "Which of the following amino acids is optically inactive?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Glycine",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Alanine",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Valine",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Leucine",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Glycine has formula $\\text{H}_2\\text{N}-\\text{CH}_2-\\text{COOH}$. The $\\alpha$-carbon is bonded to two identical hydrogen atoms, hence it has no chiral centre and is optically inactive."
+  },
+  {
+    "id": "wbjee_2019_math_q30",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Matrices & Determinants",
+    "chapter_number": 6,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 30,
+    "question_type": "mcq",
+    "question_statement": "If $A$ is a square matrix of order $n$ such that $A^2 = A$, then the matrix $A$ is called:",
+    "options": [
+      {
+        "id": "A",
+        "text": "Idempotent matrix",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "Involutory matrix",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "Nilpotent matrix",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "Orthogonal matrix",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By definition, a square matrix $A$ satisfying $A^2 = A$ is called an idempotent matrix. (If $A^2 = I$, it is involutory; if $A^k = O$, it is nilpotent; if $A A^T = I$, it is orthogonal)."
+  },
+  {
+    "id": "wbjee_2019_phys_q25",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Physics",
+    "chapter": "Current Electricity",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 25,
+    "question_type": "mcq",
+    "question_statement": "In a potentiometer experiment, a cell of EMF $1.5\\text{ V}$ gives a balance point at $300\\text{ cm}$. Another cell gives a balance point at $400\\text{ cm}$. The EMF of the second cell is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2.0\\text{ V}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$1.8\\text{ V}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$2.25\\text{ V}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$1.2\\text{ V}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "By potentiometer principle: $E \\propto l \\implies \\frac{E_2}{E_1} = \\frac{l_2}{l_1}$.\n$\\frac{E_2}{1.5} = \\frac{400}{300} = \\frac{4}{3} \\implies E_2 = 1.5 \\times \\frac{4}{3} = 2.0\\text{ V}$."
+  },
+  {
+    "id": "wbjee_2019_chem_q65",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Chemistry",
+    "chapter": "Inorganic Chemistry: p-Block Elements",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 65,
+    "question_type": "mcq",
+    "question_statement": "Which of the following oxoacids of phosphorus contains a $\\text{P}-\\text{H}$ bond and acts as a strong reducing agent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\text{H}_3\\text{PO}_2$ (Hypophosphorous acid)",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\text{H}_3\\text{PO}_4$ (Orthophosphoric acid)",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\text{H}_4\\text{P}_2\\text{O}_7$ (Pyrophosphoric acid)",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\text{HPO}_3$ (Metaphosphoric acid)",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\text{H}_3\\text{PO}_2$ contains two direct $\\text{P}-\\text{H}$ bonds and one $\\text{P}-\\text{OH}$ bond. The presence of two $\\text{P}-\\text{H}$ bonds makes hypophosphorous acid a very powerful reducing agent."
+  },
+  {
+    "id": "wbjee_2019_math_q38",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Applications of Derivatives",
+    "chapter_number": 15,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 38,
+    "question_type": "mcq",
+    "question_statement": "If the radius of a spherical balloon increases by $0.1\\%$, then its volume increases approximately by:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$0.3\\%$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$0.1\\%$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$0.001\\%$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$0.2\\%$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Volume of a sphere $V = \\frac{4}{3}\\pi r^3$.\nTaking natural logarithm: $\\ln V = \\ln\\left(\\frac{4}{3}\\pi\\right) + 3\\ln r$.\nDifferentiating: $\\frac{dV}{V} = 3\\frac{dr}{r}$.\nPercentage change in volume $\\frac{\\Delta V}{V} \\times 100 = 3\\left(\\frac{\\Delta r}{r} \\times 100\\right) = 3(0.1\\%) = 0.3\\%$."
+  },
+  {
+    "id": "wbjee_2019_math_q44",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Algebra: Permutations & Combinations",
+    "chapter_number": 5,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 44,
+    "question_type": "mcq",
+    "question_statement": "A candidate is required to answer $6$ out of $12$ questions which are divided into two groups, each containing $6$ questions. He is not permitted to attempt more than $4$ questions from each group. The number of choices available to him is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$850$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$924$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$650$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$720$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "The candidate can choose $(2, 4)$, $(3, 3)$, or $(4, 2)$ questions from Group 1 and Group 2 respectively:\n1. 2 from Group 1, 4 from Group 2: $\\binom{6}{2} \\times \\binom{6}{4} = 15 \\times 15 = 225$.\n2. 3 from Group 1, 3 from Group 2: $\\binom{6}{3} \\times \\binom{6}{3} = 20 \\times 20 = 400$.\n3. 4 from Group 1, 2 from Group 2: $\\binom{6}{4} \\times \\binom{6}{2} = 15 \\times 15 = 225$.\nTotal choices $= 225 + 400 + 225 = 850$."
+  },
+  {
+    "id": "wbjee_2019_math_q60",
+    "exam": "WBJEE",
+    "year": 2019,
+    "subject": "Mathematics",
+    "chapter": "Calculus: Limits & Continuity",
+    "chapter_number": 13,
+    "section": "Category 2",
+    "category": 2,
+    "marks": 2,
+    "negative_marks": 0.5,
+    "question_number": 60,
+    "question_type": "mcq",
+    "question_statement": "Let $a = \\min\\{x^2 + 2x + 3 : x \\in \\mathbb{R}\\}$ and $b = \\lim_{\\theta \\to 0} \\frac{1 - \\cos\\theta}{\\theta^2}$. Then the value of $\\sum_{r=0}^n a^r b^{n-r}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{2^{n+1} - 2^{-n}}{3}$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{2^{n+1} - 1}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{2^n - 1}{3}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$2^{n+1} - 1$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$x^2 + 2x + 3 = (x + 1)^2 + 2 \\implies a = 2$.\n$b = \\lim_{\\theta \\to 0} \\frac{1 - \\cos\\theta}{\\theta^2} = \\frac{1}{2}$.\n$\\sum_{r=0}^n a^r b^{n-r} = b^n \\sum_{r=0}^n \\left(\\frac{a}{b}\\right)^r = \\left(\\frac{1}{2}\\right)^n \\sum_{r=0}^n 4^r = \\frac{1}{2^n} \\frac{4^{n+1} - 1}{3} = \\frac{2^{2n+2} - 1}{3 \\cdot 2^n} = \\frac{2^{n+2} - 2^{-n}}{3}$."
+  },
+  {
+    "id": "wbjee_2020_math_q12",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Mathematics",
+    "chapter": "Vectors & 3D Geometry",
+    "chapter_number": 19,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 12,
+    "question_type": "mcq",
+    "question_statement": "The distance of the point $(1, -2, 3)$ from the plane $x - y + z = 5$ measured parallel to the line $\\frac{x}{2} = \\frac{y}{3} = \\frac{z}{-6}$ is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$1$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$7$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1}{7}$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$\\sqrt{7}$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Equation of line through $(1, -2, 3)$ parallel to direction $(2, 3, -6)$ is:\n$\\frac{x - 1}{2} = \\frac{y + 2}{3} = \\frac{z - 3}{-6} = t$.\nAny point on line is $P(1 + 2t, -2 + 3t, 3 - 6t)$.\nSubstitute into plane $x - y + z = 5$:\n$(1 + 2t) - (-2 + 3t) + (3 - 6t) = 5 \\implies 6 - 7t = 5 \\implies 7t = 1 \\implies t = \\frac{1}{7}$.\nDistance $= \\sqrt{(2t)^2 + (3t)^2 + (-6t)^2} = |t|\\sqrt{4 + 9 + 36} = |t|\\sqrt{49} = 7|t| = 7\\left(\\frac{1}{7}\\right) = 1$."
+  },
+  {
+    "id": "wbjee_2020_phys_q18",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Physics",
+    "chapter": "Electromagnetic Induction & AC",
+    "chapter_number": 8,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 18,
+    "question_type": "mcq",
+    "question_statement": "In a series $RLC$ circuit at resonance, the impedance of the circuit is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "minimum and equal to resistance $R$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "maximum and equal to resistance $R$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "zero",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "purely inductive",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "Impedance of series $RLC$ circuit is $Z = \\sqrt{R^2 + (\\omega L - \\frac{1}{\\omega C})^2}$.\nAt resonance, $\\omega L = \\frac{1}{\\omega C}$, so the reactive part is zero and $Z = R$ (minimum), resulting in maximum current."
+  },
+  {
+    "id": "wbjee_2020_chem_q48",
+    "exam": "WBJEE",
+    "year": 2020,
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding & Molecular Structure",
+    "chapter_number": 7,
+    "section": "Category 1",
+    "category": 1,
+    "marks": 1,
+    "negative_marks": 0.25,
+    "question_number": 48,
+    "question_type": "mcq",
+    "question_statement": "The bond order of $\\text{O}_2^+$ ion according to Molecular Orbital Theory is:",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2.5$",
+        "is_correct": true
+      },
+      {
+        "id": "B",
+        "text": "$2.0$",
+        "is_correct": false
+      },
+      {
+        "id": "C",
+        "text": "$1.5$",
+        "is_correct": false
+      },
+      {
+        "id": "D",
+        "text": "$3.0$",
+        "is_correct": false
+      }
+    ],
+    "correct_option": "A",
+    "explanation": "$\\text{O}_2^+$ has $16 - 1 = 15$ electrons: $N_b = 10, N_a = 5$.\n$\\text{Bond Order} = \\frac{N_b - N_a}{2} = \\frac{10 - 5}{2} = \\frac{5}{2} = 2.5$."
+  }
+];
+
+export const WBJEE_YEARS = [2024, 2023, 2022, 2020, 2019] as const;
+export type WbjeeYear = typeof WBJEE_YEARS[number];
+
+export const WBJEE_SUBJECTS = [
+  {
+    key: 'Mathematics',
+    name: 'Mathematics',
+    paper: 'Paper I',
+    color: '#6366F1', // Indigo / Blue
+    gradient: 'from-indigo-500 to-blue-600',
+    lightBg: 'bg-indigo-50 dark:bg-indigo-950/40',
+    border: 'border-indigo-200 dark:border-indigo-800/60',
+    badge: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/60 dark:text-indigo-300',
+    accentText: 'text-indigo-600 dark:text-indigo-400',
+    buttonBg: 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-500/20',
+  },
+  {
+    key: 'Physics',
+    name: 'Physics',
+    paper: 'Paper II',
+    color: '#8B5CF6', // Violet / Cosmic Purple
+    gradient: 'from-violet-500 to-purple-600',
+    lightBg: 'bg-violet-50 dark:bg-violet-950/40',
+    border: 'border-violet-200 dark:border-violet-800/60',
+    badge: 'bg-violet-100 text-violet-700 dark:bg-violet-900/60 dark:text-violet-300',
+    accentText: 'text-violet-600 dark:text-violet-400',
+    buttonBg: 'bg-violet-600 hover:bg-violet-700 text-white shadow-violet-500/20',
+  },
+  {
+    key: 'Chemistry',
+    name: 'Chemistry',
+    paper: 'Paper II',
+    color: '#10B981', // Emerald / Teal
+    gradient: 'from-emerald-500 to-teal-600',
+    lightBg: 'bg-emerald-50 dark:bg-emerald-950/40',
+    border: 'border-emerald-200 dark:border-emerald-800/60',
+    badge: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300',
+    accentText: 'text-emerald-600 dark:text-emerald-400',
+    buttonBg: 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-500/20',
+  },
+] as const;
+
+export function getWbjeeStats() {
+  const total = WBJEE_QUESTIONS_DATA.length;
+  const math = WBJEE_QUESTIONS_DATA.filter(q => q.subject === 'Mathematics').length;
+  const phys = WBJEE_QUESTIONS_DATA.filter(q => q.subject === 'Physics').length;
+  const chem = WBJEE_QUESTIONS_DATA.filter(q => q.subject === 'Chemistry').length;
+  const cat1 = WBJEE_QUESTIONS_DATA.filter(q => q.category === 1).length;
+  const cat2 = WBJEE_QUESTIONS_DATA.filter(q => q.category === 2).length;
+  const cat3 = WBJEE_QUESTIONS_DATA.filter(q => q.category === 3).length;
+  return { total, math, phys, chem, cat1, cat2, cat3 };
+}

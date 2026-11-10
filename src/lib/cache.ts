@@ -118,3 +118,4 @@ export function getCacheHealthInfo() {
     type: isRedisConfigured() ? 'Upstash Redis (Distributed Cloud)' : 'In-Memory Cluster Fallback',
   };
 }
+

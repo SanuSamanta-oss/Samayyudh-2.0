@@ -87,8 +87,16 @@ export function filterPyqQuestions(
     filtered = filtered.filter((q) => q.exam.toLowerCase() === filters.exam!.toLowerCase());
   }
 
+  if (filters.year && !isNaN(filters.year)) {
+    filtered = filtered.filter((q) => q.year === filters.year);
+  }
+
   if (filters.subject && filters.subject !== 'All') {
     filtered = filtered.filter((q) => q.subject.toLowerCase() === filters.subject!.toLowerCase());
+  }
+
+  if (filters.chapter && filters.chapter !== 'All') {
+    filtered = filtered.filter((q) => q.chapter && q.chapter.toLowerCase() === filters.chapter!.toLowerCase());
   }
 
   if (filters.date && filters.date !== 'All') {

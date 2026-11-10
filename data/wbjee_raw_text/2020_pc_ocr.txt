@@ -1,0 +1,1538 @@
+
+--- PAGE 1 ---
+PC-2020
+Subjeect : PHYSICS & CHEMISTRY
+22095521
+(Booklet Numbcr)
+Full Marks : 100
+Duration : 2 Hours
+INSTRUCTIONS
+1.
+This question paper contains all objective questions divided into three categories. Each
+question has four answer options given.
+2.
+Category-I : Carry 1 mark each and only one option is correct. In case of incorrect answer or
+any combination of more than onte answer, % mark will be deducted.
+3.
+Category-1l : Carry 2 marks each and only one option is correct. In case of incorrect answer
+or any combination of more than one answer,  mark will be deducted.
+4.
+Category-lll : Carry 2 marks each and alco one or more option(s) is/are correct. If all correct
+answers are not marked and no incorect answer is marked, then scorc -- 2 × numher of
+correct answers marked + actual number of correct answers. If any wrong option is imarked or
+if any conbination including a wrong option is narked, the answer will be considered wrong.
+but there is no negative marking for the sane and zero mark will be awarded.
+5.
+Questions imust be answered on OMR sheet by darkening the appropriate bubble marked A.
+B, C, or D.
+6.
+Usc only Black/Blue ball point pen to imark the answer by complete filling up of the
+respective bubbles.
+7.
+Mark the answers oniy in the space provided. Do not make any stray mark on thu OMR.
+8.
+Write question booklet number and your roll number carefully in the specified locations of
+the OMR. Also fill appropriate bubbles.
+9.
+Write your namc (in block letter), nane of the examination centre and put your full signature
+in appropriate boxes in the OMR.
+lo. 'The OMR is liable to becone invalid if there is any inistake in filing the correct bubbles for
+question booklet numbet/roll number or if there is any discrepancy in the name/signature of
+the candidate, name of the examination centre. The OMR may also become invalid due to
+folding or putting stray tnarks on it or any damage to it. The consequence of such invalidatio
+due to incorrect marking or careless handling by the candidate will be sole responsibility of
+candidate.
+1l. Candidates are not allowed to carry any written or printed material, calculator, pen, docu-pen.
+log table, wristwatch, any communication device like mobile phones etc. inside the
+examination hall. Any candidate found with such items will be reported against & his/her
+candidature will be summarily cancelled.
+12. Rough work must be done on the question paper itself. Additional blank pages are given in
+the question paper for rough work.
+13. Hand over the OMR to the invigilator before leaving the Examination Hall.
+were taken while framing the Bengali version. However. if any discrepancy(ies) is /are found
+between the two versions, the information provided in the English version will stand and will
+be treated as final.
+A-96
+PC-2020
+
+--- PAGE 2 ---
+PC-2020
+SPACE FOR ROUGH WORK
+
+--- PAGE 3 ---
+PC-2020
+PHYSICS
+Category-1 (Q. 1 to 30)
+Category-l : Carry 1 mark each and only one option is correct. In case of incorrect
+answcr or any comhination of more than one answer, / mark will be deducted.
+1.
+ The bob of a swinging scconds pendulun (one whose time period is 2 s) has a small
+speed Vo at its jowest point. Its height from this lowest point 2.25 s after passing through
+it is given by
+(C)
+(D)
+(V)
+(B)
+4g
+49
+2g
+  ( 2 s)     
+1  2.25 s  ?
+(C)
+(B)
+(D)
+(A)
+4g
+49
+2g
+2.A steel and a brass wire. each of length 50 cm and cross-scctional area 0.005 cm2 hang
+from a ceiling and are 15 cm apart. Lower cnds of the wires arc attached lo a light
+horizontal bar. A suitable downward load is applied lo the bar so that cach of the wires
+extends in length by 0.1 cm. At what distance from the steel wire thc load must be
+applied ?
+[Young's modulus of steel is 2 × 1012 dynes/cm? and that of brass is 1 × 1012 dynes/cm2]
+(C) 10 cm
+(D) 3 cm
+(A) 7.5 cm
+(B) 5cm
+2 50 cm  3 0.005 cm2     3 f    
+1          1     sl
+0.1 cm  1   ? [
+[s/s z1ol × 1    o/p o   
+(D)
+10 cm
+(C)
+(B)
+5 cm
+3 cm
+(A)
+7.5 cm
+P.T.O.
+
+--- PAGE 4 ---
+PC-2020
+3.
+Which of the following diagrams correctly shows the relation between the terninal
+velocity V, of a spherical body falling in a liquid and viscosity n of the liquid ?
+(A)
+(B)
+(C)
+(D)
+4.
+An idcal gas undergoes thc cyelic proccss auhca as shown in the given p-V diagram. It
+rejccts 50 J of heat during ah and absorbs 80 J of heat during ca. During hc, thcre is no
+transfer of heat and 40 J of work is done by thc gas. What should be the area of the closed
+curveabca?
+(A) 30 J
+(B)40 J
+(C)10 J
+(D)90 J
+P-V   ,    abca  1 
+(A)
+30 J
+(B)
+40 J
+(C)
+10 J
+(D)
+90 J
+
+--- PAGE 5 ---
+PC-2020
+5m
+A container AB in the shape of a rectangular parallelopiped of length 5 m is divided
+internally by a movable partition P as sihown in the figure. The left compartnent is filled
+with a given mass of an ideal gas of molar mass 32 while the right compartment is fiied
+with an cqual mass of another ideal gas of molar mass 18 at same temperalure. What wi
+be the distance of P from the left wall A when equilibrium is cstablished ?
+(C) 3.2 m
+(B)1.8 m
+(D) 2.1 m
+(A) 2.5m
+             g
+1.8 m
+(D)
+(C)
+3.2 m
+(13)
+2.5 m
+2.1 m
+(A)
+6.
+When 100 g of boiling water at 100 'c is added into a calorimeter containing 300 g of
+cold water at l0 'c. temperature of the mixtiure beconcs 20 oc. 'I'hen a metallic block of
+mass I kg at lo oC is dipped into the mixttire: in the calorineter. After reaching thermal
+cquilibrium. the final temperature becomes 19 oc. What is the specific heat of the netal
+in C.G.S. unit ?
+(C)  0.09
+0.3
+(B)
+0.01
+(A)
+(D)0.1
+100 C- 100   10 ℃- 300 g     
+   a    1  -。 01 a 1 。  k  
+ 1   可 19 C 1  C.G.S. 
+0.09
+(α)
+0.3
+0.01
+(C)
+(B)
+(A)
+0.1
+P.T.O.
+
+--- PAGE 6 ---
+PC-2020
+7.
+Q2
+(10, 0)
+As shown in the figure, a point charge q, = +l × 10- C is placed at the origin in x-y
+planc and another point charge q2 - +3 × 10-6 C is placed at the co-ordinate (10, 0). In
+that case, which of the following graph(s) shows nost correctly the electric field vector in
+E, in x-direction ?
+,  = +1× 10-6 - x- 
+92 = +3 × 10- C-(10. 0)1 ()
+[ x-   E, 可 可     ?
+(A)
+(B)
+(10,)
+(10,0)
+(C)
+[10, 0]
+(D)
+:110, 0)
+8.
+Four identical point masses, cach of mass m and carrying charge tq are placed at the
+corners of a squarc of sides 'a' on a frictionless plain surface. If the particles are released
+simultaneously, the kinetic energy of the systen when they are infinitely far apart is
+(/2+4)
+(V2+1)
+(2/2+1)
+(B)
+(C)
+(A)
+(D)
+  ,    ±    k  b+   
+       
+(B)
+(D)
+(C)
+(A)
+
+--- PAGE 7 ---
+PC-2020
+Dielectric constant of the material of the cylinder is k. What will be the magnitude of
+electric field at a radial distance 'x' (xr < a) from the axis of the cylinder ?
+(D)
+(B)
+(A)
+2a80
+2kE0
+2k
+03
+(D)
+(B)
+(A)
+Zato
+2k
+03
+10.A galvanometer can be converted 1o a voltmeter of futf-scale deflection V, by connecting
+a series resistance R, and can be converted to an ammcter of full-scale deflection I, by
+connecting a shunt resistance R2. What is the currcnt flowing through thc galvanomeler at
+its full-scaie dellcclion ?
+Vo -IoRi
+Vu +1oR2
+Vo +IoR,
+Vo-IoR2
+(C)
+(B)
+(D)
+(V)
+R2-R1
+R++R2
+RI+R2
+R↓-R2
+  V,        R, ( 
+              
+     1       
+Vo -IoR!
+Vo-IoR2
+Vo+IR
+Vo +IoRi
+(C)
+(B)
+(A)
+(D)
+R2 -Rl
+R1+R2
+Ri-R2
+R1+R2
+P.T.O.
+
+--- PAGE 8 ---
+PC-2020
+11.
+As shown in the figure, a single conducting wire is
+bent to form a loop in the form of a circle of
+radius 'r' concentrically inside a square of side 'a'.
+where a : r = 8 : π. A battery B drives a current through
+the wire. If the battery B and the gap G are of negligible
+sizes, determine the strength of magnetic field at the
+common centre O.
+Hol
+-1
+(B)
+2a
+ol2/2(/2 +1)
+Hl2/2(/2-1)
+(C)
+(D).
+.      ,  m   
+  -0 
+ol /2(V2-1)
+ho!
+(A)
+(B)
+HoL2/2(V2+1)
+l2/2(J2 -1)
+(C)
+(D)
+12.
+As shown in the figure. a wire is bent to form a D-sinaped closed loop. carrying current I.
+where ihe curved part is a scni-circle of radius R. The loop js placed in a uniform
+magnetic field B. which is directed into the plane of the papcr. The magnetic force felt by
+the closed loop is
+(B)IRB
+(C) 2RB
+(D)
+(A) 0
+IRB
+     R        
+2IRB
+(B)
+IRB
+(C)
+(D)
+(A)
+IRB
+
+--- PAGE 9 ---
+PC-2020
+2R
+2R
+13.
+MRMR
+What wil! he the equivalent resistance between the terminals A and B of the infinite
+resistive nelwork shown in the figure ?
+(V3-1)R
+(V3+1)R
+(C)
+(D)
+(B)
+(A)
+     A  B    ?
+(V3-1)R
+(V3+1)R
+(D) (V3+1)R
+(3)
+(A)
+14.
+When a c voltagc is applied at thc two ends of a circuit kept in a closed box, it is
+ohserved thal the current gradually inereases from zero to a certain value and then
+remains constant. Wlat do you think thal the circuit contains ?
+(B) A capacitor alone
+(A) A resistor alone
+(D)A resistor and a capacitor in series
+(C)A resistor and an inductor in series
+               
+(A)
+(B)
+(C)
+(D)
+P.T.O.
+
+--- PAGE 10 ---
+PC-2020
+15.
+402
+2V
+2V
+2V
+Consider the circuit shown, If all the cells have negligible internal resistance, what will
+be the current through the 2 2 resistor when steady state is reached ?
+(A)0.66 A
+(B)0.29 A
+(C) 0A
+(D) 0.14 A
+(A) 0.66 A
+(B) 0.29 A
+(C) 0A
+(D) 0.14 A
+16.
+Consider a conducting wire of lengtii I. bent in lhe forn of a circle of radius R and
+another conductor of iength 'a' (a << R) is bent in the form of a square. The two loops
+are then placed in same planc such that the square loop is exactly at the centrc of the
+circular loop. What will be the nnutual inductance betwecn the two loops ?
+Ta?
+Ta?
+Ho16l.
+(A)
+Ho"L
+(B)
+(C)
+(D)
+1            
+t      a k 2
+na?
+Na?
+(A)
+(B)
+Na?
+Ho16L
+(C)
+(D)
+Ho 4L.
+H0 4元L
+17. An object is placed 60 cm in front of a convex mirror of focai length 30 cm. A plane
+mirror is now piaced facing thic objcct in between the object and thc convex mirror such
+that it covers lower half of the convex mirror. What should be the distance of the plane
+mirror from thc object so that there will he no parallax between the inages formed by the
+two mirrors ?
+(A) 40 cm
+(B)30 cm
+(C) 20 cm
+(D) 15 cm
+30c60cm
+             
+f 4 可?
+40 cm
+(A)
+(B)
+30 cm
+(C)
+20 cm
+(D)
+15 cm
+10
+
+--- PAGE 11 ---
+PC-2020
+18.A thin convex lens is placed just above an empty vessel of depth 80 cm. T'he image of a
+coin kept at the bottom of the vessel is thus formed 20 cm above the lens. If now water is
+poured in the vessel up to a height of 64 cm, what will be the approximate new position
+of the image. Assune that refractive index of water is 4/3.
+(B) 6.67 cm below the lens
+(A)21.33 cm above the lens
+(D) 24 cm above the lens
+(C) 33.67 cm above the lens
+     20    
+ 64   ?  
+ 4/3 1
+(B)
+6.67 cin (- 
+(A)
+21.33 cm -
+(D) 24 cm (-
+(C)
+33.67 cm *-4
+19.
+ The intensity of light cmerging from one of the slis in a Young's double slit experiment
+is found to be 1.5 tines the intensity of light erncrging fron the other slit. What will be
+the approximate ratio of intensity of an interfercncc maximum to that of an interference
+mininmum ?
+(C)5
+(D) 9.9
+(A) 2.25
+(B) 98
+(C) 5
+(D) 9.9
+(B)
+(A) 2.25
+98
+20.
+In a Frounhofer diffraction experiment, a single slit of width 0.5 mm is illuminated by a
+monochromatic light of wavelength 600 nm. The diffraction pattern is observed on a
+sereen at a distance of S0 cm from the slit. What will be the linear separation of ihc first
+order minina ?
+(C) 0.6 mm
+(D) 1.2 mm
+(A) 1.0mm
+(B) 1.1 mm
+-0.5 - 600 m 
+(C) 0.6 mm
+(D) 1.2 mm
+(A) 1.0 mm
+(B) 1.1 mm
+21.
+if R is the Rydberg Constant in cm-', then hydrogen atom does not emit any radiation of
+wave-length in the range of
+4, 36
+19
+144
+(C)
+(D)
+to
+(B)
+to-
+(A)
+cm
+-cm
+5R
+5R
+5R
+R3R
+7R
+R  c-     
+36
+19
+144
+(C)
+(D)
+(B)
+to
+cm
+cm
+(A)
+cm
+cm
+01
+5R
+5R
+5R
+7R
+3R
+P.T.O.
+
+--- PAGE 12 ---
+PC-2020
+22. A nucleus X emits a beta particle to produce a nucleus Y. If their atomic nasses are My
+and M, respectively, the maximum energy of the beta particle emitted is
+(where m, is the mass of an electron and c is the velocity of light)
+(A)
+(Mx -- M- m.) c?
+(B)
+(M.-M, + m.
+(C)
+(M. -M,)c2
+(D)
+(M. -M, - 2me)c?
+ M、 M  (,  。 3
+  c)
+(A)
+(M、- M, - m.)c2
+(B)
+(M-M,+m.)c?
+(C)
+(M.-- M.)c?
+(D)
+(M,- M,- 2m.) c2
+23.
+For nuclei with mass number close to 119 and 238. thc binding energies per nucleon are
+approximately 7.6 MeV and 8.6 MeV respectively. If a nucleus of mass nunber 238
+breaks into two niclei of ncarly equal masses. what will be thc approximale anmount of
+energy releascd in the process of fission ?
+214 McV
+(V)
+(13) 119 Mev
+(C)2047 MeV
+(D) 1142 MeV
+119 238-四可可
+7.6 MeV 3 8.6 MeV 1  238       
+           ?
+(A)
+214 McV
+(B) 119MeV
+(C) 2047 McV
+(D)
+1[42 MeV
+24. A common emitter transistor amplifier is connccted witl a load resistance of 6 ks2. When
+a small a.c. signal of t5 nV is added to thc base emiter voltage. thc alternating basc
+current is 20 μA and the alternating colleclor current is 1.8 mA. What is the voitage gain
+of the amplificr ?
+90
+(A)
+(B)640
+(C)900
+(D)720
+1520
+  1.8 mA 1 [  (gain) ?
+(A)
+90
+(B)
+640
+(C)
+900
+(D)
+720
+12
+
+--- PAGE 13 ---
+PC-2020
+Vcc=5V
+25.
+500 2 
+IB=200 μA
+In the circuit shown. the value of β3 of the transistor is 48. If the base current supplied is
+200 μA, what is the voltage at the termninal Y ?
+ 4V
+(C)
+(D) 4.8 V
+(A) 0.2 V
+(B)0.5 V
+- 48- 200
+G Y R4?
+ 4V
+(C)
+(D)  4.8 V
+(A) 0.2 V
+(B) 0.5 V
+26.
+The frequency y of the radiation emitted by an atom when an electron jumps from one
+orbit to another is given by v = k 8F. where k is a constant and E is the change in energy
+lcvel due to the transition. Then dimension of k is
+(A)
+MI2T 2
+(B)
+the same dimension of angular momentum
+(C)
+MI?T-
+(D)
+M'1-2T
+   I    
+(B)
+(A) ML2T-2
+(C)ML3T-I
+(D)M-IL-2T
+-(i - 2j + 2k). What is the
+27. Consider the vectors A=i+j-k. B = 2i-j+k. C=-
+value of C(A × B)?
+(C) 3 V2
+(B)
+(D) 18 V5
+(A) 1
+A-i+i-,B= 2i-j+k,C=(i - 2 + 2k).  fb  1 
+C(A × B)?
+3 /2
+(D)
+18 /5
+(B)
+(A)
+(C)
+13
+P.T.O.
+
+--- PAGE 14 ---
+PC-2020
+28.  A fighter plane, flying horizontally with a speed 360 kmph at an altitude of 500 m drops a
+bomb for a target straight ahead of it on the ground. The bomb should be dropped at what
+approximate distance ahead of the target ? Assume that acceleration due to gravity (g) is
+10 ms" 2. Also neglect air drag.
+1000 m
+(B)50 /5 m
+(A)
+(C) 500 V5 m
+(D) 866 m
+ a   k  k  00s 2 ydu 09  
+1              
+1    -s 01    
+1000 m
+(B)50 V5 m
+(A)
+(C) 500 5 m
+(D)
+866 m
+29. A block of mass m rests on a horizontal table with a co-cfficient of static iriction μ. What
+mininum force must be applied on the block to drag it on the table ?
+(A)
+(B)
+(C)
+mg
+mg
+(D) μmg
+         
+H-1
+(A)
+(B)
+mg
+(C)
+(D)
+mg
+mg
+μng
+μ+1
+30.A tennis hall hits the floor with a speed v at an angle  with the normai 1o the floor. If ihe
+collision is inelastic and the co-cfficient of restitution is E, what will bc thc angle of
+reflection ?
+tan0
+sino)
+(A)
+tan
+(B)
+sin-!
+(C)
+(D)
+tane
+sing】
+28
+(A)
+tan-
+(B)
+sin-1
+(C)
+(D)
+&+1
+14
+
+--- PAGE 15 ---
+PC-2020
+Category-ll (Q. 31 to 35)
+Carry 2 marks each and only one option is correct. In case of incorrect answer or
+combination of more than one answer,  mark will be deducted.
+31. A metallic block of mass 20 kg is dragged with a uniform velocity of 0.5 ms-1 on a
+horizontal table for 2.1 s. The co-efficeient of static friction between the block and the
+table is 0.10. What will be the maximum possible rise in temperature of the metal block
+if the specific heat of the block is 0. I C.G.S. unit ? Assume g = 10 ms-2 and uniforn rise
+in temperature throughout the whole block. [lgnore absorption of heat by the table]
+(C)0.001 °℃
+(D)0.05 °C
+(A)0.0025 °C!
+(B)0.025 °C
+20 kg     0.5 ms-1 4  2.1 s 可 1
+  10       
+0.1 C..S.    ?  g = 10 ms 2 
+(   )   
+(C)0.001 °℃
+(ID)0.05 °℃
+(B)
+(A)0.0025 °C
+0.025 °℃
+32. Consicter an enginc that absorbs 130 cal of heat from a hot reservoir and delivers 30 cal
+heat to a cold reservoir in cach cycle. The engine also consumes 2 J energy in cach cycle
+to overcome friction. If the engine works at 90 cycles per minutc., what will be the
+maximum power delivered to the load ?
+[Assume the thermal equivalent of heat is 4.2 J/cal]
+(D)
+627 W
+(C)
+(B) 819 W
+630 W
+(A) 816 W
+    130 ca   
+? [, 可 4.2 J/cal]
+(D)
+627 W
+(C)
+819 W
+(B)
+630 W
+(A)
+816 W
+15
+P.T.O.
+
+--- PAGE 16 ---
+PC-2020
+33. Two pith balls, each carrying charge +q are hung from a hook by two strings. It is found
+that when each charge is tripled, angle between the strings double. what was the initial
+angle between the strings ?
+(A)  30°
+(B) 60°
+(C)45°
+(D) 90°
+              
+(A) 30°
+(B) 60°
+(C) 45°
+(D) 90°
+34.
+A conducting circular loop of resistance 20 2 and cross-sectional area 20 × 10-2 m2 is
+placed perpendicular to a spatially uniform magnetic field B, which varies with time t as
+B - 2 sin (50 t) T. Find the net charge flowing through the loop in 20 ms starting from
+t = 0.
+Dso (V)
+(B) 0.2 C
+(C) 0C
+(D)0.14 C
+20  20 × 10-2 可
+  (osus=a  -        -
+0  20 s
+(A) 0.5 C
+(B) 0.2 C
+(C) 0C
+(D)0.14 C
+35.
+A pair of parallel metal plates are kept with a separation 'd'. One plate is at a potential
++V and the other is at ground potential. A narrow beam of elcctrons enters the space
+between the plates with a velocity Vo, and in a direction parallel lo the plates. What will be
+the angle of the beam with the plates after it travels an axial distance L?
+eVL
+eVL
+(A)
+tan "
+(B)
+tan-1
+(mdv
+mdvo
+eVL
+eVL
+(C)
+sin-
+(D)
+cos-l
+mdvo
+mdvi
+eVL
+ev.
+(A)
+tan-1
+(B). tan-1
+mdvo.
+eVL
+eVL
+(C)
+sin'
+(D)
+cos-
+mdya
+16
+
+--- PAGE 17 ---
+PC-2020
+Category-I11 (Q. 36 to 40)
+Carry 2 marks each and one or more option(s) is/are correct. If all correct answers are not
+marked and also no incorrect answer is marked, then score = 2 x number of correct
+answers marked + actual number of corrcct answers. If any wrong option is marked or if
+any combination including a wrong option is marked, the answer will be considered wrong,
+but there is no negative marking for the same and zero mark will be awarded.
+              , 
+36. A simple pendulum of length f is displaced so that its taught string is horizontal and then
+releascd. A uniform bar pivoted at one cnd is simultaneously released from its norizontal
+position. If their motions are synchronous, what is the length of ihe bar ?
+2f
+(C)
+(D)
+(B)(
+(V)
+             
+(C)
+(D)
+(13)
+(v)
+37. A 400 2 resistor. a 250 nH inductor and a 2.5 μF capacitor are connected in series with
+an AC source of peak voltage 5 V and angular frequency 2kHz. What is the peak value of
+the electrostatic energy of the capacitor ?
+(C)3.33 μJ
+(D)  5 μJ
+(A) 2 μJ
+(B)2.5 μJ
+ 400 2 [, 4 250 mH  3  2.5 μF , 5 V  3 2kHz 
+(D)
+3.33 μJ
+(C)
+5 uJ
+(B)
+(A)
+2.5 μJ
+17
+P.T.O.
+
+--- PAGE 18 ---
+PC-2020
+38. A charged particle moves with constant velocity in a region where no effect of
+gravity is felt but an electrostatic field F together with a magnetic field B ay bc present.
+Then which of the following cases are possible ?
+(A)E0,B0(B)0.B=0
+(C)E=0.B= 0
+(D) E=0,B0
+             
+       1 () 
+(A) E±0, B±0
+(B) F0.B=0
+(C) F= 0.B= 0
+(D)0.0
+39. A point source of light is used in an experinent of ploto-electric cffects. If the
+distance between the source and the photo-clectric surface is doubled, which of the
+following may result ?
+(A)
+Stopping potential will be lhalvet.
+(B)
+Photo-electric current will decreasc.
+(C)
+Maximum kinetic energy of photo-electrons will decrease.
+(D)
+Stopping potential wit incrcase slightly.
+    ()       
+(A)
+(B)
+(C)
+40.
+Two mctallie spheres of equal outer radi are found to have sane monment of inertia about
+their respective diamelers. Then which of ihe following statemenfs) is/arc true ?
+(v)
+'Ihe two spheres have equal masses
+(B)
+The ratio of their masses is nearly 1.67 : 1
+(C)
+The spheres are made of different materiats
+(D)
+Their rotational kinetic cicrgies will be equal when rotaled with equal uniform
+angular speed about their respeclive diameters
+          
+(A)
+k   ±l
+(B)
+[ : 9'1    a 2
+(C)
+(D)
+    可        
+18
+
+--- PAGE 19 ---
+PC-2020
+CHEMISTRY
+Category-1 (Q. 41 to 70)
+Category-l : Carry 1 mark each and only one option is correct. In case of incorrect answer
+or any combination of more than one answer, % mark will be dedueted.
+       1   1    I   
+41. Among the following. the ion which will be more effective for flocculation of Fe(OH)3
+sol. is
+(C)SO,?
+(D) NU3
+(A)  PO,3-
+(B) SO,2.
+ Fe(H),  ?
+(D)
+SO,2-
+(C)
+NO3
+(A)  PO,
+(B)SO,2
+42.
+'Tht mole fraction oft cthanol in watcr is O.08. Its nmolality is
+(D)  2.84 mol kg-l
+(B)4.83 mol kg-1
+(C)3.82 mol kg 1
+(A)6.32 mol kg l
+ 0.08   
+(D)2.84 mo1 kg-1
+(A) 6.32 mol kgl
+(B) 4.83 mol kg ^(C)3.82 mol kg ^
+43.
+5 ml of 0.1 M Pb(NO,)2 is mixed with 10 mi of 0.02 M KI. The anount of Pbl2
+precipitated wil! be about
+(C) 2 × 10-4 mol 
+(D)10-3 mol
+(A) 10-2 mol
+(B) 10-4 mol
+ g i     I  20'0  01   od  10  s
+(C) 2 × 10-4 mol
+(D)10-3 mol
+(A) 10-2 mol
+(B)10- mol
+44.
+At 273 K temperature and 76 cm Hg pressure, the density of a gas is 1.964 gL-1. The gas is
+(C) He
+CH4
+(D) CO2
+(v)
+(B) CO
+273 K 可  76 cm Hg 5, 4f   1.964 gL-1   可
+(D)
+CO2
+(C)
+(B)
+He
+(V)
+CH4
+P.T.O.
+19
+
+--- PAGE 20 ---
+PC-2020
+45.
+Equal masses of ethane and hydrogen arc nixed in an empty container at 298 K. The
+fraction of total pressure exerted by hydrogen is
+(A) 15:16
+(B) 1:1
+(C) 1:4
+(D) 1:6
+298             1
+(A) 15:16
+(B)1:1
+(C)
+1:4
+(D) 1:6
+46. An ideal gas expands adiabatically against vacuum. Which of the following is correct for
+the given process ?
+(A) AS = 0
+(B)AT- -ve
+Au= 0
+(C)
+(D) AP=0
+I     a      s  
+(A) AS -- 0
+(B)
+aT =-Vc
+(C)
+A =0
+(D) △P = 0
+47. K, (water) = 1.86 K kg mol '. The temperature al which ice begins to scparate from a
+mixture of 10 mass % ethylenc glycol is
+(A)-1.86 °C
+(B)-3.72 °C
+(C)-3.3 °℃
+(D) -3 °℃C
+  : ( K, 1.86 K kg m01 1)
+(A)-1.86 °℃
+(B)-3.72 °C
+(c)-3.3 °℃
+D。t(()
+48.
+The radius of the first Bohr orbit of a hydrogen atom is 0.53 x 10 8 cm. The velocity of
+the clectron in the first Bohr orhit is
+(A) 2.188 × 10x cm s-l
+(B) 4.376 × 108 cm s 1
+(C) 1.094 × 108 cm s-1
+(D) 2.188 × 10°cms 1
+.5310
+(A) 2.188 × 108 cm sl
+(B)  4.376 × 108 cm s t
+(C)1.094 × 10* cn s-1
+(D) 2.188 × 109cms 1
+49.
+Wlhich of the following statements is not truc for the reaction 21', + 2H,0 → 4HF + O, ?
+(A)
+F, is more strongly oxidising tinan O2. (B) F - F hond is weaker tlan O = O bond.
+(C) H - F bond is stronger than H - O bond (D) F is less electronegative than O.
+(A)
+(B)
+(C)
+(D)
+
+--- PAGE 21 ---
+PC-2020
+50. The number of unpaired electrons in the uranium (gU) atom is :
+(D)
+(C)3
+(B) 6
+(A)  4
+:      (n6) 
+(D)
+(C)
+(B)6
+(A) 4
+51.
+ How and why does the density of liquid water change on prolonged electrolysis ?
+(A)
+Decreases, as the proportion of H,O increases
+(B)
+Remains unchanged
+(c)
+Increases, as the proportion of D,O increases
+(D)
+Increases, as the volume decreases
+(A)
+(B)
+(C)
+(D)
+52.
+ The difference betwcen orbital angular monentum of an electron in a 4f orbital and
+anothcr electron in a 4s orbital is
+(C)V3
+(D)
+(B)3 V2
+(A) 2 V3
+4f 4s
+(B)  3 /2
+(C)V3
+(D)
+(A) 2V3
+53.
+Which of the following has the largest number of atoms ?
+(C) 1 g of Cl2
+(B) lgof Fe
+(A) 1g of Ag
+(D) . 1 g of Mg
+   k  
+1C12
+(D)
+(C)
+(A) 1  Ag
+(B)1Fe
+1 Mg
+21
+P.T.O.
+
+--- PAGE 22 ---
+PC-2020
+54.  Indicate the correct IUPAC name of the co-ordination compound shown in the figure.
+NH3
+NH3
+NH3
+(V)
+Cis-dichlorotetraminochromium (H) chloride
+(B)
+Trans-dichlorotetraninochromiun (I) chloride
+(C)
+Frans-tetraminediclilorochromiun (IH) chloride
+(D)
+is-tetraanmninedichlorochronium (I) chloride
+ UA 
+NH3
+NH3
+NH3
+NH3
+(A)
+- () 
+(B)
+- (I) 
+(C)
+-(1)
+(D)
+What will be the nass of onc atom of 12c ?
+1 a.ni.u.
+(B) 1.9923 × 10-23g (C) 1.6603 × 10 22g (D)
+(A)
+6 a.n.u
+ ±   z 
+(A) 1 a.m.u.
+(B) 1.9923 × 10-23g (C) 1.6603 × 10·22g (D)
+6 a.m.u
+56.
+Bond order of He2, He t and He 2+ are respectively :
+(C)
+(D)
+(B)
+1.0
+(A)
+1. 0.
+He2, He  He 2+    :
+(B)
+(C)
+(A)
+(D)
+22
+
+--- PAGE 23 ---
+PC-2020
+s7. To a solution of a colouriess efflorescent sodium salt. when dilule acid is added, a
+colourless gas is evolved along with formation of a white precipitate. Acidified
+dichromate solution turns green when the colourless gas is passed through it. Ihc sodiun
+salt is
+(C) NaS,O3
+(D) Na,S4O,
+(A) Na,SO3
+(B) Na,S
+可1 可     
+(() Naas,03
+(D) Na2s,O.
+(A) Nu2s()3
+(B) Na,S
+58.
+'The reaclion for obiaining the metai (M) from is oxide (M,O,) ore is given by
+M,Og(s) + 2Al(()
+>A/O3(t) + 2M(s). (s  solid. f = liquid)
+in that cast. M is
+(C)[ron
+(D)  Zinc
+Jaddo)(V)
+(B) Caleium
+Ileal
+M,03(s) + 2Al(+)
++A/,0)(f) + 2M(s). (s = solid, + =- liquid) CP(@ M 含
+(D)
+(A）
+(B)
+in the extraction of Ca by electro reduction of molten Cac/2 some Cal'z is added to the
+electrolyte for the following reason :
+(V)
+TFo keep the electrolyte in liquid state at femperature lower than the m. p. of CaCt.
+(B)
+To effect precipitation of C'a
+(C)
+To cffect the electrolysis at lower voltage
+(D)
+Fo inerease the current efficiency
+sfar Cacl,  fe F  Ca F  fe F  f至 fa CaF.
+(V)
+(B)
+(C)
+(D)
+60.
+The total nunber of alkyl bromides (including stereoismers) formed in the reaction
+Me,C - CH = CH, + HIBr → will be
+(A)
+(B) 2
+(C) 3
+(D) No bromide forms.
+MegC - CH = CH  HBr →      
+(可可) 
+(A)
+(B)
+(D)
+(C)
+23
+P.T.O.
+
+--- PAGE 24 ---
+PC-2020
+.M
+g/diethyl ether
+Br
+→ Product
+61.
+2. CH,0
+3. H,00
+This product in the above reaction is
+CH20H
+(A)
+Br
+(B)
+CH:OH
+20H
+(D)
+HOH2C
+CHOH
+CH2OH
+ON
+CO2CH3
+MeQ
+O2CH3
+62.
+Me
+(1)
+()
+(H)
+For thc above threc esters. hc orcicr of rates of alkaline hydrolysis is
+(D)
+(C)>M>H
+(A)>I>I
+H>>H
+50% aq. Nao1I
+Ph -. CDO
+63.
++ Ph - COOH + an alcohol. This alcohol is
+Warin
+(v)
+Ph-CHD-OH (I3) Ph : CH)-O) (C) Ph-CD2 -OH (D) Ph- CD2-(OD
+50% aq. NaOH
+Ph - CDO
+ Ph -C +1
+Warm
+(A)
+Ph-CHD -. OH (B) Pl CHD-(OD) (C) Ph-CDz-OH (D) Pl-CD2-OD
+64.
+'Ihe correct order of acidity for the following compounds is :
+TOOH
+Iv.
+NO2
+OCH:
+(B)
+(A)
+(D)
+(C)
+24
+
+--- PAGE 25 ---
+PC-2020
+65.For the following carbocations the correct order of stability is
+II : 甲CHz - OCH3
+II : 甲CH2 - CH3
+I : 田CH, - COCH,
+(C)
+(D)<II I
+(A)
+(B)II<I<II
+:   k   aa 
+II : 甲CH2 - OCH3
+II : 田CH, - CH.
+I : CH2 - COCH3
+(C)I<I<II
+<<II
+(D)I<III <H
+(A)
+(B)
+66. The reduction product of ethyl 3-oxobutanoate by NaBlI, in methanol is
+ 3-   NBH   
+(B)
+(V)
+(D)
+(C)
+67.
+What is the major product of the following reaction ?
+1. NaOCOFt
+2. 11,0由
+DOH
+HOO:
+(A)
+(B)
+CH3
+(C)
+(D)
+COOH
+25
+P.T.O.
+
+--- PAGE 26 ---
+PC-2020
+68.
+The maxinum number of electrons in an atom in which the last electron filled has the
+quantum numbcrs n - 3. I - 2 and m = -1 is
+(A) 17
+(B)27
+28
+(C)
+(D)30
+3,12=
+(A) 17
+(B)27
+(C)
+28
+(D) 30
+69.
+In the face-centred cubic lattice structure of gold the closest distance between gold atoms
+is (a' being the edge lengih of the cubic unit cell)
+(V)
+(B)
+(C)
+(D) 2 /2 a
+  :     e     
+(A) αV2
+(D)
+(B)
+(C)
+22a
+2v2
+70.
+Thc equilibrium constant for the following reactions are given at 25° C
+2A1
+B +C, K, = 1.0
+2BC + D. K, - 16
+2C + D —2P, K, = 25
+The equilibrium constant for the reaction P 
+B at 25 °℃ is
+(D)
+20
+(B)
+(A)
+20
+42
+2AB + C. K = 1.0
+2BC+D、K, = 16
+2C + D 2P. K, = 25
+250℃0P
+(D)
+20
+(C)
+(B)
+(A)
+21
+20
+42
+26
+
+--- PAGE 27 ---
+PC-2020
+Category-1I (Q. 71 to 75)
+Carry 2 marks each and only onc option is correct. In case of incorrect answer or any
+combination of more than one answer, / mark will be deducted.
+71.  A solution is saturated with SrCO, and SrF2. The [CO,2-] is found to be 1.2 × 10-3 M.
+The concentration of F- in the solution would be
+(C) 5.1 × 10-7 M
+(D) 3.7 × 10 2 M
+(A) 3.7×10-M(B) 3.2 ×10 3M
+Givcn : Ksp (SrCO,) = 7.0 × 10-10. Ksp (Srf2) - 7.9 × 10-10
+  SrCO,  SrF,      iC,? 1   1.2 × 10 3 M  F-
+(C) 5.1 × 10 7 M
+(B) 3.2 × 10-3 M
+(D)3.7 × 10-2 M
+(A) 3.7 ×10M
+(T3  : Ksp (SrCO,) = 7.0 × 10-10. Ks (SrF2) = 7.9 × 10-10
+72. A homonuciear diatomic gas molecule shows 2-clectron magnetic moment. The
+one-electron and two-electron reduced species obiained from ahove gas molecult can act
+as both oxidizing and reducing agents. When the gas molecule is onc-electron oxidized
+the bond length decreases compared to the ncutral molecule. The gas motecule is
+(B) Cl2
+(C) 02
+(D)B2
+(A) N2
+        
+(D)
+(C)
+N2
+(B)
+(A)
+B2
+27
+P.T.O.
+
+--- PAGE 28 ---
+PC-2020
+ag.
+HO.
+73. CH, - O-CH2 -CI
+ CH, -O- CH, - OH
+Which information below regarding this reaction is applicable ?
+(A)  It follows Sn2 pathway, because it is a primary alkyl chloride.
+(B)
+ It follows Snl pathway, because the intermediate carbocation is resonance
+stabilized.
+(C)
+S 1 pathway is not followed, because the intermediate carbocation is destabilised
+by -1 cffect of oxygen.
+(D)
+A mixed Sμl and Sn2 pathway is followed.
+aq.OH
+CH, - O- CH, - CI
+→CH, - O -CH, - OH
+F       ?
+(A)
+(B)
+(C)
+(D)
+74.
+Which of the following compounds is asymmetric ?
+(A)
+(B)
+Br
+(C)
+(D)
+75. For a reaction 2A + B -→ P. when concentration of B alone is doubied. ty/2 does not
+change and when concentrations of both A and B is doubled, rate increases by a factor of
+4. The unit of rate constant is.
+(C) mol L-l s-1
+(A)s-1
+(B)L mol-l s-1
+(D)L2mol-2 s1
+2A + B→ P    B     t1/2 f , 
+(B) L mol-l s~1
+mol L-1 s-1
+(A)
+(C)
+(D)L2mol-2 s-1
+28
+
+--- PAGE 29 ---
+PC-2020
+Catcgory-111 (Q. 76 to 80)
+Carry 2 marks cach and one or more option(s) is/are correct. lf all corrcet answers are not
+marked and no incorrcct answer is marked, then score = 2 x number of corrcet answers
+marked + actual number of correct answers, If any wrong option is marked or if any
+comhination including a wrong option is markcd, the answer will bc considered wrong, but
+there is no negative marking for the sanc and zero mark will be awarded.
+ 空可   @可   1  4  本  , 
+76.
+Whicin of thc folowing statement (s) is / are incorreet :
+(V)
+A sink of 'sO, pollutant is O, in the atnosphere.
+(3)
+FGD is a process of removing NO, fron atmospherc.
+(G)
+NO, in tuc! gases can be removed by alkaline scrubhing.
+(D)
+The catalyst used to convert CC/, to CF, by HF is ShFs
+(A)
+ ,  S,  (ollutan)   1
+(B)  
+(C)
+77.
+SiO, is attacked by which one / ones of the following ?
+(A) HF
+(B)conc. HC/
+(C) hot NaOH
+(D)
+Fluorine
+ 同 Sio,  f  ?
+HF
+(B)
+(C)
+(A)
+ NaOH
+(D)
+P.T.O.
+
+--- PAGE 30 ---
+PC-2020
+Na/NH,(liq.)
+dil.alkaline KMnO4
+78. Me - C = C -- Me
+ Product(s)
+EtOH, -33°C
+The product(s) from the above reaction will be
+Me
+(B)
+(A)
+Me
+H-
+Ho.
+HO
+HI-
+Me
+Me
+(1)
+Me
+(C)
+Me
+H-
+HO
+-H
+(H
+H-
+Me
+79.
+Which of the following reactions give(s) a meso-compound as the main product ?
+Be?
+(A)
+(B)
+CH,CI,
+Pd C
+12
+Br2
+(C)
+(D)
+Lindlars catalyst
+CC14
+80.
+For spontaneous polymerization. which of the following is (are) correct ?
+(B)
+(A) AG is negative.
+AH is negative.
+(D)
+(C)As is positive.
+As is negative.
+()  /  ?
+(B)
+   V
+(A)
+(D)
+(C)
+30
+
+--- PAGE 31 ---
+PC-2020
+SPACE FOR ROUGH WORK
+31
+
+--- PAGE 32 ---
+PC-2020
+Subject : PHYSICS & CHEMISTRY
+              1
+        : 1-
+G.
+  a      k     I k   : 1-oae
+8.
+                  -
+           
+CONFIDENTIA1
+OMR  A, B ,C, D  本     1
+1          W0
+9.
+1       O
+>o.
+         1 OMR     
+             
+，，，可、，，
+1       O   
+       1   ak   

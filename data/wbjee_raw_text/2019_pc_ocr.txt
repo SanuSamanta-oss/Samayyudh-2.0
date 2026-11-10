@@ -1,0 +1,1261 @@
+
+--- PAGE 1 ---
+PC-2019
+Subject : PHYSICS & CHEMISTRY
+92123177
+(Booklet Number)
+Duration: 2 Hours
+Full Marks: 100
+INSTRUCTIONS
+1.
+This question paper contains all .objective questions divided into three categories. Each
+question has four answer options given.
+2.
+Category-I: Carry 1 mark each and oniy one option is correct. In case of incorrect answer or
+any combination of more than one answer, /4 mark will be deducted.
+3.
+Category-II: Carry 2 marks each and only one option is correct. In case of incorrect answer or
+any combination of more than one answer, /s mark will be deducted.
+4.
+Category-III: Carry 2 marks each and one or more option(s) is/are correct. If all correct
+answers are not marked and also no incorrect answer is marked, then score - 2 x number of
+correct answers marked - actual number of correct answers. If any wrong option is marked or
+if any combination including a wrong option is marked, the answer will be considered wrong.
+but there is no negative marking for the same and zero mark will be awarded.
+5.
+Questions must be answered on OMR sheet by darkening the appropriate bubble marked A,
+B, C, or D.
+6.
+Use only Black/Blue ball point pen to mark the answer by complete filling up of the
+respective bubbles.
+7.
+Mark the answers only in the space provided. Do not make any stray mark on' the OMR.
+8.
+Write question booklet number and your roll number carefully in the specified locations of
+the OMR. Also fill appropriate bubbles.
+9.
+Write your name (in block letter), name of the examination centre and put your full signature
+in appropriate boxes in the OMR.
+10.
+ The OMR is liable to become invalid if there is any mistake in filling the correct bubbles for
+question booklet number/roll number or if there is any discrepancy in the namel signature of
+the gandidate, name of the examination centre. The OMR may also become invalid due to
+folding or putting stray marks on it or any damage 'to it. The consequence of such
+invalidation due to incorrect marking or careless handing by the candidate will be sole
+responsibility of candidate.
+ll. Candidates are not allowed to carry any written or printed material, calculator, pen, docu-
+pen, log table, wristwatch, any communication device like mobile phones etc. inside the
+examination hall. Any candidate found with such' items wili be reported against & his/her
+candidature will be summarily cancelled.
+12.
+Rough work must be done on the question paper itself. Additional blank pages are given in
+the question paper for rough work.
+13. Hand over the OMR to the invigilator before leaving the Examination Hall.
+14. This paper contains questions in both English and Bengali. Necessary care and precaution
+were taken while framing the Bengali version. However, if any discrepancy(ies) is /are found
+between the two yersions, the information provided in the English version will stand and will
+be treated as final.
+PC-2019
+A-124
+
+--- PAGE 2 ---
+PC-2019
+SPACE FOR ROUGH WORK
+
+--- PAGE 3 ---
+PC-2019
+PHYSICS
+Unless otherwise specified in the question, the following values should be used :
+Mechanical equivalent of-heat, J = 4.2 J cal-1
+Acceleration due to gravity, g - 9.8 m s-2
+Absolute zero temperature -- --273 °C
+Speed of light in vacuum -- 3 × 108 ms-1
+The following symbois usually carry meaning as given below :
+So : electric permittivity of free space
+Ho : magnetic permeability of free space
+R : universal gas constant
+  系, J = 4.2 J cal-1
+f , g = 9.8 m s-2
+=-273 ℃
+= 3 × 108 ms-1
+-  : 03
+Ho : * c (
+-k : 
+Category -- I (Q. 1 to Q. 30)
+Category-I : Carry 1 mark each and only one option is correct. In case of incorrect answer
+or any combination of more than one answer, Ya mark will be deducted.
+1.
+ Assume that the earth moves around the sun in a circular orbit of radius R and there
+exists a planet which also moves around the sun in a circular orbit with an angular speed
+twice as large as that of the earth. The radius of the orbit of the planet is
+22/3R
+(A) 2-2/3R
+(B)
+(C)  2-1/3R
+(D)
+V2
+P.T.O.
+
+--- PAGE 4 ---
+PC-2019
+2.
+A compressive force is applied to a uniform rod of rectangular cross-section so that its
+length decreases by 1%. If the Poisson's ratio for the material of the rod be 0.2, which of
+the following statements is correct ?
+"The volume approximately ...
+(A)  decreases by 1%
+(B) decreases by 0.8%
+(C)
+decreases by 0.6%
+(D) increases by 0.2%
+1% 1    可. 0.2 ,   ?
+(B)
+(A)
+1% 
+0.8%  
+(C)
+0.6%  
+(D) 0.2%  
+3.
+A small spherical body of radius r and density p moves with the terminal velocity v in a
+fluid of coefficient of viscosity n and density  . What will be the net force on the body ?
+(C) Zero
+(D) Infinity
+1  p         
+(p-0)g  (B) 6mnrv
+4元
+(C)
+(A)
+(D)
+4.
+Two black bodies A and B have equal surface areas and are maintained at temperatures
+27° C and 177° C respectively. What will be the ratio of the thermal energy radiated per
+second by A to that by B?
+  A  B-       27C 
+177C   1 A  B       
+(D)
+(B)
+:16:81
+4:9 .
+2:3
+(A)
+(C)
+27:177
+What will be the molar specific heat at constant volume of an ideal gas consisting of rigid
+diatomic molecules ?
+olar）
+(A)
+(B)
+(D)
+(C)
+3R
+
+--- PAGE 5 ---
+PC-2019
+6.
+Consider the given diagram. An ideal gas is contained in a chamber (left) of volume V
+and is at an absolute temperature T. It is allowed to rush freely into the right chamber of
+volume V which is initially vacuum. The whole system is thermally isolated. What will
+be the final temperature of the system after the equilibrium has been attained ?
+  1    V    ()  
+a            
+ a a  a  k a 1k a bl
+Ideal gas
+Vacuum
+(可 )
+(间)
+T-2
+(A)
+(B)
+T-4
+2T
+(C)
+(D)
+7.
+Five identical capacitors, of capacitance .20 μF each, are connected to a battery of 150 V,
+in a combination as shown in the diagram. What is the total amount of charge stored ?
+  20      150     
+(B)
+12 × 10-3 C
+15 ×.10-3 C
+(C)
+10 × 10-3 C
+(D) 3 × 10-3 C
+P.T.O.
+
+--- PAGE 6 ---
+PC-2019
+8.
+Eleven equal point charges, all of them having a charge +Q, are placed at all the hour
+positions of a circular clock of radius r, except at the 1o hour position. What is the
+electric field strength at the centre of the clock ?
+ from the centre towards the mark 10
+4元8
+(B)
+from the mark 10 towards the centre
+4元8
+(C)
+from the centre towards the mark 6
+(D)
+Zero
+  -01 ± 
+(B)
+  ±  -0 1
+(C
+  - 9 ±2
+(D)
+9.
+A negative charge is placed at the midpoint between two fixed equal positive charges.
+separated by a distance 2d. If the negative charge is given a small displacement x (x << d)
+perpendicular to the line jaining the positive charges, how the force (F) developed on it
+will approximately depend on x ?
+  (d)，    (F)
+() x-  ?
+(C)
+(B)
+Fαx
+(A)
+F αc x2
+
+--- PAGE 7 ---
+PC-2019
+10.
+To which of the following quantities, the radius of the circular path of a charged particle
+moving at right angles to a uniform magnetic field is directly proportional ?
+(A)
+ energy of the particle.
+(B)
+magnetic field.
+(C)
+charge of the particle.
+(D)
+momentum of the particle.
+(A) 
+(B)
+(C) 
+(D)
+l1.  An electric current 'I' enters and leaves a .uniform circular wire of radius r through
+diametrically opposite points. A particle'carrying a charge q moves along the axis of the
+circular wire with speed v. What is the magnetic force experienced by the particle when it
+passes through the centre of the circle ?
+Hoi
+Hoi
+'qv 2a
+(B)
+(A)
+(D)
+Zero
+qv
+2πa
+12.  A current 'T' is flowing along an infinite, straight wire, in the positive Z-direction and the
+same current is flowing along a similar parallel wire 5 m apart, in the negative
+Z- direction. A point P is at a perpendicular distance 3 m from the first wire and 4 m from
+the second. What will be magnitude of the magnetic field B at P?
+ -   ，       
+k   a  ·k   s  a
+     3m  4 m ?
+25
+(B)
+(A)
+(C)
+12 (μol)
+(D)
+24 (μo)
+288 (μol)
+P.T.O.
+
+--- PAGE 8 ---
+PC-2019
+13. A square conducting loop is placed near an infinitely long current carrying wire with one
+i.edge parallel to' the wire as shown in the figure. If the' current in the straight wire is
+suddenly halved, which of the following statements will be true ?
+  可       
+1           
+"The loop will ..
+(A)
+stay stationary.
+(B)
+move towards the wire.
+(C)
+move away from the wire.
+(D)
+move parallel to the wire.
+(A)
+(B)
+(C)
+(D)
+14.
+What is the current.I shown in the given circuit ?
+2R
+2R
+2R
+(C)
+(D)
+(B)
+16R
+(A)
+8R
+2R
+
+--- PAGE 9 ---
+PC-2019
+,15.
+When the value of R in the balanced Wheatstone bridge, shown in the figure: is increased
+from 5 Q to 7 2, the value of S has to be increased by 3 2 in order to maintain the
+balance. What is the initial value of S ?
+52
+(D)
+32
+(B)
+2.5 2
+(C)
+7.52
+(A)
+16.
+When a 60 mH inductor and a resistor are connected in series with an AC voltage source,
+the voltage leads the current by 60° . If the inductor is replaced by a 0.5 μuF capacitor, the
+voltage lags behind the current by 30°. What is the frequency of the AC supply ?
+ G 60 mH      AC 
+ ，  60
+0.5 F   ,     30° 1 AC 
+× 104Hz
+× 104Hz
+(B)
+(C)
+(A)
+(D)
+17. A point object is placed on the axis of a thin convex lens of focal length 0.05 m at a
+distance of 0.2 m from the lens and its image is formed on the axis. If the object is now
+made to oscillate along the axis with a small amplitude of A cm, then what is. the
+amplitude of oscillation of the image ?
+ - 0.05 m     可   3  13 0.2 m
+A cm       of  F  ?
+5A
+× 10-2 m
+含× 10-2 m
+(C)
+(B)
+10-2 m
+(D)
+P.T.O.
+
+--- PAGE 10 ---
+PC-2019
+18.
+In Young's experiment for the interference of light, the separation between the slits is d
+and the distance of the screen from the slits is D. If D is increased by 0.5% and d is
+ decreased by 0.3%, then for the light of a given wavelength, which one of the following
+is true ?
+"The fringe width..
+(A) increases by 0.8%
+(B) decreases by 0.8%
+(C) increases by 0.2%
+(D)  decreases by 0.2%
+    a     
+     0.5%     - 0.3%    
+        
+"4fO 9fG 44 ....
+(A): 0.8% 1 (B) 0.8% ！ (C) 0.2%  (D) 0.2% 1
+i9. When the frequency of 'the light used is changed from 4 × 1014 s-1 to 5 × 1014 s1, the
+angular width of the principal (central ) maximum in a single slit Fraunhoffer diffraction
+pattern changes by 0.6 radian. What is the width of the slit (assume that the experiment is
+performed in vacuum) ?
+    4× 1014g-1 5×1014s-1   ， -
+（）0.6
+ (     )    
+(C). 5 ×10-7 m :
+(B) 3 × 10-7 m
+(A) . 1.5 × 10-7 m
+(D) 6 × 10-7 m
+20. A ray of light is reflected by a plane mirror. &, e and n be the unit vectors along the
+incident ray, reflected ray and the normal to the reflecting surface respectively.
+Which of the following gives an expression for e?
+           
+(D)
+(C) e-(e.n)n
+(A) 0 + 2(e.n)n
+(B)ég-2(en)n
+.10
+
+--- PAGE 11 ---
+PC-2019
+21. A parent nucleus X undergoes α-decay with a half-life of 75000 years. The daughter
+nucleus Y undergoes β-decay with a half-life of 9 months. In a particular sample, it is
+found that the rate of emission of β -particles is nearly constant (over several months) at
+1o' / hour. What will be the number of α -particles emitted in an hour ?
+a   6 1 g -X a   000
+  )         - 
+102
+107
+1012
+(D)
+(A)
+(B)
+(C)
+1014
+22. A proton and'an electron initially at rest are accelerated by the same potential difference.
+Assuming that a proton is 2000 times heavier than an'electron, what will be the relation
+between the de Broglie wavelength of the proton (α,) and that of electron (a) ?
+          
+(8 )        000  
+2,= 2000%
+(C)2,= 20V/5 ^e
+(A)
+(B)
+(D)
+2000
+p=20V5
+23. To which of the following the angular velocity of the electron in the n-th Bohr orbit is
+proportional ?
+k    k     -u
+n?
+(B)
+(C)
+(A)
+(D)
+n3
+11
+P.T.O.
+
+--- PAGE 12 ---
+PC-2019
+24.  In the circuit shown, what will be the current through the 6V zener ?
+  6V -     ?
+1 k2
+10 V
+1 k2
+6 V
+(B)
+6 mA, from A to B
+(A)
+2 mA, from A to B
+(D)
+(C)
+2 mA, from B to A 
+Zero
+(A) A  B-  6 mA
+(B) A  B-  2 mA
+(C) B  A-  2 mA
+(D) 
+25. Each of the two inputs A and B can assume values either 0 or 1. Then which of the
+following will be equal to AB ?
+  A  B-    0  1    AB-
+(B)
+A+B
+(A)
+A+B
+(D)
+A.B
+(C)
+A+B
+26.
+ The correct dimensional formula for impulse is given by
+(C)ML2T-1
+MLT-1
+(B)
+(A)ML2T-2
+(D) MLT-2
+27.
+ The density of the material of a cube can be estimated by-measuring its mass and the
+length of one. of its sides. If the maximum error in the measurement of mass and
+length are 0.3% and 0.2% respectively, the maximum error in the estimation of the
+density of the cube is approximately
+0.3%0.2%
+0.9%
+(D)
+(B) .0.5%
+(C)
+0.7%
+(A)  1.1%
+12
+
+--- PAGE 13 ---
+PC-2019
+28.
+Two weights of. the mass m, and m2 (> m,) are joined by an inextensible string of
+negligible mass- passing over :a fixed frictionless pulley. The magnitude of the
+acceleration of the loads is
+(A)
+(B)
+(C)
+(D)
+m2.
+m2 + m1
+m2 + m
+29. A body starts from rest, under the action of an engine working at a constant power and
+moves along a straight line. The displacement S is given as a function'of time (t) as
+(A)
+S = at + bt2,
+:a, b are constants
+S = bt2,
+(B)
+b is.aconstant
+(C)
+S = a t3/2,
+a is a constant
+(D)
+S= at,
+ais a constant
+    ()    S 
+(A)
+S == at + bt?,
+a, b
+(B)
+S = bt2,
+b布
+(C)
+S = a t3/2,
+aA
+(D)
+S= at,
+a44
+30.
+Two particles are simultaneously projected in the horizontal direction from a point P at a
+certain height. The initial velocities of the particles are oppositely directed to each other
+and have magnitude v each. The separation between the particles at a time when their
+position vectors (drawn from the point P) are mutually perpendicular, is 
+      d    
+a         1 
+2 (   d)   l± 2  1    a
+4v?
+2y2
+(B)
+(A)
+(C)
+2g
+(D)
+g.
+13
+P.T.O.
+
+--- PAGE 14 ---
+PC-2019
+Category -- II (Q. 31 to Q. 35)
+Carry 2 marks each and only one option is correct. In case of incorrect answer or any
+combination of more than one answer, / mark will be deducted.
+1 21L2
+31. Two identical blocks.of ice'move in opposite directions with equal speed and collide with
+eacl other. What will be the minimum speed required to .make both the blocks melt
+completely, if the initial temperatures of the blocks were -8'C each ?
+(Specific heat of ice is.2100 Jkg-I K-1 and Latent heat of fusion of ice is 3.36 × 105 Jkg-1 )
+      @  k    
+(可 2100 Jkg-1 -1   3.36 x 105 Jkg-)
+(D)
+(C)
+8.4 ms-1
+(B)
+420 ms-1
+9 84 ms-1
+(A) 840.ms-1
+32. A particle with charge q moves with'a'velocity y'in a direction perpendicular to the
+directions of uniform electric and magnetic fields, E and B respectively, which are
+mutually perpendicular to each other. Which one of the following gives the condition for
+which the particle moves undeflected in its original trajectory ?
+   ,    B  
+ bu q ?
+(D)
+v=qE
+(B)
+(A)
+(C)
+14
+
+--- PAGE 15 ---
+PC-2019
+33.
+A parallel plate capacitor in series with a resistance of 100 2 , an inductor of 20 mH and
+1250
+an AC voltage source of variable frequency shows resonance at a frequency of
+If this capacitor is charged by a DC voltage. source to a voltage 25 V, what amount of
+charge will be stored in each plate of the capacitor ? :
+   ,  100 2  3  20 H 可  
+(AC)   
+1250
+Hz 1  4G 44g 84 (DC) (9- 可 f 25 V R420 
+(A)
+0.2 μC
+(B)
+2 mC
+(C)" 0.2 mC
+(D) "
+0.2 C
+34.
+A capacitor of capacitance C is connected in series with a resistance R and a DC source of
+emf E through a key. The capacitor starts charging when the key is closed. By the time the
+capacitor has been fully charged, what amounf of energy is dissipated in the resistance R ?
+C   ，  R. E    (DC):
+(A)
+(B)
+(C)
+CE2
+(D)
+35. A horizontal fire hose with a nozzle of cross-sectional area
+ × 10-3 m2 delivers a
+V21
+cubic metre of water in 1Os. What will be the maximum possible increase in the
+temperature of water while it hits a rigid wall (neglecting the effect of gravity) ?
+10  1 1    
+(A)
+(C)
+10℃
+(B)
+(D)
+0.01°C
+P.T.O.
+
+--- PAGE 16 ---
+PC-2019
+Category -- II1 (Q. 36 to Q. 40)
+Carry 2 marks each and one or more option(s) is/are correct. If all correct answers are
+not marked and also no incorrect'answer is marked then score - 2 x number of correct
+ answers marked + actual number of correct answers. If any wrong option is marked or if
+any combination including a wrong option is marked, the answer will be considered
+wrong, but there is no negative marking for the same and zero mark will be awarded.
+36.  A projectile thrown with an initial velocity of 10 ms-1 at an angle α with the horizontal,
+has a range of 5 m . Taking g = 10 ms-2 and neglecting air resistance, what will be the
+estimated value of α ?
+  -     s0=
+(A)
+15°
+(B)
+30°
+(C)
+45°
+(D)
+75°
+16
+
+--- PAGE 17 ---
+PC-2019
+37.
+In the circuit shown in the figure all the resistances are identical and each has the value
+r 2: The equivalent resistance of the combination between the points A and B will remain
+unchanged even when the following pairs of points marked in the figure are connected
+through a resistance R.
+(B)
+ 3 and 6
+(A) 2 andl 6
+(D)
+(C)* 4 and 7
+ 4 and 6
+             
+(B)
+36
+26
+(A)
+(D)
+(C)
+444 7
+4 44 6
+38. A metallic loop is placed in a uniform magnetic field  with the plane of the loop
+perpendicular to B. Under which condition(s) given below an emf wii be induced in the
+loop ?
+"If the loop is ..
+(B)
+moved along the direction of B.
+(A)
+ squcezed to a smaller area.
+rotated about its axis.
+(D) rotated about one of its diameters.
+(C)
+           1 
+(B)
+B-   !
+(A)
+(D)
+(C)
+17
+P.T.O.
+
+--- PAGE 18 ---
+PC-2019
+39. Electrons are emitted with kinetic energy T from a metal plate by an irradiation of light of
+intensity J and frequency v . Then which of the following will be true ?
+TαJ
+(A)
+(B)' T linearly'increasing with v
+(C)
+T α time of irradiation
+(D) Number of electrons emitted α J
+2 lak la2
+(A) T αJ
+(B)
+     -
+(C)
+(D)
+f k b a
+40. The initial pressure and yolume of a given mass of an ideal gas (with  y ), taken in a
+cylinder fitted with a piston, are P and V respectively. At this stage the gas has the same
+temperature as that of the surrounding medium which is To . It is adiabatically
+Vo
+equilibrium with the surroundings. What is the heat released to the surroundings ?
+  a（a) Kks     aa  a kk
+ P。  V。       T。
+ICA-
+2   k k bk  I a k kkk
+Pov.
+(A)
+(B)
+(2)-1
+y-- 1
+Povo.
+(C) 
+Vo ln 2
+(D)
+2(y- 1) 
+18
+
+--- PAGE 19 ---
+PC-2019
+CHEMISTRY
+Category -- I (Q. 41 to Q. 70)
+Category- : Carry 1 mark each and only one option is correct. In case of incorrect
+answer or any combination of more than one answer, / mark will be deducted.
+41. In the equilibrium H2+I22HI, if at a given temperature the concentrations of the
+ reactants are increased, the value of the equilibrium constant, Kc, will
+(A)
+Increase
+(B), Decrease
+Remain the'same
+(C)
+(D)  Cannot be predicted with certainty
+   s a    2 IH—+H
+,Kc，
+(A）1
+(B)1
+(C）I
+(D)
+42. .. If electrolysis of'aqueous CusOgsolution is carried out using Cu-electrodes, the reaction
+taking place at the anode is
+f Cu-f   Cuso4    f-f,  G
+(A) H++e-→H
+(B) Cu2+(aq)+ 2e -→ Cu (s)
+(C) 'SO42-(aq) -- 2e -> SO4
+(D) Cu(s) -2e -→ Cu2+ (ag)
+43.
+Which one of the following electronic arrangements is absurd ?
+   RG 4 ?
+(B)
+(A) n=3, 1= 1, m=-1
+n= 3,1 0,m= 0
+(C) n=2,1=0,m=-l
+.(D) ·n=2, 1= 1,m=0
+ The quantity hv/kg corresponds to
+(B)
+Wavelength
+(A)
+Velocity
+(D)
+(C)
+ Temperature
+ Angular momentum
+hv/kg F    
+(C)
+(B)
+(A)
+  (a)
+19
+
+--- PAGE 20 ---
+PC-2019
+45. In the crystalline solid MSO4. n H,O of molar mass 250 gmol-1, the percentage of
+anhydrous salt is 64 by weight. The value of n is
+250 gmol-1      MS04. n H20-
+     9    a a
+(A) 2
+(C)
+：(B)3
+(D)
+46.
+At S.T.P. the volume of 7.5 g of a gas is 5.6 L. The gas is
+S.T.P.  7.5 g  f   5.6 L 1  
+(B)N20
+(D)
+(C)
+CO
+(A) NO
+ CO2
+47. The half - life period of s3 1125 is 60 days. The radioactivity after 180 days will be
+53 1125  (60)0 (180)
+(C) 33.3%
+(D)
+(A) 25%
+(B)
+12.5%
+3.0%
+48.
+Consider the radioactive disintegration
+    
+82 A210 →B → C → 82D206 
+The sequence of emission can be
+(B)α,α, β
+(A)β,β,β
+(C)β,β, 
+(D) β,β, α
+49.The second Ionisation Energy of the following'elements follows the order
+(A) Zn>Cd <Hg(B)Zn>Cd >Hg(C) Cd >Hg<Zn(D) Zn<Cd<Hg
+50. The melting points of (i) BeCl2 (ii) CaCl2 and (ii) HgCl, follows the order
+(i) BeCl2 (ii) CaCl,  (ii) HgCl,    :
+(D)
+(C) i<ii<i
+(B)ii<i<i
+(A) i<i<iii
+<i<i
+51.
+Which of these species will have non-zero magnetic moment ?
+  2z  ±k ±12 6a12 12 2a
+(B) Mg
+(D)
+(A) Na*
+(C)
+Ar*
+20
+
+--- PAGE 21 ---
+PC-2019
+The first electron affinity of C, N and O will be of the order
+C, N  0 
+(C) C<O<N
+(B) N<C<O
+(A) C<N<O'
+(D) O<N<C
+53.
+The H -- N - H angle in ammonia is 107.6° , while the H - P - H angle in phosphine is
+93.5°. Relative to phosphine, the p-character of the lone pair on ammonia is expected to
+be.
+(B)
+(A)
+Less
+More
+(C)
+Same
+(D)  Cannot be predicted
+  H-N-H    107.6,   H-P-H  
+93.50
+(D)
+(C)
+(B) 
+(A)
+54. The reactive species in chlorine bleach is
+CI02
+(D)
+(A) Cl20
+(B)OCI-
+(C)
+55.
+ The conductivity measurement of a coordination compound of Cobalt (Ill) shows that it
+dissociates into 3 ions in solution. The compound is
+(A) : Hexaamminecobalt(III) chloride
+(B)
+ Pentaamminesulphatocobalt(III) chloride
+(C)
+Pentaamminechloridocobalt(III) sulphate
+(D)
+Pentaamminechloridocobalt(IID) chloride
+     (pnod upo)    ()  
+(A)  (III) 
+(B)   (I) 
+(C)  (1I) 
+(D)  (I) 
+56.  In the Bayer's process, the leaching of alumina is done by using
+(C)SiO2
+(D)
+(A) Na2CO3
+(B) NaOH
+Cao
+57.
+Which atomic species cannot be used as a nuclear fuel ?
+(species)  ?
+239
+235.
+233
+238.
+(C)
+(B)
+(A)
+(D)
+92 U
+92
+94 Pu
+21
+P.T.O.
+
+--- PAGE 22 ---
+PC-2019
+58.  The molecule/molecules that has/have delocalised lone pair(s) of electrons is/are
+o pasep) /     a     
+pair of electrons)  f f  
+:0:
+EN
+()
+CH3
+(I)
+OCH-
+(I)
+(IV) CH,CH=CHCH,NHCH3
+(B) I,II and IV
+(A)
+I, II and III
+I and III
+(C)
+(D) only III
+59. The conformations. of n-butane, commonly
+known
+as eclipsed, gauche and
+anti-conformations can be interconverted by
+(A)
+ rotation around C-H bond of a methyl group
+(B)
+rotation around C-H bond of a methylene group
+(C)
+rotation around C1-C2 linkage
+(D)
+rotation.around C2-C3 linkage
+n-可(conformational isomers)(eclipsed),
+(gauche)   (anti) 可 (conformation)  f1   
+(A)
+/(group)  C-   
+(B)
+2 2  H-  (dno8) / 
+(C)
+C1-C2
+(D)
+C2-C3
+60.
+ The correct order of the addition reaction rates of halogen acids with ethylene is
+(A)
+hydrogen chloride > hydrogen bromide > hydrogen iodide
+(B)
+(C)
+(D)
+  (addition reaction)  
+(A) >
+(B)
+       
+(C)
+(D)
+22
+
+--- PAGE 23 ---
+PC-2019
+61.
+One of the products of the following reaction is P.
+i) aq KOH
+i) HgO
+Structure of P is
+A)
+(B)
+(C)
+(D)
+62.
+For the reaction below, the product is Q.
+O.H
+acetic anhydride
+Q[C,H.04]
+Conc.H2SO4(cat.) heat
+ff  Q  1
+Q[C,H.04]
+   (),
+110
+The compound Q is
+GOOCOCH3
+(A)
+(B)
+OCOC3
+HO
+COH
+CO.H
+(C)
+(D)
+COCH-
+HO
+23
+P.T.O.
+
+--- PAGE 24 ---
+PC-2019
+63. : Cyclopentanol on reaction with NaH followed by CS2 and CH3I produces a/an
+(B)
+ketone :
+alkene
+(A)
+(D)
+ether
+(C)
+ xanthate
+      H  HN  
+(B)
+(A)
+(D)
+(C)
+ 64. The compound, which evolves carbon dioxide on treatment with aqueous solution of
+sodium bicarbonate at 25°C, is
+         
+(B)
+CH,COC1
+(A)
+(D)
+CH,CONH,
+CH,COOC,H,
+(C)
+65.The indicated atom is not a nucleophilic site in
+ 可e    (nucleophilic)   可
+(B)
+(A)BH4-
+CH3Mgl
+(D)
+CH,NH
+(C)
+CH3OH
+24
+
+--- PAGE 25 ---
+PC-2019
+66. The charge carried by 1 millimole of Mi+ ions is 193 coulombs. The value of n is
+(B)
+(A)
+(C)
+(D)
+67.
+Which of the following mixtures will have the lowest pH at 298 K ?
+    Hd    ga     86
+(A)
+10 ml 0.05N CH,COOH + 5 ml 0.1 N NH4OH
+(B)
+5 ml. 0.2N NH4C1 + 5 ml 0.2N NH4OH
+(C)
+5 ml 0.1N CH,COOH + 10 ml 0.05N CH,COONa
+(D)
+5 ml 0.1N CH,COOH + 5 ml 0.1N NaOH
+68.
+Consider the following two first order reactions occurring at 298 K with same initial
+concentration of A:
+()
+A -> B; rate constant, k = 0.693 min-1
+(2)
+A -→ C; half - life, ty2= 0.693 min
+Choose the correct option :
+(A)
+Reaction (1) is faster than Reaction (2).
+(B)
+Reaction (1) is slower than Reaction (2).
+(C)
+Both reactions proceed at the same rate.
+(D)
+Since two different products are formed, rates can not be compared.
+298      A-  
+(1)
+(2)
+A→ C; 可, tiv2= 0.693 min
+(A)
+（1）(2）！
+(B)
+1  （) （)  
+(C)
+Iknk kk e 
+(D)
+25
+P.T.O.
+
+--- PAGE 26 ---
+PC-2019
+69. For the equilibrium H,O (D  H,O (v), which of the following is correct ?
+         ()oH ) oH
+(A)
+△G = 0, AH<0, AS <0
+(B)
+△G<0, AH > 0. △S ≥ 0
+(C)
+△G > 0. AH = 0, △S > 0
+(D)
+AG = 0. AH> 0, AS > 0
+ab
+70.For a van der Waal's.gas, the term
+represents some
+(A)
+Pressure
+(B)
+Energy
+(C)
+Critical density
+(D)
+Molar mass
+(A)
+(B) 
+(C)
+(D)
+26
+
+--- PAGE 27 ---
+PC-2019
+Category - II (Q.71 to Q.75)
+Carry 2 marks each and only one.option is correct. In case of incorrect answer or any
+combination of more than one answer, / mark will be deducted.
+71. At constant pressure, the heat of formation of a compound is not dependent on
+temperature, when
+(A) △Cp=0
+(B) △Cy=0
+(C) △Cp >0
+(D) ACp<0
+72.
+ A copper coin was electroplated with Zn and then heated at high temperature until there
+is a change in colour. What will be the resulting colour ?
+(A) White
+(B).Black
+(C)
+Silver
+(D)Golden
+(A)
+(B) t
+ (Silver)
+(C)
+(D) (Golden)
+73.
+Oxidation of allyl alcohol with a peracid gives a compound of molecular formula
+C,H,O2, which contains an asymmetric carbon atom. The structure of the compound is
+f C,H2     (asymmetric)   1
+HO
+DH
+(B)
+(C)
+(D)
+HO
+P.T.O.
+
+--- PAGE 28 ---
+PC-2019
+74.
+The total number of isomeric linear dipeptides which can be synthesized from racemic
+alanine is
+     (linear)  
+(B)
+(A)
+(C)
+(D)
+75.
+ The kinetic study of a reaction like vA -→ P at 300 K provides the following curve, where
+concentration is taken in mol dm- and time in min.
+  mol dm-3   min !
+ro: Initial rate
+[Ao]: Initial concentration of A
+Slope (μf0)= 4.0
+Fo:  
+[Aa]: A-  f 5
+[A]。 --
+Identify the correct order (n) and rate constant (k) :
+ (n)   (k)1
+(A)
+n = 0, k = 4.0 mol dm-3 min-1 .
+(B)
+n = 1/2, k = 2.0 mo11/2 dm-3/2 min-1
+(C)
+n= 1, k=8.0 min-1
+(D)
+n = 2, k = 16.0 dm3mol-1 min-1
+28
+
+--- PAGE 29 ---
+PC-2019
+Category - III (Q. 76 to Q. 80)
+Carry 2 marks each and one or more option(s) is/are correct. If all correct answers are not
+marked and also noincorrect answer is marked then score - 2 x number of correct
+answers marked + actual number of correct answers. If any wrong option is marked or if
+any combination including a wrong option is marked, the answer will considered wrong,
+but there is no negative marking for the same and zero mark will be awarded.
+        
+76.  Compounds with spin-only magnetic moment equivalent to five unpaired electrons are
+ a   (uds)    a k
+K4[Mn(CN)]
+(A)
+(B)[Fe(H,O)sj Cl3
+(C)  K,[FeFa]
+(D) K,[MnFal
+77.
+Which of the following chemicals may be used to identify three unlabelled beakers
+containing conc. NaOH, conc. H, SO, and water ?
+    NaOH,  H, SO, 。    
+(A) - NHNO3
+(B)NaC1
+(NH4)2CO, .
+(C)
+(D)HCOONa
+78.
+ The compound(s), capable of producing achiral compound on heating at 1oo C is/are
+ k (e)  a/    ka  001
+  / 
+Me
+COOH
+Me
+Et
+Et
+(B)
+(A)
+HO
+Me.
+CO2H
+-10
+Me
+Et.
+Et.
+(C)
+(D)
+Me
+Me
+29
+P.T.O.
+
+--- PAGE 30 ---
+PC-2019
+79. Haloform reaction with I2 and KOH will be responded by
+     I  KOH   
+(B)
+Ph
+HO
+(D)
+PE
+Me
+80.
+Identify'the correct statement(s) :
+(A)
+The oxidation number of Cr in CrO, is +6.
+(B)
+AH > AU for the reaction N204(g) -→ 2NO2 (g), provided both gases behave
+.ideally.
+(C)
+pH of 0.1N H,SO4 is less than that of 0.1N HC1 at 25° C.
+RT
+(D)
+ - 0.0591 volt at 25° C .
+(A)CrO, Cr - -  +6
+(B)
+     k   H  ()ON(8)o'
+(C)25° C, 0.1N HSO4  H  0.1N HCI   1
+(RT)
+(D) 25°C ,
+30
+
+--- PAGE 31 ---
+PC-2019
+SPACE FOR ROUGH WORK
+31
+
+--- PAGE 32 ---
+PC-2019
+Subject : PHYSICS & CHEMISTRY
+S.           
+N.
+G.
+  a  1    a g k a :II-08
+1   o a    1±k    ± i-0
+8.
+I       +      
+          a
+I        'g'V  WO
+1            WO
+            WO
+            . WO
+1    k a      k
+OMR            !
+.，，， 可，，，  
+          a   2s
+  k    O k    as

@@ -48,6 +48,8 @@ __pycache__/
 
 # scratch
 scratch/
+test_*
+*.tmp
 
 # Scraped raw dumps
 data/jee_adv_raw/

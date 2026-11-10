@@ -1,0 +1,1529 @@
+
+--- PAGE 1 ---
+ PC-2023 
+A 1  P.T.O.  
+   Signature of the Candidate :  ______________________________  
+          (as in Admit Card) 
+ 
+   Signature of the Invigilator : ______________________________ 
+   
+    (Booklet Number) 
+ Duration : 2 Hours                              Full Marks : 100 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+PC-2023 
+Subject : PHYSICS & CHEMISTRY 
+ 
+Question    
+Booklet Series 
+INSTRUCTIONS 
+1. All questions are of objective type having four answer options for each. 
+2. Category- 1: Carries 1 mark each and only one option is correct. In case of incorrect answer or 
+any combination of more than one answer, ¼ mark will be deducted. 
+3. Category- 2: Carries 2 marks each and only one option is correct. In case of incorrect answer or 
+any combination of more than one answer, ½ mark will be deducted. 
+4. Category- 3: Carries 2 marks each and one or more option(s) is/are correct. If all correct     
+answers are not marked and no incorrect answer is marked, then score = 2 × number of correct 
+answers marked ÷ actual number of correct answers. If any wrong option is marked or if any 
+combination including a wrong option is marked, the answer will be considered wrong, but 
+there is no negative marking for the same and zero mark will be awarded. 
+5. Questions must be answered on OMR sheet by darkening the appropriate bubble marked A, B, C, or D.  
+6. Use only Black/Blue ink ball point pen  to mark the answer by filling up of the respective 
+bubbles completely. 
+7. Write Question Booklet number and your roll number carefully in the specified locations of the 
+OMR Sheet. Also fill appropriate bubbles. 
+8. Write your name (in block letter), name of the examination center and put your signature (as is 
+appeared in Admit Card) in appropriate boxes in the OMR Sheet. 
+9. The OMR Sheet is liable to become invalid if there is any mistake in filling the correct bubbles 
+for Question Booklet number/roll number or if there is any discrepancy in the name/ signature 
+of the candidate, name of the examination center. The OMR Sheet may also become invalid 
+due to folding or putting stray marks on it or any damage to it. The consequence of such 
+invalidation due to incorrect marking or careless handling by the candidate will be the sole 
+responsibility of candidate. 
+10. Candidates are not allowed to carry any written or printed material, calculator, pen, log-table, 
+wristwatch, any communication device like mobile phones, bluetooth device etc. inside the 
+examination hall. Any candidate found with such prohibited items will be reported against 
+and his/her candidature will be summarily cancelled. 
+11. Rough work must be done on the Question Booklet itself. Additional blank pages are given in 
+the Question Booklet for rough work. 
+12. Hand over the OMR Sheet to the invigilator before leaving the Examination Hall. 
+13. This Booklet contains questions in both English and Bengali. Necessary care and precaution 
+were taken while framing the Bengali version. However, if any discrepancy(ies) is /are found 
+between the two versions, the information provided in the English version will stand and will 
+be treated as final. 
+14. Candidates are allowed to take the Question Booklet after examination is over. 
+ PC-2023    A 
+PC-2023 
+Subject : PHYSICS & CHEMISTRY 
+--- PAGE 2 ---
+ PC-2023 
+A 2 
+ 
+  
+SPACE FOR ROUGH WORK 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 3 ---
+ PC-2023 
+A 3  P.T.O.  
+PHYSICS  
+Category-1 (Q. 1 to 30) 
+(Carry 1 mark each. Only one option is correct. Negative marks : – ¼) 
+ 
+1. In a simple harmonic motion, let f  be the acceleration and T be the time period. If x denotes 
+the displacement, then |f T| vs. x graph will look like, 
+ HL¢V plm ­c¡mN¢al ­r­œ f q'm aÆlZ J T q'm fkÑ¡uL¡m z k¢c x qu plZ a­h |f T| he¡j x 
+­mM¢Qœ¢V q­h, 
+ 
+(A)
+  
+(B) 
+ 
+ 
+(C) 
+ 
+(D)
+  
+ 
+2. The displacement of a plane progressive wave in a medium, travelling towards positive      
+x-axis with velocity 4 m/s at t = 0 is given by y = 3 sin 2    3 x . Then the expression for 
+the displacement at a later time t = 4 sec will be 
+ 
+ HL¢V j¡dÉ­j de¡a ÈL x-Ar A¢ij¤­M 4 m/s ­h­N N¢an£m HL¢V pjam Qmal­‰l t = 0 pj­u 
+pl­Zl pj£LlZ y = 3 sin 2    3 x  z a¡q­m t = 4 ­p­L™ pj­u pl­Zl l¡¢n¢V q­h, 
+ (A) y = 3 sin 2      3 16x   (B) y = 3 sin 2        3 16x  
+ (C) y = 3 sin 2  
+
+
+
+ 
+3
+1x   (D) y = 3 sin 2  
+
+
+
+ 
+3
+1x  
+|f T| |f T| 
+|f T| |f T| 
+x x 
+x x 
+--- PAGE 4 ---
+ PC-2023 
+A 4 
+ 
+  
+3. As shown in the figure, a liquid is at same levels in two 
+arms of a U-tube of uniform cross-section when at rest. If 
+the U-tube moves with an acceleration ‘f’ towards right, 
+the difference between liquid heights between two arms 
+of the U-tube will be, (acceleration due to gravity = g) 
+ ¢Q­œ fËc¢nÑa ¢ÙÛl AhÙÛ¡u pjfËÙÛ­µRck¤š² U-e­ml c¤¢V h¡ý­a 
+HL¢V alm pj¡e EµQa¡u b¡­L z k¢c U-em¢V ‘f’ aÆl­Z 
+X¡e¢c­L N¢an£m qu a­h U-e­ml c¤C h¡ýl al­ml EµQa¡l 
+f¡bÑLÉ q­h, (A¢iLoÑS aÆlZ = g) 
+ (A) ag f  (B) af g  (C) a (D) 0 
+ 
+4. Six molecules of an ideal gas have velocities 1, 3, 5, 5, 6 and 5 m/s respectively. At any 
+given temperature, if V  and Vrms represent average and rms speed of the molecules, then 
+ HL¢V BcnÑ NÉ¡­pl Ru¢V AZ¤l ­hN kb¡œ²­j 1, 3, 5, 5, 6 J 5 m/s z k¢c V  J Vrms ­L¡e ¢e¢cÑø 
+a¡fj¡œ¡u AZ¤…¢ml Ns­hN J rms ­hN ­h¡T¡u a­h, 
+ (A) V = 5 m/s (B) V rms > V  (C) 22 rms VV   (D) V rms = V  
+ 
+5. 
+ 
+ As shown in the figure, a pump is designed as horizontal cylinder with a piston having area 
+A and an outlet orifice having an area ‘a’. The piston moves with a constant velocity under 
+the action of force F. If the density of the liquid is ρ, then the speed of the liquid emerging 
+from the orifice is, (assume A >> a) 
+ ¢Q­œ fËc¢nÑa HL¢V f¡Çf Ae¤i¨¢jL ­Q¡­Pl BL¡­l N¢Wa k¡l ¢fø­el fËÙÛ­µR­cl ­rœgm A J 
+¢eNÑje j¤­Ml fËÙÛ­µR­cl ­rœgm ‘a’ z HL¢V ¢ÙÛl hm F-Hl fË­u¡­N ¢føe¢V ¢ÙÛl ­h­N ANËpl qu z 
+al­ml OeaÆ k¢c ρ qu a­h f¡­Çfl j¤M ­b­L ¢eNÑa al­ml ­hN q­h (d­l e¡J A >> a), 
+ (A) ρA F  (B) ρA F A a  (C) ρA 2F  (D) ρA 2F a A  
+
+--- PAGE 5 ---
+ PC-2023 
+A 5  P.T.O.  
+6. Two substances A and B of same mass are heated at constant rate. The variation of 
+temperature θ of the substances with time t is shown in the figure. Choose the correct 
+statement. 
+ (A) Specific heat of A is greater than that of B. 
+ (B) Specific heat of B is greater than that of A. 
+ (C) Both have same specific heat. 
+ (D) None of the above is true. 
+ 
+ HLC i­ll c¤¢V fc¡bÑ A J B ­L HLC q¡­l Ešç Ll¡ q­µR z pju (t)-Hl p¡­b a¡fj¡œ¡ (θ)-Hl 
+f¢lhaÑe ¢Q­œ ­cM¡­e¡ q­u­R z ­p­r­œ p¢WL E¢š²¢V ¢ehÑ¡Qe Ll z 
+ (A) B -Hl ­Q­u A-Hl B­f¢rL a¡f ­h¢n z 
+ (B) A -Hl ­Q­u B-Hl B­f¢rL a¡f ­h¢n z 
+ (C) c¤¢V fc¡­bÑlC B­f¢rL a¡f pj¡e z 
+ (D) Ef­ll ­L¡­e¡ E¢š²C p¢WL eu z 
+ 
+7. A given quantity of gas is taken from A to C in two ways;        
+a) directly from A → C along a straight line and b) in two 
+steps, from A → B and then from B → C. Work done and heat 
+absorbed along the direct path A →C is 200 J and  280 J 
+respectively.  
+ If the work done along A →B→C is 80 J, then heat absorbed 
+along this path is, 
+ 
+ HL¢V ¢e¢cÑø f¢lj¡Z NÉ¡p­L A ­b­L C AhÙÛ¡­e c¤C i¡­h ¢e­u k¡Ju¡ q'm, a) A → C plm ­lM¡ 
+hl¡hl J b) A → B J B → C HC c¤C d¡­f z A→C f­b L«a L¡kÑÉ J ­n¡¢oa a¡f kb¡œ²­j 200 J 
+J 280 J z A→B→C f­b L«a L¡kÑÉ k¢c 80 J qu a­h I f­b ­n¡¢oa a¡f q­h, 
+ (A)  80 J (B)  0 (C)  160 J (D)  120 J 
+θ 
+t 
+B 
+A 
+0 
+p 
+V 
+B 
+A 
+C 
+--- PAGE 6 ---
+ PC-2023 
+A 6 
+ 
+  
+8. A thin glass rod is bent in a semicircle of radius R. A charge is 
+non-uniformly distributed along the rod with a linear charge 
+density 0 sin   (0 is a positive constant). The electric field 
+at the centre P of the semicircle is, 
+ HL¢V pl¦ Ly¡­Ql c™­L R hÉ¡p¡­dÑl AdÑhªš¡L¡­l hy¡L¡­e¡ q'm z c™¢V­a 
+Apj ¢hÙ¹«a Bd¡e k¤š² B­R k¡l °l¢ML OeaÆ q'm 0 sin   (0 HL¢V de¡aÈL dË¤hL) z ­p­r­œ 
+AdÑhª­šl ­L¾cÊ P-­a a¢sv ­r­œl j¡e q­h, 
+ (A) – 
+o
+8oR ^j (B) o 8oR ^j (C) o 8oR ^i  (D) – o 8oR ^i 
+ 
+9. Consider a positively charged infinite cylinder with uniform volume charge 
+density ρ > 0. An electric dipole consisting of + Q and ˗ Q charges attached to 
+opposite ends of a massless rod is oriented as shown in the figure. At the 
+instant as shown in the figure, the dipole will experience, 
+ (A) a force to the left and no torque. 
+ (B) a force to the right and a clockwise torque. 
+ (C) a force to the right and a counter clockwise torque. 
+ (D) no force but only a clockwise torque. 
+ j­e Ll de¡aÈL Bd¡ek¤š² HL¢V A¢a c£OÑ ­Q¡­Pl Bua¢eL Bd¡e OeaÆ ρ > 0 z Bh¡l HL¢V ilq£e 
+c­™l c¤C fË¡­¿¹ + Q J ˗ Q Bd¡e k¤š² HL¢V a¢sv ¢à­jl¦ ¢Q­œ fËc¢nÑa A¢ij¤­M l¡M¡ B­R z ¢Q­œ 
+fËc¢nÑa j¤q¨­aÑ a¢sv ¢à­jl¦¢Vl Efl ¢œ²u¡ Ll­h, 
+ (A) h¡j A¢ij¤­M HL¢V hm ¢L¿¹¥ ­L¡­e¡ ï¡jL eu z 
+ (B) X¡e A¢ij¤­M HL¢V hm J O¢sl Ly¡V¡l A¢ij¤­M HL¢V ï¡jL z 
+ (C) X¡e A¢ij¤­M HL¢V hm J O¢sl Ly¡V¡l ¢hfl£a A¢ij¤­M HL¢V ï¡jL z 
+ (D) ­L¡e hm eu, öd¤ O¢sl Ly¡V¡l A¢ij¤­M HL¢V ï¡jL z 
+x 
+y 
+R 
+θ 
+Q 
+˗ Q 
+--- PAGE 7 ---
+ PC-2023 
+A 7  P.T.O.  
+10. 12 μC and 6 μC charges are given to the two conducting plates 
+having same cross-sectional area and placed face to face close 
+to each other as shown in the figure. The resulting charge 
+distribution in μC on surfaces A, B, C and D are respectively, 
+ ¢Q­œ fËc¢nÑa HLC fËÙÛ­µRc k¤š² c¤¢V f¢lh¡q£ f¡a­L kb¡œ²­j          
+12 μC J 6 μC Bd¡e ­cJu¡ q'm Hhw M¤h L¡R¡L¡¢R j¤­M¡j¤¢M l¡M¡ 
+q'm z ­p­r­œ A, B, C J D fª­ù h¢¸Va Bd¡­el j¡e (μC HL­L) 
+q­h kb¡œ²­j, 
+ (A)  9, 3, – 3, 9 (B)  3, 9, – 9, 3 (C)  6, 6, – 6, 12 (D) 6, 6, 3, 3  
+  
+11. A wire carrying a steady current I is kept in the x-y plane along the curve    xλ 2πsinA y . 
+A magnetic field B exists in the z-direction. The magnitude of the magnetic force in the 
+portion of the wire between x = 0 and x = λ is 
+ ¢ÙÛl a¢svfËh¡q I k¤š² HL¢V pl¦ a¡l­L x-y a­m    xλ 2πsinA y  hœ²­lM¡ hl¡hl l¡M¡ q'm z I 
+ÙÛ¡­e z-Ar A¢ij¤­M HL¢V ­Q±ðL ­rœ B ¢œ²u¡ L­l z a¡q­m a¡l¢Vl x = 0 J x = λ -Hl jdÉha£Ñ 
+Aw­nl Efl ­k ­Q±ðL hm ¢œ²u¡ L­l a¡l j¡e q'm, 
+ (A) 0 (B) 2I B (C) I B (D) I B/2 
+ 
+12. The figure represents two equipotential lines in x-y 
+plane for an electric field. The x-component E x of the 
+electric field in space between these equipotential lines 
+is, 
+ x-y a­m HL¢V a¢sa­r­œl j­dÉ c¤¢V pj¢hih ­lM¡ ¢Q­œ 
+­cM¡­e¡ q­u­R z I c¤¢V ­lM¡l jdÉhaÑ £ ÙÛ¡­e a¢sv­r­œl          
+x-Ef¡wn Ex-Hl j¡e q'm, 
+ (A)  100 V/m (B)  –100 V/m (C)  200 V/m (D)  –200 V/m 
+12 μC 
+ 6 μC 
+A 
+B 
+ C 
+ D 
+x(cm) 
+y(cm) 
+3 
+2 
+1 
+0 
+2 
+ 4 
+ 6 
+ 8 
+2 Volt 
+4 Volt 
+--- PAGE 8 ---
+ PC-2023 
+A 8 
+ 
+  
+13. An electric dipole of dipole moment 
+
+p is placed at the origin of the co-ordinate system 
+along the z-axis. The amount of work required to move a charge ‘q’ from the point (a, 0, 
+0) to the point (0, 0, a) is, 
+ 
+
+p ¢à­jl¦ ï¡j­Ll HL¢V a¢sv-¢à­jl¦ L¡­VÑS£u ¢e­cÑna­¿»l j§m¢h¾c¤­a l¡M¡ B­R z ¢à­jl¦¢Vl A¢ij¤M 
+z-Ar hl¡hl z a¡q­m HL¢V ‘q’ Bd¡e­L (a, 0, 0) ¢h¾c¤ ­b­L (0, 0, a) ¢h¾c¤­a ¢e­u ­k­a fË­u¡Se£u 
+L«aL¡kÑÉ q'm, 
+ (A) 
+aε4
+pq
+0
+ (B) 0 (C) 2
+0aε4
+pq
+
+  (D) 2
+0aε4
+pq
+
+ 
+ 
+14. The electric field of a plane electromagnetic wave of wave number k and angular frequency 
+ω is given by 
+
+E = E0(^i + ^j) sin(kz – t).  Which of the following gives the direction of the 
+associated magnetic field 
+
+B ? 
+ al‰ pwMÉ¡ k J ω ®L±¢ZL LÇf¡­ˆl HL¢V pjam a¢sv ®Q±ðL£u al­‰l a¢s­vrœ  
+
+E = E0(^i + ^j) sin(kz – t)  z a¡q­m ¢e­Ql ­L¡e¢V Be¤p¢‰L ­Q±ðL­rœ  B-Hl ¢cL ¢e­cÑn L­l ?  
+ (A) ^k (B) – ^i + ^j (C) – ^i – ^j (D) ^i – ^k 
+ 
+15. A charged particle in a uniform magnetic field 
+
+B = B0 ^k  starts moving from the origin with 
+velocity v = 3^i + 4 ^k  m/s. The trajectory of the particle and the time t at which it reaches    
+2 m above x-y plane are, 
+ (A) Circular path, ½ sec.  (B)  Helical path, ½ sec. 
+ (C)  Circular path, 2/3 sec.  (D)  Helical path, 2/3 sec. 
+ p¤¤oj a¢sv­rœ 
+
+B = B0 ^k  -Hl j­dÉ HL¢V B¢qa LZ¡ j§m¢h¾c¤ ­b­L v = 3^i + 4^k  m/s ­h­N Qm­a 
+öl¦ L­l z LZ¡¢Vl Njefb J ­k pju t-­a LZ¡¢V x-y-a­ml 2 m EµQa¡u ­f±yR­h a¡ q'm, 
+ (A) hªš¡L¡l fb, ½ ­p­L™  (B) L¥™m¡¢ua fb, ½ ­p­L™ 
+ (C) hªš¡L¡l fb, 2/3 ­p­L™  (D) L¥™m¡¢ua fb, 2/3 ­p­L™ 
+--- PAGE 9 ---
+ PC-2023 
+A 9  P.T.O.  
+16. In an experiment on a circuit as shown in the figure, the voltmeter shows 8 V reading. The 
+resistance of the voltmeter is, 
+ 
+ ¢Q­œ fËc¢nÑa haÑe£l fl£r¡u ­i¡ÒV¢jV¡l 8 V f¡W ­cu z a¡q­m ­i¡ÒV¢jV¡­ll ­l¡d La ? 
+ (A)  20 Ω (B)  320 Ω (C)  160 Ω (D)  1.44 k Ω 
+  
+17. An interference pattern is obtained with two coherent sources of intensity ratio n:1. The 
+ratio Max Min
+Max Min
+I I
+I I
+
+
+ will be maximum if 
+ fË¡h­mÉl Ae¤f¡a n:1 ¢h¢nø c¤¢V p¤¤pwNa Evp à¡l¡ HL¢V hÉ¡¢aQ¡l f¢V N¢Wa q'm z ­p­r­œ 
+Max Min
+Max Min
+I I
+I I
+
+
+ Ae¤f¡a¢V p­hÑ¡µQ q­h kMe, 
+ (A)  n = 1 (B)  n = 2 (C)  n = 3 (D)  n = 4 
+ 
+18. A circular coil is placed near a current carrying conductor, both 
+lying on the plane of the paper. The current is flowing through the 
+conductor in such a way that the induced current in the loop is 
+clockwise as shown in the figure. The current in the wire is, 
+ (A) time dependent and downward. 
+ (B) steady and upward.  
+ (C) time dependent and upward. 
+ (D) An alternating current. 
+ HL¢V hªš¡L¡l L¥™m£­L HL¢V a¢svh¡q£ f¢lh¡q£l L¡­R l¡M¡ q'm; Ei­uC L¡N­Sl a­m Ah¢ÙÛa z 
+f¢lh¡q£l jdÉ ¢c­u a¢sv Hje i¡­h fËh¡¢qa q­µR ­k L¥™m£­a B¢hø a¢sv fËh¡­ql A¢ij¤M O¢sl 
+Ly¡V¡l ¢c­L (¢Q­œ fËc¢nÑa) z ­p­r­œ f¢lh¡q£l j­dÉ a¢svfËh¡q 
+ (A) pj­ul p¡­b f¢lhaÑen£m J ¢ejÀj¤M£ 
+ (B) FdÑÄj¤M£ J ¢ÙÛlfËh¡q 
+ (C) pj­ul p¡­b f¢lhaÑen£m J FdÑÄj¤M£  
+ (D) HL¢V f¢lhaÑ£ a¢svfËh¡q  
+Up 
+Down 
+I 
+--- PAGE 10 ---
+ PC-2023 
+A 10 
+ 
+  
+19. Three identical convex lenses each of focal 
+length f are placed in a straight line separated 
+by a distance f from each other. An object is 
+located at f/2 in front of the leftmost lens. 
+Then, 
+ (A) Final image will be at f/2 behind the rightmost lens and its magnification will be −1. 
+ (B) Final image will be at f/2 behind the rightmost lens and its magnification will be +1. 
+ (C) Final image will be at f behind the rightmost lens and its magnification will be −1. 
+ (D) Final image will be at f behind the rightmost lens and its magnification will be +1.  
+ f  ­g¡L¡p °c­OÑÉl ¢ae¢V A¢iæ Ešm ­m¾p­L HL¢V plm ­lM¡u H­L Afl ­b­L f c§l­aÄ ÙÛ¡fe Ll¡ 
+q'm z hy¡ ¢c­Ll fËbj ­m¾p¢Vl p¡j­e f/2 c§l­aÄ HL¢V hÙ¹¥ l¡M¡ q'm z ­p­r­œ, 
+ (A) A¢¿¹j fË¢a¢hð¢V X¡e¢c­Ll ­no ­m­¾pl ¢fR­e f/2 c§l­aÄ pª¢ø q­h Hhw ¢hhdÑe q­h −1 
+ (B) A¢¿¹j fË¢a¢hð¢V X¡e¢c­Ll ­no ­m­¾pl ¢fR­e f/2 c§l­aÄ pª¢ø q­h Hhw ¢hhdÑe q­h +1 
+ (C) A¢¿¹j fË¢a¢hð¢V X¡e¢c­Ll ­no ­m­¾pl ¢fR­e f  c§l­aÄ pª¢ø q­h Hhw ¢hhdÑe q­h −1 
+ (D) A¢¿¹j fË¢a¢hð¢V X¡e¢c­Ll ­no ­m­¾pl ¢fR­e f  c§l­aÄ pª¢ø q­h Hhw ¢hhdÑe q­h +1 
+ 
+20. A ray of monochromatic light is incident on the plane 
+surface of separation between two media X and Y with 
+angle of incidence ‘i’ in medium X and angle of refraction 
+‘r’ in medium Y. The given graph shows the relation 
+between sin i and sin r. If V X and V Y are the velocities of 
+the ray in media X and Y respectively, then which of the 
+following is true ? 
+ (A) V X = 3 1 VY 
+ (B) V X = 3 VY 
+ (C) Total internal reflection can happen when the light is incident in medium X. 
+ (D) X Y 3   , where νX and νY are frequencies of the light in medium X and Y 
+respectively. 
+ HL¢V HLhZÑ£ B­m¡l l¢nÈ X J Y c¤¢V j¡dÉ­jl pjam ¢h­µRc a­ml Efl Bf¢aa q'm, ­kM¡­e X 
+j¡dÉ­j Bfae ­L¡Z ‘i’ J Y j¡dÉ­j fË¢aplZ ­L¡Z ‘r’ z sin i J sin r-Hl j­dÉ pÇfLÑ ¢Q­œ ­cM¡­e¡ 
+q­u­R z k¢c VX J VY kb¡œ²­j X J Y j¡dÉ­j l¢nÈ¢Vl ­hN qu a­h ¢e­Ql ­L¡e E¢š²¢V p¢WL ? 
+ (A) V X = 3 1 VY 
+ (B) V X = 3 VY 
+ (C) l¢nÈ¢V X j¡dÉ­j Bf¢aa q'­m BiÉ¿¹l£Z f§ZÑ fË¢agme q­a f¡­l z 
+ (D) X Y 3   ,  ­kM¡­e νX J νY q'm kb¡œ²­j X J Y j¡dÉ­j B­m¡­Ll LÇf¡ˆ z 
+Object 
+sin r 
+sin i 
+30O 
+0 
+--- PAGE 11 ---
+ PC-2023 
+A 11  P.T.O.  
+21. If the potential energy of a hydrogen atom in the first excited state is assumed to be zero, 
+then the total energy of n = ∞ state is, 
+ q¡C­XÊ¡­Se flj¡Z¤l fËbj EŸ£¢fa Ù¹­ll ¢ÙÛ¢an¢š² n§eÉ dl­m n = ∞ Ù¹­l ­j¡V n¢š² q­h 
+ (A)  3.4 eV (B)  6.8 eV (C)  0 (D)  ∞ 
+  
+22.
+ 
+ 
+ In the given circuit, find the voltage drop V L in the load resistance RL. 
+ fËcš haÑe£­a ­m¡X RL-H ¢hih fË­ic VL-Hl j¡e La ? 
+ (A)  5 V (B)  3 V (C)  9 V (D)  6 V 
+ 
+  
+23.
+ 
+ 
+ 
+ Consider the logic circuit with inputs A, B, C and output Y. How many combinations of 
+A, B and C gives the output Y = 0  ? 
+ Cef¤V A, B, C J BEVf¤V Y-Hl fËcš haÑe£¢V ¢h­hQe¡ Ll z A, B J C-Hl La lL­jl ­r­œ         
+Y = 0 q­h ? 
+ (A)  8 (B)  5 (C) 7 (D)  1 
+ 
+24. X-rays of wavelength λ gets reflected from parallel 
+planes of atoms in a crystal with spacing d between 
+two planes as shown in the figure. If the two 
+reflected beams interfere constructively, then the 
+condition for maxima will be, (n is the order of 
+interference fringe) 
+ λ  al‰°c­OÉÑl X-l¢nÈ HL¢V ­Lm¡­pl pj¡¿¹l¡m c¤¢V am (k¡­cl j­dÉ c§laÄ q'm d) ­b­L fË¢ag¢ma 
+q'm z fË¢ag¢ma l¢nÈc¤¢Vl NWej§mL hÉ¢aQ¡­ll naÑ q­h, (n q'm hÉ¢aQ¡l f¢Vl œ²j)  
+ (A) d tan  = n (B) d sin  = n (C) 2d cos  = n (D) 2d sin  = n 
+d 
+θ 
+--- PAGE 12 ---
+ PC-2023 
+A 12 
+ 
+  
+25. A particle of mass m is projected at a velocity u, making an angle θ with the horizontal (x-
+axis). If the angle of projection θ is varied keeping all other parameters same, then 
+magnitude of angular momentum (L) at its maximum height about the point of projection 
+varies with θ as, 
+ m  i­ll HL¢V hÙ¹¥LZ¡­L u ­h­N Ae¤i¨¢jL (x-A­rl) p­‰ θ ­L¡­Z fË­rf Ll¡ q'm z AeÉ pjÙ¹ 
+¢LR¥ HLC ­l­M k¢c öd¤ fË­rf­L¡Z θ f¢lhaÑe Ll¡ qu a­h I hÙ¹¥LZ¡l p­hÑ¡µQ AhÙÛ¡­e fË­rf 
+¢h¾c¤l p¡­f­r ­L±¢ZL il­h­Nl (L) f¢lhaÑe ¢e­Ql ­L¡e ­mM¢Qœ¢V à¡l¡ ¢e­cÑn Ll¡ k¡u ? 
+ 
+(A) 
+ 
+(B) 
+ 
+ 
+(C) 
+ 
+(D) 
+ 
+ 
+26. A body of mass 2 kg moves in a horizontal circular path of radius 5 m. At an instant, its 
+speed is 2√5 m/s and is increasing at the rate of 3 m/s 2. The magnitude of force acting on 
+the body at that instant is, 
+ 2 kg i­ll HL¢V hÙ¹¥ 5 m hÉ¡p¡­dÑl Ae¤i¨¢jL hªš¡L¡l f­b O¤l­R z ­L¡­e¡ HL j¤q¨­aÑ hÙ¹¥¢Vl â ¤¢a 
+2√5 m/s Hhw I â¤¢a 3 m/s2 q¡­l hª¢Ü f¡­µR z I j¤q¨­aÑ hÙ¹¥¢Vl Efl ¢œ²u¡la h­ml j¡e q'm, 
+ (A)  6 N (B)  8 N (C)  14 N (D)  10 N 
+ 
+27. In an experiment, the length of an object is measured to be 6.50 cm. This measured value 
+can be written as 0.0650 m. The number of significant figures on 0.0650 m is 
+ HL¢V fl£r¡u HL¢V hÙ¹¥l °cOÑÉ ­j­f f¡Ju¡ ­Nm 6.50 cm z f¢lj¡­fl j¡e¢Vl HLL f¢lhaÑe L­l 
+­mM¡ k¡u 0.0650 m z 0.0650 m-H a¡vfkÑf§ZÑ AˆpwMÉ¡ q'm 
+ (A)  3 (B)  4 (C)  2 (D)  5 
+
+--- PAGE 13 ---
+ PC-2023 
+A 13  P.T.O.  
+28. A mouse of mass m jumps on the outside edge of a rotating ceiling fan of moment of inertia 
+I and radius R. The fractional loss of angular velocity of the fan as a result is, 
+ m  i­ll HL¢V Cyc¤l R hÉ¡p¡dÑ J I S¡XÉï¡jL ¢h¢nø HL¢V O¤ZÑ¡uj¡e ¢p¢mw gÉ¡­el h¢qxfË¡­¿¹ m¡g 
+¢c­u EWm z a¡q­m gÉ¡e¢Vl ­L±¢ZL ­h­Nl Bw¢nL qÊÊ¡p La q­h ? 
+ (A) 2
+2
+mRI
+mR
+
+ (B) 2mRI I   (C) I mR  I 2  (D) 2 2 mRI mR I    
+ 
+29. Acceleration due to gravity at a height H from the surface of a planet is the same as that at 
+a depth of H below the surface. If R be the radius of the planet, then H vs. R graph for 
+different planets will be, 
+ HL¢V NË­ql fªù ­b­L H EµQa¡u J HLC Ni£la¡u A¢iLoÑS a Äl­Zl j¡e pj¡e z NËq¢Vl hÉ¡p¡dÑ 
+k¢c R qu a­h ¢h¢iæ NË­ql SeÉ H he¡j R ­mM¢Qœ¢V q­h, 
+ 
+(A)
+  
+(B) 
+ 
+ 
+(C) 
+ 
+(D)
+  
+ 
+30. A uniform rope of length 4 m and mass 0.4 kg is held on a frictionless table in such a way 
+that 0.6 m of the rope is hanging over the edge. The work done to pull the hanging part of 
+the rope on to the table is, (Assume g = 10 m/s2) 
+ 0.4 kg i­ll J 4 m °c­OÉÑl HL¢V c¢s­L HL¢V OoÑZ ¢hq£e ­V¢h­ml Efl Hje i¡­h l¡M¡ B­R ­k 
+c¢s¢Vl 0.6 m Awn ­V¢h­ml h¡C­l T¥m­R z c¢s¢V­L ­V¢h­ml Efl ­V­e a¥m­a La L¡kÑÉ Ll­a 
+q­h ? (d­l e¡J g = 10 m/s2) 
+ (A)  0.36 J (B)  0.24 J (C)  0.12 J (D)  0.18 J 
+
+--- PAGE 14 ---
+ PC-2023 
+A 14 
+ 
+  
+Category-2 (Q. 31 to 35) 
+(Carry 2 marks each. Only one option is correct. Negative marks : – ½) 
+ 
+ 
+31. There are n elastic balls placed on a smooth horizontal plane. The masses of the balls are 
+m, 1n2 2 m,.... 2 m,2 m  respectively. If the first ball hits the second ball with velocity v 0, then 
+the velocity of the nth ball will be, 
+ HL¢V jpªZ Ae¤i¨¢jL a­ml Efl n pwMÉL ¢ÙÛ¢aÙÛ¡fL hm l¡M¡ q'm z hm…¢ml il kb¡œ²­j              
+m, 1n2 2 m,.... 2 m,2 m   z fËbj hm¢V k¢c ¢àa£u hm­L v0 ­h­N A¡O¡a L­l a¡q­m n-aj h­ml ­hN q­h, 
+ (A) 0v3 4  (B) 0
+n
+v3 4      (C) 0 1n v3 4        (D) v 0 
+ 
+ 
+32. An earth’s satellite near the surface of the earth takes about 90 min per revolution. A 
+satellite orbiting the moon also takes about 90 min per revolution. Then which of the 
+following is true ? 
+ (A)  ρ m < ρe 
+ (B)  ρ m > ρe  
+ (C)  ρ m = ρe 
+ (D)  No conclusion can be made about the densities. 
+ [where ρ m is density of the moon and ρe is density of the earth.] 
+ fª¢bh£ fª­ùl L¡R¡L¡¢R HL¢V EfNÊq 90 min-H HLh¡l fª¢bh£­L fËc¢rZ L­l z Q¾cÊfª­ùl L¡R¡L¡¢R 
+HL¢V EfNÊqJ 90 min-H HLh¡l Q¾cÊ­L fËc¢rZ L­l z ­p­r­œ ¢e­Ql ­L¡e¢V p¢WL ? 
+ (A) ρ m < ρe 
+ (B) ρ m > ρe  
+ (C) ρ m = ρe 
+ (D) OeaÄ pÇf­LÑ ­L¡­e¡ Efpwq¡l Ll¡ pñh eu z 
+ [ ­kM¡­e ρm q'm Q­¾cÊl OeaÄ J ρe q'm fª¢bh£l OeaÄ z] 
+--- PAGE 15 ---
+ PC-2023 
+A 15  P.T.O.  
+33. A bar magnet falls from rest under gravity through the centre of a 
+horizontal ring of conducting wire as shown in figure. Which of the 
+following graph best represents the speed (v) vs. time (t) graph of the bar 
+magnet ?  
+ ¢Q­œ fËc¢nÑa f¢lh¡q£ a¡­ll HL¢V Ae¤i¨¢jL ¢lw-Hl ­L¾cÊ hl¡hl HL¢V 
+c™Q¥ðL­L A¢iL­oÑl fËi¡­h Eõð i¡­h ¢e­Q ­gm¡ q'm z a¡q­m ¢e­Ql ­L¡e¢V 
+ph­Q­u p¢WL i¡­h c™Q¥ðL¢Vl ­hN (v) he¡j pju (t) ­mM¢Qœ¢V ¢e­cÑn L­l ? 
+ 
+(A) 
+ 
+(B)
+  
+ 
+(C)
+  
+(D)
+  
+ 
+34. An amount of charge Q passes through a coil of resistance R. If the current in the coil 
+decreases to zero at a uniform rate during time T, then the amount of heat generated in the 
+coil will be, 
+ R  ­l¡­dl HL¢V L¥äm£l jdÉ ¢c­u Q Bd¡e Nje L­l z k¢c T pj­u L¥äm£­a fËh¡q p¤¤oj q¡­l L­j 
+n§eÉ qu a¡q­m L¥äm£­a Evfæ a¡­fl f¢lj¡Z q­h, 
+ (A) 
+3T
+R4Q2
+ (B) 3T 2QR  (C) 4R TQ2  (D) Q 2RT 
+ 
+35. A modified gravitational potential is given by 2r A r GMV  . If the constant A is 
+expressed in terms of gravitational constant (G), mass (M) and velocity of light (c), then 
+from dimensional analysis, A is, 
+ j­e Ll HL¢V f¢lh¢aÑa jq¡LoÑ£u ¢hi­hl j¡e ­cJu¡ B­R 2r A r GMV   z dË¤hL A-­L k¢c 
+jq¡LoÑ£u dË¤hL (G) il (M) J A¡­m¡­Ll ­hN (c)-Hl p¡q¡­kÉ ¢eZÑu Ll¡ k¡u a¡q­m A q'm 
+ (A) 2
+22
+c
+MG    (B) 2c GM  
+ (C) 2c 1    (D)  Dimensionless ( j¡œ¡¢hq£e) 
+
+--- PAGE 16 ---
+ PC-2023 
+A 16 
+ 
+  
+Category-3 (Q. 36 to 40) 
+(Carry 2 marks each. One or more options are correct. No negative marks) 
+ 
+36.  
+ 
+ 
+ 
+ 
+ 
+ A cyclic process is shown in p-v diagram and T-S diagram. Which of the following 
+statement(s) is/are true ? 
+ (A) 1 →2: Isobaric, 2→3: Isothermal. 
+ (B) 3 →1: Isochoric, 2→3: adiabatic. 
+ (C) Work done by the system in the complete cyclic process is non-zero. 
+ (D) The heat absorbed by the system in the complete cyclic process is non-zero. 
+ HL¢V Qœ²£u fË¢œ²u¡­L p-v ­mM¢Qœ J T-S ­mM¢Q­œl p¡q¡­kÉ ­cM¡­e¡ q­u­R z ¢e­Ql ­L¡e 
+E¢š²(…¢m) p¢WL ? 
+ (A) 1 →2: pjQ¡f£, 2→3: p­j¡o·  
+ (B) 3 →1: pj¡uae£, 2→3: l©Üa¡f 
+ (C) pÇf¨ZÑ Qœ²£u fË¢œ²u¡¢V­a L«a L¡kÑÉ n§eÉ eu z 
+ (D) pÇf¨ZÑ Qœ²£u fË¢œ²u¡­a a¿»¢V à¡l¡ ­n¡¢oa a¡f n§eÉ eu z 
+ 
+37. The figure shows two identical parallel plate capacitors A and B 
+of capacitances C connected to a battery. The key K is initially 
+closed. The switch is now opened and the free spaces between 
+the plates of the capacitors are filled with a dielectric constant 3. 
+Then which of the following statement(s) is/are true ? 
+ (A) When the switch is closed, total energy stored in the two capacitors is CV 2. 
+ (B) When the switch is opened, no charge is stored in the capacitor B. 
+ (C) When the switch is opened, energy stored in capacitor B is 2 3  CV2. 
+ (D) When the switch is opened, total energy stored in two capacitors is 3 5 CV2. 
+ ¢Q­œ fËc¢nÑa C d¡lLaÄ ¢h¢nø A J B c¤¢V pj¡¿¹l¡m f¡a d¡lL­L HL¢V hÉ¡V¡l£l c¤C fË¡­¿¹ k¤š² Ll¡ 
+q­u­R z K Q¡¢h¢V fËb­j hå Ll¡ B­R z Hh¡l Q¡¢h¢V M¤­m ¢c­u d¡lL c¤¢Vl f¡a c¤¢Vl j­dÉ 3 
+fl¡°hc¤É¢aL ¢ÙÛl¡ˆ ¢h¢nø j¡dÉj ¢c­u f§ZÑ Ll¡ q'm z a¡q­m ¢e­Ql ­L¡eÚ E¢š²(…¢m) p¢WL ? 
+ (A) Q¡¢h¢V hå b¡L¡l pj­u d¡lLc¤¢V­a p¢’a ­j¡V n¢š² q'm CV2 
+ (B) Q¡¢h¢V kMe ­M¡m¡ qu aMe B d¡l­L ­L¡­e¡ Bd¡e p¢’a b¡­L e¡ z 
+ (C) Q¡¢h¢V kMe ­M¡m¡ qu aMe B d¡l­L p¢’a n¢š² q'm 2 3  CV2 
+ (D) Q¡¢h¢V kMe ­M¡m¡ qu aMe d¡lL c¤¢V­a p¢’a ­j¡V n¢š² q'm 3 5  CV2 
+T 
+S 
+1 
+3 
+2 
+V 
+ A 
+C 
+ C 
+B 
+K 
+p 
+v 
+1 
+3 
+2 
+
+--- PAGE 17 ---
+ PC-2023 
+A 17  P.T.O.  
+38. A charged particle of charge q and mass m is placed at a distance 2R from the centre of a 
+vertical cylindrical region of radius R where magnetic field varies as 
+
+B = (4t2 – 2t + 6)^k , 
+where t is time. Then which of the following statement(s) is/are true ? 
+ (A) Induced electric field lines form closed loops. 
+ (B) Electric field varies linearly with r if r < R, where r is the radial distance from the 
+centerline of the cylinder. 
+ (C) The charged particle will move in clockwise direction when viewed from top. 
+ (D) Acceleration of the charged particle is 7q 2m  when t = 2 sec. 
+ R  hÉ¡p¡dÑ ¢h¢nø HL¢V Eõð ­Q¡P¡L«¢a ÙÛ¡­e ­Q±ðL ­rœ 
+
+B = (4t2 – 2t + 6)^k  Ae¤k¡u£ f¢lh¢aÑa qu, 
+­kM¡­e t q'm pju z ­pM¡­e q Bd¡e J m il ¢h¢nø HL¢V hÙ¹¥LZ¡­L ­Q¡­Pl Ar­lM¡ ­b­L 2R 
+c§l­aÄ l¡M¡ q'm z a¡q­m ¢e­Ql ­L¡e E¢š²(…¢m) p¢WL ? 
+ (A) B¢hø a¢svhm­lM¡…¢m hÜ m¤­fl BL¡­l qu z 
+ (B) a¢sv­r­œl j¡e r-Hl p­‰ plm°l¢ML pÇf­LÑ f¢lh¢aÑa qu k¢c r < R qu, ­kM¡­e r q'm 
+­Q¡­Pl Ar­lM¡ ­b­L hÉ¡p hl¡hl c§laÄ z 
+ (C) Efl ­b­L ­cM­m LZ¡¢V O¢sl Ly¡V¡l ¢c­L O¤l­h z 
+ (D) t = 2 sec  pj­u LZ¡¢Vl aÄlZ q'm 7q 2m z 
+--- PAGE 18 ---
+ PC-2023 
+A 18 
+ 
+  
+39. A uniform magnetic field B exists in a region. An electron of charge q and mass m moving 
+with velocity v enters the region in a direction perpendicular to the magnetic field. 
+Considering Bohr angular momentum quantization, which of the following statement(s) 
+is/are true ? 
+ (A) The radius of n th orbit rn  n . 
+ (B) The minimum velocity of the electron is qB
+m
+ . 
+ (C) Energy of the n th level En n. 
+ (D) Transition frequency ω between two successive levels is independent of n. 
+ ­L¡­e¡ ÙÛ¡­e HL¢V p¤¤oj ­Q±ðL ­rœ B l­u­R z I ÙÛ¡­e HL¢V m il J q Bd¡epÇfæ C­mƒÊe ­Q±ðL 
+­r­œl Eõð ¢cL hl¡hl v ­h­N fË­hn Llm z ­h¡­ll ­L±¢ZL il­h­Nl ­L¡u¡¾V¡C­Sne naÑ Ae¤k¡u£ 
+¢e­Ql ­L¡eÚ E¢š²(…¢m) p¢WL ? 
+ (A) n- aj L­rl hÉ¡p¡dÑ rn  n . 
+ (B) C­mƒÊ­el eÉ¨eaj ­hN qB
+m
+  
+ (C) n -aj L­rl n¢š² En n. 
+ (D) flØfl c¤¢V d¡­fl j­dÉ ÙÛ¡e¡¿¹l LÇf¡ˆ ω, n-Hl Efl ¢eiÑln£m eu z 
+ 
+40. A train is moving along the tracks at a constant speed u. A girl on the train throws a ball 
+of mass m straight ahead along the direction of motion of the train with speed v with respect 
+to herself. Then 
+ (A) Kinetic energy of the ball as measured by the girl on the train is mv 2/2. 
+ (B) Work done by the girl in throwing the ball is mv 2/2. 
+ (C) Work done by the train is mvu. 
+ (D) The gain in kinetic energy of the ball as measured by a person standing by the rail 
+track is mv2/2. 
+ HL¢V ­VÊe u ¢ÙÛl ­h­N Qm­R z ­VÊ­el k¡œ£ HL¢V h¡¢mL¡ m i­ll HL¢V hm­L ­VÊ­el N¢al A¢ij¤­M 
+pl¡p¢l p¡j­el ¢c­L v ­h­N Ry¥­s ¢cm z a¡q­m 
+ (A) ­VÊ­el k¡œ£ h¡¢mL¡l p¡­f­r hm¢Vl N¢an¢š² q­h mv2/2 z 
+ (B) hm¢V ­Ry¡s¡l SeÉ h¡¢mL¡ à¡l¡ L«a L¡kÑÉ q'm mv2/2 z 
+ (C) ­VÊe¢V à¡l¡ L«a L¡kÑÉ q'm mvu z 
+ (D) ­lmm¡C­el d¡­l cy¡s¡­e¡ ­L¡­e¡ hÉ¢š²l p¡­f­r hm¢Vl N¢an¢š² q'm mv2/2 z 
+--- PAGE 19 ---
+ PC-2023 
+A 19  P.T.O.  
+CHEMISTRY 
+Category-1 (Q 41 to 70) 
+(Carry 1 mark each. Only one option is correct. Negative marks : – ¼) 
+ 
+41. The correct order of boiling points of N-ethylethanamine (I), ethoxyethane (II) and        
+butan-2-ol (III) is 
+ N- Cb¡CmCb¡eÉ¡¢je (I), Cb¢„C­be (II) Hhw ¢hEV¡e-2-Am (III)-Hl Øg¥Ve¡­ˆl p¢WL œ²j qm 
+ (A)  III < II < I   (B)  II < III < I 
+ (C)  II < I < III   (D)  III < I < II 
+  
+  42.
+ 
+ 
+  
+ Structure of M is, 
+ M -Hl NWe q'm 
+ (A) Ph – C  CH   (B) Ph – C  C – CH3 
+ (C) H 3C – C  CH   (D) H 3C – C  C – CH3  
+ 
+43.   
+ 
+ 
+ 
+ 
+  
+ The correct order of acidity of above compounds is 
+ Ef¢l¢õ¢Ma ­k±N…¢ml B¢ÇmLa¡l p¢WL œ²j qm 
+ (A)  II > IV > I > III   (B)  III > IV > II > I 
+ (C)  IV > II > III > I   (D) IV > III > I > II 
+M
+H2, Lindlar Catalyst N Ozonolysis O + P
+(CH3CO)2O
+CH3COONa
+Cinnamic acid
+Ammoniacal AgNO3
+White precipitate
+OH
+CH3 NMe2 CH
+OHOH
+CH2
+OH
+NO2
+(I) (II) (III) (IV)
+CH = CH2 
+--- PAGE 20 ---
+ PC-2023 
+A 20 
+ 
+  
+44.   
+ 
+ 
+ The correct option for the above reaction is 
+ Ef­l¡š² ¢h¢œ²u¡u p¢WL ¢hLÒf¢V q'm 
+ 
+ (A)  
+ 
+ 
+  (B)  
+ 
+ 
+ (C)  
+ 
+ 
+ 
+ (D)  
+ 
+ 
+ 
+45.  
+  
+ 
+ 
+ 
+ If all the nucleophilic substitution reactions at saturated carbon atoms in the above 
+sequence of reactions follow SN2 mechanism, then E and F will be respectively, 
+ k¢c Ef­l h¢ZÑa ¢h¢œ²u¡œ²­j pÇf«š² L¡hÑe flj¡Z¤­a O¢Va phL'¢V ¢eJ¢LÓJ¢g¢mL fË¢aÙÛ¡fe ¢h¢œ²u¡ 
+SN2 ¢œ²u¡­L±nm Ae¤plZ L­l, a­h E Hhw F q­h kb¡œ²­j 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CH3
+O
+CH3
+Br2/AcOH X Br2/NaOH Y + Z
+O
+X=
+CH3
+O
+CH2Br
+Y= CHBr 3  Z= CH 3CO2Na
+X=
+CH3
+O
+CBr3
+Y= CHBr 3  Z= CH 3CO2Na
+X=
+CH3
+O
+CH2Br
+Y= CHBr 3  Z= CH 2CO2Na
+Br
+X=
+CH2
+O
+CH2
+Y= CHBr 3  Z=
+Br Br
+CH2CO2Na
+Br
+Br 
+OH
+H3CH2C
+H
+H3C
+and I
+H3CH2C
+H
+H3C
+(A)
+HO H
+CH3
+CH2CH3
+and I
+H3C
+H
+H3CH2C
+(B)
+Cl
+H3CH2C
+H
+H3C
+aqueous 
+NaOH C4H10O pyridine
+H3C SO2Cl
+C11H16SO3 C4H9I
+NaI
+acetone
+E F
+HO H
+CH3
+CH2CH3
+and I H
+CH3
+CH2CH3
+HO H
+CH3
+CH2CH3
+I
+H3CH2C
+H
+H3C
+and
+(C) (D)
+--- PAGE 21 ---
+ PC-2023 
+A 21  P.T.O.  
+46. Two base balls (masses: 1m  = 100 g, and 2 m  = 50 g) are thrown. Both of them move with 
+uniform velocity, but the velocity of 2 m  is 1.5 times that of 1m . The ratio of de Broglie 
+wavelengths    1 2m : m  is given by  
+ c¤C¢V ­hphm (il 1m  = 100 NË¡j, Hhw 2 m  = 50 NË¡j) ­Ry¡s¡ qm z fË­aÉL¢VC ¢ÙÛl ­h­N N¢an£m z 
+¢L¿¹¥ 2 m -Hl N¢a­hN 1m -Hl ­b­L 1.5 …Z ­h¢n z ­hphm c¤C¢Vl p­‰ k¤š² ¢X hËN¢m al‰°cOÑÉ-Hl 
+Ae¤f¡a    1 2m : m  qm 
+ (A) 4 : 3 (B) 3 : 4 (C) 2 : 1 (D) 1 : 2 
+ 
+47. What is the edge length of the unit cell of a body centred cubic crystal of an element whose 
+atomic radius is 75 pm ? 
+ HL¢V ­cq­L¢¾cÊL OeL¡L¡l ­Lm¡­pl HL¢V ­j±­ml flj¡Z¤l hÉ¡p¡dÑ 75 pm z I ­Lm¡­pl HLL 
+­L¡­ol fË¡¢¿¹L£l °cOÑÉ La ? 
+ (A)  170 pm (B)  175 pm (C)  178 pm (D)  173.2 pm 
+ 
+48. The root mean square (rms) speed of X 2 gas is x m/s at a given temperature. When the 
+temperature is doubled, the X 2 molecules dissociated completely into atoms. The root 
+mean square speed of the sample of gas then becomes (in m/s) 
+ HL¢V ¢e¢cÑø Eo·a¡u X2 -Hl Ns hNÑâ¤¢al hNÑj§m qm x m/s z Eo·a¡ ¢à…Z Ll­m X2 -Hl AZ¤…¢m 
+flj¡Z¤­a ¢h­u¡¢Sa qu z HC AhÙÛ¡u HC NÉ¡­pl Ns hNÑâ¤¢al hNÑj§m (m/s HL­L) q­h 
+ (A) x/2 (B) x (C) 2x (D) 4x 
+ 
+49. Arrange the following in order of increasing mass  
+ I. 1 mole of N 2   II. 0.5 mole of O 3 
+ III. 3.011  1023 molecules of O2 IV. 0.5 gram atom of O 2 
+ i­ll EÜÑœ²j¡e¤p¡­l p¡S¡J  
+ I. 1 ­j¡m N2   II.  0.5 ­j¡m O3 
+ III. O 2 -Hl 3.011×1023 pwMÉL AZ¤ IV. 0.5 NË¡j flj¡Z¤ O2 
+ (A) IV < III < II < I   (B) IV < I < III < II 
+ (C) III < II < IV < I   (D) I < III < II < IV 
+--- PAGE 22 ---
+ PC-2023 
+A 22 
+ 
+  
+50. Which of the following would give a linear plot ?  
+ ¢e­Ql ­L¡e fÔV¢V (­lM¡¢Qœ¢V) plm°l¢ML q­h ? 
+ (A) k vs T (B) k vs 1/T (C) ln k vs T (D) ln k vs 1/T 
+ (k is the rate constant of an elementary reaction and T is temp. in absolute scale)  
+ ( k HL d¡f ¢h¢œ²u¡l N¢adË¤hL, T flj a¡fj¡œ¡) 
+  
+51. The equivalent conductance of NaCl, HCl and CH3COONa at infinite dilution are 126.45, 
+426.16 and 91 ohm –1cm2eq–1 respectively at 25C. The equivalent conductance of acetic 
+acid (at infinite dilution) would be  
+ (A)  461.61 ohm –1 cm2 eq–1  (B)  390.71 ohm –1 cm2 eq–1 
+ (C)  cannot be determined from the given data. (D)  208.71 ohm –1 cm2 eq–1 
+ Ap£j mO¤a¡u NaCl, HCl Hhw CH3COONa -Hl a¥mÉ¡wL f¢lh¡¢qa¡ kb¡œ²­j 126.45, 426.16 
+Hhw 91 ohm–1cm2eq–1 (25℃ -H) z HLC AhÙÛ¡u AÉ¡­p¢VL AÉ¡¢p­Xl a¥mÉ¡wL f¢lh¡¢qa¡  
+ (A)  461.61 ohm –1 cm2 eq–1  (B)  390.71 ohm –1 cm2 eq–1 
+  (C)  k¡ abÉ ­cJu¡ q­u­R a¡ ­b­L ­hl Ll¡ k¡­h e¡ z (D)  208.71 ohm –1 cm2 eq–1 
+ 
+52. For the reaction A + B → C, we have the following data :  
+Initial concentration of A 
+(in molarity) 
+Initial concentration of B 
+(in molarity) 
+Rate (initial) 
+(Relevant unit) 
+1 10 100 
+1 1 1 
+10 1 10 
+ The order of the reaction with respect to A and B are 
+ (A)  Not possible to tell with the given data. 
+ (B)  First order with respect to both A and B. 
+ (C)  First order with respect to A and second order with respect to B. 
+ (D)  Second order with respect to A and first order with respect to B. 
+ A  J B Hl j­dÉ A + B → C ¢h¢œ²u¡¢Vl N¢a­hN pÇf­LÑ ¢e­Ql abÉ…¢m S¡e¡ B­R z 
+A -Hl fË¡l¢ñL N¡taÄ 
+(­j¡m¡¢l¢V­a) 
+B -Hl fË¡l¢ñL N¡taÄ 
+(­j¡m¡¢l¢V­a) 
+¢h¢œ²u¡l fË¡l¢ñL N¢a­hN 
+(Efk¤š² HL­L) 
+1 10 100 
+1 1 1 
+10 1 10 
+ ­p­r­œ A J B -Hl p¡­f­r ¢h¢œ²u¡¢Vl œ²j  
+ (A)  hm¡l ja k­bø abÉ ­cJu¡ ­eC z  
+ (B)  A  J B c¤C­ul p¡­f­rC œ²j HL z  
+ (C)  A -Hl p¡­f­r HL Hhw B-Hl p¡­f­r c¤C z  
+ (D)  A -Hl p¡­f­r c¤C Hhw B-Hl p¡­f­r HL z 
+--- PAGE 23 ---
+ PC-2023 
+A 23  P.T.O.  
+53. The equivalent weight of KIO3 in the given reaction is (M = molecular mass): 
+ 2Cr(OH) 3 + 4OH – + KIO3  2CrO4 2– + 5H2O + KI  
+ fËcš ¢h¢œ²u¡u 2Cr(OH)3 + 4OH – + KIO3  2CrO4 2– + 5H2O + KI,  
+ KIO 3-Hl a¥mÉ¡ˆ il (M = Be¢hL il) 
+ (A) M (B) M/2 (C) M/6 (D) M/8 
+ 
+54. At STP, the dissociation reaction of water is H 2O  H + (aq.) + OH– (aq.) , and the pH 
+of water is 7.0. The change of standard free energy (∆G°) for the above dissociation process 
+is given by  
+ STP  n­aÑ, S­ml ¢h­u¡Se ¢h¢œ²u¡¢V qm  H2O  H + (aq.) + OH – (aq.), Hhw S­ml pH qm 
+7.0 z Ef¢lš² ¢h­u¡Se ¢h¢œ²u¡u BcnÑ j¤š²n¢š²l f¢lhaÑe (∆G°) qm  
+ (A)  20301 cal/mol (B)  19091cal/mol (C)  20096 cal/mol (D)  21301 cal/mol 
+ 
+55. Na2CO3 is prepared by Solvay process but K2CO3 cannot be prepared by the same because  
+ (A)  K 2CO3 is highly soluble in H2O (B)  KHCO 3 is sparingly soluble 
+ (C)  KHCO 3is appreciably soluble (D)  KHCO 3 decomposes 
+ 2 3Na CO fËÙ¹¥¢a­a pmÚ­i fÜ¢a hýmhÉhq©a q­mJ 2 3K CO  fËÙ¹¥¢a­a hÉhq¡l Ll¡ k¡u e¡ L¡lZ  
+ (A)  K 2CO3 S­m A¢a j¡œ¡u â¡hÉ (B)  KHCO 3üÒfâ¡hÉ  
+ (C)  KHCO 3 k­bø j¡œ¡u â¡hÉ  (D)  KHCO 3 ¢h­u¡¢Sa q­u k¡u 
+ 
+56. If in case of a radio isotope the value of half-life (T1/2) and decay constant (λ) are identical 
+in magnitude, then their value should be  
+ k¢c HL¢V ­aS¢ûu BC­p¡­V¡­fl AdÑ¡u¤×L¡m (T1/2)  Hhw ru¡ˆ (λ)-Hl j¡e f¢lj¡ZNai¡­h pj¡e 
+qu, a¡q­m ­pC j¡e¢V qJu¡ E¢Qv 
+ (A) 0.693/2 (B) (0.693) 1/2 (C) (0.693) 2 (D) 0.693 
+ 
+57. Suppose a gaseous mixture of He, Ne, Ar and Kr is treated with photons of the frequency 
+appropriate to ionize Ar. What ion(s) will be present in the mixture ? 
+ HL¢V h¡uh£u ¢jnË­Zl j­dÉ He, Ne, Ar Hhw Kr haÑj¡e z HC ¢jnË­Zl j­dÉ Ar-­L Bu¢ea Ll­a 
+f¡­l HlLj LÇf¡­ˆl ­g¡Ve f¡W¡­e¡ qm z HMe ¢jnË­Zl j­dÉ ­k Bue…¢m b¡L­h a¡l¡ qm 
+ (A) Ar +   (B) Ar + + Kr+ 
+ (C) Ar + + He+ + Ne+   (D) He + + Ar+ + Kr+ 
+ 
+58. A solution containing 4g of polymer in 4.0 litre solution at 27 C shows an osmotic pressure 
+of 3.0×10 – 4 atm. The molar mass of the polymer in g/mol is 
+ 27℃ Eo·a¡u 4.0 L âh­Z HL¢V f¢mj¡­ll 4.0 g âh£i¨a b¡L­m 3.0×10 – 4 atm A¢ipËhe Q¡­fl 
+pª¢ø qu z f¢mj¡l¢Vl Be¢hL il (NË¡j/­j¡m HL­L) q­h 
+ (A)  820000 (B) 82000 (C)  8200 (D)  820 
+
+--- PAGE 24 ---
+ PC-2023 
+A 24 
+ 
+  
+59. The molecular shapes of SF4, CF4 and XeF4 are 
+ (A) the same with 2, 0 and 1 lone pairs of electrons on the central atoms, respectively. 
+ (B) the same with 1, 1 and 1 lone pairs of electrons on the central atoms, respectively. 
+ (C) different with 0, 1 and 2 lone pairs of electrons on the central atoms, respectively. 
+ (D) different with 1, 0 and 2 lone pairs of electrons on the central atoms, respectively. 
+ SF 4, CF4 Hhw XeF4 Hl Be¢hL BL«¢a qm  
+ (A) HLC Hhw ­L¾cÊ£u flj¡Z¤l ¢exp‰ C­mLVÊe ­S¡s kb¡œ²­j 2, 0 Hhw 1 z  
+ (B) HLC Hhw ­L¾cÊ£u flj¡Z¤l ¢exp‰ C­mLVÊe ­S¡s kb¡œ²­j 1, 1 Hhw 1 z 
+ (C) Bm¡c¡ Hhw ­L¾cÊ£u flj¡Z¤l ¢exp‰ C­mLVÊe ­S¡s kb¡œ²­j 0, 1 Hhw 2 z 
+ (D) Bm¡c¡ Hhw ­L¾cÊ£u flj¡Z¤l ¢exp‰ C­mLVÊe ­S¡s kb¡œ²­j 1, 0 Hhw 2 z 
+ 
+60. The species in which nitrogen atom is in a state of sp hybridisation is 
+ e£­Ql ­L¡eÚ ­k±­N e¡C­VÊ¡­Se flj¡Z¤¢V sp pwLl¡¢ua (hybridised) 
+ (A) NO 3 – (B) NO 2 (C) NO 2 + (D) NO 2 – 
+ 
+61. The correct statement about the magnetic properties of  
+3
+6Fe CN
+
+    and  
+3
+6FeF
+
+ is  
+ (A)  Both are paramagnetic  
+ (B)  Both are diamagnetic  
+ (C)   
+3
+6Fe CN
+
+   is diamagnetic,  
+3
+6FeF
+
+is paramagnetic 
+ (D)   
+3
+6Fe CN
+
+    is paramagnetic,  
+3
+6FeF
+
+ is diamagnetic  
+  
+3
+6Fe CN
+
+    Hhw  
+3
+6FeF
+
+Hl ­Q±ðL djÑ pÇf¢LÑa p¢WL hš²hÉ¢V qm  
+ (A)  c¤¢V ­k±NC EfQ¥ðL£u 
+ (B)  c¤¢V ­k±NC AfQ¥ðL£u 
+ (C)   
+3
+6Fe CN
+
+   AfQ¥ðL£u,  
+3
+6FeF
+
+ EfQ¥ðL£u 
+ (D)  
+3
+6Fe CN
+
+    EfQ¥ðL£u,  
+3
+6FeF
+
+ AfQ¥ðL£u 
+--- PAGE 25 ---
+ PC-2023 
+A 25  P.T.O.  
+62. The calculated spin-only magnetic moment values in BM for  4FeCl
+
+ and  
+3
+6Fe CN
+
+    
+are 
+  4FeCl
+
+ Hhw  
+3
+6Fe CN
+
+    Hl NZe¡L«a ¢Øfe Q¥ðL£u ï¡jL (spin magnetic moment) (BM) 
+qm 
+ (A)  5.9 BM, 1.732 BM  (B)  4.89 BM, 1.732 BM  
+ (C)  3.87 BM, 1.732 BM  (D)  1.732 BM, 2.82 BM  
+ 
+63. BrF3 self ionises as following  
+ BrF 3 ¢e­jÀ¡š²i¡­h üaxBu¢ea qu 
+ (A) 2BrF 3  BrF + + BrF5 – (B) 2BrF 3  BrF 2 + + BrF4 – 
+ (C) 2BrF 3  BrF 4 + + BrF2 – (D) 2BrF 3  BrF 3 + + BrF3 – 
+  
+64. 4f2 electronic configuration is found in 
+ ­L¡eÚ¢Vl ­r­œ 4f2 C­mLVÊe ¢heÉ¡p ­cM¡ k¡u ? 
+ (A) Pr (B) Pr 3+ (C) Nd 3+ (D) Pm 3+ 
+ 
+65. Which of the following statements is incorrect ? 
+ (A)  
+3
+6A VF
+
+ is paramagnetic with 2 unpaired electrons. 
+ (B)  
+2
+4B CuCl
+
+ is paramagnetic with 1 unpaired electron. 
+ (C)  
+3
+3 6C Co NH
+
+   is diamagnetic  
+ (D)  
+3
+6D CoF
+
+ is paramagnetic with 2 unpaired electrons. 
+ ¢ej À¢m¢Ma ­L¡e ¢hhª¢a¢V p¢WL eu ? 
+ (A)  
+3
+6A VF
+
+EfQ¥ðL£u, 2¢V ­S¡sq£e C­mLVÊe p­ja  
+ (B)  
+2
+4B CuCl
+
+EfQ¥ðL£u, 1¢V ­S¡sq£e C­mLVÊe p­ja 
+ (C)  
+3
+3 6C Co NH
+
+    AfQ¥ðL£u 
+ (D)  
+3
+6D CoF
+
+ EfQ¥ðL£u, 2¢V ­S¡sq£e C­mLVÊe p­ja  
+
+--- PAGE 26 ---
+ PC-2023 
+A 26 
+ 
+  
+    
+66.   
+ 
+ 
+ The correct order of C O bond length in ethyl propanoate (I), ethyl propenoate (II) and 
+ethenyl propanoate (III) is 
+ Cb¡Cm ­fË¡f¡­e¡­uV ( I), Cb¡Cm ­fË¡¢f­e¡­uV (II) Hhw C¢be¡Cm ­fË¡f¡­e¡­uV (III) -H C O håe 
+°c­OÑÉl p¢WL œ²j qm 
+ (A) I > II > III (B)  III > II > I (C)  I > III > II (D)  II > I > III 
+ 
+67. Select the molecule in which all the atoms may lie on a single plane is 
+ (A)  4-Nitrobenzaldehyde  (B)  4-Methoxybenzaldehyde 
+ (C)  4-Methylnitrobenzene  (D)  4-Nitroacetophenone 
+ ¢e­j À¡š² ­k AZ¤­a pLm flj¡Z¤…¢m HL¢V j¡œ a­m AhÙÛ¡e L­l ­p¢V qm 
+ (A)  4- e¡C­VÊ¡­h”É¡m¢Xq¡CX  (B)  4- ¢jb¢„­h”É¡m¢Xq¡CX 
+ (C)  4- ¢jb¡Cme¡C­VÊ¡­h¢”e  (D)  4- e¡C­VÊ¡AÉ¡¢p­V¡­g­e¡e 
+ 
+68. The IUPAC name of CH 3CH= C |
+C
+–
+HO
+   CH2–CH3 is : 
+ (A)  3-Formyl-2-pentene  (B)  2-Ethylbut-2-enal 
+ (C)  3-Ethylbut-3-enal  (D)  2-Ethylcrotonaldehyde 
+ CH3CH=  C |
+C
+–
+HO
+   CH2–CH3 ­k±N¢Vl e¡j q'm: 
+ (A)  3- glj¡Cm-2-­f¢¾Ve  (B)  2- Cb¡Cm¢hEV-2-CeÉ¡m 
+ (C)  3- Cb¡Cm¢hEV-3-CeÉ¡m  (D)  2- Cb¡Cm­œ²¡­V¡eÉ¡m¢Xq¡CX 
+O
+O
+O
+O
+O
+O
+I II III
+--- PAGE 27 ---
+ PC-2023 
+A 27  P.T.O.  
+69. The correct stability order of the following carbocations is 
+ ¢ej À¢m¢Ma L¡­hÑ¡LÉ¡V¡ue…¢ml ÙÛ¡u£­aÄl p¢WL œ²j qm 
+  H 2
+
+C – CH = CH – CH3  
+
+CH2 – CH = CH – BMe2 
+   I    II 
+  H 2
+
+C – CH = CH – NMe2 H 2
+
+C – CH = CH – OMe 
+   III    IV 
+ 
+ (A)  II > I > III > IV   (B)  III > I > II > IV   
+ (C)  III > IV > I > II   (D)  IV > III > II > I 
+ 
+  
+70. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ The relationship between the pair of compounds shown above are respectively, 
+ (A)  enantiomer, diastereomer, diastereomer 
+ (B)  enantiomer, enantiomer, diastereomer 
+ (C)  enantiomer, homomer (identical), diastereomer 
+ (D)  homomer (identical), diastereomer, geometrical isomer 
+ Ef­l¡š² ­k±N­S¡s…¢ml j­dÉ pÇfLÑ qm kb¡œ²­j 
+ (A)  He¡e¢nJj¡l (fË¢a¢hð pj¡huh), X¡u¡¢ØV¢lJj¡l, X¡u¡¢ØV¢lJj¡l 
+ (B)  He¡e¢nJj¡l (fË¢a¢hð pj¡huh), He¡e¢nJj¡l (fË¢a¢hð pj¡huh), X¡u¡¢ØV¢lJj¡l 
+ (C)  He¡e¢nJj¡l (fË¢a¢hð pj¡huh), ­q¡­j¡j¡l, X¡u¡¢ØV¢lJj¡l 
+ (D)  ­q¡­j¡j¡l, X¡u¡¢ØV¢lJj¡l, SÉ¡¢j¢aL pj¡huh 
+HHO
+CO2H
+OHH
+CHO2
+And1
+Br C2H5
+H
+CH3
+Br H
+CH3
+C2H5
+2 And
+3
+And
+and 
+and 
+--- PAGE 28 ---
+ PC-2023 
+A 28 
+ 
+  
+Category-2 (Q 71 to 75) 
+(Carry 2 marks each. Only one option is correct. Negative marks : – ½) 
+ 
+71.    
+  
+ 
+ 
+ ‘G’ in the above sequence of reactions is 
+ Ef­l¡š² ¢h¢œ²u¡œ²­j ‘G’ q'm 
+ (A)  (CH 3)2CHCOOCH2CH3 (B)  CH 3CH2CH2COOCH2CH3 
+ (C)  CH 3CH2COOCH2CH2CH3 (D)  CH 3CH2COOCH(CH3)2 
+ 
+72. Case – 1: An ideal gas of molecular weight M at temperature T. 
+ Case – 2: Another ideal gas of molecular weight 2M at temperature T/2. 
+ Identify the correct statement in context of above two cases. 
+ (A)  Average kinetic energy and average speed will be the same in the two cases. 
+ (B)  Both the averages are halved. 
+ (C)  Both the averages are doubled. 
+ (D)  Only average speed is halved in the second case. 
+ fËbj ­rœ : M Be¢hL i­ll HL¢V BcnÑ NÉ¡p T Eo·a¡u z 
+ ¢àa£u ­rœ : 2M Be¢hL i­ll HL¢V BcnÑ NÉ¡p T/2 Eo·a¡u z 
+ Hl©f f¢l¢ÙÛ¢a­a p¢WL hš²hÉ¢V ¢el©fZ Ll: 
+ (A)  Ns N¢an¢š² J Ns â¤¢a Eiu­r­œ HLC b¡L­h z  
+ (B)  Eiu l¡¢nl f¢lj¡f A­dÑL q­h z  
+ (C)  Eiu l¡¢nl f¢lj¡f ¢à…Z q­h z  
+ (D)  ­Lhm Ns â¤¢al f¢lj¡e ¢àa£u ­r­œ A­dÑL q­h z  
+ 
+73. 63 g of a compound (Mol. Wt. = 126) was dissolved in 500 g distilled water. The density 
+of the resultant solution as 1.126 g/ml. The molarity of the solution is  
+ HL¢V ­k±­Nl (Be¢hL il = 126) 63 NË¡j ¢e­u 500 NË¡j f¡¢aa S­m âh£i¨a Ll¡ q­m 
+ âh­Zl Oea Ä qm 1.126 NË¡j/¢j¢m z I âh­Zl ­j¡m¡¢l¢V qm 
+ (A)  1.25 M (B)  1.0 M (C)  0.75 M (D)  1.1 M  
+C6H12O2
+G
+(i) OH/H2O,
+(ii) H3O+ H      +          I
+CrO3/H+
+--- PAGE 29 ---
+ PC-2023 
+A 29  P.T.O.  
+74. Nickel combines with a uninegative monodentate ligand ( X ) to form a paramagnetic 
+complex  
+2
+4NiX
+
+. The hybridisation involved and number of unpaired electrons present 
+in the complex are respectively 
+ (A)  sp 3, two (B)  dsp 2, zero (C)  dsp 2, one (D)  sp 3, one 
+ ¢e­Lm HL¢V HLL GZ¡aÈL Bd¡ek¤š² HL­k¡S£ ¢mNÉ¡­äl ( X ) p­‰ k¤š² q­u HL¢V EfQ¥ðL£u 
+­k±N  
+2
+4NiX
+
+ NWe L­l z ­k±N¢V­a ¢e­L­ml pwLl¡uZ ( hybridisation) Hhw Ak¤NÈ C­mLVÊ­el 
+pwMÉ¡ qm  
+ (A)  sp 3, c¤¢V (B)  dsp 2, HL¢VJ eu  (C)  dsp 2, HL¢V (D)  sp 3, HL¢V 
+ 
+75. ═L (i)  PhMgBr (ii)  H3O  ═M CrO3/H  ═N  Ph3 P = CH2 Ph2 C = CH2 
+ ‘L’ in the above sequence of reaction is/are (where L ≠ M ≠ N) 
+ (A)  Benzaldehyde   (B)  Methyl benzoate 
+ (C)  Benzoyl chloride   (D)  Benzonitrile 
+ Ef­l¡š² ¢h¢œ²u¡œ²­j ‘L’ q'm (HM¡­e L ≠ M ≠ N) 
+ (A)  ­h”É¡m¢Xq¡CX   (B)  ¢jb¡Cm ­h­”¡­uV 
+ (C)  ­h­”¡¢um ­LÓ¡l¡CX   (D)  ­h­”¡e¡CVÊ¡Cm 
+ 
+Category-3 (Q 76 to 80) 
+(Carry 2 marks each. One or more options are correct. No negative marks) 
+  
+76. The correct set(s) of reactions to synthesize benzoic acid starting from benzene is/are 
+ 
+         
+       
+     
+2 2 3
+o o o
+2 3 2
+3 3 4 3
+3 3
+A
+)
+ i  Br / Fe ii  Mg / dry ether iii  CO  iv  H O
+B  i  Br / Fe ii  NH ,  25 C iii  NaNO ,  dil. HCl,  0 5 C
+(iv) CuCN / KCN (v) dil.HCl,
+C  i  CH Cl,  Anhydrous AlCl  ii  KMn O O H, (iii) H O
+(D) (i) CH C (OCl, Anhyd irous l
+to
+ A iCl
+
+ 
+
+
+2 3
+ 
+Br , NaOH (i ) Hi Oi
+
+ 
+ ­h¢”e ­b­L öl¦ L­l ­h­”¢uL AÉ¡¢pX pw­nÔo­Zl SeÉ p¢WL ¢h¢œ²u¡ œ²j¢V/œ²j…¢m q'm 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ö×L Cb¡l 
+  Ae¡âÑ AlCl3       
+mO¤ 
+mO¤ HCl,  
+ 
+  Ae¡âÑ AlCl3       
+   (iv)   H3O 
+   (iv)   H3O 
+   (iii)   H3O 
+   (iii)   H3O 
+(ii) KMnO4 
+(ii) KMnO4 
+--- PAGE 30 ---
+ PC-2023 
+A 30 
+ 
+  
+77. Which statement(s) is/are applicable above critical temperature ? 
+ (A)  A gas cannot be liquified.  
+ (B)  Surface tension of a liquid is very high. 
+ (C)  A liq. phase cannot be distinguished from a gas phase. 
+ (D)  Density changes continuously with P or V. 
+ pwLV a¡fj¡œ¡l Jf­l ­L¡eÚ ¢hhª¢a¢V/¢hhª¢a…¢m fË­k¡SÉ ? 
+ (A)  ­L¡­e¡ NÉ¡p­L alm Ll¡ k¡u e¡ z  
+ (B)  al­ml fªùV¡e M¤h ­h¢n qu z  
+ (C)  NÉ¡p h¡ alm­L Bm¡c¡ i¡­h ­Qe¡ k¡u e¡ z  
+ (D)  OeaÄ, P Abh¡ V-Hl p­‰ d¡l¡h¡¢qLi¡­h f¢lhaÑe qu z 
+ 
+78. Which of the following mixtures act(s) as buffer solution ? 
+ ¢ej À¢m¢Ma ¢jnËZ…¢ml j­dÉ ­L¡e¢V/­L¡e…¢m h¡g¡l âhZ ¢qp¡­h L¡S Ll­h ? 
+ (A) NaOH + CH 3COOH (1 : 1 mole ratio) 
+ (B) NH 4OH + HCl (2 : 1 mole ratio) 
+ (C) CH 3COOH + NaOH (2 : 1 mole ratio) 
+ (D) CH 3COOH + NaOH (1 : 2 mole ratio) 
+ 
+79. An electron in the 5d orbital can be represented by the following (n, l, mℓ,) values 
+ 
+ 5d EfL­rl (orbital) HL¢V C­mLVÊe­L ¢ejÀ¢m¢Ma (n, l, mℓ,) Hl j¡e…¢m à¡l¡ hm¡ k¡u 
+ (A)  (5, 2, 1) (B)  (5, 1, –1) (C)  (5, 0, 1) (D)  (5, 2, –1) 
+ 
+80. The conversion(s) that can be carried out by bromine in carbon tetrachloride solvent is/are 
+ L¡hÑe ­VVÊ¡­LÓ¡l¡CX â¡h­L ­hË¡¢je ­k l©f¡¿¹l¢V­L/l©f¡¿¹l…¢m­L pÇfæ Ll­a f¡­l ­p…¢m q'm 
+(A)  PhCH = CHCH 3  PhCHBrCHBrCH3 
+ 
+ 
+ (B)  
+ 
+ (C)  CH 3CH2COOH  CH3CHBrCOOH 
+ 
+  
+  
+ (D) 
+ 
+_____________ 
+COOH COOH
+Br
+COOAg
+Br
+--- PAGE 31 ---
+ PC-2023 
+A 31  P.T.O.  
+SPACE FOR ROUGH WORK 
+  
+--- PAGE 32 ---
+ PC-2023 
+A 32 
+ 
+  
+ 
+ 
+ pju: 2 O¾V¡                             f§ZÑj¡e : 100 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+A 
+PC-2023 
+Subject : PHYSICS & CHEMISTRY 
+¢e­cÑn¡hm£ 
+ 
+1. HC fËnÀf ­œ pjÙ¹ fËnÀC Ah­S¢ƒi fËnÀ Hhw fË¢a¢V fË­nÀl Q¡l¢V pñ¡hÉ Ešl ­cJu¡ B­R z  
+2. Category-1 : HL¢V Ešl p¢WL z p¢WL Ešl ¢c ­m 1 eðl f¡ ­h z i¥m Ešl ¢c ­m Abh¡ ­k ­L¡e 
+HL¡¢dL Ešl ¢c­m ¼  eðl L¡V¡ k¡­h z 
+3. Category-2 : HL¢V Ešl p¢WL z p¢WL Ešl ¢c ­m 2 eðl f¡ ­h z i¥m Ešl ¢c ­m Abh¡ ­k ­L¡e 
+HL¡¢dL Ešl ¢c­m ½ eðl L¡V¡ k¡­h z 
+4. Category-3: HL h¡ HL¡¢dL Ešl p¢WL z ph L¢V p¢WL Ešl ¢c ­m 2 eðl f¡ ­h z k¢c ­L¡e i¥m 
+Ešl e¡ b¡­L Hhw p¢WL EšlJ ph L¢V e¡ b¡ ­L a¡q­m f¡­h 2  ­k L¢V p¢WL Ešl ­cJu¡ q­u­R 
+a¡l pwMÉ¡  Bp­m ­k L¢V Ešl p¢WL a¡l pwMÉ¡ z k¢c ­L¡­e¡ i¥m Ešl ­cJu¡ qu h¡ HL¡¢dL Eš­ll 
+j­dÉ HL¢VJ i¥m b¡ ­L a¡q­m Ešl¢V i¥m d ­l ­eJu¡ q­h z ¢L¿¹¥ ­p­r­œ ­L¡­e¡ eðl L¡V¡ k¡ ­h e¡, 
+AbÑ¡v n§eÉ eðl f¡­h z 
+5. OMR f­œ A, B, C, D ¢Q¢q²a p¢WL Ol¢V il¡V L­l Ešl ¢c­a q­h z 
+6. OMR f­œ Ešl ¢c­a öd¤j¡œ L¡­m¡ h¡ e£m L¡¢ml hm f­u¾V ­fe hÉhq¡l Ll­h z 
+7. OMR f­œ ¢e¢cÑø ÙÛ¡e R¡s¡ AeÉ ­L¡b¡J ­L¡e c¡N ­c­h e¡ z 
+8. OMR f­œ ¢e¢cÑø ÙÛ¡­e fËnÀf­œl eðl Hhw ¢e ­Sl ­l¡m eðl A¢a p¡hd¡ea¡l p¡ ­b ¢mM­a q­h Hhw 
+fË­u¡Se£u Ol…¢m f§lZ Ll­a q­h z 
+9. OMR f­œ ¢e¢cÑø ÙÛ¡­e ¢e­Sl e¡j J fl£r¡ ­L­¾cÊl e¡j ¢mM­a q­h Hhw ¢e­Sl (Admit Card-H 
+E­õ¢Ma) pÄ¡rl Ll­a q­h z 
+10. fËnÀf ­œl eðl h¡ ­l¡m eðl i¥m ¢mM­m Abh¡ i¥m Ol il¡V Ll­m, fl£r¡bÑ£l e¡j, fl£r¡ ­L­¾cÊl e¡j 
+h¡ pÄ¡r­l ­L¡e i¥m b¡L­m Ešl fœ h¡¢am q­u ­k­a f¡­l z OMR fœ¢V i¡yS q­m h¡ a¡­a Ae¡hnÉL 
+c¡N fs­mJ h¡¢am q ­u ­k­a f¡­l z fl£r¡bÑ£l HC dl ­el i¥m h¡ ApaÑLa¡l SeÉ Ešlfœ h¡¢am 
+q­m HLj¡œ fl£r¡bÑ£ ¢e­SC a¡l SeÉ c¡u£ b¡L­h z 
+11. ­j¡h¡Cm­g¡e, LÉ¡mL¥­mVl, pÔ¡CXl¦m, mN­Vhm, q¡aO¢s, ­lM¡¢Qœ, NË¡g h¡ ­L¡e dl­Zl a¡¢mL¡ fl£r¡ 
+L­r Be¡ k¡­h e¡ z Be­m ­p¢V h¡­Su¡ç q­h Hhw fl£r¡bÑ£l JC fl£r¡ h¡¢am Ll¡ q­h z 
+12. fËnÀf­œ l¡g L¡S Ll¡l SeÉ gy¡L¡ S¡uN¡ ­cJu¡ B­R z AeÉ ­L¡e L¡NS HC L¡­S hÉhq¡l Ll¡ k¡­h 
+e¡ z 
+13. fl£r¡ Lr R¡s¡l B ­N OMR fœ AhnÉ C f¢lcnÑL­L ¢c­u k¡­h z 
+14. HC fËnÀf­œ Cwl¡S£ J h¡wm¡ Eiu i¡o¡­aC fËnÀ ­cJu¡ B­R z h¡wm¡ j¡dÉ­j fËnÀ °al£l pju fË­u¡Se£u 
+p¡hd¡ea¡ J paLÑa¡ Ahmðe Ll¡ q­u­R z a¡ p­šÄJ k¢c ­L¡e Ap‰¢a mrÉ Ll¡ k¡u, ­p­r­œ Cwl¡S£ 
+j¡dÉ­j ­cJu¡ fËnÀ ¢WL J Q¨s¡¿¹ h­m ¢h­h¢Qa q­h z 
+15. fl£r¡ ®n­o fl£r¡b£Ñl¡ fËnÀfœ¢V ¢e­u k¡­h z  

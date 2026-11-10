@@ -14,7 +14,9 @@ export async function GET(req: NextRequest) {
 
     const filters: PyqFilterParams = {
       exam: searchParams.get('exam') || 'All',
+      year: searchParams.get('year') && searchParams.get('year') !== 'all' && searchParams.get('year') !== 'All' ? parseInt(searchParams.get('year')!, 10) : undefined,
       subject: (searchParams.get('subject') || 'All') as PyqSubject | 'All',
+      chapter: searchParams.get('chapter') || 'All',
       date: searchParams.get('date') || 'All',
       shift: searchParams.get('shift') || 'All',
       section: (searchParams.get('section') || 'All') as PyqSection | 'All',

@@ -1,0 +1,1185 @@
+
+--- PAGE 1 ---
+M-2019
+Subject : MATHEMATICS
+91123177
+(Booklet Number)
+Duration : 2 Hours
+Full Marks : 100
+INSTRUCTIONS
+1.
+This question paper contains all objective questions divided into three categories. Each
+question has four answer options given.
+2.
+Category-I : Carry 1 marks each and only one option is correct. In case of incorrect answer or
+any combination of more than one answer, /4 mark will be deducted.
+3.
+Category-II : Carry 2 marks each and only one option is correct. In case of incorrect answer
+or any combination of more than one answer, /2 mark will be deducted.
+4.
+Category-Ill: Carry 2 marks each and one or more option(s) is/are correct. If all correct
+answers are not marked and also no incorect answer is marked, then score = 2 × number of
+correct answers marked + actual number of correct answers. If any wrong option is marked or
+if any combination including a wrong option is marked, the answer will be considered wrong,
+but there is no negative marking for the same and zero mark will be awarded.
+5.
+Questions must be answered on OMR sheet by darkening the appropriate bubble marked A,
+B, C, or D.
+6.
+Use only Black/Blue ball point pen to mark the answer by complete filling up of the
+respective bubbles.
+7.
+Mark the answers only in the space provided. Do not make any stray mark on the OMR.
+8.
+Write question booklet number and your roH number carefully in the specified locations of
+the OMR. Also fill appropriate bubbles.
+9.
+Write your name (in block letter), name of the examination centre and put your full signature
+in appropriate boxes in the OMR.
+The OMR is liable to become invalid if-there is any mistake in filling the correct bubbles for
+question booklet number/roll number or if there is any discrepancy in the name/ signature of
+the candidate, name of the examination centre. The OMR may also become invalid due to
+folding or putting stray marks on it or any damage to it. The consequence of such
+invalidation due to incorrect marking or careless handling by the candidate will be sole
+responsibility of candidate.
+11. Candidates are not allowed to carry any written or printed material, calculator, pen, docu-
+pen, log table, wristwatch, any communication device like mobile phones etc. inside the
+examination hall. Any candidate found with such items will be reported against & his/her
+candidature will be summarily cancelled.
+12. Rough work must be done on the question paper itself. Additional blank pages are given in
+the question paper for rough work.
+13. Hand over the OMR to the invigilator before leaving the Examination Hall.
+14. This paper contains questions in both English and Bengali. Necessary care and precaution
+were taken while framing the Bengali version. However, if any discrepancy(ies) is /are found
+between the two versions, the information provided in the English version will stand and will
+be treated as final.
+M-2019
+A-124
+
+--- PAGE 2 ---
+M-2019
+MATHEMATICS
+Category - I (Q 1 to Q 50)
+Carry 1 mark each and only one option is correct. In case of incorrect answer or any
+combination of more than one answer, /4 mark will be deducted
+1     o
+1.
+Let A and B be two square matrices of order 3 and AB = O3, where O denotes the null
+matrix of order 3. Then.
+(A)
+must be A = O3, B = O3
+(B) if AO3, must be B± O3
+(C)
+if A = O3, must be B ± O3
+(D)
+may be A+ O3, B+O3
+ A B,3(order)   AB=O 03 
+(A)
+可 A = 03, B= 0, 
+(B)
+ A03, B0
+(C)  A= 0, ,  B 0,  (D) 
+  A03, BO3
+2.
+Let P and T be the subsets of X-Y plane defined by
+P = (x, y) : x >0, y > 0 and x2 + y2 = 1)
+T = (x, y) : x>0, y >0 and x8 + y8 <1)
+Then P T is
+(A)
+the void set @
+(B)
+(C)
+(D)
+  X-    P  T    :
+P-TC
+P= (x, y) : x> 0, y>0 and x2 + y2 = 1)
+T = (x, y) : x >0, y > 0 and x8 + y8 <1)
+M甲@ PAT 
+(A)
+(B)
+(C)
+(D)
+-d
+3.
+Let f : R -→ R be defined by f (x) = x
+x2
+for all x e R. Then
+(A)
+f is one - one but not onto mapping
+(B)
+(C)
+f is both one - one and onto
+f is onto but not one - one mapping
+(D)
+f is neither one - one nor onto
+  f: R→R     f()=x
+(A)：f 
+(B)
+(C) . f   
+(D)
+f - , - 
+P.T.O.
+
+--- PAGE 3 ---
+M-2019
+4.
+Let the relation p be defined on R as apb iff I+ ab > O. Then
+(A)p is reflexive only
+(B)
+p is equivalence relation
+(C)
+p is reflexive and transitive but not symmetric
+(D)
+p is reflexive and symmetric but not transitive
+k kk a d
+(A)
+&k kk d(a)
+(C)
+5.
+A problem in mathematics is given to 4 students whose chances of solving individually are
+2. 3· 4
+2-3
+3-5
+(A)
+(B)
+4-5
+3-4
+(C)
+(D)
+6.
+If X is a randon variable such that o(X) =- 2.6., then o(1 - 4X) is equal to,
+    ()=2.6 (4)- 
+(A)
+7.8
+(B)
+-10.4
+(C)
+13
+(D)
+10.4
+7.
+If esin.x - e-sin x- 4 = O, then the number of real values of x is
+(A)
+(B)
+(C)
+(D)
+8.
+The angles of a triangle are in the ratio 2:3:7 and the radius of the circumscribed circle is
+10 cm. The length of the smallest 'side is
+   2:3:7     3   10 cm.
+(A)
+2 cm
+(B)
+5 cm
+(C)
+7 cm
+(D)
+10 cm
+
+--- PAGE 4 ---
+M-2019
+9.
+A variable line passes through a fixed point (xr, y,) & meets the axes at A and B. If the
+rectangle OAPB be completed, the locus of P is, (O being the origin of the system of
+axes)
+(） A B
+(A)  (y - y)2 = 4(x -x)
+(B)
+x2+ y?=×?+yl?
+(C)
+x2
+(D)
+2x (
+10.
+A straight line through the point (3, - 2) is inclined at an angle 60° to the line 3x + y = 1.
+If it intersects the X-axis, then its equation will be
+(^) y+V3+2+3V3==0
+(B) y- x/3 + 2 + 3/3 = 0
+(C) y-xV3 - 2 - 2V/3 = 0
+(D) x-xV3 + 2 - 3V3= 0
+11. A variable line passes through the fixed point (α, β). The locus of the foot of the
+perpendicular from the origin on the line is,
+ k     (“0) L    
+(A) x2 + y? - αx - βy = 0
+(B) x2 - y2 + 2αx + 2βy = 0
+(C)αx + βy ± V(α2 + β3) = 0
+y2
+(D)
+12.  If the point of intersection of the lines 2ax + 4ay +c = 0 and 7bx + 3by - d = 0 lies in the
+4th quadrant and is equidistant from the two axes, where a, b. c and d are non-zero
+numbers, then ad : bc equals to
+2ax + 4ay +c = 0  7bx + 3by - d =0  f    
+  ,  a, b, c  d  1  ad : bc 
+(A)
+2:3
+(B)
+2:1
+(C)
+1:1
+(D)
+3:2
+P.T.O.
+
+--- PAGE 5 ---
+. M-2019
+13. A variable circle passes through the fixed point A(p, q) and touches x-axis. The locus of
+the other end of the diameter through A is
+(x - p)2 = 4qy
+(A)
+(B)  (x-q)2= 4py
+(C)(y -p)2= 4qx
+(D) (y - q)?= 4px
+If P(0, 0), Q(1, 0) and R
+14.
+are three given points, then the centre of the circle for
+which the lines PQ, QR and RP are the tangents is
+1 
+P(0, 0), Q(1, 0) 3 R
+ ff 1  PQ, QR  RP  f
+(A)
+(B)
+(C)
+(D)
+15. For the hyperbola
+sin?
+1, which of the following remains fixed when α
+varies ?
+(A)  directrix
+(B)
+vertices
+foci
+(C)
+(D)
+eccentricity
+x2
+2a-  aa a 0k   -
+cos2 α
+sin?α
+(B)
+(A)
+(D)
+(C)
+16.
+S and T are the foci of an ellipse and B is the end point of the minor axis. If STB is
+equilateral triangle, the eccentricity of the ellipse is
+   B TB  
+(A)
+(B)
+1-2
+(C)
+(D)
+
+--- PAGE 6 ---
+M-2019
+17.  The equation of the directrices of the hyperbola 3x2 - 3y2 - 18x + 12y + 2 = 0 is
+    0=+ +81 
+13
+(A)
+x=3+
+(B)
+x=3±1
+13
+13
+(C)
+x=6±1
+(D)
+x=6±
+13
+18. P is the extremity of the latusrectum of ellipse 3x2 + 4y2 = 48 in the first quadrant. The
+eccentric angle of P is
+3+4=48       -
+元-8
+(A)
+3元
+(B)
+π-3
+(C)
+2元
+(D)
+19.
+The direction ratios of the normal to the plane passing through the points (1, 2, -3),
+x-2
+(-1, -2, 1) and parallel to
+y+1
+x-2
+y+1
+(1, 2,-3),(-1,2,1)
+(A)
+(2, 3, 4)
+(B) (14, -8, -1)
+(C)
+(-2, 0, -3)
+(D)(1, -2, -3)
+20.
+The equation of the plane, which bisects the line joining the points (1, 2, 3) and (3, 4, 5)
+at right angles is,
+(1, 2, 3)  (3, 4, 5)       
+(A)
+×+y+z=0
+(B) x+y-z=9
+(C)
+x+y+z=9
+(D) x+y-z+9=0
+21.
+ The limit of the interior angle of a regular polygon of n sides as n -→ co is
+(A)
+元-3
+(B)
+3元
+(C)
+2元
+(D)
+P.T.O.
+
+--- PAGE 7 ---
+M-2019
+22.
+Let f(x) > O for all x and f(x) exists for all x. If f is the inverse function of h and
+h'(x)= 1+ log x
+. Then f'(x) will be
+(),  
+(B)
+1 + log (f(x))
+(A)
+1 +f(x)
+(D)
+(C) 1 -log((x)
+log f(x)
+23.
+Consider the function f(x) = cos x2. Then
+(B)
+f is of period 2元
+(A)
+f is of period 2元
+(D)
+(C)  f is not periodic
+f is of period π
+1(x) = cos x2 a( 4f FR(4b1  1 (3((@,
+(B)
+(A)
+f-~2元
+(C）f
+(D)
+f 
+24.
+lim, (er +x)/x
+x-0 +
+(B)
+(A)
+Does not exist finitely
+is 1
+(D)
+is e2
+(C)
+is 2
+lim+ (er + x)1/x
+0x
+(B)
+(A)
+(D)
+(C)
+  -
+25.
+Let f(x) be a derivable function, f '(x) > f (x) and f(0)=0. Then
+f(x) > 0 for all x > 0
+(A)
+(B) f(x)<0 for all x > 0
+no sign of f(x) can be ascertained
+(C)
+(D)  f(x) is a constant function
+ 0=(0)  (x) (x), ±   (x)   )
+(B)
+   f)
+(A)
+()-    
+(C)
+   (x) (a)
+
+--- PAGE 8 ---
+M-2019
+26.
+ Let f :[1, 3] -→ R be a continuous function that is differentiable in (1, 3) an
+f '(x) = I f (α) [2 + 4 for all x (1, 3). Then,
+(A) f(3) -f(1) = 5 is true
+(B)
+f(3) - f(1) = 5 is false
+(C)
+f(3) - f(1) = 7 is false
+(D)
+f(3) - f(1) < 0 only at one point of (1, 3)
+ f :[1, 3] 可 (1, 3)  x (1, 3) - 
+ f'(x) = 1 f (x) [P + 4 (,
+(A)
+f(3) -f(1) = 5 可 (
+(B)
+   S=( -()
+(C)
+f(3) -f(1)  7   
+(D)
+(1, 3) -  f  f(3) -f(1) <0 
+27.
+lim
+(xn in x), n > 0
+(A)
+does not exist
+(B)
+exists and is zero
+(C)
+exists and is 1
+(D)
+exists and is e-l
+lim
+(xn in x), n > 0
+x-→0 -
+(A)
+(B)
+(C)
+(D)
+e-1
+If J cos x log!
+tan
+dx = sin x log
+tan
++ f (a) then f(x) is equal to. (assuming c is a
+arbitrary real constant)
+J cos x log (tan 2
+dx = sin x log
++ f () , f (x)   , ( c 
+(A)
+(B)
+(C) c+x
+c-x
+(D)
+2x + c
+29.
+y=j
+J cos 2 tan
+dx is an equation of a family of
+(A)
+straight lines
+(B)
+circles
+(C)
+ellipses
+(D) parabolas
+J cos [2 tan-1
+(A)
+(B）
+(C)
+(D）
+P.T.O.
+
+--- PAGE 9 ---
+M-2019
+I sin x
+30. The value of the integration
+(B)
+is independent of  only
+(A)
+is independent of μ only
+(D)
+is independent of  only
+(C)
+ depends on , μ and 
+元/4
+μ sin x
+ -xp [A
+(B)
+(A)
+ 22k - 
+k - 
+ 2k2k - a
+(C)
+(D), μ- 
+The value of lim
+31.
+t l is equal to
+x-0 x
+++y
+lim
+dt
+&  -
+x-0 x
+++y
+(B)
+(A)
+e2sin y
+elsin yl
+(D)
+(C)
+ecosec2.
+32.
+If J 22* .2x dx = A.22" + c, then A =
+ ] 22* .2× dx = A.22* + c, ,  A =
+(B)
+(A)
+log 2
+log 2
+(1og 2)2
+(C)
+(D)
+(log 2)2
+r2015
+33. The value of the integral
+el (x2 + cos x)
+dx is equal to
+x2015
+   xp
+elxl (x2 + cos x)
+(B)
+(A)
+I - e-!
+2e-1
+(C)
+(D)
+2(1 -e-l)
+10
+
+--- PAGE 10 ---
+M-2019
+34.
+lim
+n-00
+n+6
+n++
+n+3 (n-1)
+(A)
+does not exist
+(B)
+is 1
+(C)
+is 2
+(D)
+is 3
+lim
+n-00
+n+3
+n+6
+n+3 (n-1)
+(A)
+可 
+(B)
+(C)
+(D)
+35. The general solution of the differential equation
+1+ey
+dx
+dy = 0 is (c is an
+arbitrary constant)
+1+ey
+dx
+edy0  (c )
+(A)
+X - yey - c
+(B)
+y- xey - c
+(C)
+x+yey = c
+(D)
+y+xey= c
+General solution of (x + y)
+36.
+dy
+dy
+(x+
+dx
+(A)
+tan
+(B)
+tan xy = c
+(C)
+tan (x + y) = c
+y+c
+x+y
+(D)
+tan
+Let P (4, 3) be a point on the hyperbola
+37.
+X-axis at (16, 0), then the eccentricity of the hyperbola is
+  P (4, 3)  
+r2
+X-(16, 0)      
+(A)
+(B)
+(C)
+V2
+(D)
+P.T.O.
+
+--- PAGE 11 ---
+M-2019
+38. If the radius of a spherical balloon increases by 0.1%, then its volume increases
+approximately by
+0.1%
+(B)
+0.2%
+(A)
+0.3%
+0.4%
+(C)
+(D) 0.05%
+39.
+ The three sides of a right-angled triangle are in G.P (geometric progression). If the two
+acute angles be α and β, then tan α and tan β are
+α  β,  tan α  tan β
+/5+1
+5-1
+5+1ond V5-1
+(B)
+(A)
+and
+and
+(D)
+and :
+(C
+and
+If log26 + 2x
+: log2
+2x +8
+40.
+,thenthe values of xare
+ 1og,6+
+1og2
+2× +8
+11
+11
+11
+(C)
+(D)
+(B)
+(A)
+3, -2
+43
+4 2
+41.  Let z be a complex number such that the principal value of argument, arg z > 0.
+Then arg z - arg (-z) is
+ (z -) B - z B a 1 0  z Be  -(nge)  -z  g
+(D)
+(C)
+(B)
+(A)
+42.
+The general value of the real angle , which satisfies the equation,
+(cos 3 +i sin 0) (cos 20 +i sin 20)...(cos ne +i sin nd) = 1 is given by, (assuming k is an
+integer)
+(cos + i sin 0)(cos 20 + i sin 20)..(cos no + i sin ne) = 1   f 
+2kπ
+4k元
+(v)
+(B)
+n+2
+n(n + 1)
+4k元
+6k元
+(C)
+(D)
+n+1
+n(n + 1)
+12
+
+--- PAGE 12 ---
+M-2019
+43. Let a, b, c be real numbers such that a + b + c < 0 and the quadratic equation
+ax2 + bx + c = 0 has imaginary roots. Then
+-=q+0
+(A)
+a>0,c>0
+(B) a>0,c<0
+(C)
+a<0,c>0
+(D) a<0,c<0
+44. A candidate is required to answer 6 out of 12 questions which are divided into two parts A
+and B, each containing 6 questions and he / she is not permitted to attempt more than
+4 questions from any part. In how many different ways can he/she make up his/her choice
+: of 6 questions ?
+126
+     /    4
+(A)
+850
+(B)
+800
+(C)
+750
+(D)
+700
+45.
+There are 7 greetings cards, each of a different colour and 7 envelopes of same 7 colours as
+that of the cards. The number of ways in which the cards can be put in envelopes, so that
+exactly 4 of the cards go into envelopes of respective colour is,
+(A)
+7C3
+(B)  2. 7C
+(C)
+3! 4C4
+(D)
+3!7C,4C
+46.72n +16n -1 (n eN) is divisible by
+ f  72n +16n -1 (n eN) f ?
+(A)
+65
+(B)
+63
+(C)
+61
+(D)
+64
+13
+P.T.O.
+
+--- PAGE 13 ---
+M-2019
+84
+47.
+The number of-irrational terms in the expansion of | 38 +54
+is
+84
+38 +54
+   k -
+(A)
+73
+(B)
+74
+(C)
+75
+(D)
+76
+48.
+Let A be a square matrix of order 3 whose all entries are 1 and let I, be the identity matrix
+of order 3. Then the matrix A - 31, is
+(A)
+invertible
+(B) orthogonal
+(C)
+ non-invertible
+(D) real Skew Symmetric matrix
+ 1 A - 313
+(A)
+(B)
+(C)
+(D)
+(A)
+(B)
+(C)
+null matrix
+(D)
+identity matrix
+M, -3MM,
+adj(M) -(adj M) 
+(A) M
+(B) M
+(C) 
+(D)
+5x
+50.
+If A=
+5.x
+and [A2|= 25, then / x / is equal to
+5x
+5x
+3A=25,-
+(A)
+(B)
+(C)
+52
+(D)
+14
+
+--- PAGE 14 ---
+M-2019
+Category - II (Q.51 to Q.65)
+Carry 2 marks each and only one option is correct. In case of incorrect answer or any
+combination of more than one answer, / mark will be deducted.
+51.The system of equations
+Λx +y+ 3z = 0
+2x + μy - z = 0
+5x + 7y + z = 0
+has infinitely many solutions in R. Then,
+(A)
+=2,μ= 3
+(B)
+= 1, μ= 2
+(C)
+2= 1, μ= 3
+(D) ^= 3, μ= 1
+52.
+Let f : X -→ Y and A, B are non-void subsets of Y, then (where the symbols have their
+usual interpretation)
+(A)
+f -1 (A) - f-1 (B) - f -1l (A - B) but the opposite does not hold.
+(B)
+  f: X→  A, B -  I  ( 
+(A)
+  a (-V) I-J() I-J -(V)I-J
+(B)
+  k (-) I-() 1--() I-J
+(C)
+f-I (A - B) = f-I (A) - f -1 (B)
+(D)
+f-1 (A - B) = f-1 (A) Uf-l (B)
+15
+P.T.O.
+
+--- PAGE 15 ---
+M-2019
+53. Let S, T, U be three non-void sets and f : S -→ T, g : T -→ U be so that g : f : S -→ U is
+surjective. Then
+(A) g and f are both surjective
+(B)  g is surjective, f may not be so
+(C)  fis surjective, g may not be so
+(D)  f and g both may not be surjective
+: :  ' 
+(A)
+gf  
+(B)
+g  , f -  9
+2k  - b k (0)
+k  -   (α)
+54.
+ The polar coordinate of a point P is (
+ The polar coordinate of the point Q. which is
+such that the line joining PQ is bisected perpendicularly by the initial line, is
+Q  PQ
+   -      
+(2.)
+(B) (2.)
+(A)
+(C)
+55.
+The length of conjugate axis of a hyperbola is greater than the length of transverse axis.
+Then the eccentricity e is.
+(A) =~2
+(B) >~2
+(C)<2
+(D)
+56.
+The value of lim [a is
+(A)
+(B)
+(C)
+(D)
+57.
+Let f(x) = x4 - 4x3 + 4x2 + c. c e R. Then
+(A)
+f(x) has infinitely many zeros in (1, 2) for all c
+(B)
+f(x) has exactly one zero in (1, 2) if - 1 < c < 0
+(C)
+f(x) has double zeros in (1, 2) if - 1< c < 0
+(D)
+whatever be the value of c, f(x) has no zero in (1, 2)
+ f(x)=x+ - 4x3 + 4x2 + c, c e R, 甲@
+(A)
+   () -()    ~
+(B)
+   () -() “0 >>[ -
+(C)
+  ( -()  0>>[ - 
+(D)
+16
+
+--- PAGE 16 ---
+M-2019
+58.
+ The graphs of the polynomial x2 -1 and cos x intersect
+(A)
+at exactly two points
+(B)
+at exactily 3 points
+(C)
+at least 4 but at finitely many points
+(D)
+at infinitely many points
+ x1   cOs x 
+(A)
+(B)
+(C)
+         
+(D)
+    
+10
+59.
+A point is in motion along a hyperbola y =
+ so that its abscissa x increases uniformly at
+a rate of 1 unit per second. Then, the rate of change of its ordinate, when the point passes
+through (5. 2)
+(A)
+ increases at the rate of  unit per second
+(B)
+decreases at the rate of  unit per second
+(C)
+(D)
+10
+ 1    1  (5, 2)     
+f 
+(A)
+(B)
+12
+2-5
+(C)
+(D)  f 4
+2-5
+17
+P.T.O.
+
+--- PAGE 17 ---
+M-2019
+1 - cos 0
+60. Let a= min(x2 +2x +3 : x e Rj and. b= lim
+02
+Then
+r=0
+1 - cos 
+  a= min{x2 + 2x + 3 : x  R)  b= lim
+02
+k b- -uq μ
+0←
+r=0
+2n+1
+(A)
+3.2n
+(B)
+3.2n
+4n+1
+(C)
+号(2n - 1)
+3.2n
+61. - Let a>b >0 and I(n)= al/n -bl/n, J (n)=(a - b)1/n for all n ≥2, Then
+  a>b>0  n≥2 -  I(n)=al/n -blin, J(n)=(a-b)i
+(A)
+I(n)<J(n)
+(B)
+I(n)> J (n)
+(C)
+I(n)= J(n)
+(D)
+I(n)+ J (n)= 0
+62. Let &,β, be three unit vectors such that &× (β×)=(β+)where
+α×(β× )=(α.)β -(α. β).If β is not parallel to, then the angle between&and is
+α,β, α×(β×)=(β+)
+×(×)=(α-(α.)1  , -   , α  -
+5元
+(A)
+π-6
+(B)
+π-3
+2元
+(C)
+(D)
+18
+
+--- PAGE 18 ---
+M-2019
+63.
+The position vectors of the points A, B, C and D are 3i - 2j - k , 2i - 3j+ 2k , 5i - j+ 2k
+and 4i - j+ Ak respectively. If the points A, B, C and D lie on a plane, the value of A is
+A, B, C  D f   3i - 2- k, 2i -3j+ 2, 5i -+ 2k,
+4+      -
+(A) 0
+(B) 1
+(C)
+(D) - 4
+64.
+A particle starts at the origin and moves 1 unit horizontally to the right and reaches Pi,
+then it moves  unit vertically up and reaches P2, then it moves 4 unit horizontally to
+right and reaches P3, then it moves g unit vertically down and reaches P4, then it moves
+and lim. Yn = β. Then (α, β) is
+n→8
+            
+    -   
+16
+ Ps-    1 P=(, n) lim=α
+lim n=β (α,β) 
+n→8
+(A)
+(2, 3)
+(B)
+(D)
+65. For any non-zero complex number z, the minimum value of I z I + I z -1 I is
+(A)
+(B)
+12
+3-2
+(C)
+(D)
+19
+P.T.O.
+
+--- PAGE 19 ---
+M-2019
+Category - III (Q.66 to Q.75)
+Carry 2 marks each and one or more option(s) is/are correct. If all correct answers are
+not marked and also no incorrect answer is marked then score -- 2 × number of correct
+answers marked + actual number of correct answers. If any wrong option is marked or if
+any combination including a wrong option is marked, the answer will considered wrong,
+but there is no negative marking for the same and zero marks will be awarded.
+Let A =
+66.
+Then the roots of the equation det (A - XI,)= O (where I3 is the
+identity matrix of order 3) are
+ det (A -)= 0 (1  3  )
+(3
+(A)
+3, 0, 3
+(B)
+0,3. 6
+(C)
+1, 0, - 6
+(D)
+3, 3.6
+67.
+Straight lines x - y = 7 and x + 4y = 2 intersect at B. Points A and C are so chosen on
+these two lines such that AB = AC. The equation of line AC passing through (2, -7) is
+A  C        AB= AC  (2, -7) AC 
+(A) x-y-9=0
+(B) 23x + 7y + 3 = 0
+(C) 2x-y-11= 0
+(D) 7x - 6y - 56 = 0
+68.
+Equation of a tangent to the hyperbola 5x2 - y2 = 5 and which passes through an external
+point (2, 8) is
+  k   (8)    xs
+(A) . 3x -y+ 2 =0
+(B)
+3x +y- 14 = 0
+(C) : 23x - 3y - 22 = 0
+(D)
+3x - 23y + 178 = 0
+20
+
+--- PAGE 20 ---
+M-2019
+69.
+Let f and g be differentiable on the interval I and let a, b e I, a < b. Then
+(A)
+If f (a) = 0 = f (b), the equation f'()+ f (x)g'(x) = 0 is solvable in (a, b).
+(B)
+(q e) u aiqea[os aq tou Ke 0 =(x),3(x) J +(x),J oenb a1 '(q) J= 0 =(e) J JI
+(C)
+If g(a)= 0 = g(b), the equation g'(x)+ kg(x) = 0 is solvable in (a, b), k e R
+(D)
+If g(a) = 0 = g(b), the equation g'(x)+ kg(x)= 0 may not be solvable in (a, b), k e R
+ f g  I-   a, beI.a<b! 
+(A)
+ f (a) = 0 = f(b) ,  f()+f (x)g()= 0 f (a, b)-{
+(B)
+ f (a) = 0 = f (b) , ( f'(x)+ f (x)g(x) = 0 f (a. b)- 
+(C)
+f g(a)= 0 = g(b) ,  g(x)+ kg(x)= 0 f (a. b)- , k e R
+(D)
+ g(a) = 0 = g(b) , ( g(x)+ kg(x) = 0 f (a, b)- 对-
+ , k R
+70.
+Consider the function f (x) --
+4 - sin 元x +3
+(A)
+f(x) does not attain value within the interval [-2, 2]
+(B)
+f(x) takes on the value 2  in the interval [-2. 2]
+(C)
+f(x) takes on the value 3 4 in the interval [-2, 2]
+(D)
+f(x) takes no value p, 1 < p < 5 in the interval [-2, 2]
+x3
+f (x)
+ sin x + 3-  ！
+(A)
+·[-2, 2]- f(x)    
+(B)
+可 [-2, 2]-可 f(x), 2  
+(C)
+ [- 2, 2]-{ f(x), 3    
+(D)
+S >d >1     d    (x) 2-[z-] 
+71.
+Let I - J x tan-'x dx. If an u+2 + b, In = c, for all n ≥ 1, then
+(A)
+aj.az ,a, are in G.P
+(B)
+b,, ba. bs are in A.P
+(C)
+C,C2,C3 are in H.P
+(D)
+ap,a2 ,as are in A.P
+(A)
+a,a2 ,as t3 foe Q4(4
+(B)
+bi, b2, b3  f0. 
+(C)
+C1,C2,C, F fo 14
+(D)
+a1, a2 ,ag  fo 2
+21
+P.T.O.
+
+--- PAGE 21 ---
+M-2019
+72.
+Two particles A and B move from rest along a straight line with constant accelerations f
+and h respectively. If A takes m seconds more than B and describes n units more than that
+of B acquiring the same speed, then
+          
+     ±  
+z=u(+) () z=-) () =zu(-) (a) =z(+) ()
+73.
+ The area bounded by y = x + 1 and y = cos x and the x-axis, is
+(A)
+1 sq. unit
+(B)
+2 sq. unit
+(C)
+4 sq. unit
+(D)
+8 sq. unit
+    - xs= I+x=
+3-2
+(A)
+(B)
+(C)
+(D)
+74.
+Let xi, x, be the roots of x2 - 3x + a = 0 and x3, x4 be the roots of x2 - 12x + b = 0.
+If , <x, <x, <4 and xj,*2. *g, 4 are in G.P then ab equals
+1x Ex   0 =q + xz x  xx   0=+x -x
+ x x2xg 4   X2,,4     ab 
+24
+(A)
+(B)
+64
+(C)
+16
+(D)
+-icos0
+Ife e R and
+75.
+ is real number, then  will be (when I: Set of integers)
+1 + 2icos 
+1-icos 0
+   (: )
+1 + 2icos 0
+3n元
+(2n + 1), n e I
+(A)
+(B)
+2,εI
+(C)
+nt, ne I
+(D)
+2n, n  I
+22
+
+--- PAGE 22 ---
+M-2019
+Subject : MATHEMATICS
+S.           
+Category-1:      1   1  
+G.
+ a  a I     a  I  a  -bee
+8.
+Categoryll:2
+OMR  A, B, C, D       双 1
+9.
+OMR 能  1
+2.
+.，，，可，，，
+S.    OMR 1
+,    1

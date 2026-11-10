@@ -440,24 +440,9 @@ export function ChapterWorkspace({
                           className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 dark:border-[#2A3F68] bg-white dark:bg-[#111A2E] text-stone-900 dark:text-white font-mono text-lg sm:text-xl font-bold focus:outline-none focus:border-purple-500 dark:focus:border-purple-400 transition-colors"
                         />
                       </div>
-                      <button
-                        onClick={() => {
-                          const params = new URLSearchParams({
-                            exam: 'JEE_MAINS',
-                            source: 'pyq',
-                            subject: q.subject,
-                            shift: q.shift,
-                            date: q.exam_date_str,
-                            mode: 'quick_battle',
-                            questions: '10',
-                          });
-                          window.location.href = `/exam/session?${params.toString()}`;
-                        }}
-                        className="px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-md shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 active:scale-95 cursor-pointer transition-all flex items-center justify-center gap-2"
-                      >
-                        <Zap className="w-4 h-4 text-amber-300 fill-amber-300" />
-                        <span>Solve in Battle</span>
-                      </button>
+                      <span className="text-xs text-stone-500 font-medium">
+                        Enter numerical value to practice.
+                      </span>
                     </div>
                   </div>
                 )}
@@ -467,24 +452,9 @@ export function ChapterWorkspace({
                   <span className="text-xs font-semibold text-stone-600 dark:text-stone-300 bg-stone-100 dark:bg-[#18233C] px-3 py-1.5 rounded-lg border border-stone-200/60 dark:border-[#293B60] truncate max-w-md">
                     {q.clean_source || `${q.exam} ${q.year} • ${q.exam_date_str} • ${q.shift}`}
                   </span>
-                  <button
-                    onClick={() => {
-                      const params = new URLSearchParams({
-                        exam: 'JEE_MAINS',
-                        source: 'pyq',
-                        subject: q.subject,
-                        shift: q.shift,
-                        date: q.exam_date_str,
-                        mode: 'quick_battle',
-                        questions: '10',
-                      });
-                      window.location.href = `/exam/session?${params.toString()}`;
-                    }}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 shadow-md shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                  >
-                    <Zap className="w-4 h-4 text-amber-300 fill-amber-300" />
-                    <span>Solve in Battle</span>
-                  </button>
+                  <span className="text-xs font-bold text-brand-600 dark:text-brand-400">
+                    Official PYQ
+                  </span>
                 </div>
               </motion.div>
             ))}

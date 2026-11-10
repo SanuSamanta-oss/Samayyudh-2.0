@@ -120,7 +120,7 @@ export default function LandingPage() {
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative w-8 h-8 rounded-xl overflow-hidden bg-black border border-border shadow-xs flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <Image
-                src="/icon-512.png"
+                src="/samayyudh-logo.png"
                 alt="সময়যুদ্ধ 2.0 Logo"
                 width={32}
                 height={32}
@@ -438,7 +438,10 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-border bg-card py-8">
         <div className="max-w-6xl mx-auto px-4 lg:px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
+            <div className="relative w-6 h-6 rounded-lg overflow-hidden bg-black border border-border shadow-xs flex items-center justify-center shrink-0">
+              <Image src="/samayyudh-logo.png" alt="সময়যুদ্ধ 2.0 Logo" width={24} height={24} className="w-full h-full object-cover" />
+            </div>
             <span className="font-bold text-gradient-brand">সময়যুদ্ধ 2.0</span>
             <span>— The Battle Between You &amp; The Clock</span>
           </div>

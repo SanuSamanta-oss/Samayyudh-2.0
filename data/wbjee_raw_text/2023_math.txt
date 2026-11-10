@@ -1,0 +1,1299 @@
+
+--- PAGE 1 ---
+ M-2023 
+A 1 
+ 
+P.T.O. 
+   Signature of the Candidate :  ______________________________  
+          (as in Admit Card) 
+ 
+   Signature of the Invigilator : ______________________________ 
+   
+    (Booklet Number) 
+ Duration : 2 Hours                              Full Marks : 100 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+INSTRUCTIONS 
+1. All questions are of objective type having four answer options for each. 
+2. Category- 1: Carries 1 mark each and only one option is correct. In case of incorrect answer 
+or any combination of more than one answer, ¼ mark will be deducted. 
+3. Category- 2: Carries 2 marks each and only one option is correct. In case of incorrect answer 
+or any combination of more than one answer, ½ mark will be deducted. 
+4. Category- 3: Carries 2 marks each and one or more option(s) is/are correct. If all correct 
+answers are not marked and no incorrect answer is marked, then score = 2 × number of 
+correct answers marked ÷ actual number of correct answers. If any wrong option is marked or 
+if any combination including a wrong option is marked, the answer will be considered wrong, 
+but there is no negative marking for the same and zero mark will be awarded. 
+5. Questions must be answered on OMR sheet by darkening the appropriate bubble marked A, 
+B, C, or D.  
+6. Use only Black/Blue ink ball point pen  to mark the answer by filling up of the respective 
+bubbles completely. 
+7. Write Question Booklet number and your roll number carefully in the specified locations of 
+the OMR Sheet. Also fill appropriate bubbles. 
+8. Write your name (in block letter), name of the examination center and put your signature (as 
+is appeared in Admit Card) in appropriate boxes in the OMR Sheet. 
+9. The OMR Sheet is liable to become invalid if there is any mistake in filling the correct 
+bubbles for Question Booklet number/roll number or if there is any discrepancy in the name/ 
+signature of the candidate, name of the examination center. The OMR Sheet may also 
+become invalid due to folding or putting stray marks on it or any damage to it. The 
+consequence of such invalidation due to incorrect marking or careless handling by the 
+candidate will be the sole responsibility of candidate. 
+10. Candidates are not allowed to carry any written or printed material, calculator, pen, log-table, 
+wristwatch, any communication device like mobile phones, bluetooth device etc. inside the 
+examination hall. Any candidate found with such prohibited items will be reported against 
+and his/her candidature will be summarily cancelled. 
+11. Rough work must be done on the Question Booklet itself. Additional blank pages are given 
+in the Question Booklet for rough work. 
+12. Hand over the OMR Sheet to the invigilator before leaving the Examination Hall. 
+13. This Booklet contains questions in both English and Bengali. Necessary care and precaution 
+were taken while framing the Bengali version. However, if any discrepancy(ies) is /are found 
+between the two versions, the information provided in the English version will stand and will 
+be treated as final. 
+14. Candidates are allowed to take the Question Booklet after examination is over. 
+ M-2023   
+      
+M-2023 
+Subject : MATHEMATICS 
+--- PAGE 2 ---
+ M-2023 
+A 2 
+  
+SPACE FOR ROUGH WORK 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 3 ---
+ M-2023 
+A 3 
+ 
+P.T.O. 
+MATHEMATICS 
+Category-1 (Q. 1 to 50) 
+(Carry 1 mark each. Only one option is correct. Negative marks:  ̶ ¼) 
+ 
+1. If the matrix Mr is given by Mr =       r1– r 1– r r  for r = 1, 2, 3, … then  
+ det (M 1) + det (M2) + … + det (M2008) =  
+ jÉ¡¢VÊ„ Mr =       r1– r 1– r r ,  r = 1, 2, 3, … ­cJu¡ B­R z ­p­r­œ  
+ det (M 1) + det (M2) + … + det (M2008) = 
+ (A) 2007 (B) 2008 (C) (2008) 2 (D) (2007) 2 
+ 
+2. Let  ,  be the roots of the equation a x2 + b x + c = 0, a, b, c real and s n = n + n and 
+ 
+s  1s  1s  1
+s 1s  1s  1
+s 1s  13
+ 
+432
+321
+21
+
+
+
+ = k 4
+2
+a
+c)  b  (a   then k =  
+ j­e Ll, , pj£LlZ ax2 + bx + c = 0-Hl c¤¢V h£S, ­kM¡­e a, b, c h¡Ù¹h Hhw  
+ sn = n + n J   
+s  1s  1s  1
+s 1s  1s  1
+s 1s  13
+ 
+432
+321
+21
+
+
+
+ = k 4
+2
+a
+c)  b  (a   a¡q­m k = 
+ (A) b 2 – 4ac (B) b 2 + 4ac (C) b 2 + 2ac (D) 4ac – b 2 
+ 
+3. Let A = 
+
+
+
+
+
+
+
+
+
+
+845
+1174
+302
+. Then  
+ (A) det A is divisible by 11  (B) det A is not divisible by 11 
+ (C) det A = 0   (D) A is orthogonal matrix 
+ j­e Ll, A = 
+
+
+
+
+
+
+
+
+
+
+845
+1174
+302
+ z ­p­r­œ 
+ (A) det A, 11  à¡l¡ ¢hi¡SÉ  (B) det A, 11  à¡l¡ ¢hi¡SÉ eu 
+ (C) det A = 0   (D) A HL¢V mð jÉ¡¢VÊ„  
+--- PAGE 4 ---
+ M-2023 
+A 4 
+  
+4. Let X be a nonvoid set. If 1 and2 be the transitive relations on X, then  
+ (A) 1 º 2 is transitive relation (B) 1 º 2 is not transitive relation 
+ (C) 1 º 2 is equivalence relation (D) 1 º 2 is not any relation on X  
+ ( º denotes the composition of relations) 
+ j­e Ll,  X HL¢V An§ZÉ ­pV z k¢c 1 J 2 X-Hl pw‘¡a pwœ²jZ pðå qu, a­h  
+ (A) 1 º 2 pwœ²jZ pðå   
+ (B) 1 º 2 pwœ²jZ pðå eu 
+ (C) 1 º 2 pja¥mÉa¡ pðå   
+ (D) 1 º 2 , X-Hl ­L¡­e¡ pðå pw‘¡a L­l e¡ 
+ ( º pw­k¡SL pðå ­h¡T¡u) 
+ 
+5. Let A and B are two independent events. The probability that both A and B happen is 12 1   
+and probability that neither A nor B happen is 2 1 . Then  
+ j­e Ll, A J B flØfl ¢eiÑln£m eu Hje c¤¢V OVe¡ z  A J B Ei­uC OV­h Hje pñ¡he¡ qm 12 1  
+Hhw A J B -Hl ­LEC q­h e¡ Hje pñ¡he¡ qm 2 1  z ­p­r­œ  
+ (A) P(A) = 3 1 , P(B) = 4 1   (B) P(A) = 2 1 , P(B) = 6 1   
+ (C) P(A) = 6 1 , P(B) = 2 1   (D) P(A) = 3 2 , P(B) = 8 1  
+ 
+6. Let A, B, C are subsets of set X. Then consider the validity of the following set theoretic 
+statement : 
+ j­e Ll,  A, B, C ­pV X-Hl Ef­pV z ­p­r­œ ¢ejÀ¢m¢Ma ­pVa¡¢šÄL ¢hhª¢a…¢ml kb¡bÑa¡ ¢eZÑu Ll : 
+ (A) A  (B \ C) = (A  B) \ (A  C) (B) (A \ B) \ C = A \ (B  C) 
+ (C) (A  B) \ A = A \ B  (D) A \ C = B \ C  
+--- PAGE 5 ---
+ M-2023 
+A 5 
+ 
+P.T.O. 
+7. If 6 1  sin , cos , tan  are in G.P, then the solution set of  is  
+ k¢c 6 1  sin , cos , tan  pj¡¿¹l fËN¢a­a b¡­L a­h -Hl pj¡d¡e l¡¢n q­h 
+ (A) 2n   6 π  (B) 2n   3 π  (C) n  + (–1)n 3 π  (D) n   3 π  
+ ( Here/HM¡­e n  
+ ) 
+ 
+8. The equation r2 cos2    3 π–  θ  = 2 represents  
+ (A) a parabola   (B) a hyperbola  
+ (C) a circle   (D) a pair of straight lines 
+ r 2 cos2    3 π–  θ  = 2 p§¢Qa L­l 
+ (A) HL¢V A¢dhªš   (B) HL¢V fl¡hªš  
+ (C)  HL¢V hªš   (D) plm­lM¡ k¤Nm 
+ 
+9. Let S be the sample space of the random experiment of throwing simultaneously two 
+unbiased dice and E k = {(a, b)  S : ab = k}. If p k = P(E k), then the correct among the 
+following is : 
+ c¤¢V V¡mq£e R‚¡ N¢s­u ­cJu¡ qm z S OVe¡ pj§­ql ej¤e¡ ­rœ Hhw Ek = {(a, b)  S : ab = k}  z 
+k¢c pk = P(Ek) qu, a­h ¢e­jÀl pÇfLÑ…¢ml ­L¡e¢V ¢WL ? 
+ (A) p 1 < p10 < p4   (B) p 2 < p8 < p14  
+ (C) p 4 < p8 < p17   (D) p 2 < p16 < p5 
+--- PAGE 6 ---
+ M-2023 
+A 6 
+  
+10. If 4a2 + 9b2 – c2 + 12ab = 0, then the family of straight lines ax + by + c = 0 is concurrent at  
+ (A) (2, 3) or (–2, –3)   (B) (–2, 3) or (2, 3)  
+ (C) (3, 2) or (–3, 2)   (D) (–3, 2) or (2, 3) 
+ k¢c 4a2 + 9b2 – c2 + 12ab = 0 qu, a­h plm­lM¡ f¢lh¡l ax + by + c = 0 ­k ¢h¾c¤­a pj¢h¾c¤ q­h 
+a¡ q'm, 
+ (A) (2, 3) Abh¡ (–2, –3)  (B) (–2, 3) Abh¡ (2, 3)  
+ (C) (3, 2) Abh¡ (–3, 2)  (D) (–3, 2) Abh¡ (2, 3) 
+ 
+11. The straight lines x + 2y – 9 = 0, 3 x + 5y – 5 = 0 and a x + by – 1 = 0 are concurrent if the 
+straight line 35x – 22y + 1 = 0 passes through the point 
+ x + 2y – 9 = 0,  3x + 5y – 5 = 0 J ax + by – 1 = 0 plm­lM¡œu pj¢h¾c¤ q­h, k¢c 35x – 22y + 1 = 0 
+plm­lM¡¢V ­k ¢h¾c¤N¡j£ qu, 
+    (A) (–a, –b)   (B) (a, – b)  
+ (C) (–a, b)   (D) (a, b)  
+ 
+12. Let A be the point (0, 4) in the xy-plane and let B be the point (2t, 0). Let L be the midpoint 
+of AB and let the perpendicular bisector of AB meet the y-axis M. Let N be the midpoint of 
+LM. Then locus of N is 
+ (A) a circle   (B) a parabola  
+ (C) a straight line   (D) a hyperbola 
+ xy- a­m A(0, 4) Hhw B(2t, 0) z j­e Ll, L, AB-Hl jdÉ¢h¾c¤ Hhw j­e Ll, AB-Hl mð pj¢àMäL 
+y-Ar­L M ¢h¾c¤­a ­Rc L­l z j­e Ll, N, LM-Hl jdÉ¢h¾c¤ z ­p­r­œ N-Hl p’¡lfb q­h 
+ (A) HL¢V hªš   (B) HL¢V A¢dhªš  
+ (C) HL¢V plm­lM¡   (D) HL¢V fl¡hªš 
+--- PAGE 7 ---
+ M-2023 
+A 7 
+ 
+P.T.O. 
+13. Let O be the vertex, Q be any point on the parabola x2 = 8y. If the point P divides the line 
+segment OQ internally in the ratio 1 : 3, then the locus of P is  
+ j­e Ll, A¢dhªš x2 = 8y  -Hl n£oÑ¢h¾c¤  qm O Hhw Q A¢dhª­šl Ef¢lÙÛ ­L¡e HL¢V ¢h¾c¤ z k¢c P 
+¢h¾c¤ OQ ­lM¡wn­L 1 : 3 Ae¤f¡­a A¿¹Ñ¢hiš² L­l a­h P-Hl p’¡lfb q­h 
+ (A) x2 = y (B) y 2 = x (C) y 2 = 2x (D) x2 = 2y 
+ 
+14. The tangent at point  (a cos , b sin ), 0 <  < 2 π , to the ellipse 2 2 2 2 b y  a x  = 1 meets the      
+x-axis at T and y-axis at T1. Then the value of min  2 π  θ  0   (OT) (OT1) is  
+ Efhªš  
+2
+2
+2
+2
+b
+y  
+a
+x  = 1 -Hl (a cos , b sin ), 0 <  < 2 π , ¢h¾c¤­a A¢ˆa ØfnÑL x-Ar­L T ¢h¾c¤­a 
+J y-Ar­L T1 ¢h¾c¤­a ­Rc L­l z ­p­r­œ min  2 π  θ  0   (OT) (OT1) Hl j¡e q­h 
+ (A) ab (B) 2ab (C) 0 (D) 1  
+ 
+15. ABC is an isosceles triangle with an inscribed circle with centre O. Let P be the midpoint 
+of BC. If AB = AC = 15 and BC = 10, then OP equals  
+ (A) 
+2
+5  unit   (B) 
+2
+5  unit  
+ (C) 2 5  unit   (D) 5 2  unit 
+ ABC HL¢V pj¢àh¡ý ¢œi¥S, k¡l HL¢V A¿¹xhªš haÑj¡e J I hª­šl ­L¾cÊ O z j­e Ll, P, BC Hl 
+jdÉ¢h¾c¤ z k¢c AB = AC = 15 HLL qu J BC = 10 HLL qu, a­h OP q­h 
+ (A) 
+2
+5  HLL   ( B) 
+2
+5 HLL  
+ (C) 2 5  HLL   (D) 5 2  HLL 
+--- PAGE 8 ---
+ M-2023 
+A 8 
+  
+16. If the lines joining the focii of the ellipse 2
+2
+2
+2
+b
+y  
+a
+x  = 1 where a > b, and an extremity of its 
+minor axis is inclined at an angle 60º, then the eccentricity of the ellipse is 
+ Efhªš  2
+2
+2
+2
+b
+y  
+a
+x = 1, a > b -Hl e¡¢iàu J Efhªš¢Vl Ef¡­rl HL¢V fË¡¿¹¢h¾c¤l pw­k¡NL¡l£ plm­lM¡ 
+60º ­L¡­Z ea q­m, Efhªš¢Vl Ev­L¾cÊa¡ q­h 
+  (A) 2 3  (B) 2 1  (C) 3 7  (D) 3 1  
+ 
+17. If the distance between the plane x – 2y + z = k and the plane containing the lines 
+ 4 3–  z  3 2– y   2 1–  x  and 5 4–  z  4 3– y   3 2–  x  is 6  , then | k |  is  
+ am x – 2y + z = k J 4 3–  z  3 2– y   2 1–  x  J 5 4–  z  4 3– y   3 2–  x  plm­lM¡à­ul d¡lL 
+a­ml j­dÉL¡l c§laÄ 6 HLL q­m | k | q­h 
+ (A) 36 (B) 12 (C) 6 (D) 2 3  
+ 
+18. Let A(2 sec , 3 tan ) and B(2 sec , 3 tan ) where  +  = 2 π  be two points on the 
+hyperbola 9 y–  4 22x  = 1. If (, ) is the point of intersection of normals to the hyperbola at 
+A and B, then  is equal to  
+ j­e Ll, A(2 sec , 3 tan ) J B(2 sec , 3 tan ),  +  = 2 π  fl¡hªš 9 y–  4 22x  = 1-Hl Ef¢lÙÛ 
+c¤¢V ¢h¾c¤ z I A & B  c¤C ¢h¾c¤­a A¢ˆa A¢imðà­ul ­Rc ¢h¾c¤l ÙÛ¡e¡ˆ (, ) q­m  q­h 
+ (A) 3 12  (B) 3 13  (C) – 3 12  (D) – 3 13  
+--- PAGE 9 ---
+ M-2023 
+A 9 
+ 
+P.T.O. 
+19. Let f(x) = [x2] sin x, x > 0. Then 
+ (A) f is discontinuous everywhere.  
+ (B) f is continuous everywhere. 
+ (C)  f is continuous at only those points which are perfect squares. 
+ (D) f is continuous at only those points which are not perfect squares. 
+ j­e Ll,  f(x) = [x2] sin x, x > 0 ­p­r­œ,  
+ (A) f  phÑœC Ap¿¹a  
+ (B) f  phÑœC p¿¹a  
+  (C) ­kph ¢h¾c¤ f§ZÑhNÑ, ­Lhmj¡œ ­pCph ¢h¾c¤­aC f p¿¹a q­h 
+  (D) ­kph ¢h¾c¤ f§ZÑhNÑ eu, ­Lhmj¡œ ­pCph ¢h¾c¤­aC f p¿¹a q­h 
+ 
+20. If y = lognx, where logn means loge loge loge … (repeated n times), then  
+ x log x log2 x log3 x ….. logn – 1 x logn x xd dy  is equal to  
+ log n hm­a loge loge loge … (n-pwMÉL fc fkÑ¿¹) ­h¡T¡u z k¢c y = logn x qu, a­h 
+ x log x log2 x log3 x ….. logn – 1 x logn x xd dy  -Hl j¡e q­h 
+ (A) log x (B) x (C) 1 (D) log n x 
+ 
+21. The angle between a normal to the plane 2x – y + 2z – 1 = 0 and the X-axis is  
+ X -Ar Hhw 2x – y + 2z – 1 = 0 -a­ml A¢im­ðl j­dÉL¡l ­L¡Z q­h 
+ (A) cos –1 3 2  (B) cos –1 5 1  (C) cos –1 4 3  (D) cos –1 3 1  
+--- PAGE 10 ---
+ M-2023 
+A 10 
+  
+22.  n xxxxx )a–  ( ... )a–  )(a–  (–   lim     n21  where a1, a2, …, an are positive rational numbers. 
+The limit   
+ (A) does not exist   (B) is n a ...  a  a n21    
+ (C) is n n21 a ... aa    (D) is 
+n21 a  ...  a  a
+n
+  
+  n xxxxx )a–  ( ... )a–  )(a–  (–   lim     n21  ­kM¡­e a1, a2, …, an de¡aÈL j§mc pwMÉ¡, p£j¡ qm 
+ (A) p£j¡¢Vl A¢Ù¹ aÄ ­eC   (B) q­h n a ...  a  a n21   
+ (C) q­h n n21 a ... aa    (D)  q­h 
+n21 a  ...  a  a
+n
+  
+ 
+23. Suppose f : 
+   
+  be given by f(x) = 
+
+    1–  1sin  1)–  (  e 1   if           ,1 2)1–( 10 xx x x , if x  1 then  
+ (A) f  ′(1) does not exist  (B) f  ′(1) exists and is zero 
+ (C) f  ′(1) exist and is 9  (D) f  ′(1) exists and is 10 
+ j­e Ll,  f : 
+   
+  ¢ejÀi¡­h pw‘¡a B­R f(x) = 
+
+    1–  1sin  1)–  (  e 1   if           ,1 2)1–( 10 xx x x , if x  1 a¡q­m 
+ (A) f  ′(1)-Hl A¢Ù¹aÄ ­eC  (B) f  ′(1)-Hl A¢Ù¹aÄ B­R J j¡e q­h 0   
+ (C) f  ′(1) -Hl A¢Ù¹aÄ B­R J j¡e q­h 9 (D) f  ′(1)-Hl A¢Ù¹aÄ B­R J j¡e q­h 10 
+--- PAGE 11 ---
+ M-2023 
+A 11 
+ 
+P.T.O. 
+24. f(x) is a differentiable function and given f'(2) = 6 and f'(1) = 4, then  
+ L = 
+f(1)–)h– h   f(1
+f(2)–  )h 2h   f(2 lim  0 h 2 2     
+ (A) does not exist    (B) equal to –3 
+ (C) equal to 3   (D) equal to 3/2 
+ f( x) HL¢V AhLme ­k¡NÉ A­frL Hhw f'(2) = 6, f'(1) = 4 ­cJu¡ B­R z  
+ ­p­r­œ, L = 
+f(1)–)h– h   f(1
+f(2)–  )h 2h   f(2 lim  0 h 2 2     
+ ( A) Hl A¢Ù¹ aÄ ­eC    ( B) –3 Hl p­‰ pj¡e  
+ (C)  3 Hl p­‰ pj¡e   (D) 3/2 Hl p­‰ pj¡e 
+ 
+25. Let cos–1 
+
+
+
+
+b
+y  = loge n n     x , then Ay2 + By1 + Cy = 0 is possible for  
+ j­e Ll, cos–1 
+
+
+
+
+b
+y  = loge n n     x z ­p­r­œ Ay2 + By1 + Cy = 0 pñh kMe   
+ where/  ­kM¡­e y2 = 2
+2
+d
+yd
+x
+, y1 = xd dy  
+ (A) A = 2, B = x2, C = n  (B) A = x2, B = x, C = n2 
+ (C) A = x, B = 2x, C = 3n + 1 (D) A = x2, B = 3x, C = 2n 
+ 
+26. Let f : [1, 3]  
+  be continuous and be derivable in (1, 3) and f'(x) = [f(x)]2 + 4 x  (1, 3). 
+Then 
+ (A) f(3) – f(1) = 5 holds  (B) f(3) – f(1) = 5 does not hold 
+ (C) f(3) – f(1) = 3 holds  (D) f(3) – f(1) = 4 holds 
+ j­e Ll,  f : [1, 3]  
+  A­frL¢V [1, 3] A¿¹l¡­m p¿¹a J (1, 3) ­a AhLme­rœ A­frL z  
+ f ′(x) = [f(x)]2 + 4 pLm x  (1, 3)-Hl SeÉ z ­p­r­œ, 
+ (A) f(3) – f(1) = 5 kb¡bÑ  (B) f(3) – f(1) = 5  kb¡bÑ eu 
+ (C) f(3) – f(1) = 3  kb¡bÑ  (D) f(3) – f(1) = 4  kb¡bÑ 
+--- PAGE 12 ---
+ M-2023 
+A 12 
+  
+27. If 
+
+      4 3 e 2)–  ( | 1   | | 3–   | log k 1  3)–  ( 2)–  ( 1)  ( d x xx xxx x  + c, then the value of k is  
+ k¢c 
+
+      4 3 e 2)–  ( | 1   | | 3–   | log k 1  3)–  ( 2)–  ( 1)  ( d x xx xxx x  + c qu, a­h k-Hl j¡e q­h  
+ (A) 4 (B) 6 (C) 8 (D) 12  
+ 
+28. The expression 
+
+
+n
+0
+n
+0
+d }{
+d ][
+xx
+xx
+, where [ x] and { x} are respectively integral and fractional part of    
+x and n  
+ , is equal to  
+ 
+
+
+n
+0
+n
+0
+d }{
+d ][
+xx
+xx
+-Hl j¡e q­h (HM¡­e [x] J {x}h¢m­a x-Hl kb¡œ²­j f§ZÑpwMÉ¡ j¡e J Awnj¡e h¤T¡C­h) 
+Hhw n  
+ , 
+ (A) 1– n 1  (B) n 1  (C) n (D) n – 1 
+ 
+29. If I =   2
+2
+) cos  sin  (
+d
+xxx
+xx  = f(x) + tan x + c, then f(x) is  
+ k¢c  I =   2
+2
+) cos  sin  (
+d
+xxx
+xx  = f(x) + tan x + c qu, a­h f(x) q­h 
+ (A) xxx x  cos  sin   sin     (B) 2) cos  sin  ( 1 xxx    
+ (C) ) cos  sin  (  cos – xxxx x    (D) )sin    cos (  sin 1 xxxx   
+--- PAGE 13 ---
+ M-2023 
+A 13 
+ 
+P.T.O. 
+30. If In = 
+2
+π
+0
+cosn x cos nxdx, then I1, I2, I3 …  are in  
+ (A) A.P.   (B) G.P.  
+ (C) H.P.   (D) no such relation 
+ k¢c In = 
+2
+π
+0
+cosn x cos nxdx, a¡q­m I1, I2, I3 … 
+ (A) pj¡¿¹l fËN¢a­a b¡L­h,   (B) …­Z¡šl fËN¢a­a b¡L­h,  
+ (C) ¢hfl£a fËN¢a­a b¡L­h,  (D) Hje ­L¡­e¡ pÇfLÑ b¡L­h e¡  
+ 
+31. If y = | c | loge x x  is the solution of the differential equation       y  y  d dy x xx , then        y x  is 
+given by  
+       y  y  d dy x xx  A¿¹lLm pj£Ll­Zl pj¡d¡e y = | c | loge x x  q­m,        y x  q­h 
+ (A) 2
+2y
+x
+ (B) – 2
+2y
+x
+ (C) 2
+2
+y
+x  (D) – 2 2 y x  
+ 
+32. The value of 
+1/2
+0
+2n–  1
+d
+x
+x  is (n  
+ ) 
+ (A) less than or equal to 6 π   (B) greater than or equal to 1 
+ (C) less than 2 1    (D) greater than 6 π  
+ 
+1/2
+0
+2n–  1
+d
+x
+x  (n  
+ )-Hl j¡e 
+ (A) 6 π -Hl ­Q­u ­R¡V h¡ pj¡e (B) 1- Hl ­Q­u h­s¡ h¡ pj¡e 
+ (C) 2 1 -Hl ­Q­u ­R¡V   (D) 6 π -Hl ­Q­u h­s¡ 
+--- PAGE 14 ---
+ M-2023 
+A 14 
+  
+33. The function y = ekx satisfies           y–  d dy d dy  d yd 2 2 xxx  = y xd dy . It is valid for  
+ (A) exactly one value of k.  (B) two distinct values of k. 
+ (C) three distinct values of k. (D) infinitely many values of k. 
+ A­frL y = ekx,           y–  d dy d dy  d yd 2 2 xxx  = y xd dy  -­L ¢pÜ L­l z H¢V °hd q­h  
+ (A) k -Hl HL¢V j¡œ j¡­el SeÉ (B) k -Hl c¤¢V fªbL fªbL j¡­el SeÉ 
+ (C) k -Hl ¢ae¢V fªbL fªbL j¡­el SeÉ (D) k -Hl Ap£j pwMÉL j¡­el SeÉ 
+ 
+34. Given 2
+2
+d
+yd
+x
+ + cot x xd dy  + 4y cosec2 x = 0. Changing the independent variable x to z by the 
+substitution z = log tan 2 x , the equation is changed to  
+ 2
+2
+d
+yd
+x
+ + cot x xd dy  + 4y cosec2 x = 0 z ü¡d£e Qml¡¢n x-Hl hc­m z = log tan 2 x  q­m, pj£LlZ¢V 
+f¢lh¢aÑa q­h 
+ (A) y 3  dz yd 2 2   = 0   (B) 2 2 2 dz yd  + ey = 0  
+ (C) 2
+2
+dz
+yd  – 4y = 0   (D) 2 2 dz yd  + 4y = 0 
+ 
+--- PAGE 15 ---
+ M-2023 
+A 15 
+ 
+P.T.O. 
+35. A missile is fired from the ground level rises x meters vertically upwards in t sec, where        
+x = 100t – 2 25  t2. The maximum height reached is 
+ i¨¢j ­b­L HL¢V ­rfZ¡Ù» Eõði¡­h Ev¢rç qu, ­k¢V  t ­p­L­ä x ¢jV¡l fb A¢aœ²j L­l ­kM¡­e       
+x = 100t – 2 25  t2 z ­rfZ¡Ù»¢V ­k p­hÑ¡µQ EµQa¡ f¢lœ²j L­l a¡l f¢lj¡f  
+ (A) 100 m (B) 300 m  (C) 200 m  (D) 125 m  
+ 
+36. If a hyperbola passes through the point P( 3 ,2 ) and has foci at ( 2, 0), then the tangent 
+to this hyperbola at P is  
+ P( 3 ,2 ) ¢h¾c¤N¡j£ HL¢V fl¡hª­šl e¡¢iàu ( 2, 0) q­m, P ¢h¾c¤­a A¢ˆa ØfnÑ­Ll pj£LlZ qm 
+ (A) y = x 3–  6    (B) y = x 6–  3   
+ (C) y = x 3  6     (D) y = x 6  3  
+ 
+37. Let f(x) = 
+
+
+
+
+
+1   0,–
+0    1–1,  
+xx
+xx   
+ (A) f( x) is discontinuous in [–1, 1] and so has no maximum value or minimum value in 
+[–1, 1]. 
+ (B) f( x) is continuous in [–1, 1] and so has maximum value and minimum value. 
+ (C) f( x) is discontinuous in [–1, 1] but still has the maximum and minimum value.  
+ (D) f( x) is bounded in [–1, 1] and does not attain maximum or minimum value. 
+ j­e Ll, f(x) = 
+
+
+
+
+
+1   0,–
+0    1–1,  
+xx
+xx  z ­p­r­œ,  
+(A) f(x), [–1, 1]-H Ap¿¹a J ­pL¡l­Z p­hÑ¡µQ J phÑ¢ejÀ j¡e f¢lNËq L­l e¡   
+(B) f( x), [–1,1]-H p¿¹a J ­pL¡l­Z p­hÑ¡µQ J phÑ¢ejÀ j¡e f¢lNËq L­l  
+(C) f( x), [–1, 1] -H Ap¿¹a ¢L¿¹¥ a¡p­šÄJ A­frL¢V p­hÑ¡µQ J phÑ¢ejÀ j¡e f¢lNËq L­l 
+(D) f( x), [–1,1] -H p£j¡hÜ A­frL Hhw p­hÑ¡µQ J phÑ¢ejÀ j¡e f¢lNËq L­l e¡ 
+--- PAGE 16 ---
+ M-2023 
+A 16 
+  
+38. The average length of all vertical chords of the hyperbola 2
+2
+2
+2
+b
+y–  
+a
+x  = 1, a  x  2a, is  
+ fl¡hªš 2
+2
+2
+2
+b
+y–  
+a
+x  = 1, a  x  2a z fl¡hª­šl pLm Eõð SÉ¡-Hl Ns °cOÉÑ qm 
+ (A) b )3  n(2  32  l   (B) b  )2  n(3  23  l   
+ (C) a )5  n(2 – 52 l   (D) a  )2  n(5  25  l  
+ 
+39. The value of ‘a’ for which the scalar triple product formed by the vectors  
+ 
+
+α  = ^i  + a ^j  + ^k ,  β  = ^j  + a ^k  and  γ  = a ^i  + ^k  is maximum, is  
+ 
+
+α  = ^i  + a ^j  + ^k ,  β  = ^j  + a ^k ,  γ  = a ^i  + ^k -Hl scalar triple product p­hÑ¡µQ q­m ‘a’ -Hl 
+j¡e q­h 
+ (A) 3   (B) –3  
+ (C) –
+3
+1    (D) 
+3
+1  
+ 
+40. A, B are fixed points with coordinates (0, a) and (0, b) (a > 0, b > 0). P is variable point     
+(x, 0) referred to rectangular axis. If the angle APB  is maximum, then  
+ A J B c¤¢V ¢ÙÛl ¢h¾c¤, a¡­cl ÙÛ¡e¡ˆ kb¡œ²­j (0, a) J (0, b) (a > 0, b > 0) z Bua¡L¡l Ar hÉhÙÛ¡u, 
+P HL¢V N¢an£m ¢h¾c¤ (x, 0)  z  k¢c ­L¡Z APB p­hÑ¡µQ qu, a­h 
+ (A) x2 = ab   (B) x2 = a + b \ 
+ (C) x = ab 1    (D) x = 2 b a  
+--- PAGE 17 ---
+ M-2023 
+A 17 
+ 
+P.T.O. 
+41. If 1, log9 (31 – x + 2), log3 (4.3x – 1) are in A.P, then x equals  
+ 1, log 9 (31 – x + 2), log3 (4.3x – 1) pj¡¿¹l fËN¢a­a b¡L­m x Hl j¡e q­h  
+ (A) log 3 4 (B) 1 – log 3 4 (C) 1 – log 4 3 (D) log 4 3 
+ 
+42. Reflection of the line a–z + az– = 0 in the real axis is given by  
+ h¡Ù¹h A­r a–z + az– = 0 ­lM¡l fË¢agme q­h 
+ (A) az + az  = 0 (B) a –z – az– = 0 (C) az – az  = 0 (D) z a  z a   = 0 
+ 
+43. If the vertices of a square are z1, z2, z3 and z4 taken in the anti-clockwise order, then z3 = 
+ O¢sl Ly¡V¡l ¢hfl£a ¢cL ¢e¢l­M HL¢V hNÑ­r­œl ­L±¢ZL ¢h¾c¤  Qa¥øu kb¡œ²­j z1, z2, z3 J z4 q­m 
+z3 q­h 
+ (A) –iz 1 – (1 + i) z2   (B) z 1 – (1 + i) z2  
+ (C) z 1 + (1 + i) z2   (D) –iz 1 + (1 + i) z2 
+ 
+44. If the n terms a 1, a2, ……, an are in A.P. with increment r, then the difference between the 
+mean of their squares & the square of their mean is  
+ n  pwMÉL fc a1, a2, ……, a n pj¡¿¹l fËN¢a­a (A.P.) B­R, ­kM¡­e p¡d¡lZ A¿¹l qm r z ­p­r­œ 
+pwMÉ¡…¢ml hNÑ pj§­ql jdÉL J pwMÉ¡…¢ml jdÉ­Ll h­NÑl A¿¹l qm  
+ (A) 12 1}–  1)– {(n r 22  (B) 12 r 2  (C) 12 1)–  (nr 22  (D) 12 1–  n 2  
+--- PAGE 18 ---
+ M-2023 
+A 18 
+  
+45. The number of ways in which the letters of the word ‘VERTICAL’ can be arranged without 
+changing the order of the vowels is  
+ ‘VERTICAL’  në¢Vl ülhZÑ…¢ml œ²j f¢lhaÑe e¡ L­l I në¢Vl Arl…¢m­L kai¡­h ¢heÉÙ¹ Ll¡ 
+k¡u, a¡l pwMÉ¡ qm 
+ (A) 6!  3!   (B) 3 !8   
+ (C) 6!  3   (D) !3 !8  
+ 
+46. n objects are distributed at random among n persons. The number of ways in which this can 
+be done so that at least one of them will not get any object is   
+ n  pwMÉL hÉ¢š²l j­dÉ Ljf­r HLSe ­L¡e hÙ¹¥C f¡­he e¡ -HC naÑ¡d£­e n pwMÉL hÙ¹¥ kcªµR i¡­h 
+pj­ha hÉ¢š²­cl j­dÉ h¾Ve Ll¡ k¡­h ­k pwMÉL fÜ¢a­a, a¡ qm 
+ (A) n! – n   (B) n n – n  
+ (C) n n – n2   (D) n n – n! 
+ 
+47. If one root of x2 + p x – q 2 = 0, p and q are real, be less than 2 and other be greater than 2, 
+then   
+ x2 + px – q2 = 0 pj£Ll­Zl (p J q h¡Ù¹h) HL¢V h£S 2-l ­Q­u ­R¡­V¡ J Afl¢V 2-l ­Q­u hs q­m 
+ (A) 4 + 2p + q 2 > 0   (B) 4 + 2p + q 2 < 0  
+ (C) 4 + 2p – q 2 > 0    (D) 4 + 2p – q 2 < 0 
+--- PAGE 19 ---
+ M-2023 
+A 19 
+ 
+P.T.O. 
+48. Let A be a set containing n elements. A subset P of A is chosen, and the set A is 
+reconstructed by replacing the elements of P. A subset Q of A is chosen again. The number 
+of ways of choosing P and Q such that Q contains just one element more than P is   
+ A  HL¢V n pcpÉ ¢h¢nø ­pV z P, A -Hl HL¢V Ef­pV NWe Ll¡ qm z P Ef­p­Vl pcpÉ…¢m ¢c­u A 
+­pV¢V f¤el¡u NWe Ll¡ qm z Q, A Hl Bl HL¢V Ef­pV NWe Ll¡ qm z P J Q ka lLj i¡­h NWe 
+Ll¡ k¡­h k¡­a Q-Hl pcpÉ pwMÉ¡ P-Hl pcpÉ pwMÉ¡l ­b­L HL¢V ­hn£ qu a¡l pwMÉ¡ q­h 
+ (A) 2nCn – 1 (B) 2nCn (C) 2nCn + 2 (D) 2 2n + 1 
+ 
+49. Let A and B are orthogonal matrices and det A + det B = 0. Then  
+  (A) A + B is singular   (B) A + B is non-singular      
+  (C) A + B is orthogonal  (D) A + B is skew symmetric 
+ j­e Ll, A J B c¤¢V mð jÉ¡¢VÊ„ Hhw det A + det B = 0 z ­p­r­œ  
+ (A) A + B ¢h¢nø jÉ¡¢VÊ„    (B) A + B A¢h¢nø jÉ¡¢VÊ„  
+ (C) A + B HL¢V mð jÉ¡¢VÊ„    (D) A + B ¢hfË¢apj jÉ¡¢VÊ„  
+ 
+50. Let P(n) = 32n + 1 + 2n + 2 where n  
+ . Then   
+ (A)   P(n) is not divisible by any prime integer.  
+ (B)   there exists prime integer which divides P(n). 
+ (C)   P(n) is divisible by 5 for all n  
+ . 
+ (D)   P(n) is divisible by 3 for all n  
+ . 
+ j­e Ll, pLm n  
+  Hl SeÉ P(n) = 32n + 1 + 2n + 2 z ­p­r­œ  
+ (A)  P(n) ­L¡e ­j±¢mL pwMÉ¡ à¡l¡ ¢hi¡SÉ eu 
+ (B)  Hje ­j±¢mL pwMÉ¡l A¢Ù¹aÄ l­u­R k¡l à¡l¡ P(n) ¢hi¡SÉ q­h 
+ (C)   pLm n  
+  Hl SeÉ P(n), 5 à¡l¡ ¢hi¡SÉ q­h 
+ (D)  pLm n  
+  Hl SeÉ P(n), 3 à¡l¡ ¢hi¡SÉ q­h 
+--- PAGE 20 ---
+ M-2023 
+A 20 
+  
+Category-2 (Q. 51 to 65) 
+(Carry 2 marks each. Only one option is correct. Negative marks:  ̶ ½) 
+ 
+51. Let  be a relation defined on set of natural numbers 
+ , as  = {(x, y)  
+   
+  : 2x + y = 41}. 
+Then domain A and range B are   
+ ü¡i¡¢hL pwMÉ¡l ­pV 
+ -H pÇfLÑ  pw‘¡a B­R ­k  = {(x, y)  
+   
+  : 2x + y = 41} z ­p­r­œ 
+pw‘¡l A’m A J X-H ¢hÙ¹¡l B qm 
+ (A) A  {x  
+  : 1  x  20} and B  {y  
+  : 1  y  39} 
+ (B) A = { x  
+  : 1  x  15} and B = {y  
+  : 2  y  30}  
+ (C) A  
+ , B  ℚ  
+ (D) A =  ℚ, B = ℚ 
+ 
+52. From the focus of the parabola y 2 = 12 x, a ray of light is directed in a direction making an 
+angle tan –1 4 3  with x-axis. Then the equation of the line along which the reflected ray 
+leaves the parabola is  
+ A¢dhªš y2 = 12 x-Hl e¡¢i ­b­L HL¢V B­m¡Ll¢nÈ x-A­rl p­‰ tan–1 4 3  ­L¡­Z ea A¢ij¤­M 
+d¡¢ha qu z ­p­r­œ fË¢ag¢ma l¢nÈ ­k m¡Ce hl¡hl A¢dhªš aÉ¡N L­l a¡q¡l pj£LlZ qm 
+ (A) y = 2 (B) y = 18 (C) y = 9 (D) y = 36  
+ 
+53. Let A = 
+
+
+
+
+
+
+
+
+
+
+000
+001
+100
+, B = 
+
+
+
+
+
+
+
+
+
+
+000
+100
+010
+ and P = 
+
+
+
+
+
+
+
+
+
+
+y00
+00
+010
+x  be an orthogonal matrix such that 
+B = PAP–1 holds. Then  
+ j­e Ll, A = 
+
+
+
+
+
+
+
+
+
+
+000
+001
+100
+, B = 
+
+
+
+
+
+
+
+
+
+
+000
+100
+010
+ J P = 
+
+
+
+
+
+
+
+
+
+
+y00
+00
+010
+x  HL¢V mð jÉ¡¢VÊ„ ( orthogonal 
+matrix) Hl©f ­k B = PAP–1 ¢pÜ L­l z ­p­r­œ 
+ (A) x = 1 = y   (B) x = 1, y = 0  
+ (C) x = 0, y = 1   (D) x = –1, y = 0 
+--- PAGE 21 ---
+ M-2023 
+A 21 
+ 
+P.T.O. 
+54. The value of                      n1 n nn23222 3 · 2 1  3 · 2 1  ...  3 · 2 1  3 · 2 1  3 · 2 1  3 · 2 1 lim    n  is  
+                       n1 n nn23222 3 · 2 1  3 · 2 1  ...  3 · 2 1  3 · 2 1  3 · 2 1  3 · 2 1 lim    n  Hl j¡e 
+ (A) 8 3  (B) 10 3  (C) 14 3  (D) 16 3  
+ 
+55. The family of curves y = ea sin x, where ‘a’ is arbitrary constant, is represented by the 
+differential equation  
+ hœ²­lM¡ f¢lh¡l y = ea sin x, ‘a’ - kcªµR dË¤hL, ­k AhLm pj£LlZ à¡l¡ pw‘¡a q­h ­p¢V qm 
+ (A) y log y = tan x xd dy   (B) y log x = cot x xd dy   
+ (C) log y = tan x xd dy    (D) log y = cot x xd dy  
+ 
+56. The locus of points (x, y) in the plane satisfying sin2 x + sin2 y = 1 consists of  
+ (A) a circle centered at origin   
+ (B) infinitely many circles that are all centered at the origin  
+ (C) infinitely many lines with slope  1   
+ (D) finitely many lines with slope  1 
+ sin 2 x + sin2 y = 1 pj£LlZ­L ¢pÜ L­l, Hje (x, y) am¢ÙÛa pLm ¢h¾c¤l p’¡lfb qm 
+ (A) j§m ¢h¾c¤­a ­L¾cÊ Hje hªš      
+ (B) j§m ¢h¾c¤ ­a ­L¾cÊ Hje Ap£j pwMÉL hªš 
+ (C) e¢a  1 pð¢ma Ap£j pwMÉL ­lM¡l f¢lh¡l  
+  (D) e¢a  1 pð¢ma pp£j pwMÉL ­lM¡l f¢lh¡l   
+--- PAGE 22 ---
+ M-2023 
+A 22 
+  
+57. If x = sin  and y = sin k, then (1 – x2)y2 – xy1 – y = 0, for α =  
+ x = sin  J y = sin k fËcš z (1 – x2)y2 – xy1 – y = 0 q­m, -Hl j¡e q­h 
+ (A) k (B) –k (C) –k 2 (D) k 2 
+ 
+58. In the interval (–2, 0), the function f(x) = sin 
+
+
+
+
+3
+1
+x
+. 
+ (A)  never changes sign.   
+ (B) changes sign only once. 
+ (C) changes sign more than once but finitely many times. 
+ (D) changes sign infinitely many times. 
+ (–2 , 0) A¿¹l¡­m A­frL qm f(x) = sin 
+
+
+
+
+3
+1
+x
+ z A­frL¢V  
+ (A) LMeC ¢Qq² f¢lhaÑe L­l e¡ 
+ (B) j¡œ HLh¡l ¢Qq² f¢lhaÑe L­l  
+ (C) HLh¡­ll ­Q­u ­h¢n ¢L¿¹¥ pp£j pwMÉL h¡l ¢Qq² f¢lhaÑe L­l  
+  (D) Ap£j pwMÉL h¡l ¢Qq² f¢lhaÑe L­l  
+ 
+59. 
+2π
+0
+6 dθ θ cos θ sin θ  is equal to   
+ 
+2π
+0
+6 dθ θ cos θ sin θ -Hl j¡e qm  
+ (A) 16 π  (B) 16 3π  (C) 3 16π  (D) 0 
+--- PAGE 23 ---
+ M-2023 
+A 23 
+ 
+P.T.O. 
+60. The average ordinate of y = sin x over [0, ] is 
+ [0, ] -Hl Jf®l y = sin x hœ²­lM¡l ­L¡¢V pj§­ql °c­OÑÉl Ns qm 
+ (A) π 2    (B) π 3   
+ (C) π 4    (D)  
+ 
+61. The portion of the tangent to the curve x 3
+2
+ + y 3
+2
+ = a 3
+2
+, a > 0 at any point of it, intercepted 
+between the axes  
+ (A)  varies as abscissa    
+ (B) varies as ordinate   
+ (C)  is constant 
+ (D) varies as the product of abscissa and ordinate 
+ x 3
+2
+ + y 3
+2
+ = a 3
+2
+, a > 0 hœ²­lM¡l Ef¢lÙÛ ­L¡e ¢h¾c¤ ­a A¢ˆa ØfnÑ­Ll ­k Awn Arà­ul j­dÉ 
+­R¢ca qu, ­p¢V 
+ (A) i¥­Sl p­‰ plm­i­c B­R 
+ (B) ­L¡¢Vl p­‰ plm­i­c B­R 
+ (C) dË¤hL  
+  (D) i¥S J ­L¡¢Vl …Zg­ml p­‰ plm­i­c B­R   
+--- PAGE 24 ---
+ M-2023 
+A 24 
+  
+62. If the volume of the parallelopiped with 
+
+a   
+
+b , 
+
+b   c  and c    a  as coterminous 
+edges is 9 cu. units, then the volume of the parallelopiped with (
+
+a   
+
+b )  (
+
+b   c ),   
+(
+
+b   c )  (c    a ) and (c    a )  (  a    b ) as coterminous edges is  
+ (A) 9 cu. units    (B)  729 cu. units  
+ (C) 81 cu. units   (D) 243 cu. units 
+ 9 Oe HLL Buae ¢h¢nø HL¢V Qa¥ÙÛm­Ll pjfË¡¢¿¹L h¡ý…¢m 
+
+a   
+
+b , 
+
+b   c  Hhw c    a  z 
+­k Qa¥ÙÛm­Ll pjfË¡¢¿¹L h¡ý…¢m, (
+
+a   
+
+b )  (
+
+b   c ),   (  b   c )  (c    a ) Hhw  
+(c    a )  (  a    b ) a¡l Buae q­h  
+ (A) 9 Oe HLL   (B) 729 Oe HLL  
+ (C) 81 Oe HLL   (D) 243 Oe HLL 
+ 
+63. Given f(x) = esin x + ecos x. The global maximum value of f(x) 
+ (A) does not exist. 
+ (B) exists at a point in    2 π 0,  and its value is 2e 2
+1
+.  
+ (C) exists at infinitely many points. 
+ (D) exists at x = 0 only. 
+ f( x) = esin x + ecos x A­fr­Ll global p­hÑ¡µQ j¡e  
+ (A) -Hl A¢Ù¹aÄ ­eC  
+ (B)    2 π 0, -A¿¹l¡­m HL¢V ¢h¾c¤­a A¢Ù¹aÄ B­R Hhw a¡l j¡e qm 2e 2
+1
+ 
+ (C) Ap£j pwMÉL ¢h¾c¤­a I p­hÑ¡µQ j¡e ¢hcÉj¡e  
+  (D) öd¤j¡œ x = 0 -­a A¢Ù¹aÄ B­R 
+--- PAGE 25 ---
+ M-2023 
+A 25 
+ 
+P.T.O. 
+64. Consider a quadratic equation a x2 + 2b x + c = 0 where a, b, c are positive real numbers. If 
+the equation has no real root, then which of the following is true ? 
+ (A) a, b, c cannot be in A.P. or H.P. but can be in G.P. 
+ (B) a, b, c cannot be in G.P. or H.P. but can be in A.P. 
+ (C) a, b, c cannot be in A.P. or G.P. but can be in H.P. 
+ (D) a, b, c cannot be in A.P., G.P. or H.P. 
+ a, b, c-  de¡aÈL h¡Ù¹h pwMÉ¡ q­m ax2 + 2b x + c = 0  ¢àO¡a pj£LlZ¢V ¢h­hQe¡ Ll z pj£LlZ¢Vl 
+h£S…¢m h¡Ù¹h e¡ q­m, ¢ejÀ¢m¢Ma ¢hhª¢a…¢ml ­L¡e¢V paÉ : 
+ (A) a, b, c, A.P. h¡ H.P. ­a b¡L­h e¡ ¢L¿¹¥ G.P. ­a b¡L­a f¡­l  
+ (B) a, b, c, G.P.  h¡ H.P. ­a b¡L­h e¡ ¢L¿¹¥ A.P. ­a b¡L­a f¡­l 
+ (C) a, b, c, A.P.  h¡ G.P. ­a b¡L­h e¡ ¢L¿¹¥ H.P. ­a b¡L­a f¡­l 
+  (D) a, b, c, A.P., G.P. h¡ H.P. ­a ­eC 
+ 
+65. Let a 1, a 2, a 3, …, a n be positive real numbers. Then the minimum value of 
+1
+n
+3
+2
+2
+1
+a
+a  ....  a a  a a   is  
+ j­e Ll,  a1, a2, a3, …, an de¡aÈL h¡Ù¹h pwMÉ¡ z ­p­r­œ 
+1
+n
+3
+2
+2
+1
+a
+a  ....  a a  a a  -Hl phÑ¢ejÀ j¡e q­h 
+ (A) 1 (B) n (C) nC2  (D) 2  
+--- PAGE 26 ---
+ M-2023 
+A 26 
+  
+Category-3 (Q. 66 to 75) 
+(Carry 2 marks each. One or more options are correct. No negative marks) 
+ 
+66. Let f be a strictly decreasing function defined on 
+  such that f ( x ) > 0 ,   x
+ .  Let 
+15)  f(a
+y  
+3)  5a  f(a
+2
+2
+2
+  x  = 1 be an ellipse with major axis along the y-axis. The value of 
+‘a’ can lie in the interval (s) 
+ f, 
+ -H kb¡bÑ œ²jqÊÊ¡pj¡e A­frL J f(x) > 0, x  
+  z 
+15)  f(a
+y  
+3)  5a  f(a
+2
+2
+2
+  x  = 1 Efhªš¢Vl 
+fl¡r y-Ar hl¡hl z ­p­r­œ ‘a’ ­kM¡­e b¡L­a f¡­l ­p¢V qm 
+ (A) (– , –6)   (B) (–6, 2)  
+ (C) (2, )   (D) (– , ) 
+ 
+67. A rectangle ABCD has its side parallel to the line y = 2 x and vertices A, B, D are on lines    
+y = 1, x = 1 and x = –1 respectively. The coordinate of C can be 
+ Bua­rœ ABCD-Hl HL¢V h¡ý y = 2 x-Hl pj¡¿¹l¡m Hhw n£oÑ¢h¾c¤ œu A, B, D kb¡œ²­j             
+y = 1, x = 1 J x = –1 -Hl Ef¢l¢ÙÛa z C-Hl ÙÛ¡e¡ˆ q­h  
+ (A) (3, 8)   (B) (–3, 8)  
+ (C) (–3, –1)   (D) (3, –1) 
+ 
+68. If R and R1 are equivalence relations on a set A, then so are the relations 
+ (A) R –1   (B) R  R1  
+ (C) R  R1   (D) All of these 
+ ­pV A-­a R J R1 pja¥mÉ pðå pw‘¡a B­R z Ae¤l©f pÇfLÑ q­h  
+ (A) R –1   (B) R  R1  
+ (C) R  R1    (D) ph L¢V 
+--- PAGE 27 ---
+ M-2023 
+A 27 
+ 
+P.T.O. 
+69. Let f( x) = xm, m being a non-negative integer. The value of m so that the equality              
+f'(a + b) = f'(a) + f'(b) is valid for all a, b > 0 is  
+ f( x) = xm, m A-GZ¡aÈL f§ZÑpwMÉ¡ z f'(a + b) = f'(a) + f'(b) q­h, k¢c a, b > 0 qu 
+  (A) 0 (B) 1 (C) 2 (D) 3  
+ 
+70. Which of the following statements are true ? 
+ (A) If f( x) be continuous and periodic with periodicity T, then I = 
+ T  a
+a
+f(x) dx depend on 
+‘a’. 
+(B) If f( x) be continuous and periodic with periodicity T, then I = 
+ T  a
+a
+f(x) dx does not 
+depend on ‘a’. 
+(C) Let f( x) =   
+
+ 1 ,   if x is rational 0 ,   if x is irrational, then f is periodic of the periodicity T only if T is 
+rational.  
+ (D) f defined in (C) is periodic for all T. 
+ ¢ejÀ¢hhª¢a…¢ml ­L¡e¢V paÉ ? 
+(A) k¢c f(x) p¿¹a Hhw T-fkÑ¡hª­šl HL¢V fkÑ¡hªš£u A­frL qu, a­h I = 
+ T  a
+a
+f(x) dx, ‘a’-Hl 
+Efl ¢eiÑln£m q­h 
+(B) k¢c f(x) p¿¹a Hhw  T-fkÑ¡hª­šl HL¢V fkÑ¡hªš£u A­frL qu, a­h I = 
+ T  a
+a
+f(x) dx, ‘a’-Hl 
+Efl ¢eiÑln£m eu 
+(C) j­e Ll, f(x) =  
+
+  1  ,  x j§mc 0  ,  x Aj§mc, f-fkÑ¡hªš T-Hl HL¢V fkÑ¡hªš£u A­frL q­h HLj¡œ k¢c T 
+j§mc qu 
+(D) pLm T-Hl SeÉ (C) H h¢ZÑa f-fkÑ¡hªš A­frL q­h 
+--- PAGE 28 ---
+ M-2023 
+A 28 
+  
+71. A balloon starting from rest is ascending from ground with uniform acceleration of              
+4 ft/sec2. At the end of 5 sec, a stone is dropped from it. If T be the time to reach the stone 
+to the ground and H be the height of the balloon when the stone reaches the ground, then  
+ ¢ÙÛa¡hÙÛ¡ ­b­L k¡œ¡ L­l HL¢V ­hm¤e 4 ft/sec2  aÄl­Z EÜÑN¡j£ z 5 ­p­Lä f­l ­hm¤e¢V ­b­L HL¢V 
+f¡bl ­R­s ­cJu¡ qm z k¢c f¡bl¢V T ­p­Lä f­l i¨¢j ØfnÑ L­l Hhw kMe f¡bl¢V i¨¢j ØfnÑ L­l 
+aMe ­hm¤e¢Vl EµQa¡ H ft.qu, a­h 
+ (A) T = 6 sec   (B) H = 112.5 ft  
+ (C) T = 5/2 sec   (D)  225 ft 
+  
+72. If f(x) = 3 3 2x  – x2, then  
+(A) f has no extrema.  
+(B) f is maximum at two points x = 1 and x = –1. 
+(C) f is minimum at x = 0. 
+(D) f has maximum at x = 1 only. 
+ j­e Ll, f(x) = 3 3 2x  – x2 ­p­r­œ 
+ (A) f -Hl Qlj j¡e ­eC  
+ (B) x = 1, x = –1 ¢h¾c¤­a f -Hl p­hÑ¡µQ j¡e B­R 
+ (C) x = 0 ¢h¾c¤­a f -Hl phÑ¢ejÀ j¡e ¢hcÉj¡e  
+  (D) öd¤j¡œ x = 1 ¢h¾c¤­a f -Hl p­hÑ¡µQ j¡e B­R 
+ 
+73. Let f be a non-negative function defined on     2 π ,0 . If  x 0 ( f ′(t) – sin 2t) dt =  0 x f(t) tan tdt, 
+f(0) = 1, then 
+2
+π
+0
+f(x) dx is  
+ j­e Ll,     2 π ,0 -­a pw‘¡a f A-GZ¡aÈL A­frL z  
+ 
+x
+0
+(f ′(t) – sin 2t)dt = 
+0
+x
+f(t) tan tdt,     f(0) = 1 ­p­r­œ 
+2
+π
+0
+f(x) dx q­h 
+ (A) 3 (B) 3 – 2 π  (C) 3 + 2 π  (D) 2 π  
+--- PAGE 29 ---
+ M-2023 
+A 29 
+ 
+P.T.O. 
+74. If z1 and z 2 are two complex numbers satisfying the equation  z–  z  z 21 21 z   = 1, then 2 1 z z  may 
+be  
+ (A) real positive   (B)  real negative   
+ (C) zero   (D) purely imaginary 
+ z 1 J z2 c¤¢V S¢Vml¡¢n Hje ­k  z–  z  z 21 21 z   = 1, ­p­r­œ 2 1 z z  q­h  
+ (A) de¡aÈL h¡Ù¹h    (B) GZ¡aÈL h¡Ù¹h 
+ (C) n§ZÉ    (D) f¤­l¡f¤¢l L¡Òf¢eL 
+ 
+75. A letter lock consists of three rings with 15 different letters. If N denotes the number of 
+ways in which it is possible to make unsuccessful attempts to open the lock, then  
+ (A) 482 divides N   
+ (B)  N is the product of two distinct prime numbers. 
+ (C) N is the product of three distinct prime numbers. 
+ (D) 16 divides N. 
+ HL¢V Arl a¡m¡u ¢ae¢V hmu B­R z fË¢a¢V hm­u 15 ¢V L­l ¢h¢iæ Arl B­R z N k¢c a¡m¡ 
+­M¡m¡l ­Qø¡u Ap¡g­mÉl pwMÉ¡ qu a­h  
+ (A) N, 482 à¡l¡ ¢hi¡SÉ  
+ (B) N, c¤¢V Bm¡c¡ ­j±¢mL pwMÉ¡l …Zgm  
+ (C) N, ¢ae¢V Bm¡c¡ ­j±¢mL pwMÉ¡l …Zgm  
+  (D) N, 16 à¡l¡ ¢hi¡SÉ 
+____________ 
+--- PAGE 30 ---
+ M-2023 
+A 30 
+  
+SPACE FOR ROUGH WORK 
+--- PAGE 31 ---
+ M-2023 
+A 31 
+ 
+P.T.O. 
+SPACE FOR ROUGH WORK 
+--- PAGE 32 ---
+ M-2023 
+A 32 
+  
+ 
+ 
+ pju: 2 O¾V¡                              f§ZÑj¡e : 100 
+ 
+ 
+ 
+ 
+    
+   
+¢e­cÑn¡hm£ 
+ 
+1. HC fËnÀf ­œ pjÙ¹ fËnÀC Ah­S¢ƒi fËnÀ Hhw fË¢a¢V fË­nÀl Q¡l¢V pñ¡hÉ Ešl ­cJu¡ B­R z  
+2. Category-1 : HL¢V Ešl p¢WL z p¢WL Ešl ¢c ­m 1 eðl f¡ ­h z i¥m Ešl ¢c ­m Abh¡ ­k ­L¡e 
+HL¡¢dL Ešl ¢c­m ¼  eðl L¡V¡ k¡­h z 
+3. Category-2 : HL¢V Ešl p¢WL z p¢WL Ešl ¢c ­m 2 eðl f¡ ­h z i¥m Ešl ¢c ­m Abh¡ ­k ­L¡e 
+HL¡¢dL Ešl ¢c­m ½ eðl L¡V¡ k¡­h z 
+4. Category-3: HL h¡ HL¡¢dL Ešl p¢WL z ph L¢V p¢WL Ešl ¢c ­m 2 eðl f¡ ­h z k¢c ­L¡e i¥m 
+Ešl e¡ b¡­L Hhw p¢WL EšlJ ph L¢V e¡ b¡ ­L a¡q­m f¡­h 2  ­k L¢V p¢WL Ešl ­cJu¡ q­u­R 
+a¡l pwMÉ¡  Bp­m ­k L¢V Ešl p¢WL a¡l pwMÉ¡ z k¢c ­L¡­e¡ i¥m Ešl ­cJu¡ qu h¡ HL¡¢dL 
+Eš­ll j­dÉ HL¢VJ i¥m b¡ ­L a¡q­m Ešl¢V i¥m d ­l ­eJu¡ q­h z ¢L¿¹ ¥ ­p­r­œ ­L¡­e¡ eðl L¡V¡ 
+k¡­h e¡, AbÑ¡v n§eÉ eðl f¡­h z 
+5. OMR f­œ A, B, C, D ¢Q¢q²a p¢WL Ol¢V il¡V L­l Ešl ¢c­a q­h z 
+6. OMR f­œ Ešl ¢c­a öd¤j¡œ L¡­m¡ h¡ e£m L¡¢ml hm f­u¾V ­fe hÉhq¡l Ll­h z 
+7. OMR f­œ ¢e¢cÑø ÙÛ¡e R¡s¡ AeÉ ­L¡b¡J ­L¡e c¡N ­c­h e¡ z 
+8. OMR f­œ ¢e¢cÑø ÙÛ¡­e fËnÀf­œl eðl Hhw ¢e ­Sl ­l¡m eðl A¢a p¡hd¡ea¡l p¡ ­b ¢mM­a q­h Hhw 
+fË­u¡Se£u Ol…¢m f§lZ Ll­a q­h z 
+9. OMR f­œ ¢e¢cÑø ÙÛ¡­e ¢e­Sl e¡j J fl£r¡ ­L­¾cÊl e¡j ¢mM­a q­h Hhw ¢e­Sl (Admit Card-H 
+E­õ¢Ma) pÄ¡rl Ll­a q­h z 
+10. fËnÀf ­œl eðl h¡ ­l¡m eðl i¥m ¢mM­m Abh¡ i¥m Ol il¡V Ll­m, fl£r¡bÑ£l e¡j, fl£r¡ ­L­¾cÊl e¡j 
+h¡ pÄ ¡r­l ­L¡e i¥m b¡L ­m Ešl fœ h¡¢am q ­u ­k­a f¡ ­l z OMR fœ¢V i¡yS q ­m h¡ a¡ ­a 
+Ae¡hnÉL c¡N fs ­mJ h¡¢am q ­u ­k­a f¡ ­l z fl£r¡bÑ£l HC dl ­el i¥m h¡ ApaÑLa¡l SeÉ 
+Ešlfœ h¡¢am q­m HLj¡œ fl£r¡bÑ£ ¢e­SC a¡l SeÉ c¡u£ b¡L­h z 
+11. ­j¡h¡Cm­g¡e, LÉ¡mL¥ ­mVl, pÔ¡CXl¦m, mN ­Vhm, q¡aO¢s, ­lM¡¢Qœ, NË¡g h¡ ­L¡e dl ­Zl a¡¢mL¡ 
+fl£r¡ L­r Be¡ k¡­h e¡ z Be­m ­p¢V h¡­Su¡ç q­h Hhw fl£r¡bÑ£l JC fl£r¡ h¡¢am Ll¡ q­h z 
+12. fËnÀf ­œ l¡g L¡S Ll¡l SeÉ gy¡L¡ S¡uN¡ ­cJu¡ B­R z AeÉ ­L¡e L¡NS HC L¡­S hÉhq¡l Ll¡ k¡­h 
+e¡ z 
+13. fl£r¡ Lr R¡s¡l B ­N OMR fœ AhnÉ C f¢lcnÑL­L ¢c­u k¡­h z 
+14. HC fËnÀf ­œ Cwl¡S£ J h¡wm¡ Eiu i¡o¡ ­aC fËnÀ ­cJu¡ B ­R z h¡wm¡ j¡dÉ ­j fËnÀ °al£l pju 
+fË­u¡Se£u p¡hd¡ea¡ J paLÑa¡ Ahmðe Ll¡ q ­u­R z a¡ p ­šÄJ k¢c ­L¡e Ap‰¢a mrÉ Ll¡ k¡u, 
+­p­r­œ Cwl¡S£ j¡dÉ­j ­cJu¡ fËnÀ ¢WL J Q¨s¡¿¹ h­m ¢h­h¢Qa q­h z 
+15. fl£r¡ ®n­o fl£r¡b£Ñl¡ fËnÀfœ¢V ¢e­u k¡­h z  
+M-2023 
+Subject : MATHEMATICS 

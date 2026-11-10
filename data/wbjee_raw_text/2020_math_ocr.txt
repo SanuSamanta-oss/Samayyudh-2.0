@@ -1,0 +1,1435 @@
+
+--- PAGE 1 ---
+M-2020
+Subjcct : MATHEMATICS
+21095545
+(Booklet Number)
+Duration : 2 Hours
+Full Marks : 100
+INSTRUCTIONS
+1. 
+This question paper cuntains all zbjectivc questions divided into three categorics. Lach
+question has four answer options given.
+Category-I : Carry I murk each and only one option is corect. In casc of incorrect answer or
+any conbination of more than one 2answer. A inark wil be deducled.
+3.
+Category-ll : Carry 2 marks each and only one optien is correct. In case of incorrec1 answer
+or ary comhination of more than ome answer. / mark will be deducted.
+4.
+Category-I : Carry 2 marks cach and onc or more oplion(s) is/are correct. If all corrcct
+answers are not murked and mo incorrect answer is marked, the score = 2 × number of
+correcl answers inarked + acttal nunber of correct answers. If any wrong option is marked ur
+if any combination including a wrong option is markcd, the answer wil be considered wrong,
+but there is no ncgafive marking for the sanc and zero mark will be awarded.
+Questions must he answered on oMR sheet by darkcning the appropriate bubble markcd A.
+B. , or D.
+Use only Black/Blue ball point pen to mark ihe answer by conplcte filling up of tize
+respective huhhles.
+7.
+Mark the answers only in the spacc pruvided. Do not make any stray inark on the oMR.
+8.
+Write question booklet number and your roll ntnber careflly in the spccified localions of
+the OM. Also fill appropriale burbbles.
+9.
+Write your nane (in block letter), narne of the examination centre and puit your futl signature
+in appropriate boxes in the OMR.
+10. The OMR is liable t become invalid if there is any ntistake in filling the curect bnbbles tor
+question hoklet numher/rull number or if there is any discrepancy in the nane/signature of
+the candidale. name of thc examination cenire. The OMR may als becone invalic due to
+foking or puting stray inarks on it or any afanage to it. The consequence of such invalidiation
+due to incorrect marking or careless landling by the candidate witl be sole responsibility of
+candidate.
+I l. Candidates are not allowed to carry any written or printed inaterial. calculator. pen, docu-petn.
+log table, wristwatch. any communication device like mnobile plones etc. inside the
+examination lhall. Any candidate found with such iteins will be reported against & his/her
+candidature will be sunumarily canceled.
+12. Rough work must be done on the question paper itself. Additional blank pages are given in
+the question paper for rough work.
+13. Hand over the OMR to thie invigilator before leaving the Examination Hall.
+14. This paper contains questions in both Fnglish and Bengali. Necessary care and precaution
+were taken whife framing the Bengali version. However, if any discrepancy(ies) is /are found
+between the two versions, the information provided in the English version will stand and will
+be treated as final.
+M-2020
+A-96
+
+--- PAGE 2 ---
+M-2020
+SPACE FOR ROUGH WORK
+
+--- PAGE 3 ---
+M-2020
+MATHEMATICS
+Category-I (Q : 1 to 50)
+Catcgory-1 : Carry 1 mark each and only one option is correct. In casc of incorrect
+answer or any combination of more than onc answer, / mark will be deducted.
+1.
+If f : S -→  where S is the set of all non-singular matrices of order 2 over '? and
+ ad - bhc, then
+(A)
+f is bijective mapping.
+(B)f is one-one but not onto.
+(C)
+f is onto but not one-one.
+(D)f is neither one-one nor onto.
+ f: S →  S.       
+ ad - bc ,
+(A) f
+ ()
+   ()
+(D)f -, 
+2.
+Let the relation p be defined on i by a p b holds if and only if a - b is zero or irrational,
+then
+(A)
+p is equivalcnce relation.
+(B)
+p is reflexive & symmetric but is not transitive.
+(C)
+p is reflexive and transitive but is not symmetric.
+(D)
+p is reflexive only.
+(A)
+kkk aatk d
+(B)
+k k bkk  kk kke a kk kkk d
+(C)
+(D)
+kkk tkk dlka d
+P.T.O.
+
+--- PAGE 4 ---
+M-2020
+3.
+The unit vector in ZOX plane. making angles 45° and 60° respectively with
+α=2i+2j - andj- is
+(A)
+12
+       0      X07
+(V)
+(B)
+4.
+Four persons A. B. C and D throw an unbiased die. turn by turn. in succession lill one
+gels an even nunber and win the gane. What is the probability that A wins if A hegins ?
+(B)
+(C)
+(10)
+12
+15
+             '
+(C)
+(3)
+(A)
+(D)
+12
+15
+A rifleman is firing at a distant targct and has only l0% clanct of hitting it. Ihe least
+number of rounds he must fire to have inore than 50% chance of hitting it at leasi oncc. is
+(3)7
+(C)
+(A) 5
+(D)11
+(D)
+(C)
+(B)
+(A)
+11
+
+--- PAGE 5 ---
+M-2020
+6.
+1oj o!njos [t1 E aab eo (x uis - z)e =( + z) so0
+all real values of a
+(A)
+(13) a ε [2.6]
+(C) a e (-00, 2) 1 (0)
+(D)
+a E (0, 00)
+  -(s -) =( + ) s
+(A)
+(B)a[2. 6] -
+(C)
+a E (-0. 2)1 (0)-43
+(D)   (0, 0) -
+7.
+The diflerential equation of the family of curves y "- e" (A cos x + B sin x) where A. B are
+arbitrary constants is
+d'y
+(V)
+9x = 13
+(B)
+dx
+dx
+dy
+(C)
+dy
+(a)
+y -- 0
+dx?
+dx
+- y   (A cos x + B sin x)(A  B  )    
+(A)
+9x = 13
+dy
+(B)
++ 2y = (
+dr?
+xp
+dy
+(C)
+(D)
+dx
+y=: 0
+8.
+ The equation r cos
+represents
+(A)
+a circle
+(B)
+a paraboia
+(C) an ellipse
+(D) a straight line
+r cos
+(A)
+ ()
+(C)
+(D)
+P.T.O.
+
+--- PAGE 6 ---
+M-2020
+9.
+The locus of the centre of the circles which touch both the circles x2 + y2 - a2 and
+x2 + y2 - 4ar externally is
+ a circle
+(A)
+(B) a parabola
+ an ellipse
+(C)
+(D) a hyperbola
+    r   -  =  +    =  +  
+(A）
+(B) 
+(C）
+(D)
+10. Let each of the equations x2 + 2xy + ay2 = 0 & ar2 + 2xy + y2 - 0 represent two straight
+lines passing through the origin. If they have a comnmon line. then thc other two lines are
+given by
+(A) X - y = 0.x - 3y = 0
+O = K + XEO - KE + X ()
+(C) 3x +y = 0. 3x -y= 0
+(D) (3x - 2y) = 0. x +y= (
+  x2 + 2y + ay2 .- 0  ax2 + 2y + y2 = 0   
+(A) x ~ y = 0. x - 3y = 0
+(B) x + 3y = 0. 3x + y = 0
+3x + y - 0 3x - y= 0
+(C)
+(D) (3x -2y) = 0,x +y= 0
+11.
+ A straight line through the origin 0 meets the parallel lines 4x + 2y = 9 and
+2x + y + 6 -- 0 at P and Q respectively. The point O divides the segment PQ in the ratio
+(B)
+１:2
+(A)
+3:4
+2:1
+(C)
+(D) 4 :3
+(0)  4x + 2 = 9  2x +  + 6 = 0 P
+1:2
+(B)
+(A)
+3: 4
+(D)
+2:1
+(C)
+4:3
+
+--- PAGE 7 ---
+M1-2020
+Area in the first quadrant between the ellipses x2 + 2y2 = a2 and 2x
+12.
+- a2 is
+3a ?
+Sa 2
+9元a?
+(B)
+(V)
+(C)
+tan-!
+sin
+tan
+(D)
+  + 2 =   22 + y2  2 -        
+3a ?
+Sa?
+(v)
+(B)
+(G)
+lan-1
+tan
+sin-i
+(D)
+13.
+The equation of cirele of radius V17 unit. with centre on the positive side of r-axis and
+through thc point (. 1) is
+(A) ×2 + y2 - 8x -1 -- 0
+(B3) x2 + y² + 8 -1 = 0
+(C) ×2+ y²-9y + 1 = 0
+(D) 2x2 + 2y2 - 3x + 2y = 4
+(A) x2 + y2 . 8x -1 = 0
+(B)
+x2 + y² + 8x -1 - 0
+(C)
+x2 + y2 - 9y + 1 = 0
+(D)
++-+ 
+14. The length of the chord of the parabola y2 -- 4ar (a > 0) which passes through tlhe vertex
+and makes an acute angle α with the axis of thc parabola is
+(A)  ±4a cot α cosec α
+ 0500 x 105 Et()
+(C)
+(D)  4a cosec2 α
+(A)
+±4a cot α cosec o.
+(B)
+4a cot α cosec α
+(C)
+-4a cot α cosec α
+(D)
+4a cosec2 α
+P.T.O.
+
+--- PAGE 8 ---
+M-2020
+15. A double ordinate PQ of the hyperbola
+1 is such that AOPQ is equilateral.
+O being the centrc of thc hyperbola. Then the eccentricity e satisfies the relation
+(B)
+(G)
+(A)
+(D)
+V3
+(B)
+(C)
+(D)
+V3
+16.
+If B and B' are the ends of' minor axis and S ind S' art the foci of the ehipst
+ l, then the area of'the thonbuls SBs'3' will be
+(B)  48 sy. unit
+(C)24 sq. umit
+(A)
+12 sq. unit
+(D)36 sq. unit
+SBSB'-E
+(A）12
+(B)
+(1))36
+17.The equation of the latus rectun of 2 parabola is x + y - & and the cquation of the tangent
+at the vertex is x + y = l2. Then the length of tlie latus rectum is
+(A)  4V2 unit
+(B)  2V2 unit
+(C) unit
+(D)  8V2 unit
+ x +y= 121f
+(B)2
+(A)
+(C)
+(D) 8V2 四
+
+--- PAGE 9 ---
+M-2020
+18.
+The tquation ot the plane through the point (=. -l. -3) and paralel to the lines
+Y+?
+r-1
+z-2
+-3
+(3)
+8x + 14y + 13. + 37 = 0
+(A)
+8x - 14y - 132. -- 37 - 0
+([D)
+8x - 14y 13z + 37 = 0
+(G)
+8r -- 14y + 13z + 37 -- 0
+y+2
+2-2
+(2、、· 3)
+-7-
+-3
+(3)
+(A)8r +14y + 137. + 37 = 0
+8x : 14y -- 132. -- 37 -- 0
+(D)
+8x 14y -- 13z + 37
+(C)
+8x - 14y + 13z + 37 : 0
+2-4
+19. lhc sine t' the angic betwcen the straight line
+and the plane
+2x - 2y + 7. - 5 is
+2V3
+(13)
+()
+(A)
+(0)
+10
+5V2
+y、3
+7. - 4
+(B)
+(V)
+(D)
+10
+20.
+Lel f(r) -- si x + cos ur be periodic fiunction. Thcn
+(B)
+'a' is ay real number.
+(A)
+'a' is any irrational number.
+(D)
+(C)
+'a' is rational number.
+I    s - s =( )
+(A)
+a  ,.
+(B)
+  2 .
+(C)
+aek bk ,e.
+(D)
+a=0
+P.T.O.
+
+--- PAGE 10 ---
+M-2020
+21.The domain of f(x) :
+(A)
+x>-1
+(B)(-1. 00) /(0)
+(C)
+f(x
+(A)
+(B)(-1. 00)/0)
+(C)
+(D
+22.I ct y = f(α) -- 2r2 - 3r + 2. The differential of y when x changes from 2 to 1.99 is
+10'0 (V)
+(13)0.18
+(c)
+-0.05
+(1))0.07
+   -=  : 22 . 3 + 21 x- 2  1.99 -   y-
+(V)
+0.01
+(B3)
+0.18
+-.0.05
+(D)
+()
+0.07
+If lim
+23.
+4. then lin
+is
+1-2ex
+(A)
+(B)
+(C)
+16
+(D)
+64
+1 + 2cx
+m+l
+lim
+= 4 lim
+1 -cx
+1 -- 2cx
+(A)
+(B)
+(C)
+16
+(D)
+10
+
+--- PAGE 11 ---
+M-2020
+24. Let f : R. → F be twice continuously differentiable (or f" exists and is continuous) such
+that f(0) = f(1) = f'(0) -- 0. Then
+(A) f"(c) = 0 for somec e 
+(B) there is no point lor which f"(x) = 0
+(C) at all points f"(x) > 0
+(D) at all points f"(x) < 0
+ 10 -(0), =(1=(0)坐
+()  "(c) =
+(B)
+(c)
+(D) f"(x)<0
+25. Iet f(x) - x13 + xll + x +x7 + x5 +
++ 3 + x +12. Then
+(A)
+f(x) has 13 non-zero real roots.
+(B)
+f(x) has exactly onc rcal root.
+(G)
+f(x) has exactly one pair of imaginary roots.
+(D)
+f(x) has no real root.
+  f(x) = x13 + x11 + x9 +x? + x5 + x3 + x +12 1 (@
+(A)
+(x) - 13   
+(B)
+(x) -   
+(C)
+(D)
+11
+P.T.O.
+
+--- PAGE 12 ---
+M-2020
+Let cos
+26.
+log
+Then
+(A) xy2 +xy, + n'y= 0
+(B) xy2 - xyi + 2n²y = 0
+(C)
+x'y2 + 3xy, - n'y = 0
+(D) xy2 + 5xy1 - 3y = 0
+d'y
+dy
+(Here y?
+dx?
+dx
+(V)
++y? +xy+ + n'y = 0
+(B)
+ xy2 -xy + 2n'y =0
+(C)
+xy? + 3xy; -- n'y = 0
+(D) xy2 + 5xry - 3y = 0
+d2
+dx?
+dr
+27. Let (p(x) = f(x) + f(1 - x) and f"(x) < 0 in [0. 1 I, then
+(A)β is monotonic increasing in
+and ntonotonic decreasing in
+(B)
+p is monolonic increasing in
+and monotonic decreasing in
+(C)
+β is neither inereasing nor decreasing in any sub interval of [0, 1]
+(D)
+(p is incrcasing in [0. 1]
+(x) = 1(x) + f(1 -- x) 3 [0. 1]  f"(x) <0 1
+(B)
+(C)
+(D)
+12
+
+--- PAGE 13 ---
+M-2020
+f(x)(p'(r)+p(x)f'(x)
+28.
+dr=
+f(x)p(x)+1)/f(x)p(x) -1
+(x)
+(V)
+sin-l
+(B)cos-I /(f(x)? -(9(x)2 +c
+V p(x)
++c
+f(x)p(x) -1
+f(x)@(+)+1
+/2 tan
+((0)
+(C)
+2 tan -l
+Where c is the constant of integration. (g c 可penf)
+-2n
+10
+2n+1
+sin27 
+29.
+ d +
+sin27 x dr is equal to
+n-1 -21-1
+213
+27
+(V)
+(D)
+(13)
+(C)
+-.211
+10
+10
+ir +
+sin27
+sin27 x x  
+n-1 -2n--[
+211
+()
+27
+(13)
+(C)
+-54
+(0)
+30.
+[1 x? dx is cqual to
+(13) 5  /2 -- /3
+(V)
+(C)）
+(D)
+8/3
+(v)
+(B) 5 - V- V5
+(C) 3- 2
+(D)
+8/3
+31.
+If the tangent to the curve y? : x3 at (m. m*) is also a normal to the curve at (M?. M3).
+then the value of mM is
+(A)
+(B)
+(C)
+(D)
+I & (W'w) E    () -  i
+& kk E Wu k2
+(A)
+(B)
+(C)
+(D)
+13
+P.T.O.
+
+--- PAGE 14 ---
+M-2020
+dy
+32. If x2 + y2 = a², then
+dr :
+ dx
+2na
+(B)
+(A)
+(C)
+(D)
+x2 + y2  a?, 甲
+Ap
+dx =
+dx
+2元
+(A)
+(B)
+(C)
+(D)
+Let f. bc a continuous function in [0. 1], then lim
+33,
+j=0
+(13)
+(C)
+(A)
+xp(x)
+dx
+[ f(x)dx
+(D)
+xp(x) 
+f[0. 1] -,  lim
+11
+j-0
+(B)
+(V)
+xp(x)
+(G)
+-p(r)
++ f(x)dr
+(D)
+If(x)dr
+34.
+Let f be a differentiable function with lim f(x) = 0. If y' + yf' (x) - f(x)f' (x) = 0.
+.r-.o?
+dy
+lim y(x) = 0. then (where y' =
+dx
+(A) y+ 1 = etitr) + f(x)
+(B) y-I =eix)+f(x)
+(C) y+I =e-fr)+f(x)
+(D) y-1 =e tr)+ (x)
+0 (x),()-(x),  + i 0=(  J 
+lim y(x) = 0 , (y"=
+(A) y+ 1 =er)+f(x)
+(B)
+y- 1 =elx)+ f(x)
+(C) y + 1 = e-ftr) + f(x)
+(D)
+y - 1 =e'fix)+ f(x)
+14
+
+--- PAGE 15 ---
+M-2020
+If x sin
+35.
+dx. x >0 and y(1) - 
+sif
+(C)
+(D)
+log x
+(B)
+(A)
+ x sin
+, TrA coS
+dr. x≥ 0  y(1)
+y sin:
+log x
+(D)
+(C)
+(B)
+(A)
+36. Let f(x) - 1 -- (x') where the square ruot is to be taken positive, then
+(v)
+I' has no extrema at r - 0
+(13)
+f hs minima at x = 0
+(G)
+f hs maximu al x - (
+(D)
+t' exists at 0
+(A)
+   -() 0 -: x()
+ -(  0 = x()
+() f'-
+37. If the function f(x) = 2x3 - 9ax2 + 12a'x +1 [a > 0] attains its maximum and minimum at
+p and q respcctively such that p? - q, then a is equal to
+(A) 2
+(B)
+(C)
+-2
+(D) 3
+可 1(x)= 2x3 ~ 9ax2 + 12ax +1 [a 0],  p  q 
+ ,  -
+(A)
+(B)
+(C)
+(D)
+15
+P.T.O.
+
+--- PAGE 16 ---
+M-2020
+10h
+38. If a and b are arbitrary positive real nunbers, then the least possibie value of
+5b
+3a
+10
+68
+(B)
+(C)
+(A)
+(D)
+15
+6a
+10b
+       
+Sh
+3a
+10
+68
+(B)
+(c)
+(V)
+(D)
+15
+39. If 2 log (r + 1) - log (x2 - 1) -= log 2. then x =
+(B)-1 and 3
+(A) only 3
+only --↓
+(D)
+(C)
+1 and 3
+f 2 log (x + 1) - log (x2 - 1) -- log 2. 4 x =
+(D)
+(13)
+(C)
+(V)
+-1 33
+133
+The numher of complex numhers p such thal I p l - 1 and imaginary part of pt is O. is
+(B) 2
+(C) 8
+(A) 4
+(D)) infinitely many
+(C)
+(10)
+(B)
+(V)
+41. Ihe equation zz + (2 -- 3i) z + (2 + 3i)  + 4  0 represtents a circle of radius
+(B) 3 unit
+(A) 2 unit
+(C) 4 unit
+(D)
+6 unit
+7 +(2 - 31) 7 +(2 + 3) + 4 = 0  , 
+(D)
+(B)
+(C)
+(A)
+16
+
+--- PAGE 17 ---
+M-2020
+42.The expression ar2 + br + c (a, b and c aure real) has the sume sign as that of a for all x if
+(A) h2 - 4ac >0
+(B)b2 - 4ac  ()
+(C)b2 - 4ac ≤0
+(D) h and c have tlhe same sigu as that of a
+ax + bx + (a, b -
+(13)
+b2 ... 4ac > 0
+b2 -- 4ac ± 0
+(A)
+(C) b2 - 4ac ≤0
+In a 12 storied building, 3 persons cner a lift cabin. 11 is known that they will leave the
+lift at different floors. In how many ways can ihey do so if the lift does nol stop at the
+second flour ?
+(C) 240
+(B) 120
+(1))720
+(A) 36
+        
+(D)
+O ()
+120
+(3)
+720
+(A) 36
+44. If the total number of m-ciement subseis of the set A = tay. a. ... a, is k fimes the
+number of m element suhsets containing ay, then n is
+(c) (m+1)k
+(B) mk
+(D) (m+2)k
+(A) (m- 1)k
+A - (a1 a2 ,1  m-f  m- ,  
+   u b  -+re 
+(C) (m+1)k
+mk
+(B)
+(A) (m- 1)k
+(D) (m + 2)k
+Let I(n) = n". J(n) = 1.3.5 .... (2n - 1) for all (n > 1). n e 1. then
+(C) I(n)= J(n)
+(D)
+I(n)
+(B)I(n)<J(n)
+(A) I(n)>(n)
+I(n)
+( -uz) .s' ()=(([ u)“u
+(D)
+(u)r> (u)I
+(C)
+I(n) = J(n)
+I(n):
+I(n)> J(n)
+(B)
+(A)
+J(n)
+17
+P.T.O.
+
+--- PAGE 18 ---
+M-2020
+46.
+If co. C, C2, ... Cis are the Binomial co-efficients in the expansion of(1 + x)i5, then the
+value'of 1+ 22 +3  +
++15515 is
++15
+(A)
+1240
+(B)
+120
+(C)
+124
+(D)
+140
+S1,  g g 0 e] b- s(x + 1)
+C3
+1240
+(B)
+120
+(G)
+124
+(D)
+140
+(3  
+47.
+3-t
+1et A -
+and det A : 5. then
+0)
+(A)
+(= 1
+(B)
+t2
+(0)
+t...-1
+(D)
+ =-2
+3-t
+3- t
+(A)
+t :- 1
+(3)
+t- 2
+(C)
+1=.1
+(D)
+t  -2
+12
+24
+48.
+Let A -.
+ The value ofx for which the matrix A is not invertible is
+-2
+-1
+(A)
+(B)
+12
+(G)
+(D)
+12
+24
+-1
+-2
+(B)
+(A)
+12
+(C)
+(D)
+18
+
+--- PAGE 19 ---
+M-2020
+49.
+Let A 
+be a 2 × 2 real malrix with det A = t. If the cquation det (A - 2I2) = 0 has
+imaginary roots (l, be the Identity matrix of order 2), then
+(A) (a + d)2< 4
+(B)  (a + d)2 = 4
+(C) (α+d)2>4
+(D)(a + d)2 = 16
+ 2 × 2  det A = 1 1
+det (A -2) 0 (),
+(A) (a+d)2<4
+(13) (a + d)2 = 4
+(a + d)2 > 4
+(C)
+(D) (a + d)2 = 16
+bc
+50.
+ ka?b-c2, then k -
+ca
+b2+ bc
+(B)
+(A)
+-2
+(D)
+(C)
+ac
+b2
+ca
+= ka2b2c2 ( k =
+b2+ bc
+ab
+(B)
+(A)
+-2
+(C)
+(D)
+19
+P.T.O.
+
+--- PAGE 20 ---
+M-2020
+Category-H (Q : 51 to 65)
+Carry 2 marks each and only one option is correct. In case of incorrcct answer or any
+combination of more than one answer, / nmark will be deducted.
+51. Let f(x) = Jx? -3x+2 and g(x) - Vr be two given functions. If S be the domain of f o g
+and T be the domain of g o f , then
+(A)
+S=T
+(B) ST-
+(G)
+S n T is a singleton.
+(D) $ O'T is an interval.
+(V)
+S-T
+(B)
+()
+()
+let p, and p- be two cquivalence relalions defined on a non-void set S. Thnen
+(A)
+both P,  P2 and p, U P2 are equivalence relations.
+(13)
+P,  pe is equivalence relation but p, U P, is not so.
+(C)
+P, U pz is cquivalence relation but P, O P2 is not so.
+(D)
+neither p,  P2 nor P+ U pz is cquivalence relation.
+1  d 'd    - 2 - ± 
+(A)
+(B)
+(C)
+(D)
+20
+
+--- PAGE 21 ---
+M-2020
+Consider the curve
+53.
+i. The portion of the tangent at any point of the curve
+intercepted between the point of contact and the directrix subtends at the corresponding
+focus an angle of
+(B)
+(C)
+(A)
+(D)
+(C)
+(B)
+(A)
+(D)
+54. A line cuts the x-axis at A (7. 0) and thc y-axis at B (0. - 5). A variable linc PQ is druwn
+pcrpendicular to AB cutting the x -axis at P (a, O) and the y-axis at Q (0, b). If AQ and B
+interscct at R. the locus of R is
+(A) x2 + y2 + 7x + 5y - 0
+(B) x2 + y2 + 7x - 5y - 0
+(() 2 + y2 -- 7x + 5y = 0
+(D) r² - y² -- 7x - 5y = 0
+  x- A (7. 0)   y- B (0. ..5) F   1 AB-
+ 可 可  PQ, x- P (a. 0)   y-可 Q (0. )  
+1 AQ 3 BP  R  ,  R-  
+(A) ×2 + y2 + 7x + 5y = 0
+(B) x2 + y2 + 7x - 5y = 0
+(C) x2 + y2 .- 7x + 5y = 0
+(D) x² + y2 - 7x -- 5y = 0
+1/(k+a)
+xp
+55. Let 0<α<β< 1. Then lim
+is
+1+x
+k=1 1/(k+β)
+1+β
+1+α
+loge 1+α
+(A)
+(B)
+10g 1+ β
+(C)
+(D)
+00
+1/(k+α)
+dx
+lim
+1+x
+k=1 1/(k+β)
+B-
+1+β
+1+α
+(B)
+(C)
+(D)
+1+α
+1+β
+21
+P.T.O.
+
+--- PAGE 22 ---
+M-2020
+56.
+lim
+inx
+(x-1)
+(A)
+Does not exist.
+(B)
+(C)
+(D)
+lim
+Inx
+(x-1)
+(A)
+(B)
+(C)
+(D)
+57.
+Let y
+Then
+1+x+lnx
+dy
+dy
+(A)
+(B)
+y(y lnx -1)
+dr
+dx
+dy
+(G)
+I+x+inx
+dy
+(A)
+(B)
+=x
+y(y ln x-1)
+dx
+dy
+(C)
+(D
+y-x
+dx
+22
+
+--- PAGE 23 ---
+M-2020
+58.
+Consider thc curve y - be-r/a where a anedl b are non-zero real nunhers. Then
+ -- 1 is tungent to the curve at (0, 0).
+(A)
+(13)
+(C)
+- 1 is tungen to the curve at (a. 0).
+(D)
+  = e  F ,     -   1
+(A)
+(B)
+(C)
+(D)
+59. The area of the region ((x. y) : x2 + y- ≤ 1 ≤x + yl is
+(B)
+(C)
+(D)
+(V)
+():++
+(B)
+(C)
+(A)
+(D)
+23
+P.T.O.
+
+--- PAGE 24 ---
+M-2020
+60.
+In open interval
+(V)
+cosx+x sinx<l
+(B)
+cosx +x sinx  l
+(C)
+no specific order relation can be ascertained between cos x + x sin x and 1
+(D)
+cosx + x sin x <
+(A)
+cosx +r sinx 1
+(13)
+cos x +x sin r  1
+(C)
+(D)
+cosr + r sinr
+61.
+If the line y -- x is a tangent lo the parabola y: ar? + hx + c at the point (1. l) and he
+curve passes through (-l . 0). tlen
+α~h 1.c-3
+(A)
+(13)
+.c-0
+(C)
+(D)
+a= 0. b = 心
+(0~ [ ( +   = 
+(13)
+(A)
+a-b --l.c..3?
+a- h
+(G)
+(1)
+a-0h.c
+ uhe vectors a = i + aj
+62.
++ uk, B = i + bj + b?k and  = i + ci + ck are threc
+b2
+1+b3
+non-coplanar vectors and
+-- O . then the value of abc is
+1+c3
+(B)
+(C) -1
+(A)
+(D) 2
+b2
+1+b3
+(A)
+(B)
+(C)
+-1
+(D)
+24
+
+--- PAGE 25 ---
+M-2020
+63. I.et z, and z, be two imaginary roots of z? + pz. + q - 0. where p and - arc real. The
+points Zr- Z, and origin form an equilateral triangle if
+(C)  p² == 3q
+(B) p2 < 3q
+(A) p2 >39
+(D) p2 =q
+ + p + -- 0  f    2  2 P  q  1  z
+(a)
+(C)p² -- 3
+(B) p2 ≤3q
+(A) p2≥ 3q
+64.!
+If P(r) = ax2 + bhx -+ c and Q(x) -. -ar? + dr + c. where ac ± 0 [a. b. c. d are all real].
+then P(x).Q(r) = 0 has
+(A) at least two real roots
+(B) [wo real roots
+(C) four real roots
+(D) no rcal root
+f P(x) - ar2 + hx + c  Q(x) = a2 -+ dr + c. ac    [, h. c, d ], 
+P(x).Q(x) : 0 -94
+（A）
+(B)
+(C）
+65.
+Iet A = tx e F: :-l ≤ x ≤ I} & f: A -→A be a mapping defined by f(x) "- xrl. Ihen fis
+injcctive but not surjective
+(A)
+(B)  surjcctive but not injective
+(C) neither injective nor surjective
+(D) bijective
+  A = x  R: - ≤x ≤   f: A→A    
+f(x) = xxj 1 f
+(B)
+    2 (0)
+(D) 
+25
+P.T.O.
+
+--- PAGE 26 ---
+M-2020
+Category-III (Q : 66 to 75)
+Carry 2 marks each and one or more option(s) is/are correct. If all correct answers are
+not marked and no incorrect answer is markcd, then score - 2 x numher of correct
+answers marked + actual number of correct answers. If any wrong option is marked or if
+any combination including a wrong option is marked, the answer will be considered
+wrong, but there is no negative marking for the same and zero marks will be awarded.
+       1    , 
+f 2k k 0
+66. A and B arc independent cvens. Ilic probability that lxih A ianc B oceur is
+and the
+20
+probahility tihal neither of' them occurs is 
+. The probahiliy of occurrence of A is
+(A)
+(B)
+10
+(C)
+(D)
+A 3 B    f 1 A 3 B     -
+20
+(A)
+(B)
+10
+(C)
+(D)
+26
+
+--- PAGE 27 ---
+M-2020
+67. The equation of the straight line passing through the point (4. 3) and making intercepts on
+the co-ordinate axes whose sum is -1 is
+(A)
+(B)
+(D)
+(C)
+(4. 3)  -1  
+X_Y=1
+(B)
+(D)
+(C)
+Consider a tangent to the cllipse
+68.
+1 at any point. Tlhe locus of the midpoint of
+the portion intercepted between the axes is
+(B)
+(D)
+2x
+3x
+(B)
+(A)
+(D)
+3x
+27
+P.T.O.
+
+--- PAGE 28 ---
+M-2020
+69.
+Let y
+Then
+($+1)
+(A)
+(B)
+(r+1)
+(++1)?
+(x+1)3
+(x+ 2)3
+(D)
+(++1)
+(x+ 1)2
+(++1)3
+(x+1)?
+(x+1)3
+(x+1)3
+(x+1)2(x+ 2)
+(A)
+(B)
+(r+1)*
+(x+2
+(C)
+(D)
+(x+ 1)2
+(++1)3
+(++ 1)3
+(x+1)3
+(++1)2?
+(x+1)3
+f(x)
+70.
+x sin x - (I .. cos x). 'Thc smallest positive integer k such that lim
+et (x) :
++0 is
+(A)
+(B)
+(C)
+(D)
+f(x)
+ 可  f() :
+x sin.x - (1 - cos x) I lim
+0x
+(A)
+(B)
+(C)
+(D)
+28
+
+--- PAGE 29 ---
+M-2020
+71. Tangent is drawn at any point P (x. y) on a curve. which passes through (1. 1). The
+tangent cuts X-axis and Y-axis al A und B respcctively. If Ap : Bp = 3 : 1, then
+dy.
+(A)  the difterential cqiuation of the curve is 3r
+y=0
+dy
+(B)
+the differential equuntion of the curve is 3x
+(G)
+the curve passes through
+(D) the mormal at (1. 1) is x + 3y = 4
+ A  B  1 A: BP =: 3 : 1 , 
+(V)
+- 0
+dy
+(B)
+dr
+(C)
+(1) (1, 1)ff4x + 3y - 4
+72.
+The area of the figure boundeti by tlhc parabola x - --2y2. x = 1 - 3y? is
+(A)
+ square unit
+(B)
+ square unit
+(C)
+1 squarc unit
+(D)  2 square unit
+x =-22  x = 1 - 32  
+(A)
+(B)
+(C)
+(D)
+29
+P.T.O.
+
+--- PAGE 30 ---
+M-2020
+seconds, then
+(A)
+velocity of projection is 192 ft / sec
+(B)
+greatest height attained is 600 ft
+(C)
+velocity of projection is 196 ft / sec
+(D)
+greatest height attained is 576 ff
+(A)  192 f / sec
+(B)
+ 009   2 4
+(C)
+33s / 4 961 2 b2s 2±2
+(D)
+65 f 6 374 576 ft
+(log3 x)2 _
+74. The equation x
+has
+(B)
+(A) at least onc real root
+exactly one real root
+(C)  exactly onc irrational root
+(D)
+complex roots
+_1og3 x+5
+= 3 / 
+(B)
+(A)
+(D)
+(C)
+75.
+In a certain test, there are n questions. In this test 2n-i students gave wrong answers to
+at least i questions, where i = l, 2, .... n. If thc total number of wrong answers given is
+2047, then n is equal to
+12
+(B)11
+(C)
+(A) 10
+(D) 13
+2(=1,2,
+(D)
+12
+(B)11
+(C)
+10
+(A)
+13
+30
+
+--- PAGE 31 ---
+M-2020
+SPACE FOR ROUGH WORK
+31
+
+--- PAGE 32 ---
+M-2020
+Subjcct : MATHEMATICS
+      1 k      1    : -K1e
+G.
+ k     1       I   : 1-oa
+8.
+          I    -
+1          HW)
+9.
+1      [  0
+                
+$0.
+，，，，，，
+VG.
+1      O 1s   
+$8.

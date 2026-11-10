@@ -1,0 +1,1202 @@
+
+--- PAGE 1 ---
+2011109989
+Question
+M-2022
+Booklet Series
+Subject : MATHEMATICS
+(Booklet Number)
+Duration : 2 Hours
+Full Marks : 100
+INSTRUCTIONS
+1.
+All questions are of objective type having four answer options for each.
+2.
+Category-I: Carry 1 mark each and only one option is correct. In case of incorrect answer or
+any combination of more than one answer, / mark will be deducted.
+3.
+Category-Il: Carry 2 marks each and only one option is correct. In case of incorrect answer
+or any combination of more than one answer, / mark will be deducted.
+4.
+Category-III: Carry 2 marks each and one or more option(s) is/are correct. If all correct
+answers are not marked and no incorrect answer is marked, then score = 2 × number of
+correct answers marked - actual number of correct answers. If any wrong option is marked or
+if any combination including a wrong option is marked, the answer will be considered wrong,
+but there is no negative marking for the same and zero mark will be awarded.
+5.
+Questions must be answered on OMR sheet by darkening the appropriate bubble marked A,
+B, C, or D. Question booklet series code (A, B, C, or D) must be properly marked on the
+OMR.
+6.
+Use only Black/Blue ball point pen to mark the answer by complete filling up of the
+respective bubbles.
+7.
+Write question booklet number and your roll number carefully in the specified locations of
+the OMR. Also fill appropriate bubbles.
+8.
+Write your name (in block letter), name of the examination center and put your full signature
+in appropriate boxes in the OMR.
+9.
+The OMR is liable to become invalid if there is any mistake in filling the correct bubbles for
+question bookiet number/roll number or if there is any discrepancy in the name/ signature of
+the candidate, name of the examination center. The OMR may also become invalid due to
+folding or putting stray marks on it or any damage to it. The consequence of such
+invalidation due to incorrect marking or careless handling by the candidate will be sole
+responsibility of candidate.
+10. Candidates are not allowed to carry any written or printed material, calculator, pen, log-table,
+wristwatch, any communication device like mobile phones etc. inside the examination hall.
+Any candidate found with such items will be rcported against and his/her candidature will
+be summarily cancelled.
+11. Rough work must be done on the question paper itself. Additional blank pages are given in
+the question paper for rough work.
+12. Hand over the OMR to the invigilator before leaving the Examination Hall.
+13. This paper contains questions in both English and Bengali. Necessary care and precaution
+were taken while framing the Bengali version. However, if any discrepancy(ies) is /are found
+between the two versions, the information provided in the English version will stand and will
+be treated as final.
+M-2022
+
+--- PAGE 2 ---
+M-2022
+MATHEMATICS
+Category-I (Q. 1 to 50)
+(Carry I mark each. Only onc option is correct. Negative marks - /)
+1.
+Under which of the following condition(s) does(do) the system of equations
+possesses(posses) uniquc solutinn?
+(A)
+VaeR
+(B)
+a=8
+(C)
+for all integral values of a
+(D)
+a±8
+   
+(A)
+VaeR
+(B)
+a=8
+(C)
+    -
+(D)
+a±8
+(x-1)2
+x-2
+x3
+2.
+If A(x) =
+x2
+Ix-1
+(x+1)3
+L,thencoefficient ofxinA(x)is
+(x+1)2
+(x+2)3
+(x-1)2
+x-2
++3
+ A(x) 
+(x+1)3
+[x-]
+,  (x)- x  (A
+(x+1)2
+(x+2)3
+(A)
+(B)
+-2
+(C)
+(D)
+-4
+P.T.O.
+
+--- PAGE 3 ---
+M-2022
+If A
+3.
+andA
+then (a + d) equals
+(D)
+(C)
+(B)
+1+i
+(A)
+2018
+4.
+Let S, T, U be three non-void sets and f : S -→ T, g : T -→ U and composed mapping
+g - f : S -→ U be defined. Let g · f be injective mapping. Then
+(A) f, g both are injective.
+(B) neither f nor g is injective
+f is obviously injective.
+(C)
+(D) g is obviously injective.
+  S, T, Uf   f : S → T, g : T → U   g · f :S → U
+(A)  f, g
+(B) f  g  
+(C)
+(D)  g 
+5.
+If p =
+is the adjoint of the 3 × 3 matrix A and det A = 4, then α is equal to
+37
+(D)
+(B)
+11
+(C)
+(A)
+
+--- PAGE 4 ---
+M-2022
+6.
+A, B, C are mutually exclusive events such that P(A)
+3x+1
+P(B)
+and
+1-2x
+P(C) :
+. Then the set of possible values of x are in
+      P(A)
+3x+1
+A, B
+-x
+P(B)
+1--2x
+P (C) 
+(A)[0, 1] 
+[32]
+(B)
+13
+(D
+7.
+A determinant is chosen at random from the set of all determinants of order 2 with
+elements O or 1 only. The probability that the determinant chosen is non-zero is
+   0   1   0
+3-
+(A)
+(B)
+(C)
+16
+(D)
+For the mapping f : R -{ 1} → R - {2), given by f(x) =
+8.
+2x
+which of the following is
+x-1
+correct ?
+(A)
+f is one-one but not onto
+(B)
+f is onto but not one-one
+(C) f is neither one-one nor onto
+(D)
+f is both one-one and onto
+f : R -{1) → R - (2) f   可  f(x) =
+2x
+x-1
+(A)f
+(B)
+(C)f - , - 
+(D)f
+P.T.O.
+
+--- PAGE 5 ---
+M-2022
+9.
+If the algebraic sum of the distances from the points (2, 0), (0, 2) and (1, 1) to a variable
+straight line be zero, then the line passes through the fixed point
+  (2, 0), (0, 2)  (1, 1)-
+(D)
+(C) (-1, -1)
+(1, 1)
+(A) (-1, 1)
+(B)(1, -1)
+10.
+The side AB of AABC is fixed and is of length 2a unit. The vertex moves in the plane
+such that the vertical angle is always constant and is α. Let x-axis be along AB and the
+origin be at A. Then the locus of the vertex is
+ABC  AB    2a  1  
+ A-  I   
+(A) x2 + y2 + 2ax sin α + a? cos α = 0
+(B)
+x2 + y2 - 2ax - 2ay cot α = 0
+(C)
+x2 + y2 -- 2ax cos α - a? = 0
+(D)
+x2 + y2 - ax sin.α - ay cos α = 0
+11. If (cot α,) (cot α2).... (cot αn) = , <αy, α2, .... α, < /2, then the maximum value of
+(cos α,) (cos α2) .... (cos αn) is given by
+(cot α) (cot α2) .. (cot αn) = , α], α2, .. αn < /2 3T
+(cos α,) (cos α2) .... (cos αn)-   4
+(C)
+(D)
+(A)
+(B)
+2"
+2n
+2n/2
+
+--- PAGE 6 ---
+M-2022
+ the positive
+direction of x-axis. If this line meets the curve x2 -- 4y - 9 at A and B, then [ABl is equal
+to
+51
+5-
+(A)
+unit
+(B)
+ unit
+(C)
+ unit
+(D)
+-5
+unit
+1-s    -x  (1 [-)  
+    x2  4y - 9- A 3 B   , [AB 
+5-
+(A)
+(B)
+(C)
+(D)
+13.
+Two circles S, = px2 + py2 + 2g'x + 2f'y + d = 0 and S, = x2 + y2 + 2gx + 2fy + d' = 0
+have a common chord PQ. The equation of PQ is
+f  S, = px2 + py2 + 2g'x + 2f'y + d = 0  S2 = x2 + y2 + 2gx + 2fy + d' = 0 ~ 4
+(A) Si-S2=0
+(B) St +S2=0
+(C) S -pS2= 0
+(D)S, +pSz = 0
+14.
+If the sum of the distances of a point from two perpendicular lines in a plane is 1 unit,
+then its locus is
+(A)
+(B)
+ a square
+acircle
+(C) a straight line
+(D)  two intersecting lines
+（A）
+(B)
+(C)
+(D) 
+P.T.O.
+
+--- PAGE 7 ---
+M-2022
+15.  Let P be a point on (2, 0) and Q be a variable point on (y - 6)2 = 2(x - 4). Then the locus
+of mid-point of PQ is
+  P  可 (2, 0)  b可 Q ff (y - 6)2 = 2(x - 4) - 1(
+(A) y2 + x + 6y + 12 = 0
+(B) y2 - x + 6y + 12 = 0
+(C) y2 + x - 6y + 12 = 0
+(D) y2  x - 6y + 12 = 0
+16. AB is a chord of a parabola y2 = 4ax, (a > 0) with vertex A. BC is drawn perpendicuiar to
+AB meeting the axis at C. The projection of BC on the axis of the parabola is
+(C) 8a unit
+(D) 4a unit
+(A) a unit
+(B) 2a unit
+ y2 = 4ax, (a > 0)- AB f ,   A 1 BC  AB-
+      1  BC- 
+(D)
+(C)
+8a4
+(B)
+2a4
+4a
+(A)
+1  such
+17. Let P(3 sec §, 2 tan 0) and Q(3sec Φ, 2 tan Φ) be two points on
+that 0+Φ:
+>'>0
+normals at P and Q is
+x2
+1- f f  P(3 sec , 2 tan )  Q(3 sec , 2 tan )
+0<0, 9
+1 9( P B Q FRu 可 可fea  G 
+5-
+13
+13
+(C)
+(B)
+(D)
+(A)
+
+--- PAGE 8 ---
+M-2022
+18. The equation of the plane through the intersection of the planes x + y + z = 1 and
+2x + 3y - z + 4 = O and parallel to the x-axis is
+x++ =1   + + 4 0  -
+(B) y + 3z -6 = 0
+(C) y-3z + 6= 0
+(A) y +3z +6= 0
+(D) y- 3z-6= 0
+19. The line x - 2y + 4z + 4 = 0, x + y + z - 8 = 0 intersect the plane x -- y + 2z + 1 = 0 at the
+point
+x - 2y + 4z + 4 = 0  x + y + z - 8 = 0 a(fG x - y + 2z + 1 = 0 4 (
+F  ,  G 
+(2, 5, -1)
+(D)
+(A)(-2, 5, 1)
+(2, -5, 1)
+(C)
+(B)
+(2, 5, 1)
+20.AB is a variable chord of the ellipse
+1. If AB subtends a right angle at the
+b?
+origin O, then
+OA2
+ b -0 k V  1 k   -[ :
+b2
+OA3
+OB2
+a2 + b2
+(D)
+(B)
+(C)
+(A)
+a²_ b2
+P.T.O.
+
+--- PAGE 9 ---
+M-2022
+sin(a+i)x+sinx
+x<0
+21. The values of a, b, c for which the function f(x) =
+3c,x=0
+(x+ bx?)
+x>0
+is continuous at x -- O, are
+(A)
+(B)
+b is arbitrary non-zero real number.
+(C)
+(D)
+a= -2, beR - [0), c= 0
+sin(a+1)x+sin x
+,x<0
+a, b, c - f(x) = c,x= 0
+(x+ bx)-- 
+,x>0
+= 0 , 
+(A)
+(B)
+k  ba  
+(C)
+(D)
+a= -2, beR - {0),c= 0
+
+--- PAGE 10 ---
+M-2022
+s (  ss [e e   g          + (  
+differentiable at x = 0
+(A)
+whatever be ao, aj, a2, a3.
+(B)
+for no values of ao, aj, a2, a3.
+(C)
+only if a, = 0
+(D)
+only if a, = 0, ag = 0
+(             +  =(  
+(A)
+ao, a, a, ag-   
+(B)
+ao, a, a, a -   
+(C)
+(D)
+ a_= 0, a=0 
+23. If y = elan-× then
+ y = elan' , 
+(A) (1 +x2)y2 +(2x - 1)y, = 0
+(B) (1 +x2)y2 + 2xy = 0
+(C) (1 -x2)y2-y, = 0
+(D) (1 +x2)y2 + 3xy + 4y= 0
+/1og10
+3x-3
+24. Domain of y = 1l
+is
+3x-x
+jlog10
+(A)
+x<1
+(B)
+2<x
+(C)
+(D)
+2 <x<3
+11
+P.T.O.
+
+--- PAGE 11 ---
+M-2022
+25.
+lim
+(A)
+V2
+(B)
+(C)
+(D)
+26. Let f :[a, b] → R be continuous in [a, bl, differentiable in (a, b) and f(a) = 0 = f(b). Then
+(A) there exists at least one point ce(a, b) for which f(c) =- f (c)
+(B)
+f'(x) = f (x) does not hold at any point of (a, b)
+(C)
+at every point of (a, b), f'(x) > f (x)
+(D)
+at every point of (a, b), f'(x) < f (x)
+f :[a, b] -→ R, [a, b]-t , (a, b)-{   f (a) = 0 = f(b) 1 (
+(A)
+ f f ce(a, b) -   ( f(c) = f(c)
+(B)
+(a, b)- f'(x) = f (x) 可
+(C)
+(a, b)- f f'(x) > f (x) 
+(D)  (a. b)- af f(x) < f (x) 4
+12
+
+--- PAGE 12 ---
+M-2022
+27. I = J cos (ln x) dx. Then I =
+I = J cos (In x) dx, C( I =
+(A)
+(B)  x2[cos (ln x) -- sin (ln x)) + c
+(C)
+x? sin (in x) + c
+(D) x cos (lnx)+ c
+(c denotes constant of integration) / (c   )
+28. Let f be derivable in [0, 1], then
+(A) there exists ce(0, 1) such that [ f(x)dx = (1 - c) f(c)
+(B)
+there does not exist any point de(0, 1) for which | f(x)dx =- (1 -- d) f(d)
+(C)
+f(x)dx does not exist, for any ce(0, I)
+(D)
+f(x) dx is independent of c, ce(0, 1)
+f, [0, 1]-1
+(A)
+(0, 1)- c  [ f(x)dx = (1 -c) f(c) 
+(B)
+(, 1)
+I f(x)dx = (1 - d) f(d) (
+(C)
+[f(x) dx -  c(0, 1)
+(D)
+[ f(x) dx, c- ce(0, 1)
+13
+P.T.O.
+
+--- PAGE 13 ---
+M-2022
+(cos x
+sinx
+29.
+The value of
+dx is
+(cosx)sin× +(sin x)cosx
+(cosx)sinx
+(cosx)sinx +(sin x)cos
+(D)
+72
+(B)
+(A)
+(C)
+bt cos 4t -asin 4t
+a sin 4x
+lim
+30.
+Let
+Then a and b are given by
+bt cos 4t -a sin 4t
+asin 4x
+ lim
+t2
+(B) a= 4 ,b=1
+ a=-1,b=4
+(C)
+a= 2, b= 2
+(A)
+(D) a=2,b= 4
+31.
+Let
+dx
+g(f(x) + c ; then
+dx
+g(f(x) + c 1 (甲(四
+(A) f(x)= Vx,g(x)= x
+f(x) = x
+(B)
+g(x)  sin-1 
+(C)f(x) = Vx, g(x) = sin-l x
+(D)f(x) = sinl x, g(x) =- x
+(c denotes constant of integration) / (c    )
+14
+
+--- PAGE 14 ---
+M-2022
+dy
+f(xy)
+32.
+If x
+then |f (xy)| is equal to
+dx
+f'(xy)
+dy
+f(xy)
+, U(4 f (xy)(
+dx
+f'(xy)
+(A)
+(B)
+(C)
+Ce2x2
+(D)
+where C is the constant of integration. /  C  
+contained between the co-ordinate axes is bisected at the point of contact. The equation
+of the curve is
+  (3, 2) ,       
+(A) y=x2 .- 7
+(B)
+(C)
+xy = 6
+(D)
+x2 + y2  5x + 7y + 11 = 0
+COSX
+34.
+Let f(x) -
+dt. Then
+equals
+sin x
+cosx
+sin x
+(A)
+(B)
+2/
+(C)
+(D)
+15
+P.T.O.
+
+--- PAGE 15 ---
+M-2022
+35.  The point of contact of the tangent to the parabola y2 = 9x which passes through the point
+(4, 10) and makes an angle 0 with the positive side of the axis of the parabola where
+tan > 2, is
+y2  9x     (4, 10)   可
+   0     tan 0 > 2 1  
+(A)
+(B)
+(4, 6)
+(C)
+(4, 5)
+(D)
+36.
+Let f(x) = (x - 2)17 (x + 5)24. Then
+(A)
+f does not have a critical point at x = 2
+(B)
+f has a minimum at x = 2
+(C)
+f has neither a maximum nor a minimum at x = 2
+(D)
+f has a maximum at x = 2
+ I z( + x) ( -x) = (x)± 
+(A)
+(B)
+  a -()  = x
+(C)
+ 2 (x)
+(D)
+ = 2 f(x) 
+37. The solution of cos y
+dy
+er+sin y + x2esin y is f(x) + e-sin y = C (C is arbitrary real
+dx
+constant) where f(x) is equal to
+dy
+cos y
+1(  )    us +(    us +  s+ 
+xp
+Cc@ f(x) 4
+(A)
+(B)
+(C)
+(D)
+16
+
+--- PAGE 16 ---
+M-2022
+38.
+Area of the figure bounded by the parabola y2 + 8x =- 16 and y2 - 24x = 48 is
+11
+16
+24
+(A)
+(B)
+(C)
+sq. unit
+sq. unit
+(D)
+sq. unit
+ y + 8x = 16  y2  24x = 48 可
+2444
+(B)
+(A)
+(C)
+(D)
+39. A particle moving in a straight line starts from rest and the acceleration at any time t is
+a - kt? where a and k are positive constants. The maximum velocity attained by the
+particle is
+        t   a  k, a  k
+,  
+(A)
+(B)
+(C)
+(D)
+40. If a=i+j-k,b-i-j+k and  is unit vector perpendicular to a and coplanar with a and
+b, then unit vector d perpendicular to both a and  is
+ P        k
+(2i-j+k) (B)
+(A)
+(C)
+)(D)±(
+41. If the equation of one tangent to the circle with centre at (2., -1) from the origin is
+3x + y = O , then the equation of the other tangent through the origin is
+3x +  0 1    
+(A) 3x-y=0
+(B)x + 3y = 0
+(C) x3y= 0
+(D) x + 2y = 0
+17
+P.T.O.
+
+--- PAGE 17 ---
+M-2022
+42. If a, b, c are in G. P. and log a - log 2b, log 2b - log 3c, log 3c - log a are in A. P., then
+a, b, c are the lengths of the sides of a triangle which is
+(A) acute angled
+(B) obtuse angled
+(C) right angled
+(D) equilateral
+f a, b, c  fo  4 log a - log 2b, log 2b - log 3c, log 3c - log a 可
+fo ,  a, b  c   ff    f 
+ (V)
+(C)
+(D)
+43. Let a,  (12 + 22 + .... n?)n and b, = n" (n!). Then
+(A)
+(B)
+(C)
+a, = b, for infinitely many n
+(D)
+a, < b, if n be even and a, > b, if n be odd
+4 a, = (12 + 22 + .... n2)n β b, = n" (n!) I 
+(A)
+(B)
+a,>b, Vn
+(C)
+18
+
+--- PAGE 18 ---
+M-2022
+44. If z = x - iy and z/s = p + iq (x, y, p, qe R), then
+is equal to
+(p² +q")
+f z = x - iy  z/s = p + iq (x, y, P, q R) , U[
+(p2 +q)
+(A)
+(B)
+(C)
+(D)
+45.
+If a, b are odd integers, then the roots of the equation 2ax2 + (2a + b) x + b = 0, a ± 0 are
+(A) rational
+(B) irrational
+(C) non-real
+(D)equal
+ a, b 可 ,  2ax2 + (2a + b) x + b = 0, a  0 
+(A)
+(B)
+(C)
+(D)
+46.
+ The number of zeros at the end of 100 is
+    - 00 1
+(A)
+21
+(B)
+22
+(C)
+23
+(D)
+ 24
+47. If | z -- 25i / ≤ 15, then Maximum arg(z) - Minimum arg(z) is equal to
+ [ z - 25i / ≤ 1 5 , ( arg(2) -  arg(z) (
+(A)
+2cos-
+(B)
+2cos-1
+(C)
+cos-1
+(D)
+sin-1
+(3)
+(5
+(arg z is the principal value of argument of z) / (arg z, z-   )
+19
+P.T.O.
+
+--- PAGE 19 ---
+M-2022
+48.
+Let f(n) = 2n+1, g(n) = 1 + (n +1)2n for all n e N. Then
+(A)
+f(n) >g(n)
+(B)
+f(n)<g(n)
+(C)
+f(n) and g(n) are not comparable.
+(D)
+f(n) > g(n) if n be even and f(n) < g(n) if n be odd.
+ n e N- f(n) = 2n+1, g(n) = 1 + (n +1)2n / 
+(A)
+f(n) > g(n)
+(B)
+(u)8 > (u)
+(C)
+1- () ()
+(D)
+1  () >()   (u) (u) 
+49. A is a set containing n elements. P and Q are two subsets of A. Then the number of ways
+of choosing P and Q so that P  Q = @ is
+A, n     I P  Q, A- f 1 PQ = , P  Q   
+(A)  22n_2n Cn
+(B)
+2n
+(C)
+3n-1
+(D)
+3n
+50.
+There are n white and n black balls marked 1, 2, 3, ...... n. The number of ways in which
+we can arrange these balls in a row so that neighbouring balls are of different colours is
+ n 1, 2, 3, …  
+(A) (n!)2
+2(n!)2
+(2n)!
+(B)
+(2n)!
+(C)
+(D)
+(n!)?
+20
+
+--- PAGE 20 ---
+M-2022
+Category-II (Q51 to 65)
+(Carry 2 marks cach. Only one option is corrcct. Negative marks: V2)
+51.
+If P,P2 and P,P4 are two focal chords of the parabola y2 = 4axr then the chords P,P, and
+P,P4 intersect on the
+(A)
+directrix of the parabola
+(B)
+axis of the parabola
+(C)
+ latus-rectum of the parabola
+(D)
+y-axis
+ y2 = 4ax- f f   P,P2
+ P,P4
+4    ,P
+(A)
+(B)
+(C)
+(D) y-
+52. f : X -→ R, X = (x /0 <x <1} is defined as f(x) 
+2x-1
+Then
+1-|2x-1
+(A)
+f is only injective
+(B) fis only surjective
+(C)
+f is bijective
+(D)f is neither injective nor surjective
+f : X -→ R, X = (x 1 0 <x <1)   f(x)
+2x --1
+1-12x -1↓
+(A)f
+(B)
+(C)  f , [
+(D)f - , - 
+21
+P.T.O.
+
+--- PAGE 21 ---
+M-2022
+53. Let f be a non-negative function defined in [0, π/2]. f' exists and be continuous for all x
+Ji-(f'(t)? dt=[ f(t)dt and f (0) = 0. Then
+and
+-x     -,      ± - -[ 0]
+/1-(f (t)2 dt= [ f(t) dt 44 f (0) = 0 1 ($(
+( and [()
+(A)
+(B)
+(C)
+-3
+54. PQ is a double ordinate of the hyperbola
+:1 such that AOPQ is an equilateral
+b2
+triangle, O being the centre of the hyperbola. Then the eccentricity: e of the hyperbola
+satisfies
+           [
+b2
+(C) e=2 /3
+(A) 1 <e<
+(B) e=
+(D)
+22
+
+--- PAGE 22 ---
+M-2022
+55.
+lim
+ax
+, (a, b eR) = 0. Then
+x+1
++1
+lim
+ax-b
+ (a, b R) - 0 1
+X→00
+x+1
+(A)
+a=0,b=1
+(B)
+a= 1,b=-
+(C)
+a=-l, b= 1
+(D)
+a=0,b=0
+56.  If the transformation z = log tan = reduces the differential equation
+dy
+X100.
+4y cose? x =0 into the form
+ky =0 then k is equal to
+xp
+zp
+dy
+y cosec x=  x, z = log tan 
+cotx
+dx
+dr?
+y=01-
+(A)
+-4
+(B)
+(C)
+(D) →2
+57.If I is the greatest of
+dx.
+COS
+then
+COS
+0.
+(A) 1=I
+(B)
+[= I2
+(C)
+I = I3
+(D)
+[= I4
+23
+P.T.O.
+
+--- PAGE 23 ---
+M-2022
+58. A straight line meets the co-ordinate axes at A and B. A circle is circumscribed about the
+triangle OAB, O being the origin. If m and n are the distances of the tangent to the circle
+at the origin from the points A and B respectively, the diameter of the circle is
+ 1    -V  1       ±  
+O A  Bm  n 
+(A) m(m +n)
+(B)
+(C) n(m+n)
+m+n
+(D)V2(m+n)
+59. Let the tangent and normal at any point P(at?, 2at), (a > 0), on the parabola y2 = 4ax meet
+the axis of the parabola at T and G respectively. Then the radius of the circle through P, T
+and G is
+ y2  4ax-    P(at2, 2at), (a > 0)- 可   f
+ 可  T  G    I P, T  Gf   
+(A)a(1 + t2)
+(B) (1 + t2)
+(C) a(1 - t2)
+(D) (1 -{2)
+60.
+From the point (-1, -6), two tangents are drawn to y2 = 4x. Then the angle between the
+two tangents is
+(-1, -6)   y2 = 4x 4  9 t  1 4 4 ( 4
+元/3
+(B）
+(A)
+π/4
+(C)
+元/6
+(D)
+元/2
+61. If &is a unit vector, β-i+j-k, -i+k, then the maximum value of [α β l is
+ ,, 
+(A) 3
+(B)V3
+(C) 2
+(D) V6
+62. The maximum value of f(x) - esin x+ ecosx ; x e R is
+  :  + xus =()
+(B)
+2e
+(A)
+(C)
+2e
+(D)
+24
+
+--- PAGE 24 ---
+M-2022
+63. If x satisfies the inequality log2s x2 + (logs x)2 < 2, then x belongs to
+1og25 x2 + (1ogs x)2 <2 可f x 可 (e)
+(B)
+(D)
+25
+64.The solution of det(A -- 2I,) = 0 be 4 and 8 and A
+Then
+ det(A  )  0 - 4  8  A
+(A) x= 4,y= 10
+(B)
+x= 5,y= 8
+(C) x= 3, y= 9
+(D)x= -- 4, y= 10
+(I2 is identity matrix of order 2) / (12 可 2  )
+65. The value of a for which the sum of the squares of the .roots of the equation
+x2 - (a -- 2)x -- a --1 - 0 assumes the least value is
+(A)
+(B)
+(C)
+(D)
+P.T.0.
+
+--- PAGE 25 ---
+M-2022
+Category-III (Q. 66 to 75)
+(Carry 2 marks each. One or more options are correct. No negative marks)
+66.
+Chords of an ellipse are drawn through the positive end of the minor axis. Their midpoint
+lies on
+(D) a hyperbola
+(B) a parabola
+(C) an ellipse
+(A) acircle
+a  a   a    
+(C)
+(D)
+(A)
+(B) 
+67.
+Consider the equation y - y, = m(x - x). If m and x are fixed and different lines are
+drawn for different values of y,, then
+(A)
+the lines will pass through a fixed point
+(B)
+there will be a set of parallel lines
+(C)
+all lines intersect the line x = x
+(D)
+all lines will be parallel to the line y = Xi
+y - 1 = m(x -x) f f 1  m  x, -f   y1- 
+(A)
+(B)
+(C)
+ a  x  x
+(D)
+ -xaa k
+68.
+Let R and S be two equivalence relations on a non-void set A. Then
+(B)
+R  S is equivalence relation
+(A）
+R U S is equivalence relation
+(D)
+R U S is not equivalence relation
+(C)
+R  S is not equivalence relation
+k i  e kk k  S   -V ak b
+(B)
+(A)
+(D)
+(C)
+26
+
+--- PAGE 26 ---
+M-2022
+69.
+Twenty metres of wire is available to fencc off a flower bed in the form of a circular
+sector. What must the radius of thc circle be, if the area of the flowcr bed be grealest ?
+   fower bed    20 m    
+flower bed-?
+10 m
+(A)
+4m
+5m
+(B)
+(C)
+(D)
+6m
+70.
+The line y  x + 5 touches
+(A)
+ the parabola y2  20 x
+(B)
+the ellipse 9x2 + 16y2 = 144
+(C)
+the hyperbola
+(D)
+the circle x2 + y2 = 25
+29
+y= x + 5
+(A)
+ y2 = 20 x- 
+(B)
+±k±-1 = z9 +z×6
+x2
+(C)
+29
+(D)
+x2 + =25 -
+71.
+Let p(x) be a polynomial with real co-efficients, p(O) = 1 and p'(x) > O for all x e R. Then
+(A)
+p(x) has at least two real roots
+(B)
+p(x) has only one positive real root
+(C)
+p(x) may have negative real root
+(D)
+p(x) has infinitely many real roots
+ p(x)- p(0)  1   x  R- p(x) > 0 1 
+(A)
+    -(x)d
+(B)
+(C)
+(x) -  4    9
+(D)
+P.T.O.
+
+--- PAGE 27 ---
+M-2022
+72. From a balloon rising vertically with uniform velocity v ff/sec a piece of stone is let go.
+The height of the balloon above the ground when the stone reaches the ground after 4 sec
+is [g = 32 ft/sec?]
+V ft/sec         1 4 sec 
+[s  = ]        
+(B)
+220 ft
+240 ft
+(A)
+(D)
+256 ft
+260 ft
+(C)
+73. Let f(x) = x2 + x sin x - cos x. Then
+(A) - f(x) = O has at least one real root
+(B)
+f(x) = 0 has no real root
+(C)
+f(x) = 0 has at least one positive root
+(D)
+f(x) -- 0 has at least one negative root
+ f(x) = x2 + x sin x - cos x I ((
+(v)
+(B)
+f(x) = 0- 
+(C)
+(D)
+f(x) =0-   
+28
+
+--- PAGE 28 ---
+M-2022
+74.Let z, and z, be two non-zero complex numbers. Then
+(A) Principal value of arg(ziz2) may not be equal to Principal value of argz + Principal
+value of arg Z2
+(B)
+Principal value of arg(ziz2) = Principal value of argz, + Principal value of arg Z2
+(C)
+Principal value of arg(z,/z2) = Principal value of argz, - Principal value of arg Z2
+(D)
+Principal value of arg(z,/z2) may not be argz, -- argz2
+ z1  22  可   1 
+(A)
+ arg(2), arg + arg Z2 -  
+(B)
+ arg(,2)   argz, +  arg 22
+(C)
+ arg(z/z2) =  argz, - arg 22
+(D)
+  8- k  - 2z B -- z (2zz)1 
+sincosΦ
+sinsin
+cosO
+75.
+Let A=cosocosΦ
+cosのsin Φ -sinの[. Then
+-sinsin sincos$
+(A)
+A is independent of 0
+(B)
+A is independent of β
+(C)
+A is a constant
+(D)
+=0
+d0 )0=%
+sin cosΦ
+sinsin 
+cosO
+cossinΦ
+-sine
+-sinsin 
+sin &cos$
+(A) . 0-
+(B)
+(C)
+(D)
+=0
+29
+P. :
+
+--- PAGE 29 ---
+Question
+M-2022
+Booklet Serics
+Subject : MATHEMATICS
+      I k  1    1  a  : -Ko3a
+G.
+    a  I k   k a  1 k a  : -oe
+8.
+   I         I      :-e
+   2  
+          1   
+..
+           “  O
+(A, B, C, D)   1 
+OMR 
+9.
+1 42 3 2 2  15   22 WO
+b.
+OMR              
+OMR      
+     1 MR   
+, , , 可, , ，  
+1       WO   ± 
+$8.

@@ -72,8 +72,29 @@ type Segment =
   | { type: 'text'; content: string }
   | { type: 'math'; content: string; display: boolean };
 
-function splitSegments(text: string): Segment[] {
-  if (!text) return [];
+function splitSegments(rawText: string): Segment[] {
+  if (!rawText) return [];
+
+  // Normalize double-escaped backslashes and unicode logic bar characters
+  let text = rawText
+    .replace(/\\\\([a-zA-Z]+)/g, '\\$1')
+    .replace(/Ā/g, '\\bar{A}')
+    .replace(/B̄/g, '\\bar{B}')
+    .replace(/C̄/g, '\\bar{C}');
+
+  // If text contains un-delimited LaTeX commands like \overline, \frac, \sqrt, \vec, \sum, \int, wrap formulas in $...$
+  if (!text.includes('$') && /(\\[a-zA-Z]+(?:\{[^{}]*\}|\[[^\[\]]*\])?)/.test(text)) {
+    // Detect mathematical clauses with LaTeX commands (e.g. Y = \overline{\bar{A} + \bar{B}} = ...)
+    text = text.replace(/([a-zA-Z0-9_\(\)]+\s*=\s*)?(\\[a-zA-Z]+(?:\{[^{}]*\}|\[[^\[\]]*\])?(?:[a-zA-Z0-9_\(\)\{\}\s\+\-\*\/=·×\\]+)?)/g, (match) => {
+      // Avoid wrapping trailing plain words
+      const trimmed = match.trim();
+      if (trimmed.length > 1) {
+        return `$${trimmed}$`;
+      }
+      return match;
+    });
+  }
+
   const trimmed = text.trim();
 
   // 1. Entire text is display math $$...$$
@@ -139,10 +160,15 @@ function splitSegments(text: string): Segment[] {
 function KatexSegment({ latex, display }: { latex: string; display: boolean }) {
   const html = useMemo(() => {
     try {
-      // Auto-escape unescaped % (which is treated as LaTeX comment and breaks the render)
+      // Auto-escape unescaped % and replace unsupported symbols
       const sanitized = latex
         .replace(/(?<!\\)%/g, '\\%')
-        .replace(/\ufffd/g, '\\times ');
+        .replace(/\ufffd/g, '\\times ')
+        .replace(/Ā/g, '\\bar{A}')
+        .replace(/B̄/g, '\\bar{B}')
+        .replace(/C̄/g, '\\bar{C}')
+        .replace(/·/g, '\\cdot ')
+        .replace(/×/g, '\\times ');
 
       return katex.renderToString(sanitized, {
         throwOnError: false,

@@ -1,0 +1,1115 @@
+
+--- PAGE 1 ---
+PC-2024
+Subiect:PHYSICS & CHEMISTRY 4012153901
+(Booklet Number)
+Duration : 2 Hours
+Full Marks : 100
+INSTRUCTIONS
+1.
+All questions are of objective type having four answer options for cach.
+2.
+Category-l: Carries i mark each and only one option is correct. In case of incorrect
+answer or any combination of more than one answer. /4 mark will be deducted.
+3.
+Category-2: Carries 2 marks each and only one option is correct. In case of.
+incorrect answer or any combination of more than one answer: lz mark will be
+deducted.
+Category-3: Carries 2 marks cach and one or more option(s) is/are correct. If all
+correct answers are not marked and no incorrect answer is marked. then score =
+2 × number of correct answers marked + actual number of correct answers. If any
+wrong option is marked or if any combination including a wrong option is marked.
+the answer will be considered wrong, but there is no negative marking for the
+same and zero mark will be awarded.
+5.
+Questions must be answered on OMR sheet by darkening the appropriate bubble marked
+A. B. C. or D.
+6.
+ Use only Black/Blue ink ball point pen to mark the answer by filling up of the
+respective hubbles completely.
+7.
+. Write Question Booklet number and your roll number carefullv in the specified
+locations of the OMR Sheet. Also fill appropriate bubbles.
+8.
+Write yvour name (in block letter). name of the examination center and put your
+signature (as is appeared in Admit Card) in appropriate boxes in the OMR Sheet.
+9.
+. The OMR Sheet is liable to become invalid if there is any mistake in filling the
+correct bubbles for Question Booklet number/roll number or if there is any
+discrepancy in the namel signature of the candidate. name of the examination
+center. The OMR Sheet may also become invalid due to folding or putting strav
+marks on it or any damage to it. The consequence of such invalidation due to
+incorrect marking or careless handling by the candidate will be the sole
+responsibility of candidate.
+10. Candidates are not allowed to carry any written or printed material. calculator.
+pen, log-table. wristwatch, any communication device like mobile phones.
+bluetooth device etc. inside the examination hall. Any candidate found with such
+prohibited items will be reported against and his/her candidatiure will be
+summarily cancelled.
+1l. Rough work must be done on the Question Booklet itself. Additional blank pages
+are given in the Question Booklet for rough work.
+12. Hand over the OMR Sheet to the invigilator before leaving the Examination Hall.
+13. This Booklet contains questions in both English and Bengali. Necessary care and
+precaution were taken while framing the Bengali version. However. if any
+cliscrepancy(ies) is /are found between the two versions, the information provided
+in the English version will stand and will be treated as final.
+14. Candidates are allowed to take the Question Booklet after examination is over.
+Signature of the Candidate :
+(as in Admit Card)
+Signature of the Invigilator :
+154.
+PC-2024
+
+--- PAGE 2 ---
+PC-2024
+PHYSICS
+Category-1 (Q. 1 to 30)
+(Carry 1 mark each. Only one option is correct. Negative marks : - )
+1.
+ The acceleration-time graph of a particle moving in a straight line is shown in
+the figure. If the initial velocity of the particle is zero then the velocity-time
+graph of the particle will be
+    - C  (  1  
+  kk-    e  a
+T/2
+(A)
+(B)
+T/2
+T/2
+(C)
+(D)
+T/2
+T/2
+2.
+The position vector of a particle. of mass m moving with a constant velocity
+ is given by r = x(t) i + bj, where b is a constant. At an instant, f makes an
+angle  with thc x-axis as shown in the figurc. The variation of the angular
+momentum of the particle about the origin with  will he
+ (  m  (= (t)  + b,  b f
+ 1  ( ( , (     X-   (  1
+     2   
+Y个
+(A)
+(B)
+2元
+2元
+(C)
+(D)
+2元
+P.T.O.
+
+--- PAGE 3 ---
+'PC-2024
+3.
+V = 50 /2sinot
+In a series LCR circuit, the rms voltage across the resistor and the capacitor
+are 30 V and 90 V respectively. If the applied voltage is 50 2 sin ot, then the
+peak voltage across the inductor is
+  LCR , s 30 V 90 V1
+  50 V2 sin 0t (       ( 
+(peak)  
+(C) 70 V2 V
+50 V
+(B)
+(A) 70 V
+(D)  50 ~2 v
+4.
+A small ball of mass m is suspended from the ceiling of a
+flaor by a string of length L. The ball moves along a
+horizontal circle with constant angular velocity o, as
+shown in the figure. The torque about the centre (O) of
+the horizontal circle is
+m   (    ( L   
+0.
+        1 
+  262  26 2  / 0 1 
+(B) mg L
+(C) 0
+(A)mg Lsine
+(D)mg L cos e
+5.
+2b
+2a
+The position of the centre of mass of the uniform plate as shown in the figure is
+(B)
+(A)
+(D)
+(8.8)
+
+--- PAGE 4 ---
+,PC-2024
+If n, ng and t represent. unit vectors along the incident ray. reflected ray and
+6.
+normal to the surface respcctively, then
+  ,        (  n1, 2
+(A) ng = n - 2 (n, t) t
+(B) n, = ni + 2 (ni - t) t
+(C) n²=-ni
+(D) n, = 2 n - (ni × t) ·ni
+7.
+A beam of light of wavelength  falls on a metal having work function  placed
+in a magnetic field B. The most energetic electrons, perpendicular to the field
+are bent in circular arcs of radius R. If the experiment is performed for
+quantities constant)
+     R 
+C  (     )
+B2
+B2
+(A)
+(B)
+B2
+B2
+(C)
+(D)
+P.T.O.
+
+--- PAGE 5 ---
+:PC-2024
+8.A charged particle moving with a velocity V=vi i+v2  in a magnetic field B
+. experiences a force F = Fi i + F2 j. Here vi, V2, Fi, Fz all are constants. Then
+B can be
+=+ =F + F
+  /  V1, V2, F1, F,   1 R可 C B  A
+(C) B = B;  with Bi = B2= 0
+(D) B=Bii+B,kwith B,=v2
+B1 - V1
+9.
+Two straight conducting plates form an angle  where their ends are joined. A
+conducting bar in contact with the plates and forming an isosceles triangle
+with them starts at the vertex at time t = 0 and moves with constant velocity
+V to the right as shown in figure. A magnetic field B points out of the page.
+The magnitude of emf induced at t = 1 second will be
+  2   6  22  62  2l6   
+5  ( (c  Ce1  31  1 C  1
+2 Bv2
+(C)
+(A)
+(B)
+cot
+(D)
+
+--- PAGE 6 ---
+PC-2024
+been taken to height h inside water and released, it will come to the surface
+after time t. Then
+         1    h 
+1  0  1     
+(A)  tVn
+(B) t αn
+(C) tαn+ 1 (D) tαn -1
+1l.. A small sphere of mass m and radius r slides down the smooth surface of a
+large hemispherical bowl of radius R. If the sphere starts sliding from rest, the
+total kinetic energy of the sphere at the lowest point A of the bowl will be
+[given, moment of inertia of sphere =  mr?] 
+ 1 ( 度(   ,    A ( C
+  (C:   =
+5 mr9]
+10
+(A)mg (R-r)
+(B)
+mg(R-r)
+12. Three point charges q, - 2q and q are placed along x axis at x =- a, 0 and a
+respectively. As a  0 and q -  while q a2 = Q remains finite, the electric
+αQ
+F   q - 2g  q x    x= - a, 0  a  
+ I a  0  q  q a = Q , x= 0  x ( >> a) 
+αQ
+(A) α=β
+(B) α = 2β
+(C)
+(D) 2α = β
+P.T.O.
+
+--- PAGE 7 ---
+PC-2024
+13.  Two convex lens (L; and L2) of equal focal
+f/2
+length f are placed at a distance z apart. An
+object is placed at a distance 4f in the left
+Object
+of Li as shown in figure. The final image is
+4f
+L2
+at
+3可 ( f-4 5 (0 (L, 8 L2) (  3 1 4 ( L1 (391
+ ( (TC ) 4f  C 3C 1 2 2ff Z 3 -
+5f
+5f
+(A)
+14.  Which of the following quantity has the dimension of length ?
+(h is Planck's constant, m is the mass of electron and c is the velocity of light)
+(, )
+h2
+hc
+(C)
+(D)
+(A)
+(B)
+mc2
+mc2
+mc
+perpendicular to A, then the direction of B - B sin e al is
+(A) along B
+(B)  perpendicular to B
+(C)  along A
+(D) perpendicular to A
+ ,  - B sin   fe
+2e2 - (8)
+2kin  (v)
+2kajbe Ey (a)
+kin  (0)
+(q a)m
+wherc q is the charge, a is the acceleration of the particle and c is speed of light
+in vacuum. From dimensional analysis, the value of m and n respectively, are
+  c    ( /   m  n   
+(C)m= 3, n = 2
+(D)m=0,n= 1
+(A) m = 2, n = 2
+(B) m = 2, n = 3
+
+--- PAGE 8 ---
+PC-2024
+17.  The internal encrgy of a thermodynamic system is given by U = a st/s va where 
+s is entropy, V is volume and 'a and 'α are constants. The valuc of α is
+f 9    U = a s4/3  f  f , C s 
+, Va  / 
+(C)
+(B) -1
+(D)
+(A)
+where α and β are dimensional parameters. The angular frequency of the
+oscillation is proportional to
+αx
+(B)
+(D)
+(A)
+mB6
+mβB4
+mβ4
+19. The speed distribution for a sample of N gas particles is shown below. P(v) = 0
+for v > 2vo. How many particles have speeds between 1.2 vo and 1.8 vo ?
+P(v)
+2V0
+时 f N 色  f 可 同   1 P(v) = 0 
+V > 2vo / 可 1.2 vo β 1.8 vo 可 何?
+(D)
+(C) 0.6 N
+(B)0.4 N
+ 0.8 N
+(A) 0.2 N
+P.T.O.
+
+--- PAGE 9 ---
+PC-2024
+20. A charge Q is placed at the centre of a cube of sides a. The total flux of electric
+field through the six surfaces of the cuhe is
+ a    ( Q   1       (
+ (xn)  
+6 Q a?
+Q a2
+(C) Q /E0
+(A)
+(B)
+(D) Q a2 / E0
+6E0
+21. The elastic potential energy of a strained body is
+(B)
+(A) stress × strain
+stress / strain
+(C)  stress × strain / volume
+(D)
+(A)×ffo
+(B)
+9 / 
+(C)× / T
+22.Longitudinal waves cannot
+(A) have a unique wave length
+(B) have a unique wave velocity
+(C) transmit energy
+(D) be polarized
+(A)  可  3(  
+(B)
+(C)   (可 (
+止 2 22 2k ()
+23. A 2 V cell is connected across the points A and B as shown in the figure.
+Assume that the resistance of each diode is zero in forward bias and infinity in
+reverse bias. The current supplied by the cell is
+         (  1 A 
+      1         
+10 2
+20 2
+2V
+(C)
+0.1A
+0.2 A
+(B)
+0.5 A
+(A)
+(D)  0.25 A
+10
+
+--- PAGE 10 ---
+PC-2024
+24.  Which of the following statement(s) is/are true in respect of nuclear binding 08
+energy?
+(i)
+The mass cnergy of a nucleus is larger than the total mass energy of its
+individual protons and neutrons.
+(ii)
+ If a nucleus could be separated into its nucleons, an energy equal to the
+ binding energy would have to be transferred to the particles during the
+separating process.
+(ii) The binding energy is a measure of how well the nucleons in a nucleus
+are held together.
+energy.
+(A)
+Statements (i), (i) and (i) are true
+(B)
+Statements (i), (iii) and (iv) are true
+(C)
+Statements (ii) and (iii) are true
+(D) All the four statements are true
+(1)      (2   C  (3 ( 1
+()     ( , 可  
+(1)可  可    51  可  件 1
+(iv)        I
+(A)
+不 (i), (1i)  (ii) 可可
+(B) (ii), (ii)  (iv) 可
+(C)
+ (ii)  (ii) 
+(D)
+11
+P.T.O.
+
+--- PAGE 11 ---
+PC-2024
+25.wWhat force F is required to start moving this 10 kg block shown in the figure
+if it acts at an angle of 60° as shown ? (μ, = 0.6)
+  60°    可   10 kg   
+ ? (μ, = 0.6)
+10 kg
+25.56 N
+(C)
+(B) 24.97 N
+(D) 27.32 N
+(A) 22.72 N
+26.  Light of wavelength 6000 A is incident on a thin glass plate of r.i. 1.5 such that
+the angle of refraction into the plate is 60°. Calculatc the smallest thickness of
+the plate which will make dark fringe by reflected beam interference.
+6000 A           
+ ( 60% (  1.5) 1   (   
+       122
+(A) 1.5 × 10-7 m (B) 2 × 10- m
+(C) 3.5 × 10-7 m (D) 4 × 10-7 m
+27. A satellite of mass m rotates round the earth in a circular orbit of radius R. If
+the angular momentum of the satellite is J, then its kinetic energy (K) and the
+total energy (E) of the satellite are
+      R    1 
+G J    f (K)    (E)  -
+J2
+J2
+J2
+J2
+(B)
+(A)
+2. mR2,
+2 mR2
+mR2, E=
+2 mR2
+J2
+J2
+J2
+(D)
+(C)
+2 mR2, E=.
+mR?
+mR2
+12
+
+--- PAGE 12 ---
+ PC-2024
+the figure between the points P and N is
+4 C
+2 C
+(C)
+(D)
+(B)
+(A) 3 C
+29.  In a single-slit diffraction experiment, the slit is illuminated by light of two
+wavelengths 2, and 2. It is observed that the 2nd order diffraction minimum
+for 2i coincides with the 3rd diffraction minimum for A2. Then
+ 度 可   f 0 入  入2- 可  
+3( 1 ( (可 (, 2-     可 入2-对    
+(B)
+(C)
+(A)
+(D)
+30.
+Consider a circuit where a cell of emf E, and internal resistance r is connected
+across the terminal A and B as shown in figure. The value of R for which the
+power generated in the circuit is maximum, is given by
+   E,  可 B r  (  ( A  B 
+  1 R  (  可   可  , f 可
+ Ｒ=
+(C) R= 3r
+(B)R = 2r
+(A) R=r
+(D) 
+13
+P.T.O.
+
+--- PAGE 13 ---
+PC-2024
+Category-2 (Q. 31 to 35)
+(Carry 2 marks each. Only one option is correct. Negative marks : - /)
+31.  A metal plate of area 10-2 m2 rests on a layer of castor oil, 2 × 10-3 m thick,
+whose coefficient of viscosity is 1.5 Ns m-2. The approximate horizontal force
+required to move the plate with a uniform speed of 3 x 10-2 ms-1 is
+10-2 m2   4 C 2 × 10-3 m   ( 3
+,   1.55 Ns m-2 1      c
+   kk 1-s -01 × 8
+(B)0.2325 N
+(A)0.6718 N
+(D)0.6615 N
+(C)0.2022 N
+32. The following figure shows the variation of potential energy V(x) of a particle
+with distance x. The particle has
+V(α) 个
+(A)
+Two equilibrium points, one stable another unstable
+(B)
+Two equilibrium points, both stable
+(C)
+Three equilibrium points, one stable two unstable
+(D) Three equilibrium points, two stable one unstable
+    ()   V() ( ( 3 / 
+(A)
+(B)
+  , 
+(C)
+(D)   可, ,  
+33.
+ When a conivex lens is placed above an empty tank, the image of a mark at the
+bottom of the tank, which is 45 cm from the lens is formed 36 cm above the lens.
+When a liquid is poured in the tank to a depth of 40 cm, the distance of the image
+of the mark above the lens is 48 cm. The refractive index of the liquid is
+45 cm            可
+( 3  36 cm 3  对 1  (  ( f 40 cm 
+可 可   (   48 cm  s  1 
+1.472
+(C) 
+(D)1.366
+(B)
+(A) 1.353
+1.544
+14
+
+--- PAGE 14 ---
+PC-2024
+34. In the given network of AND and OR gates, output Q can be written as
+(assuming n even)
+RAND (n
+Xo
+X,
+X2
+8x
+(A) Xo Xi + X, X: + ... Xn-i Xn
+(B)Xo Xi... Xn + Xi X2 ... Xn + X, X3 ... Xn + Xn
+(C) Xo X1 ... Xn-1+ Xn-2 Xn-1+Xn
+"x+I-"x 3-"x+I-"x ..'xex3x+I-"x ". Ix'x (a)
+35. Water is filled in a cylindrical vessel of height H. A hole is made at height z
+from the bottom, as shown in the figure. The value of z for which the range (R)
+of the emerging water through the hole will be maximum for
+, 对可  (  1 z- (可  (R   (R) 
+34, 回可
+(A)
+(B) 
+(C)
+(D)
+15
+P.T.O.
+
+--- PAGE 15 ---
+PC-2024
+Category-3 (Q. 36 to 40)
+(Carry 2 marks each. One or more options are correct. No negative marks)
+36.
+The variation of impedance Z of a series LCR circuit
+with frequency of the source is shown in the figure
+Which of the following statement(s) is/are true ?
+(A)
+ The impedance Z is inductive in the portion AC
+(B)
+ The impedance Z is capacitive in the portion BC
+(C)The impedance Z is inductive in the portion BC
+(D)  The impedance Z is capacitive in the portion AC
+ LCR    (Z)-  (
+(B)BC 可
+(C) BC   
+(D)AC  
+37. The electric field of a plane electromagnetic wave in a medium is given by
+E (x.y.z. t) = Eo h eik.[(r +y+2) -ct]
+where c is the speed of light in frce space. E field is polarized in the x - z plane.
+The speed of wave is v in the medium. Then
+(A) 台=↑-;v=c.
+(B)
+(C)
+refractive index of the medium is V3
+i+k
+(D)
+    G   
+E (x, y, z, t) = E, n eik, (a+y+2)-el]
+ c 可     1 fx -, z   1 
+(B)
+(A) n=↑-K:v=c.
+(D)
+(C)    V3
+V2
+16
+
+--- PAGE 16 ---
+PC-2024
+38. Monochromatic light of wavelength  = 4770 A is incident separately on the
+surfaces of four different metals A, B, C and D. The work functions of A, B, C
+and D are 4.2 eV, 3.7 eV. 3.2 eV and 2.3 eV, respectively. The metal / metals
+from which electrons will be emitted is / are
+(A) A, B, C and D (B) B, C andD (C) Cand D
+(D) D only
+ = 4770 A       A, B, C  D   
+f0 可 1 A, B, C 8 D   可4 4 4.2 eV, 3.7 eV, 3.2 cV 13 2.8 eV 1
+(C)CBD
+(B)B, C D
+(D)  D
+(A)A, B, C D
+39. Consider the integral form of the Gauss' law in electrostatics
+Which of the following statements are correct ?
+(A)  It contains law of Coulomb.
+(B)
+F It contains superposition principle.
+(C)  An elementary patch on the enclosing surface is a polar vector. 
+(D) An elementary patch on the enclosing surface is a pseudo-vector.
+(A)I
+(B)      1
+(C) (  可 C9 ( 1
+(D) (  可  ( 1
+17
+P.T.O.
+
+--- PAGE 17 ---
+PC-2024
+A uniform rod AB of length 1 m and mass 4 kg is sliding
+40.
+4 m/s
+along two mutually perpendicular frictionless walls OX
+and OY. The velocity of the two ends of the rod A and B
+3 m/s
+>x are 3 m/s and 4 m/s respectively, as shown in the figure.
+Then whieh of the following statement(s) is/are correct ?
+(A)  The velocity of the centre of mass of the rod is 2.5 m/s.
+25
+(C) The angular velocity of the rod is 5 rad/s clockwise
+(D) The angular velocity of the rod is 5 rad/s anticlockwise.
+1 m  8 4 kg     AB, f     cT
+8 k22a 160s 2  8  02 1 (0 ) 326 1ay  10 8 X0
+i a / b  1 s/   s/
+(A)   C(P f0( 2.5 m/s.
+25
+(B)对 t s-f 
+ joule.
+(C)  可 (  5 rad/s,    1
+1 22  's/p  s  ()
+18
+
+--- PAGE 18 ---
+PC-2024
+CHEMISTRY
+Category-1 (Q. 41 to 70)
+(Carry 1 mark each. Only one option is correct. Negative marks : - )
+41.  Identify the incorrect statement among the following :
+(A) Viscosity of liquid always decreases with increase in temperature. :
+(B)  Surface tension of liquid always decreases with increase in temperature.
+(C)  Viscosity of liquid always increases in presence of impurity.
+(D) Surface tension of liquid always increases in presence of impurity.
+ k k k  k   (V)
+ k   o k   ()
+(C)  可 可 
+(D)   
+42.  Which of the following statements is true about equilibrium constant and rate
+constant of a single step chemical reaction ?
+(A)  Equilibrium constant may increase or decrease but rate constant always
+increases with temperature. 
+(B) Both equilibrium constant and rate constant increase with temperature.
+(C)  Rate constant may increase or decrease but equilibrium constant always
+increases with temperature.
+(D) Both equilibrium constant and rate constant decrease with temperature.
+(A)   (      ,  
+1     
+(B)
+(C)
+  ,    
+    , -  1
+(D)
+19
+P.T.O.
+
+--- PAGE 19 ---
+PC-2024
+43.  Equal volumes of aqueous solution of 0.1(M) HCl and 0.2 (M) H,SOy are mixed.
+The concentration of H+ ions in the resulting solution is
+0.1(M) HCl  0.2 (M) H,S0,      1   H+
+(D) 0.25 (M)
+(C)0.10 (M)
+(B) 0.30 (M)
+(A): 0.15 (M)
+44. The correct order of boiling point of the given aqueous solutions is
+(A) 1 N KNO; ≥ 1 N NaCI > 1 N CH, COOH
+> 1 N sucrose
+(B) 1 N KNO; = 1 N NaCl > 1 N CH, COOH
+> 1 N sucrose
+(C)  Same for all /  
+(D) 1 N KNO; = 1 N NaCI = 1 N CH, COOH
+> 1 N sucrose
+45. After the emission of a β-particle followed by an α-particle from 2
+number of neutrons in the atom is -
+214Bi  C314 4 44 β 8 4 α  F 3  9f 0
+ 3?
+(D)82
+(C) 129
+(B)128
+(A) 210
+46.  Which hydrogen like species will have the same radius as that of 1-t Bohr orbit
+of hydrogen atom ?
+         ?
+(D) n = 3, Li2+
+(C) n = 2, He+
+(B) n= 2, Be3+
+(A) n = 2, Li2+
+47. For a first order reaction with rate constant k, the slope of the plot of log
+(reactant concentration) against time is
+ (=k) 10g ( )   (
+(D)-k
+(C)
+-k/2.303
+(B) k
+(A)k/2.303
+
+--- PAGE 20 ---
+PC-2024
+48. Number of moles of ions produced by complete dissociation of one mole of
+Mohr's salt in water is
+ (           ?
+(C) 5
+(B) 4
+(D)  6
+(A) 3
+49.  Which of the following species exhibits both LMCT and paramagnetism ?
+   LMCT  ？
+(C)  Cr203
+(D)  Cr0?
+(A) MnO?-
+(B) MnO7
+50. Correct solubility order of AgF, AgCl, AgBr, AgI in water is
+ AgF, AgCl, AgBr, AgI o ff 
+(B) AgI < AgBr < AgCl < AgF
+(A) AgF < AgCl> AgBr > AgI
+(C) AgF < AgI < AgBr <AgCl
+51. What will be the change in acidity if
+(i)
+CuSOy is added in saturated (NHy)2 SOy solution
+(i)  SbF, is added in anhydrous HF
+(B) decrease, decrease
+(A) increase, increase
+(D)  decrease, increase
+(C) increase, decrease
+(i)  (NH4)2 SO4  CuSO4 (  
+(ii)   HF- ShF,  1
+(B)
+(A)
+(D) A, GA
+(C) 
+52.  Which of the following contains maximum number of lone pairs on the central
+atom ?
+(C) SF4
+(D) I3-
+(A)  CIO3
+(B) XeF,
+21
+P.T.O.
+
+--- PAGE 21 ---
+PC-2024
+53.  Metallic conductors and semiconductors are heated separately. What are the
+changes with respect to conductivity ?
+(B) decrease, decrease
+(A)  increase, increase
+(D)  decrease, increase 
+(C)  increase, decrease
+(B)
+(A) GA, G
+(D)
+(C)A, 
+54. The equivalent weight of Naz S, O, (Gram molecular weight = M) in the given
+reaction is
+  Na2 S, O; (a 9 B可 = M)- @-   ?
+I2 + 2 Naz S2 Og = 2 Nal + Naz S4 O6
+(D)
+ M/4
+(B) M
+(C)  2M
+(A) M/2
+55.  In the following sequence of reaction compound M' is
+CH-MgBrN+CH, ↑_H*→CH,COCH,COCHs
+(B)
+)CH,COCH,CO,Et
+(A)
+CH,COCH,COCH3
+(D) CH:-C-OH
+(C) CH; -C-CH3
+56.  Identify the ion having 4f6 electronic configuration.
+4f6  
+(D)  Tb3+
+(C)
+Sm3+
+Sm2+
+(A) Gd3+
+(B)
+22
+
+--- PAGE 22 ---
+PC-2024
+57. Toluene reacts with mixed acid at 25 °C to produce
+(A) nearly equal amounts of g- and m- nitrotoluene
+(B) p- nitrotoluene (only)
+(C) predominantly - nitrotoluene and p- nitrotoluene
+(D) 2, 4, 6- trinitrotoluene (only)
+ 25 C -
+(A)      m 
+(B) - ()
+g-d - ()
+(D) 2, 4, 6-  ()
+CH,CH2 -C -ONa
+58. PhCHO + CH:CH2 -C -O-C-CH,CH3
+(anhydrous/at)
+The product 'P' in the above reaction is
+(A) Ph CH = CHCH,COOH
+CH3
+(B)
+Ph - CH = C- COOH
+OCOCH,
+(C)
+PhCH(
+OCOCH
+(D) Ph CH= CH - CH2- C-O-C-CH,CH3
+59.  The reactivity order of the following molecules towards Sn1 reaction is
+Chlorobenzene
+Allyl chloride
+Ethyl chloride
+(II)
+(II).
+(B)
+(A) I>I>II
+I>II>H
+(D)
+II<I<I ()
+>I>I
+P.T.O.
+
+--- PAGE 23 ---
+PC-2024
+60.Ozonolysis of g-xylene produces
+00
+00
+CH:-C-C-H
+H-C-C-H
+CH:-C- C- CH:
+(B) II:IHI = 2:1
+(C) I:II:III = 1:2:3 (D)I:II:III = 3:2:1
+(A)I:III = 1:2
+6i. The compounds A and B are respectively
+AB
+1. Mg dry Et20
+-Me
+Me
+2. dry ice
+Br
+3. H3o+
+Me
+Br. ; B = HO,C
+CO,H
+(A)
+A= Br
+LBr
+-CO,H
+-Br
+CO,H
+A=
+;B=
+(B)
+Me.
+Me
+-Me
+Me
+CO,H
+Br.
+Me-
+-Me
+Me
+Me
+A=
+(C)
+Me
+Me
+CO,H
+Br
+Me
+-Me
+Me
+-Me
+:B=
+(D)
+A-
+CO,H
+Br
+Br
+HO,C
+Me
+Me
+62. The decreasing order of reactivity of the following alkenes towards HBr
+addition is
+Fe  C HBr      FP 3
+MeOCH = CH,
+CH:-C - CH =CH2
+CH; - CH = CH2 
+CF3 - CH= CH2
+(I)
+(IV)
+()
+(II)
+(D)
+(C)
+I>IV>I>II
+>>I>V
+(B)II>IV>I>III
+AI<II<II<I (V)
+24
+
+--- PAGE 24 ---
+PC-2024
+63. The correct acidity order of phenol (I), 4-hydroxybenzaldehyde (II) and
+3-hydroxybenzaldehyde (III) is
+(可(I), 4- (1)  3- (I1I) 可
+(C) II<III<I
+(B)I<III<II
+(A).I<II<III
+(D) III<II<I
+64. The major product of the following reaction is :
+NaCN
+DMF
+NC
+(A)
+(B)
+(D）
+65.  The compound that does not give positive test for nitrogen in Lassaigne's test is
+N2*C1
+NO2
+(B)
+OH
+ HO:S-
+(D)
+NH
+(C)
+NH2
+25
+P.T.O.
+
+--- PAGE 25 ---
+PC-2024
+66. The compressibility factor for a van der Waal gas at high pressure is
+Pb
+Pb
+(C) 1-RT
+RT
+(D)
+(B)
+1 +
+(A) 1+
+Pb
+RT
+67.  For a spontaneous process, the incorrect statement is
+(B) (ASsystem)+ (ASsurroundings)>0
+(C) (AGgystemT.,p<0
+68.  Which of the following statements is correct for a spontaneous polymerization
+reaction ?
+   ( (  可  ? 
+(B) △G< 0, △H > 0, △S > 0
+(A) △G<0, H <0, △S<0
+(D) AG> 0, 4H ≥ 0, 4S > 0
+(C) AG > 0, △H <0, 4S> 0
+69. At 25°C, the ionic product of water is 10-14. The free energy change for the self-
+ionization of water in kCal mol-1 is close to
+25 ,  -可 10-14 1 ( --  
+ kCal mol-l 4 
+(D) 25.3
+(C) 19.1
+(B) 14.0
+(A) 20.5
+70. Consider an electron moving in the first Bohr orbit of a He+ ion with a velocity
+Vi. If it is allowed to move in the third Bohr orbit with a velocity v's, then
+indicate the correct vg : Vy ratio.
+ ,  He+          
+  (可    3 ,   V3 : v1  
+(D) 1:2
+1:3
+(B)
+2:1
+(A)  3:1
+26
+
+--- PAGE 26 ---
+PC-2024
+Category-2 (Q. 71 to 75)
+(Carry 2 marks each. Only one option is correct. Negative marks : - /)
+71.  The specific conductance (k) of 0.02 (M) aqueous acctic acid solution at 298 K
+is 1.65 × 10-4 S cm-1. The degree of dissociation of acetic acid is
+[°H+ = 349.1 S cm² mol-1 and A°cH,C00- = 40.9 S cm² mol-1]
+0.02 (M)       (k) 298 K 
+ [k ba2 a2ga g 't- S r-01 × 99'
+[2°H+ = 349.1 S cm² mol -1 and 2°cH,c00- = 40.9 S cm² mol-1]
+(A)0.021
+(B)
+0.21
+(D)
+(C) 0.012
+0.12
+72.
+The number(s) of -OH group(s) present in H,PO; and H;POy is/are
+(A)3 and 3 respectively
+(B)  3 and 4 respectively
+(C)  2 and 3 respectively
+(D)  1 and 3 respectively
+H,PO;  H;PO4 (-OH 
+(A)  3 C
+(B)    4 
+(C)  2  3 
+(D) 1  3 
+73.
+ How many P-O-P linkages are there in P4O10
+(B)
+(A)  Six
+Four
+(D)
+(C) Five
+One
+P4010-日 向 P-0-P 同 可 ?
+(A)
+(B)
+(C) 
+(D)
+27
+P.T.O.
+
+--- PAGE 27 ---
+PC-2024
+OH
+_Me;CCH = CH2
+→ Me,C- CH - CH,
+74. MesCCH,CH,OH<-
+Q and R in the above reaction sequences are respectively
+  Q  R 可 FC
+(A) Hg(OAc)2. NaBH/OH ; B,Hg, H,O,/OH
+(B) B2Hg, H,0,/OH ; H+/H,O
+(C) Hg(OAc)2, NaBH,/OH ; H+/H,0
+(D)B,Hg, H,O,/OH ; Hg(OAc)2, NaBH/OH
+75. pH of 10-8 (M) HCl solution is
+(A)  8
+(B) greater than 7, less than 8
+(C)  greater than 8
+(D) greater than 6, less than 7
+10-8 (M) HCI  pH -
+(A) 
+(B)
+7  (, 8 可时
+(C)
+8 可附 (个开
+± 2a 2  2a 9 ()
+28
+
+--- PAGE 28 ---
+PC-2024
+Category-3 (Q. 76 to 80)
+(Carry 2 marks each. One or more options are correct. No negative marks)
+76. Which of the following ion/ions is/are diamagnetic ?
+( /()?
+(A) [CoFa]3-
+(B) [Co(NH3)s]3+  (C)[Fe(OH2)6]2+ (D) [Fe(CN)6]4
+77. Which of the following statement/statements is/are correct ?
+(A) Solid I2 is freely soluble in water
+(B)
+ Solid Iz is freely soluble in water but only in presence of excess KI
+(C)Solid I, is freely soluble in CCl
+(D)  Solid Iz is freely soluble in hot water
+[ 52  31  (V)
+   31  220 b I  ()
+(C)   I2  CCl4 - )
+()  
+78. Which of the following statements about the Sn2 reaction mechanism is/are
+true ?
+(A)
+The rate of reaction increases with increasing nucleophilicity.
+(B)
+The number 2 denotes a second order reaction.
+(C)
+ Tertiary butyl substrates do not follow this mechanism.
+(D) 
+ The optical rotation of substrates always changes from (+) to (-) or from
+(-) to (+) in the products.
+S2  可  4向  (/向  ?
+(A）1
+(B)  2          1
+(D)    (+) ( (-)  () ((+)-
+29
+P.T.O.
+
+--- PAGE 29 ---
+PC-2024
+79. Which of the following represent(s) the enantiomer of Y ?
+Y () / :
+Br
+CH:
+CHs
+(Y)
+Br
+H.C
+Br
+H,C
+(B)
+CH3
+CH:
+Br
+CH3
+H,C
+-Br
+(D)
+(C)
+CH3
+80.
+ Identify the correct statement(s) :
+(A)
+The oxidation number of Cr in CrO, is +6
+(B) AH > AU for the reaction N,O4(g) -→ 2 NO, (g), provided both gases behave
+ideally
+(C)
+)pH of 0.1 (N) H,SO, is less than that of 0.1 (N) HCl at 25°C
+(RT)
+(D)
+= 0.0591 volt at 25°C
+(A)
+CrO5-4 Cr   +6
+(B) N,04(g) - 2 NO2 (g)  H >U ,    
+(C)
+25C  0.1 (N) H,S04  pH 0.1 (N) HCl  pH-  
+RT
+= 0.0591 volt
+(D)25C 
+30

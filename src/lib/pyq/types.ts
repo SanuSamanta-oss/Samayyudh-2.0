@@ -44,11 +44,14 @@ export interface PyqQuestion {
   shift: string;                 // 'Shift 1' | 'Shift 2'
   session?: string;              // 'Morning' | 'Evening'
   subject: PyqSubject;
+  chapter?: string;
   question_number: number;       // 1 - 25
   section: PyqSection;           // 'Section A' | 'Section B'
   question_type: PyqQuestionType;// 'MCQ' | 'Numerical Value'
   question_statement: string;
   options?: PyqOption[];
+  correct_option?: string;
+  explanation?: string;
   correct_answer?: {
     value: string;               // e.g. '2' for MCQ or numeric string
     is_verified: boolean;
@@ -81,6 +84,7 @@ export interface PyqFilterParams {
   year?: number;
   course?: string;
   subject?: PyqSubject | 'All';
+  chapter?: string;
   date?: string;
   shift?: string;
   section?: PyqSection | 'All';

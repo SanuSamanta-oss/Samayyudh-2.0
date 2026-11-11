@@ -22,14 +22,17 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
 CREATE POLICY "Users can view own profile"
   ON public.profiles FOR SELECT
   USING (auth.uid() = id);
 
+DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
 CREATE POLICY "Users can update own profile"
   ON public.profiles FOR UPDATE
   USING (auth.uid() = id);
 
+DROP POLICY IF EXISTS "Users can insert own profile" ON public.profiles;
 CREATE POLICY "Users can insert own profile"
   ON public.profiles FOR INSERT
   WITH CHECK (auth.uid() = id);
@@ -51,6 +54,7 @@ CREATE TABLE IF NOT EXISTS public.user_exam_profiles (
 
 ALTER TABLE public.user_exam_profiles ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can manage own exam profiles" ON public.user_exam_profiles;
 CREATE POLICY "Users can manage own exam profiles"
   ON public.user_exam_profiles FOR ALL
   USING (auth.uid() = user_id)
@@ -80,6 +84,7 @@ CREATE TABLE IF NOT EXISTS public.exam_sessions (
 
 ALTER TABLE public.exam_sessions ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can manage own sessions" ON public.exam_sessions;
 CREATE POLICY "Users can manage own sessions"
   ON public.exam_sessions FOR ALL
   USING (auth.uid() = user_id)
@@ -112,6 +117,7 @@ CREATE TABLE IF NOT EXISTS public.answers (
 
 ALTER TABLE public.answers ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can manage own answers" ON public.answers;
 CREATE POLICY "Users can manage own answers"
   ON public.answers FOR ALL
   USING (auth.uid() = user_id)
@@ -153,6 +159,7 @@ CREATE TABLE IF NOT EXISTS public.evaluations (
 
 ALTER TABLE public.evaluations ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can manage own evaluations" ON public.evaluations;
 CREATE POLICY "Users can manage own evaluations"
   ON public.evaluations FOR ALL
   USING (auth.uid() = user_id)
@@ -177,6 +184,7 @@ CREATE TABLE IF NOT EXISTS public.sticky_notes (
 
 ALTER TABLE public.sticky_notes ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can manage own notes" ON public.sticky_notes;
 CREATE POLICY "Users can manage own notes"
   ON public.sticky_notes FOR ALL
   USING (auth.uid() = user_id)
@@ -206,6 +214,7 @@ CREATE TABLE IF NOT EXISTS public.user_progress (
 
 ALTER TABLE public.user_progress ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can manage own progress" ON public.user_progress;
 CREATE POLICY "Users can manage own progress"
   ON public.user_progress FOR ALL
   USING (auth.uid() = user_id)
@@ -227,6 +236,7 @@ CREATE TABLE IF NOT EXISTS public.milestones (
 
 ALTER TABLE public.milestones ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can manage own milestones" ON public.milestones;
 CREATE POLICY "Users can manage own milestones"
   ON public.milestones FOR ALL
   USING (auth.uid() = user_id)
@@ -240,6 +250,7 @@ INSERT INTO storage.buckets (id, name, public)
 VALUES ('answer-images', 'answer-images', false)
 ON CONFLICT (id) DO NOTHING;
 
+DROP POLICY IF EXISTS "Users can upload own images" ON storage.objects;
 CREATE POLICY "Users can upload own images"
   ON storage.objects FOR INSERT
   WITH CHECK (
@@ -247,6 +258,7 @@ CREATE POLICY "Users can upload own images"
     auth.uid()::text = (storage.foldername(name))[1]
   );
 
+DROP POLICY IF EXISTS "Users can view own images" ON storage.objects;
 CREATE POLICY "Users can view own images"
   ON storage.objects FOR SELECT
   USING (
@@ -254,6 +266,7 @@ CREATE POLICY "Users can view own images"
     auth.uid()::text = (storage.foldername(name))[1]
   );
 
+DROP POLICY IF EXISTS "Users can delete own images" ON storage.objects;
 CREATE POLICY "Users can delete own images"
   ON storage.objects FOR DELETE
   USING (
@@ -276,9 +289,10 @@ BEGIN
     NEW.id,
     NEW.email,
     NEW.phone,
-    COALESCE(NEW.raw_user_meta_data ->> 'full_name', NEW.raw_user_meta_data ->> 'name', split_part(NEW.email, '@', 1)),
+    COALESCE(NEW.raw_user_meta_data ->> 'full_name', NEW.raw_user_meta_data ->> 'name', split_part(COALESCE(NEW.email, 'user'), '@', 1)),
     NEW.raw_user_meta_data ->> 'avatar_url'
-  );
+  )
+  ON CONFLICT (id) DO NOTHING;
   RETURN NEW;
 END;
 $$;
@@ -293,7 +307,16 @@ CREATE TRIGGER on_auth_user_created
 -- 11. ENABLE REALTIME
 -- ====================
 
-ALTER PUBLICATION supabase_realtime ADD TABLE public.exam_sessions;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.answers;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.evaluations;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.user_progress;
+DO $$
+DECLARE
+  t TEXT;
+BEGIN
+  FOREACH t IN ARRAY ARRAY['exam_sessions', 'answers', 'evaluations', 'user_progress'] LOOP
+    BEGIN
+      EXECUTE format('ALTER PUBLICATION supabase_realtime ADD TABLE public.%I', t);
+    EXCEPTION WHEN duplicate_object THEN
+      NULL;
+    END;
+  END LOOP;
+END;
+$$;

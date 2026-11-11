@@ -12,6 +12,7 @@ import {
   HelpCircle,
   Sparkles,
 } from 'lucide-react';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 
 interface UploadPYQModalProps {
   isOpen: boolean;
@@ -165,30 +166,37 @@ export function UploadPYQModal({
                   </div>
                   <div>
                     <label className="block text-stone-500 font-medium mb-1">Question Type</label>
-                    <select
+                    <SmoothSelect
                       value={questionType}
-                      onChange={(e) => setQuestionType(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-foreground font-medium"
-                    >
-                      <option value="mcq_single">Single Correct MCQ</option>
-                      <option value="mcq_multi">Multiple Correct MSQ</option>
-                      <option value="numerical">Numerical Answer Type</option>
-                      <option value="integer">Integer Type</option>
-                      <option value="assertion">Assertion &amp; Reason</option>
-                      <option value="match">Match the Following</option>
-                    </select>
+                      onChange={setQuestionType}
+                      ariaLabel="Question Type"
+                      size="sm"
+                      className="w-full"
+                      options={[
+                        { value: 'mcq_single', label: 'Single Correct MCQ' },
+                        { value: 'mcq_multi', label: 'Multiple Correct MSQ' },
+                        { value: 'numerical', label: 'Numerical Answer Type' },
+                        { value: 'integer', label: 'Integer Type' },
+                        { value: 'assertion', label: 'Assertion & Reason' },
+                        { value: 'match', label: 'Match the Following' },
+                      ]}
+                    />
                   </div>
                   <div>
                     <label className="block text-stone-500 font-medium mb-1">Difficulty</label>
-                    <select
+                    <SmoothSelect
                       value={difficulty}
-                      onChange={(e) => setDifficulty(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-foreground font-medium"
-                    >
-                      <option value="easy">Easy</option>
-                      <option value="medium">Medium</option>
-                      <option value="hard">Hard</option>
-                    </select>
+                      onChange={setDifficulty}
+                      ariaLabel="Difficulty"
+                      size="sm"
+                      align="right"
+                      className="w-full"
+                      options={[
+                        { value: 'easy', label: 'Easy' },
+                        { value: 'medium', label: 'Medium' },
+                        { value: 'hard', label: 'Hard' },
+                      ]}
+                    />
                   </div>
                   <div>
                     <label className="block text-stone-500 font-medium mb-1">Marks (+ / -)</label>

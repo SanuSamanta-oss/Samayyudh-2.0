@@ -9,6 +9,7 @@ import {
   Zap, Swords, HelpCircle, ChevronDown, ChevronUp, Clock
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 import type { PyqExamPaper, PyqQuestion, PyqStats, PyqSubject, PyqSection, PyqQuestionType } from '@/lib/pyq/types';
 import { MathText } from '@/components/pyq/MathText';
 
@@ -789,31 +790,36 @@ export default function JeeMainPyqExplorer({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search questions by topic, formula, or keyword..."
-            className="w-full pl-9 pr-3.5 py-2 rounded-xl border border-stone-200 dark:border-[#283C64] bg-stone-50/80 dark:bg-[#16233B] text-xs sm:text-sm text-stone-900 dark:text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
+            className="w-full pl-9 pr-3.5 py-2.5 rounded-2xl bg-stone-100/80 dark:bg-[#16233B] focus:bg-white dark:focus:bg-[#1A2844] text-xs sm:text-sm text-stone-900 dark:text-white placeholder-stone-400 outline-none focus:outline-none focus:shadow-[0_6px_20px_-4px_rgba(99,91,255,0.2)] transition-all"
           />
         </div>
 
         {/* Section Filter */}
-        <select
+        <SmoothSelect
           value={selectedSection}
-          onChange={(e) => setSelectedSection(e.target.value)}
-          className="px-3.5 py-2 rounded-xl border border-stone-200 dark:border-[#283C64] bg-stone-50/80 dark:bg-[#16233B] text-xs font-semibold text-stone-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer"
-        >
-          <option value="All">All Sections</option>
-          <option value="Section A">Section A (MCQ)</option>
-          <option value="Section B">Section B (Numerical)</option>
-        </select>
+          onChange={setSelectedSection}
+          ariaLabel="Filter by Section"
+          size="sm"
+          options={[
+            { value: 'All', label: 'All Sections' },
+            { value: 'Section A', label: 'Section A (MCQ)' },
+            { value: 'Section B', label: 'Section B (Numerical)' },
+          ]}
+        />
 
         {/* Question Type Filter */}
-        <select
+        <SmoothSelect
           value={selectedType}
-          onChange={(e) => setSelectedType(e.target.value)}
-          className="px-3.5 py-2 rounded-xl border border-stone-200 dark:border-[#283C64] bg-stone-50/80 dark:bg-[#16233B] text-xs font-semibold text-stone-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer"
-        >
-          <option value="All">All Question Types</option>
-          <option value="MCQ">MCQ (Single Correct)</option>
-          <option value="Numerical Value">Numerical Value</option>
-        </select>
+          onChange={setSelectedType}
+          ariaLabel="Filter by Question Type"
+          size="sm"
+          align="right"
+          options={[
+            { value: 'All', label: 'All Question Types' },
+            { value: 'MCQ', label: 'MCQ (Single Correct)' },
+            { value: 'Numerical Value', label: 'Numerical Value' },
+          ]}
+        />
       </div>
 
       {/* ──────────────────────────────────────────────────────────── */}

@@ -99,6 +99,14 @@ const ContributionHeatmapCard = dynamic(
   }
 );
 
+const StudentIdentityCard = dynamic(
+  () =>
+    import('@/components/profile/StudentIdentityCard').then(
+      (m) => m.StudentIdentityCard
+    ),
+  { ssr: false }
+);
+
 type SidebarTab = 'profile' | 'sessions' | 'achievements' | 'analytics' | 'settings';
 
 interface ProfileStats {
@@ -802,6 +810,8 @@ export default function ProfilePage() {
                 activeDays={stats.activeDays}
                 currentStreak={streakData?.current_streak ?? 0}
               />
+
+              {isAuthenticated && <StudentIdentityCard />}
 
               <SubjectTopicDistributionCard
                 subjectDistribution={analyticsData.subjectDistribution}

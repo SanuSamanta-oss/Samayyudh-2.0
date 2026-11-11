@@ -21,6 +21,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import type { BoardNote, StickyNoteColor } from '@/types';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 import { getColorConfig, NOTE_COLORS } from './StickyNote';
 
 export interface NotesBoardProps {
@@ -178,32 +179,36 @@ export function NotesBoard({
           <div className="flex items-center gap-2 shrink-0">
             {/* Question filter pill */}
             {questionOptions.length > 0 && (
-              <select
+              <SmoothSelect
                 value={selectedQuestionFilter}
-                onChange={(e) => setSelectedQuestionFilter(e.target.value)}
-                className="px-2.5 py-1 rounded-lg text-xs font-semibold border bg-white dark:bg-[#0B1320] border-stone-200 dark:border-[#283C5A] text-stone-700 dark:text-stone-200 focus:outline-none cursor-pointer"
-                aria-label="Filter by question"
-              >
-                <option value="all">All Questions</option>
-                {questionOptions.map((q) => (
-                  <option key={q} value={String(q)}>
-                    Question Q{q}
-                  </option>
-                ))}
-              </select>
+                onChange={setSelectedQuestionFilter}
+                ariaLabel="Filter by question"
+                size="sm"
+                variant="elevated"
+                menuMinWidth={160}
+                options={[
+                  { value: 'all', label: 'All Questions' },
+                  ...questionOptions.map((q) => ({ value: String(q), label: `Question Q${q}` })),
+                ]}
+              />
             )}
 
             {/* Sort toggle */}
-            <select
+            <SmoothSelect
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-2.5 py-1 rounded-lg text-xs font-semibold border bg-white dark:bg-[#0B1320] border-stone-200 dark:border-[#283C5A] text-stone-700 dark:text-stone-200 focus:outline-none cursor-pointer hidden md:inline-block"
-              aria-label="Sort notes"
-            >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="question">Question Order</option>
-            </select>
+              onChange={(v) => setSortBy(v as 'newest' | 'oldest' | 'question')}
+              ariaLabel="Sort notes"
+              size="sm"
+              variant="elevated"
+              align="right"
+              menuMinWidth={165}
+              className="hidden md:inline-flex"
+              options={[
+                { value: 'newest', label: 'Newest First' },
+                { value: 'oldest', label: 'Oldest First' },
+                { value: 'question', label: 'Question Order' },
+              ]}
+            />
 
             {/* Layout Mode Toggle: Grid vs Canvas */}
             <div className="flex items-center rounded-lg border border-stone-200 dark:border-[#283C5A] p-0.5 bg-stone-50 dark:bg-[#0B1320]">

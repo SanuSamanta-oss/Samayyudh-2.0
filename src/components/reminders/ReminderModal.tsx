@@ -27,6 +27,7 @@ import type { CustomToneRecord } from '@/lib/notifications/custom-audio';
 import { formatTimeDisplay, toLocalDateKey } from '@/lib/notifications/reminder-service';
 import { BUILT_IN_TONES } from './NotificationSoundSettings';
 import { CategoryIcon, PresetTimeIcon } from './category-icons';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 
 export type ModalTarget =
   | { kind: 'create'; presetCategory?: TaskCategory; defaultDate?: string }
@@ -654,17 +655,22 @@ export function ReminderModal({
                         <CalendarDays className="w-3.5 h-3.5 text-[#7667C8] dark:text-[#8D7BE0]" />
                         Repeat
                       </label>
-                      <select
+                      <SmoothSelect
                         value={repeatType}
-                        onChange={(e) => setRepeatType(e.target.value as RepeatFrequency)}
-                        className="w-full px-3 py-2 rounded-[12px] bg-white dark:bg-[#181822] text-sm font-medium text-[#25233A] dark:text-[#F5F3FF] focus:outline-none focus:ring-2 focus:ring-[#7667C8]/40 cursor-pointer"
-                      >
-                        <option value="once">Once</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekdays">Weekdays</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="custom">Custom</option>
-                      </select>
+                        onChange={(v) => setRepeatType(v as RepeatFrequency)}
+                        ariaLabel="Repeat frequency"
+                        size="sm"
+                        variant="elevated"
+                        align="right"
+                        className="w-full"
+                        options={[
+                          { value: 'once', label: 'Once' },
+                          { value: 'daily', label: 'Daily' },
+                          { value: 'weekdays', label: 'Weekdays' },
+                          { value: 'weekly', label: 'Weekly' },
+                          { value: 'custom', label: 'Custom' },
+                        ]}
+                      />
                     </div>
                   </div>
 

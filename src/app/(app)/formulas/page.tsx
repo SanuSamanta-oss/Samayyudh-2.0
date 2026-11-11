@@ -25,6 +25,7 @@ import { ConstantsModal } from '@/components/formulas/ConstantsModal';
 import { getMathematicsStats } from '@/data/formulas/mathematics';
 import type { SubjectId } from '@/types/formulas';
 import { cn } from '@/lib/utils';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 
 export default function FormulaLibraryPage() {
   const [activeSubject, setActiveSubject] = useState<SubjectId>('physics');
@@ -237,7 +238,7 @@ export default function FormulaLibraryPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search formulas by name, topic, symbol, or keyword..."
-                  className="w-full pl-10 pr-10 py-2.5 rounded-2xl text-xs sm:text-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111A2E] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all shadow-2xs font-medium"
+                  className="w-full pl-10 pr-10 py-2.5 rounded-2xl text-xs sm:text-sm bg-white dark:bg-[#111A2E] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:outline-none shadow-[0_4px_16px_-6px_rgba(15,23,42,0.08)] dark:shadow-[0_6px_20px_-6px_rgba(0,0,0,0.45)] focus:shadow-[0_6px_22px_-4px_rgba(99,91,255,0.22)] transition-all font-medium"
                 />
                 {searchQuery && (
                   <button
@@ -253,20 +254,20 @@ export default function FormulaLibraryPage() {
 
               {/* Chapter Jump Selector Dropdown */}
               <div className="flex items-center gap-2">
-                <select
+                <SmoothSelect
                   value={selectedChapterId || ''}
-                  onChange={(e) => setSelectedChapterId(e.target.value || null)}
-                  className="px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111A2E] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all shadow-2xs font-medium"
-                >
-                  <option value="">All Chapters ({stats.totalChapters})</option>
-                  {(selectedLevelId ? currentLevel?.chapters || [] : physicsAcademicLevels.flatMap((l) => l.chapters)).map(
-                    (ch) => (
-                      <option key={ch.id} value={ch.id}>
-                        {ch.title}
-                      </option>
-                    )
-                  )}
-                </select>
+                  onChange={(v) => setSelectedChapterId(v || null)}
+                  ariaLabel="Filter Physics Chapter"
+                  variant="elevated"
+                  className="min-w-[180px]"
+                  options={[
+                    { value: '', label: `All Chapters (${stats.totalChapters})` },
+                    ...(selectedLevelId
+                      ? currentLevel?.chapters || []
+                      : physicsAcademicLevels.flatMap((l) => l.chapters)
+                    ).map((ch) => ({ value: ch.id, label: ch.title })),
+                  ]}
+                />
 
                 {(searchQuery || selectedLevelId || selectedChapterId) && (
                   <button

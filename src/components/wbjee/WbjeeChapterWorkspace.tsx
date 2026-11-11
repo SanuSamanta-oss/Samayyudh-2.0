@@ -24,6 +24,7 @@ import {
 import { WbjeeChapter, WbjeeSubject, WbjeeSyllabusConfig } from '@/data/wbjee/wbjeeSyllabus';
 import { WBJEE_QUESTIONS_DATA, WbjeeQuestion } from '@/data/wbjee/wbjeeQuestionsData';
 import { MathText } from '@/components/pyq/MathText';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 
 // ── WBJEE Upload Modal ─────────────────────────────────────────
 
@@ -181,27 +182,37 @@ function WbjeeUploadModal({ isOpen, onClose, subjectName, chapterName }: WbjeeUp
                   </div>
                   <div>
                     <label className="block text-stone-500 font-medium mb-1">Question Category</label>
-                    <select
+                    <SmoothSelect
                       value={questionCategory}
-                      onChange={(e) => { setQuestionCategory(e.target.value); setCorrectOptions([0]); }}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-foreground font-medium"
-                    >
-                      <option value="cat1">Category 1 (1 mark, −0.25)</option>
-                      <option value="cat2">Category 2 (2 marks, −0.5)</option>
-                      <option value="cat3">Category 3 (2 marks, partial)</option>
-                    </select>
+                      onChange={(val) => {
+                        setQuestionCategory(val);
+                        setCorrectOptions([0]);
+                      }}
+                      ariaLabel="Question Category"
+                      size="sm"
+                      className="w-full"
+                      options={[
+                        { value: 'cat1', label: 'Category 1 (1 mark, −0.25)' },
+                        { value: 'cat2', label: 'Category 2 (2 marks, −0.5)' },
+                        { value: 'cat3', label: 'Category 3 (2 marks, partial)' },
+                      ]}
+                    />
                   </div>
                   <div>
                     <label className="block text-stone-500 font-medium mb-1">Difficulty</label>
-                    <select
+                    <SmoothSelect
                       value={difficulty}
-                      onChange={(e) => setDifficulty(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-foreground font-medium"
-                    >
-                      <option value="easy">Easy</option>
-                      <option value="medium">Medium</option>
-                      <option value="hard">Hard</option>
-                    </select>
+                      onChange={setDifficulty}
+                      ariaLabel="Difficulty"
+                      size="sm"
+                      align="right"
+                      className="w-full"
+                      options={[
+                        { value: 'easy', label: 'Easy' },
+                        { value: 'medium', label: 'Medium' },
+                        { value: 'hard', label: 'Hard' },
+                      ]}
+                    />
                   </div>
                 </div>
 

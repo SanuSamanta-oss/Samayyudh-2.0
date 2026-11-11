@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   Sparkles,
 } from 'lucide-react';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 
 interface UpscUploadPYQModalProps {
   isOpen: boolean;
@@ -164,10 +165,10 @@ export function UpscUploadPYQModal({
 
                   <div>
                     <label className="block text-stone-500 font-medium mb-1">Question Format</label>
-                    <select
+                    <SmoothSelect
                       value={questionFormat}
-                      onChange={(e) => {
-                        const nextFmt = e.target.value as 'OBJECTIVE' | 'DESCRIPTIVE';
+                      onChange={(val) => {
+                        const nextFmt = val as 'OBJECTIVE' | 'DESCRIPTIVE';
                         setQuestionFormat(nextFmt);
                         if (nextFmt === 'OBJECTIVE') {
                           setMarks('2');
@@ -177,11 +178,14 @@ export function UpscUploadPYQModal({
                           setNegativeMarks('0');
                         }
                       }}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-foreground font-medium"
-                    >
-                      <option value="OBJECTIVE">Objective MCQ (Prelims)</option>
-                      <option value="DESCRIPTIVE">Descriptive Answer (Mains)</option>
-                    </select>
+                      ariaLabel="Question Format"
+                      size="sm"
+                      className="w-full"
+                      options={[
+                        { value: 'OBJECTIVE', label: 'Objective MCQ (Prelims)' },
+                        { value: 'DESCRIPTIVE', label: 'Descriptive Answer (Mains)' },
+                      ]}
+                    />
                   </div>
 
                   <div>
@@ -192,14 +196,14 @@ export function UpscUploadPYQModal({
                         value={marks}
                         onChange={(e) => setMarks(e.target.value)}
                         placeholder="Marks"
-                        className="w-1/2 px-2 py-2 rounded-lg border border-border bg-surface text-foreground text-center"
+                        className="w-1/2 px-2 py-2 rounded-xl bg-surface text-foreground text-center outline-none focus:outline-none"
                       />
                       <input
                         type="text"
                         value={negativeMarks}
                         onChange={(e) => setNegativeMarks(e.target.value)}
                         placeholder="Neg"
-                        className="w-1/2 px-2 py-2 rounded-lg border border-border bg-surface text-foreground text-center"
+                        className="w-1/2 px-2 py-2 rounded-xl bg-surface text-foreground text-center outline-none focus:outline-none"
                       />
                     </div>
                   </div>
@@ -209,25 +213,33 @@ export function UpscUploadPYQModal({
                       {questionFormat === 'DESCRIPTIVE' ? 'Word Limit' : 'Difficulty'}
                     </label>
                     {questionFormat === 'DESCRIPTIVE' ? (
-                      <select
+                      <SmoothSelect
                         value={wordLimit}
-                        onChange={(e) => setWordLimit(e.target.value)}
-                        className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-foreground font-medium"
-                      >
-                        <option value="150">150 Words (10 Marks)</option>
-                        <option value="250">250 Words (15 Marks)</option>
-                        <option value="1000">1000-1200 Words (Essay)</option>
-                      </select>
+                        onChange={setWordLimit}
+                        ariaLabel="Word Limit"
+                        size="sm"
+                        align="right"
+                        className="w-full"
+                        options={[
+                          { value: '150', label: '150 Words (10 Marks)' },
+                          { value: '250', label: '250 Words (15 Marks)' },
+                          { value: '1000', label: '1000-1200 Words (Essay)' },
+                        ]}
+                      />
                     ) : (
-                      <select
+                      <SmoothSelect
                         value={difficulty}
-                        onChange={(e) => setDifficulty(e.target.value)}
-                        className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-foreground font-medium"
-                      >
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                      </select>
+                        onChange={setDifficulty}
+                        ariaLabel="Difficulty"
+                        size="sm"
+                        align="right"
+                        className="w-full"
+                        options={[
+                          { value: 'easy', label: 'Easy' },
+                          { value: 'medium', label: 'Medium' },
+                          { value: 'hard', label: 'Hard' },
+                        ]}
+                      />
                     )}
                   </div>
                 </div>

@@ -27,6 +27,7 @@ import {
 import type { Formula, AcademicLevel, Chapter } from '@/types/formulas';
 import { MathRenderer } from './MathRenderer';
 import { MathFormulaDetailModal } from './MathFormulaDetailModal';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 import { cn } from '@/lib/utils';
 
 export function MathematicsSection() {
@@ -220,21 +221,24 @@ export function MathematicsSection() {
 
         {/* Subtopic Selector Dropdown */}
         <div className="flex items-center gap-2">
-          <select
+          <SmoothSelect
             value={selectedChapterId || ''}
-            onChange={(e) => setSelectedChapterId(e.target.value || null)}
-            className="px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111A2E] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all shadow-2xs font-medium"
-          >
-            <option value="">All Topics ({selectedDivisionId ? currentDivision?.chapters.length : stats.totalSubtopics})</option>
-            {(selectedDivisionId
-              ? currentDivision?.chapters || []
-              : mathematicsDivisions.flatMap((d) => d.chapters)
-            ).map((ch) => (
-              <option key={ch.id} value={ch.id}>
-                {ch.title} ({ch.formulas.length})
-              </option>
-            ))}
-          </select>
+            onChange={(v) => setSelectedChapterId(v || null)}
+            ariaLabel="Select mathematics topic"
+            variant="elevated"
+            align="right"
+            className="min-w-[190px]"
+            options={[
+              {
+                value: '',
+                label: `All Topics (${selectedDivisionId ? currentDivision?.chapters.length : stats.totalSubtopics})`,
+              },
+              ...(selectedDivisionId
+                ? currentDivision?.chapters || []
+                : mathematicsDivisions.flatMap((d) => d.chapters)
+              ).map((ch) => ({ value: ch.id, label: `${ch.title} (${ch.formulas.length})` })),
+            ]}
+          />
 
           {(searchQuery || selectedDivisionId || selectedChapterId) && (
             <button

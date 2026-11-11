@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { AchievementDefinition, UserAchievement } from '@/types/achievements';
 import { AchievementCard } from './AchievementCard';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 import { Sparkles, Trophy, Flame, Award, Filter, ArrowUpDown } from 'lucide-react';
 
 export interface AchievementGridProps {
@@ -103,15 +104,20 @@ export function AchievementGrid({
         {/* Sort dropdown */}
         <div className="flex items-center gap-2 self-end sm:self-auto">
           <ArrowUpDown className="w-3.5 h-3.5 text-stone-400" />
-          <select
+          <SmoothSelect
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-1.5 rounded-xl border border-border bg-card text-xs font-semibold text-stone-700 dark:text-stone-300 focus:outline-none"
-          >
-            <option value="default">Default Order</option>
-            <option value="unlocked_first">Unlocked First</option>
-            <option value="rarity">Rarest First</option>
-          </select>
+            onChange={(v) => setSortBy(v as 'default' | 'unlocked_first' | 'rarity')}
+            ariaLabel="Sort achievements"
+            size="sm"
+            variant="elevated"
+            align="right"
+            menuMinWidth={170}
+            options={[
+              { value: 'default', label: 'Default Order' },
+              { value: 'unlocked_first', label: 'Unlocked First' },
+              { value: 'rarity', label: 'Rarest First' },
+            ]}
+          />
         </div>
       </div>
 

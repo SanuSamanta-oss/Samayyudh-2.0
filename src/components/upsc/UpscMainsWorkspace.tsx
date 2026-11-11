@@ -22,6 +22,7 @@ import {
   UpscTopic,
   UpscOptionalSubject,
 } from '@/data/upsc/upscSyllabus';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 
 interface UpscMainsWorkspaceProps {
   onBackToStages: () => void;
@@ -251,15 +252,16 @@ export function UpscMainsWorkspace({
               <p className="text-[11px] text-stone-400">22 constitutionally recognized languages supported</p>
             </div>
           </div>
-          <select
+          <SmoothSelect
             value={selectedLanguage}
-            onChange={(e) => setSelectedLanguage(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-border bg-surface text-xs font-bold text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-500/30"
-          >
-            {UPSC_INDIAN_LANGUAGES.map((lang) => (
-              <option key={lang} value={lang}>{lang}</option>
-            ))}
-          </select>
+            onChange={setSelectedLanguage}
+            ariaLabel="Select Indian Language"
+            size="sm"
+            align="right"
+            searchPlaceholder="Search language..."
+            className="min-w-[180px]"
+            options={UPSC_INDIAN_LANGUAGES.map((lang) => ({ value: lang, label: lang }))}
+          />
         </div>
       )}
 

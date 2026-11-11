@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   History as HistoryIcon, Clock, Award, Target, ChevronRight,
-  Trash2, Calendar, Zap, Search, Filter, Loader2, Printer
+  Trash2, Calendar, Zap, Search, Loader2, Printer
 } from 'lucide-react';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
 import { cn, formatDuration, percentage } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
 import type { ExamSession, Answer, AnswerEvaluation } from '@/types';
@@ -156,22 +157,23 @@ export default function HistoryPage() {
             placeholder="Search sessions..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400 transition-all"
+            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-card text-sm outline-none focus:outline-none shadow-[0_4px_16px_-6px_rgba(15,23,42,0.08)] dark:shadow-[0_6px_20px_-6px_rgba(0,0,0,0.45)] focus:shadow-[0_6px_22px_-4px_rgba(99,91,255,0.22)] transition-all"
           />
         </div>
-        <div className="relative">
-          <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-          <select
-            value={filterStatus}
-            onChange={e => setFilterStatus(e.target.value)}
-            className="pl-9 pr-8 py-2.5 rounded-xl border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400 appearance-none cursor-pointer"
-          >
-            <option value="all">All Status</option>
-            <option value="submitted">Submitted</option>
-            <option value="completed">Completed</option>
-            <option value="in_progress">In Progress</option>
-          </select>
-        </div>
+        <SmoothSelect
+          value={filterStatus}
+          onChange={setFilterStatus}
+          ariaLabel="Filter sessions by status"
+          variant="elevated"
+          align="right"
+          className="sm:w-48"
+          options={[
+            { value: 'all', label: 'All Status' },
+            { value: 'submitted', label: 'Submitted' },
+            { value: 'completed', label: 'Completed' },
+            { value: 'in_progress', label: 'In Progress' },
+          ]}
+        />
       </div>
 
       {/* Sessions List */}

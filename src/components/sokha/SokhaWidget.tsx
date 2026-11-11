@@ -89,9 +89,9 @@ export function SokhaWidget() {
     setMantraIndex((prev) => (prev + 1) % WARRIOR_MANTRAS.length);
   };
 
-  // ── Floating Launcher Greeting Text (1 min intervals, stays 5s then sleeps) ──
+  // Floating Launcher Greeting Text (1 min intervals, stays 5s then sleeps)
   const [showGreeting, setShowGreeting] = useState(false);
-  const [greetingText, setGreetingText] = useState("🔥 Awaken Your Focus! Ask doubts");
+  const [greetingText, setGreetingText] = useState("Awaken Your Focus! Ask doubts");
 
   // Welcome login profile hint (5s then sleeps)
   useEffect(() => {
@@ -108,12 +108,12 @@ export function SokhaWidget() {
           window.dispatchEvent(new CustomEvent('samayyudh:profile-hint-active', { detail: { active: true } }));
         }
 
-        setGreetingText("👉 Click on your profile photo to unlock full potential!");
+        setGreetingText("Click on your profile photo to unlock full potential!");
         setShowGreeting(true);
 
         const timer = setTimeout(() => {
           setShowGreeting(false);
-          setGreetingText("🔥 Awaken Your Focus! Ask doubts");
+          setGreetingText("Awaken Your Focus! Ask doubts");
           if (typeof window !== 'undefined') {
             window.dispatchEvent(new CustomEvent('samayyudh:profile-hint-active', { detail: { active: false } }));
           }
@@ -128,7 +128,7 @@ export function SokhaWidget() {
   useEffect(() => {
     // Initial popup on load after 1.5s, stays 5s
     const initialTimer = setTimeout(() => {
-      setGreetingText("🔥 Awaken Your Focus! Ask doubts");
+      setGreetingText("Awaken Your Focus! Ask doubts");
       setShowGreeting(true);
       const sleepTimer = setTimeout(() => {
         setShowGreeting(false);
@@ -138,7 +138,7 @@ export function SokhaWidget() {
 
     // Recurring 1-minute interval (every 60s, wake for 5s)
     const interval = setInterval(() => {
-      setGreetingText("🔥 Awaken Your Focus! Ask doubts");
+      setGreetingText("Awaken Your Focus! Ask doubts");
       setShowGreeting(true);
 
       const sleepTimer = setTimeout(() => {
@@ -156,14 +156,14 @@ export function SokhaWidget() {
 
   useEffect(() => {
     const handleTrigger = () => {
-      setGreetingText("👉 Click on your profile photo to unlock full potential!");
+      setGreetingText("Click on your profile photo to unlock full potential!");
       setShowGreeting(true);
       if (typeof window !== 'undefined') {
         window.dispatchEvent(new CustomEvent('samayyudh:profile-hint-active', { detail: { active: true } }));
       }
       const timer = setTimeout(() => {
         setShowGreeting(false);
-        setGreetingText("🔥 Awaken Your Focus! Ask doubts");
+        setGreetingText("Awaken Your Focus! Ask doubts");
         if (typeof window !== 'undefined') {
           window.dispatchEvent(new CustomEvent('samayyudh:profile-hint-active', { detail: { active: false } }));
         }

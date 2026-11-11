@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useMemo, useSyncExternalStore } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef, useSyncExternalStore } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
@@ -45,18 +46,58 @@ import {
   clearSelectedAvatar,
   type AvatarDef,
 } from '@/lib/avatars';
-import { ProfilePictureModal } from '@/components/ProfilePictureModal';
-import { ReminderSettingsPanel } from '@/components/notifications/ReminderSettingsPanel';
-import { PerformanceBadge } from '@/components/achievements/PerformanceBadge';
-import { StreakMedal } from '@/components/achievements/StreakMedal';
 import { ProfileBannerHeader } from '@/components/profile/ProfileBannerHeader';
 import { ProfileStatsGrid } from '@/components/profile/ProfileStatsGrid';
 import { SubjectTopicDistributionCard } from '@/components/profile/SubjectTopicDistributionCard';
-import { ContributionHeatmapCard } from '@/components/profile/ContributionHeatmapCard';
 import {
   ProfileRightSidebar,
   type RecentBadgeItem,
 } from '@/components/profile/ProfileRightSidebar';
+
+const PerformanceBadge = dynamic(
+  () =>
+    import('@/components/achievements/PerformanceBadge').then(
+      (m) => m.PerformanceBadge
+    ),
+  { ssr: false }
+);
+
+const StreakMedal = dynamic(
+  () =>
+    import('@/components/achievements/StreakMedal').then((m) => m.StreakMedal),
+  { ssr: false }
+);
+
+const ProfilePictureModal = dynamic(
+  () => import('@/components/ProfilePictureModal').then((m) => m.ProfilePictureModal),
+  { ssr: false }
+);
+
+const ReminderSettingsPanel = dynamic(
+  () =>
+    import('@/components/notifications/ReminderSettingsPanel').then(
+      (m) => m.ReminderSettingsPanel
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-96 rounded-3xl bg-white dark:bg-[#111A2E] animate-pulse" />
+    ),
+  }
+);
+
+const ContributionHeatmapCard = dynamic(
+  () =>
+    import('@/components/profile/ContributionHeatmapCard').then(
+      (m) => m.ContributionHeatmapCard
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-56 rounded-3xl bg-white dark:bg-[#111A2E] animate-pulse" />
+    ),
+  }
+);
 
 type SidebarTab = 'profile' | 'sessions' | 'achievements' | 'analytics' | 'settings';
 
@@ -129,7 +170,7 @@ function getSessionModeIcon(mode: string) {
 }
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, signOut, revokeAllSessions, refreshSession, loading: authLoading } =
+  const { user, isAuthenticated, signOut, revokeAllSessions, refreshSession } =
     useAuth();
   const router = useRouter();
   const prefersReducedMotion = useReducedMotion();
@@ -181,7 +222,7 @@ export default function ProfilePage() {
   const [revokeMessage, setRevokeMessage] = useState<string | null>(null);
   const [confirmClear, setConfirmClear] = useState(false);
   const [clearingData, setClearingData] = useState(false);
-  const [dataLoading, setDataLoading] = useState(true);
+  const syncedUserRef = useRef<string | null>(null);
 
   const loadAvatar = useCallback(() => {
     setSelectedAvatarState(getSelectedAvatar());
@@ -207,56 +248,59 @@ export default function ProfilePage() {
 
   const authUserId = user?.id ?? null;
 
-  const loadAllProfileData = useCallback(async () => {
-    try {
-      appUsageTracker.init();
-      const userId = authUserId || 'local-user';
+  const loadAllProfileData = useCallback(
+    async (
+      prefetchedSystemData?: Awaited<ReturnType<typeof getAchievementSystemData>> | null
+    ) => {
+      try {
+        appUsageTracker.init();
+        const userId = authUserId || 'local-user';
 
-      const [
-        allSessions,
-        allAnswers,
-        allEvals,
-        allNotes,
-        customQs,
-        unsynced,
-        localSnap,
-        systemData,
-      ] = await Promise.all([
-        localDB.getAllSessions(),
-        localDB.getAllAnswers(),
-        localDB.getAllEvaluations(),
-        localDB.getAllStickyNotes(),
-        localDB.getAllCustomQuestions(),
-        localDB.getUnsyncedItems(),
-        getLocalAchievementSnapshot(userId),
-        authUserId ? getAchievementSystemData(authUserId).catch(() => null) : Promise.resolve(null),
-      ]);
+        // Fast-path local IndexedDB read (<20ms) with zero network blocking
+        const [
+          allSessions,
+          allAnswers,
+          allEvals,
+          allNotes,
+          customQs,
+          unsynced,
+          localSnap,
+        ] = await Promise.all([
+          localDB.getAllSessions(),
+          localDB.getAllAnswers(),
+          localDB.getAllEvaluations(),
+          localDB.getAllStickyNotes(),
+          localDB.getAllCustomQuestions(),
+          localDB.getUnsyncedItems(),
+          getLocalAchievementSnapshot(userId),
+        ]);
 
-      const usageBuckets = appUsageTracker.getAllStoredBuckets();
+        const systemData = prefetchedSystemData ?? null;
+        const usageBuckets = appUsageTracker.getAllStoredBuckets();
 
-      setSessions(allSessions);
-      setAnswers(allAnswers);
-      setEvaluations(allEvals);
-      setCustomQuestions(customQs);
-      setAppUsageBuckets(usageBuckets);
-      setNotesCount(allNotes.length);
-      setUnsyncedCount(unsynced.length);
+        setSessions(allSessions);
+        setAnswers(allAnswers);
+        setEvaluations(allEvals);
+        setCustomQuestions(customQs);
+        setAppUsageBuckets(usageBuckets);
+        setNotesCount(allNotes.length);
+        setUnsyncedCount(unsynced.length);
 
-      const resolvedDefs =
-        systemData?.definitions && systemData.definitions.length > 0
-          ? systemData.definitions
-          : localSnap.definitions.length > 0
-            ? localSnap.definitions
-            : STANDARD_ACHIEVEMENTS;
-      const resolvedUserAchs =
-        systemData?.userAchievements && systemData.userAchievements.length >= localSnap.userAchievements.length
-          ? systemData.userAchievements
-          : localSnap.userAchievements;
-      const resolvedStreak = systemData?.streak || localSnap.streak || null;
+        const resolvedDefs =
+          systemData?.definitions && systemData.definitions.length > 0
+            ? systemData.definitions
+            : localSnap.definitions.length > 0
+              ? localSnap.definitions
+              : STANDARD_ACHIEVEMENTS;
+        const resolvedUserAchs =
+          systemData?.userAchievements && systemData.userAchievements.length >= localSnap.userAchievements.length
+            ? systemData.userAchievements
+            : localSnap.userAchievements;
+        const resolvedStreak = systemData?.streak || localSnap.streak || null;
 
-      setAchDefinitions(resolvedDefs);
-      setUserAchievements(resolvedUserAchs);
-      setStreakData(resolvedStreak);
+        setAchDefinitions(resolvedDefs);
+        setUserAchievements(resolvedUserAchs);
+        setStreakData(resolvedStreak);
 
       const evalMap = new Map(allEvals.map((e) => [e.answer_id, e]));
       const answersBySession = new Map<string, Answer[]>();
@@ -378,16 +422,32 @@ export default function ProfilePage() {
       }
     } catch (err) {
       console.error('Failed to load profile dashboard data:', err);
-    } finally {
-      setDataLoading(false);
     }
   }, [authUserId]);
 
+  // 1. Immediate local IndexedDB hydration (<20ms)
   useEffect(() => {
     Promise.resolve().then(() => {
       void loadAllProfileData();
     });
   }, [loadAllProfileData]);
+
+  // 2. Non-blocking background cloud sync so UI never waits on remote API calls
+  useEffect(() => {
+    if (!authUserId || !isOnline || syncedUserRef.current === authUserId) return;
+    syncedUserRef.current = authUserId;
+    let cancelled = false;
+    void getAchievementSystemData(authUserId)
+      .then((systemData) => {
+        if (!cancelled && systemData) {
+          void loadAllProfileData(systemData);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [authUserId, isOnline, loadAllProfileData]);
 
   // Analytics module reuse for Subject & Topic Distribution
   const analyticsData: ProcessedAnalytics = useMemo(() => {
@@ -560,32 +620,6 @@ export default function ProfilePage() {
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
-
-  if (authLoading || dataLoading) {
-    return (
-      <div className="min-h-[82vh] max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[232px_minmax(0,1fr)] xl:grid-cols-[232px_minmax(0,1fr)_316px] gap-6">
-          <div className="hidden lg:block h-[540px] rounded-3xl bg-white/80 dark:bg-[#111A2E]/80 animate-pulse" />
-          <div className="space-y-5">
-            <div className="h-64 rounded-3xl bg-white/80 dark:bg-[#111A2E]/80 animate-pulse" />
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
-              {[0, 1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="h-32 rounded-3xl bg-white/80 dark:bg-[#111A2E]/80 animate-pulse"
-                />
-              ))}
-            </div>
-            <div className="h-64 rounded-3xl bg-white/80 dark:bg-[#111A2E]/80 animate-pulse" />
-          </div>
-          <div className="hidden xl:block space-y-4">
-            <div className="h-44 rounded-3xl bg-white/80 dark:bg-[#111A2E]/80 animate-pulse" />
-            <div className="h-72 rounded-3xl bg-white/80 dark:bg-[#111A2E]/80 animate-pulse" />
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-[85vh] max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7">

@@ -1,5 +1,5 @@
 // Service Worker for SamayYudh PWA & Push Notifications
-const CACHE_NAME = 'samayyudh-v5';
+const CACHE_NAME = 'samayyudh-v6';
 const STATIC_ASSETS = [
   '/',
   '/auth',

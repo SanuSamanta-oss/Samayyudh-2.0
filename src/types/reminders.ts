@@ -4,18 +4,23 @@
 
 export type ReminderTone = 'chime' | 'gong' | 'bell' | 'marimba' | 'custom' | string;
 
+export type RepeatFrequency = 'once' | 'daily' | 'weekdays' | 'weekly' | 'custom';
+
 export type TaskCategory =
+  | 'study'
+  | 'practice'
   | 'quick_battle'
   | 'practice_battle'
   | 'century'
   | 'full_exam'
+  | 'current_affairs'
   | 'questions'
   | 'history'
   | 'analytics'
   | 'streak'
   | 'notes'
+  | 'custom'
   // Legacy compatibility fallbacks
-  | 'practice'
   | 'revision'
   | 'mock'
   | 'gk'
@@ -28,13 +33,17 @@ export interface CustomTaskReminder {
   title: string;
   time: string; // 24h format "HH:mm" (e.g., "07:30")
   days: number[]; // Days of the week (0 = Sun, 1 = Mon, ..., 6 = Sat)
+  repeatType?: RepeatFrequency;
+  scheduledDate?: string | null; // YYYY-MM-DD when repeatType === 'once'
   enabled: boolean;
   category: TaskCategory;
   tone?: ReminderTone;
   customToneName?: string;
   notes?: string;
+  browserNotification?: boolean;
+  pushNotification?: boolean;
   lastTriggeredDate?: string | null;
-  completedDate?: string | null; // e.g. "2026-10-14" when student marks done
+  completedDate?: string | null; // e.g. "2026-11-11" when marked done
 }
 
 export interface ReminderSettings {
@@ -73,9 +82,11 @@ export const DEFAULT_STUDENT_TASKS: CustomTaskReminder[] = [
     id: 'task-morning-quick-battle',
     title: 'Morning Quick Battle (10 Qs)',
     time: '07:30',
-    days: [1, 2, 3, 4, 5, 6], // Mon - Sat
+    days: [1, 2, 3, 4, 5, 6],
+    repeatType: 'custom',
     enabled: true,
     category: 'quick_battle',
+    browserNotification: true,
     notes: 'Warm up with 10 fast timed questions in Practice mode.',
   },
   {
@@ -83,8 +94,10 @@ export const DEFAULT_STUDENT_TASKS: CustomTaskReminder[] = [
     title: 'PYQ & Speed Drill',
     time: '14:30',
     days: [1, 2, 3, 4, 5],
+    repeatType: 'weekdays',
     enabled: true,
     category: 'practice_battle',
+    browserNotification: true,
     notes: 'Solve targeted PYQ questions under exam conditions.',
   },
   {
@@ -92,8 +105,10 @@ export const DEFAULT_STUDENT_TASKS: CustomTaskReminder[] = [
     title: 'Full Exam Mock Simulation',
     time: '18:30',
     days: [0, 2, 4, 6],
+    repeatType: 'custom',
     enabled: true,
     category: 'full_exam',
+    browserNotification: true,
     notes: 'Complete mock paper under official exam hall timer rules.',
   },
   {
@@ -101,21 +116,23 @@ export const DEFAULT_STUDENT_TASKS: CustomTaskReminder[] = [
     title: 'History & Mistakes Review',
     time: '21:30',
     days: [1, 2, 3, 4, 5, 6],
+    repeatType: 'custom',
     enabled: true,
     category: 'history',
+    browserNotification: true,
     notes: 'Analyze incorrect questions and review step-by-step solutions.',
   },
 ];
 
 export const DEFAULT_REMINDER_SETTINGS: ReminderSettings = {
   enabled: false,
-  studyTime: '20:00', // Default 8:00 PM
-  days: [0, 1, 2, 3, 4, 5, 6], // Every day by default
+  studyTime: '20:00',
+  days: [0, 1, 2, 3, 4, 5, 6],
   streakProtection: true,
   soundEnabled: true,
   vibrationEnabled: true,
   reminderTone: 'chime',
-  customNote: 'Time for your daily Battle with the Clock! ⚔️',
+  customNote: 'Time for your daily Battle with the Clock.',
   lastTriggeredDate: null,
   snoozedUntil: null,
   pushSubscribed: false,
@@ -133,10 +150,10 @@ export const DAY_LABELS = [
 ];
 
 export const TIME_PRESETS = [
-  { label: 'Morning Focus', time: '07:00', icon: '🌅' },
-  { label: 'Afternoon Boost', time: '14:00', icon: '☀️' },
-  { label: 'Evening Battle', time: '20:00', icon: '🌆' },
-  { label: 'Night Sprint', time: '22:00', icon: '🌙' },
+  { label: 'Morning Focus', time: '07:00', icon: 'sunrise' as const },
+  { label: 'Afternoon Boost', time: '14:00', icon: 'sun' as const },
+  { label: 'Evening Battle', time: '20:00', icon: 'sunset' as const },
+  { label: 'Night Sprint', time: '22:00', icon: 'moon' as const },
 ];
 
 export const CATEGORY_META: Record<
@@ -150,135 +167,158 @@ export const CATEGORY_META: Record<
     darkColor: string;
   }
 > = {
+  study: {
+    label: 'Study Session',
+    sectionName: 'Practice Studio',
+    route: '/practice',
+    icon: 'book-open',
+    color: 'bg-[#EAE5FA] text-[#7667C8]',
+    darkColor: 'dark:bg-[#302A48] dark:text-[#C5B9F2]',
+  },
   quick_battle: {
-    label: 'Quick Battle (10 Qs)',
+    label: 'Quick Battle',
     sectionName: 'Practice Mode',
     route: '/practice?mode=quick_battle',
-    icon: '⚡',
-    color: 'bg-amber-100 text-amber-700',
-    darkColor: 'dark:bg-amber-950/60 dark:text-amber-300',
+    icon: 'zap',
+    color: 'bg-amber-500/12 text-amber-700',
+    darkColor: 'dark:bg-amber-500/15 dark:text-amber-300',
   },
   practice_battle: {
-    label: 'Practice Battle (25 Qs)',
+    label: 'Practice Battle',
     sectionName: 'Practice Mode',
     route: '/practice?mode=practice_battle',
-    icon: '⚔️',
-    color: 'bg-indigo-100 text-indigo-700',
-    darkColor: 'dark:bg-indigo-950/60 dark:text-indigo-300',
+    icon: 'swords',
+    color: 'bg-[#EAE5FA] text-[#7667C8]',
+    darkColor: 'dark:bg-[#302A48] dark:text-[#C5B9F2]',
   },
   century: {
-    label: 'Century Run (50/100 Qs)',
+    label: 'Century Challenge',
     sectionName: 'Century Challenge',
     route: '/practice?mode=half_century',
-    icon: '🏆',
-    color: 'bg-rose-100 text-rose-700',
-    darkColor: 'dark:bg-rose-950/60 dark:text-rose-300',
+    icon: 'trophy',
+    color: 'bg-rose-500/12 text-rose-700',
+    darkColor: 'dark:bg-rose-500/15 dark:text-rose-300',
   },
   full_exam: {
-    label: 'Full Exam Simulation',
+    label: 'Exam Simulation',
     sectionName: 'Exams Section',
     route: '/exams',
-    icon: '🎓',
-    color: 'bg-purple-100 text-purple-700',
-    darkColor: 'dark:bg-purple-950/60 dark:text-purple-300',
+    icon: 'graduation-cap',
+    color: 'bg-purple-500/12 text-purple-700',
+    darkColor: 'dark:bg-purple-500/15 dark:text-purple-300',
+  },
+  current_affairs: {
+    label: 'Current Affairs',
+    sectionName: 'Practice Hub',
+    route: '/practice',
+    icon: 'newspaper',
+    color: 'bg-sky-500/12 text-sky-700',
+    darkColor: 'dark:bg-sky-500/15 dark:text-sky-300',
   },
   questions: {
-    label: 'Explore PYQ',
+    label: 'PYQ Practice',
     sectionName: 'PYQ Hub',
     route: '/pyq',
-    icon: '📚',
-    color: 'bg-emerald-100 text-emerald-700',
-    darkColor: 'dark:bg-emerald-950/60 dark:text-emerald-300',
+    icon: 'book-open',
+    color: 'bg-emerald-500/12 text-emerald-700',
+    darkColor: 'dark:bg-emerald-500/15 dark:text-emerald-300',
   },
   history: {
-    label: 'History & Mistake Review',
+    label: 'Mistake Review',
     sectionName: 'History Section',
     route: '/history',
-    icon: '🕒',
-    color: 'bg-blue-100 text-blue-700',
-    darkColor: 'dark:bg-blue-950/60 dark:text-blue-300',
+    icon: 'history',
+    color: 'bg-blue-500/12 text-blue-700',
+    darkColor: 'dark:bg-blue-500/15 dark:text-blue-300',
   },
   analytics: {
-    label: 'Analytics & Speed Stats',
+    label: 'Analytics',
     sectionName: 'Analytics Section',
     route: '/analytics',
-    icon: '📊',
-    color: 'bg-cyan-100 text-cyan-700',
-    darkColor: 'dark:bg-cyan-950/60 dark:text-cyan-300',
+    icon: 'bar-chart',
+    color: 'bg-cyan-500/12 text-cyan-700',
+    darkColor: 'dark:bg-cyan-500/15 dark:text-cyan-300',
   },
   streak: {
-    label: 'Streak Shield & Goal',
+    label: 'Daily Routine',
     sectionName: 'Badges & Goals',
     route: '/achievements',
-    icon: '🔥',
-    color: 'bg-orange-100 text-orange-700',
-    darkColor: 'dark:bg-orange-950/60 dark:text-orange-300',
+    icon: 'flame',
+    color: 'bg-orange-500/12 text-orange-700',
+    darkColor: 'dark:bg-orange-500/15 dark:text-orange-300',
   },
   notes: {
-    label: 'Formula & Study Notes',
+    label: 'Study Notes',
     sectionName: 'Notes Section',
     route: '/notes',
-    icon: '📝',
-    color: 'bg-emerald-100 text-emerald-700',
-    darkColor: 'dark:bg-emerald-950/60 dark:text-emerald-300',
+    icon: 'file-text',
+    color: 'bg-emerald-500/12 text-emerald-700',
+    darkColor: 'dark:bg-emerald-500/15 dark:text-emerald-300',
+  },
+  custom: {
+    label: 'Custom Task',
+    sectionName: 'Practice Mode',
+    route: '/practice',
+    icon: 'target',
+    color: 'bg-[#EAE5FA] text-[#7667C8]',
+    darkColor: 'dark:bg-[#302A48] dark:text-[#C5B9F2]',
   },
 
   // Legacy fallbacks
   practice: {
-    label: 'Practice Battle',
+    label: 'Practice',
     sectionName: 'Practice Mode',
     route: '/practice',
-    icon: '⚔️',
-    color: 'bg-indigo-100 text-indigo-700',
-    darkColor: 'dark:bg-indigo-950/60 dark:text-indigo-300',
+    icon: 'swords',
+    color: 'bg-[#EAE5FA] text-[#7667C8]',
+    darkColor: 'dark:bg-[#302A48] dark:text-[#C5B9F2]',
   },
   revision: {
-    label: 'Concept Revision',
+    label: 'Revision',
     sectionName: 'Formulas & Notes',
     route: '/formulas',
-    icon: '📖',
-    color: 'bg-purple-100 text-purple-700',
-    darkColor: 'dark:bg-purple-950/60 dark:text-purple-300',
+    icon: 'book-open',
+    color: 'bg-purple-500/12 text-purple-700',
+    darkColor: 'dark:bg-purple-500/15 dark:text-purple-300',
   },
   mock: {
-    label: 'Full Mock Test',
+    label: 'Mock Test',
     sectionName: 'Exams Section',
     route: '/exams',
-    icon: '📝',
-    color: 'bg-emerald-100 text-emerald-700',
-    darkColor: 'dark:bg-emerald-950/60 dark:text-emerald-300',
+    icon: 'graduation-cap',
+    color: 'bg-emerald-500/12 text-emerald-700',
+    darkColor: 'dark:bg-emerald-500/15 dark:text-emerald-300',
   },
   gk: {
-    label: 'Practice & Battle',
+    label: 'Current Affairs',
     sectionName: 'Practice Section',
     route: '/practice',
-    icon: '📰',
-    color: 'bg-amber-100 text-amber-700',
-    darkColor: 'dark:bg-amber-950/60 dark:text-amber-300',
+    icon: 'newspaper',
+    color: 'bg-amber-500/12 text-amber-700',
+    darkColor: 'dark:bg-amber-500/15 dark:text-amber-300',
   },
   vocab: {
     label: 'Mistake Review',
     sectionName: 'History Section',
     route: '/history',
-    icon: '🧠',
-    color: 'bg-pink-100 text-pink-700',
-    darkColor: 'dark:bg-pink-950/60 dark:text-pink-300',
+    icon: 'history',
+    color: 'bg-pink-500/12 text-pink-700',
+    darkColor: 'dark:bg-pink-500/15 dark:text-pink-300',
   },
   math: {
     label: 'Quick Battle',
     sectionName: 'Practice Mode',
     route: '/practice?mode=quick_battle',
-    icon: '📐',
-    color: 'bg-cyan-100 text-cyan-700',
-    darkColor: 'dark:bg-cyan-950/60 dark:text-cyan-300',
+    icon: 'zap',
+    color: 'bg-cyan-500/12 text-cyan-700',
+    darkColor: 'dark:bg-cyan-500/15 dark:text-cyan-300',
   },
   general: {
-    label: 'Daily Study Battle',
+    label: 'Custom Task',
     sectionName: 'Practice Mode',
     route: '/practice',
-    icon: '🎯',
-    color: 'bg-violet-100 text-violet-700',
-    darkColor: 'dark:bg-violet-950/60 dark:text-violet-300',
+    icon: 'target',
+    color: 'bg-[#EAE5FA] text-[#7667C8]',
+    darkColor: 'dark:bg-[#302A48] dark:text-[#C5B9F2]',
   },
 };
-

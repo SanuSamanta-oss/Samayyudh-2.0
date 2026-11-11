@@ -122,6 +122,47 @@ export async function deleteCustomTask(
 }
 
 /**
+ * Toggles completion state of a custom task for a specific local date key (YYYY-MM-DD).
+ */
+export async function toggleTaskCompletion(
+  id: string,
+  dateKey: string,
+  userId?: string | null
+): Promise<ReminderSettings> {
+  const current = getReminderSettings();
+  const nextTasks = (current.customTasks || []).map((t) =>
+    t.id === id
+      ? { ...t, completedDate: t.completedDate === dateKey ? null : dateKey }
+      : t
+  );
+  return saveReminderSettings({ customTasks: nextTasks }, userId);
+}
+
+/**
+ * Formats a Date into local YYYY-MM-DD key.
+ */
+export function toLocalDateKey(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+/**
+ * Checks whether a custom task reminder occurs on a given calendar date.
+ */
+export function doesTaskOccurOnDate(
+  task: import('@/types/reminders').CustomTaskReminder,
+  date: Date
+): boolean {
+  const dateKey = toLocalDateKey(date);
+  if (task.repeatType === 'once' || task.scheduledDate) {
+    return task.scheduledDate === dateKey;
+  }
+  return task.days.includes(date.getDay());
+}
+
+/**
  * Computes the next upcoming task (primary study battle or custom task) and remaining time.
  */
 export function getNextUpcomingTask(settings: ReminderSettings): {
@@ -135,6 +176,7 @@ export function getNextUpcomingTask(settings: ReminderSettings): {
   if (!settings.enabled) return null;
 
   const now = new Date();
+  const todayKey = toLocalDateKey(now);
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
   const currentDayOfWeek = now.getDay();
 
@@ -144,7 +186,6 @@ export function getNextUpcomingTask(settings: ReminderSettings): {
     time: string;
     minutes: number;
     isPrimary?: boolean;
-    days: number[];
   }[] = [];
 
   // 1. Primary study battle
@@ -156,13 +197,13 @@ export function getNextUpcomingTask(settings: ReminderSettings): {
       time: settings.studyTime,
       minutes: h * 60 + m,
       isPrimary: true,
-      days: settings.days,
     });
   }
 
   // 2. Custom tasks active today
   (settings.customTasks || []).forEach((t) => {
-    if (t.enabled && t.days.includes(currentDayOfWeek)) {
+    if (!t.enabled) return;
+    if (doesTaskOccurOnDate(t, now) && t.completedDate !== todayKey) {
       const [h, m] = t.time.split(':').map((v) => parseInt(v, 10));
       allItems.push({
         id: t.id,
@@ -170,24 +211,19 @@ export function getNextUpcomingTask(settings: ReminderSettings): {
         time: t.time,
         minutes: h * 60 + m,
         isPrimary: false,
-        days: t.days,
       });
     }
   });
 
   if (allItems.length === 0) return null;
 
-  // Sort by minutes of day
   allItems.sort((a, b) => a.minutes - b.minutes);
-
-  // Find next task today
   let next = allItems.find((item) => item.minutes > currentMinutes);
 
   let diffMinutes = 0;
   if (next) {
     diffMinutes = next.minutes - currentMinutes;
   } else {
-    // Wrap around to first task tomorrow
     next = allItems[0];
     diffMinutes = 24 * 60 - currentMinutes + next.minutes;
   }
@@ -209,6 +245,109 @@ export function getNextUpcomingTask(settings: ReminderSettings): {
     countdown,
     isPrimary: next.isPrimary,
   };
+}
+
+export interface UpcomingScheduleItem {
+  id: string;
+  taskId?: string;
+  title: string;
+  time: string;
+  formattedTime: string;
+  dateKey: string;
+  dayLabel: string;
+  category: import('@/types/reminders').TaskCategory;
+  enabled: boolean;
+  isPrimary?: boolean;
+  isStreak?: boolean;
+}
+
+/**
+ * Returns chronological upcoming reminders across today (remaining) and next 7 days.
+ */
+export function getUpcomingScheduleItems(
+  settings: ReminderSettings,
+  limit = 6
+): UpcomingScheduleItem[] {
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const results: UpcomingScheduleItem[] = [];
+
+  for (let offset = 0; offset < 7 && results.length < limit; offset++) {
+    const d = new Date(now);
+    d.setDate(now.getDate() + offset);
+    const dateKey = toLocalDateKey(d);
+    const dayLabel =
+      offset === 0
+        ? 'Today'
+        : offset === 1
+          ? 'Tomorrow'
+          : d.toLocaleDateString('en-US', { weekday: 'long' });
+
+    const dayEntries: UpcomingScheduleItem[] = [];
+
+    if (settings.days.includes(d.getDay()) && settings.studyTime) {
+      const [h, m] = settings.studyTime.split(':').map((v) => parseInt(v, 10));
+      const mins = (h || 0) * 60 + (m || 0);
+      if (offset > 0 || mins > currentMinutes) {
+        dayEntries.push({
+          id: `primary-${dateKey}`,
+          title: 'Daily Study Battle',
+          time: settings.studyTime,
+          formattedTime: formatTimeDisplay(settings.studyTime),
+          dateKey,
+          dayLabel,
+          category: 'practice_battle',
+          enabled: settings.enabled,
+          isPrimary: true,
+        });
+      }
+    }
+
+    (settings.customTasks || []).forEach((t) => {
+      if (!t.enabled) return;
+      if (!doesTaskOccurOnDate(t, d)) return;
+      if (offset === 0 && t.completedDate === dateKey) return;
+      const [h, m] = t.time.split(':').map((v) => parseInt(v, 10));
+      const mins = (h || 0) * 60 + (m || 0);
+      if (offset > 0 || mins > currentMinutes) {
+        dayEntries.push({
+          id: `${t.id}-${dateKey}`,
+          taskId: t.id,
+          title: t.title,
+          time: t.time,
+          formattedTime: formatTimeDisplay(t.time),
+          dateKey,
+          dayLabel,
+          category: t.category,
+          enabled: t.enabled,
+        });
+      }
+    });
+
+    if (settings.streakProtection) {
+      const mins = 22 * 60;
+      if (offset > 0 || mins > currentMinutes) {
+        dayEntries.push({
+          id: `streak-${dateKey}`,
+          title: 'Streak Protection Shield',
+          time: '22:00',
+          formattedTime: '10:00 PM',
+          dateKey,
+          dayLabel,
+          category: 'streak',
+          enabled: settings.streakProtection,
+          isStreak: true,
+        });
+      }
+    }
+
+    dayEntries.sort((a, b) => a.time.localeCompare(b.time));
+    for (const entry of dayEntries) {
+      if (results.length < limit) results.push(entry);
+    }
+  }
+
+  return results;
 }
 
 /**
@@ -289,7 +428,7 @@ export async function triggerStudyNotification(
           renotify: true,
           requireInteraction: options?.requireInteraction ?? true,
           data: { url },
-        } as any);
+        } as NotificationOptions & { renotify?: boolean });
         return true;
       }
     } catch {
@@ -364,8 +503,8 @@ export async function testNotificationAndAlarm(settings: ReminderSettings): Prom
   if (permission === 'granted') {
     const formatted = formatTimeDisplay(settings.studyTime);
     notificationSent = await triggerStudyNotification(
-      'সময়যুদ্ধ 2.0 — Alarm & Notification Test 🔔',
-      `Awesome! Your study alarm is set for ${formatted}. We'll remind you to conquer your questions on schedule!`,
+      'SamayYudh 2.0 — Study Notification Test',
+      `Your study reminder is scheduled for ${formatted}. Notifications and chime alerts are active.`,
       { tag: 'test-reminder', url: '/practice' }
     );
   }

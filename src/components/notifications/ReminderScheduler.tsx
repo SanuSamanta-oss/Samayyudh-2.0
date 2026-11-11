@@ -6,11 +6,7 @@
 // ============================================================
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import {
-  ReminderSettings,
-  DEFAULT_REMINDER_SETTINGS,
-  CATEGORY_META,
-} from '@/types/reminders';
+import { CATEGORY_META } from '@/types/reminders';
 import {
   getReminderSettings,
   saveReminderSettings,
@@ -24,9 +20,8 @@ import { useAuth } from '@/components/providers/AuthProvider';
 
 export function ReminderScheduler() {
   const { user } = useAuth();
-  const [settings, setSettings] = useState<ReminderSettings>(DEFAULT_REMINDER_SETTINGS);
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState('Study Battle Time! ⚔️');
+  const [modalTitle, setModalTitle] = useState('Daily Study Battle');
   const [modalMessage, setModalMessage] = useState('');
   const [modalTargetUrl, setModalTargetUrl] = useState('/practice');
   const [modalActionLabel, setModalActionLabel] = useState('Start Quick Battle (10 Min)');
@@ -34,20 +29,12 @@ export function ReminderScheduler() {
 
   const lastCheckedMinuteRef = useRef<string>('');
 
-  // 1. Load initial settings and register Service Worker on mount
+  // 1. Register Service Worker and reset minute lock on settings changes
   useEffect(() => {
-    const loaded = getReminderSettings();
-    setSettings(loaded);
     ensureServiceWorker().catch(() => {});
 
-    // Listen for real-time changes across tabs or pages
-    const handleSettingsChanged = (e: Event) => {
-      const customEvent = e as CustomEvent<ReminderSettings>;
-      if (customEvent.detail) {
-        setSettings(customEvent.detail);
-      } else {
-        setSettings(getReminderSettings());
-      }
+    const handleSettingsChanged = () => {
+      lastCheckedMinuteRef.current = '';
     };
 
     window.addEventListener(REMINDER_SETTINGS_CHANGED_EVENT, handleSettingsChanged);
@@ -96,15 +83,16 @@ export function ReminderScheduler() {
     const isAlreadyFiredToday = current.lastTriggeredDate === todayKey;
 
     let shouldFireAlarm = false;
-    let title = 'Study Battle Time! ⚔️';
-    let message = current.customNote || 'Your scheduled study session is here! Practice real questions and protect your streak.';
+    let title = 'Daily Study Battle';
+    let message = current.customNote || 'Your scheduled study session is here. Practice real questions and protect your streak.';
     let isStreak = false;
     let toneToPlay = current.reminderTone;
     let triggeredTaskId: string | null = null;
+    let shouldSendBrowserNotification = true;
 
     if (isSnoozeExpired) {
       shouldFireAlarm = true;
-      title = 'Snooze Finished — Time to Practice! ⚔️';
+      title = 'Snooze Finished — Time to Practice';
       message = 'Ready for your quick study sprint? 10 minutes of practice makes all the difference.';
     } else if (isExactStudyTime && !isAlreadyFiredToday) {
       shouldFireAlarm = true;
@@ -112,22 +100,27 @@ export function ReminderScheduler() {
       // Streak Protection check at 10:00 PM
       shouldFireAlarm = true;
       isStreak = true;
-      title = '🔥 Streak Shield: 2 Hours Left!';
+      title = 'Streak Shield: 2 Hours Left';
       message = "Don't let today slip away! Complete 1 quick battle before midnight to keep your study streak alive.";
     } else if (current.customTasks && current.customTasks.length > 0) {
-      // Check custom day-to-day task reminders
+      // Check custom day-to-day task reminders (handles both one-time scheduledDate and recurring days)
       for (const task of current.customTasks) {
+        const matchesDate =
+          task.repeatType === 'once' || task.scheduledDate
+            ? task.scheduledDate === todayKey
+            : task.days.includes(currentDayOfWeek);
         if (
           task.enabled &&
-          task.days.includes(currentDayOfWeek) &&
+          matchesDate &&
           currentHM === task.time &&
           task.lastTriggeredDate !== todayKey
         ) {
           shouldFireAlarm = true;
-          title = `⏰ ${task.title}`;
-          message = task.notes || 'Your scheduled study task has arrived! Conquer it to keep your momentum high.';
+          title = task.title;
+          message = task.notes || 'Your scheduled study task has arrived. Stay focused and keep your momentum high.';
           toneToPlay = task.tone || current.reminderTone;
           triggeredTaskId = task.id;
+          shouldSendBrowserNotification = task.browserNotification !== false;
           break;
         }
       }
@@ -155,14 +148,16 @@ export function ReminderScheduler() {
         }
       } else if (isStreak) {
         targetUrl = '/achievements';
-        actionLabel = 'Protect My Streak 🔥';
+        actionLabel = 'Protect My Streak';
       }
 
       // System Notification (Service Worker or Native)
-      triggerStudyNotification(title, message, {
-        tag: isStreak ? 'streak-reminder' : triggeredTaskId ? `task-${triggeredTaskId}` : 'study-reminder',
-        url: targetUrl,
-      }).catch(() => {});
+      if (shouldSendBrowserNotification) {
+        triggerStudyNotification(title, message, {
+          tag: isStreak ? 'streak-reminder' : triggeredTaskId ? `task-${triggeredTaskId}` : 'study-reminder',
+          url: targetUrl,
+        }).catch(() => {});
+      }
 
       // Open In-App Modal if tab is focused
       setModalTitle(title);
@@ -192,22 +187,26 @@ export function ReminderScheduler() {
 
   // 3. Scheduler Tick Loop (runs every 25 seconds)
   useEffect(() => {
+    let cancelled = false;
     const interval = setInterval(() => {
-      checkAlarm();
+      void checkAlarm();
     }, 25000);
 
     // Also check immediately when tab becomes visible
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
-        checkAlarm();
+        void checkAlarm();
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    // Initial check on load
-    checkAlarm();
+    // Initial check on load asynchronously to avoid synchronous setState in effect
+    void Promise.resolve().then(() => {
+      if (!cancelled) void checkAlarm();
+    });
 
     return () => {
+      cancelled = true;
       clearInterval(interval);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };

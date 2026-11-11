@@ -26,8 +26,8 @@ export function InAppReminderModal({
   isOpen,
   onClose,
   onSnooze,
-  title = 'Study Battle Time! ⚔️',
-  message = 'Your scheduled study time has arrived. Take 10 minutes to conquer real exam questions and maintain your edge!',
+  title = 'Daily Study Battle',
+  message = 'Your scheduled study time has arrived. Take 10 minutes to conquer real exam questions and maintain your edge.',
   isStreakAlert = false,
   targetUrl = '/practice',
   actionLabel,
@@ -107,7 +107,7 @@ export function InAppReminderModal({
               className="w-full flex items-center justify-center gap-2 py-3.5 px-5 rounded-2xl text-xs sm:text-sm font-bold text-white bg-[#7C71B2] hover:bg-[#685EA1] shadow-md shadow-[#7C71B2]/30 active:scale-[0.98] transition-all cursor-pointer"
             >
               <Swords className="w-4 h-4" />
-              <span>{actionLabel || (isStreakAlert ? 'Protect My Streak 🔥' : 'Start Quick Battle (10 Min)')}</span>
+              <span>{actionLabel || (isStreakAlert ? 'Protect My Streak' : 'Start Quick Battle (10 Min)')}</span>
             </button>
 
             <div className="grid grid-cols-2 gap-2.5">

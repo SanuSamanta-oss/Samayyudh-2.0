@@ -265,9 +265,9 @@ export function LightNavBar({
               {/* Label */}
               <span
                 className={cn(
-                  'transition-all duration-200 mt-0.5 truncate',
+                  'transition-all duration-200 mt-0.5 truncate max-w-full',
                   isMobile
-                    ? 'text-[9.5px] leading-none font-medium'
+                    ? 'text-[9px] sm:text-[9.5px] leading-none font-medium tracking-tight'
                     : 'text-[10px] leading-none font-medium tracking-tight',
                   isActive
                     ? 'text-black dark:text-white font-semibold'

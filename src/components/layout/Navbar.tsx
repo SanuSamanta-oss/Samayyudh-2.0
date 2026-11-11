@@ -43,11 +43,12 @@ const desktopNavItemsRaw = [
   { href: '/admin', label: 'Admin', icon: 'ShieldAlert', color: '#581c87' },
 ];
 
-// Android & Mobile PWA: Exactly 7 required destinations
+// Android & Mobile PWA: 8 core destinations including PYQ
 const mobileNavItemsRaw = [
   { href: '/dashboard', label: 'Home', icon: 'LayoutDashboard', color: '#7c3aed' },
   { href: '/practice', label: 'Practice', icon: 'Swords', color: '#6366f1' },
   { href: '/exams', label: 'Exams', icon: 'GraduationCap', color: '#8b5cf6' },
+  { href: '/pyq', label: 'PYQ', icon: 'BookOpen', color: '#0ea5e9' },
   { href: '/formulas', label: 'Formulas', icon: 'FormulaGraph', color: '#0284c7' },
   { href: '/achievements', label: 'Badges', icon: 'Trophy', color: '#a855f7' },
   { href: '/analytics', label: 'Stats', icon: 'BarChart3', color: '#9333ea' },

@@ -1,344 +1,629 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import {
-  History as HistoryIcon, Clock, Award, Target, ChevronRight,
-  Trash2, Calendar, Zap, Search, Loader2, Printer
+  FolderArchive,
+  Search,
+  Sparkles,
+  Trash2,
+  X,
+  ArrowRight,
+  Clock,
+  CheckCircle2,
+  Award,
+  Layers,
 } from 'lucide-react';
-import { SmoothSelect } from '@/components/ui/SmoothSelect';
-import { cn, formatDuration, percentage } from '@/lib/utils';
 import * as localDB from '@/lib/store/local-db';
-import type { ExamSession, Answer, AnswerEvaluation } from '@/types';
+import { questionBank } from '@/lib/questions';
+import type {
+  ExamSession,
+  Answer,
+  AnswerEvaluation,
+  StickyNote,
+  Question,
+} from '@/types/database';
+import { SmoothSelect } from '@/components/ui/SmoothSelect';
+import { ExamFolderCard } from '@/components/history/ExamFolderCard';
+import { OpenFolderModal } from '@/components/history/OpenFolderModal';
+import {
+  formatExamDuration,
+  resolveExamIdentity,
+  type SessionArchiveMeta,
+} from '@/components/history/history-helpers';
 
-interface SessionWithMeta {
-  session: ExamSession;
-  answers: Answer[];
-  evaluations: AnswerEvaluation[];
-  answeredCount: number;
-  totalTimeSpent: number;
-  totalScore: number;
-  totalMaxScore: number;
-}
-
-const statusBadge: Record<string, { label: string; class: string }> = {
-  completed: { label: 'Completed', class: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
-  submitted: { label: 'Submitted', class: 'text-blue-700 bg-blue-50 border-blue-200' },
-  evaluated: { label: 'Evaluated', class: 'text-brand-700 bg-brand-50 border-brand-200' },
-  in_progress: { label: 'In Progress', class: 'text-amber-700 bg-amber-50 border-amber-200' },
-  paused: { label: 'Paused', class: 'text-stone-700 bg-stone-50 border-stone-200' },
-  setup: { label: 'Setup', class: 'text-stone-500 bg-stone-50 border-stone-200' },
-};
+const STATUS_FILTER_OPTIONS = [
+  { value: 'all', label: 'All Status' },
+  { value: 'in_progress', label: 'In Progress' },
+  { value: 'submitted', label: 'Submitted' },
+  { value: 'completed', label: 'Completed' },
+  { value: 'drafts', label: 'Drafts' },
+];
 
 export default function HistoryPage() {
-  const [sessions, setSessions] = useState<SessionWithMeta[]>([]);
+  const prefersReduced = useReducedMotion();
+  const [items, setItems] = useState<SessionArchiveMeta[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [confirmCleanupOpen, setConfirmCleanupOpen] = useState(false);
+  const [cleaningDrafts, setCleaningDrafts] = useState(false);
 
-  async function loadSessions() {
-    setLoading(true);
-    const allSessions = await localDB.getAllSessions();
-    const allAnswers = await localDB.getAllAnswers();
-    const allEvals = await localDB.getAllEvaluations();
+  const loadArchiveData = useCallback(async () => {
+    const [sessions, allAnswers, allEvals, customQuestions, allNotes] =
+      await Promise.all([
+        localDB.getAllSessions(),
+        localDB.getAllAnswers(),
+        localDB.getAllEvaluations(),
+        localDB.getAllCustomQuestions(),
+        localDB.getAllStickyNotes(),
+      ]);
 
-    // Build answer and evaluation maps by session
+    const questionMap = new Map<string, Question>();
+    for (const q of questionBank) {
+      questionMap.set(q.id, q);
+    }
+    for (const q of customQuestions) {
+      questionMap.set(q.id, q);
+    }
+
     const answersBySession = new Map<string, Answer[]>();
-    allAnswers.forEach(a => {
-      const list = answersBySession.get(a.session_id) || [];
-      list.push(a);
-      answersBySession.set(a.session_id, list);
-    });
+    for (const ans of allAnswers) {
+      const list = answersBySession.get(ans.session_id) ?? [];
+      list.push(ans);
+      answersBySession.set(ans.session_id, list);
+    }
 
-    const evalByAnswer = new Map<string, AnswerEvaluation>();
-    allEvals.forEach(e => evalByAnswer.set(e.answer_id, e));
+    const evalByAnswerId = new Map<string, AnswerEvaluation>();
+    for (const ev of allEvals) {
+      evalByAnswerId.set(ev.answer_id, ev);
+    }
 
-    const enriched: SessionWithMeta[] = allSessions
-      .sort((a, b) => new Date(b.started_at).getTime() - new Date(a.started_at).getTime())
-      .map(session => {
-        const answers = answersBySession.get(session.id) || [];
-        const evaluations = answers
-          .map(a => evalByAnswer.get(a.id))
-          .filter((e): e is AnswerEvaluation => !!e);
+    const notesBySession = new Map<string, StickyNote[]>();
+    for (const note of allNotes) {
+      if (!note.session_id) continue;
+      const list = notesBySession.get(note.session_id) ?? [];
+      list.push(note);
+      notesBySession.set(note.session_id, list);
+    }
 
-        const answeredCount = answers.filter(a => a.answer_text.trim()).length;
-        const totalTimeSpent = answers.reduce((sum, a) => sum + a.time_spent_seconds, 0);
-        const totalScore = evaluations.reduce((sum, e) => sum + e.score, 0);
-        const totalMaxScore = evaluations.reduce((sum, e) => sum + e.max_score, 0);
+    const sortedSessions = [...sessions].sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
 
-        return { session, answers, evaluations, answeredCount, totalTimeSpent, totalScore, totalMaxScore };
-      });
+    const enriched: SessionArchiveMeta[] = sortedSessions.map(
+      (session: ExamSession) => {
+        const sAnswers = answersBySession.get(session.id) ?? [];
+        const answeredCount = sAnswers.filter(
+          (a) =>
+            (a.answer_text && a.answer_text.trim().length > 0) ||
+            Boolean(a.selected_option) ||
+            (a.selected_options && a.selected_options.length > 0)
+        ).length;
 
-    setSessions(enriched);
-    setLoading(false);
-  }
+        let totalTimeSpent = 0;
+        let totalScore = 0;
+        let totalMaxScore = 0;
+        let accuracyWeightedSum = 0;
+        const sEvaluations: AnswerEvaluation[] = [];
 
-  useEffect(() => {
-    setTimeout(() => {
-      loadSessions();
-    }, 0);
+        const subjectSet = new Set<string>();
+        const topicSet = new Set<string>();
+
+        for (const ans of sAnswers) {
+          totalTimeSpent += ans.time_spent_seconds || 0;
+          const q = questionMap.get(ans.question_id);
+          if (q?.subject) subjectSet.add(q.subject);
+          if (q?.topic) topicSet.add(q.topic);
+
+          const ev = evalByAnswerId.get(ans.id);
+          if (ev) {
+            sEvaluations.push(ev);
+            totalScore += ev.score;
+            const qMax = ev.max_score || q?.marks || 10;
+            totalMaxScore += qMax;
+            if (
+              typeof ev.percentage === 'number' &&
+              !Number.isNaN(ev.percentage)
+            ) {
+              accuracyWeightedSum += ev.percentage;
+            } else if (qMax > 0) {
+              accuracyWeightedSum += Math.max(
+                0,
+                Math.min(100, (ev.score / qMax) * 100)
+              );
+            }
+          }
+        }
+
+        const denominator =
+          totalMaxScore > 0 ? totalMaxScore : session.total_marks;
+        const scorePercent =
+          sEvaluations.length > 0 && denominator > 0
+            ? Math.round((totalScore / denominator) * 100)
+            : null;
+
+        const accuracyPercent =
+          sEvaluations.length > 0
+            ? Math.round(accuracyWeightedSum / sEvaluations.length)
+            : null;
+
+        const sessionNotes = [...(notesBySession.get(session.id) ?? [])].sort(
+          (a, b) => {
+            if (Boolean(a.is_pinned) !== Boolean(b.is_pinned)) {
+              return a.is_pinned ? -1 : 1;
+            }
+            return (
+              new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+            );
+          }
+        );
+
+        const identity = resolveExamIdentity(session.exam_code, session.title);
+
+        return {
+          session,
+          answers: sAnswers,
+          evaluations: sEvaluations,
+          notes: sessionNotes,
+          answeredCount,
+          totalTimeSpent,
+          totalScore,
+          totalMaxScore,
+          scorePercent,
+          accuracyPercent,
+          examCategory: identity.categoryName,
+          examLogo: identity.logo,
+          subjects: Array.from(subjectSet),
+          topics: Array.from(topicSet),
+          firstQuestionId: sAnswers[0]?.question_id ?? '',
+        };
+      }
+    );
+
+    return enriched;
   }, []);
 
-  async function deleteSession(sessionId: string) {
+  useEffect(() => {
+    let active = true;
+    loadArchiveData()
+      .then((enriched) => {
+        if (!active) return;
+        setItems(enriched);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [loadArchiveData]);
+
+  const draftSessions = useMemo(
+    () =>
+      items.filter(
+        (item) =>
+          item.session.status === 'in_progress' && item.answeredCount === 0
+      ),
+    [items]
+  );
+
+  const filteredItems = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    return items.filter((item) => {
+      if (filterStatus === 'drafts') {
+        if (
+          !(
+            item.session.status === 'in_progress' && item.answeredCount === 0
+          )
+        ) {
+          return false;
+        }
+      } else if (
+        filterStatus !== 'all' &&
+        item.session.status !== filterStatus
+      ) {
+        return false;
+      }
+
+      if (!query) return true;
+      const haystack = [
+        item.session.title,
+        item.session.exam_code ?? '',
+        item.examCategory,
+        ...item.subjects,
+        ...item.topics,
+      ]
+        .join(' ')
+        .toLowerCase();
+
+      return haystack.includes(query);
+    });
+  }, [items, searchQuery, filterStatus]);
+
+  const selectedItem = useMemo(
+    () => items.find((item) => item.session.id === selectedId) ?? null,
+    [items, selectedId]
+  );
+
+  const handleDeleteSession = useCallback(async (sessionId: string) => {
     await localDB.deleteSession(sessionId);
-    setSessions(prev => prev.filter(s => s.session.id !== sessionId));
-  }
+    setSelectedId((prev) => (prev === sessionId ? null : prev));
+    setItems((prev) => prev.filter((item) => item.session.id !== sessionId));
+  }, []);
 
-  async function clearAbandonedSessions() {
-    const abandoned = sessions.filter(s => s.session.status === 'in_progress' && s.answeredCount === 0);
-    if (abandoned.length === 0) return;
-    for (const item of abandoned) {
-      await localDB.deleteSession(item.session.id);
+  const handleCleanupDrafts = useCallback(async () => {
+    if (cleaningDrafts || draftSessions.length === 0) return;
+    setCleaningDrafts(true);
+    try {
+      const draftIds = new Set(draftSessions.map((d) => d.session.id));
+      for (const draft of draftSessions) {
+        await localDB.deleteSession(draft.session.id);
+      }
+      setSelectedId((prev) => (prev && draftIds.has(prev) ? null : prev));
+      setItems((prev) => prev.filter((item) => !draftIds.has(item.session.id)));
+      setConfirmCleanupOpen(false);
+    } finally {
+      setCleaningDrafts(false);
     }
-    setSessions(prev => prev.filter(s => !(s.session.status === 'in_progress' && s.answeredCount === 0)));
-  }
+  }, [cleaningDrafts, draftSessions]);
 
-  const abandonedCount = sessions.filter(s => s.session.status === 'in_progress' && s.answeredCount === 0).length;
+  const handleNotesUpdated = useCallback(
+    (sessionId: string, updatedNotes: StickyNote[]) => {
+      setItems((prev) =>
+        prev.map((item) =>
+          item.session.id === sessionId ? { ...item, notes: updatedNotes } : item
+        )
+      );
+    },
+    []
+  );
 
-  const filtered = sessions.filter(s => {
-    const matchesSearch = searchQuery === '' ||
-      s.session.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      s.session.exam_code.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = filterStatus === 'all' || s.session.status === filterStatus;
-    return matchesSearch && matchesStatus;
-  });
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center space-y-3">
-          <Loader2 className="w-8 h-8 text-brand-500 animate-spin mx-auto" />
-          <p className="text-sm text-stone-500">Loading history...</p>
-        </div>
-      </div>
+  const summaryStats = useMemo(() => {
+    const totalAnswered = items.reduce(
+      (sum, item) => sum + item.answeredCount,
+      0
     );
-  }
+    const totalSeconds = items.reduce(
+      (sum, item) => sum + item.totalTimeSpent,
+      0
+    );
+    const scoredItems = items.filter(
+      (item) => item.scorePercent !== null && item.evaluations.length > 0
+    );
+    const avgScore =
+      scoredItems.length > 0
+        ? Math.round(
+            scoredItems.reduce(
+              (sum, item) => sum + (item.scorePercent ?? 0),
+              0
+            ) / scoredItems.length
+          )
+        : 0;
+
+    return {
+      totalSessions: items.length,
+      totalAnswered,
+      totalTimeFormatted: formatExamDuration(totalSeconds),
+      avgScore,
+    };
+  }, [items]);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 lg:px-6 py-6 md:py-8 space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-          <HistoryIcon className="w-6 h-6 text-brand-600" />
-          History
-        </h1>
-        <p className="text-stone-500 mt-1">Your past exam sessions and performance</p>
-      </div>
+    <div className="relative min-h-[calc(100vh-4rem)] w-full overflow-x-hidden bg-[#F7F8FD] dark:bg-[#090D1A] transition-colors duration-300">
+      {/* Atmospheric top ambient gradient wash (non-blocking, zero outline) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-indigo-500/[0.07] via-violet-500/[0.04] to-transparent dark:from-indigo-500/[0.14] dark:via-violet-500/[0.06] dark:to-transparent"
+      />
 
-      {/* Abandoned sessions cleanup banner */}
-      {abandonedCount > 0 && (
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-amber-300/60 bg-amber-500/10 text-amber-200">
-          <div className="flex items-center gap-2.5">
-            <span className="text-xl">⚡</span>
-            <div>
-              <p className="text-sm font-semibold text-foreground">
-                Found {abandonedCount} unsubmitted &quot;In Progress&quot; battle{abandonedCount > 1 ? 's' : ''} (0 questions answered)
-              </p>
-              <p className="text-xs text-stone-400">
-                These were started without submitting. You can clean them up in one click.
-              </p>
+      <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-10 py-6 sm:py-8 space-y-6">
+        {/* Archive Header */}
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#6366F1] via-[#6C63FF] to-[#4F46E5] flex items-center justify-center text-white shadow-[0_10px_24px_-6px_rgba(99,91,255,0.45)] shrink-0">
+                <FolderArchive className="w-5 h-5" />
+              </div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  Exam History
+                </h1>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 dark:bg-indigo-400/15 text-indigo-700 dark:text-indigo-200">
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>
+                    {items.length}{' '}
+                    {items.length === 1 ? 'Folder' : 'Folders'}
+                  </span>
+                </span>
+              </div>
             </div>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              Open any exam folder to inspect performance metrics, personal sticky notes, and printable reports.
+            </p>
           </div>
-          <button
-            onClick={clearAbandonedSessions}
-            className="flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg font-medium text-xs text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm shrink-0"
+
+          <Link
+            href="/practice"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#6366F1] via-[#6C63FF] to-[#5448E6] hover:brightness-105 text-white text-xs sm:text-sm font-semibold shadow-[0_10px_26px_-8px_rgba(99,91,255,0.5)] transition-all shrink-0 outline-none focus:outline-none"
           >
-            <Trash2 className="w-3.5 h-3.5" /> Clean Up {abandonedCount} Draft{abandonedCount > 1 ? 's' : ''}
-          </button>
-        </div>
-      )}
+            <span>Start New Exam</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </header>
 
-      {/* Search and Filter */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-          <input
-            type="text"
-            placeholder="Search sessions..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-card text-sm outline-none focus:outline-none shadow-[0_4px_16px_-6px_rgba(15,23,42,0.08)] dark:shadow-[0_6px_20px_-6px_rgba(0,0,0,0.45)] focus:shadow-[0_6px_22px_-4px_rgba(99,91,255,0.22)] transition-all"
-          />
-        </div>
-        <SmoothSelect
-          value={filterStatus}
-          onChange={setFilterStatus}
-          ariaLabel="Filter sessions by status"
-          variant="elevated"
-          align="right"
-          className="sm:w-48"
-          options={[
-            { value: 'all', label: 'All Status' },
-            { value: 'submitted', label: 'Submitted' },
-            { value: 'completed', label: 'Completed' },
-            { value: 'in_progress', label: 'In Progress' },
-          ]}
-        />
-      </div>
-
-      {/* Sessions List */}
-      {filtered.length === 0 ? (
-        <div className="text-center py-16 space-y-3">
-          <HistoryIcon className="w-12 h-12 mx-auto text-stone-300" />
-          <p className="text-stone-500">
-            {sessions.length === 0
-              ? 'No sessions yet. Complete an exam to see it here.'
-              : 'No sessions match your filters.'}
-          </p>
-          {sessions.length === 0 && (
-            <Link
-              href="/practice"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-brand hover:opacity-90 transition-opacity"
+        {/* Subtle Unsubmitted Draft Archive Notice */}
+        <AnimatePresence>
+          {draftSessions.length > 0 && (
+            <motion.div
+              initial={prefersReduced ? false : { opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={
+                prefersReduced
+                  ? { opacity: 0 }
+                  : { opacity: 0, y: -8, scale: 0.98 }
+              }
+              transition={{ duration: 0.25 }}
+              className="rounded-2xl bg-gradient-to-r from-indigo-500/[0.08] via-violet-500/[0.08] to-amber-500/[0.08] dark:from-indigo-500/[0.18] dark:via-violet-500/[0.14] dark:to-amber-500/[0.12] px-4 sm:px-5 py-3.5 shadow-[0_8px_24px_-12px_rgba(79,70,229,0.22)] flex flex-col sm:flex-row sm:items-center justify-between gap-3"
             >
-              <Zap className="w-4 h-4" /> Start Your First Battle
-            </Link>
-          )}
-        </div>
-      ) : (
-        <div className="space-y-3">
-          {filtered.map(({ session, answeredCount, totalTimeSpent, totalScore, totalMaxScore, evaluations }) => {
-            const badge = statusBadge[session.status] || statusBadge.completed;
-            const hasEval = evaluations.length > 0;
-            const scorePct = totalMaxScore > 0 ? Math.round((totalScore / totalMaxScore) * 100) : 0;
-
-            return (
-              <div
-                key={session.id}
-                className="bg-card rounded-xl border border-border hover:border-brand-200 transition-all group"
-              >
-                <div className="p-4 flex items-start gap-4">
-                  {/* Icon */}
-                  <div className="hidden sm:flex w-12 h-12 rounded-xl bg-gradient-to-br from-brand-50 to-accent-50 items-center justify-center shrink-0 text-xl">
-                    {session.mode === 'quick_battle' ? '⚡' :
-                     session.mode === 'half_century' ? '🏏' :
-                     session.mode === 'full_century' ? '🏆' :
-                     session.mode === 'speed_battle' ? '🏎️' : '📝'}
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0 space-y-2">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <h3 className="text-sm font-semibold text-foreground truncate">{session.title}</h3>
-                        <div className="flex items-center gap-2 mt-0.5 text-xs text-stone-500">
-                          <Calendar className="w-3.5 h-3.5" />
-                          <span>{new Date(session.started_at).toLocaleDateString('en-IN', {
-                            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
-                          })}</span>
-                        </div>
-                      </div>
-                      <span className={cn('text-[10px] font-semibold px-2 py-0.5 rounded-full border shrink-0', badge.class)}>
-                        {badge.label}
-                      </span>
-                    </div>
-
-                    {/* Stats row */}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-stone-500">
-                      <span className="flex items-center gap-1">
-                        <Target className="w-3.5 h-3.5" />
-                        {answeredCount}/{session.total_questions} answered
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
-                        {formatDuration(totalTimeSpent)}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Award className="w-3.5 h-3.5" />
-                        {session.total_marks} marks
-                      </span>
-                      {hasEval && (
-                        <span className={cn('font-semibold', scorePct >= 60 ? 'text-emerald-600' : 'text-amber-600')}>
-                          Score: {totalScore}/{totalMaxScore} ({scorePct}%)
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Progress bar */}
-                    <div className="h-1.5 rounded-full bg-stone-100 overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-gradient-brand transition-all duration-500"
-                        style={{ width: `${percentage(answeredCount, session.total_questions)}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    <button
-                      onClick={() => deleteSession(session.id)}
-                      className="p-2 rounded-lg text-stone-400 hover:text-red-500 hover:bg-red-500/10 transition-colors"
-                      title="Delete session"
-                      aria-label="Delete session"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                    {session.status !== 'in_progress' && (
-                      <Link
-                        href={`/report?session=${session.id}`}
-                        className="p-2 rounded-lg text-stone-400 hover:text-brand-400 hover:bg-brand-500/10 transition-colors hidden sm:inline-flex"
-                        title="View printable report"
-                        aria-label="View printable report"
-                      >
-                        <Printer className="w-4 h-4" />
-                      </Link>
-                    )}
-                    {session.status === 'in_progress' ? (
-                      <Link
-                        href={`/exam/session?resume=${session.id}`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 transition-colors shadow-sm"
-                        title="Resume battle"
-                      >
-                        Resume <ChevronRight className="w-3.5 h-3.5" />
-                      </Link>
-                    ) : (
-                      <Link
-                        href={`/results?session=${session.id}`}
-                        className="p-2 rounded-lg text-stone-400 hover:text-brand-400 hover:bg-brand-500/10 transition-colors"
-                        title="View results"
-                        aria-label="View results"
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </Link>
-                    )}
-                  </div>
+              <div className="flex items-start sm:items-center gap-3">
+                <div className="w-8 h-8 rounded-xl bg-amber-500/15 dark:bg-amber-400/20 flex items-center justify-center text-amber-600 dark:text-amber-300 shrink-0">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+                    {draftSessions.length} unsubmitted draft{' '}
+                    {draftSessions.length === 1 ? 'session' : 'sessions'} with 0
+                    answered questions
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Keep your digital archive tidy by removing empty starts that were never submitted.
+                  </p>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      )}
 
-      {/* Stats Footer */}
-      {sessions.length > 0 && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4 border-t border-border">
-          <div className="text-center p-3">
-            <div className="text-2xl font-bold text-gradient-brand">{sessions.length}</div>
-            <div className="text-xs text-stone-500 mt-0.5">Total Sessions</div>
+              <div className="flex items-center gap-2 shrink-0">
+                <AnimatePresence mode="wait">
+                  {!confirmCleanupOpen ? (
+                    <motion.button
+                      key="cleanup-trigger"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      type="button"
+                      onClick={() => setConfirmCleanupOpen(true)}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-rose-500/12 hover:bg-rose-500/20 dark:bg-rose-500/20 dark:hover:bg-rose-500/30 text-rose-600 dark:text-rose-300 text-xs font-semibold transition-colors cursor-pointer outline-none focus:outline-none"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Clean Up {draftSessions.length} Drafts</span>
+                    </motion.button>
+                  ) : (
+                    <motion.div
+                      key="cleanup-confirm"
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.96 }}
+                      className="flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 px-2.5 py-1.5 rounded-xl shadow-sm"
+                    >
+                      <span className="text-xs font-medium text-rose-600 dark:text-rose-300 px-1">
+                        Remove {draftSessions.length}?
+                      </span>
+                      <button
+                        type="button"
+                        disabled={cleaningDrafts}
+                        onClick={handleCleanupDrafts}
+                        className="px-3 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition-colors disabled:opacity-60 cursor-pointer outline-none focus:outline-none"
+                      >
+                        {cleaningDrafts ? 'Cleaning...' : 'Confirm'}
+                      </button>
+                      <button
+                        type="button"
+                        disabled={cleaningDrafts}
+                        onClick={() => setConfirmCleanupOpen(false)}
+                        className="px-2.5 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer outline-none focus:outline-none"
+                      >
+                        Cancel
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Minimal Archive Toolbar (Search + Smooth Status Filter) */}
+        <section
+          aria-label="Archive controls"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+        >
+          <div className="relative flex-1">
+            <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search sessions by exam title, category, subject, or topic..."
+              aria-label="Search exam sessions"
+              className="w-full h-11 pl-10 pr-9 rounded-2xl bg-white/90 dark:bg-[#13192D]/90 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-[0_8px_24px_-10px_rgba(15,23,42,0.1)] dark:shadow-[0_10px_28px_-10px_rgba(0,0,0,0.5)] focus:bg-white dark:focus:bg-[#171F36] transition-colors outline-none focus:outline-none"
+            />
+            {searchQuery.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search query"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer outline-none focus:outline-none"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
-          <div className="text-center p-3">
-            <div className="text-2xl font-bold text-foreground">
-              {sessions.reduce((sum, s) => sum + s.answeredCount, 0)}
+
+          <div className="w-full sm:w-52 shrink-0">
+            <SmoothSelect
+              value={filterStatus}
+              onChange={setFilterStatus}
+              options={STATUS_FILTER_OPTIONS}
+              ariaLabel="Filter sessions by status"
+              variant="elevated"
+              align="right"
+            />
+          </div>
+        </section>
+
+        {/* Responsive Exam Folder Gallery */}
+        {loading ? (
+          <div
+            aria-label="Loading exam folders"
+            className="grid grid-cols-1 min-[440px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 sm:gap-6 pt-2"
+          >
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={idx} className="pt-4">
+                <div className="relative h-[265px] rounded-[26px] bg-gradient-to-br from-indigo-100/80 via-slate-100 to-violet-100/70 dark:from-[#171E38] dark:via-[#12182D] dark:to-[#1E1B3A] animate-pulse shadow-sm" />
+              </div>
+            ))}
+          </div>
+        ) : filteredItems.length === 0 ? (
+          <motion.div
+            initial={prefersReduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-[28px] bg-white/85 dark:bg-[#12172B]/85 px-6 py-16 text-center shadow-[0_16px_44px_-16px_rgba(79,70,229,0.18)] dark:shadow-[0_18px_48px_-16px_rgba(0,0,0,0.55)]"
+          >
+            <div className="w-16 h-16 mx-auto rounded-3xl bg-gradient-to-br from-indigo-500/15 to-violet-500/15 dark:from-indigo-500/25 dark:to-violet-500/25 flex items-center justify-center text-indigo-600 dark:text-indigo-300 mb-4">
+              <FolderArchive className="w-8 h-8" />
             </div>
-            <div className="text-xs text-stone-500 mt-0.5">Questions Answered</div>
-          </div>
-          <div className="text-center p-3">
-            <div className="text-2xl font-bold text-foreground">
-              {formatDuration(sessions.reduce((sum, s) => sum + s.totalTimeSpent, 0))}
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-1.5">
+              {items.length === 0
+                ? 'Your Exam Archive Is Empty'
+                : 'No Matching Exam Folders'}
+            </h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6">
+              {items.length === 0
+                ? 'Complete a timed battle or practice test to store your first interactive exam folder here.'
+                : 'Try adjusting your search keywords or status filter to locate the session folder.'}
+            </p>
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              {(searchQuery || filterStatus !== 'all') && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery('');
+                    setFilterStatus('all');
+                  }}
+                  className="px-4 py-2 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-colors cursor-pointer outline-none focus:outline-none"
+                >
+                  Reset Filters
+                </button>
+              )}
+              <Link
+                href="/practice"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#6366F1] via-[#6C63FF] to-[#5448E6] text-white text-xs font-semibold shadow-[0_10px_24px_-8px_rgba(99,91,255,0.5)] outline-none focus:outline-none"
+              >
+                <span>Start Practice Session</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
-            <div className="text-xs text-stone-500 mt-0.5">Total Time</div>
-          </div>
-          <div className="text-center p-3">
-            <div className="text-2xl font-bold text-foreground">
-              {(() => {
-                const totalS = sessions.reduce((sum, s) => sum + s.totalScore, 0);
-                const totalM = sessions.reduce((sum, s) => sum + s.totalMaxScore, 0);
-                return totalM > 0 ? `${Math.round((totalS / totalM) * 100)}%` : '—';
-              })()}
+          </motion.div>
+        ) : (
+          <motion.div
+            layout
+            className="grid grid-cols-1 min-[440px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 sm:gap-6 pt-1"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredItems.map((item, index) => (
+                <ExamFolderCard
+                  key={item.session.id}
+                  item={item}
+                  index={index}
+                  isSelected={selectedId === item.session.id}
+                  onOpen={(entry) => setSelectedId(entry.session.id)}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
+
+        {/* Archive Performance Summary Strip */}
+        {items.length > 0 && (
+          <section
+            aria-label="Archive summary statistics"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-2"
+          >
+            <div className="rounded-2xl bg-white/85 dark:bg-[#12172B]/90 px-4 py-3.5 shadow-[0_8px_24px_-12px_rgba(15,23,42,0.12)] dark:shadow-[0_10px_28px_-12px_rgba(0,0,0,0.45)] flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-indigo-500/12 dark:bg-indigo-400/20 text-indigo-600 dark:text-indigo-300 flex items-center justify-center shrink-0">
+                <FolderArchive className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
+                  {summaryStats.totalSessions}
+                </div>
+                <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate">
+                  Total Sessions
+                </div>
+              </div>
             </div>
-            <div className="text-xs text-stone-500 mt-0.5">Avg Score</div>
-          </div>
-        </div>
-      )}
+
+            <div className="rounded-2xl bg-white/85 dark:bg-[#12172B]/90 px-4 py-3.5 shadow-[0_8px_24px_-12px_rgba(15,23,42,0.12)] dark:shadow-[0_10px_28px_-12px_rgba(0,0,0,0.45)] flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-violet-500/12 dark:bg-violet-400/20 text-violet-600 dark:text-violet-300 flex items-center justify-center shrink-0">
+                <CheckCircle2 className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
+                  {summaryStats.totalAnswered}
+                </div>
+                <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate">
+                  Questions Answered
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-white/85 dark:bg-[#12172B]/90 px-4 py-3.5 shadow-[0_8px_24px_-12px_rgba(15,23,42,0.12)] dark:shadow-[0_10px_28px_-12px_rgba(0,0,0,0.45)] flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-blue-500/12 dark:bg-blue-400/20 text-blue-600 dark:text-blue-300 flex items-center justify-center shrink-0">
+                <Clock className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
+                  {summaryStats.totalTimeFormatted}
+                </div>
+                <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate">
+                  Total Time
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-white/85 dark:bg-[#12172B]/90 px-4 py-3.5 shadow-[0_8px_24px_-12px_rgba(15,23,42,0.12)] dark:shadow-[0_10px_28px_-12px_rgba(0,0,0,0.45)] flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-emerald-500/12 dark:bg-emerald-400/20 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0">
+                <Award className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
+                  {summaryStats.avgScore}%
+                </div>
+                <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate">
+                  Avg Score
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+      </div>
+
+      {/* Opened 3D Exam Folder Modal */}
+      <AnimatePresence>
+        {selectedItem && (
+          <OpenFolderModal
+            key={selectedItem.session.id}
+            item={selectedItem}
+            onClose={() => setSelectedId(null)}
+            onConfirmDelete={handleDeleteSession}
+            onNotesUpdated={handleNotesUpdated}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

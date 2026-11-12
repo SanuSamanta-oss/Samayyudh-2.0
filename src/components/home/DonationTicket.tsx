@@ -68,9 +68,16 @@ export function DonationTicket() {
           return;
         }
 
+        const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || data.keyId;
+        if (!razorpayKey) {
+          alert("Razorpay public key is not configured.");
+          setIsLoading(false);
+          return;
+        }
+
         // Initialize Razorpay checkout
         const options = {
-          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_Tlix2vclEDoazj",
+          key: razorpayKey,
           amount: data.amount,
           currency: data.currency,
           name: "SamayYudh",

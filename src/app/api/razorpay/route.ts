@@ -1,18 +1,28 @@
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || "rzp_test_Tlix2vclEDoazj",
-  key_secret: process.env.RAZORPAY_KEY_SECRET || "69vUWJwfLJImUpuI6EOBzsxo",
-});
-
 export async function POST(req: Request) {
   try {
+    const keyId = process.env.RAZORPAY_KEY_ID?.trim();
+    const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
+
+    if (!keyId || !keySecret) {
+      return NextResponse.json(
+        { error: "Razorpay gateway is not configured on the server" },
+        { status: 503 }
+      );
+    }
+
     const { amount } = await req.json();
 
     if (!amount || amount <= 0) {
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
+
+    const razorpay = new Razorpay({
+      key_id: keyId,
+      key_secret: keySecret,
+    });
 
     const options = {
       amount: amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -21,7 +31,12 @@ export async function POST(req: Request) {
     };
 
     const order = await razorpay.orders.create(options);
-    return NextResponse.json({ id: order.id, currency: order.currency, amount: order.amount });
+    return NextResponse.json({
+      id: order.id,
+      currency: order.currency,
+      amount: order.amount,
+      keyId,
+    });
   } catch (error) {
     console.error("Razorpay order creation error:", error);
     return NextResponse.json(

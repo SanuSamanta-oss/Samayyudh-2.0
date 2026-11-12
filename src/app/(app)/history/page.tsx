@@ -17,19 +17,13 @@ import {
 } from 'lucide-react';
 import * as localDB from '@/lib/store/local-db';
 import { questionBank } from '@/lib/questions';
-import type {
-  ExamSession,
-  Answer,
-  AnswerEvaluation,
-  StickyNote,
-  Question,
-} from '@/types/database';
+import type { StickyNote } from '@/types/database';
 import { SmoothSelect } from '@/components/ui/SmoothSelect';
 import { ExamFolderCard } from '@/components/history/ExamFolderCard';
 import { OpenFolderModal } from '@/components/history/OpenFolderModal';
 import {
+  buildSessionArchiveItems,
   formatExamDuration,
-  resolveExamIdentity,
   type SessionArchiveMeta,
 } from '@/components/history/history-helpers';
 
@@ -61,130 +55,13 @@ export default function HistoryPage() {
         localDB.getAllStickyNotes(),
       ]);
 
-    const questionMap = new Map<string, Question>();
-    for (const q of questionBank) {
-      questionMap.set(q.id, q);
-    }
-    for (const q of customQuestions) {
-      questionMap.set(q.id, q);
-    }
-
-    const answersBySession = new Map<string, Answer[]>();
-    for (const ans of allAnswers) {
-      const list = answersBySession.get(ans.session_id) ?? [];
-      list.push(ans);
-      answersBySession.set(ans.session_id, list);
-    }
-
-    const evalByAnswerId = new Map<string, AnswerEvaluation>();
-    for (const ev of allEvals) {
-      evalByAnswerId.set(ev.answer_id, ev);
-    }
-
-    const notesBySession = new Map<string, StickyNote[]>();
-    for (const note of allNotes) {
-      if (!note.session_id) continue;
-      const list = notesBySession.get(note.session_id) ?? [];
-      list.push(note);
-      notesBySession.set(note.session_id, list);
-    }
-
-    const sortedSessions = [...sessions].sort(
-      (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
-
-    const enriched: SessionArchiveMeta[] = sortedSessions.map(
-      (session: ExamSession) => {
-        const sAnswers = answersBySession.get(session.id) ?? [];
-        const answeredCount = sAnswers.filter(
-          (a) =>
-            (a.answer_text && a.answer_text.trim().length > 0) ||
-            Boolean(a.selected_option) ||
-            (a.selected_options && a.selected_options.length > 0)
-        ).length;
-
-        let totalTimeSpent = 0;
-        let totalScore = 0;
-        let totalMaxScore = 0;
-        let accuracyWeightedSum = 0;
-        const sEvaluations: AnswerEvaluation[] = [];
-
-        const subjectSet = new Set<string>();
-        const topicSet = new Set<string>();
-
-        for (const ans of sAnswers) {
-          totalTimeSpent += ans.time_spent_seconds || 0;
-          const q = questionMap.get(ans.question_id);
-          if (q?.subject) subjectSet.add(q.subject);
-          if (q?.topic) topicSet.add(q.topic);
-
-          const ev = evalByAnswerId.get(ans.id);
-          if (ev) {
-            sEvaluations.push(ev);
-            totalScore += ev.score;
-            const qMax = ev.max_score || q?.marks || 10;
-            totalMaxScore += qMax;
-            if (
-              typeof ev.percentage === 'number' &&
-              !Number.isNaN(ev.percentage)
-            ) {
-              accuracyWeightedSum += ev.percentage;
-            } else if (qMax > 0) {
-              accuracyWeightedSum += Math.max(
-                0,
-                Math.min(100, (ev.score / qMax) * 100)
-              );
-            }
-          }
-        }
-
-        const denominator =
-          totalMaxScore > 0 ? totalMaxScore : session.total_marks;
-        const scorePercent =
-          sEvaluations.length > 0 && denominator > 0
-            ? Math.round((totalScore / denominator) * 100)
-            : null;
-
-        const accuracyPercent =
-          sEvaluations.length > 0
-            ? Math.round(accuracyWeightedSum / sEvaluations.length)
-            : null;
-
-        const sessionNotes = [...(notesBySession.get(session.id) ?? [])].sort(
-          (a, b) => {
-            if (Boolean(a.is_pinned) !== Boolean(b.is_pinned)) {
-              return a.is_pinned ? -1 : 1;
-            }
-            return (
-              new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-            );
-          }
-        );
-
-        const identity = resolveExamIdentity(session.exam_code, session.title);
-
-        return {
-          session,
-          answers: sAnswers,
-          evaluations: sEvaluations,
-          notes: sessionNotes,
-          answeredCount,
-          totalTimeSpent,
-          totalScore,
-          totalMaxScore,
-          scorePercent,
-          accuracyPercent,
-          examCategory: identity.categoryName,
-          examLogo: identity.logo,
-          subjects: Array.from(subjectSet),
-          topics: Array.from(topicSet),
-          firstQuestionId: sAnswers[0]?.question_id ?? '',
-        };
-      }
-    );
-
-    return enriched;
+    return buildSessionArchiveItems({
+      sessions,
+      answers: allAnswers,
+      evaluations: allEvals,
+      questions: [...questionBank, ...customQuestions],
+      notes: allNotes,
+    });
   }, []);
 
   useEffect(() => {

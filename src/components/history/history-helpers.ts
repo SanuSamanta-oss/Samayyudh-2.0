@@ -1,6 +1,6 @@
 import { EXAM_CATEGORIES } from '@/lib/constants';
 import { formatDuration } from '@/lib/utils';
-import type { Answer, AnswerEvaluation, ExamSession, StickyNote } from '@/types';
+import type { Answer, AnswerEvaluation, ExamSession, Question, StickyNote } from '@/types';
 
 export interface SessionArchiveMeta {
   session: ExamSession;
@@ -238,4 +238,133 @@ export const STATUS_DISPLAY: Record<
     dotColor: 'bg-slate-400',
   },
 };
+
+/**
+ * Enriches raw IndexedDB session, answer, evaluation, question, and sticky note
+ * records into complete SessionArchiveMeta entries sorted newest first.
+ */
+export function buildSessionArchiveItems(params: {
+  sessions: ExamSession[];
+  answers: Answer[];
+  evaluations: AnswerEvaluation[];
+  questions: Question[];
+  notes: StickyNote[];
+}): SessionArchiveMeta[] {
+  const { sessions, answers, evaluations, questions, notes } = params;
+
+  const questionMap = new Map<string, Question>();
+  for (const q of questions) {
+    questionMap.set(q.id, q);
+  }
+
+  const answersBySession = new Map<string, Answer[]>();
+  for (const ans of answers) {
+    const list = answersBySession.get(ans.session_id) ?? [];
+    list.push(ans);
+    answersBySession.set(ans.session_id, list);
+  }
+
+  const evalByAnswerId = new Map<string, AnswerEvaluation>();
+  for (const ev of evaluations) {
+    evalByAnswerId.set(ev.answer_id, ev);
+  }
+
+  const notesBySession = new Map<string, StickyNote[]>();
+  for (const note of notes) {
+    if (!note.session_id) continue;
+    const list = notesBySession.get(note.session_id) ?? [];
+    list.push(note);
+    notesBySession.set(note.session_id, list);
+  }
+
+  const sortedSessions = [...sessions].sort(
+    (a, b) =>
+      new Date(b.started_at || b.created_at).getTime() -
+      new Date(a.started_at || a.created_at).getTime()
+  );
+
+  return sortedSessions.map((session) => {
+    const sAnswers = answersBySession.get(session.id) ?? [];
+    const answeredCount = sAnswers.filter(
+      (a) =>
+        (a.answer_text && a.answer_text.trim().length > 0) ||
+        Boolean(a.selected_option) ||
+        (a.selected_options && a.selected_options.length > 0)
+    ).length;
+
+    let totalTimeSpent = 0;
+    let totalScore = 0;
+    let totalMaxScore = 0;
+    let accuracyWeightedSum = 0;
+    const sEvaluations: AnswerEvaluation[] = [];
+
+    const subjectSet = new Set<string>();
+    const topicSet = new Set<string>();
+
+    for (const ans of sAnswers) {
+      totalTimeSpent += ans.time_spent_seconds || 0;
+      const q = questionMap.get(ans.question_id);
+      if (q?.subject) subjectSet.add(q.subject);
+      if (q?.topic) topicSet.add(q.topic);
+
+      const ev = evalByAnswerId.get(ans.id);
+      if (ev) {
+        sEvaluations.push(ev);
+        totalScore += ev.score;
+        const qMax = ev.max_score || q?.marks || 10;
+        totalMaxScore += qMax;
+        if (typeof ev.percentage === 'number' && !Number.isNaN(ev.percentage)) {
+          accuracyWeightedSum += ev.percentage;
+        } else if (qMax > 0) {
+          accuracyWeightedSum += Math.max(
+            0,
+            Math.min(100, (ev.score / qMax) * 100)
+          );
+        }
+      }
+    }
+
+    const denominator = totalMaxScore > 0 ? totalMaxScore : session.total_marks;
+    const scorePercent =
+      sEvaluations.length > 0 && denominator > 0
+        ? Math.round((totalScore / denominator) * 100)
+        : null;
+
+    const accuracyPercent =
+      sEvaluations.length > 0
+        ? Math.round(accuracyWeightedSum / sEvaluations.length)
+        : null;
+
+    const sessionNotes = [...(notesBySession.get(session.id) ?? [])].sort(
+      (a, b) => {
+        if (Boolean(a.is_pinned) !== Boolean(b.is_pinned)) {
+          return a.is_pinned ? -1 : 1;
+        }
+        return (
+          new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+        );
+      }
+    );
+
+    const identity = resolveExamIdentity(session.exam_code, session.title);
+
+    return {
+      session,
+      answers: sAnswers,
+      evaluations: sEvaluations,
+      notes: sessionNotes,
+      answeredCount,
+      totalTimeSpent,
+      totalScore,
+      totalMaxScore,
+      scorePercent,
+      accuracyPercent,
+      examCategory: identity.categoryName,
+      examLogo: identity.logo,
+      subjects: Array.from(subjectSet),
+      topics: Array.from(topicSet),
+      firstQuestionId: sAnswers[0]?.question_id ?? '',
+    };
+  });
+}
 

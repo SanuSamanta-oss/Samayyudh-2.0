@@ -13,13 +13,7 @@ import {
   Settings,
   LogOut,
   LogIn,
-  ChevronRight,
-  Clock,
   CheckCircle2,
-  BookOpen,
-  FileText,
-  Target,
-  Zap,
   Shield,
   Database,
   Trash2,
@@ -39,7 +33,12 @@ import { processAnalyticsData, type ProcessedAnalytics } from '@/lib/analytics/d
 import { STANDARD_ACHIEVEMENTS } from '@/lib/achievements/definitions';
 import { getAchievementSystemData, getLocalAchievementSnapshot } from '@/lib/achievements/client';
 import type { AchievementDefinition, UserAchievement, UserStreak } from '@/types/achievements';
-import type { Answer, AnswerEvaluation, ExamSession, Question } from '@/types';
+import type { Answer, AnswerEvaluation, ExamSession, Question, StickyNote } from '@/types';
+import {
+  buildSessionArchiveItems,
+  type SessionArchiveMeta,
+} from '@/components/history/history-helpers';
+import { ProfileSessionsPanel } from '@/components/profile/ProfileSessionsPanel';
 import {
   getSelectedAvatar,
   setSelectedAvatarId,
@@ -162,21 +161,6 @@ function formatDurationCompact(seconds: number): string {
   return `${mins}m`;
 }
 
-function getSessionModeIcon(mode: string) {
-  switch (mode) {
-    case 'timed_exam':
-      return Clock;
-    case 'practice_battle':
-      return BookOpen;
-    case 'challenge':
-      return Target;
-    case 'quick_fire':
-      return Zap;
-    default:
-      return FileText;
-  }
-}
-
 export default function ProfilePage() {
   const { user, isAuthenticated, signOut, revokeAllSessions, refreshSession } =
     useAuth();
@@ -213,6 +197,7 @@ export default function ProfilePage() {
     totalWordsWritten: 0,
   });
   const [sessionItems, setSessionItems] = useState<SessionDisplayItem[]>([]);
+  const [archiveSessionItems, setArchiveSessionItems] = useState<SessionArchiveMeta[]>([]);
   const [practiceSince, setPracticeSince] = useState<string>('Not started');
   const [notesCount, setNotesCount] = useState<number>(0);
 
@@ -361,6 +346,15 @@ export default function ProfilePage() {
         });
 
       setSessionItems(builtSessions);
+      setArchiveSessionItems(
+        buildSessionArchiveItems({
+          sessions: allSessions,
+          answers: allAnswers,
+          evaluations: allEvals,
+          questions: [...questionBank, ...customQs],
+          notes: allNotes,
+        })
+      );
 
       // Unique active dates across answers, sessions, and usage tracker
       const activeDayKeys = new Set<string>();
@@ -566,6 +560,35 @@ export default function ProfilePage() {
       }
     }
   };
+
+  const handleDeleteArchiveSession = useCallback(async (sessionId: string) => {
+    await localDB.deleteSession(sessionId);
+    setArchiveSessionItems((prev) =>
+      prev.filter((item) => item.session.id !== sessionId)
+    );
+    setSessionItems((prev) => prev.filter((item) => item.id !== sessionId));
+    setSessions((prev) => prev.filter((s) => s.id !== sessionId));
+    setStats((prev) => ({
+      ...prev,
+      totalSessions: Math.max(0, prev.totalSessions - 1),
+    }));
+  }, []);
+
+  const handleArchiveNotesUpdated = useCallback(
+    (sessionId: string, updatedNotes: StickyNote[]) => {
+      setArchiveSessionItems((prev) => {
+        const currentEntry = prev.find((item) => item.session.id === sessionId);
+        const delta = updatedNotes.length - (currentEntry?.notes.length ?? 0);
+        if (delta !== 0) {
+          setNotesCount((n) => Math.max(0, n + delta));
+        }
+        return prev.map((item) =>
+          item.session.id === sessionId ? { ...item, notes: updatedNotes } : item
+        );
+      });
+    },
+    []
+  );
 
   const handleManualSync = async () => {
     if (!isAuthenticated || !isOnline || syncing) return;
@@ -843,115 +866,13 @@ export default function ProfilePage() {
             </>
           )}
 
-          {/* TAB: MY SESSIONS (Borderless & Emoji-free) */}
+          {/* TAB: MY SESSIONS (Mini Animated Exam Folders, Borderless & Emoji-free) */}
           {activeTab === 'sessions' && (
-            <section className="space-y-4">
-              <div className="rounded-3xl bg-white dark:bg-[#111A2E] p-5 sm:p-6 shadow-[0_2px_16px_-4px_rgba(15,23,42,0.05)] dark:shadow-[0_4px_24px_-6px_rgba(0,0,0,0.45)] flex items-center justify-between gap-4">
-                <div>
-                  <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
-                    My Sessions
-                  </h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    {sessionItems.length}{' '}
-                    {sessionItems.length === 1 ? 'practice session' : 'practice sessions'}{' '}
-                    recorded
-                  </p>
-                </div>
-                <Link
-                  href="/practice"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs font-semibold bg-violet-600 hover:bg-violet-700 text-white transition-colors"
-                >
-                  <Zap className="w-3.5 h-3.5" />
-                  New Session
-                </Link>
-              </div>
-
-              {sessionItems.length === 0 ? (
-                <div className="rounded-3xl bg-white dark:bg-[#111A2E] p-10 text-center shadow-[0_2px_16px_-4px_rgba(15,23,42,0.05)] dark:shadow-[0_4px_24px_-6px_rgba(0,0,0,0.45)]">
-                  <div className="w-12 h-12 rounded-2xl bg-violet-500/12 dark:bg-violet-500/20 flex items-center justify-center text-violet-600 dark:text-violet-400 mx-auto mb-3">
-                    <History className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
-                    No sessions recorded yet
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">
-                    Start your first exam simulation or practice drill to build your session log.
-                  </p>
-                  <Link
-                    href="/practice"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs font-semibold bg-violet-600 hover:bg-violet-700 text-white transition-colors"
-                  >
-                    Start Practicing
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              ) : (
-                <div className="space-y-2.5">
-                  {sessionItems.map((s) => {
-                    const ModeIcon = getSessionModeIcon(s.mode);
-                    const href =
-                      s.status === 'completed' || s.status === 'evaluated'
-                        ? `/results/${s.id}`
-                        : `/exam/${s.id}`;
-                    return (
-                      <Link
-                        key={s.id}
-                        href={href}
-                        className="flex items-center justify-between gap-4 p-4 rounded-3xl bg-white dark:bg-[#111A2E] hover:bg-stone-50/90 dark:hover:bg-[#162032] shadow-[0_2px_14px_-4px_rgba(15,23,42,0.05)] dark:shadow-[0_4px_20px_-6px_rgba(0,0,0,0.45)] transition-colors group"
-                      >
-                        <div className="flex items-center gap-3.5 min-w-0">
-                          <div className="w-10 h-10 rounded-2xl bg-violet-500/10 dark:bg-violet-500/18 flex items-center justify-center text-violet-600 dark:text-violet-300 shrink-0">
-                            <ModeIcon className="w-4 h-4" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
-                              <h3 className="text-sm font-semibold text-slate-900 dark:text-white truncate">
-                                {s.title}
-                              </h3>
-                              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-violet-500/10 text-violet-700 dark:text-violet-300 uppercase shrink-0">
-                                {s.exam_code}
-                              </span>
-                            </div>
-                            <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                              <span>
-                                {new Date(s.started_at).toLocaleDateString('en-IN', {
-                                  day: 'numeric',
-                                  month: 'short',
-                                  year: 'numeric',
-                                })}
-                              </span>
-                              <span>{s.answerCount} answers</span>
-                              <span>{formatDurationCompact(s.timeSpentSeconds)}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-3 shrink-0">
-                          {s.scorePercent !== null ? (
-                            <span
-                              className={`px-2.5 py-1 rounded-xl text-xs font-bold tabular-nums ${
-                                s.scorePercent >= 70
-                                  ? 'bg-emerald-500/12 text-emerald-700 dark:text-emerald-300'
-                                  : s.scorePercent >= 40
-                                    ? 'bg-amber-500/12 text-amber-700 dark:text-amber-300'
-                                    : 'bg-rose-500/12 text-rose-700 dark:text-rose-300'
-                              }`}
-                            >
-                              {s.scorePercent}%
-                            </span>
-                          ) : (
-                            <span className="px-2.5 py-1 rounded-xl text-[11px] font-medium bg-stone-100 dark:bg-[#18233C] text-slate-500 dark:text-slate-300 capitalize">
-                              {s.status.replace('_', ' ')}
-                            </span>
-                          )}
-                          <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-violet-500 group-hover:translate-x-0.5 transition-all" />
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </section>
+            <ProfileSessionsPanel
+              items={archiveSessionItems}
+              onDeleteSession={handleDeleteArchiveSession}
+              onNotesUpdated={handleArchiveNotesUpdated}
+            />
           )}
 
           {/* TAB: ACHIEVEMENTS (Borderless, Existing Vector Artwork, Zero Emojis) */}

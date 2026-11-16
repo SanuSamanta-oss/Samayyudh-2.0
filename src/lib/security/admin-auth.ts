@@ -141,7 +141,7 @@ export function extractClientIp(req?: NextRequest | Request): string {
   return req.headers.get('x-real-ip') || 'unknown';
 }
 
-function getSuperAdminEmails(): string[] {
+export function getSuperAdminEmails(): string[] {
   const raw = process.env.SUPER_ADMIN_EMAILS || '';
   return raw
     .split(',')

@@ -16,6 +16,7 @@ import {
   PanelLeftOpen,
   X,
   ShieldCheck,
+  Activity,
 } from 'lucide-react';
 import type { AdminSectionId, CommandRole } from '@/types/admin';
 
@@ -125,6 +126,12 @@ export function CommandSidebar({
 }: CommandSidebarProps) {
   const navItems: NavItemConfig[] = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+    ...(role === 'super_admin'
+      ? [
+          { id: 'user_management' as AdminSectionId, label: 'User & Roles', icon: ShieldCheck },
+          { id: 'login_activity' as AdminSectionId, label: 'Login Activity', icon: Activity },
+        ]
+      : []),
     { id: 'questions', label: 'Question Bank', icon: FileQuestion },
     { id: 'resources', label: 'Resource Library', icon: FolderOpen },
     { id: 'assignments', label: 'Assignments', icon: ClipboardCheck },

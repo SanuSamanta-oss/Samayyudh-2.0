@@ -31,3 +31,5 @@ export async function createClient() {
     },
   );
 }
+
+export { createClient as createServerRlsClient };

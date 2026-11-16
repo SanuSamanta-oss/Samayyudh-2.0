@@ -16,6 +16,8 @@ import { StudentDirectorySection } from './StudentDirectorySection';
 import { ConnectionsSection } from './ConnectionsSection';
 import { AdminAnalyticsSection } from './AdminAnalyticsSection';
 import { CommandSettingsSection } from './CommandSettingsSection';
+import { UserRoleManagementSection } from './UserRoleManagementSection';
+import { LoginActivitySection } from './LoginActivitySection';
 import type {
   AdminOverviewPayload,
   AdminSectionId,
@@ -233,6 +235,14 @@ export function CommandCenterShell() {
                     setOpenUploadModal(true);
                   }}
                 />
+              )}
+
+              {activeSection === 'user_management' && (
+                <UserRoleManagementSection />
+              )}
+
+              {activeSection === 'login_activity' && (
+                <LoginActivitySection />
               )}
 
               {activeSection === 'questions' && (

@@ -30,6 +30,8 @@ interface CommandTopbarProps {
 
 const SECTION_TITLES: Record<AdminSectionId, string> = {
   overview: 'Command Overview',
+  user_management: 'User & Role Management',
+  login_activity: 'Login Activity & Session Monitor',
   questions: 'Question Bank Management',
   resources: 'Resource Library & PDF Studio',
   assignments: 'Assignments & Assessments',

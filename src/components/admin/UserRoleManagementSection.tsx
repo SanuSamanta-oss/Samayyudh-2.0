@@ -214,7 +214,7 @@ export function UserRoleManagementSection() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder={`Search ${activeTab} by name, email, or institution...`}
+            placeholder={`Search ${activeTab === 'super_admins' ? 'super admins' : activeTab} by name, email, or institution...`}
             className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white dark:bg-[#1C1A29] text-xs text-neutral-900 dark:text-white placeholder-neutral-400 outline-none focus:outline-none shadow-sm"
           />
         </div>
@@ -452,7 +452,7 @@ export function UserRoleManagementSection() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="relative w-full max-w-lg bg-white dark:bg-[#181622] rounded-[32px] p-6 sm:p-8 shadow-2xl z-10 my-auto text-left"
             >
-              <div className="flex items-center justify-between pb-4 border-b border-neutral-100 dark:border-[#221E31]">
+              <div className="flex items-center justify-between pb-4">
                 <div>
                   <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
                     Teacher Verification Details
@@ -536,7 +536,7 @@ export function UserRoleManagementSection() {
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-4 flex items-center justify-end gap-3 border-t border-neutral-100 dark:border-[#221E31]">
+              <div className="pt-4 flex items-center justify-end gap-3">
                 {selectedTeacher.verificationStatus !== 'verified' ? (
                   <button
                     type="button"

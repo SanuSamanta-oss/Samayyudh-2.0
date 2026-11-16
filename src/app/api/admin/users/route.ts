@@ -1,6 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { createServerRlsClient } from '@/lib/supabase/server';
-import { getCommandDataClient, isMissingSchemaError } from '@/lib/supabase/admin';
+import { getCommandDataClient } from '@/lib/supabase/admin';
 import { getSuperAdminEmails, getCommandAuthContext } from '@/lib/security/admin-auth';
 
 async function checkIsAuthorizedSuperAdmin(req: NextRequest): Promise<boolean> {
@@ -28,7 +27,7 @@ export async function GET(req: NextRequest) {
 
     const { db } = await getCommandDataClient();
 
-    // Compute Tab Counts
+    // 1. Compute Tab Counts reliably from user_roles
     const [superAdminCountRes, teacherCountRes, studentCountRes] = await Promise.all([
       db.from('user_roles').select('*', { count: 'exact', head: true }).eq('role', 'super_admin'),
       db.from('user_roles').select('*', { count: 'exact', head: true }).eq('role', 'teacher'),
@@ -41,113 +40,173 @@ export async function GET(req: NextRequest) {
       students: studentCountRes.count || 0,
     };
 
+    // 2. Fetch role assignments for the selected tab
+    const targetRole = tab === 'super_admins' ? 'super_admin' : tab === 'teachers' ? 'teacher' : 'student';
+
+    const { data: roleRows, error: roleError } = await db
+      .from('user_roles')
+      .select('user_id, role, created_at, updated_at')
+      .eq('role', targetRole)
+      .order('created_at', { ascending: false });
+
+    if (roleError) {
+      console.error('Error querying user_roles:', roleError);
+    }
+
+    const userIds = (roleRows || []).map((r) => r.user_id);
+
+    // 3. Query profiles with correct column names (display_name, not full_name)
+    const profilesMap: Record<string, {
+      id: string;
+      email?: string | null;
+      display_name?: string | null;
+      username?: string | null;
+      institution?: string | null;
+      account_status?: string | null;
+      created_at?: string;
+    }> = {};
+
+    if (userIds.length > 0) {
+      const { data: profs } = await db
+        .from('profiles')
+        .select('id, email, display_name, username, institution, account_status, created_at')
+        .in('id', userIds);
+
+      profs?.forEach((p) => {
+        profilesMap[p.id] = p;
+      });
+    }
+
+    // 4. Query auth.admin.listUsers to fetch Google display names & verified emails as fallbacks
+    const authUsersMap: Record<string, {
+      id: string;
+      email?: string;
+      user_metadata?: {
+        full_name?: string;
+        name?: string;
+        display_name?: string;
+        teacher_verified?: boolean;
+        institutional_email?: string;
+        institution_name?: string;
+        department?: string;
+        designation?: string;
+      };
+    }> = {};
+
+    try {
+      const { data: authData } = await db.auth.admin.listUsers({ perPage: 100 });
+      authData?.users?.forEach((u) => {
+        authUsersMap[u.id] = u;
+      });
+    } catch {}
+
+    // 5. Build items list according to the active tab
     if (tab === 'super_admins') {
-      const { data: superRows, error } = await db
-        .from('super_admins')
-        .select(`
-          user_id,
-          authorized_by,
-          is_active,
-          created_at,
-          user_roles!inner(role, status)
-        `)
-        .order('created_at', { ascending: false });
+      let items = (roleRows || []).map((r) => {
+        const p = profilesMap[r.user_id] || {};
+        const au = authUsersMap[r.user_id] || {};
+        const email = p.email || au.email || 'Super Administrator';
+        const fullName =
+          p.display_name ||
+          au.user_metadata?.full_name ||
+          au.user_metadata?.name ||
+          p.username ||
+          'Super Administrator';
 
-      if (error && !isMissingSchemaError(error)) {
-        console.error('Error fetching super_admins:', error);
-      }
-
-      // Fetch profiles to get name and email
-      const userIds = (superRows || []).map((r) => r.user_id);
-      let profilesMap: Record<string, { full_name?: string; email?: string; username?: string }> = {};
-
-      if (userIds.length > 0) {
-        const { data: profs } = await db
-          .from('profiles')
-          .select('id, full_name, username, email')
-          .in('id', userIds);
-        profs?.forEach((p) => {
-          profilesMap[p.id] = p;
-        });
-      }
-
-      const superAdminsList = (superRows || []).map((row) => {
-        const p = profilesMap[row.user_id] || {};
         return {
-          id: row.user_id,
-          email: p.email || null,
-          fullName: p.full_name || p.username || 'Super Administrator',
+          id: r.user_id,
+          email,
+          fullName,
           role: 'super_admin',
-          status: row.is_active ? 'active' : 'suspended',
-          authorizedBy: row.authorized_by,
-          createdAt: row.created_at,
+          status: 'active',
+          authorizedBy: 'Server Environment (.env.local)',
+          createdAt: r.created_at || p.created_at || new Date().toISOString(),
         };
       });
+
+      if (search) {
+        items = items.filter(
+          (item) =>
+            item.fullName.toLowerCase().includes(search) ||
+            (item.email && item.email.toLowerCase().includes(search))
+        );
+      }
 
       return NextResponse.json({
         tab,
         counts,
-        items: superAdminsList,
+        items,
       });
     }
 
     if (tab === 'teachers') {
-      let query = db
-        .from('teachers')
-        .select(`
-          user_id,
-          institutional_email,
-          institution_name,
-          department,
-          designation,
-          verification_status,
-          verification_method,
-          verification_score,
-          verified_at,
-          created_at,
-          updated_at
-        `)
-        .order('created_at', { ascending: false });
-
-      if (statusFilter !== 'all') {
-        query = query.eq('verification_status', statusFilter);
-      }
-
-      const { data: teacherRows, error } = await query;
-      if (error && !isMissingSchemaError(error)) {
-        console.error('Error querying teachers:', error);
-      }
-
-      const userIds = (teacherRows || []).map((t) => t.user_id);
-      let profilesMap: Record<string, { full_name?: string; email?: string; username?: string }> = {};
+      // Check teachers table if it exists
+      const teacherDetailsMap: Record<string, {
+        institutional_email?: string;
+        institution_name?: string;
+        department?: string;
+        designation?: string;
+        verification_status?: 'verified' | 'pending' | 'rejected' | 'suspended';
+        verification_method?: string;
+        verification_score?: number;
+        verified_at?: string;
+        created_at?: string;
+      }> = {};
 
       if (userIds.length > 0) {
-        const { data: profs } = await db
-          .from('profiles')
-          .select('id, full_name, username, email')
-          .in('id', userIds);
-        profs?.forEach((p) => {
-          profilesMap[p.id] = p;
-        });
+        try {
+          const { data: teacherDetails } = await db
+            .from('teachers')
+            .select('*')
+            .in('user_id', userIds);
+          teacherDetails?.forEach((t) => {
+            teacherDetailsMap[t.user_id] = t;
+          });
+        } catch {}
       }
 
-      let items = (teacherRows || []).map((t) => {
-        const p = profilesMap[t.user_id] || {};
+      let items = (roleRows || []).map((r) => {
+        const p = profilesMap[r.user_id] || {};
+        const au = authUsersMap[r.user_id] || {};
+        const td = teacherDetailsMap[r.user_id] || {};
+        const email = p.email || au.email || td.institutional_email || 'No email';
+        const fullName =
+          p.display_name ||
+          au.user_metadata?.full_name ||
+          au.user_metadata?.name ||
+          p.username ||
+          'Educator';
+
+        const verificationStatus = (td.verification_status ||
+          (au.user_metadata?.teacher_verified ? 'verified' : 'pending')) as
+          | 'verified'
+          | 'pending'
+          | 'rejected'
+          | 'suspended';
+
         return {
-          id: t.user_id,
-          fullName: p.full_name || p.username || 'Educator',
-          email: p.email || t.institutional_email || 'No email',
-          institutionalEmail: t.institutional_email,
-          institutionName: t.institution_name,
-          department: t.department,
-          designation: t.designation,
-          verificationStatus: t.verification_status,
-          verificationMethod: t.verification_method,
-          verificationScore: t.verification_score,
-          verifiedAt: t.verified_at,
-          createdAt: t.created_at,
+          id: r.user_id,
+          fullName,
+          email,
+          institutionalEmail: td.institutional_email || au.user_metadata?.institutional_email,
+          institutionName:
+            td.institution_name ||
+            p.institution ||
+            au.user_metadata?.institution_name ||
+            'Institution Pending',
+          department: td.department || au.user_metadata?.department,
+          designation: td.designation || au.user_metadata?.designation,
+          verificationStatus,
+          verificationMethod: td.verification_method || 'institutional_email',
+          verificationScore: td.verification_score || (au.user_metadata?.teacher_verified ? 100 : 0),
+          verifiedAt: td.verified_at || (au.user_metadata?.teacher_verified ? r.updated_at : undefined),
+          createdAt: r.created_at || td.created_at || p.created_at || new Date().toISOString(),
         };
       });
+
+      if (statusFilter !== 'all') {
+        items = items.filter((item) => item.verificationStatus === statusFilter);
+      }
 
       if (search) {
         items = items.filter(
@@ -166,42 +225,24 @@ export async function GET(req: NextRequest) {
     }
 
     // Default: tab === 'students'
-    let query = db
-      .from('students')
-      .select(`
-        user_id,
-        created_at
-      `)
-      .order('created_at', { ascending: false })
-      .limit(100);
+    let items = (roleRows || []).map((r) => {
+      const p = profilesMap[r.user_id] || {};
+      const au = authUsersMap[r.user_id] || {};
+      const email = p.email || au.email || 'No email';
+      const fullName =
+        p.display_name ||
+        au.user_metadata?.full_name ||
+        au.user_metadata?.name ||
+        p.username ||
+        'Student Candidate';
 
-    const { data: studentRows, error } = await query;
-    if (error && !isMissingSchemaError(error)) {
-      console.error('Error querying students:', error);
-    }
-
-    const userIds = (studentRows || []).map((s) => s.user_id);
-    let profilesMap: Record<string, { full_name?: string; email?: string; username?: string }> = {};
-
-    if (userIds.length > 0) {
-      const { data: profs } = await db
-        .from('profiles')
-        .select('id, full_name, username, email')
-        .in('id', userIds);
-      profs?.forEach((p) => {
-        profilesMap[p.id] = p;
-      });
-    }
-
-    let items = (studentRows || []).map((s) => {
-      const p = profilesMap[s.user_id] || {};
       return {
-        id: s.user_id,
-        fullName: p.full_name || p.username || 'Student Candidate',
-        email: p.email || 'No email',
+        id: r.user_id,
+        fullName,
+        email,
         role: 'student',
-        status: 'active',
-        createdAt: s.created_at,
+        status: p.account_status || 'active',
+        createdAt: r.created_at || p.created_at || new Date().toISOString(),
       };
     });
 
@@ -243,83 +284,116 @@ export async function PATCH(req: NextRequest) {
 
     if (action === 'approve_teacher') {
       await Promise.all([
-        db.from('teachers').update({
+        db.from('user_roles').upsert({
+          user_id: targetUserId,
+          role: 'teacher',
+          updated_at: new Date().toISOString(),
+        }, { onConflict: 'user_id' }),
+        db.auth.admin.updateUserById(targetUserId, {
+          user_metadata: { role: 'teacher', teacher_verified: true },
+        }).catch(() => null),
+      ]);
+
+      try {
+        await db.from('teachers').upsert({
+          user_id: targetUserId,
           verification_status: 'verified',
           verification_score: 100,
           verified_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
-        }).eq('user_id', targetUserId),
-        db.from('user_roles').update({
-          status: 'active',
-          role: 'teacher',
-          updated_at: new Date().toISOString(),
-        }).eq('user_id', targetUserId),
-      ]);
+        }, { onConflict: 'user_id' });
+      } catch {}
 
-      await db.from('admin_audit_logs').insert({
-        actor_role: 'super_admin',
-        target_entity: 'teachers',
-        target_id: targetUserId,
-        action: 'super_admin_approved_teacher',
-        details: { target_user_id: targetUserId },
-      });
+      try {
+        await db.from('admin_audit_logs').insert({
+          actor_role: 'super_admin',
+          target_entity: 'teachers',
+          target_id: targetUserId,
+          action: 'super_admin_approved_teacher',
+          details: { target_user_id: targetUserId },
+        });
+      } catch {}
 
       return NextResponse.json({ success: true, message: 'Teacher approved successfully.' });
     }
 
     if (action === 'revoke_teacher') {
       await Promise.all([
-        db.from('teachers').update({
-          verification_status: 'rejected',
+        db.from('user_roles').upsert({
+          user_id: targetUserId,
+          role: 'student',
           updated_at: new Date().toISOString(),
-        }).eq('user_id', targetUserId),
-        db.from('user_roles').update({
-          status: 'limited',
-          updated_at: new Date().toISOString(),
-        }).eq('user_id', targetUserId),
+        }, { onConflict: 'user_id' }),
+        db.auth.admin.updateUserById(targetUserId, {
+          user_metadata: { role: 'student', teacher_verified: false },
+        }).catch(() => null),
       ]);
 
-      await db.from('admin_audit_logs').insert({
-        actor_role: 'super_admin',
-        target_entity: 'teachers',
-        target_id: targetUserId,
-        action: 'super_admin_revoked_teacher',
-        details: { target_user_id: targetUserId },
-      });
+      try {
+        await db.from('teachers').upsert({
+          user_id: targetUserId,
+          verification_status: 'rejected',
+          updated_at: new Date().toISOString(),
+        }, { onConflict: 'user_id' });
+      } catch {}
+
+      try {
+        await db.from('admin_audit_logs').insert({
+          actor_role: 'super_admin',
+          target_entity: 'teachers',
+          target_id: targetUserId,
+          action: 'super_admin_revoked_teacher',
+          details: { target_user_id: targetUserId },
+        });
+      } catch {}
 
       return NextResponse.json({ success: true, message: 'Teacher status revoked.' });
     }
 
     if (action === 'suspend_user') {
-      await db.from('user_roles').update({
-        status: 'suspended',
-        updated_at: new Date().toISOString(),
-      }).eq('user_id', targetUserId);
+      await Promise.all([
+        db.from('profiles').update({
+          account_status: 'suspended',
+          updated_at: new Date().toISOString(),
+        }).eq('id', targetUserId),
+        db.from('user_roles').update({
+          updated_at: new Date().toISOString(),
+        }).eq('user_id', targetUserId),
+      ]);
 
-      await db.from('admin_audit_logs').insert({
-        actor_role: 'super_admin',
-        target_entity: 'user_roles',
-        target_id: targetUserId,
-        action: 'super_admin_suspended_user',
-        details: { target_user_id: targetUserId },
-      });
+      try {
+        await db.from('admin_audit_logs').insert({
+          actor_role: 'super_admin',
+          target_entity: 'user_roles',
+          target_id: targetUserId,
+          action: 'super_admin_suspended_user',
+          details: { target_user_id: targetUserId },
+        });
+      } catch {}
 
       return NextResponse.json({ success: true, message: 'User suspended.' });
     }
 
     if (action === 'restore_user') {
-      await db.from('user_roles').update({
-        status: 'active',
-        updated_at: new Date().toISOString(),
-      }).eq('user_id', targetUserId);
+      await Promise.all([
+        db.from('profiles').update({
+          account_status: 'active',
+          updated_at: new Date().toISOString(),
+        }).eq('id', targetUserId),
+        db.from('user_roles').update({
+          updated_at: new Date().toISOString(),
+        }).eq('user_id', targetUserId),
+      ]);
 
-      await db.from('admin_audit_logs').insert({
-        actor_role: 'super_admin',
-        target_entity: 'user_roles',
-        target_id: targetUserId,
-        action: 'super_admin_restored_user',
-        details: { target_user_id: targetUserId },
-      });
+      try {
+        await db.from('admin_audit_logs').insert({
+          actor_role: 'super_admin',
+          target_entity: 'user_roles',
+          target_id: targetUserId,
+          action: 'super_admin_restored_user',
+          details: { target_user_id: targetUserId },
+        });
+      } catch {}
 
       return NextResponse.json({ success: true, message: 'User restored.' });
     }
@@ -330,4 +404,3 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: errorMsg }, { status: 500 });
   }
 }
-

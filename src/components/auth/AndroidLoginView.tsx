@@ -177,6 +177,8 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
       if (result.error) throw result.error;
 
       markUserLoggedIn(result.data?.user);
+      // Strictly clear any prior admin passkey session so Super Admin must re-authenticate with passkey
+      fetch('/api/admin/auth/logout', { method: 'POST' }).catch(() => {});
 
       // Check if new user needs to set their display name
       const hasDisplayName = !!result.data?.user?.user_metadata?.display_name;
@@ -226,6 +228,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
       if (updateError) throw updateError;
 
       markUserLoggedIn();
+      fetch('/api/admin/auth/logout', { method: 'POST' }).catch(() => {});
 
       // Show Bored Hand tapping loading animation upon completing profile setup
       setRedirecting(true);

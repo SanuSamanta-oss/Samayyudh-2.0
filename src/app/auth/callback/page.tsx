@@ -68,6 +68,10 @@ function AuthCallbackContent() {
 
         markUserLoggedIn(session?.user);
 
+        // Ensure any previous admin command session is cleared on new login
+        // Super Admin must explicitly authenticate with the Command Passkey
+        fetch('/api/admin/auth/logout', { method: 'POST' }).catch(() => {});
+
         // 3. Play the full hand gesture animation before smoothly redirecting
         const userName =
           session?.user?.user_metadata?.display_name ||

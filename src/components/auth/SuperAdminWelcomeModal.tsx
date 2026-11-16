@@ -125,8 +125,8 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
             className="relative w-full max-w-[390px] sm:max-w-[420px] bg-white dark:bg-[#181622] rounded-[32px] pb-7 px-6 sm:px-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center"
           >
             {/* Top Breaching Security Passkey Illustration in Document Flow */}
-            <div className="-mt-14 sm:-mt-16 mb-4 flex items-center justify-center drop-shadow-xl pointer-events-none">
-              <SecurityPasskeyIllustration size={150} />
+            <div className="-mt-16 sm:-mt-20 mb-3.5 flex items-center justify-center drop-shadow-xl pointer-events-none">
+              <SecurityPasskeyIllustration size={160} />
             </div>
 
             <h3 className="text-xl sm:text-2xl font-bold text-[#18181B] dark:text-white tracking-tight">

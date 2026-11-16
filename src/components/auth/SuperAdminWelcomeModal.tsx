@@ -108,11 +108,11 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
           className="relative aspect-square w-full max-w-[360px] sm:max-w-[390px] bg-white dark:bg-[#181622] rounded-[36px] p-5 sm:p-6 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center flex flex-col justify-center items-center overflow-hidden select-none border-0 ring-0 outline-none"
         >
           {verifying ? (
-            /* VERIFICATION STATE: EXACT CROPPED BIOMETRIC ANIMATION (NO BOX, FEATHERED EDGES) */
+            /* VERIFICATION STATE: BLENDED FINGERPRINT LASER SCANNER */
             <div className="w-full h-full flex flex-col items-center justify-center my-auto">
               <BiometricScanAnimation
                 status={scanStatus}
-                size={185}
+                size={150}
                 label={scanLabel}
                 sublabel={scanSublabel}
               />

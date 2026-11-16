@@ -1,8 +1,13 @@
 -- ============================================================
 -- SamayYudh 2.0 — Global Admin & Teacher Command Center Schema
--- Idempotent migration: extends existing SamayYudh Supabase tables
--- without breaking existing student sessions, profiles, or exams.
--- Run in Supabase Dashboard -> SQL Editor
+-- Database Partition: ADMIN / COMMAND CENTER DATABASE
+--
+-- Deployment Modes:
+-- 1. Unified Database: Run this file in your primary Supabase SQL Editor
+--    after `migration.sql`. It idempotently adds admin tables without
+--    altering existing student sessions or exams.
+-- 2. Separate Databases: Run this file on your dedicated Admin/Institutional
+--    Supabase database instance (pointed to by ADMIN_SUPABASE_URL).
 -- ============================================================
 
 -- ====================

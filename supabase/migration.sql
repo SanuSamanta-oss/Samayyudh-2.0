@@ -1,6 +1,11 @@
 -- ============================================================
--- SamayYudh 2.0 — Supabase Database Schema
--- Run this in Supabase Dashboard → SQL Editor
+-- SamayYudh 2.0 — Primary Student & Platform Database Schema
+-- Database Partition: APP / PRIMARY DATABASE
+--
+-- Deployment Modes:
+-- 1. Unified Database: Run this file in your primary Supabase SQL Editor.
+-- 2. Separate Databases: Run this file on your dedicated Student/Public
+--    Supabase database instance (pointed to by NEXT_PUBLIC_SUPABASE_URL).
 -- ============================================================
 
 -- ====================

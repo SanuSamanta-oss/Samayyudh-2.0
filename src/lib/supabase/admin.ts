@@ -1,5 +1,12 @@
-import { createClient as createSupabaseJsClient, type SupabaseClient } from '@supabase/supabase-js';
+import { type SupabaseClient } from '@supabase/supabase-js';
 import { createClient as createServerRlsClient } from '@/lib/supabase/server';
+import {
+  getAdminDatabaseClient,
+  getPartitionConfig,
+  isDatabaseSeparated,
+  getDatabaseTopology,
+  type DatabaseTopology,
+} from '@/lib/supabase/db-manager';
 
 export interface SupabaseErrorLike {
   code?: string | null;
@@ -34,34 +41,42 @@ export function isMissingSchemaError(err: SupabaseErrorLike | null | undefined):
 }
 
 /**
- * Creates a server-side Supabase client using the Service Role key when available
- * (bypassing RLS for verified server-authorized Command Center operations),
- * or falls back cleanly to the caller's RLS-authenticated server client.
+ * Creates a server-side Supabase client using the Service Role key when available.
+ * Supports separate databases: uses ADMIN_SUPABASE_URL / ADMIN_SUPABASE_SERVICE_ROLE_KEY
+ * when configured, or falls back seamlessly to the primary app database credentials.
  */
-export function createServiceRoleClient(): SupabaseClient | null {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !serviceKey) return null;
-
-  return createSupabaseJsClient(url, serviceKey, {
-    auth: {
-      persistSession: false,
-      autoRefreshToken: false,
-    },
-  });
+export function createServiceRoleClient(options?: { schema?: string }): SupabaseClient | null {
+  return getAdminDatabaseClient(options);
 }
 
+/**
+ * Returns the data client for the Admin & Teacher Command Center.
+ * If separate databases are configured, `db` connects directly to the dedicated Admin database.
+ */
 export async function getCommandDataClient(): Promise<{
   db: SupabaseClient;
   rlsDb: SupabaseClient;
   hasServiceRole: boolean;
+  isSeparate: boolean;
+  topology: DatabaseTopology;
 }> {
   const rlsDb = await createServerRlsClient();
   const serviceDb = createServiceRoleClient();
+  const isSeparate = isDatabaseSeparated('admin');
+  const topology = getDatabaseTopology();
+
   return {
     db: serviceDb ?? rlsDb,
     rlsDb,
     hasServiceRole: Boolean(serviceDb),
+    isSeparate,
+    topology,
   };
 }
 
+export {
+  getAdminDatabaseClient,
+  getPartitionConfig,
+  isDatabaseSeparated,
+  getDatabaseTopology,
+};

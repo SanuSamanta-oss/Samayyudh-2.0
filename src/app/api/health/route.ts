@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { LOAD_BALANCER_NODE_ID } from '@/lib/load-balancer';
 import { getCacheHealthInfo } from '@/lib/cache';
 import { redis } from '@/lib/redis';
+import { getDatabaseTopology } from '@/lib/supabase/db-manager';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +21,7 @@ export async function GET() {
 
   const memory = process.memoryUsage();
   const latencyMs = Date.now() - startTime;
+  const dbTopology = getDatabaseTopology();
 
   const payload = {
     status: 'healthy',
@@ -27,6 +29,7 @@ export async function GET() {
     timestamp: new Date().toISOString(),
     uptimeSeconds: Math.floor(process.uptime()),
     latencyMs,
+    databases: dbTopology,
     cache: {
       ...getCacheHealthInfo(),
       redisPing: redisPingResult,
@@ -47,4 +50,3 @@ export async function GET() {
     },
   });
 }
-

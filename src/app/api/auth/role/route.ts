@@ -47,9 +47,9 @@ export async function GET() {
       role = 'super_admin';
       status = 'active';
 
-      // Persist super_admin record safely if missing
-      try {
-        await db.from('user_roles').upsert(
+      // Persist super_admin records asynchronously in background (non-blocking for ultra-fast API response)
+      Promise.all([
+        db.from('user_roles').upsert(
           {
             user_id: user.id,
             role: 'super_admin',
@@ -58,16 +58,18 @@ export async function GET() {
             updated_at: new Date().toISOString(),
           },
           { onConflict: 'user_id' }
-        );
-        await db.from('super_admins').upsert(
+        ),
+        db.from('super_admins').upsert(
           {
             user_id: user.id,
             authorized_by: 'system_env',
             is_active: true,
           },
           { onConflict: 'user_id' }
-        );
-      } catch {}
+        ),
+      ]).catch((err) => {
+        console.warn('[auth/role] Background super_admin upsert notice:', err);
+      });
     }
 
     let teacherProfile = null;

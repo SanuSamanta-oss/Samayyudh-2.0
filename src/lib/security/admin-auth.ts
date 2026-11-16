@@ -142,7 +142,7 @@ export function extractClientIp(req?: NextRequest | Request): string {
 }
 
 export function getSuperAdminEmails(): string[] {
-  const raw = process.env.SUPER_ADMIN_EMAILS || '';
+  const raw = process.env.SUPER_ADMIN_EMAILS || process.env.NEXT_PUBLIC_SUPER_ADMIN_EMAILS || '';
   return raw
     .split(',')
     .map((e) => e.trim().toLowerCase())

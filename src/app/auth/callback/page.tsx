@@ -86,8 +86,8 @@ function AuthCallbackContent() {
               sessionStorage.setItem('samayyudh_just_logged_in', 'true');
             } catch {}
             router.replace(targetUrl);
-          }, 700);
-        }, 2200);
+          }, 400);
+        }, 850);
       } catch (err) {
         console.error('Auth callback failed:', err);
         setStatusText('AUTHENTICATION FAILED');

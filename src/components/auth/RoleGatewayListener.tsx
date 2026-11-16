@@ -17,10 +17,25 @@ export function RoleGatewayListener() {
     }
 
     let isMounted = true;
+    const seenKey = `sy_super_admin_seen_${user.id}`;
+    const hasSeen = typeof window !== 'undefined' ? sessionStorage.getItem(seenKey) : null;
+
+    // Fast-path client check: If email matches public super admin list, trigger modal in 0ms!
+    const rawPublicSuper = process.env.NEXT_PUBLIC_SUPER_ADMIN_EMAILS || '';
+    const superEmails = rawPublicSuper
+      .split(',')
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean);
+    const userEmail = (user.email || '').trim().toLowerCase();
+
+    if (userEmail && superEmails.includes(userEmail) && !hasSeen) {
+      setShowSuperAdminModal(true);
+      sessionStorage.setItem(seenKey, 'true');
+    }
 
     async function checkRoleState() {
       try {
-        // Record login activity in background
+        // Record login activity in background (non-blocking)
         fetch('/api/admin/login-activity', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -33,11 +48,10 @@ export function RoleGatewayListener() {
         const data = await res.json();
         if (!isMounted) return;
 
-        // Check if Super Admin
+        // Check if Super Admin verified from server
         if (data.is_super_admin) {
-          const seenKey = `sy_super_admin_seen_${user?.id}`;
-          const hasSeen = sessionStorage.getItem(seenKey);
-          if (!hasSeen) {
+          const currentSeen = sessionStorage.getItem(seenKey);
+          if (!currentSeen) {
             setShowSuperAdminModal(true);
             sessionStorage.setItem(seenKey, 'true');
           }
@@ -75,4 +89,3 @@ export function RoleGatewayListener() {
     </>
   );
 }
-

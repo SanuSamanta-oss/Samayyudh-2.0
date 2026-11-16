@@ -187,7 +187,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
         result.data?.user?.user_metadata?.full_name;
 
       if (hasDisplayName) {
-        // Show Bored Hand tapping loading animation then route to target destination
+        // Show Bored Hand tapping loading animation then route swiftly to target destination
         setRedirecting(true);
         setTimeout(() => {
           setRedirectingFinished(true);
@@ -197,8 +197,8 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
               sessionStorage.setItem('samayyudh_just_logged_in', 'true');
             } catch {}
             router.replace(targetUrl);
-          }, 700);
-        }, 2200);
+          }, 400);
+        }, 850);
       } else {
         setStep('name');
       }
@@ -240,8 +240,8 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
             sessionStorage.setItem('samayyudh_just_logged_in', 'true');
           } catch {}
           router.replace(targetUrl);
-        }, 700);
-      }, 2200);
+        }, 400);
+      }, 850);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save name. Please try again.');
     } finally {

@@ -99,13 +99,13 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
           className="fixed inset-0 bg-black/65 backdrop-blur-md"
         />
 
-        {/* ── 1:1 SQUARE POP-UP CARD (No sharp edges, No outlines) ── */}
+        {/* ── 1:1 SQUARE POP-UP CARD (No sharp edges, No outlines, Perfectly Centered) ── */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 16 }}
           transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-          className="relative aspect-square w-full max-w-[360px] sm:max-w-[390px] bg-white dark:bg-[#181622] rounded-[36px] p-5 sm:p-6 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center flex flex-col justify-between items-center overflow-hidden select-none"
+          className="relative aspect-square w-full max-w-[360px] sm:max-w-[390px] bg-white dark:bg-[#181622] rounded-[36px] p-5 sm:p-6 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center flex flex-col justify-center items-center overflow-hidden select-none border-0 ring-0 outline-none"
         >
           {verifying ? (
             /* VERIFICATION STATE: EXACT CROPPED BIOMETRIC ANIMATION (NO BOX, FEATHERED EDGES) */
@@ -118,33 +118,32 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
               />
             </div>
           ) : !showPasskeyInput ? (
-            /* STEP 1: WELCOME SCREEN (1:1 Ratio Balanced Layout) */
-            <>
+            /* STEP 1: WELCOME SCREEN (1:1 Ratio Centered Layout) */
+            <div className="w-full flex flex-col items-center justify-center my-auto">
               {/* Top Section: Illustration & Badge */}
-              <div className="w-full flex flex-col items-center pt-1">
-                <div className="mb-2 flex items-center justify-center drop-shadow-md pointer-events-none">
-                  <SuperAdminWelcomeIllustration size={115} />
-                </div>
-
-                <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-semibold bg-[#F59E0B]/15 text-[#B45309] dark:text-[#FBBF24] mb-2">
-                  <ShieldCheck className="w-3 h-3" /> Super Admin Authorization
-                </span>
-
-                <h3 className="text-xl sm:text-2xl font-extrabold text-[#18181B] dark:text-white tracking-tight leading-snug">
-                  Welcome Home, Super Admin!
-                </h3>
-
-                <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[270px] mx-auto">
-                  Your command center is ready. Manage SamayYudh, teachers, students, and the learning ecosystem.
-                </p>
+              <div className="mb-2 flex items-center justify-center drop-shadow-md pointer-events-none">
+                <SuperAdminWelcomeIllustration size={118} />
               </div>
 
-              {/* Bottom Actions */}
-              <div className="w-full flex flex-col gap-2 pb-1">
+              <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-semibold bg-[#F59E0B]/15 text-[#B45309] dark:text-[#FBBF24] mb-2">
+                <ShieldCheck className="w-3 h-3" /> Super Admin Authorization
+              </span>
+
+              <h3 className="text-xl sm:text-2xl font-extrabold text-[#18181B] dark:text-white tracking-tight leading-snug">
+                Welcome Home, Super Admin!
+              </h3>
+
+              <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[270px] mx-auto">
+                Your command center is ready. Manage SamayYudh, teachers, students, and the learning ecosystem.
+              </p>
+
+              {/* Actions */}
+              <div className="w-full flex flex-col gap-2 mt-4">
                 <button
                   type="button"
                   onClick={() => setShowPasskeyInput(true)}
-                  className="w-full py-2.5 px-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer outline-none focus:outline-none"
+                  className="w-full py-2.5 px-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer border-0 outline-none focus:outline-none focus-visible:outline-none"
+                  style={{ outline: 'none' }}
                 >
                   <KeyRound className="w-4 h-4 shrink-0" />
                   <span>Enter Super Admin Dashboard</span>
@@ -153,29 +152,28 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
                 <button
                   type="button"
                   onClick={onDismiss}
-                  className="w-full py-2 px-4 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer outline-none focus:outline-none"
+                  className="w-full py-2 px-4 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer border-0 outline-none focus:outline-none focus-visible:outline-none"
+                  style={{ outline: 'none' }}
                 >
                   Continue to Platform
                 </button>
               </div>
-            </>
+            </div>
           ) : (
-            /* STEP 2: PASSKEY INPUT (1:1 Ratio Balanced Layout) */
-            <>
-              <div className="w-full flex flex-col items-center pt-1">
-                <div className="mb-2 flex items-center justify-center drop-shadow-md pointer-events-none">
-                  <SecurityPasskeyIllustration size={105} />
-                </div>
-
-                <h3 className="text-lg sm:text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
-                  Enter Command Passkey
-                </h3>
-                <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 max-w-[260px] mx-auto">
-                  Provide your server-configured Super Admin passkey to decrypt session credentials.
-                </p>
+            /* STEP 2: PASSKEY INPUT (1:1 Ratio Centered Layout - No Empty Void, No Outline) */
+            <div className="w-full flex flex-col items-center justify-center my-auto">
+              <div className="mb-2 flex items-center justify-center drop-shadow-md pointer-events-none">
+                <SecurityPasskeyIllustration size={112} />
               </div>
 
-              <form onSubmit={handleUnlock} className="w-full space-y-3 pb-1">
+              <h3 className="text-lg sm:text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
+                Enter Command Passkey
+              </h3>
+              <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 max-w-[260px] mx-auto">
+                Provide your server-configured Super Admin passkey to decrypt session credentials.
+              </p>
+
+              <form onSubmit={handleUnlock} className="w-full space-y-3 mt-3.5">
                 <div className="relative">
                   <input
                     type="password"
@@ -183,7 +181,8 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
                     onChange={(e) => setPasskey(e.target.value)}
                     placeholder="Enter Master Passkey..."
                     autoFocus
-                    className="w-full px-4 py-2.5 rounded-2xl bg-neutral-100 dark:bg-[#201D2E] text-neutral-900 dark:text-white placeholder-neutral-400 text-center tracking-widest text-sm outline-none focus:outline-none"
+                    className="w-full px-4 py-2.5 rounded-2xl bg-neutral-100 dark:bg-[#201D2E] text-neutral-900 dark:text-white placeholder-neutral-400 text-center tracking-widest text-sm border-0 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0"
+                    style={{ outline: 'none', boxShadow: 'none' }}
                   />
                 </div>
 
@@ -198,7 +197,8 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
                   <button
                     type="submit"
                     disabled={!passkey.trim()}
-                    className="flex-1 py-2.5 px-3 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 outline-none focus:outline-none"
+                    className="flex-1 py-2.5 px-3 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 border-0 outline-none focus:outline-none focus-visible:outline-none"
+                    style={{ outline: 'none' }}
                   >
                     <KeyRound className="w-3.5 h-3.5 shrink-0" />
                     <span>Unlock Dashboard</span>
@@ -207,13 +207,14 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
                   <button
                     type="button"
                     onClick={() => setShowPasskeyInput(false)}
-                    className="py-2.5 px-4 rounded-2xl bg-neutral-200 hover:bg-neutral-300 dark:bg-[#27272A] dark:hover:bg-[#323236] text-neutral-800 dark:text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer outline-none focus:outline-none"
+                    className="py-2.5 px-4 rounded-2xl bg-neutral-200 hover:bg-neutral-300 dark:bg-[#27272A] dark:hover:bg-[#323236] text-neutral-800 dark:text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer border-0 outline-none focus:outline-none focus-visible:outline-none"
+                    style={{ outline: 'none' }}
                   >
                     Back
                   </button>
                 </div>
               </form>
-            </>
+            </div>
           )}
         </motion.div>
       </div>

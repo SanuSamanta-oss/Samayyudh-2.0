@@ -264,7 +264,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
   };
 
   return (
-    <div className="fixed inset-0 h-[100dvh] max-h-[100dvh] w-screen bg-[#FAF9F6] text-slate-900 overflow-hidden overscroll-none select-none font-sans flex flex-col justify-between">
+    <div className="fixed inset-0 h-[100dvh] max-h-[100dvh] w-screen bg-[#FAF9F6] text-slate-900 overflow-y-auto overscroll-none select-none font-sans flex flex-col items-center justify-center">
       {/* Full-screen Bored Hand Loading Animation upon login completion */}
       <AnimatePresence>
         {redirecting && (
@@ -307,83 +307,80 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
         </svg>
       </div>
 
-      {/* ── MAIN CONTENT CONTAINER (Locked to 100dvh, zero scrolling, perfectly scaled) ── */}
-      <div className="relative z-10 w-full max-w-sm mx-auto px-5 py-3 sm:py-5 h-full flex-1 flex flex-col justify-between items-center overflow-hidden">
-        {/* Top Section: App Emblem, Scaled Illustration & Title */}
-        <div className="w-full flex flex-col items-center shrink-0">
-          {/* Subtle app branding tag */}
-          <div className="flex items-center gap-1.5 mb-1 opacity-90">
-            <span className="text-xs font-black tracking-tight text-slate-800">সময়যুদ্ধ</span>
-            <span className="text-[10px] font-bold text-[#358781] bg-[#E3F2F0] px-1.5 py-0.2 rounded">
-              2.0
-            </span>
-          </div>
-
-          {/* Clean Study Illustration — Viewport-height responsive (shrinks on small phones, zero overflow) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="w-full max-w-[240px] h-[18vh] min-h-[105px] max-h-[175px] relative flex items-center justify-center my-0.5 select-none"
-          >
-            <Image
-              src="/illustrations/android-login-illustration-transparent.png"
-              alt="Students preparing with SamayYudh"
-              width={480}
-              height={380}
-              className="w-full h-full object-contain drop-shadow-xs"
-              priority
-            />
-          </motion.div>
-
-          {/* Welcome Heading */}
-          <div className="text-center mt-1 mb-1.5">
-            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
-              Welcome, Warrior!
-            </h1>
-            <p className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">
-              Your battle against the clock begins here.
-            </p>
-          </div>
-
-          {/* Mode Switcher Pills (Email vs Phone) */}
-          {step === 'input' && (
-            <div className="flex items-center gap-1 p-0.5 rounded-full bg-[#EBF4F3] border border-[#CDE5E2] text-[11px] font-bold">
-              <button
-                type="button"
-                onClick={() => {
-                  setMode('email');
-                  setError(null);
-                }}
-                className={`px-3.5 py-1 rounded-full transition-all ${
-                  mode === 'email'
-                    ? 'bg-white text-[#2C6F6A] shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Email Sign In
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setMode('phone');
-                  setError(null);
-                }}
-                className={`px-3.5 py-1 rounded-full transition-all ${
-                  mode === 'phone'
-                    ? 'bg-white text-[#2C6F6A] shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Phone Number
-              </button>
-            </div>
-          )}
+      {/* ── DEDICATED CENTERED LOGIN CARD CONTAINER ── */}
+      <div className="relative z-10 w-full max-w-[380px] sm:max-w-[420px] mx-auto px-5 py-4 sm:py-6 my-auto flex flex-col items-center justify-center text-center">
+        {/* Subtle app branding tag */}
+        <div className="flex items-center gap-1.5 mb-1 sm:mb-1.5 opacity-90">
+          <span className="text-xs sm:text-sm font-black tracking-tight text-slate-800">সময়যুদ্ধ</span>
+          <span className="text-[10px] sm:text-[11px] font-bold text-[#358781] bg-[#E3F2F0] px-2 py-0.5 rounded-full">
+            2.0
+          </span>
         </div>
 
-        {/* Form Inputs & Interactive Section */}
-        <div className="w-full space-y-2.5 sm:space-y-3 shrink-0">
-          {/* Status Banners */}
+        {/* Clean Study Illustration — Viewport-responsive & enlarged */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          className="w-full max-w-[270px] sm:max-w-[310px] h-[21vh] min-h-[130px] max-h-[210px] relative flex items-center justify-center my-1 sm:my-2 select-none"
+        >
+          <Image
+            src="/illustrations/android-login-illustration-transparent.png"
+            alt="Students preparing with SamayYudh"
+            width={520}
+            height={410}
+            className="w-full h-full object-contain"
+            priority
+          />
+        </motion.div>
+
+        {/* Welcome Heading & Subtitle — Enlarged typography with clean rhythm */}
+        <div className="text-center mt-1 mb-3 sm:mb-3.5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+            Welcome, Warrior!
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
+            Your battle against the clock begins here.
+          </p>
+        </div>
+
+        {/* Mode Switcher Pills (Email vs Phone) — zero borders, soft pill design */}
+        {step === 'input' && (
+          <div className="flex items-center gap-1 p-1 rounded-full bg-[#EBF4F3] text-xs font-bold mb-3.5 sm:mb-4 shadow-2xs">
+            <button
+              type="button"
+              onClick={() => {
+                setMode('email');
+                setError(null);
+              }}
+              className={`px-4 py-1.5 rounded-full transition-all cursor-pointer outline-none focus:outline-none ${
+                mode === 'email'
+                  ? 'bg-white text-[#2C6F6A] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Email Sign In
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setMode('phone');
+                setError(null);
+              }}
+              className={`px-4 py-1.5 rounded-full transition-all cursor-pointer outline-none focus:outline-none ${
+                mode === 'phone'
+                  ? 'bg-white text-[#2C6F6A] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Phone Number
+            </button>
+          </div>
+        )}
+
+        {/* Form Inputs & Interactive Section — tightly positioned right below header */}
+        <div className="w-full space-y-2.5 sm:space-y-3">
+          {/* Status Banners — zero borders */}
           <AnimatePresence mode="wait">
             {error && (
               <motion.div
@@ -391,7 +388,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="flex items-center gap-2 p-2.5 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium"
+                className="flex items-center gap-2 p-2.5 rounded-2xl bg-rose-50 text-xs text-rose-700 font-medium shadow-xs text-left"
               >
                 <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
                 <span className="flex-1">{error}</span>
@@ -403,7 +400,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="flex items-center gap-2 p-2.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 font-medium"
+                className="flex items-center gap-2 p-2.5 rounded-2xl bg-emerald-50 text-xs text-emerald-800 font-medium shadow-xs text-left"
               >
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span className="flex-1">{success}</span>
@@ -411,7 +408,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
             )}
           </AnimatePresence>
 
-          {/* STEP 1: CREDENTIAL INPUTS (Pill fields with circular icons) */}
+          {/* STEP 1: CREDENTIAL INPUTS (Zero outline, soft shadows, rounded pills) */}
           {step === 'input' && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -423,7 +420,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 <>
                   {/* Email Input Field */}
                   <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
+                    <div className="w-10 h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
                       <Mail className="w-4 h-4" />
                     </div>
                     <div className="flex-1 relative">
@@ -433,7 +430,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email address"
                         autoComplete="email"
-                        className="w-full rounded-full border border-[#BCE1DD] bg-white/95 px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/25 transition-all font-medium text-center shadow-2xs"
+                        className="w-full rounded-full bg-white px-5 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none transition-all font-medium text-center shadow-xs"
                       />
                     </div>
                   </div>
@@ -443,7 +440,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                     type="button"
                     disabled={loading}
                     onClick={handleSendOTP}
-                    className="w-full py-2.5 sm:py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+                    className="w-full py-2.5 sm:py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/30 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer outline-none focus:outline-none"
                   >
                     {loading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
@@ -456,7 +453,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 <>
                   {/* Phone Input Field */}
                   <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
+                    <div className="w-10 h-10 rounded-full bg-[#E2F2F0] text-[#3A8C86] flex items-center justify-center shrink-0 shadow-2xs">
                       <Phone className="w-4 h-4" />
                     </div>
                     <div className="flex-1 relative">
@@ -466,7 +463,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+91 98765 43210"
                         autoComplete="tel"
-                        className="w-full rounded-full border border-[#BCE1DD] bg-white/95 px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/25 transition-all font-medium text-center shadow-2xs"
+                        className="w-full rounded-full bg-white px-5 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none transition-all font-medium text-center shadow-xs"
                       />
                     </div>
                   </div>
@@ -476,7 +473,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                     type="button"
                     disabled={loading}
                     onClick={handleSendOTP}
-                    className="w-full py-2.5 sm:py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+                    className="w-full py-2.5 sm:py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/30 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer outline-none focus:outline-none"
                   >
                     {loading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
@@ -505,7 +502,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 </p>
               </div>
 
-              {/* 6 Digit Input Row */}
+              {/* 6 Digit Input Row — zero border */}
               <div className="flex justify-center gap-2">
                 {otpDigits.map((digit, idx) => (
                   <input
@@ -519,7 +516,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                     value={digit}
                     onChange={(e) => handleOtpInput(idx, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                    className="w-10 h-12 rounded-xl text-center font-mono font-bold text-base text-slate-900 border border-[#BCE1DD] bg-white focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/30 transition-all"
+                    className="w-10 h-12 rounded-xl text-center font-mono font-bold text-base text-slate-900 bg-white shadow-xs outline-none focus:outline-none transition-all"
                   />
                 ))}
               </div>
@@ -529,7 +526,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 type="button"
                 disabled={loading || otpDigits.join('').length < 6}
                 onClick={handleVerifyOTP}
-                className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+                className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/30 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer outline-none focus:outline-none"
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Verify &amp; Continue</span>}
               </button>
@@ -538,14 +535,14 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 <button
                   type="button"
                   onClick={() => setStep('input')}
-                  className="hover:text-slate-800 transition-colors"
+                  className="hover:text-slate-800 transition-colors cursor-pointer"
                 >
                   Change {mode === 'email' ? 'email' : 'number'}
                 </button>
                 <button
                   type="button"
                   onClick={handleSendOTP}
-                  className="text-[#358781] hover:underline"
+                  className="text-[#358781] hover:underline cursor-pointer"
                 >
                   Resend code
                 </button>
@@ -578,7 +575,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                     onChange={(e) => setDisplayName(e.target.value)}
                     placeholder="e.g. Sanu Samanta"
                     autoFocus
-                    className="w-full rounded-full border border-[#BCE1DD] bg-white/95 px-5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#5CB0A8] focus:ring-2 focus:ring-[#86C5C0]/25 transition-all font-medium text-center shadow-2xs"
+                    className="w-full rounded-full bg-white px-5 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 outline-none focus:outline-none transition-all font-medium text-center shadow-xs"
                   />
                 </div>
               </div>
@@ -587,7 +584,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 type="button"
                 disabled={loading || displayName.trim().length < 2}
                 onClick={handleSaveName}
-                className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/40 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+                className="w-full py-3 rounded-full bg-[#80C2BD] hover:bg-[#6EB5B0] active:scale-[0.98] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm shadow-[#80C2BD]/30 transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer outline-none focus:outline-none"
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>Start Your Journey</span>}
               </button>
@@ -597,19 +594,19 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
           {/* Social Divider & Google Button (when on input step) */}
           {step === 'input' && (
             <div className="space-y-2 pt-0.5">
-              {/* Centered Or with straight line removed */}
+              {/* Centered Or */}
               <div className="flex items-center justify-center py-0.5">
                 <span className="text-xs font-semibold text-slate-400 tracking-wider">
                   Or
                 </span>
               </div>
 
-              {/* Google Button */}
+              {/* Google Button — zero borders */}
               <button
                 type="button"
                 onClick={handleGoogleLogin}
                 disabled={loading}
-                className="w-full py-2 sm:py-2.5 px-4 rounded-full border border-[#BCE1DD] bg-white/90 hover:bg-white text-slate-700 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2.5 shadow-2xs hover:border-[#6DB5AE] transition-all cursor-pointer"
+                className="w-full py-2.5 sm:py-3 px-4 rounded-full bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2.5 shadow-xs transition-all cursor-pointer outline-none focus:outline-none"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                   <path
@@ -635,9 +632,9 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
           )}
         </div>
 
-        {/* Footer & Secondary Navigation */}
-        <div className="w-full pt-1 pb-1 sm:pb-2 text-center space-y-1 select-none shrink-0">
-          <div className="flex items-center justify-center gap-3 text-[11px] text-slate-500 font-medium">
+        {/* Footer & Secondary Navigation — cleanly placed directly under the form */}
+        <div className="w-full pt-3.5 sm:pt-4 text-center space-y-1 select-none">
+          <div className="flex items-center justify-center gap-2 text-xs text-slate-500 font-medium">
             <span>Don&apos;t have an account?</span>
             <button
               type="button"
@@ -647,23 +644,23 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
                 setError(null);
                 setSuccess('Enter your email to create a new warrior account');
               }}
-              className="font-bold text-[#2A7570] hover:underline"
+              className="font-bold text-[#2A7570] hover:underline cursor-pointer"
             >
               Get Started
             </button>
           </div>
 
-          <p className="text-[9px] sm:text-[10px] text-slate-400 font-medium">
+          <p className="text-[10px] text-slate-400 font-medium">
             By continuing, you agree to our Terms of Service.
           </p>
 
           {/* Testing / Preview switcher link */}
           {onSwitchToWeb && (
-            <div>
+            <div className="pt-0.5">
               <button
                 type="button"
                 onClick={onSwitchToWeb}
-                className="text-[10px] text-slate-400 hover:text-slate-600 underline"
+                className="text-[10px] text-slate-400 hover:text-slate-600 underline cursor-pointer"
               >
                 Switch to Web View
               </button>

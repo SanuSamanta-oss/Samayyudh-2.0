@@ -36,7 +36,7 @@ const SECTION_TITLES: Record<AdminSectionId, string> = {
   resources: 'Resource Library & PDF Studio',
   assignments: 'Assignments & Assessments',
   classrooms: 'Classrooms & Private Groups',
-  students: 'Student & Faculty Directory',
+  students: 'User & Role Management',
   connections: 'Connections & Discovery',
   analytics: 'Performance & Bank Analytics',
   notifications: 'Notifications Center',

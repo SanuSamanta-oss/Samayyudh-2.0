@@ -137,7 +137,7 @@ export async function GET(req: NextRequest) {
         category: 'students',
         title: p.display_name || p.username || p.public_id || 'Aspirant',
         subtitle: `${p.public_id || 'SY-'}${p.username ? ` · @${p.username}` : ''}`,
-        section: 'students',
+        section: 'user_management',
       });
     }
   }

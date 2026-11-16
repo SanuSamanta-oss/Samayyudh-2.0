@@ -136,7 +136,6 @@ export function CommandSidebar({
     { id: 'resources', label: 'Resource Library', icon: FolderOpen },
     { id: 'assignments', label: 'Assignments', icon: ClipboardCheck },
     { id: 'classrooms', label: 'Classrooms & Groups', icon: GraduationCap },
-    { id: 'students', label: 'Student Directory', icon: UserCheck },
     {
       id: 'connections',
       label: 'Connections',

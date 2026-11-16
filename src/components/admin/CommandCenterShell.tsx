@@ -12,7 +12,6 @@ import { QuestionBankSection } from './QuestionBankSection';
 import { ResourceLibrarySection } from './ResourceLibrarySection';
 import { AssignmentsSection } from './AssignmentsSection';
 import { ClassroomsAndGroupsSection } from './ClassroomsAndGroupsSection';
-import { StudentDirectorySection } from './StudentDirectorySection';
 import { ConnectionsSection } from './ConnectionsSection';
 import { AdminAnalyticsSection } from './AdminAnalyticsSection';
 import { CommandSettingsSection } from './CommandSettingsSection';
@@ -274,10 +273,7 @@ export function CommandCenterShell() {
               )}
 
               {activeSection === 'students' && (
-                <StudentDirectorySection
-                  viewerRole={authStatus.role}
-                  viewerUserId={authStatus.identity?.userId || ''}
-                />
+                <UserRoleManagementSection />
               )}
 
               {activeSection === 'connections' && (

@@ -55,13 +55,19 @@ export async function GET(req: NextRequest) {
 
     const userIds = (roleRows || []).map((r) => r.user_id);
 
-    // 3. Query profiles with correct column names (display_name, not full_name)
+    // 3. Query profiles with comprehensive stats and identity columns
     const profilesMap: Record<string, {
       id: string;
       email?: string | null;
       display_name?: string | null;
       username?: string | null;
+      avatar_url?: string | null;
+      public_id?: string | null;
+      preferred_exam?: string | null;
+      total_questions_attempted?: number;
+      total_sessions?: number;
       institution?: string | null;
+      bio?: string | null;
       account_status?: string | null;
       created_at?: string;
     }> = {};
@@ -69,7 +75,7 @@ export async function GET(req: NextRequest) {
     if (userIds.length > 0) {
       const { data: profs } = await db
         .from('profiles')
-        .select('id, email, display_name, username, institution, account_status, created_at')
+        .select('id, email, display_name, username, avatar_url, public_id, preferred_exam, total_questions_attempted, total_sessions, institution, bio, account_status, created_at')
         .in('id', userIds);
 
       profs?.forEach((p) => {
@@ -85,6 +91,8 @@ export async function GET(req: NextRequest) {
         full_name?: string;
         name?: string;
         display_name?: string;
+        avatar_url?: string;
+        picture?: string;
         teacher_verified?: boolean;
         institutional_email?: string;
         institution_name?: string;
@@ -115,10 +123,12 @@ export async function GET(req: NextRequest) {
 
         return {
           id: r.user_id,
+          publicId: p.public_id || 'SY-ADMIN',
           email,
           fullName,
+          avatarUrl: p.avatar_url || au.user_metadata?.avatar_url || au.user_metadata?.picture || null,
           role: 'super_admin',
-          status: 'active',
+          status: p.account_status || 'active',
           authorizedBy: 'Server Environment (.env.local)',
           createdAt: r.created_at || p.created_at || new Date().toISOString(),
         };
@@ -128,7 +138,8 @@ export async function GET(req: NextRequest) {
         items = items.filter(
           (item) =>
             item.fullName.toLowerCase().includes(search) ||
-            (item.email && item.email.toLowerCase().includes(search))
+            (item.email && item.email.toLowerCase().includes(search)) ||
+            (item.publicId && item.publicId.toLowerCase().includes(search))
         );
       }
 
@@ -140,7 +151,6 @@ export async function GET(req: NextRequest) {
     }
 
     if (tab === 'teachers') {
-      // Check teachers table if it exists
       const teacherDetailsMap: Record<string, {
         institutional_email?: string;
         institution_name?: string;
@@ -186,8 +196,10 @@ export async function GET(req: NextRequest) {
 
         return {
           id: r.user_id,
+          publicId: p.public_id || 'SY-TEACHER',
           fullName,
           email,
+          avatarUrl: p.avatar_url || au.user_metadata?.avatar_url || au.user_metadata?.picture || null,
           institutionalEmail: td.institutional_email || au.user_metadata?.institutional_email,
           institutionName:
             td.institution_name ||
@@ -200,6 +212,7 @@ export async function GET(req: NextRequest) {
           verificationMethod: td.verification_method || 'institutional_email',
           verificationScore: td.verification_score || (au.user_metadata?.teacher_verified ? 100 : 0),
           verifiedAt: td.verified_at || (au.user_metadata?.teacher_verified ? r.updated_at : undefined),
+          status: p.account_status || 'active',
           createdAt: r.created_at || td.created_at || p.created_at || new Date().toISOString(),
         };
       });
@@ -213,6 +226,7 @@ export async function GET(req: NextRequest) {
           (item) =>
             item.fullName.toLowerCase().includes(search) ||
             item.email.toLowerCase().includes(search) ||
+            (item.publicId && item.publicId.toLowerCase().includes(search)) ||
             (item.institutionName && item.institutionName.toLowerCase().includes(search))
         );
       }
@@ -238,19 +252,36 @@ export async function GET(req: NextRequest) {
 
       return {
         id: r.user_id,
+        publicId: p.public_id || 'SY-STUDENT',
         fullName,
         email,
+        username: p.username || '',
+        avatarUrl: p.avatar_url || au.user_metadata?.avatar_url || au.user_metadata?.picture || null,
+        preferredExam: p.preferred_exam || 'General Prep',
+        totalQuestions: p.total_questions_attempted || 0,
+        totalSessions: p.total_sessions || 0,
+        institution: p.institution || '',
+        bio: p.bio || '',
         role: 'student',
         status: p.account_status || 'active',
         createdAt: r.created_at || p.created_at || new Date().toISOString(),
       };
     });
 
+    if (statusFilter === 'active') {
+      items = items.filter((item) => item.status === 'active');
+    } else if (statusFilter === 'suspended') {
+      items = items.filter((item) => item.status === 'suspended');
+    }
+
     if (search) {
       items = items.filter(
         (item) =>
           item.fullName.toLowerCase().includes(search) ||
-          item.email.toLowerCase().includes(search)
+          item.email.toLowerCase().includes(search) ||
+          (item.publicId && item.publicId.toLowerCase().includes(search)) ||
+          (item.preferredExam && item.preferredExam.toLowerCase().includes(search)) ||
+          (item.institution && item.institution.toLowerCase().includes(search))
       );
     }
 
@@ -282,7 +313,7 @@ export async function PATCH(req: NextRequest) {
 
     const { db } = await getCommandDataClient();
 
-    if (action === 'approve_teacher') {
+    if (action === 'approve_teacher' || action === 'promote_to_teacher') {
       await Promise.all([
         db.from('user_roles').upsert({
           user_id: targetUserId,
@@ -314,10 +345,10 @@ export async function PATCH(req: NextRequest) {
         });
       } catch {}
 
-      return NextResponse.json({ success: true, message: 'Teacher approved successfully.' });
+      return NextResponse.json({ success: true, message: 'Teacher privileges granted successfully.' });
     }
 
-    if (action === 'revoke_teacher') {
+    if (action === 'revoke_teacher' || action === 'demote_to_student') {
       await Promise.all([
         db.from('user_roles').upsert({
           user_id: targetUserId,
@@ -347,7 +378,7 @@ export async function PATCH(req: NextRequest) {
         });
       } catch {}
 
-      return NextResponse.json({ success: true, message: 'Teacher status revoked.' });
+      return NextResponse.json({ success: true, message: 'User role updated to Student.' });
     }
 
     if (action === 'suspend_user') {
@@ -371,7 +402,7 @@ export async function PATCH(req: NextRequest) {
         });
       } catch {}
 
-      return NextResponse.json({ success: true, message: 'User suspended.' });
+      return NextResponse.json({ success: true, message: 'User account suspended.' });
     }
 
     if (action === 'restore_user') {
@@ -395,7 +426,7 @@ export async function PATCH(req: NextRequest) {
         });
       } catch {}
 
-      return NextResponse.json({ success: true, message: 'User restored.' });
+      return NextResponse.json({ success: true, message: 'User account restored to active.' });
     }
 
     return NextResponse.json({ error: 'Unknown action' }, { status: 400 });

@@ -66,43 +66,44 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
         />
 
         {step === 'select' ? (
+          /* POPUP 1: ROLE SELECTION CARDS (Perfect Ratio, Never Cut Off) */
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className="relative w-full max-w-2xl bg-white dark:bg-[#181622] rounded-[32px] p-6 sm:p-10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center overflow-hidden"
+            className="relative w-full max-w-xl sm:max-w-2xl bg-white dark:bg-[#181622] rounded-[32px] p-6 sm:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center"
           >
             {/* Header */}
-            <div className="max-w-md mx-auto mb-8">
+            <div className="max-w-md mx-auto mb-6 sm:mb-8">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F59E0B]/15 text-[#B45309] dark:text-[#FBBF24] mb-3">
                 <Sparkles className="w-3.5 h-3.5" /> Welcome to SamayYudh 2.0
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#18181B] dark:text-white tracking-tight">
                 Which role defines you most?
               </h2>
-              <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+              <p className="mt-2 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
                 Choose your primary learning or teaching journey. We customize your workflows,
                 analytics, and tools accordingly.
               </p>
             </div>
 
             {/* Role Options Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {/* TEACHER CARD */}
               <div
                 onClick={() => !submitting && handleChooseRole('teacher')}
-                className="group relative flex flex-col items-center p-6 rounded-[28px] bg-neutral-50 dark:bg-[#201D2E] hover:bg-amber-50/50 dark:hover:bg-[#28243A] cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-center"
+                className="group relative flex flex-col items-center pt-4 pb-6 px-5 rounded-[28px] bg-neutral-50 dark:bg-[#201D2E] hover:bg-amber-50/50 dark:hover:bg-[#28243A] cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-center"
               >
-                {/* Breaching 2D illustration */}
-                <div className="-mt-8 mb-2">
-                  <RoleTeacherIllustration size={160} />
+                {/* Unclipped 2D circle photo illustration */}
+                <div className="mb-2">
+                  <RoleTeacherIllustration size={150} />
                 </div>
 
                 <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">
                   I&apos;m a Teacher
                 </h3>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-6 leading-relaxed">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-5 leading-relaxed">
                   Create classrooms, upload questions and assignments, verify institutional identity,
                   and monitor student batch performance.
                 </p>
@@ -110,7 +111,7 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
                 <button
                   type="button"
                   disabled={submitting}
-                  className="w-full mt-auto py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-sm transition-transform active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full mt-auto py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-xs sm:text-sm transition-transform active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Select Teacher</span>
                   <ArrowRight className="w-4 h-4" />
@@ -120,17 +121,17 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
               {/* STUDENT CARD */}
               <div
                 onClick={() => !submitting && handleChooseRole('student')}
-                className="group relative flex flex-col items-center p-6 rounded-[28px] bg-neutral-50 dark:bg-[#201D2E] hover:bg-neutral-100/70 dark:hover:bg-[#28243A] cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-center"
+                className="group relative flex flex-col items-center pt-4 pb-6 px-5 rounded-[28px] bg-neutral-50 dark:bg-[#201D2E] hover:bg-neutral-100/70 dark:hover:bg-[#28243A] cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-center"
               >
-                {/* Breaching 2D illustration */}
-                <div className="-mt-8 mb-2">
-                  <RoleStudentIllustration size={160} />
+                {/* Unclipped 2D circle photo illustration */}
+                <div className="mb-2">
+                  <RoleStudentIllustration size={150} />
                 </div>
 
                 <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">
                   I&apos;m a Student
                 </h3>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-6 leading-relaxed">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-5 leading-relaxed">
                   Participate in live exam battles, practice thousands of PYQs, track study streaks,
                   and join teacher classrooms.
                 </p>
@@ -138,7 +139,7 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
                 <button
                   type="button"
                   disabled={submitting}
-                  className="w-full mt-auto py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#2E2A42] dark:hover:bg-[#383350] text-white font-semibold text-sm transition-transform active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full mt-auto py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#2E2A42] dark:hover:bg-[#383350] text-white font-semibold text-xs sm:text-sm transition-transform active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Select Student</span>
                   <ArrowRight className="w-4 h-4" />
@@ -146,63 +147,66 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
               </div>
             </div>
 
-            <p className="mt-6 text-xs text-neutral-400 dark:text-neutral-500">
+            <p className="mt-5 text-xs text-neutral-400 dark:text-neutral-500">
               You can access public tests, mock sessions, and materials across both accounts.
             </p>
           </motion.div>
         ) : (
-          /* STEP 2: TEACHER CONFIRMATION POPUP */
+          /* POPUP 2: TEACHER CONFIRMATION POPUP (Never Cut Off) */
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className="relative w-full max-w-md bg-white dark:bg-[#181622] rounded-[32px] p-6 sm:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center overflow-hidden"
+            className="relative w-full max-w-[390px] sm:max-w-[420px] pt-16 sm:pt-20 z-10 my-auto text-center"
           >
-            {/* Top Breaching Illustration */}
-            <div className="-mt-12 flex justify-center mb-3">
-              <TeacherVerificationIllustration size={190} />
+            {/* Top Floating Illustration - Unclipped with breathing room */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none drop-shadow-xl">
+              <TeacherVerificationIllustration size={160} />
             </div>
 
-            <h3 className="text-2xl font-extrabold text-[#18181B] dark:text-white tracking-tight">
-              Welcome to the Teaching Community!
-            </h3>
+            {/* Elevated Card Body */}
+            <div className="relative bg-white dark:bg-[#181622] rounded-[32px] pt-18 sm:pt-20 pb-7 px-6 sm:px-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)]">
+              <h3 className="text-2xl sm:text-[26px] font-extrabold text-[#18181B] dark:text-white tracking-tight leading-snug">
+                Welcome to the Teaching Community!
+              </h3>
 
-            <p className="mt-3 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-              Your educator account has been created in pending status. Complete quick automated
-              verification to activate classroom creation, test publishing, and student analytics.
-            </p>
+              <p className="mt-2.5 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-xs mx-auto">
+                Your educator account has been created in pending status. Complete quick automated
+                verification to activate classroom creation, test publishing, and student analytics.
+              </p>
 
-            {/* Quick Benefits Bullet List */}
-            <div className="mt-5 p-4 rounded-2xl bg-neutral-50 dark:bg-[#201D2E] text-left space-y-2">
-              <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                <span>Instant automated institutional email check</span>
+              {/* Quick Benefits Bullet List */}
+              <div className="mt-5 p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#201D2E] text-left space-y-2">
+                <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                  <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
+                  <span>Instant automated institutional email check</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                  <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
+                  <span>Alternative Google Classroom &amp; Directory verification</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                <span>Alternative Google Classroom &amp; Directory verification</span>
+
+              {/* Action Buttons matching reference style */}
+              <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
+                <button
+                  type="button"
+                  onClick={handleGoToVerification}
+                  className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Verify Yourself</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleExploreAsStudent}
+                  className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer"
+                >
+                  Explore as Student
+                </button>
               </div>
-            </div>
-
-            {/* Action Buttons matching reference style */}
-            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
-              <button
-                type="button"
-                onClick={handleGoToVerification}
-                className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <span>Verify Yourself</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-
-              <button
-                type="button"
-                onClick={handleExploreAsStudent}
-                className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-sm transition-all active:scale-95 cursor-pointer"
-              >
-                Explore as Student
-              </button>
             </div>
           </motion.div>
         )}
@@ -210,4 +214,3 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
     </AnimatePresence>
   );
 }
-

@@ -56,7 +56,7 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 pt-20 sm:p-6 sm:pt-24 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -152,61 +152,58 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
             </p>
           </motion.div>
         ) : (
-          /* POPUP 2: TEACHER CONFIRMATION POPUP (Never Cut Off) */
+          /* POPUP 2: TEACHER CONFIRMATION POPUP (Zero Overlap, Never Cut Off) */
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className="relative w-full max-w-[390px] sm:max-w-[420px] pt-16 sm:pt-20 z-10 my-auto text-center"
+            className="relative w-full max-w-[390px] sm:max-w-[420px] bg-white dark:bg-[#181622] rounded-[32px] pb-7 px-6 sm:px-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center"
           >
-            {/* Top Floating Illustration - Unclipped with breathing room */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none drop-shadow-xl">
+            {/* Top Breaching Illustration (Vintage Teacher & Classroom) in Document Flow */}
+            <div className="-mt-16 sm:-mt-20 mb-3.5 flex items-center justify-center drop-shadow-xl pointer-events-none">
               <TeacherVerificationIllustration size={160} />
             </div>
 
-            {/* Elevated Card Body */}
-            <div className="relative bg-white dark:bg-[#181622] rounded-[32px] pt-18 sm:pt-20 pb-7 px-6 sm:px-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)]">
-              <h3 className="text-2xl sm:text-[26px] font-extrabold text-[#18181B] dark:text-white tracking-tight leading-snug">
-                Welcome to the Teaching Community!
-              </h3>
+            <h3 className="text-2xl sm:text-[26px] font-extrabold text-[#18181B] dark:text-white tracking-tight leading-snug">
+              Welcome to the Teaching Community!
+            </h3>
 
-              <p className="mt-2.5 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-xs mx-auto">
-                Your educator account has been created in pending status. Complete quick automated
-                verification to activate classroom creation, test publishing, and student analytics.
-              </p>
+            <p className="mt-2.5 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-xs mx-auto">
+              Your educator account has been created in pending status. Complete quick automated
+              verification to activate classroom creation, test publishing, and student analytics.
+            </p>
 
-              {/* Quick Benefits Bullet List */}
-              <div className="mt-5 p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#201D2E] text-left space-y-2">
-                <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                  <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                  <span>Instant automated institutional email check</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                  <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
-                  <span>Alternative Google Classroom &amp; Directory verification</span>
-                </div>
+            {/* Quick Benefits Bullet List */}
+            <div className="mt-5 p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#201D2E] text-left space-y-2">
+              <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
+                <span>Instant automated institutional email check</span>
               </div>
-
-              {/* Action Buttons matching reference style */}
-              <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
-                <button
-                  type="button"
-                  onClick={handleGoToVerification}
-                  className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <span>Verify Yourself</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleExploreAsStudent}
-                  className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer"
-                >
-                  Explore as Student
-                </button>
+              <div className="flex items-center gap-2 text-xs font-medium text-neutral-700 dark:text-neutral-300">
+                <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
+                <span>Alternative Google Classroom &amp; Directory verification</span>
               </div>
+            </div>
+
+            {/* Action Buttons matching reference style */}
+            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
+              <button
+                type="button"
+                onClick={handleGoToVerification}
+                className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Verify Yourself</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+
+              <button
+                type="button"
+                onClick={handleExploreAsStudent}
+                className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer"
+              >
+                Explore as Student
+              </button>
             </div>
           </motion.div>
         )}

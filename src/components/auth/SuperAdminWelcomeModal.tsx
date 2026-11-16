@@ -25,8 +25,8 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
   const [scanSublabel, setScanSublabel] = useState('Scanning secure biometric credentials');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // When modal is shown on new session, strictly clear any prior session cookie
-  // so Super Admin MUST provide the passkey before unlocking
+  // When modal is shown on a new session, clear any lingering passkey cookie
+  // so Super Admin MUST enter the passkey before the dashboard unlocks
   useEffect(() => {
     if (isOpen) {
       fetch('/api/admin/auth/logout', { method: 'POST' }).catch(() => {});
@@ -90,7 +90,7 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 pt-20 sm:p-6 sm:pt-24 overflow-y-auto">
+      <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -99,129 +99,123 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
           className="fixed inset-0 bg-black/65 backdrop-blur-md"
         />
 
-        {!showPasskeyInput ? (
-          /* STEP 1: SUPER ADMIN WELCOME POPUP */
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 16 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className="relative w-full max-w-[390px] sm:max-w-[420px] bg-white dark:bg-[#181622] rounded-[32px] pb-7 px-6 sm:px-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center"
-          >
-            {/* Top Breaching Circular Illustration (Snoopy Executive) */}
-            <div className="-mt-16 sm:-mt-20 mb-3.5 flex items-center justify-center drop-shadow-xl pointer-events-none">
-              <SuperAdminWelcomeIllustration size={160} />
+        {/* ── 1:1 SQUARE POP-UP CARD (No sharp edges, No outlines) ── */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 16 }}
+          transition={{ type: 'spring', damping: 28, stiffness: 350 }}
+          className="relative aspect-square w-full max-w-[360px] sm:max-w-[390px] bg-white dark:bg-[#181622] rounded-[36px] p-5 sm:p-6 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center flex flex-col justify-between items-center overflow-hidden select-none"
+        >
+          {verifying ? (
+            /* VERIFICATION STATE: EXACT CROPPED BIOMETRIC ANIMATION (NO BOX, FEATHERED EDGES) */
+            <div className="w-full h-full flex flex-col items-center justify-center my-auto">
+              <BiometricScanAnimation
+                status={scanStatus}
+                size={185}
+                label={scanLabel}
+                sublabel={scanSublabel}
+              />
             </div>
-
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F59E0B]/15 text-[#B45309] dark:text-[#FBBF24] mb-3">
-              <ShieldCheck className="w-3.5 h-3.5" /> Super Admin Authorization
-            </span>
-
-            <h3 className="text-2xl sm:text-[26px] font-extrabold text-[#18181B] dark:text-white tracking-tight leading-snug">
-              Welcome Home, Super Admin!
-            </h3>
-
-            <p className="mt-2.5 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-xs mx-auto">
-              Your command center is ready. Manage SamayYudh, teachers, students, and the learning
-              ecosystem.
-            </p>
-
-            {/* Actions: Require passkey to enter dashboard */}
-            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
-              <button
-                type="button"
-                onClick={() => setShowPasskeyInput(true)}
-                className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer outline-none focus:outline-none"
-              >
-                <KeyRound className="w-4 h-4 shrink-0" />
-                <span>Enter Super Admin Dashboard</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={onDismiss}
-                className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer outline-none focus:outline-none"
-              >
-                Continue to Platform
-              </button>
-            </div>
-          </motion.div>
-        ) : (
-          /* STEP 2: PASSKEY VERIFICATION WITH BIOMETRIC SCANNING ANIMATION */
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 16 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className="relative w-full max-w-[390px] sm:max-w-[420px] bg-white dark:bg-[#181622] rounded-[32px] pb-7 px-6 sm:px-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] z-10 my-auto text-center"
-          >
-            {verifying ? (
-              /* ACTIVE FINGERPRINT SCANNER ANIMATION */
-              <div className="py-4">
-                <BiometricScanAnimation
-                  status={scanStatus}
-                  size={160}
-                  label={scanLabel}
-                  sublabel={scanSublabel}
-                />
-              </div>
-            ) : (
-              /* PASSKEY INPUT FORM */
-              <>
-                {/* Top Breaching Security Passkey Illustration */}
-                <div className="-mt-16 sm:-mt-20 mb-3.5 flex items-center justify-center drop-shadow-xl pointer-events-none">
-                  <SecurityPasskeyIllustration size={160} />
+          ) : !showPasskeyInput ? (
+            /* STEP 1: WELCOME SCREEN (1:1 Ratio Balanced Layout) */
+            <>
+              {/* Top Section: Illustration & Badge */}
+              <div className="w-full flex flex-col items-center pt-1">
+                <div className="mb-2 flex items-center justify-center drop-shadow-md pointer-events-none">
+                  <SuperAdminWelcomeIllustration size={115} />
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-[#18181B] dark:text-white tracking-tight">
+                <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-semibold bg-[#F59E0B]/15 text-[#B45309] dark:text-[#FBBF24] mb-2">
+                  <ShieldCheck className="w-3 h-3" /> Super Admin Authorization
+                </span>
+
+                <h3 className="text-xl sm:text-2xl font-extrabold text-[#18181B] dark:text-white tracking-tight leading-snug">
+                  Welcome Home, Super Admin!
+                </h3>
+
+                <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[270px] mx-auto">
+                  Your command center is ready. Manage SamayYudh, teachers, students, and the learning ecosystem.
+                </p>
+              </div>
+
+              {/* Bottom Actions */}
+              <div className="w-full flex flex-col gap-2 pb-1">
+                <button
+                  type="button"
+                  onClick={() => setShowPasskeyInput(true)}
+                  className="w-full py-2.5 px-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer outline-none focus:outline-none"
+                >
+                  <KeyRound className="w-4 h-4 shrink-0" />
+                  <span>Enter Super Admin Dashboard</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onDismiss}
+                  className="w-full py-2 px-4 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer outline-none focus:outline-none"
+                >
+                  Continue to Platform
+                </button>
+              </div>
+            </>
+          ) : (
+            /* STEP 2: PASSKEY INPUT (1:1 Ratio Balanced Layout) */
+            <>
+              <div className="w-full flex flex-col items-center pt-1">
+                <div className="mb-2 flex items-center justify-center drop-shadow-md pointer-events-none">
+                  <SecurityPasskeyIllustration size={105} />
+                </div>
+
+                <h3 className="text-lg sm:text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
                   Enter Command Passkey
                 </h3>
-                <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+                <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 max-w-[260px] mx-auto">
                   Provide your server-configured Super Admin passkey to decrypt session credentials.
                 </p>
+              </div>
 
-                <form onSubmit={handleUnlock} className="mt-5 space-y-4">
-                  <div className="relative">
-                    <input
-                      type="password"
-                      value={passkey}
-                      onChange={(e) => setPasskey(e.target.value)}
-                      placeholder="Enter Master Passkey..."
-                      autoFocus
-                      className="w-full px-4 py-3.5 rounded-2xl bg-neutral-100 dark:bg-[#201D2E] text-neutral-900 dark:text-white placeholder-neutral-400 text-center tracking-widest text-sm outline-none focus:outline-none"
-                    />
+              <form onSubmit={handleUnlock} className="w-full space-y-3 pb-1">
+                <div className="relative">
+                  <input
+                    type="password"
+                    value={passkey}
+                    onChange={(e) => setPasskey(e.target.value)}
+                    placeholder="Enter Master Passkey..."
+                    autoFocus
+                    className="w-full px-4 py-2.5 rounded-2xl bg-neutral-100 dark:bg-[#201D2E] text-neutral-900 dark:text-white placeholder-neutral-400 text-center tracking-widest text-sm outline-none focus:outline-none"
+                  />
+                </div>
+
+                {errorMsg && (
+                  <div className="p-2 rounded-xl bg-red-500/10 text-red-600 dark:text-red-400 text-[11px] flex items-center justify-center gap-1.5">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{errorMsg}</span>
                   </div>
+                )}
 
-                  {errorMsg && (
-                    <div className="p-3 rounded-2xl bg-red-500/10 text-red-600 dark:text-red-400 text-xs flex items-center justify-center gap-2">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
-                      <span>{errorMsg}</span>
-                    </div>
-                  )}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="submit"
+                    disabled={!passkey.trim()}
+                    className="flex-1 py-2.5 px-3 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-bold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 outline-none focus:outline-none"
+                  >
+                    <KeyRound className="w-3.5 h-3.5 shrink-0" />
+                    <span>Unlock Dashboard</span>
+                  </button>
 
-                  <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
-                    <button
-                      type="submit"
-                      disabled={!passkey.trim()}
-                      className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-xs sm:text-sm transition-all active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 outline-none focus:outline-none"
-                    >
-                      <KeyRound className="w-4 h-4 shrink-0" />
-                      <span>Unlock Dashboard</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setShowPasskeyInput(false)}
-                      className="w-full sm:flex-1 py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#27272A] dark:hover:bg-[#323236] text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer outline-none focus:outline-none"
-                    >
-                      Back
-                    </button>
-                  </div>
-                </form>
-              </>
-            )}
-          </motion.div>
-        )}
+                  <button
+                    type="button"
+                    onClick={() => setShowPasskeyInput(false)}
+                    className="py-2.5 px-4 rounded-2xl bg-neutral-200 hover:bg-neutral-300 dark:bg-[#27272A] dark:hover:bg-[#323236] text-neutral-800 dark:text-white font-medium text-xs sm:text-sm transition-all active:scale-95 cursor-pointer outline-none focus:outline-none"
+                  >
+                    Back
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+        </motion.div>
       </div>
     </AnimatePresence>
   );

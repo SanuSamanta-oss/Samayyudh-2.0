@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   AlertTriangle,
   RefreshCw,
-  Sparkles,
   Lock,
   ArrowRight,
 } from 'lucide-react';
@@ -79,9 +78,6 @@ export function PreExamCameraCheckModal({
     if (isOpen) {
       startCamera();
     }
-    return () => {
-      // Don't kill stream here if user confirms; onConfirm passes it to the parent
-    };
   }, [isOpen]);
 
   // Attach stream to video tag whenever granted or videoRef mounts
@@ -102,16 +98,16 @@ export function PreExamCameraCheckModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md overflow-y-auto select-none">
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/65 backdrop-blur-xl overflow-y-auto select-none">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 16 }}
+          initial={{ opacity: 0, scale: 0.95, y: 14 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 16 }}
+          exit={{ opacity: 0, scale: 0.95, y: 14 }}
           transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-          className="relative w-full max-w-lg bg-card rounded-3xl p-6 sm:p-8 shadow-2xl border border-border/80 my-auto text-center flex flex-col items-center"
+          className="relative w-full max-w-lg bg-card/95 dark:bg-[#111622]/95 backdrop-blur-2xl rounded-[32px] p-6 sm:p-8 shadow-[0_25px_70px_rgba(0,0,0,0.35)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.85)] border border-border/80 dark:border-white/10 my-auto text-center flex flex-col items-center"
         >
           {/* Header Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-300 mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/10 dark:bg-brand-500/20 text-brand-600 dark:text-brand-400 mb-3">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>AI Remote Proctoring Verification</span>
           </div>
@@ -126,51 +122,64 @@ export function PreExamCameraCheckModal({
           {/* Circular Camera Preview Container */}
           <div className="relative my-6 flex items-center justify-center">
             {/* Outer Subtle Radial Ambient Glow */}
-            <div className="absolute -inset-4 rounded-full bg-brand-500/15 dark:bg-brand-500/25 blur-xl pointer-events-none" />
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-brand-500/20 via-sky-400/20 to-indigo-500/20 blur-xl pointer-events-none" />
 
             {/* Circular Camera Mask Frame */}
-            <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full overflow-hidden border-2 border-brand-500/40 dark:border-brand-400/50 shadow-inner bg-stone-900 flex items-center justify-center">
-              {permissionState === 'granted' ? (
-                <>
-                  <video
-                    ref={videoRef}
-                    autoPlay
-                    playsInline
-                    muted
-                    className="w-full h-full object-cover -scale-x-100"
-                  />
-                  {/* Subtle Face Alignment HUD Ring */}
-                  <div className="absolute inset-4 rounded-full border border-dashed border-white/40 pointer-events-none" />
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-emerald-500/90 text-[10px] font-bold text-white uppercase tracking-wider backdrop-blur-sm flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                    <span>Camera Ready</span>
+            <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full p-[2.5px] bg-gradient-to-tr from-brand-500 via-sky-400 to-indigo-600 shadow-[0_12px_35px_rgba(99,102,241,0.25)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.7)]">
+              <div className="relative w-full h-full rounded-full overflow-hidden bg-stone-950 flex items-center justify-center">
+                {permissionState === 'granted' ? (
+                  <>
+                    <video
+                      ref={videoRef}
+                      autoPlay
+                      playsInline
+                      muted
+                      className="w-full h-full object-cover -scale-x-100"
+                    />
+
+                    {/* Subtle Biometric HUD Vignette */}
+                    <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] pointer-events-none" />
+
+                    {/* Clean Reticle Arcs at Boundary (No dashed lines across face) */}
+                    <svg viewBox="0 0 100 100" className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] pointer-events-none opacity-40">
+                      <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.75" />
+                      <path d="M 50 2 L 50 7" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M 50 93 L 50 98" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M 2 50 L 7 50" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M 93 50 L 98 50" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+
+                    <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-emerald-500/90 text-[10px] font-extrabold text-white uppercase tracking-wider backdrop-blur-md border border-white/20 shadow-md flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                      <span>Camera Ready</span>
+                    </div>
+                  </>
+                ) : permissionState === 'requesting' ? (
+                  <div className="flex flex-col items-center gap-2 p-4 text-white">
+                    <div className="w-8 h-8 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" />
+                    <span className="text-xs font-semibold text-stone-300">Requesting Camera...</span>
                   </div>
-                </>
-              ) : permissionState === 'requesting' ? (
-                <div className="flex flex-col items-center gap-2 p-4 text-white">
-                  <div className="w-8 h-8 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" />
-                  <span className="text-xs font-medium text-stone-300">Requesting Camera...</span>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center gap-2 p-4 text-center text-white">
-                  <CameraOff className="w-8 h-8 text-rose-400" />
-                  <span className="text-xs font-medium text-stone-300">Camera Unavailable</span>
-                </div>
-              )}
+                ) : (
+                  <div className="flex flex-col items-center gap-2 p-4 text-center text-white">
+                    <CameraOff className="w-8 h-8 text-rose-400" />
+                    <span className="text-xs font-semibold text-stone-300">Camera Unavailable</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Error Notice */}
           {errorMessage && (
-            <div className="w-full mb-4 p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2 text-left">
+            <div className="w-full mb-4 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2 text-left">
               <AlertTriangle className="w-4 h-4 shrink-0 text-rose-500" />
               <span>{errorMessage}</span>
             </div>
           )}
 
           {/* Privacy & Transparency Notice */}
-          <div className="w-full p-3 rounded-2xl bg-surface border border-border/70 text-xs text-stone-600 dark:text-stone-300 text-left space-y-1 mb-5">
-            <div className="flex items-center gap-1.5 font-semibold text-foreground">
+          <div className="w-full p-4 rounded-2xl bg-surface/80 dark:bg-white/[0.04] border border-border/80 dark:border-white/[0.08] text-xs text-stone-600 dark:text-stone-300 text-left space-y-1 mb-5">
+            <div className="flex items-center gap-1.5 font-bold text-foreground">
               <Lock className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
               <span>Session Supervision Transparency</span>
             </div>
@@ -197,7 +206,7 @@ export function PreExamCameraCheckModal({
               type="button"
               disabled={permissionState !== 'granted'}
               onClick={handleConfirm}
-              className="flex-1 py-3 px-5 rounded-2xl bg-gradient-brand text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 py-3 px-5 rounded-2xl bg-gradient-brand text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span>Confirm &amp; Enter Exam</span>
               <ArrowRight className="w-4 h-4" />

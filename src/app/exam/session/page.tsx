@@ -127,6 +127,19 @@ function ExamSessionInner() {
             setShowCameraCheck(true);
           }
         }
+
+        // Notify linked guardians that examination has commenced
+        if (state.session?.user_id) {
+          fetch('/api/proctoring/notifications', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              studentId: state.session.user_id,
+              eventType: 'exam_started',
+              examTitle: state.session.title || 'Examination',
+            }),
+          }).catch(() => {});
+        }
       })
       .catch(() => {});
   }, [state.session?.id, state.session?.exam_code, state.session?.title, state.questions.length, cameraVerified]);
@@ -415,10 +428,23 @@ function ExamSessionInner() {
   }, [goToQuestion, state.currentQuestionIndex, state.questions.length]);
 
   const handleSubmit = useCallback(async () => {
+    // Notify linked guardians that examination has been submitted
+    if (state.session?.user_id) {
+      fetch('/api/proctoring/notifications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          studentId: state.session.user_id,
+          eventType: 'exam_submitted',
+          examTitle: state.session.title || 'Examination',
+        }),
+      }).catch(() => {});
+    }
+
     await submitExam();
     setShowSubmitDialog(false);
     router.push('/results?session=' + state.session?.id);
-  }, [submitExam, router, state.session?.id]);
+  }, [submitExam, router, state.session?.id, state.session?.user_id, state.session?.title]);
 
   // Warn before leaving
   useEffect(() => {

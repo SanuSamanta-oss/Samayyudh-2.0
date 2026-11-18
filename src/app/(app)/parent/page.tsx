@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
-import { ParentLiveMonitoringView } from '@/components/parent/ParentLiveMonitoringView';
+import { GuardianDashboardView } from '@/components/guardian/GuardianDashboardView';
 
 export const metadata: Metadata = {
-  title: 'Parent Live Monitoring — SamayYudh 2.0',
-  description: 'Live examination supervision and camera monitoring for parents.',
+  title: 'Guardian Connect & Live Supervision — SamayYudh 2.0',
+  description: 'Live examination supervision, attendance, and camera monitoring for parents and guardians.',
 };
 
-export default function ParentMonitoringPage() {
-  return <ParentLiveMonitoringView />;
+export default function GuardianPortalPage() {
+  return <GuardianDashboardView />;
 }

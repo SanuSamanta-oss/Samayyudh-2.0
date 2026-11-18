@@ -192,16 +192,45 @@ export class ProctorViewer {
 
   constructor(
     sessionId: string,
-    viewerId: string,
-    viewerRole: 'teacher' | 'parent',
-    onStream: (stream: MediaStream) => void,
-    onStatus: (status: 'connecting' | 'connected' | 'disconnected' | 'failed') => void
+    viewerId?: string,
+    viewerRole?: 'teacher' | 'parent',
+    onStream?: (stream: MediaStream) => void,
+    onStatus?: (status: 'connecting' | 'connected' | 'disconnected' | 'failed') => void
   ) {
     this.sessionId = sessionId;
-    this.viewerId = viewerId;
-    this.viewerRole = viewerRole;
-    this.onStreamCallback = onStream;
-    this.onStatusCallback = onStatus;
+    this.viewerId = viewerId || `viewer_${Math.random().toString(36).substring(2, 9)}`;
+    this.viewerRole = viewerRole || 'parent';
+    this.onStreamCallback = onStream || (() => {});
+    this.onStatusCallback = onStatus || (() => {});
+  }
+
+  public onStream(callback: (stream: MediaStream) => void) {
+    this.onStreamCallback = callback;
+    return this;
+  }
+
+  public onStatus(callback: (status: 'connecting' | 'connected' | 'disconnected' | 'failed') => void) {
+    this.onStatusCallback = callback;
+    return this;
+  }
+
+  public onError(callback: (err: any) => void) {
+    const orig = this.onStatusCallback;
+    this.onStatusCallback = (st) => {
+      orig(st);
+      if (st === 'failed' || st === 'disconnected') {
+        callback(st);
+      }
+    };
+    return this;
+  }
+
+  public startViewing() {
+    this.start();
+  }
+
+  public stopViewing() {
+    this.destroy();
   }
 
   public start() {

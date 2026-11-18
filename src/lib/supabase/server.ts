@@ -4,7 +4,9 @@
 // ============================================================
 
 import { createServerClient } from '@supabase/ssr';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
+import { createServiceRoleClient } from '@/lib/supabase/admin';
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -29,6 +31,16 @@ export async function createClient() {
         },
       },
     },
+  );
+}
+
+export function createAdminClient() {
+  const serviceDb = createServiceRoleClient();
+  if (serviceDb) return serviceDb;
+
+  return createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
 }
 

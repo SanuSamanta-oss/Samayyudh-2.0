@@ -30,6 +30,7 @@ interface CommandTopbarProps {
 
 const SECTION_TITLES: Record<AdminSectionId, string> = {
   overview: 'Command Overview',
+  live_proctoring: 'Live Exam Proctoring & Supervision',
   user_management: 'User & Role Management',
   login_activity: 'Login Activity & Session Monitor',
   questions: 'Question Bank Management',

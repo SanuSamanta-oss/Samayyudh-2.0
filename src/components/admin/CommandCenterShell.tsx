@@ -17,6 +17,7 @@ import { AdminAnalyticsSection } from './AdminAnalyticsSection';
 import { CommandSettingsSection } from './CommandSettingsSection';
 import { UserRoleManagementSection } from './UserRoleManagementSection';
 import { LoginActivitySection } from './LoginActivitySection';
+import { LiveProctoringSection } from './LiveProctoringSection';
 import type {
   AdminOverviewPayload,
   AdminSectionId,
@@ -233,6 +234,13 @@ export function CommandCenterShell() {
                     setActiveSection('resources');
                     setOpenUploadModal(true);
                   }}
+                />
+              )}
+
+              {activeSection === 'live_proctoring' && (
+                <LiveProctoringSection
+                  currentUserId={authStatus.identity?.userId}
+                  role={authStatus.role}
                 />
               )}
 

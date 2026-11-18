@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, Swords, GraduationCap,
   History, BarChart3, User, Search, Menu, X, ShieldAlert, LogOut, Trophy,
-  Bell, BookOpen
+  Bell, BookOpen, Users
 } from 'lucide-react';
 import { useState, useEffect, useMemo } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -303,6 +303,20 @@ export function Navbar() {
             >
               <Bell className="w-5 h-5 text-purple-600 dark:text-purple-400" />
               <span>Reminders & Settings</span>
+            </Link>
+
+            <Link
+              href="/parent"
+              onClick={() => setMobileMenuOpen(false)}
+              className={cn(
+                'flex items-center gap-3 px-4 py-3 rounded-2xl text-base font-semibold transition-all',
+                pathname === '/parent'
+                  ? 'bg-purple-100 dark:bg-purple-950/60 text-purple-950 dark:text-purple-100'
+                  : 'text-stone-950 dark:text-white hover:bg-stone-100 dark:hover:bg-white/10'
+              )}
+            >
+              <Users className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <span>Parent Monitoring</span>
             </Link>
 
             {isAuthenticated && (

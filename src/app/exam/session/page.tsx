@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, Suspense } from 'react';
+import { useEffect, useState, useCallback, Suspense, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ExamProvider, useExam } from '@/lib/store/exam-store';
 import { ExamTimer } from '@/components/exam/ExamTimer';
@@ -10,6 +10,11 @@ import { QuestionNavigator } from '@/components/exam/QuestionNavigator';
 import { StickyNote } from '@/components/exam/StickyNote';
 import { NotesBoard } from '@/components/exam/NotesBoard';
 import { MobileQuestionDrawer } from '@/components/exam/MobileQuestionDrawer';
+import { PreExamCameraCheckModal } from '@/components/exam/proctoring/PreExamCameraCheckModal';
+import { StudentProctoringBubble } from '@/components/exam/proctoring/StudentProctoringBubble';
+import { ExamCalculator } from '@/components/exam/calculator/ExamCalculator';
+import { useProctoringMonitor } from '@/hooks/useProctoringMonitor';
+import { ProctorBroadcaster } from '@/lib/proctoring/webrtc-service';
 import { questionBank, getQuestionsByExam } from '@/lib/questions';
 import { convertPyqListToBattle } from '@/lib/pyq/battleAdapter';
 import type { PyqQuestion } from '@/lib/pyq/types';
@@ -19,7 +24,7 @@ import { OmnitrixLoader } from '@/components/OmnitrixLoader';
 import type { ExamSession, ExamMode, BoardNote, StickyNoteColor, Question } from '@/types';
 import {
   ChevronLeft, ChevronRight, Flag, Grid3X3, Send, Award,
-  AlertTriangle, CheckCircle2
+  AlertTriangle, CheckCircle2, Calculator
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -36,6 +41,108 @@ function ExamSessionInner() {
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [showMilestone, setShowMilestone] = useState<string | null>(null);
   const [boardNotes, setBoardNotes] = useState<BoardNote[]>([]);
+
+  // Live Remote Proctoring & Calculator State
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+  const [showCameraCheck, setShowCameraCheck] = useState<boolean>(false);
+  const [cameraVerified, setCameraVerified] = useState<boolean>(false);
+  const [proctorSessionId, setProctorSessionId] = useState<string>('');
+  const [proctorConfig, setProctorConfig] = useState<{
+    live_video_enabled: boolean;
+    parent_stream_enabled: boolean;
+    calculator_enabled: boolean;
+  }>({
+    live_video_enabled: true,
+    parent_stream_enabled: true,
+    calculator_enabled: true,
+  });
+  const [showCalculator, setShowCalculator] = useState<boolean>(false);
+  const broadcasterRef = useRef<ProctorBroadcaster | null>(null);
+
+  const { warningMessage, connectionQuality, dismissWarning } = useProctoringMonitor({
+    sessionId: proctorSessionId || state.session?.id || '',
+    examSessionId: state.session?.id || '',
+    studentId: state.session?.user_id || '',
+    stream: cameraStream,
+    enabled: Boolean(proctorConfig.live_video_enabled && cameraVerified),
+    currentQuestionIndex: state.currentQuestionIndex,
+    questionsAnswered: stats.answered,
+  });
+
+  const hasCalculations = state.questions.some((q) => {
+    const subj = (q.subject || '').toLowerCase();
+    const qType = (q.question_type || '').toLowerCase();
+    const text = (q.question_text || '').toLowerCase();
+    return (
+      subj.includes('math') ||
+      subj.includes('physics') ||
+      subj.includes('chem') ||
+      subj.includes('engineer') ||
+      qType === 'numerical' ||
+      qType === 'integer' ||
+      text.includes('calculate') ||
+      text.includes('value of')
+    );
+  });
+  const isCalculatorAllowed = proctorConfig.calculator_enabled;
+
+  const handleCameraConfirmed = (stream: MediaStream) => {
+    setCameraStream(stream);
+    setCameraVerified(true);
+    setShowCameraCheck(false);
+
+    if (state.session?.id) {
+      const broadcaster = new ProctorBroadcaster(
+        proctorSessionId || state.session.id,
+        state.session.user_id || 'student'
+      );
+      broadcaster.setStream(stream);
+      broadcaster.startSignaling();
+      broadcasterRef.current = broadcaster;
+    }
+  };
+
+  // Register / fetch proctoring session & config when exam session is initialized
+  useEffect(() => {
+    if (!state.session?.id) return;
+
+    fetch('/api/proctoring/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        examSessionId: state.session.id,
+        examCode: state.session.exam_code,
+        examTitle: state.session.title || 'Examination',
+        totalQuestions: state.questions.length,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.sessionId) {
+          setProctorSessionId(data.sessionId);
+        }
+        if (data.config) {
+          setProctorConfig(data.config);
+          if (data.config.live_video_enabled && !cameraVerified) {
+            setShowCameraCheck(true);
+          }
+        }
+      })
+      .catch(() => {});
+  }, [state.session?.id, state.session?.exam_code, state.session?.title, state.questions.length, cameraVerified]);
+
+  // Clean up WebRTC broadcaster and camera tracks when leaving or completing
+  useEffect(() => {
+    return () => {
+      if (broadcasterRef.current) {
+        broadcasterRef.current.destroy();
+        broadcasterRef.current = null;
+      }
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((t) => t.stop());
+      }
+    };
+  }, [cameraStream]);
 
   // Load saved notes for session from IndexedDB
   useEffect(() => {
@@ -376,6 +483,22 @@ function ExamSessionInner() {
 
           {/* Right: Timer + Actions */}
           <div className="flex items-center gap-2">
+            {isCalculatorAllowed && (
+              <button
+                type="button"
+                onClick={() => setShowCalculator((prev) => !prev)}
+                className={cn(
+                  'p-2 rounded-lg border transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer',
+                  showCalculator
+                    ? 'bg-brand-50 border-brand-300 text-brand-700 dark:bg-brand-950 dark:border-brand-700 dark:text-brand-300'
+                    : 'border-border hover:bg-stone-50 dark:hover:bg-stone-800 text-foreground'
+                )}
+                title="Exam Calculator"
+              >
+                <Calculator className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                <span className="hidden sm:inline">Calc</span>
+              </button>
+            )}
             <ExamTimer endsAt={state.session.ends_at} onTimeUp={handleTimeUp} />
             <button
               onClick={() => setMobileNavOpen(true)}
@@ -603,6 +726,35 @@ function ExamSessionInner() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* ── PRE-EXAM CAMERA CHECK & PERMISSION MODAL ── */}
+      <PreExamCameraCheckModal
+        isOpen={showCameraCheck}
+        examTitle={state.session?.title || 'Examination'}
+        onConfirm={handleCameraConfirmed}
+        onCancel={() => setShowCameraCheck(false)}
+      />
+
+      {/* ── FLOATING CIRCULAR PROCTORING BUBBLE ── */}
+      {proctorConfig.live_video_enabled && cameraVerified && (
+        <StudentProctoringBubble
+          stream={cameraStream}
+          cameraActive={Boolean(cameraStream && cameraStream.getVideoTracks().some((t) => t.readyState === 'live'))}
+          connectionQuality={connectionQuality}
+          isLive={true}
+          examTitle={state.session?.title}
+          warningMessage={warningMessage}
+          onDismissWarning={dismissWarning}
+        />
+      )}
+
+      {/* ── BASIC ON-SCREEN CALCULATOR ── */}
+      {isCalculatorAllowed && (
+        <ExamCalculator
+          isOpen={showCalculator}
+          onClose={() => setShowCalculator(false)}
+        />
       )}
     </div>
   );

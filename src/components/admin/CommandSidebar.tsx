@@ -17,6 +17,7 @@ import {
   X,
   ShieldCheck,
   Activity,
+  Video,
 } from 'lucide-react';
 import type { AdminSectionId, CommandRole } from '@/types/admin';
 
@@ -126,6 +127,7 @@ export function CommandSidebar({
 }: CommandSidebarProps) {
   const navItems: NavItemConfig[] = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+    { id: 'live_proctoring' as AdminSectionId, label: 'Live Proctoring', icon: Video },
     ...(role === 'super_admin'
       ? [
           { id: 'user_management' as AdminSectionId, label: 'User & Roles', icon: ShieldCheck },

@@ -6,6 +6,7 @@ export type CommandRole = 'super_admin' | 'admin' | 'teacher' | 'student';
 
 export type AdminSectionId =
   | 'overview'
+  | 'live_proctoring'
   | 'user_management'
   | 'login_activity'
   | 'questions'

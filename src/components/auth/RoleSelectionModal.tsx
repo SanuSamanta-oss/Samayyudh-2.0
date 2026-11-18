@@ -32,11 +32,7 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
       });
 
       if (res.ok) {
-        if (role === 'teacher') {
-          setStep('teacher_welcome');
-        } else {
-          onRoleSelected('student');
-        }
+        onRoleSelected(role);
       }
     } catch (err) {
       console.error('Failed to set role:', err);

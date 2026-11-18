@@ -84,6 +84,7 @@ function AuthCallbackContent() {
           setTimeout(() => {
             try {
               sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+              sessionStorage.setItem('sy_post_login_modal_pending', 'true');
             } catch {}
             router.replace(targetUrl);
           }, 400);

@@ -195,6 +195,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
           setTimeout(() => {
             try {
               sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+              sessionStorage.setItem('sy_post_login_modal_pending', 'true');
             } catch {}
             router.replace(targetUrl);
           }, 400);
@@ -238,6 +239,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
         setTimeout(() => {
           try {
             sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+            sessionStorage.setItem('sy_post_login_modal_pending', 'true');
           } catch {}
           router.replace(targetUrl);
         }, 400);

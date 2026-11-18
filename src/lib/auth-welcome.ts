@@ -10,6 +10,7 @@ import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 
 export const HAS_LOGGED_IN_KEY = 'samayyudh_has_logged_in';
 export const AUTH_ANIM_SEEN_KEY = 'samayyudh_auth_animation_shown';
+export const POST_LOGIN_MODAL_PENDING_KEY = 'sy_post_login_modal_pending';
 
 /**
  * Checks whether the user has already completed a login before or seen the animation.

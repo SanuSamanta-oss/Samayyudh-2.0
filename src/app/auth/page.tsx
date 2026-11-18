@@ -187,6 +187,7 @@ function AuthPageContent() {
           setTimeout(() => {
             try {
               sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+              sessionStorage.setItem('sy_post_login_modal_pending', 'true');
             } catch {}
             router.push(targetUrl);
           }, 700);
@@ -227,6 +228,7 @@ function AuthPageContent() {
         setTimeout(() => {
           try {
             sessionStorage.setItem('samayyudh_just_logged_in', 'true');
+            sessionStorage.setItem('sy_post_login_modal_pending', 'true');
           } catch {}
           router.push(targetUrl);
         }, 700);

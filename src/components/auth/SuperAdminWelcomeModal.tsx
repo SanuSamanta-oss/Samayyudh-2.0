@@ -72,6 +72,9 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
       setScanStatus('success');
       setScanLabel('Passkey Authorized');
       setScanSublabel('Command Center unlocked. Redirecting...');
+      try {
+        sessionStorage.setItem('sy_super_admin_passkey_unlocked', 'true');
+      } catch {}
 
       setTimeout(() => {
         router.push('/admin');

@@ -17,7 +17,7 @@ interface SuperAdminWelcomeModalProps {
 
 export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeModalProps) {
   const router = useRouter();
-  const [showPasskeyInput, setShowPasskeyInput] = useState(true);
+  const [showPasskeyInput, setShowPasskeyInput] = useState(false);
   const [passkey, setPasskey] = useState('');
   const [verifying, setVerifying] = useState(false);
   const [scanStatus, setScanStatus] = useState<'scanning' | 'success' | 'error'>('scanning');
@@ -25,10 +25,14 @@ export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeM
   const [scanSublabel, setScanSublabel] = useState('Scanning secure biometric credentials');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // When modal is shown on a new session, clear any lingering passkey cookie
+  // When modal is shown on a new session, reset to welcome screen and clear any lingering passkey cookie
   // so Super Admin MUST enter the passkey before the dashboard unlocks
   useEffect(() => {
     if (isOpen) {
+      setShowPasskeyInput(false);
+      setPasskey('');
+      setErrorMsg(null);
+      setVerifying(false);
       fetch('/api/admin/auth/logout', { method: 'POST' }).catch(() => {});
     }
   }, [isOpen]);

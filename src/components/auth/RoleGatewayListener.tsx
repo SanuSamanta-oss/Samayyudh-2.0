@@ -22,25 +22,43 @@ export function RoleGatewayListener() {
 
     if (typeof window === 'undefined') return;
 
-    // Check if user has just completed a fresh login
+    // Check if user has just completed login or has a pending welcome modal
     const urlParams = new URLSearchParams(window.location.search);
     const hasWelcomeParam = urlParams.get('welcome_hint') === 'true';
-    const isPending =
-      sessionStorage.getItem(POST_LOGIN_MODAL_PENDING_KEY) === 'true' || hasWelcomeParam;
+    const justLoggedIn = sessionStorage.getItem('samayyudh_just_logged_in') === 'true';
+    const postLoginPending = sessionStorage.getItem(POST_LOGIN_MODAL_PENDING_KEY) === 'true';
 
-    // STRICT GATING: Only display the role modal ONCE right upon fresh login.
-    // If not pending, do NOT fetch or pop up anything during in-app navigation or reloads.
-    if (!isPending) {
+    // Fast-path client check for Super Admin by email
+    const rawPublicSuper = process.env.NEXT_PUBLIC_SUPER_ADMIN_EMAILS || '';
+    const superEmails = rawPublicSuper
+      .split(',')
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean);
+    const userEmail = (user.email || '').trim().toLowerCase();
+    const isSuperAdminFast = Boolean(userEmail && superEmails.includes(userEmail));
+
+    const superSeenKey = `sy_super_admin_seen_${user.id}`;
+    const hasSeenSuperModal = sessionStorage.getItem(superSeenKey) === 'true';
+
+    // Check if modal should trigger:
+    // 1. Fresh login event (postLoginPending || justLoggedIn || hasWelcomeParam)
+    // 2. OR Super admin who has not entered their passkey in this session
+    const isFreshLogin = postLoginPending || justLoggedIn || hasWelcomeParam;
+    const shouldShowSuper = isSuperAdminFast && !hasSeenSuperModal;
+
+    if (!isFreshLogin && !shouldShowSuper) {
       return;
     }
 
-    // Immediately consume the pending flag so it NEVER fires again during this or future navigations
+    // Immediately consume fresh login flags so regular in-app navigation doesn't re-trigger
     try {
       sessionStorage.removeItem(POST_LOGIN_MODAL_PENDING_KEY);
+      sessionStorage.removeItem('samayyudh_just_logged_in');
       if (hasWelcomeParam) {
         urlParams.delete('welcome_hint');
         const newSearch = urlParams.toString();
-        const newUrl = window.location.pathname + (newSearch ? `?${newSearch}` : '') + window.location.hash;
+        const newUrl =
+          window.location.pathname + (newSearch ? `?${newSearch}` : '') + window.location.hash;
         window.history.replaceState({}, '', newUrl);
       }
     } catch {}
@@ -54,19 +72,15 @@ export function RoleGatewayListener() {
       body: JSON.stringify({ user_agent: navigator.userAgent }),
     }).catch(() => {});
 
-    // Fast-path client check: If email matches public super admin list, trigger modal in 0ms
-    const rawPublicSuper = process.env.NEXT_PUBLIC_SUPER_ADMIN_EMAILS || '';
-    const superEmails = rawPublicSuper
-      .split(',')
-      .map((e) => e.trim().toLowerCase())
-      .filter(Boolean);
-    const userEmail = (user.email || '').trim().toLowerCase();
-
-    if (userEmail && superEmails.includes(userEmail)) {
+    // FAST-PATH: Super Admin by configured email
+    // Super admins enter the Command Passkey and NEVER see parent/guardian forms
+    if (isSuperAdminFast) {
+      sessionStorage.setItem(superSeenKey, 'true');
       setShowSuperAdminModal(true);
       return;
     }
 
+    // Server role check for teachers, students, or database-configured super admins
     async function checkRoleState() {
       try {
         const res = await fetch('/api/auth/role');
@@ -76,12 +90,18 @@ export function RoleGatewayListener() {
         if (!isMounted) return;
 
         if (data.is_super_admin) {
-          setShowSuperAdminModal(true);
+          if (!sessionStorage.getItem(superSeenKey)) {
+            sessionStorage.setItem(superSeenKey, 'true');
+            setShowSuperAdminModal(true);
+          }
         } else if (!data.role_selected) {
+          // New user who hasn't selected their role yet
           setShowRoleModal(true);
         } else if (data.role === 'teacher') {
+          // Returning teacher
           setShowTeacherModal(true);
         } else {
+          // Returning student
           setShowStudentModal(true);
         }
       } catch (err) {

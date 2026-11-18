@@ -17,7 +17,7 @@ interface SuperAdminWelcomeModalProps {
 
 export function SuperAdminWelcomeModal({ isOpen, onDismiss }: SuperAdminWelcomeModalProps) {
   const router = useRouter();
-  const [showPasskeyInput, setShowPasskeyInput] = useState(false);
+  const [showPasskeyInput, setShowPasskeyInput] = useState(true);
   const [passkey, setPasskey] = useState('');
   const [verifying, setVerifying] = useState(false);
   const [scanStatus, setScanStatus] = useState<'scanning' | 'success' | 'error'>('scanning');

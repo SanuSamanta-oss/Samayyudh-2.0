@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Arvo } from "next/font/google";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import { ThemeInitializer } from "@/components/providers/ThemeInitializer";
+import { RoleGatewayListener } from "@/components/auth/RoleGatewayListener";
 import { SokhaWidget } from "@/components/sokha/SokhaWidget";
 import { OfflineScreen } from "@/components/offline/OfflineScreen";
 import { ReminderScheduler } from "@/components/notifications/ReminderScheduler";
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeInitializer />
         <AuthProvider>
           {children}
+          <RoleGatewayListener />
           <ReminderScheduler />
           <SokhaWidget />
           <OfflineScreen />

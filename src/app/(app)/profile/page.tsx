@@ -549,6 +549,7 @@ export default function ProfilePage() {
     setCustomDisplayName(newName);
     if (typeof window !== 'undefined') {
       localStorage.setItem(DISPLAY_NAME_STORAGE_KEY, newName);
+      window.dispatchEvent(new Event('samayyudh:profile-change'));
     }
     if (isAuthenticated && isSupabaseConfigured) {
       try {

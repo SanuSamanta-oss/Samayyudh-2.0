@@ -40,6 +40,7 @@ interface CommandSidebarProps {
   pendingRequestsCount: number;
   role: CommandRole;
   fullName: string | null;
+  isTeacherVerified?: boolean;
 }
 
 function TopWaveCap({ compactHeight = false }: { compactHeight?: boolean }) {
@@ -124,10 +125,21 @@ export function CommandSidebar({
   pendingRequestsCount,
   role,
   fullName,
+  isTeacherVerified,
 }: CommandSidebarProps) {
   const navItems: NavItemConfig[] = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
     { id: 'live_proctoring' as AdminSectionId, label: 'Live Proctoring', icon: Video },
+    ...(role === 'teacher' || role === 'super_admin'
+      ? [
+          {
+            id: 'teacher_verify' as AdminSectionId,
+            label: 'Verify as Teacher',
+            icon: UserCheck,
+            badge: isTeacherVerified ? undefined : 1,
+          },
+        ]
+      : []),
     ...(role === 'super_admin'
       ? [
           { id: 'user_management' as AdminSectionId, label: 'User & Roles', icon: ShieldCheck },

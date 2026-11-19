@@ -21,10 +21,14 @@ import type { PyqQuestion } from '@/lib/pyq/types';
 import * as localDB from '@/lib/store/local-db';
 import { generateId, now, formatDuration } from '@/lib/utils';
 import { OmnitrixLoader } from '@/components/OmnitrixLoader';
+import { motion } from 'framer-motion';
 import type { ExamSession, ExamMode, BoardNote, StickyNoteColor, Question } from '@/types';
+import type { CustomExam, WarningLevel } from '@/types/custom-exam';
+import { TeacherWarningOverlay } from '@/components/custom-exams/TeacherWarningOverlay';
+import { ExamSuspensionOverlay } from '@/components/custom-exams/ExamSuspensionOverlay';
 import {
   ChevronLeft, ChevronRight, Flag, Grid3X3, Send, Award,
-  AlertTriangle, CheckCircle2, Calculator
+  AlertTriangle, CheckCircle2, Calculator, Trophy, ShieldCheck, Radio
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -58,6 +62,25 @@ function ExamSessionInner() {
   });
   const [showCalculator, setShowCalculator] = useState<boolean>(false);
   const broadcasterRef = useRef<ProctorBroadcaster | null>(null);
+
+  // Custom Exam Live Supervision States
+  const [customExamInfo, setCustomExamInfo] = useState<{
+    id: string;
+    code: string;
+    title: string;
+    require_webcam: boolean;
+  } | null>(null);
+  const [isSuspended, setIsSuspended] = useState(false);
+  const [suspensionReason, setSuspensionReason] = useState<string | null>(null);
+  const [suspendedAt, setSuspendedAt] = useState<string | null>(null);
+  const [activeWarning, setActiveWarning] = useState<{
+    id: string;
+    level: WarningLevel;
+    reason: string;
+    note?: string;
+    timestamp: string;
+  } | null>(null);
+  const [acknowledgedWarningIds, setAcknowledgedWarningIds] = useState<Set<string>>(new Set());
 
   const { warningMessage, connectionQuality, dismissWarning } = useProctoringMonitor({
     sessionId: proctorSessionId || state.session?.id || '',
@@ -291,6 +314,89 @@ function ExamSessionInner() {
   useEffect(() => {
     if (state.session) return; // Already initialized
 
+    const customExamCode = searchParams.get('customExam') || searchParams.get('code');
+    if (customExamCode) {
+      fetch(`/api/custom-exams/${encodeURIComponent(customExamCode)}`)
+        .then((res) => res.json())
+        .then(async (data) => {
+          if (data.exam) {
+            const ex = data.exam as CustomExam;
+            setCustomExamInfo({
+              id: ex.id,
+              code: ex.exam_code,
+              title: ex.title,
+              require_webcam: Boolean(ex.supervision_enabled),
+            });
+            if (ex.supervision_enabled) {
+              setProctorConfig((prev) => ({ ...prev, live_video_enabled: true }));
+              setShowCameraCheck(true);
+            }
+
+            // Map custom questions if available, or fetch matching subject questions
+            let examQuestions: Question[] = [];
+            const questionsList = ex.selected_questions || [];
+            if (questionsList.length > 0) {
+              examQuestions = questionsList.map((q: any, i: number) => ({
+                id: q.id || `custom_q_${i + 1}`,
+                question_number: i + 1,
+                question_text: q.question_text || q.text || '',
+                exam_category: 'CUSTOM',
+                exam_code: ex.exam_code,
+                subject: q.subject || (ex.subjects && ex.subjects[0]) || 'General',
+                topic: q.topic || 'General',
+                question_type: (q.question_type || 'multiple_choice'),
+                marks: q.marks || 4,
+                difficulty: (q.difficulty || 'medium'),
+                recommended_minutes: 2,
+                expected_points: q.expected_points || [],
+                keywords: q.keywords || [],
+                model_answer: q.model_answer || '',
+                evaluation_rubric: q.evaluation_rubric || '',
+                options: q.options || [],
+                correct_answer: q.correct_answer || '',
+                created_at: now(),
+                updated_at: now(),
+              }));
+            } else {
+              const subjects = ex.subjects || [];
+              const matched = questionBank.filter((q) =>
+                subjects.some((s) => (q.subject || '').toLowerCase().includes(s.toLowerCase()))
+              );
+              examQuestions = matched.length >= 5 ? matched.slice(0, 20) : questionBank.slice(0, 15);
+            }
+
+            const startTime = now();
+            const examDurationSeconds = (ex.duration_minutes || 60) * 60;
+            const endTime = new Date(Date.now() + examDurationSeconds * 1000).toISOString();
+
+            const session: ExamSession = {
+              id: generateId(),
+              user_id: 'local-user',
+              title: ex.title,
+              exam_code: ex.exam_code,
+              mode: 'custom',
+              status: 'in_progress',
+              total_questions: examQuestions.length,
+              total_marks: ex.total_marks || examQuestions.reduce((sum, q) => sum + q.marks, 0),
+              duration_seconds: examDurationSeconds,
+              started_at: startTime,
+              ends_at: endTime,
+              completed_at: null,
+              current_question_index: 0,
+              evaluation_status: 'not_started',
+              created_at: startTime,
+            };
+
+            await initSession(session, examQuestions);
+            return;
+          }
+        })
+        .catch((err) => {
+          console.warn('Failed to load custom exam session by code:', err);
+        });
+      return;
+    }
+
     const mode = (searchParams.get('mode') || 'quick_battle') as ExamMode;
     const questionCount = Number(searchParams.get('questions') || 10);
     const duration = Number(searchParams.get('duration') || 3600);
@@ -457,6 +563,91 @@ function ExamSessionInner() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [state.session?.status]);
 
+  // Live Supervision Polling for Custom Exam
+  useEffect(() => {
+    if (!customExamInfo?.id) return;
+    const studentId = state.session?.user_id || 'local-user';
+
+    const checkStatus = async () => {
+      try {
+        const res = await fetch(
+          `/api/custom-exams/student-status?exam_id=${customExamInfo.id}&student_id=${studentId}`
+        );
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.participant) {
+          if (data.participant.is_suspended) {
+            setIsSuspended(true);
+            setSuspensionReason(data.participant.suspended_reason || 'Suspended by proctor.');
+            setSuspendedAt(data.participant.suspended_at || null);
+          } else {
+            setIsSuspended(false);
+            setSuspensionReason(null);
+            setSuspendedAt(null);
+          }
+
+          if (data.participant.exam_status === 'submitted' && state.session?.status === 'in_progress') {
+            handleSubmit();
+          }
+        }
+
+        if (data.latestEvent && data.latestEvent.event_type === 'warning') {
+          const evtId = data.latestEvent.id;
+          if (!acknowledgedWarningIds.has(evtId)) {
+            setActiveWarning({
+              id: evtId,
+              level: data.latestEvent.warning_level || 'first',
+              reason: data.latestEvent.reason || 'Flagged by supervisor',
+              note: data.latestEvent.description,
+              timestamp: new Date(data.latestEvent.created_at).toLocaleTimeString(),
+            });
+          }
+        }
+      } catch {}
+    };
+
+    checkStatus();
+    const statusInterval = setInterval(checkStatus, 3000);
+    return () => clearInterval(statusInterval);
+  }, [customExamInfo?.id, state.session?.user_id, state.session?.status, acknowledgedWarningIds, handleSubmit]);
+
+  // Student Heartbeat Dispatcher for Live Supervisor
+  useEffect(() => {
+    if (!customExamInfo?.id) return;
+    const studentId = state.session?.user_id || 'local-user';
+
+    const sendHeartbeat = async () => {
+      try {
+        await fetch('/api/custom-exams/student-status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            exam_id: customExamInfo.id,
+            student_id: studentId,
+            updates: {
+              camera_active: Boolean(cameraStream && cameraVerified),
+              connection_quality: connectionQuality,
+              questions_answered: stats.answered,
+              current_question_index: state.currentQuestionIndex,
+            },
+          }),
+        });
+      } catch {}
+    };
+
+    sendHeartbeat();
+    const hbInterval = setInterval(sendHeartbeat, 5000);
+    return () => clearInterval(hbInterval);
+  }, [
+    customExamInfo?.id,
+    state.session?.user_id,
+    cameraStream,
+    cameraVerified,
+    connectionQuality,
+    stats.answered,
+    state.currentQuestionIndex,
+  ]);
+
   if (!state.session || !currentQuestion) {
     return (
       <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4">
@@ -474,11 +665,17 @@ function ExamSessionInner() {
       {showMilestone && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="text-center space-y-4 animate-bounce">
-            <span className="text-7xl">{showMilestone === 'half_century' ? '🏏' : '🏆'}</span>
+            <div className="w-20 h-20 mx-auto rounded-3xl bg-amber-500/20 text-amber-400 flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.4)]">
+              {showMilestone === 'half_century' ? (
+                <Award className="w-10 h-10" />
+              ) : (
+                <Trophy className="w-10 h-10" />
+              )}
+            </div>
             <h2 className="text-3xl font-bold text-white">
-              {showMilestone === 'half_century' ? 'HALF CENTURY!' : 'CENTURY!'}
+              {showMilestone === 'half_century' ? 'HALF CENTURY' : 'CENTURY'}
             </h2>
-            <p className="text-white/80">{stats.answered} questions answered!</p>
+            <p className="text-white/80">{stats.answered} questions answered</p>
           </div>
         </div>
       )}
@@ -489,6 +686,12 @@ function ExamSessionInner() {
           {/* Left: Title + Progress */}
           <div className="flex items-center gap-3 min-w-0">
             <span className="text-sm font-semibold text-gradient-brand hidden sm:block">সময়যুদ্ধ</span>
+            {customExamInfo && (
+              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100/80 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 text-xs font-bold shadow-xs">
+                <Radio className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
+                <span>Supervised ({customExamInfo.code})</span>
+              </div>
+            )}
             <div className="text-xs text-stone-500 hidden md:block">
               <span className="font-medium text-foreground">{stats.answered}</span>/{stats.total} answered
             </div>
@@ -510,22 +713,51 @@ function ExamSessionInner() {
           {/* Right: Timer + Actions */}
           <div className="flex items-center gap-2">
             {isCalculatorAllowed && (
-              <button
+              <motion.button
                 type="button"
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.94, y: 1 }}
+                transition={{ type: 'spring', stiffness: 450, damping: 25 }}
                 onClick={() => setShowCalculator((prev) => !prev)}
                 className={cn(
-                  'p-2 rounded-lg border transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer',
+                  'group relative flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer border-0 outline-none select-none shadow-sm',
                   showCalculator
-                    ? 'bg-brand-50 border-brand-300 text-brand-700 dark:bg-brand-950 dark:border-brand-700 dark:text-brand-300'
-                    : 'border-border hover:bg-stone-50 dark:hover:bg-stone-800 text-foreground'
+                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-[0_4px_20px_rgba(147,51,234,0.4)]'
+                    : 'bg-white hover:bg-purple-50 text-slate-800 hover:text-purple-700 shadow-[0_2px_10px_rgba(0,0,0,0.08)] dark:bg-[#1E293B] dark:hover:bg-[#28354D] dark:text-white dark:shadow-[0_4px_16px_rgba(0,0,0,0.45)]'
                 )}
-                title="Exam Calculator"
+                title={showCalculator ? 'Hide Exam Calculator' : 'Open Exam Calculator'}
               >
-                <Calculator className="w-4 h-4 text-brand-600 dark:text-brand-400" />
-                <span className="hidden sm:inline">Calc</span>
-              </button>
+                {/* Ambient Glow Aura when Active */}
+                {showCalculator && (
+                  <span className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 blur-sm opacity-50 pointer-events-none -z-10 animate-pulse" />
+                )}
+
+                {/* Inner Icon Bubble with Micro-scale */}
+                <span
+                  className={cn(
+                    'w-6 h-6 rounded-full flex items-center justify-center transition-colors shrink-0',
+                    showCalculator
+                      ? 'bg-white/20 text-white'
+                      : 'bg-purple-100 text-purple-600 dark:bg-purple-600/30 dark:text-purple-300 group-hover:bg-purple-200 dark:group-hover:bg-purple-600/50'
+                  )}
+                >
+                  <Calculator className="w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110" />
+                </span>
+
+                <span className="tracking-tight text-xs font-bold">Calc</span>
+
+                {/* Subtle Live Status Indicator Dot */}
+                <span
+                  className={cn(
+                    'w-1.5 h-1.5 rounded-full transition-colors shrink-0',
+                    showCalculator
+                      ? 'bg-emerald-300 shadow-[0_0_6px_#6ee7b7] animate-pulse'
+                      : 'bg-slate-300 dark:bg-slate-500 group-hover:bg-purple-400'
+                  )}
+                />
+              </motion.button>
             )}
-            <ExamTimer endsAt={state.session.ends_at} onTimeUp={handleTimeUp} />
+            <ExamTimer endsAt={state.session.ends_at} onTimeUp={handleTimeUp} isPaused={isSuspended} />
             <button
               onClick={() => setMobileNavOpen(true)}
               className="md:hidden p-2 rounded-lg border border-border hover:bg-stone-50"
@@ -538,7 +770,12 @@ function ExamSessionInner() {
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 max-w-7xl mx-auto w-full px-3 md:px-6 py-4 md:py-6">
+      <div
+        className={cn(
+          'flex-1 max-w-7xl mx-auto w-full px-3 md:px-6 py-4 md:py-6 transition-all duration-300',
+          isSuspended && 'pointer-events-none select-none blur-[2px] opacity-60'
+        )}
+      >
         <div className="flex gap-6">
           {/* Left: Question + Answer */}
           <div className="flex-1 min-w-0 space-y-5">
@@ -762,7 +999,7 @@ function ExamSessionInner() {
         onCancel={() => setShowCameraCheck(false)}
       />
 
-      {/* ── FLOATING CIRCULAR PROCTORING BUBBLE ── */}
+      {/* ── FLOATING PHOTO-BOOTH STYLE PROCTORING WINDOW ── */}
       {proctorConfig.live_video_enabled && cameraVerified && (
         <StudentProctoringBubble
           stream={cameraStream}
@@ -782,6 +1019,45 @@ function ExamSessionInner() {
           onClose={() => setShowCalculator(false)}
         />
       )}
+
+      {/* ── TEACHER SUPERVISORY WARNING BANNER ── */}
+      <TeacherWarningOverlay
+        isOpen={Boolean(activeWarning)}
+        warningLevel={activeWarning?.level || 'first'}
+        reason={activeWarning?.reason || ''}
+        note={activeWarning?.note}
+        timestamp={activeWarning?.timestamp}
+        onAcknowledge={() => {
+          if (activeWarning?.id) {
+            setAcknowledgedWarningIds((prev) => new Set([...prev, activeWarning.id]));
+          }
+          setActiveWarning(null);
+        }}
+      />
+
+      {/* ── UNBYPASSABLE EXAM SUSPENSION SCREEN ── */}
+      <ExamSuspensionOverlay
+        isSuspended={isSuspended}
+        reason={suspensionReason}
+        suspendedAt={suspendedAt}
+        onRefreshStatus={async () => {
+          if (!customExamInfo?.id) return;
+          const studentId = state.session?.user_id || 'local-user';
+          try {
+            const res = await fetch(
+              `/api/custom-exams/student-status?exam_id=${customExamInfo.id}&student_id=${studentId}`
+            );
+            if (res.ok) {
+              const data = await res.json();
+              if (data.participant && !data.participant.is_suspended) {
+                setIsSuspended(false);
+                setSuspensionReason(null);
+                setSuspendedAt(null);
+              }
+            }
+          } catch {}
+        }}
+      />
     </div>
   );
 }

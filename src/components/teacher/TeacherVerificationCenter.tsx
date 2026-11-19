@@ -20,9 +20,20 @@ import {
   RefreshCw,
   Clock,
   Loader2,
+  User,
 } from 'lucide-react';
 
-export function TeacherVerificationCenter() {
+interface TeacherVerificationCenterProps {
+  embedded?: boolean;
+  onSwitchToStudent?: () => Promise<void> | void;
+  onVerified?: () => void;
+}
+
+export function TeacherVerificationCenter({
+  embedded = false,
+  onSwitchToStudent,
+  onVerified,
+}: TeacherVerificationCenterProps = {}) {
   const router = useRouter();
 
   // Verification method tab: 'email' | 'classroom' | 'directory' | 'credentials'
@@ -247,6 +258,7 @@ export function TeacherVerificationCenter() {
       if (data.verified) {
         setCurrentStatus('verified');
         setNotification({ type: 'success', message: data.message });
+        if (onVerified) onVerified();
       } else {
         setNotification({ type: 'success', message: data.message });
       }
@@ -257,10 +269,35 @@ export function TeacherVerificationCenter() {
     }
   }
 
+  const [switchingToStudent, setSwitchingToStudent] = useState(false);
+
+  async function handleSwitchToStudent() {
+    if (switchingToStudent) return;
+    setSwitchingToStudent(true);
+    try {
+      const res = await fetch('/api/auth/role', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: 'student' }),
+      });
+      if (res.ok) {
+        if (onSwitchToStudent) {
+          await onSwitchToStudent();
+        } else {
+          router.push('/dashboard');
+        }
+      }
+    } catch (err) {
+      console.error('Failed to switch role to student:', err);
+    } finally {
+      setSwitchingToStudent(false);
+    }
+  }
+
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <div className={embedded ? 'py-4 px-1 max-w-5xl mx-auto' : 'min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto'}>
       {/* Top Banner & Heading */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-10">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#F59E0B]/15 text-[#B45309] dark:text-[#FBBF24] mb-3">
             <Sparkles className="w-3.5 h-3.5" /> Teacher Identity Verification Center
@@ -274,23 +311,36 @@ export function TeacherVerificationCenter() {
           </p>
         </div>
 
-        {/* Current Status Pill */}
-        <div className="flex items-center gap-3 p-4 rounded-3xl bg-neutral-100 dark:bg-[#1E1B2E] shadow-sm shrink-0">
-          <div
-            className={`w-3.5 h-3.5 rounded-full ${
-              currentStatus === 'verified'
-                ? 'bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.5)]'
-                : 'bg-[#F59E0B] shadow-[0_0_12px_rgba(245,158,11,0.5)]'
-            }`}
-          />
-          <div>
-            <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
-              Account Status
-            </div>
-            <div className="text-sm font-bold text-neutral-900 dark:text-white capitalize">
-              {currentStatus === 'verified' ? 'Verified Educator' : 'Pending Verification'}
+        {/* Action Controls: Status Pill + I am a Student Button */}
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="flex items-center gap-3 p-4 rounded-3xl bg-neutral-100 dark:bg-[#1E1B2E] shadow-sm">
+            <div
+              className={`w-3.5 h-3.5 rounded-full ${
+                currentStatus === 'verified'
+                  ? 'bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.5)]'
+                  : 'bg-[#F59E0B] shadow-[0_0_12px_rgba(245,158,11,0.5)]'
+              }`}
+            />
+            <div>
+              <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
+                Account Status
+              </div>
+              <div className="text-sm font-bold text-neutral-900 dark:text-white capitalize">
+                {currentStatus === 'verified' ? 'Verified Educator' : 'Pending Verification'}
+              </div>
             </div>
           </div>
+
+          <button
+            type="button"
+            onClick={handleSwitchToStudent}
+            disabled={switchingToStudent}
+            className="flex items-center gap-2 px-4 py-3.5 rounded-3xl bg-amber-500/10 hover:bg-amber-500/20 text-[#B45309] dark:text-[#FBBF24] font-semibold text-xs sm:text-sm transition-all active:scale-95 cursor-pointer border-0 outline-none"
+            title="Switch back to student role and disable admin section"
+          >
+            <User className="w-4 h-4" />
+            <span>{switchingToStudent ? 'Updating role...' : 'I am a student'}</span>
+          </button>
         </div>
       </div>
 

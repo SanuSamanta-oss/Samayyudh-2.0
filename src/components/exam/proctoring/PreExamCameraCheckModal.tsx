@@ -116,17 +116,31 @@ export function PreExamCameraCheckModal({
             Camera &amp; Environment Check
           </h2>
           <p className="mt-1 text-xs sm:text-sm text-stone-500 dark:text-stone-400 max-w-sm mx-auto leading-relaxed">
-            {examTitle} requires live video supervision. Center your face in the circular frame below.
+            {examTitle} requires live video supervision. Center your face in the camera frame below.
           </p>
 
-          {/* Circular Camera Preview Container */}
-          <div className="relative my-6 flex items-center justify-center">
-            {/* Outer Subtle Radial Ambient Glow */}
-            <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-brand-500/20 via-sky-400/20 to-indigo-500/20 blur-xl pointer-events-none" />
+          {/* Photo Booth Style Camera Preview Window */}
+          <div className="relative my-6 flex items-center justify-center w-full">
+            {/* Outer Subtle Ambient Glow */}
+            <div className="absolute -inset-2 rounded-[32px] bg-gradient-to-tr from-purple-500/15 via-sky-400/15 to-indigo-500/15 blur-xl pointer-events-none" />
 
-            {/* Circular Camera Mask Frame */}
-            <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full p-[2.5px] bg-gradient-to-tr from-brand-500 via-sky-400 to-indigo-600 shadow-[0_12px_35px_rgba(99,102,241,0.25)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.7)]">
-              <div className="relative w-full h-full rounded-full overflow-hidden bg-stone-950 flex items-center justify-center">
+            {/* Window Card Frame */}
+            <div className="relative w-full max-w-[320px] rounded-[26px] bg-slate-100/90 dark:bg-[#162032] p-3 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.18)] dark:shadow-[0_20px_50px_-8px_rgba(0,0,0,0.7)] border border-slate-200/80 dark:border-white/10 flex flex-col">
+              {/* Window Header Bar (Photo Booth Top Bar with Expand and Red Dot) */}
+              <div className="flex items-center justify-between px-1 pb-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-400/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
+                </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  <span>Live Video</span>
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse shadow-[0_0_6px_rgba(244,63,94,0.8)]" />
+                </div>
+              </div>
+
+              {/* Nested Rounded Rectangular Camera Viewport */}
+              <div className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden bg-stone-950 border border-slate-200/50 dark:border-white/10 shadow-inner flex items-center justify-center">
                 {permissionState === 'granted' ? (
                   <>
                     <video
@@ -137,26 +151,23 @@ export function PreExamCameraCheckModal({
                       className="w-full h-full object-cover -scale-x-100"
                     />
 
-                    {/* Subtle Biometric HUD Vignette */}
-                    <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] pointer-events-none" />
+                    {/* Subtle Inner Shadow Vignette */}
+                    <div className="absolute inset-0 rounded-[18px] shadow-[inset_0_0_15px_rgba(0,0,0,0.4)] pointer-events-none" />
 
-                    {/* Clean Reticle Arcs at Boundary (No dashed lines across face) */}
-                    <svg viewBox="0 0 100 100" className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] pointer-events-none opacity-40">
-                      <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.75" />
-                      <path d="M 50 2 L 50 7" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-                      <path d="M 50 93 L 50 98" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-                      <path d="M 2 50 L 7 50" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-                      <path d="M 93 50 L 98 50" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
+                    {/* Viewfinder Corner Accents */}
+                    <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-white/40 pointer-events-none rounded-tl-sm" />
+                    <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-white/40 pointer-events-none rounded-tr-sm" />
+                    <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-white/40 pointer-events-none rounded-bl-sm" />
+                    <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-white/40 pointer-events-none rounded-br-sm" />
 
-                    <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-emerald-500/90 text-[10px] font-extrabold text-white uppercase tracking-wider backdrop-blur-md border border-white/20 shadow-md flex items-center gap-1.5">
+                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-emerald-500/90 text-[10px] font-extrabold text-white uppercase tracking-wider backdrop-blur-md border border-white/20 shadow-md flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                       <span>Camera Ready</span>
                     </div>
                   </>
                 ) : permissionState === 'requesting' ? (
                   <div className="flex flex-col items-center gap-2 p-4 text-white">
-                    <div className="w-8 h-8 border-2 border-brand-400 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
                     <span className="text-xs font-semibold text-stone-300">Requesting Camera...</span>
                   </div>
                 ) : (

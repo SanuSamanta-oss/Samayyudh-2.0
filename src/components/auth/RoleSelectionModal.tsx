@@ -107,7 +107,11 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
                 <button
                   type="button"
                   disabled={submitting}
-                  className="w-full mt-auto py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-xs sm:text-sm transition-transform active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!submitting) handleChooseRole('teacher');
+                  }}
+                  className="w-full mt-auto py-3 px-5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-black font-semibold text-xs sm:text-sm transition-transform active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer border-0 outline-none"
                 >
                   <span>Select Teacher</span>
                   <ArrowRight className="w-4 h-4" />
@@ -135,7 +139,11 @@ export function RoleSelectionModal({ isOpen, onRoleSelected }: RoleSelectionModa
                 <button
                   type="button"
                   disabled={submitting}
-                  className="w-full mt-auto py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#2E2A42] dark:hover:bg-[#383350] text-white font-semibold text-xs sm:text-sm transition-transform active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!submitting) handleChooseRole('student');
+                  }}
+                  className="w-full mt-auto py-3 px-5 rounded-2xl bg-[#18181B] hover:bg-black dark:bg-[#2E2A42] dark:hover:bg-[#383350] text-white font-semibold text-xs sm:text-sm transition-transform active:scale-95 shadow-sm flex items-center justify-center gap-2 cursor-pointer border-0 outline-none"
                 >
                   <span>Select Student</span>
                   <ArrowRight className="w-4 h-4" />

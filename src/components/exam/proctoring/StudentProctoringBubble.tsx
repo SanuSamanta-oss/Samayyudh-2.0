@@ -60,7 +60,7 @@ export function StudentProctoringBubble({
 
   return (
     <>
-      {/* ── DRAGGABLE FLOATING CIRCULAR HUD BUBBLE ── */}
+      {/* ── DRAGGABLE FLOATING PROCTORING WINDOW (Sketch / Photo Booth Style) ── */}
       <motion.div
         drag
         dragMomentum={false}
@@ -70,7 +70,7 @@ export function StudentProctoringBubble({
       >
         <AnimatePresence mode="wait">
           {mode === 'minimized' ? (
-            /* MINIMIZED CAPSULE: Ultra-sleek floating indicator */
+            /* MINIMIZED CAPSULE: Sleek floating indicator */
             <motion.div
               key="minimized"
               initial={{ scale: 0.85, opacity: 0 }}
@@ -87,20 +87,55 @@ export function StudentProctoringBubble({
               <span className="text-[10px] font-extrabold tracking-widest text-foreground uppercase">Proctored</span>
             </motion.div>
           ) : (
-            /* NORMAL CIRCULAR HUD BUBBLE: Luxury VisionOS / FaceID Aesthetic */
+            /* NORMAL WINDOW: Exact Match to User Sketch & macOS Photo Booth Frame */
             <motion.div
               key="normal"
-              initial={{ scale: 0.85, opacity: 0 }}
+              initial={{ scale: 0.88, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              className="relative flex flex-col items-center group"
+              exit={{ scale: 0.88, opacity: 0 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="relative group select-none cursor-grab active:cursor-grabbing"
             >
               {/* Soft Ambient Radial Backlight Glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-brand-500/25 via-sky-400/20 to-indigo-500/25 blur-xl pointer-events-none group-hover:scale-115 transition-transform duration-500" />
+              <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-tr from-purple-500/20 via-sky-400/15 to-indigo-500/20 blur-xl pointer-events-none group-hover:scale-105 transition-transform duration-500" />
 
-              {/* Ultra-Fine Gradient Outer Border Ring */}
-              <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-[2.5px] bg-gradient-to-tr from-brand-500 via-sky-400 to-indigo-600 shadow-[0_12px_35px_rgba(99,102,241,0.25)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.7)] cursor-grab active:cursor-grabbing">
-                <div className="relative w-full h-full rounded-full overflow-hidden bg-stone-950 flex items-center justify-center">
+              {/* Main Outer Window Frame (Vertical Rounded Rectangle Card) */}
+              <div className="relative w-44 sm:w-48 rounded-[26px] bg-white/95 dark:bg-[#111622]/95 backdrop-blur-xl p-2.5 sm:p-3 shadow-[0_16px_40px_-8px_rgba(0,0,0,0.18)] dark:shadow-[0_20px_50px_-8px_rgba(0,0,0,0.75)] border border-slate-200/90 dark:border-white/10 flex flex-col transition-colors">
+                
+                {/* ── TOP HEADER BAR (Exact Sketch: Expand Icon on Left, Red Live Dot on Right) ── */}
+                <div className="flex items-center justify-between px-1 pt-0.5 pb-2">
+                  {/* Top-Left: Expand / Inspect Preview Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setMode('expanded');
+                    }}
+                    className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 transition-all cursor-pointer outline-none active:scale-90"
+                    title="Expand Video Preview"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </button>
+
+                  {/* Top-Center: Subtle Live Video Label */}
+                  <div className="flex items-center gap-1 opacity-70">
+                    <span className="text-[9px] font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase">
+                      Live Video
+                    </span>
+                  </div>
+
+                  {/* Top-Right: Solid Red Live Recording Indicator Dot */}
+                  <div
+                    className="relative flex items-center justify-center p-1"
+                    title="Live Proctoring Stream Active"
+                  >
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.85)]" />
+                    <span className="absolute w-4 h-4 rounded-full bg-rose-500/35 animate-ping pointer-events-none" />
+                  </div>
+                </div>
+
+                {/* ── NESTED ROUNDED RECTANGULAR VIDEO VIEWPORT ── */}
+                <div className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden bg-stone-950 border border-slate-200/60 dark:border-white/10 shadow-inner flex items-center justify-center">
                   {cameraActive && stream ? (
                     <video
                       ref={videoRef}
@@ -110,34 +145,31 @@ export function StudentProctoringBubble({
                       className="w-full h-full object-cover -scale-x-100 pointer-events-none"
                     />
                   ) : (
-                    <div className="flex flex-col items-center justify-center text-white text-xs gap-1.5">
+                    <div className="flex flex-col items-center justify-center text-white text-xs gap-1.5 p-3 text-center">
                       <CameraOff className="w-5 h-5 text-rose-400" />
                       <span className="text-[10px] font-medium text-stone-300">Camera Paused</span>
                     </div>
                   )}
 
-                  {/* Clean Biometric HUD Overlay (No harsh dashed lines cutting through face) */}
-                  <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] pointer-events-none" />
+                  {/* Clean Subtle Inner Vignette */}
+                  <div className="absolute inset-0 rounded-[18px] shadow-[inset_0_0_15px_rgba(0,0,0,0.4)] pointer-events-none" />
 
-                  {/* Minimalist Viewfinder Reticle Rings at the Outer Boundary */}
-                  <svg viewBox="0 0 100 100" className="absolute inset-1.5 w-[calc(100%-12px)] h-[calc(100%-12px)] pointer-events-none opacity-40">
-                    <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.75" />
-                    <path d="M 50 2 L 50 7" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M 50 93 L 50 98" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M 2 50 L 7 50" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M 93 50 L 98 50" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
+                  {/* Viewfinder Corner Accents */}
+                  <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-white/40 pointer-events-none rounded-tl-sm" />
+                  <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-white/40 pointer-events-none rounded-tr-sm" />
+                  <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-white/40 pointer-events-none rounded-bl-sm" />
+                  <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-white/40 pointer-events-none rounded-br-sm" />
 
-                  {/* Frosted Hover Controls Overlay */}
-                  <div className="absolute inset-0 bg-black/45 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                  {/* Hover Controls Overlay */}
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 pointer-events-auto">
                     <button
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         setMode('expanded');
                       }}
-                      className="p-2 rounded-full bg-white/25 hover:bg-white/40 text-white transition-all transform active:scale-90 cursor-pointer shadow-sm"
-                      title="Expand Video"
+                      className="p-1.5 rounded-full bg-white/20 hover:bg-white/35 text-white transition-all transform active:scale-90 cursor-pointer shadow-sm"
+                      title="Inspect Video"
                     >
                       <Maximize2 className="w-3.5 h-3.5" />
                     </button>
@@ -147,25 +179,33 @@ export function StudentProctoringBubble({
                         e.stopPropagation();
                         setMode('minimized');
                       }}
-                      className="p-2 rounded-full bg-white/25 hover:bg-white/40 text-white transition-all transform active:scale-90 cursor-pointer shadow-sm"
-                      title="Minimize"
+                      className="p-1.5 rounded-full bg-white/20 hover:bg-white/35 text-white transition-all transform active:scale-90 cursor-pointer shadow-sm"
+                      title="Minimize to Pill"
                     >
                       <Minimize2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
-              </div>
 
-              {/* Modern Frosted LIVE Badge Nestled at Top Edge */}
-              <div className="absolute -top-2.5 flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-rose-500/90 text-white text-[9px] font-extrabold uppercase tracking-widest shadow-[0_4px_14px_rgba(244,63,94,0.45)] backdrop-blur-md border border-white/20 pointer-events-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                <span>LIVE</span>
-              </div>
+                {/* ── BOTTOM AREA (CHIN) (Photo Booth Base with Connection & Quick Minimize) ── */}
+                <div className="flex items-center justify-between px-1.5 pt-2 text-[10px]">
+                  <div className="flex items-center gap-1.5 font-bold text-slate-600 dark:text-slate-300">
+                    <span className={`w-1.5 h-1.5 rounded-full ${connectionColors[connectionQuality]}`} />
+                    <span className="capitalize">{connectionQuality === 'good' ? 'Secure' : connectionQuality}</span>
+                  </div>
 
-              {/* Modern Frosted SECURE Badge Nestled at Bottom Edge */}
-              <div className="absolute -bottom-2.5 flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/95 dark:bg-[#121622]/95 border border-stone-200/90 dark:border-white/10 text-[9px] font-bold text-stone-700 dark:text-stone-200 shadow-[0_4px_12px_rgba(0,0,0,0.12)] backdrop-blur-md pointer-events-none">
-                <span className={`w-1.5 h-1.5 rounded-full ${connectionColors[connectionQuality]}`} />
-                <span>SECURE</span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setMode('minimized');
+                    }}
+                    className="p-1 rounded-md text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer outline-none"
+                    title="Minimize"
+                  >
+                    <Minimize2 className="w-3 h-3" />
+                  </button>
+                </div>
               </div>
             </motion.div>
           )}

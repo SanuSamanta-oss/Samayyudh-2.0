@@ -199,15 +199,19 @@ export function ExamCalculator({ isOpen, onClose }: ExamCalculatorProps) {
         className="fixed z-50 select-none top-20 right-6 md:top-24 md:right-10 pointer-events-auto touch-none"
       >
         {isMinimized ? (
-          /* MINIMIZED FLOATING PILL */
+          /* MINIMIZED FLOATING BUBBLE PILL */
           <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
+            whileHover={{ scale: 1.06, y: -1 }}
+            whileTap={{ scale: 0.94, y: 1 }}
+            transition={{ type: 'spring', stiffness: 450, damping: 25 }}
             onClick={() => setIsMinimized(false)}
-            className="flex items-center gap-2 px-3 py-2 rounded-full bg-card/95 dark:bg-[#181622]/95 backdrop-blur-md shadow-xl border border-border/80 cursor-pointer hover:scale-105 transition-all text-foreground"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 dark:bg-[#151D2E]/95 backdrop-blur-xl shadow-[0_8px_25px_-5px_rgba(0,0,0,0.15)] dark:shadow-[0_12px_30px_-5px_rgba(0,0,0,0.7)] border border-slate-200/90 dark:border-white/10 cursor-pointer transition-all text-slate-800 dark:text-slate-100"
           >
-            <Calculator className="w-4 h-4 text-brand-600 dark:text-brand-400" />
-            <span className="text-xs font-bold">{displayValue}</span>
+            <span className="w-5 h-5 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+              <Calculator className="w-3 h-3" />
+            </span>
+            <span className="text-xs font-bold tracking-tight">{displayValue}</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           </motion.div>
         ) : (
           /* FULL FLOATING CALCULATOR (Inspired by reference image) */

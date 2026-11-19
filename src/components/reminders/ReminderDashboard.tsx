@@ -633,7 +633,7 @@ export function ReminderDashboard({
           upcomingCount={upcomingItems.length}
           onToggleNotifications={() => handleUpdateSetting('enabled', !settings.enabled)}
           onJumpToSound={handleJumpToSound}
-          userName={user?.user_metadata?.full_name || user?.email || undefined}
+          userName={user?.user_metadata?.display_name || user?.user_metadata?.full_name || user?.email || undefined}
         />
       )}
 

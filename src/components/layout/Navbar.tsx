@@ -62,19 +62,37 @@ export function Navbar() {
   const [isAndroid, setIsAndroid] = useState(false);
   const { user, signOut, isAuthenticated } = useAuth();
   const [currentAvatar, setCurrentAvatar] = useState<ReturnType<typeof getSelectedAvatar>>(null);
+  const [localDisplayName, setLocalDisplayName] = useState<string>('');
 
   useEffect(() => {
     setMounted(true);
     setIsAndroid(isAndroidApp());
     setCurrentAvatar(getSelectedAvatar());
 
+    const readLocalName = () => {
+      if (typeof window !== 'undefined') {
+        const savedName = localStorage.getItem('samayyudh:display_name');
+        if (savedName) setLocalDisplayName(savedName);
+      }
+    };
+
+    readLocalName();
+
     const handleAvatarChange = () => {
       setCurrentAvatar(getSelectedAvatar());
     };
 
+    const handleProfileChange = () => {
+      readLocalName();
+    };
+
     window.addEventListener('samayyudh:avatar-change', handleAvatarChange);
+    window.addEventListener('samayyudh:profile-change', handleProfileChange);
+    window.addEventListener('storage', handleProfileChange);
     return () => {
       window.removeEventListener('samayyudh:avatar-change', handleAvatarChange);
+      window.removeEventListener('samayyudh:profile-change', handleProfileChange);
+      window.removeEventListener('storage', handleProfileChange);
     };
   }, []);
 
@@ -105,8 +123,14 @@ export function Navbar() {
   // Don't show nav during active exam
   if (pathname?.startsWith('/exam/') && pathname !== '/exams') return null;
 
-  // Get user display info
-  const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email?.split('@')[0] || 'S';
+  // Get user display info: prioritize user-customized display name over raw Google account name
+  const displayName =
+    localDisplayName ||
+    user?.user_metadata?.display_name ||
+    user?.user_metadata?.full_name ||
+    user?.user_metadata?.name ||
+    user?.email?.split('@')[0] ||
+    'Warrior';
   const avatarUrl = mounted ? (currentAvatar?.src || user?.user_metadata?.avatar_url) : null;
   const initial = displayName.charAt(0).toUpperCase();
 

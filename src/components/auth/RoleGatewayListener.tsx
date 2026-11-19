@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { RoleSelectionModal } from '@/components/auth/RoleSelectionModal';
 import { SuperAdminWelcomeModal } from '@/components/auth/SuperAdminWelcomeModal';
@@ -9,35 +10,49 @@ import { StudentWelcomeModal } from '@/components/auth/StudentWelcomeModal';
 
 export function RoleGatewayListener() {
   const { user, isAuthenticated, loading } = useAuth();
+  const pathname = usePathname();
+
   const [showRoleModal, setShowRoleModal] = useState(false);
   const [showSuperAdminModal, setShowSuperAdminModal] = useState(false);
   const [showTeacherModal, setShowTeacherModal] = useState(false);
   const [showStudentModal, setShowStudentModal] = useState(false);
 
   useEffect(() => {
+    // 1. If not authenticated or still loading, reset modal visibility
     if (loading || !isAuthenticated || !user) {
+      setShowRoleModal(false);
+      setShowSuperAdminModal(false);
+      setShowTeacherModal(false);
+      setShowStudentModal(false);
       return;
     }
 
     if (typeof window === 'undefined') return;
 
-    // Per-session tracking: ensure the welcome/passkey pop-up shows once per login/session,
+    // 2. Do NOT trigger pop-ups while user is in the middle of login on /auth or /auth/callback
+    if (pathname?.startsWith('/auth')) {
+      return;
+    }
+
+    // Per-session tracking: ensure the welcome pop-up shows once per login/session,
     // and never spams on every route click during normal browsing.
     const sessionSeenKey = `sy_role_modal_seen_${user.id}`;
     const hasSeenThisSession = sessionStorage.getItem(sessionSeenKey) === 'true';
 
-    // Check for explicit login triggers
+    // Check for explicit login triggers or manual role selection requests
     const urlParams = new URLSearchParams(window.location.search);
     const hasWelcomeParam = urlParams.get('welcome_hint') === 'true';
+    const hasSelectRoleParam = urlParams.get('select_role') === 'true';
     const justLoggedIn = sessionStorage.getItem('samayyudh_just_logged_in') === 'true';
     const postLoginPending = sessionStorage.getItem('sy_post_login_modal_pending') === 'true';
 
-    const isExplicitLogin = hasWelcomeParam || justLoggedIn || postLoginPending;
+    const isExplicitLogin = hasWelcomeParam || justLoggedIn || postLoginPending || hasSelectRoleParam;
 
-    // Clean up url param if present
-    if (hasWelcomeParam) {
+    // Clean up url params if present
+    if (hasWelcomeParam || hasSelectRoleParam) {
       try {
         urlParams.delete('welcome_hint');
+        urlParams.delete('select_role');
         const newSearch = urlParams.toString();
         const newUrl =
           window.location.pathname + (newSearch ? `?${newSearch}` : '') + window.location.hash;
@@ -59,25 +74,21 @@ export function RoleGatewayListener() {
     const superUnlockedKey = 'sy_super_admin_passkey_unlocked';
     const isPasskeyUnlocked = sessionStorage.getItem(superUnlockedKey) === 'true';
 
-    // Determine if we should show the modal:
-    // 1. If explicit login -> ALWAYS SHOW
-    // 2. If Super Admin and passkey is not unlocked yet for this session -> SHOW
-    // 3. If user has not seen their role welcome modal in this session yet -> SHOW
-    // 4. Otherwise (user already saw it and is navigating between pages) -> DO NOT SHOW
-    const shouldShow = isExplicitLogin || (isSuperAdminFast && !isPasskeyUnlocked) || !hasSeenThisSession;
-
-    if (!shouldShow) {
+    // 3. Super Admin Flow:
+    // Super admins enter the Command Passkey and NEVER see teacher/student selection or parent forms
+    if (isSuperAdminFast) {
+      if (!isPasskeyUnlocked && (!hasSeenThisSession || isExplicitLogin)) {
+        sessionStorage.setItem(sessionSeenKey, 'true');
+        try {
+          sessionStorage.removeItem('sy_post_login_modal_pending');
+          sessionStorage.removeItem('samayyudh_just_logged_in');
+        } catch {}
+        setShowSuperAdminModal(true);
+      }
       return;
     }
 
     let isMounted = true;
-
-    // Mark as shown in this session so subsequent route navigations inside the app won't pop it up again
-    sessionStorage.setItem(sessionSeenKey, 'true');
-    try {
-      sessionStorage.removeItem('sy_post_login_modal_pending');
-      sessionStorage.removeItem('samayyudh_just_logged_in');
-    } catch {}
 
     // Record login activity in background
     fetch('/api/admin/login-activity', {
@@ -86,14 +97,8 @@ export function RoleGatewayListener() {
       body: JSON.stringify({ user_agent: navigator.userAgent }),
     }).catch(() => {});
 
-    // FAST-PATH: Super Admin by configured email
-    // Super admins enter the Command Passkey and NEVER see parent/guardian forms
-    if (isSuperAdminFast) {
-      setShowSuperAdminModal(true);
-      return;
-    }
-
-    // Server role check for teachers, students, or database-configured super admins
+    // 4. Regular User Flow (Teacher / Student):
+    // For non-superadmin users, we MUST check role state from /api/auth/role.
     async function checkRoleState() {
       try {
         const res = await fetch('/api/auth/role');
@@ -102,17 +107,36 @@ export function RoleGatewayListener() {
         const data = await res.json();
         if (!isMounted) return;
 
+        // Backend reports Super Admin
         if (data.is_super_admin) {
-          setShowSuperAdminModal(true);
-        } else if (!data.role_selected) {
-          // Brand new user without selected role
+          if (!isPasskeyUnlocked && (!hasSeenThisSession || isExplicitLogin)) {
+            sessionStorage.setItem(sessionSeenKey, 'true');
+            setShowSuperAdminModal(true);
+          }
+          return;
+        }
+
+        // If the user has NOT selected their role yet (or requested role selection):
+        // ALWAYS prompt them with the Teacher vs Student selection pop-up!
+        if (!data.role_selected || hasSelectRoleParam) {
           setShowRoleModal(true);
-        } else if (data.role === 'teacher') {
-          // Returning teacher
-          setShowTeacherModal(true);
-        } else {
-          // Returning student
-          setShowStudentModal(true);
+          return;
+        }
+
+        // If the user has ALREADY selected their role:
+        // Show their respective welcome modal on fresh login or once per session
+        if (isExplicitLogin || !hasSeenThisSession) {
+          sessionStorage.setItem(sessionSeenKey, 'true');
+          try {
+            sessionStorage.removeItem('sy_post_login_modal_pending');
+            sessionStorage.removeItem('samayyudh_just_logged_in');
+          } catch {}
+
+          if (data.role === 'teacher') {
+            setShowTeacherModal(true);
+          } else {
+            setShowStudentModal(true);
+          }
         }
       } catch (err) {
         console.warn('Role gateway check notice:', err);
@@ -124,7 +148,7 @@ export function RoleGatewayListener() {
     return () => {
       isMounted = false;
     };
-  }, [isAuthenticated, loading, user]);
+  }, [isAuthenticated, loading, user, pathname]);
 
   return (
     <>
@@ -132,6 +156,14 @@ export function RoleGatewayListener() {
         isOpen={showRoleModal}
         onRoleSelected={(role) => {
           setShowRoleModal(false);
+          if (user) {
+            sessionStorage.setItem(`sy_role_modal_seen_${user.id}`, 'true');
+          }
+          try {
+            sessionStorage.removeItem('sy_post_login_modal_pending');
+            sessionStorage.removeItem('samayyudh_just_logged_in');
+          } catch {}
+
           if (role === 'teacher') {
             setShowTeacherModal(true);
           } else {

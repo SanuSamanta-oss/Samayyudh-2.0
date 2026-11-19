@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerRlsClient } from '@/lib/supabase/server';
-import { getCommandDataClient, isMissingSchemaError } from '@/lib/supabase/admin';
+import { getCommandDataClient, createServiceRoleClient, isMissingSchemaError } from '@/lib/supabase/admin';
 import { getSuperAdminEmails } from '@/lib/security/admin-auth';
 
 export async function GET() {
@@ -39,8 +39,24 @@ export async function GET() {
     }
 
     let role = roleRow?.role || (isSuperAdmin ? 'super_admin' : 'student');
-    const roleSelected = Boolean(roleRow?.role_selected || isSuperAdmin);
     let status = roleRow?.status || (isSuperAdmin ? 'active' : 'active');
+    const userMeta = user.user_metadata || {};
+
+    // Determine if the user has explicitly selected their role:
+    // 1. Super Admins bypass role selection
+    // 2. User has role_selected or role_explicitly_selected in user_metadata
+    // 3. User is already recorded as a teacher
+    // 4. In all other cases (e.g. brand new user, or default student without explicit selection), roleSelected is false
+    let roleSelected = false;
+    if (isSuperAdmin) {
+      roleSelected = true;
+    } else if (userMeta.role_selected === true || userMeta.role_explicitly_selected === true) {
+      roleSelected = true;
+    } else if (role === 'teacher' || userMeta.role === 'teacher') {
+      roleSelected = true;
+    } else {
+      roleSelected = Boolean(roleRow?.role_selected && userMeta.role_explicitly_selected);
+    }
 
     // If email is in Super Admin allowlist, elevate or maintain super_admin
     if (isSuperAdmin) {
@@ -73,7 +89,6 @@ export async function GET() {
     }
 
     let teacherProfile = null;
-    const userMeta = user.user_metadata || {};
 
     if (role === 'teacher' || (userMeta.role === 'teacher' && userMeta.teacher_verified === true)) {
       if (userMeta.role === 'teacher' && userMeta.teacher_verified === true) {
@@ -107,7 +122,7 @@ export async function GET() {
       user: {
         id: user.id,
         email: user.email,
-        name: user.user_metadata?.full_name || user.user_metadata?.name || null,
+        name: user.user_metadata?.display_name || user.user_metadata?.full_name || user.user_metadata?.name || null,
       },
       is_super_admin: isSuperAdmin,
       role,
@@ -191,6 +206,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Update auth user metadata so client-side and server-side stay immediately in sync
+    try {
+      const serviceClient = createServiceRoleClient();
+      if (serviceClient) {
+        await serviceClient.auth.admin.updateUserById(user.id, {
+          user_metadata: {
+            ...user.user_metadata,
+            role: finalRole,
+            role_selected: true,
+            role_explicitly_selected: true,
+          },
+        });
+      } else {
+        await rlsDb.auth.updateUser({
+          data: {
+            role: finalRole,
+            role_selected: true,
+            role_explicitly_selected: true,
+          },
+        });
+      }
+    } catch (metaErr) {
+      console.warn('[auth/role] Meta update notice:', metaErr);
+    }
+
     // 3. Log audit event
     try {
       await db.from('admin_audit_logs').insert({
@@ -203,12 +243,18 @@ export async function POST(req: NextRequest) {
       });
     } catch {}
 
-    return NextResponse.json({
+    const res = NextResponse.json({
       success: true,
       role: finalRole,
       status: finalStatus,
       is_super_admin: isSuperAdmin,
     });
+
+    if (finalRole === 'student') {
+      res.cookies.delete('sy_cmd_session');
+    }
+
+    return res;
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Internal server error';
     return NextResponse.json({ error: errorMsg }, { status: 500 });

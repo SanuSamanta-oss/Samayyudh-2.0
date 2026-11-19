@@ -106,6 +106,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.error('Error during signOut:', e);
     } finally {
       // Clear local storage auth cache and redirect to landing
+      try {
+        sessionStorage.clear();
+      } catch {}
       window.location.href = window.location.origin + '/';
     }
   }, []);

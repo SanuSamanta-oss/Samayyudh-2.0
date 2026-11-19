@@ -18,6 +18,7 @@ import { CommandSettingsSection } from './CommandSettingsSection';
 import { UserRoleManagementSection } from './UserRoleManagementSection';
 import { LoginActivitySection } from './LoginActivitySection';
 import { LiveProctoringSection } from './LiveProctoringSection';
+import { TeacherVerificationCenter } from '@/components/teacher/TeacherVerificationCenter';
 import type {
   AdminOverviewPayload,
   AdminSectionId,
@@ -35,6 +36,8 @@ interface AuthStatusResponse {
   schemaReady: boolean;
   hasServiceRole: boolean;
   expiresAt: string | null;
+  isTeacherVerified?: boolean;
+  teacherVerificationStatus?: 'verified' | 'pending' | 'unverified';
   identity: {
     userId: string;
     email: string | null;
@@ -70,6 +73,9 @@ export function CommandCenterShell() {
       if (res.ok) {
         const data = (await res.json()) as AuthStatusResponse;
         setAuthStatus(data);
+        if (data.role === 'teacher' && !data.isTeacherVerified) {
+          setActiveSection('teacher_verify');
+        }
       }
     } finally {
       setBootLoading(false);
@@ -167,7 +173,10 @@ export function CommandCenterShell() {
         userEmail={authStatus.identity?.email ?? null}
         fullName={authStatus.identity?.fullName ?? null}
         publicId={authStatus.identity?.publicId ?? null}
+        isTeacherVerified={authStatus.isTeacherVerified}
+        teacherVerificationStatus={authStatus.teacherVerificationStatus}
         onUnlocked={loadAuthStatus}
+        onRoleChanged={loadAuthStatus}
       />
     );
   }
@@ -186,6 +195,7 @@ export function CommandCenterShell() {
         pendingRequestsCount={pendingConnCount}
         role={authStatus.role}
         fullName={authStatus.identity?.fullName ?? null}
+        isTeacherVerified={authStatus.isTeacherVerified}
       />
 
       {/* Reserved flow spacer matching the fixed vertical navbar width so content never overlaps */}
@@ -242,6 +252,18 @@ export function CommandCenterShell() {
                   currentUserId={authStatus.identity?.userId}
                   role={authStatus.role}
                 />
+              )}
+
+              {activeSection === 'teacher_verify' && (
+                <div className="space-y-4">
+                  <TeacherVerificationCenter
+                    embedded
+                    onVerified={loadAuthStatus}
+                    onSwitchToStudent={async () => {
+                      await loadAuthStatus();
+                    }}
+                  />
+                </div>
               )}
 
               {activeSection === 'user_management' && (

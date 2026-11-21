@@ -41,6 +41,8 @@ import {
   Hand,
   FileSpreadsheet,
   Layers,
+  Share2,
+  QrCode,
 } from 'lucide-react';
 import type {
   CustomExam,
@@ -97,169 +99,6 @@ const CANDIDATE_STREAMS: Record<string, { videoUrl: string; poster: string; gaze
     lighting: 'Optimal (97%)',
   },
 };
-
-const DEFAULT_SAMPLE_CANDIDATES: CustomExamParticipant[] = [
-  {
-    id: 'cand_1',
-    exam_id: 'demo',
-    student_id: 'stud_1',
-    student_name: 'Albert Flores',
-    student_lce_code: 'LCE-1042',
-    student_email: 'albert.flores@institution.ac.in',
-    student_class: 'Batch A',
-    attempt_id: 'att_1',
-    joined_at: new Date(Date.now() - 1800000).toISOString(),
-    connection_status: 'connected',
-    camera_status: 'active',
-    exam_status: 'in_progress',
-    warning_count: 1,
-    is_suspended: false,
-    suspended_at: null,
-    suspended_reason: null,
-    time_adjustment_seconds: 0,
-    remaining_seconds_cached: 2400,
-    hand_raised: false,
-    hand_raised_at: null,
-    current_question_index: 18,
-    questions_answered: 18,
-    questions_attempted: 18,
-    questions_unanswered: 7,
-    questions_correct: 15,
-    questions_incorrect: 3,
-    accuracy_percentage: 83.3,
-    final_score: 57,
-    last_heartbeat: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: 'cand_2',
-    exam_id: 'demo',
-    student_id: 'stud_2',
-    student_name: 'Floyd Miles',
-    student_lce_code: 'LCE-1088',
-    student_email: 'floyd.miles@institution.ac.in',
-    student_class: 'Batch A',
-    attempt_id: 'att_2',
-    joined_at: new Date(Date.now() - 1700000).toISOString(),
-    connection_status: 'connected',
-    camera_status: 'active',
-    exam_status: 'in_progress',
-    warning_count: 0,
-    is_suspended: false,
-    suspended_at: null,
-    suspended_reason: null,
-    time_adjustment_seconds: 0,
-    remaining_seconds_cached: 2500,
-    hand_raised: true,
-    hand_raised_at: new Date(Date.now() - 60000).toISOString(),
-    current_question_index: 22,
-    questions_answered: 22,
-    questions_attempted: 22,
-    questions_unanswered: 3,
-    questions_correct: 19,
-    questions_incorrect: 3,
-    accuracy_percentage: 86.4,
-    final_score: 73,
-    last_heartbeat: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: 'cand_3',
-    exam_id: 'demo',
-    student_id: 'stud_3',
-    student_name: 'Ralph Edwards',
-    student_lce_code: 'LCE-1104',
-    student_email: 'ralph.edwards@institution.ac.in',
-    student_class: 'Batch B',
-    attempt_id: 'att_3',
-    joined_at: new Date(Date.now() - 1600000).toISOString(),
-    connection_status: 'connected',
-    camera_status: 'active',
-    exam_status: 'in_progress',
-    warning_count: 0,
-    is_suspended: false,
-    suspended_at: null,
-    suspended_reason: null,
-    time_adjustment_seconds: 0,
-    remaining_seconds_cached: 2600,
-    hand_raised: false,
-    hand_raised_at: null,
-    current_question_index: 15,
-    questions_answered: 15,
-    questions_attempted: 15,
-    questions_unanswered: 10,
-    questions_correct: 12,
-    questions_incorrect: 3,
-    accuracy_percentage: 80.0,
-    final_score: 45,
-    last_heartbeat: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: 'cand_4',
-    exam_id: 'demo',
-    student_id: 'stud_4',
-    student_name: 'Leslie Alexander',
-    student_lce_code: 'LCE-1132',
-    student_email: 'leslie.alexander@institution.ac.in',
-    student_class: 'Batch B',
-    attempt_id: 'att_4',
-    joined_at: new Date(Date.now() - 1500000).toISOString(),
-    connection_status: 'connected',
-    camera_status: 'active',
-    exam_status: 'suspended',
-    warning_count: 2,
-    is_suspended: true,
-    suspended_at: new Date(Date.now() - 300000).toISOString(),
-    suspended_reason: 'Continuous gaze departure from testing viewport.',
-    time_adjustment_seconds: -300,
-    remaining_seconds_cached: 2700,
-    hand_raised: false,
-    hand_raised_at: null,
-    current_question_index: 12,
-    questions_answered: 12,
-    questions_attempted: 12,
-    questions_unanswered: 13,
-    questions_correct: 8,
-    questions_incorrect: 4,
-    accuracy_percentage: 66.7,
-    final_score: 28,
-    last_heartbeat: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: 'cand_5',
-    exam_id: 'demo',
-    student_id: 'stud_5',
-    student_name: 'Annette Black',
-    student_lce_code: 'LCE-1149',
-    student_email: 'annette.black@institution.ac.in',
-    student_class: 'Batch A',
-    attempt_id: 'att_5',
-    joined_at: new Date(Date.now() - 1400000).toISOString(),
-    connection_status: 'connected',
-    camera_status: 'active',
-    exam_status: 'in_progress',
-    warning_count: 0,
-    is_suspended: false,
-    suspended_at: null,
-    suspended_reason: null,
-    time_adjustment_seconds: 0,
-    remaining_seconds_cached: 2800,
-    hand_raised: false,
-    hand_raised_at: null,
-    current_question_index: 20,
-    questions_answered: 20,
-    questions_attempted: 20,
-    questions_unanswered: 5,
-    questions_correct: 18,
-    questions_incorrect: 2,
-    accuracy_percentage: 90.0,
-    final_score: 70,
-    last_heartbeat: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-];
 
 export function LiveTeacherSupervisionRoom({
   examId,
@@ -328,28 +167,28 @@ export function LiveTeacherSupervisionRoom({
     return `${hrs > 0 ? `${hrs}:` : ''}${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-  // Fetch room state
+  const [copiedLink, setCopiedLink] = useState(false);
+
+  // Fetch room state (Real connected students only)
   const fetchRoomState = useCallback(async () => {
     try {
       const res = await fetch(`/api/custom-exams/supervision/${examId}`);
       if (res.ok) {
         const data = await res.json();
         setExam(data.exam);
-        const liveParticipants = data.participants || [];
+        const liveParticipants: CustomExamParticipant[] = data.participants || [];
+        setParticipants(liveParticipants);
         if (liveParticipants.length > 0) {
-          setParticipants(liveParticipants);
-          if (!selectedStudentId) {
+          if (!selectedStudentId || !liveParticipants.some((p) => p.student_id === selectedStudentId)) {
             setSelectedStudentId(liveParticipants[0].student_id);
           }
         } else {
-          setParticipants((prev) => (prev.length > 0 ? prev : DEFAULT_SAMPLE_CANDIDATES));
+          setSelectedStudentId('');
         }
         setEvents(data.events || []);
-      } else {
-        setParticipants(DEFAULT_SAMPLE_CANDIDATES);
       }
     } catch {
-      setParticipants(DEFAULT_SAMPLE_CANDIDATES);
+      // Retain existing state on transient poll glitch
     } finally {
       setLoading(false);
     }
@@ -391,9 +230,8 @@ export function LiveTeacherSupervisionRoom({
   }, [useLocalCam, localCamStream, selectedStudentId]);
 
   const activeCandidates = useMemo(() => {
-    const raw = participants.length > 0 ? participants : DEFAULT_SAMPLE_CANDIDATES;
     const seen = new Set<string>();
-    return raw.filter((p) => {
+    return participants.filter((p) => {
       const id = p.student_id;
       if (!id || seen.has(id)) return false;
       seen.add(id);
@@ -416,15 +254,185 @@ export function LiveTeacherSupervisionRoom({
     }
   };
 
+  const displayCode = exam?.exam_code || initialCode || 'CE4821';
+
+  const joinUrl = typeof window !== 'undefined'
+    ? `${window.location.origin}/exam/waiting-room?code=${displayCode}`
+    : `https://samayyudh.vercel.app/exam/waiting-room?code=${displayCode}`;
+
   const handleCopyCode = () => {
-    const code = exam?.exam_code || initialCode || 'CE4821';
-    navigator.clipboard.writeText(code);
+    navigator.clipboard.writeText(displayCode);
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2500);
   };
 
+  const handleCopyJoinLink = () => {
+    if (typeof navigator !== 'undefined') {
+      navigator.clipboard.writeText(joinUrl);
+      setCopiedLink(true);
+      setActionNotification('Join link copied! Share with candidates.');
+      setTimeout(() => {
+        setCopiedLink(false);
+        setActionNotification(null);
+      }, 3000);
+    }
+  };
+
+  const handleShareInvite = () => {
+    const inviteText = `Join the live proctored examination "${exam?.title || 'Examination'}" on SAMAYYUDH.\n\nAccess Code: ${displayCode}\nDirect Link: ${joinUrl}`;
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      navigator
+        .share({
+          title: exam?.title || 'Examination Invitation',
+          text: inviteText,
+          url: joinUrl,
+        })
+        .catch(() => {
+          navigator.clipboard?.writeText(inviteText);
+          setActionNotification('Invitation copied to clipboard! Share with candidates.');
+          setTimeout(() => setActionNotification(null), 3500);
+        });
+    } else if (typeof navigator !== 'undefined') {
+      navigator.clipboard?.writeText(inviteText);
+      setActionNotification('Invitation copied to clipboard! Share with candidates.');
+      setTimeout(() => setActionNotification(null), 3500);
+    }
+  };
+
+  const renderEmptyLobby = () => {
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(joinUrl)}`;
+
+    return (
+      <div className="flex-1 w-full rounded-[32px] overflow-hidden bg-white/80 dark:bg-[#090D1A]/90 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.6)] flex flex-col items-center justify-center p-6 sm:p-10 text-center relative border border-slate-200/60 dark:border-slate-800/60">
+        {/* Subtle Ambient Background Glows */}
+        <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-indigo-500/10 dark:bg-indigo-600/15 blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-xl mx-auto flex flex-col items-center">
+          {/* Radar Live Indicator */}
+          <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 text-xs font-bold mb-6 border border-purple-200/50 dark:border-purple-800/40 shadow-xs">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-600 dark:bg-purple-400"></span>
+            </span>
+            <span className="tracking-wide">Lobby Active • Real-Time Listener Ready</span>
+          </div>
+
+          {/* Heading requested by user */}
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
+            None is here now
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed mb-6">
+            Invite candidates to start the examination. Real-time webcam streams, proctoring telemetry, and candidate feeds will appear automatically as soon as students check in.
+          </p>
+
+          {/* QR Code and Quick Join Box */}
+          <div className="flex flex-col sm:flex-row items-center gap-6 p-5 sm:p-6 rounded-3xl bg-slate-50 dark:bg-[#111728] border border-slate-200/70 dark:border-slate-800/70 shadow-sm w-full max-w-md mb-6">
+            <div className="relative p-2.5 bg-white rounded-2xl shadow-md shrink-0 border border-slate-100">
+              <img
+                src={qrCodeUrl}
+                alt={`QR code to join ${displayCode}`}
+                className="w-32 h-32 sm:w-36 sm:h-36 object-contain rounded-xl"
+                loading="eager"
+              />
+              <div className="absolute -bottom-2 -right-2 bg-purple-600 text-white p-1 rounded-full shadow-md">
+                <QrCode className="w-3.5 h-3.5" />
+              </div>
+            </div>
+
+            <div className="flex-1 text-left flex flex-col justify-between h-full space-y-3 w-full">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  Exam Access Code
+                </span>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-xl sm:text-2xl font-black font-mono text-purple-600 dark:text-purple-400 tracking-wider">
+                    {displayCode}
+                  </span>
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleCopyCode}
+                    className="p-1.5 rounded-lg bg-slate-200/70 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer border-0 outline-none"
+                    title="Copy exam code"
+                  >
+                    {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                  </motion.button>
+                </div>
+              </div>
+
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  Student Waiting Room
+                </span>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate font-mono mt-0.5">
+                  /exam/waiting-room?code={displayCode}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 pt-1">
+                <motion.button
+                  type="button"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleCopyJoinLink}
+                  className="flex-1 py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
+                >
+                  {copiedLink ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedLink ? 'Copied' : 'Copy Link'}</span>
+                </motion.button>
+
+                <motion.button
+                  type="button"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleShareInvite}
+                  className="py-2 px-3 rounded-xl bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5"
+                  title="Share invitation"
+                >
+                  <Share2 className="w-3.5 h-3.5" />
+                </motion.button>
+              </div>
+            </div>
+          </div>
+
+          {/* Action button: Invite to Start Examination */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={handleShareInvite}
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-extrabold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_8px_25px_rgba(147,51,234,0.35)]"
+            >
+              <Share2 className="w-4 h-4" />
+              <span>Invite to Start the Examination</span>
+            </motion.button>
+
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={fetchRoomState}
+              className="px-4 py-3 rounded-full bg-slate-200/70 hover:bg-slate-300/80 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span>Refresh Room</span>
+            </motion.button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Start exam handler
   const handleStartExam = async () => {
+    if (activeCandidates.length === 0) {
+      setActionNotification('None is here now. Please share the QR or code to invite candidates before starting.');
+      setTimeout(() => setActionNotification(null), 4000);
+      return;
+    }
     try {
       const res = await fetch('/api/custom-exams/start', {
         method: 'POST',
@@ -682,8 +690,6 @@ export function LiveTeacherSupervisionRoom({
     return true;
   });
 
-  const displayCode = exam?.exam_code || initialCode || 'CE4821';
-
   // Summary Metrics
   const totalJoinedCount = activeCandidates.length;
   const activeCount = activeCandidates.filter((p) => p.exam_status === 'in_progress' && !p.is_suspended).length;
@@ -896,413 +902,423 @@ export function LiveTeacherSupervisionRoom({
 
           {/* VIEW MODE A: SPOTLIGHT MODE */}
           {viewMode === 'spotlight' ? (
-            <>
-              {/* Spotlight Center Video Stage */}
-              <div
-                ref={centerContainerRef}
-                className="flex-1 relative rounded-[32px] overflow-hidden bg-slate-950 dark:bg-[#030611] shadow-[0_20px_50px_rgba(0,0,0,0.18)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.7)] flex items-center justify-center min-h-[300px]"
-              >
-                {selectedStudent ? (
-                  <>
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={selectedStudent.student_id + (useLocalCam ? '_local' : '_stream')}
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.01 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute inset-0 w-full h-full"
-                      >
-                        {useLocalCam ? (
-                          <video
-                            ref={centerVideoRef}
-                            autoPlay
-                            playsInline
-                            muted
-                            className="w-full h-full object-cover -scale-x-100"
-                          />
-                        ) : (
-                          <video
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            poster={CANDIDATE_STREAMS[selectedStudent.student_id]?.poster}
-                            className={`w-full h-full object-cover filter brightness-95 contrast-105 transition-all duration-300 ${
-                              selectedStudent.is_suspended ? 'blur-md brightness-50' : ''
-                            }`}
-                          >
-                            <source
-                              src={CANDIDATE_STREAMS[selectedStudent.student_id]?.videoUrl}
-                              type="video/mp4"
+            activeCandidates.length === 0 ? (
+              renderEmptyLobby()
+            ) : (
+              <>
+                {/* Spotlight Center Video Stage */}
+                <div
+                  ref={centerContainerRef}
+                  className="flex-1 relative rounded-[32px] overflow-hidden bg-slate-950 dark:bg-[#030611] shadow-[0_20px_50px_rgba(0,0,0,0.18)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.7)] flex items-center justify-center min-h-[300px]"
+                >
+                  {selectedStudent ? (
+                    <>
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={selectedStudent.student_id + (useLocalCam ? '_local' : '_stream')}
+                          initial={{ opacity: 0, scale: 0.98 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 1.01 }}
+                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          className="absolute inset-0 w-full h-full"
+                        >
+                          {useLocalCam ? (
+                            <video
+                              ref={centerVideoRef}
+                              autoPlay
+                              playsInline
+                              muted
+                              className="w-full h-full object-cover -scale-x-100"
                             />
-                          </video>
-                        )}
-                      </motion.div>
-                    </AnimatePresence>
+                          ) : (
+                            <video
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              poster={CANDIDATE_STREAMS[selectedStudent.student_id]?.poster}
+                              className={`w-full h-full object-cover filter brightness-95 contrast-105 transition-all duration-300 ${
+                                selectedStudent.is_suspended ? 'blur-md brightness-50' : ''
+                              }`}
+                            >
+                              <source
+                                src={CANDIDATE_STREAMS[selectedStudent.student_id]?.videoUrl}
+                                type="video/mp4"
+                              />
+                            </video>
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
 
-                    {/* Subtle Cinematic Vignette */}
-                    <div className="absolute inset-0 bg-radial from-transparent via-black/10 to-black/50 pointer-events-none" />
+                      {/* Subtle Cinematic Vignette */}
+                      <div className="absolute inset-0 bg-radial from-transparent via-black/10 to-black/50 pointer-events-none" />
 
-                    {/* If Suspended: Prominent Frosted Suspension Screen */}
-                    {selectedStudent.is_suspended && (
-                      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-rose-950/60 backdrop-blur-md">
-                        <div className="w-16 h-16 rounded-3xl bg-rose-600/20 text-rose-400 flex items-center justify-center mb-4 relative">
-                          <Lock className="w-8 h-8" />
-                          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 animate-ping opacity-75" />
-                          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500" />
-                        </div>
-                        <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-600 text-white mb-2 shadow-lg">
-                          Candidate Suspended
-                        </span>
-                        <h3 className="text-xl sm:text-2xl font-extrabold text-white">
-                          Examination Paused by Invigilator
-                        </h3>
-                        <p className="text-xs text-rose-200 mt-1 max-w-md">
-                          Reason: {selectedStudent.suspended_reason || 'Examination integrity breach flagged.'}
-                        </p>
-                        <motion.button
-                          type="button"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => handleRestoreStudent(selectedStudent)}
-                          className="mt-5 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_8px_25px_rgba(16,185,129,0.5)]"
-                        >
-                          <Play className="w-4 h-4" />
-                          <span>Restore Candidate Access</span>
-                        </motion.button>
-                      </div>
-                    )}
-
-                    {/* Overlaid Candidate Name Tag with Live Audio Visualizer */}
-                    <div className="absolute bottom-5 left-5 z-10 flex items-center gap-2.5">
-                      <div className="flex items-center gap-3 px-4 py-2.5 rounded-full bg-black/65 backdrop-blur-2xl text-white text-xs font-bold shadow-xl border-0 outline-none">
-                        <span className={`w-2.5 h-2.5 rounded-full ${selectedStudent.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_10px_#34d399]'}`} />
-                        <span>{selectedStudent.student_name}</span>
-                        <span className="text-[10px] text-slate-300 font-mono">
-                          ({selectedStudent.student_lce_code})
-                        </span>
-
-                        {!selectedStudent.is_suspended && (
-                          <div className="flex items-center gap-0.5 ml-1">
-                            <span className="w-1 h-3 rounded-full bg-emerald-400 animate-pulse" />
-                            <span className="w-1 h-4 rounded-full bg-emerald-400 animate-pulse delay-75" />
-                            <span className="w-1 h-2 rounded-full bg-emerald-400 animate-pulse delay-150" />
+                      {/* If Suspended: Prominent Frosted Suspension Screen */}
+                      {selectedStudent.is_suspended && (
+                        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-rose-950/60 backdrop-blur-md">
+                          <div className="w-16 h-16 rounded-3xl bg-rose-600/20 text-rose-400 flex items-center justify-center mb-4 relative">
+                            <Lock className="w-8 h-8" />
+                            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 animate-ping opacity-75" />
+                            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500" />
                           </div>
-                        )}
-                      </div>
-
-                      {selectedStudent.hand_raised && (
-                        <div className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold shadow-xl animate-pulse">
-                          <Hand className="w-4 h-4" />
-                          <span>Hand Raised</span>
-                        </div>
-                      )}
-
-                      {!selectedStudent.is_suspended && (
-                        <div className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full bg-black/60 backdrop-blur-xl text-slate-200 text-xs font-medium shadow-xl">
-                          <Eye className="w-3.5 h-3.5 text-purple-400" />
-                          <span>{CANDIDATE_STREAMS[selectedStudent.student_id]?.gaze || 'Screen Focused'}</span>
-                        </div>
-                      )}
-
-                      {selectedStudent.warning_count > 0 && (
-                        <span className="px-3 py-2 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold shadow-xl">
-                          {selectedStudent.warning_count} Warning{selectedStudent.warning_count > 1 ? 's' : ''}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Network Quality Tag */}
-                    <div className="absolute top-5 right-5 z-10 flex items-center gap-2">
-                      <span className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-xl text-emerald-300 text-xs font-bold shadow-xl border-0">
-                        <Wifi className="w-3.5 h-3.5 text-emerald-400" />
-                        <span>1080p HD (24ms)</span>
-                      </span>
-                    </div>
-
-                    {/* Camera Switcher & Fullscreen */}
-                    <div className="absolute bottom-5 right-5 z-10 flex items-center gap-2">
-                      <motion.button
-                        type="button"
-                        whileHover={{ scale: 1.08 }}
-                        whileTap={{ scale: 0.94 }}
-                        onClick={toggleLocalCamera}
-                        className={`p-3 rounded-full backdrop-blur-xl transition-all cursor-pointer border-0 outline-none shadow-xl ${
-                          useLocalCam
-                            ? 'bg-purple-600 text-white shadow-[0_0_25px_rgba(147,51,234,0.7)]'
-                            : 'bg-black/60 text-white hover:bg-black/80'
-                        }`}
-                        title={useLocalCam ? 'Switch to student video feed' : 'Connect and show my live webcam'}
-                      >
-                        <Camera className="w-4 h-4" />
-                      </motion.button>
-
-                      <motion.button
-                        type="button"
-                        whileHover={{ scale: 1.08 }}
-                        whileTap={{ scale: 0.94 }}
-                        onClick={toggleFullscreen}
-                        className="p-3 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-xl text-white transition-all cursor-pointer border-0 outline-none shadow-xl"
-                        title="Toggle fullscreen"
-                      >
-                        {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-                      </motion.button>
-                    </div>
-                  </>
-                ) : null}
-              </div>
-
-              {/* Bottom Carousel Strip with Live Moving Feeds */}
-              <div className="mt-3 relative shrink-0">
-                <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
-                  {activeCandidates.map((p, idx) => {
-                    const isSelected = p.student_id === selectedStudentId;
-                    const streamData = CANDIDATE_STREAMS[p.student_id];
-                    return (
-                      <motion.div
-                        key={`carousel-${p.id || p.student_id}-${idx}`}
-                        layout
-                        whileHover={{ scale: 1.03, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-                        className={`group relative w-44 sm:w-52 aspect-[16/10] rounded-2xl overflow-hidden transition-all duration-300 shrink-0 text-left p-2.5 flex flex-col justify-between border-0 outline-none ring-0 cursor-pointer ${
-                          isSelected
-                            ? 'shadow-[0_12px_36px_rgba(147,51,234,0.45)] scale-[1.03] opacity-100'
-                            : 'shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)] opacity-85 hover:opacity-100'
-                        }`}
-                        onClick={() => setSelectedStudentId(p.student_id)}
-                      >
-                        <video
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          poster={streamData?.poster}
-                          className={`absolute inset-0 w-full h-full object-cover filter brightness-90 ${
-                            p.is_suspended ? 'blur-xs brightness-40' : ''
-                          }`}
-                        >
-                          <source src={streamData?.videoUrl} type="video/mp4" />
-                        </video>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/35 pointer-events-none" />
-
-                        {/* Status Pill Top Right */}
-                        <div className="flex items-center justify-between w-full z-10">
-                          <span className={`w-2 h-2 rounded-full ${p.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_8px_#34d399]'}`} />
-                          <div className="flex items-center gap-1">
-                            {p.hand_raised && (
-                              <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950 flex items-center gap-0.5">
-                                <Hand className="w-2.5 h-2.5" />
-                              </span>
-                            )}
-                            {p.is_suspended ? (
-                              <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-rose-600 text-white">
-                                Suspended
-                              </span>
-                            ) : p.warning_count > 0 ? (
-                              <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950">
-                                {p.warning_count}W
-                              </span>
-                            ) : null}
-                          </div>
-                        </div>
-
-                        {/* Hover Overlay Action Pills for Each Student */}
-                        <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-xs flex items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity p-2">
+                          <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-600 text-white mb-2 shadow-lg">
+                            Candidate Suspended
+                          </span>
+                          <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+                            Examination Paused by Invigilator
+                          </h3>
+                          <p className="text-xs text-rose-200 mt-1 max-w-md">
+                            Reason: {selectedStudent.suspended_reason || 'Examination integrity breach flagged.'}
+                          </p>
                           <motion.button
                             type="button"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => handleRestoreStudent(selectedStudent)}
+                            className="mt-5 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_8px_25px_rgba(16,185,129,0.5)]"
+                          >
+                            <Play className="w-4 h-4" />
+                            <span>Restore Candidate Access</span>
+                          </motion.button>
+                        </div>
+                      )}
+
+                      {/* Overlaid Candidate Name Tag with Live Audio Visualizer */}
+                      <div className="absolute bottom-5 left-5 z-10 flex items-center gap-2.5">
+                        <div className="flex items-center gap-3 px-4 py-2.5 rounded-full bg-black/65 backdrop-blur-2xl text-white text-xs font-bold shadow-xl border-0 outline-none">
+                          <span className={`w-2.5 h-2.5 rounded-full ${selectedStudent.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_10px_#34d399]'}`} />
+                          <span>{selectedStudent.student_name}</span>
+                          <span className="text-[10px] text-slate-300 font-mono">
+                            ({selectedStudent.student_lce_code})
+                          </span>
+
+                          {!selectedStudent.is_suspended && (
+                            <div className="flex items-center gap-0.5 ml-1">
+                              <span className="w-1 h-3 rounded-full bg-emerald-400 animate-pulse" />
+                              <span className="w-1 h-4 rounded-full bg-emerald-400 animate-pulse delay-75" />
+                              <span className="w-1 h-2 rounded-full bg-emerald-400 animate-pulse delay-150" />
+                            </div>
+                          )}
+                        </div>
+
+                        {selectedStudent.hand_raised && (
+                          <div className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold shadow-xl animate-pulse">
+                            <Hand className="w-4 h-4" />
+                            <span>Hand Raised</span>
+                          </div>
+                        )}
+
+                        {!selectedStudent.is_suspended && (
+                          <div className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full bg-black/60 backdrop-blur-xl text-slate-200 text-xs font-medium shadow-xl">
+                            <Eye className="w-3.5 h-3.5 text-purple-400" />
+                            <span>{CANDIDATE_STREAMS[selectedStudent.student_id]?.gaze || 'Screen Focused'}</span>
+                          </div>
+                        )}
+
+                        {selectedStudent.warning_count > 0 && (
+                          <span className="px-3 py-2 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold shadow-xl">
+                            {selectedStudent.warning_count} Warning{selectedStudent.warning_count > 1 ? 's' : ''}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Network Quality Tag */}
+                      <div className="absolute top-5 right-5 z-10 flex items-center gap-2">
+                        <span className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-xl text-emerald-300 text-xs font-bold shadow-xl border-0">
+                          <Wifi className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>1080p HD (24ms)</span>
+                        </span>
+                      </div>
+
+                      {/* Camera Switcher & Fullscreen */}
+                      <div className="absolute bottom-5 right-5 z-10 flex items-center gap-2">
+                        <motion.button
+                          type="button"
+                          whileHover={{ scale: 1.08 }}
+                          whileTap={{ scale: 0.94 }}
+                          onClick={toggleLocalCamera}
+                          className={`p-3 rounded-full backdrop-blur-xl transition-all cursor-pointer border-0 outline-none shadow-xl ${
+                            useLocalCam
+                              ? 'bg-purple-600 text-white shadow-[0_0_25px_rgba(147,51,234,0.7)]'
+                              : 'bg-black/60 text-white hover:bg-black/80'
+                          }`}
+                          title={useLocalCam ? 'Switch to student video feed' : 'Connect and show my live webcam'}
+                        >
+                          <Camera className="w-4 h-4" />
+                        </motion.button>
+
+                        <motion.button
+                          type="button"
+                          whileHover={{ scale: 1.08 }}
+                          whileTap={{ scale: 0.94 }}
+                          onClick={toggleFullscreen}
+                          className="p-3 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-xl text-white transition-all cursor-pointer border-0 outline-none shadow-xl"
+                          title="Toggle fullscreen"
+                        >
+                          {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+                        </motion.button>
+                      </div>
+                    </>
+                  ) : null}
+                </div>
+
+                {/* Bottom Carousel Strip with Live Moving Feeds */}
+                {activeCandidates.length > 0 && (
+                  <div className="mt-3 relative shrink-0">
+                    <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
+                      {activeCandidates.map((p, idx) => {
+                        const isSelected = p.student_id === selectedStudentId;
+                        const streamData = CANDIDATE_STREAMS[p.student_id];
+                        return (
+                          <motion.div
+                            key={`carousel-${p.id || p.student_id}-${idx}`}
+                            layout
+                            whileHover={{ scale: 1.03, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            transition={{ type: 'spring', stiffness: 450, damping: 30 }}
+                            className={`group relative w-44 sm:w-52 aspect-[16/10] rounded-2xl overflow-hidden transition-all duration-300 shrink-0 text-left p-2.5 flex flex-col justify-between border-0 outline-none ring-0 cursor-pointer ${
+                              isSelected
+                                ? 'shadow-[0_12px_36px_rgba(147,51,234,0.45)] scale-[1.03] opacity-100'
+                                : 'shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)] opacity-85 hover:opacity-100'
+                            }`}
+                            onClick={() => setSelectedStudentId(p.student_id)}
+                          >
+                            <video
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              poster={streamData?.poster}
+                              className={`absolute inset-0 w-full h-full object-cover filter brightness-90 ${
+                                p.is_suspended ? 'blur-xs brightness-40' : ''
+                              }`}
+                            >
+                              <source src={streamData?.videoUrl} type="video/mp4" />
+                            </video>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/35 pointer-events-none" />
+
+                            {/* Status Pill Top Right */}
+                            <div className="flex items-center justify-between w-full z-10">
+                              <span className={`w-2 h-2 rounded-full ${p.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_8px_#34d399]'}`} />
+                              <div className="flex items-center gap-1">
+                                {p.hand_raised && (
+                                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950 flex items-center gap-0.5">
+                                    <Hand className="w-2.5 h-2.5" />
+                                  </span>
+                                )}
+                                {p.is_suspended ? (
+                                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-rose-600 text-white">
+                                    Suspended
+                                  </span>
+                                ) : p.warning_count > 0 ? (
+                                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950">
+                                    {p.warning_count}W
+                                  </span>
+                                ) : null}
+                              </div>
+                            </div>
+
+                            {/* Hover Overlay Action Pills for Each Student */}
+                            <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-xs flex items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity p-2">
+                              <motion.button
+                                type="button"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedStudentId(p.student_id);
+                                  setWarningModalStudent(p);
+                                }}
+                                className="px-2.5 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                              >
+                                <AlertTriangle className="w-3 h-3" />
+                                <span>Warn</span>
+                              </motion.button>
+
+                              {p.is_suspended ? (
+                                <motion.button
+                                  type="button"
+                                  whileHover={{ scale: 1.05 }}
+                                  whileTap={{ scale: 0.95 }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleRestoreStudent(p);
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                                >
+                                  <Play className="w-3 h-3" />
+                                  <span>Restore</span>
+                                </motion.button>
+                              ) : (
+                                <motion.button
+                                  type="button"
+                                  whileHover={{ scale: 1.05 }}
+                                  whileTap={{ scale: 0.95 }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedStudentId(p.student_id);
+                                    setSuspendModalStudent(p);
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                                >
+                                  <Pause className="w-3 h-3" />
+                                  <span>Suspend</span>
+                                </motion.button>
+                              )}
+                            </div>
+
+                            {/* Candidate Name Tag Bottom */}
+                            <div className="w-full z-10 p-1 pointer-events-none">
+                              <p className="text-[11px] font-bold text-white truncate drop-shadow-md">
+                                {p.student_name}
+                              </p>
+                              <div className="flex items-center justify-between text-[9px] text-slate-300">
+                                <span className="font-mono">{p.student_lce_code}</span>
+                                <span>{p.questions_answered}/25 Qs</span>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </>
+            )
+          ) : (
+            /* VIEW MODE B: MULTI-CAM GRID */
+            activeCandidates.length === 0 ? (
+              renderEmptyLobby()
+            ) : (
+              <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 gap-3.5 min-h-[380px] overflow-y-auto pr-1">
+                {activeCandidates.map((p, idx) => {
+                  const isSelected = p.student_id === selectedStudentId;
+                  const streamData = CANDIDATE_STREAMS[p.student_id];
+                  return (
+                    <motion.div
+                      key={`grid-${p.id || p.student_id}-${idx}`}
+                      layout
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: 'spring', stiffness: 450, damping: 30 }}
+                      onClick={() => {
+                        setSelectedStudentId(p.student_id);
+                        setDrawerStudent(p);
+                      }}
+                      className={`relative rounded-[28px] overflow-hidden bg-slate-950 shadow-[0_10px_30px_rgba(0,0,0,0.15)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.6)] cursor-pointer flex flex-col justify-between p-3.5 transition-all duration-300 border-0 outline-none ring-0 ${
+                        isSelected ? 'shadow-[0_14px_45px_rgba(147,51,234,0.5)] scale-[1.02]' : ''
+                      }`}
+                    >
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        poster={streamData?.poster}
+                        className={`absolute inset-0 w-full h-full object-cover filter brightness-95 ${
+                          p.is_suspended ? 'blur-xs brightness-40' : ''
+                        }`}
+                      >
+                        <source src={streamData?.videoUrl} type="video/mp4" />
+                      </video>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/45" />
+
+                      {/* Top Row: Live Status + Badges */}
+                      <div className="relative z-10 flex items-center justify-between">
+                        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold">
+                          <span className={`w-2 h-2 rounded-full ${p.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_8px_#34d399]'}`} />
+                          <span>{p.is_suspended ? 'Suspended' : 'Live Feed'}</span>
+                        </div>
+
+                        <div className="flex items-center gap-1.5">
+                          {p.hand_raised && (
+                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-950 shadow-xs flex items-center gap-1 animate-pulse">
+                              <Hand className="w-3 h-3" />
+                              <span>Hand</span>
+                            </span>
+                          )}
+                          {p.warning_count > 0 && (
+                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-950 shadow-xs">
+                              {p.warning_count} Warn
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Bottom Row: Candidate Information + Direct Individual Actions */}
+                      <div className="relative z-10 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h4 className="text-sm font-bold text-white drop-shadow-md">
+                              {p.student_name}
+                            </h4>
+                            <p className="text-[10px] text-slate-300 font-mono">
+                              {p.student_lce_code} • {p.questions_answered}/25 Answered
+                            </p>
+                          </div>
+
+                          {!p.is_suspended && (
+                            <div className="flex items-center gap-0.5 px-2 py-1 rounded-full bg-black/50 backdrop-blur-md">
+                              <span className="w-1 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                              <span className="w-1 h-3.5 rounded-full bg-emerald-400 animate-pulse delay-75" />
+                              <span className="w-1 h-2 rounded-full bg-emerald-400 animate-pulse delay-150" />
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex items-center gap-2 pt-1">
+                          <motion.button
+                            type="button"
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedStudentId(p.student_id);
                               setWarningModalStudent(p);
                             }}
-                            className="px-2.5 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                            className="flex-1 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
                           >
-                            <AlertTriangle className="w-3 h-3" />
+                            <AlertTriangle className="w-3.5 h-3.5" />
                             <span>Warn</span>
                           </motion.button>
 
                           {p.is_suspended ? (
                             <motion.button
                               type="button"
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.97 }}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handleRestoreStudent(p);
                               }}
-                              className="px-2.5 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                              className="flex-1 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
                             >
-                              <Play className="w-3 h-3" />
+                              <Play className="w-3.5 h-3.5" />
                               <span>Restore</span>
                             </motion.button>
                           ) : (
                             <motion.button
                               type="button"
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.97 }}
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setSelectedStudentId(p.student_id);
                                 setSuspendModalStudent(p);
                               }}
-                              className="px-2.5 py-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                              className="flex-1 py-2 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
                             >
-                              <Pause className="w-3 h-3" />
+                              <Pause className="w-3.5 h-3.5" />
                               <span>Suspend</span>
                             </motion.button>
                           )}
                         </div>
-
-                        {/* Candidate Name Tag Bottom */}
-                        <div className="w-full z-10 p-1 pointer-events-none">
-                          <p className="text-[11px] font-bold text-white truncate drop-shadow-md">
-                            {p.student_name}
-                          </p>
-                          <div className="flex items-center justify-between text-[9px] text-slate-300">
-                            <span className="font-mono">{p.student_lce_code}</span>
-                            <span>{p.questions_answered}/25 Qs</span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
-            </>
-          ) : (
-            /* VIEW MODE B: MULTI-CAM GRID */
-            <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 gap-3.5 min-h-[380px] overflow-y-auto pr-1">
-              {activeCandidates.map((p, idx) => {
-                const isSelected = p.student_id === selectedStudentId;
-                const streamData = CANDIDATE_STREAMS[p.student_id];
-                return (
-                  <motion.div
-                    key={`grid-${p.id || p.student_id}-${idx}`}
-                    layout
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-                    onClick={() => {
-                      setSelectedStudentId(p.student_id);
-                      setDrawerStudent(p);
-                    }}
-                    className={`relative rounded-[28px] overflow-hidden bg-slate-950 shadow-[0_10px_30px_rgba(0,0,0,0.15)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.6)] cursor-pointer flex flex-col justify-between p-3.5 transition-all duration-300 border-0 outline-none ring-0 ${
-                      isSelected ? 'shadow-[0_14px_45px_rgba(147,51,234,0.5)] scale-[1.02]' : ''
-                    }`}
-                  >
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      poster={streamData?.poster}
-                      className={`absolute inset-0 w-full h-full object-cover filter brightness-95 ${
-                        p.is_suspended ? 'blur-xs brightness-40' : ''
-                      }`}
-                    >
-                      <source src={streamData?.videoUrl} type="video/mp4" />
-                    </video>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/45" />
-
-                    {/* Top Row: Live Status + Badges */}
-                    <div className="relative z-10 flex items-center justify-between">
-                      <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold">
-                        <span className={`w-2 h-2 rounded-full ${p.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_8px_#34d399]'}`} />
-                        <span>{p.is_suspended ? 'Suspended' : 'Live Feed'}</span>
-                      </div>
-
-                      <div className="flex items-center gap-1.5">
-                        {p.hand_raised && (
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-950 shadow-xs flex items-center gap-1 animate-pulse">
-                            <Hand className="w-3 h-3" />
-                            <span>Hand</span>
-                          </span>
-                        )}
-                        {p.warning_count > 0 && (
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-950 shadow-xs">
-                            {p.warning_count} Warn
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Bottom Row: Candidate Information + Direct Individual Actions */}
-                    <div className="relative z-10 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="text-sm font-bold text-white drop-shadow-md">
-                            {p.student_name}
-                          </h4>
-                          <p className="text-[10px] text-slate-300 font-mono">
-                            {p.student_lce_code} • {p.questions_answered}/25 Answered
-                          </p>
-                        </div>
-
-                        {!p.is_suspended && (
-                          <div className="flex items-center gap-0.5 px-2 py-1 rounded-full bg-black/50 backdrop-blur-md">
-                            <span className="w-1 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span className="w-1 h-3.5 rounded-full bg-emerald-400 animate-pulse delay-75" />
-                            <span className="w-1 h-2 rounded-full bg-emerald-400 animate-pulse delay-150" />
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-2 pt-1">
-                        <motion.button
-                          type="button"
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedStudentId(p.student_id);
-                            setWarningModalStudent(p);
-                          }}
-                          className="flex-1 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
-                        >
-                          <AlertTriangle className="w-3.5 h-3.5" />
-                          <span>Warn</span>
-                        </motion.button>
-
-                        {p.is_suspended ? (
-                          <motion.button
-                            type="button"
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRestoreStudent(p);
-                            }}
-                            className="flex-1 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
-                          >
-                            <Play className="w-3.5 h-3.5" />
-                            <span>Restore</span>
-                          </motion.button>
-                        ) : (
-                          <motion.button
-                            type="button"
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedStudentId(p.student_id);
-                              setSuspendModalStudent(p);
-                            }}
-                            className="flex-1 py-2 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
-                          >
-                            <Pause className="w-3.5 h-3.5" />
-                            <span>Suspend</span>
-                          </motion.button>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
+            )
           )}
 
           {/* ── FLOATING ACTION CONTROLS BAR ── */}
@@ -1314,73 +1330,91 @@ export function LiveTeacherSupervisionRoom({
             </div>
 
             {/* Center: Supervisory Actions for Currently Focused Student */}
-            <div className="flex items-center gap-2.5">
-              <span className="hidden xl:inline text-xs font-semibold text-slate-500 dark:text-slate-400">
-                Focus: <strong className="text-slate-900 dark:text-white">{selectedStudent?.student_name}</strong>
-              </span>
-
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.05, y: -1 }}
-                whileTap={{ scale: 0.95, y: 1 }}
-                disabled={!selectedStudent}
-                onClick={() => setWarningModalStudent(selectedStudent)}
-                className="px-4 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(245,158,11,0.35)] disabled:opacity-40"
-              >
-                <AlertTriangle className="w-3.5 h-3.5" />
-                <span>Issue Warning</span>
-              </motion.button>
-
-              {selectedStudent?.is_suspended ? (
+            {activeCandidates.length === 0 ? (
+              <div className="flex items-center gap-2.5">
+                <span className="hidden sm:inline text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  Focus: <strong className="text-slate-700 dark:text-slate-300">None (Awaiting examinees)</strong>
+                </span>
                 <motion.button
                   type="button"
-                  whileHover={{ scale: 1.05, y: -1 }}
-                  whileTap={{ scale: 0.95, y: 1 }}
-                  onClick={() => handleRestoreStudent(selectedStudent)}
-                  className="px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(16,185,129,0.35)]"
+                  whileHover={{ scale: 1.04, y: -1 }}
+                  whileTap={{ scale: 0.96, y: 1 }}
+                  onClick={handleShareInvite}
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(147,51,234,0.35)]"
                 >
-                  <Play className="w-3.5 h-3.5" />
-                  <span>Restore Student</span>
+                  <Share2 className="w-3.5 h-3.5" />
+                  <span>Invite to Start Examination</span>
                 </motion.button>
-              ) : (
+              </div>
+            ) : (
+              <div className="flex items-center gap-2.5">
+                <span className="hidden xl:inline text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  Focus: <strong className="text-slate-900 dark:text-white">{selectedStudent?.student_name}</strong>
+                </span>
+
                 <motion.button
                   type="button"
                   whileHover={{ scale: 1.05, y: -1 }}
                   whileTap={{ scale: 0.95, y: 1 }}
                   disabled={!selectedStudent}
-                  onClick={() => setSuspendModalStudent(selectedStudent)}
-                  className="px-4 py-2.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(225,29,72,0.35)] disabled:opacity-40"
+                  onClick={() => setWarningModalStudent(selectedStudent)}
+                  className="px-4 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(245,158,11,0.35)] disabled:opacity-40"
                 >
-                  <Pause className="w-3.5 h-3.5" />
-                  <span>Suspend Student</span>
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  <span>Issue Warning</span>
                 </motion.button>
-              )}
 
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.05, y: -1 }}
-                whileTap={{ scale: 0.95, y: 1 }}
-                disabled={!selectedStudent}
-                onClick={() => setTimeModalStudent(selectedStudent)}
-                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 hover:bg-indigo-100 text-indigo-700 dark:text-indigo-300 text-xs font-bold transition-all cursor-pointer border-0 outline-none disabled:opacity-40"
-              >
-                <Clock className="w-3.5 h-3.5" />
-                <span>Adjust Time</span>
-              </motion.button>
+                {selectedStudent?.is_suspended ? (
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.05, y: -1 }}
+                    whileTap={{ scale: 0.95, y: 1 }}
+                    onClick={() => handleRestoreStudent(selectedStudent)}
+                    className="px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(16,185,129,0.35)]"
+                  >
+                    <Play className="w-3.5 h-3.5" />
+                    <span>Restore Student</span>
+                  </motion.button>
+                ) : (
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.05, y: -1 }}
+                    whileTap={{ scale: 0.95, y: 1 }}
+                    disabled={!selectedStudent}
+                    onClick={() => setSuspendModalStudent(selectedStudent)}
+                    className="px-4 py-2.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(225,29,72,0.35)] disabled:opacity-40"
+                  >
+                    <Pause className="w-3.5 h-3.5" />
+                    <span>Suspend Student</span>
+                  </motion.button>
+                )}
 
-              {selectedStudent?.hand_raised && (
                 <motion.button
                   type="button"
                   whileHover={{ scale: 1.05, y: -1 }}
                   whileTap={{ scale: 0.95, y: 1 }}
-                  onClick={() => handleAcknowledgeHand(selectedStudent.student_id)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none animate-pulse"
+                  disabled={!selectedStudent}
+                  onClick={() => setTimeModalStudent(selectedStudent)}
+                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 hover:bg-indigo-100 text-indigo-700 dark:text-indigo-300 text-xs font-bold transition-all cursor-pointer border-0 outline-none disabled:opacity-40"
                 >
-                  <Hand className="w-3.5 h-3.5" />
-                  <span>Lower Hand</span>
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>Adjust Time</span>
                 </motion.button>
-              )}
-            </div>
+
+                {selectedStudent?.hand_raised && (
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.05, y: -1 }}
+                    whileTap={{ scale: 0.95, y: 1 }}
+                    onClick={() => handleAcknowledgeHand(selectedStudent.student_id)}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none animate-pulse"
+                  >
+                    <Hand className="w-3.5 h-3.5" />
+                    <span>Lower Hand</span>
+                  </motion.button>
+                )}
+              </div>
+            )}
 
             {/* Right: End Examination Pill Button */}
             <div>
@@ -1502,108 +1536,101 @@ export function LiveTeacherSupervisionRoom({
                   Examinees ({filteredParticipants.length})
                 </span>
 
-                {filteredParticipants.map((p, idx) => {
-                  const isSelected = p.student_id === selectedStudentId;
-                  const streamData = CANDIDATE_STREAMS[p.student_id];
-                  return (
-                    <motion.div
-                      key={`examinee-${p.id || p.student_id}-${idx}`}
-                      whileHover={{ scale: 1.01 }}
-                      onClick={() => {
-                        setSelectedStudentId(p.student_id);
-                        setDrawerStudent(p);
-                      }}
-                      className={`p-3 rounded-2xl cursor-pointer transition-all flex flex-col gap-2 border-0 outline-none ring-0 ${
-                        isSelected
-                          ? 'bg-purple-100/80 dark:bg-purple-950/60 shadow-[0_6px_22px_rgba(147,51,234,0.15)] dark:shadow-[0_8px_25px_rgba(147,51,234,0.3)]'
-                          : 'bg-slate-50/90 hover:bg-slate-100 dark:bg-[#141B2D] dark:hover:bg-[#1B2338] shadow-xs'
-                      }`}
+                {filteredParticipants.length === 0 ? (
+                  <div className="flex-1 flex flex-col items-center justify-center py-10 px-4 text-center">
+                    <div className="w-14 h-14 rounded-2xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3 shadow-inner">
+                      <Users className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-sm font-extrabold text-slate-900 dark:text-white mb-1">
+                      None is here now
+                    </h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 max-w-[220px] leading-relaxed">
+                      Invite candidates using access code <strong className="font-mono text-purple-600 dark:text-purple-400">{displayCode}</strong> or share the waiting room link.
+                    </p>
+                    <motion.button
+                      type="button"
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={handleShareInvite}
+                      className="px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer border-0 outline-none"
                     >
-                      {/* Top Row: Avatar + Info + Badges */}
-                      <div className="flex items-center gap-3">
-                        <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-xs">
-                          <img
-                            src={streamData?.poster}
-                            alt={p.student_name}
-                            className="w-full h-full object-cover"
-                          />
-                          <span
-                            className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-white dark:border-[#141B2D] ${
-                              p.is_suspended ? 'bg-rose-500' : 'bg-emerald-500'
-                            }`}
-                          />
-                        </div>
+                      <Share2 className="w-3.5 h-3.5" />
+                      <span>Invite Candidates</span>
+                    </motion.button>
+                  </div>
+                ) : (
+                  filteredParticipants.map((p, idx) => {
+                    const isSelected = p.student_id === selectedStudentId;
+                    const streamData = CANDIDATE_STREAMS[p.student_id];
+                    return (
+                      <motion.div
+                        key={`examinee-${p.id || p.student_id}-${idx}`}
+                        whileHover={{ scale: 1.01 }}
+                        onClick={() => {
+                          setSelectedStudentId(p.student_id);
+                          setDrawerStudent(p);
+                        }}
+                        className={`p-3 rounded-2xl cursor-pointer transition-all flex flex-col gap-2 border-0 outline-none ring-0 ${
+                          isSelected
+                            ? 'bg-purple-100/80 dark:bg-purple-950/60 shadow-[0_6px_22px_rgba(147,51,234,0.15)] dark:shadow-[0_8px_25px_rgba(147,51,234,0.3)]'
+                            : 'bg-slate-50/90 hover:bg-slate-100 dark:bg-[#141B2D] dark:hover:bg-[#1B2338] shadow-xs'
+                        }`}
+                      >
+                        {/* Top Row: Avatar + Info + Badges */}
+                        <div className="flex items-center gap-3">
+                          <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-xs">
+                            <img
+                              src={streamData?.poster}
+                              alt={p.student_name}
+                              className="w-full h-full object-cover"
+                            />
+                            <span
+                              className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-white dark:border-[#141B2D] ${
+                                p.is_suspended ? 'bg-rose-500' : 'bg-emerald-500'
+                              }`}
+                            />
+                          </div>
 
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center justify-between gap-1.5">
-                            <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                              {p.student_name}
-                            </h4>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-1.5">
+                              <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                                {p.student_name}
+                              </h4>
 
-                            <div className="flex items-center gap-1 shrink-0">
-                              {p.hand_raised && (
-                                <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950 flex items-center gap-0.5 animate-pulse">
-                                  <Hand className="w-2.5 h-2.5" />
-                                </span>
-                              )}
-                              {p.is_suspended ? (
-                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300">
-                                  Suspended
-                                </span>
-                              ) : p.warning_count > 0 ? (
-                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
-                                  {p.warning_count} Warn
-                                </span>
-                              ) : (
-                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
-                                  Active
-                                </span>
-                              )}
+                              <div className="flex items-center gap-1 shrink-0">
+                                {p.hand_raised && (
+                                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950 flex items-center gap-0.5 animate-pulse">
+                                    <Hand className="w-2.5 h-2.5" />
+                                  </span>
+                                )}
+                                {p.is_suspended ? (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300">
+                                    Suspended
+                                  </span>
+                                ) : p.warning_count > 0 ? (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+                                    {p.warning_count} Warn
+                                  </span>
+                                ) : (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+                                    Active
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-2 text-[10px] text-slate-400 font-mono mt-0.5">
+                              <span>{p.student_lce_code}</span>
+                              <span className="text-slate-300 dark:text-slate-600">•</span>
+                              <span className="text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                                {p.questions_answered}/25 answered
+                              </span>
                             </div>
                           </div>
-
-                          <div className="flex items-center gap-2 text-[10px] text-slate-400 font-mono mt-0.5">
-                            <span>{p.student_lce_code}</span>
-                            <span className="text-slate-300 dark:text-slate-600">•</span>
-                            <span className="text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                              {p.questions_answered}/25 answered
-                            </span>
-                          </div>
                         </div>
-                      </div>
 
-                      {/* Bottom Row: Quick Action Buttons */}
-                      <div className="flex items-center gap-2 pt-1 border-0">
-                        <motion.button
-                          type="button"
-                          whileHover={{ scale: 1.04 }}
-                          whileTap={{ scale: 0.96 }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedStudentId(p.student_id);
-                            setWarningModalStudent(p);
-                          }}
-                          className="flex-1 py-1 rounded-xl bg-amber-500/15 hover:bg-amber-500 text-amber-800 hover:text-slate-950 dark:bg-amber-500/20 dark:hover:bg-amber-500 dark:text-amber-300 dark:hover:text-slate-950 text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
-                        >
-                          <AlertTriangle className="w-3 h-3" />
-                          <span>Warn</span>
-                        </motion.button>
-
-                        {p.is_suspended ? (
-                          <motion.button
-                            type="button"
-                            whileHover={{ scale: 1.04 }}
-                            whileTap={{ scale: 0.96 }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRestoreStudent(p);
-                            }}
-                            className="flex-1 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-600 text-emerald-800 hover:text-white dark:bg-emerald-500/20 dark:hover:bg-emerald-600 dark:text-emerald-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
-                          >
-                            <Play className="w-3 h-3" />
-                            <span>Restore</span>
-                          </motion.button>
-                        ) : (
+                        {/* Bottom Row: Quick Action Buttons */}
+                        <div className="flex items-center gap-2 pt-1 border-0">
                           <motion.button
                             type="button"
                             whileHover={{ scale: 1.04 }}
@@ -1611,33 +1638,64 @@ export function LiveTeacherSupervisionRoom({
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedStudentId(p.student_id);
-                              setSuspendModalStudent(p);
+                              setWarningModalStudent(p);
                             }}
-                            className="flex-1 py-1 rounded-xl bg-rose-500/15 hover:bg-rose-600 text-rose-800 hover:text-white dark:bg-rose-500/20 dark:hover:bg-rose-600 dark:text-rose-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
+                            className="flex-1 py-1 rounded-xl bg-amber-500/15 hover:bg-amber-500 text-amber-800 hover:text-slate-950 dark:bg-amber-500/20 dark:hover:bg-amber-500 dark:text-amber-300 dark:hover:text-slate-950 text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
                           >
-                            <Pause className="w-3 h-3" />
-                            <span>Suspend</span>
+                            <AlertTriangle className="w-3 h-3" />
+                            <span>Warn</span>
                           </motion.button>
-                        )}
 
-                        <motion.button
-                          type="button"
-                          whileHover={{ scale: 1.04 }}
-                          whileTap={{ scale: 0.96 }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedStudentId(p.student_id);
-                            setTimeModalStudent(p);
-                          }}
-                          className="px-2 py-1 rounded-xl bg-indigo-500/15 hover:bg-indigo-600 text-indigo-800 hover:text-white dark:bg-indigo-500/20 dark:hover:bg-indigo-600 dark:text-indigo-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none shadow-xs"
-                          title="Adjust Time"
-                        >
-                          <Clock className="w-3 h-3" />
-                        </motion.button>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                          {p.is_suspended ? (
+                            <motion.button
+                              type="button"
+                              whileHover={{ scale: 1.04 }}
+                              whileTap={{ scale: 0.96 }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleRestoreStudent(p);
+                              }}
+                              className="flex-1 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-600 text-emerald-800 hover:text-white dark:bg-emerald-500/20 dark:hover:bg-emerald-600 dark:text-emerald-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
+                            >
+                              <Play className="w-3 h-3" />
+                              <span>Restore</span>
+                            </motion.button>
+                          ) : (
+                            <motion.button
+                              type="button"
+                              whileHover={{ scale: 1.04 }}
+                              whileTap={{ scale: 0.96 }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedStudentId(p.student_id);
+                                setSuspendModalStudent(p);
+                              }}
+                              className="flex-1 py-1 rounded-xl bg-rose-500/15 hover:bg-rose-600 text-rose-800 hover:text-white dark:bg-rose-500/20 dark:hover:bg-rose-600 dark:text-rose-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
+                            >
+                              <Pause className="w-3 h-3" />
+                              <span>Suspend</span>
+                            </motion.button>
+                          )}
+
+                          <motion.button
+                            type="button"
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.96 }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedStudentId(p.student_id);
+                              setTimeModalStudent(p);
+                            }}
+                            className="px-2 py-1 rounded-xl bg-indigo-500/15 hover:bg-indigo-600 text-indigo-800 hover:text-white dark:bg-indigo-500/20 dark:hover:bg-indigo-600 dark:text-indigo-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none shadow-xs"
+                            title="Adjust Time"
+                          >
+                            <Clock className="w-3 h-3" />
+                          </motion.button>
+                        </div>
+                      </motion.div>
+                    );
+                  })
+                )}
               </div>
             </div>
           ) : (

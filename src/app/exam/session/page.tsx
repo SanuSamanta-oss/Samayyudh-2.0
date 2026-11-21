@@ -85,7 +85,10 @@ function ExamSessionInner() {
 
   const handleRaiseHand = async () => {
     if (!customExamInfo?.id) return;
-    const studentId = state.session?.user_id || 'stud_1';
+    const studentId =
+      state.session?.user_id ||
+      (typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null) ||
+      'candidate_student';
     try {
       const res = await fetch('/api/custom-exams/hand-raise', {
         method: 'POST',

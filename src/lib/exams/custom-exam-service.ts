@@ -125,168 +125,7 @@ function getServerStore(): ServerMemoryStore {
     defaultExams.set('demo', demoExam);
     defaultExams.set('CE4821', demoExam);
 
-    const demoStudents: CustomExamParticipant[] = [
-      {
-        id: 'cand_1',
-        exam_id: 'demo_exam',
-        student_id: 'stud_1',
-        student_name: 'Albert Flores',
-        student_lce_code: 'LCE-1042',
-        student_email: 'albert.flores@institution.ac.in',
-        student_class: 'Batch A',
-        attempt_id: 'att_1',
-        joined_at: new Date(Date.now() - 1800000).toISOString(),
-        connection_status: 'connected',
-        camera_status: 'active',
-        exam_status: 'in_progress',
-        warning_count: 1,
-        is_suspended: false,
-        suspended_at: null,
-        suspended_reason: null,
-        time_adjustment_seconds: 0,
-        remaining_seconds_cached: 2400,
-        hand_raised: false,
-        hand_raised_at: null,
-        current_question_index: 18,
-        questions_answered: 18,
-        questions_attempted: 18,
-        questions_unanswered: 7,
-        questions_correct: 15,
-        questions_incorrect: 3,
-        accuracy_percentage: 83.3,
-        final_score: 57,
-        last_heartbeat: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      },
-      {
-        id: 'cand_2',
-        exam_id: 'demo_exam',
-        student_id: 'stud_2',
-        student_name: 'Floyd Miles',
-        student_lce_code: 'LCE-1088',
-        student_email: 'floyd.miles@institution.ac.in',
-        student_class: 'Batch A',
-        attempt_id: 'att_2',
-        joined_at: new Date(Date.now() - 1700000).toISOString(),
-        connection_status: 'connected',
-        camera_status: 'active',
-        exam_status: 'in_progress',
-        warning_count: 0,
-        is_suspended: false,
-        suspended_at: null,
-        suspended_reason: null,
-        time_adjustment_seconds: 0,
-        remaining_seconds_cached: 2500,
-        hand_raised: true,
-        hand_raised_at: new Date(Date.now() - 60000).toISOString(),
-        current_question_index: 22,
-        questions_answered: 22,
-        questions_attempted: 22,
-        questions_unanswered: 3,
-        questions_correct: 19,
-        questions_incorrect: 3,
-        accuracy_percentage: 86.4,
-        final_score: 73,
-        last_heartbeat: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      },
-      {
-        id: 'cand_3',
-        exam_id: 'demo_exam',
-        student_id: 'stud_3',
-        student_name: 'Ralph Edwards',
-        student_lce_code: 'LCE-1104',
-        student_email: 'ralph.edwards@institution.ac.in',
-        student_class: 'Batch B',
-        attempt_id: 'att_3',
-        joined_at: new Date(Date.now() - 1600000).toISOString(),
-        connection_status: 'connected',
-        camera_status: 'active',
-        exam_status: 'in_progress',
-        warning_count: 0,
-        is_suspended: false,
-        suspended_at: null,
-        suspended_reason: null,
-        time_adjustment_seconds: 0,
-        remaining_seconds_cached: 2600,
-        hand_raised: false,
-        hand_raised_at: null,
-        current_question_index: 15,
-        questions_answered: 15,
-        questions_attempted: 15,
-        questions_unanswered: 10,
-        questions_correct: 12,
-        questions_incorrect: 3,
-        accuracy_percentage: 80.0,
-        final_score: 45,
-        last_heartbeat: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      },
-      {
-        id: 'cand_4',
-        exam_id: 'demo_exam',
-        student_id: 'stud_4',
-        student_name: 'Leslie Alexander',
-        student_lce_code: 'LCE-1132',
-        student_email: 'leslie.alexander@institution.ac.in',
-        student_class: 'Batch B',
-        attempt_id: 'att_4',
-        joined_at: new Date(Date.now() - 1500000).toISOString(),
-        connection_status: 'connected',
-        camera_status: 'active',
-        exam_status: 'suspended',
-        warning_count: 2,
-        is_suspended: true,
-        suspended_at: new Date(Date.now() - 300000).toISOString(),
-        suspended_reason: 'Continuous gaze departure from testing viewport.',
-        time_adjustment_seconds: -300,
-        remaining_seconds_cached: 2700,
-        hand_raised: false,
-        hand_raised_at: null,
-        current_question_index: 12,
-        questions_answered: 12,
-        questions_attempted: 12,
-        questions_unanswered: 13,
-        questions_correct: 8,
-        questions_incorrect: 4,
-        accuracy_percentage: 66.7,
-        final_score: 28,
-        last_heartbeat: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      },
-      {
-        id: 'cand_5',
-        exam_id: 'demo_exam',
-        student_id: 'stud_5',
-        student_name: 'Annette Black',
-        student_lce_code: 'LCE-1149',
-        student_email: 'annette.black@institution.ac.in',
-        student_class: 'Batch A',
-        attempt_id: 'att_5',
-        joined_at: new Date(Date.now() - 1400000).toISOString(),
-        connection_status: 'connected',
-        camera_status: 'active',
-        exam_status: 'in_progress',
-        warning_count: 0,
-        is_suspended: false,
-        suspended_at: null,
-        suspended_reason: null,
-        time_adjustment_seconds: 0,
-        remaining_seconds_cached: 2800,
-        hand_raised: false,
-        hand_raised_at: null,
-        current_question_index: 20,
-        questions_answered: 20,
-        questions_attempted: 20,
-        questions_unanswered: 5,
-        questions_correct: 18,
-        questions_incorrect: 2,
-        accuracy_percentage: 90.0,
-        final_score: 70,
-        last_heartbeat: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      },
-    ];
+    const demoStudents: CustomExamParticipant[] = [];
 
     demoStudents.forEach((s) => {
       defaultParticipants.set(`demo_exam:${s.student_id}`, s);
@@ -673,6 +512,9 @@ export async function getStudentParticipantStatus(
   let participant: CustomExamParticipant | null = null;
   let latestEvent: ExamSupervisionEvent | null = null;
   const exam = await getCustomExamById(examId);
+  const targetExamIds = Array.from(
+    new Set([examId, exam?.id, exam?.exam_code].filter(Boolean) as string[])
+  );
 
   if (isSupabaseConfigured) {
     try {
@@ -681,7 +523,7 @@ export async function getStudentParticipantStatus(
         const { data: pData } = await adminClient
           .from('custom_exam_participants')
           .select('*')
-          .eq('exam_id', examId)
+          .in('exam_id', targetExamIds)
           .eq('student_id', studentId)
           .maybeSingle();
 
@@ -690,7 +532,7 @@ export async function getStudentParticipantStatus(
         const { data: eData } = await adminClient
           .from('exam_supervision_events')
           .select('*')
-          .eq('exam_id', examId)
+          .in('exam_id', targetExamIds)
           .eq('student_id', studentId)
           .order('created_at', { ascending: false })
           .limit(1)
@@ -702,8 +544,13 @@ export async function getStudentParticipantStatus(
   }
 
   if (!participant) {
-    const all = getLocalParticipants(examId);
-    participant = all.find((p) => p.student_id === studentId) || null;
+    const all = getLocalParticipants();
+    participant =
+      all.find(
+        (p) =>
+          targetExamIds.includes(p.exam_id) &&
+          (p.student_id === studentId || p.student_lce_code === studentId)
+      ) || null;
   }
 
   if (!latestEvent) {
@@ -879,6 +726,49 @@ export async function executeSupervisionAction(
             event_source: 'control_room',
             metadata: {},
           });
+        } else if (action === 'approve' || action === 'admit') {
+          const { data: part } = await adminClient
+            .from('custom_exam_participants')
+            .update({
+              exam_status: 'in_progress',
+              updated_at: now,
+            })
+            .eq('exam_id', exam_id)
+            .eq('student_id', student_id)
+            .select()
+            .single();
+          if (part) updatedParticipant = part as CustomExamParticipant;
+
+          appendAuditLog({
+            exam_id,
+            student_id,
+            teacher_id: teacherId,
+            actor_id: teacherId,
+            actor_role: 'teacher',
+            event_type: 'STUDENT_ADMITTED',
+            event_source: 'control_room',
+            metadata: {},
+          });
+        } else if (action === 'approve_all' || action === 'admit_all') {
+          await adminClient
+            .from('custom_exam_participants')
+            .update({
+              exam_status: 'in_progress',
+              updated_at: now,
+            })
+            .eq('exam_id', exam_id)
+            .eq('exam_status', 'waiting');
+
+          appendAuditLog({
+            exam_id,
+            student_id: 'all',
+            teacher_id: teacherId,
+            actor_id: teacherId,
+            actor_role: 'teacher',
+            event_type: 'STUDENTS_ALL_ADMITTED',
+            event_source: 'control_room',
+            metadata: {},
+          });
         } else if (action === 'time_adjustment') {
           const delta = time_adjustment_seconds || 0;
           const { data } = await adminClient
@@ -975,6 +865,32 @@ export async function executeSupervisionAction(
       p.student_id === student_id
   );
 
+  if (action === 'approve_all' || action === 'admit_all') {
+    allParts.forEach((p) => {
+      if (
+        (p.exam_id === exam_id ||
+          (exam_id === 'demo_exam' && p.exam_id === 'demo') ||
+          (exam_id === 'demo' && p.exam_id === 'demo_exam')) &&
+        p.exam_status === 'waiting'
+      ) {
+        p.exam_status = 'in_progress';
+        p.updated_at = now;
+      }
+    });
+    saveLocalParticipants(allParts);
+    appendAuditLog({
+      exam_id,
+      student_id: 'all',
+      teacher_id: teacherId,
+      actor_id: teacherId,
+      actor_role: 'teacher',
+      event_type: 'STUDENTS_ALL_ADMITTED',
+      event_source: 'control_room',
+      metadata: {},
+    });
+    return { success: true, event: newEvent };
+  }
+
   if (partIdx >= 0) {
     const p = { ...allParts[partIdx] };
     if (action === 'warning') {
@@ -1016,6 +932,19 @@ export async function executeSupervisionAction(
         actor_id: teacherId,
         actor_role: 'teacher',
         event_type: 'STUDENT_RESUMED',
+        event_source: 'control_room',
+        metadata: {},
+      });
+    } else if (action === 'approve' || action === 'admit') {
+      p.exam_status = 'in_progress';
+      p.updated_at = now;
+      appendAuditLog({
+        exam_id,
+        student_id,
+        teacher_id: teacherId,
+        actor_id: teacherId,
+        actor_role: 'teacher',
+        event_type: 'STUDENT_ADMITTED',
         event_source: 'control_room',
         metadata: {},
       });
@@ -1354,8 +1283,12 @@ export async function getExamSupervisionRoomState(examId: string): Promise<{
   participants: CustomExamParticipant[];
   events: ExamSupervisionEvent[];
 }> {
-  const [exam, participants, events] = await Promise.all([
-    getCustomExamById(examId),
+  const exam = await getCustomExamById(examId);
+  const targetExamIds = Array.from(
+    new Set([examId, exam?.id, exam?.exam_code].filter(Boolean) as string[])
+  );
+
+  const [participants, events] = await Promise.all([
     (async () => {
       if (isSupabaseConfigured) {
         try {
@@ -1364,13 +1297,19 @@ export async function getExamSupervisionRoomState(examId: string): Promise<{
             const { data } = await adminClient
               .from('custom_exam_participants')
               .select('*')
-              .eq('exam_id', examId)
+              .in('exam_id', targetExamIds)
               .order('joined_at', { ascending: true });
             if (data && data.length > 0) return data as CustomExamParticipant[];
           }
         } catch {}
       }
-      return getLocalParticipants(examId);
+      const local = getLocalParticipants();
+      return local.filter(
+        (p) =>
+          targetExamIds.includes(p.exam_id) ||
+          (targetExamIds.includes('demo') && p.exam_id === 'demo_exam') ||
+          (targetExamIds.includes('demo_exam') && p.exam_id === 'demo')
+      );
     })(),
     (async () => {
       if (isSupabaseConfigured) {
@@ -1380,13 +1319,14 @@ export async function getExamSupervisionRoomState(examId: string): Promise<{
             const { data } = await adminClient
               .from('exam_supervision_events')
               .select('*')
-              .eq('exam_id', examId)
+              .in('exam_id', targetExamIds)
               .order('created_at', { ascending: false });
             if (data && data.length > 0) return data as ExamSupervisionEvent[];
           }
         } catch {}
       }
-      return getLocalEvents(examId);
+      const local = getLocalEvents();
+      return local.filter((e) => targetExamIds.includes(e.exam_id));
     })(),
   ]);
 

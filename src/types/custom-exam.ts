@@ -85,6 +85,8 @@ export type SupervisionAuditEventType =
   | 'QUESTION_VISITED'
   | 'HAND_RAISED'
   | 'HAND_ACKNOWLEDGED'
+  | 'STUDENT_ADMITTED'
+  | 'STUDENTS_ALL_ADMITTED'
   | 'STUDENT_SUBMITTED'
   | 'STUDENT_DISCONNECTED'
   | 'STUDENT_RECONNECTED'
@@ -223,7 +225,7 @@ export interface CreateCustomExamInput {
 export interface TeacherSupervisionActionPayload {
   exam_id: string;
   student_id: string;
-  action: 'warning' | 'suspend' | 'restore' | 'time_adjustment' | 'acknowledge_hand' | 'message' | 'end_student_exam';
+  action: 'warning' | 'suspend' | 'restore' | 'time_adjustment' | 'acknowledge_hand' | 'message' | 'end_student_exam' | 'approve' | 'approve_all' | 'admit' | 'admit_all';
   warning_level?: WarningLevel;
   reason?: string;
   note?: string;

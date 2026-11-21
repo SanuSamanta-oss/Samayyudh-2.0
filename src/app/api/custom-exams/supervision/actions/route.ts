@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     const payload = (await req.json()) as TeacherSupervisionActionPayload;
 
-    if (!payload.exam_id || !payload.student_id || !payload.action) {
+    if (!payload.exam_id || !payload.action || (payload.action !== 'approve_all' && payload.action !== 'admit_all' && !payload.student_id)) {
       return NextResponse.json(
         { error: 'Missing required supervision action parameters.' },
         { status: 400 }

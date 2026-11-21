@@ -49,6 +49,28 @@ function WaitingRoomContent() {
           setExam(data.exam);
           setLoading(false);
 
+          // Register student into the waiting room participant list
+          try {
+            let sId = localStorage.getItem('sy_student_id');
+            if (!sId) {
+              sId = `stud_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+              localStorage.setItem('sy_student_id', sId);
+            }
+            const sName = localStorage.getItem('sy_student_name') || 'Candidate Student';
+            const sLce = localStorage.getItem('sy_student_lce') || `LCE-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            await fetch('/api/custom-exams/join', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                exam_code: examCode,
+                student_id: sId,
+                student_name: sName,
+                student_lce_code: sLce,
+              }),
+            });
+          } catch {}
+
           // If already in progress, redirect straight to session
           if (data.exam?.status === 'in_progress') {
             router.push(`/exam/session?customExam=${examCode}`);
@@ -94,12 +116,27 @@ function WaitingRoomContent() {
     };
   }, []);
 
-  // Poll for exam start
+  // Poll for exam start or teacher individual admission
   useEffect(() => {
     if (!exam || exam.status === 'in_progress') return;
 
     const interval = setInterval(async () => {
       try {
+        const sId = typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null;
+        if (sId) {
+          const statusRes = await fetch(
+            `/api/custom-exams/student-status?exam_id=${exam.id || examCode}&student_id=${sId}`
+          );
+          if (statusRes.ok) {
+            const statusData = await statusRes.json();
+            if (statusData.participant?.exam_status === 'in_progress') {
+              clearInterval(interval);
+              router.push(`/exam/session?customExam=${examCode}`);
+              return;
+            }
+          }
+        }
+
         const res = await fetch(`/api/custom-exams/${examCode}`);
         if (res.ok) {
           const data = await res.json();
@@ -109,7 +146,7 @@ function WaitingRoomContent() {
           }
         }
       } catch {}
-    }, 2500);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [exam, examCode, router]);

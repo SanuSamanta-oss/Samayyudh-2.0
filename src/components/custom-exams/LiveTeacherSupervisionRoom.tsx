@@ -15,11 +15,10 @@ import {
   Users,
   Search,
   ArrowLeft,
+  ArrowRight,
   Clock,
-  Radio,
   Wifi,
   CheckCircle2,
-  AlertOctagon,
   FileText,
   Copy,
   Check,
@@ -37,12 +36,17 @@ import {
   Eye,
   Sliders,
   Lock,
-  RotateCcw,
   Hand,
   FileSpreadsheet,
-  Layers,
   Share2,
   QrCode,
+  MoreVertical,
+  Activity,
+  ShieldAlert,
+  Info,
+  ChevronRight,
+  ChevronDown,
+  X,
 } from 'lucide-react';
 import type {
   CustomExam,
@@ -66,7 +70,7 @@ interface LiveTeacherSupervisionRoomProps {
   isSuperAdmin?: boolean;
 }
 
-// Realistic candidate webcam video streams
+// Fallback visual streams for simulated candidate feeds when direct WebRTC is in transition
 const CANDIDATE_STREAMS: Record<string, { videoUrl: string; poster: string; gaze: string; lighting: string }> = {
   stud_1: {
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-young-man-working-with-headphones-on-laptop-42930-large.mp4',
@@ -83,8 +87,8 @@ const CANDIDATE_STREAMS: Record<string, { videoUrl: string; poster: string; gaze
   stud_3: {
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-remotely-from-his-living-room-42928-large.mp4',
     poster: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80',
-    gaze: 'Writing Notes',
-    lighting: 'Good (92%)',
+    gaze: 'Screen Focused',
+    lighting: 'Optimal (94%)',
   },
   stud_4: {
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-young-woman-concentrating-on-a-laptop-at-home-42926-large.mp4',
@@ -108,36 +112,56 @@ export function LiveTeacherSupervisionRoom({
 }: LiveTeacherSupervisionRoomProps) {
   const router = useRouter();
 
+  // Core Room State
   const [exam, setExam] = useState<CustomExam | null>(null);
   const [participants, setParticipants] = useState<CustomExamParticipant[]>([]);
   const [events, setEvents] = useState<ExamSupervisionEvent[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Selected student for main spotlight & drawer
-  const [selectedStudentId, setSelectedStudentId] = useState<string>('stud_1');
+  // Selected Student for Focus / Spotlight / Drawer
+  const [selectedStudentId, setSelectedStudentId] = useState<string>('');
   const [drawerStudent, setDrawerStudent] = useState<CustomExamParticipant | null>(null);
+
+  // View Mode: 'grid' (adaptive meeting wall) | 'spotlight' (focused active speaker style)
+  const [viewMode, setViewMode] = useState<'grid' | 'spotlight'>('grid');
+
+  // Sidebar state (Desktop right panel & Mobile bottom sheet)
+  const [showSidePanel, setShowSidePanel] = useState(true);
+  const [sidebarTab, setSidebarTab] = useState<'participants' | 'activity' | 'insights' | 'chat'>('participants');
+  const [mobileBottomSheet, setMobileBottomSheet] = useState<'none' | 'participants' | 'chat' | 'insights'>('none');
+
+  // Filters & Search
+  const [searchParticipant, setSearchParticipant] = useState('');
+  const [studentFilter, setStudentFilter] = useState<'all' | 'active' | 'suspended' | 'hand_raised' | 'warned'>('all');
+
+  // Meeting Controls State
+  const [isMicMuted, setIsMicMuted] = useState(false);
+  const [isSpeakerMuted, setIsSpeakerMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const centerContainerRef = useRef<HTMLDivElement>(null);
   const centerVideoRef = useRef<HTMLVideoElement>(null);
 
-  // Layout mode: 'spotlight' or 'grid'
-  const [viewMode, setViewMode] = useState<'spotlight' | 'grid'>('spotlight');
-
-  // Sidebar filters & tab
-  const [sidebarTab, setSidebarTab] = useState<'participants' | 'chat'>('participants');
-  const [studentFilter, setStudentFilter] = useState<'all' | 'active' | 'waiting' | 'suspended' | 'submitted' | 'hand_raised' | 'warned'>('all');
-  const [searchParticipant, setSearchParticipant] = useState('');
+  // Chat State
   const [chatInput, setChatInput] = useState('');
-  const [advisoryMessages, setAdvisoryMessages] = useState<{ id: string; sender: string; text: string; time: string }[]>([
+  const [advisoryMessages, setAdvisoryMessages] = useState<
+    { id: string; sender: string; text: string; time: string; isTeacher?: boolean }[]
+  >([
     {
       id: 'm1',
-      sender: 'Proctor System',
-      text: 'Supervision room initialized. All connected feeds are encrypted end-to-end.',
-      time: 'Just now',
+      sender: 'Supervision Engine',
+      text: 'Exam supervision session initiated. High-fidelity proctoring active.',
+      time: '10:00 AM',
+    },
+    {
+      id: 'm2',
+      sender: 'Invigilator Note',
+      text: 'Please ensure webcams remain uncovered throughout testing.',
+      time: '10:02 AM',
+      isTeacher: true,
     },
   ]);
 
-  // Modals
+  // Modals State
   const [warningModalStudent, setWarningModalStudent] = useState<CustomExamParticipant | null>(null);
   const [suspendModalStudent, setSuspendModalStudent] = useState<CustomExamParticipant | null>(null);
   const [timeModalStudent, setTimeModalStudent] = useState<CustomExamParticipant | null>(null);
@@ -145,8 +169,9 @@ export function LiveTeacherSupervisionRoom({
   const [reportModalData, setReportModalData] = useState<CustomExamReport | null>(null);
   const [actionNotification, setActionNotification] = useState<string | null>(null);
   const [copiedCode, setCopiedCode] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
 
-  // Local webcam stream preview toggle
+  // Local Invigilator Webcam Preview Toggle
   const [localCamStream, setLocalCamStream] = useState<MediaStream | null>(null);
   const [useLocalCam, setUseLocalCam] = useState(false);
 
@@ -166,8 +191,6 @@ export function LiveTeacherSupervisionRoom({
     const secs = sec % 60;
     return `${hrs > 0 ? `${hrs}:` : ''}${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
-
-  const [copiedLink, setCopiedLink] = useState(false);
 
   // Fetch room state (Real connected students only)
   const fetchRoomState = useCallback(async () => {
@@ -200,7 +223,7 @@ export function LiveTeacherSupervisionRoom({
     return () => clearInterval(interval);
   }, [fetchRoomState]);
 
-  // Local camera stream handler
+  // Invigilator local camera toggle
   const toggleLocalCamera = async () => {
     if (useLocalCam) {
       if (localCamStream) {
@@ -229,6 +252,7 @@ export function LiveTeacherSupervisionRoom({
     }
   }, [useLocalCam, localCamStream, selectedStudentId]);
 
+  // Active candidates list (de-duplicated by student_id)
   const activeCandidates = useMemo(() => {
     const seen = new Set<string>();
     return participants.filter((p) => {
@@ -256,9 +280,10 @@ export function LiveTeacherSupervisionRoom({
 
   const displayCode = exam?.exam_code || initialCode || 'CE4821';
 
-  const joinUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}/exam/waiting-room?code=${displayCode}`
-    : `https://samayyudh.vercel.app/exam/waiting-room?code=${displayCode}`;
+  const joinUrl =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/exam/waiting-room?code=${displayCode}`
+      : `https://samayyudh.vercel.app/exam/waiting-room?code=${displayCode}`;
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText(displayCode);
@@ -273,8 +298,8 @@ export function LiveTeacherSupervisionRoom({
       setActionNotification('Join link copied! Share with candidates.');
       setTimeout(() => {
         setCopiedLink(false);
-        setActionNotification(null);
-      }, 3000);
+        setActionNotification(null), 3000;
+      });
     }
   };
 
@@ -299,137 +324,10 @@ export function LiveTeacherSupervisionRoom({
     }
   };
 
-  const renderEmptyLobby = () => {
-    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(joinUrl)}`;
-
-    return (
-      <div className="flex-1 w-full rounded-[32px] overflow-hidden bg-white/80 dark:bg-[#090D1A]/90 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.6)] flex flex-col items-center justify-center p-6 sm:p-10 text-center relative border border-slate-200/60 dark:border-slate-800/60">
-        {/* Subtle Ambient Background Glows */}
-        <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-indigo-500/10 dark:bg-indigo-600/15 blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 max-w-xl mx-auto flex flex-col items-center">
-          {/* Radar Live Indicator */}
-          <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 text-xs font-bold mb-6 border border-purple-200/50 dark:border-purple-800/40 shadow-xs">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-600 dark:bg-purple-400"></span>
-            </span>
-            <span className="tracking-wide">Lobby Active • Real-Time Listener Ready</span>
-          </div>
-
-          {/* Heading requested by user */}
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
-            None is here now
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed mb-6">
-            Invite candidates to start the examination. Real-time webcam streams, proctoring telemetry, and candidate feeds will appear automatically as soon as students check in.
-          </p>
-
-          {/* QR Code and Quick Join Box */}
-          <div className="flex flex-col sm:flex-row items-center gap-6 p-5 sm:p-6 rounded-3xl bg-slate-50 dark:bg-[#111728] border border-slate-200/70 dark:border-slate-800/70 shadow-sm w-full max-w-md mb-6">
-            <div className="relative p-2.5 bg-white rounded-2xl shadow-md shrink-0 border border-slate-100">
-              <img
-                src={qrCodeUrl}
-                alt={`QR code to join ${displayCode}`}
-                className="w-32 h-32 sm:w-36 sm:h-36 object-contain rounded-xl"
-                loading="eager"
-              />
-              <div className="absolute -bottom-2 -right-2 bg-purple-600 text-white p-1 rounded-full shadow-md">
-                <QrCode className="w-3.5 h-3.5" />
-              </div>
-            </div>
-
-            <div className="flex-1 text-left flex flex-col justify-between h-full space-y-3 w-full">
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                  Exam Access Code
-                </span>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-xl sm:text-2xl font-black font-mono text-purple-600 dark:text-purple-400 tracking-wider">
-                    {displayCode}
-                  </span>
-                  <motion.button
-                    type="button"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleCopyCode}
-                    className="p-1.5 rounded-lg bg-slate-200/70 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer border-0 outline-none"
-                    title="Copy exam code"
-                  >
-                    {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                  </motion.button>
-                </div>
-              </div>
-
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                  Student Waiting Room
-                </span>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate font-mono mt-0.5">
-                  /exam/waiting-room?code={displayCode}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-2 pt-1">
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={handleCopyJoinLink}
-                  className="flex-1 py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
-                >
-                  {copiedLink ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedLink ? 'Copied' : 'Copy Link'}</span>
-                </motion.button>
-
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={handleShareInvite}
-                  className="py-2 px-3 rounded-xl bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5"
-                  title="Share invitation"
-                >
-                  <Share2 className="w-3.5 h-3.5" />
-                </motion.button>
-              </div>
-            </div>
-          </div>
-
-          {/* Action button: Invite to Start Examination */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <motion.button
-              type="button"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={handleShareInvite}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-extrabold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_8px_25px_rgba(147,51,234,0.35)]"
-            >
-              <Share2 className="w-4 h-4" />
-              <span>Invite to Start the Examination</span>
-            </motion.button>
-
-            <motion.button
-              type="button"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={fetchRoomState}
-              className="px-4 py-3 rounded-full bg-slate-200/70 hover:bg-slate-300/80 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Refresh Room</span>
-            </motion.button>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   // Start exam handler
   const handleStartExam = async () => {
     if (activeCandidates.length === 0) {
-      setActionNotification('None is here now. Please share the QR or code to invite candidates before starting.');
+      setActionNotification('No one is here right now. Please invite students before starting.');
       setTimeout(() => setActionNotification(null), 4000);
       return;
     }
@@ -497,9 +395,7 @@ export function LiveTeacherSupervisionRoom({
       // Optimistic local update
       setParticipants((prev) =>
         prev.map((p) =>
-          p.student_id === targetStudent.student_id
-            ? { ...p, warning_count: (p.warning_count || 0) + 1 }
-            : p
+          p.student_id === targetStudent.student_id ? { ...p, warning_count: (p.warning_count || 0) + 1 } : p
         )
       );
       setActionNotification(`Warning issued to ${targetStudent.student_name}`);
@@ -565,9 +461,7 @@ export function LiveTeacherSupervisionRoom({
     } catch {
       setParticipants((prev) =>
         prev.map((p) =>
-          p.student_id === student.student_id
-            ? { ...p, is_suspended: false, suspended_reason: null }
-            : p
+          p.student_id === student.student_id ? { ...p, is_suspended: false, suspended_reason: null } : p
         )
       );
       setActionNotification(`Candidate ${student.student_name} restored.`);
@@ -649,6 +543,7 @@ export function LiveTeacherSupervisionRoom({
         sender: 'You (Invigilator)',
         text: chatInput.trim(),
         time: 'Just now',
+        isTeacher: true,
       },
     ]);
     setChatInput('');
@@ -681,9 +576,7 @@ export function LiveTeacherSupervisionRoom({
     if (!matchesSearch) return false;
 
     if (studentFilter === 'active') return p.exam_status === 'in_progress' && !p.is_suspended;
-    if (studentFilter === 'waiting') return p.exam_status === 'waiting';
     if (studentFilter === 'suspended') return p.is_suspended;
-    if (studentFilter === 'submitted') return p.exam_status === 'submitted';
     if (studentFilter === 'hand_raised') return p.hand_raised;
     if (studentFilter === 'warned') return p.warning_count > 0;
 
@@ -696,28 +589,335 @@ export function LiveTeacherSupervisionRoom({
   const suspendedCount = activeCandidates.filter((p) => p.is_suspended).length;
   const handRaisedCount = activeCandidates.filter((p) => p.hand_raised).length;
 
-  return (
-    <div className="flex flex-col h-[calc(100vh-4.25rem)] w-full select-none overflow-hidden bg-slate-100/90 dark:bg-[#070A12] text-slate-800 dark:text-slate-100 transition-colors duration-300">
-      {/* ── SUPER ADMIN SUPERVISION MODE BANNER ── */}
-      {isSuperAdmin && (
-        <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-950 text-white px-4 py-2 flex items-center justify-between text-xs font-semibold shadow-md z-30 shrink-0 border-b border-purple-500/30">
-          <div className="flex items-center gap-2.5">
+  // Grid layout class based on participant count
+  const getGridColsClass = (count: number) => {
+    if (count <= 1) return 'grid-cols-1';
+    if (count === 2) return 'grid-cols-1 sm:grid-cols-2';
+    if (count <= 4) return 'grid-cols-2';
+    if (count <= 6) return 'grid-cols-2 lg:grid-cols-3';
+    return 'grid-cols-2 sm:grid-cols-3 xl:grid-cols-4';
+  };
+
+  // ─────────────────────────────────────────────────────────────
+  // RENDER: NO ONE IS HERE RIGHT NOW (EMPTY STATE & LIVE QR)
+  // ─────────────────────────────────────────────────────────────
+  const renderEmptyLobby = () => {
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(joinUrl)}`;
+
+    return (
+      <div className="flex-1 w-full rounded-[32px] overflow-hidden bg-white/90 dark:bg-[#0D1322]/90 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.04)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.6)] flex flex-col items-center justify-center p-6 sm:p-12 text-center relative border-0">
+        {/* Soft Ambient Meeting Glows */}
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-purple-500/10 dark:bg-purple-600/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-indigo-500/10 dark:bg-indigo-600/15 blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-xl mx-auto flex flex-col items-center">
+          {/* Soft Meeting Radar Badge */}
+          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 text-xs font-bold mb-6 shadow-xs border-0 outline-none">
             <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-purple-600 dark:bg-purple-400"></span>
+            </span>
+            <span className="tracking-wide">Supervision Stage Active • Waiting for candidates...</span>
+          </div>
+
+          {/* Heading Requested */}
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-3">
+            No one is here right now
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md leading-relaxed mb-8">
+            Your supervision room is ready. Invite students to join the examination. Real-time video tiles will appear automatically as candidates check in.
+          </p>
+
+          {/* Large High-Fidelity QR Code Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="flex flex-col sm:flex-row items-center gap-6 p-6 rounded-[28px] bg-slate-50/90 dark:bg-[#141B2D]/90 shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.5)] w-full max-w-md mb-8 border-0"
+          >
+            <div className="relative p-3 bg-white rounded-2xl shadow-sm shrink-0">
+              <img
+                src={qrCodeUrl}
+                alt={`Scan QR code to join exam ${displayCode}`}
+                className="w-32 h-32 sm:w-36 sm:h-36 object-contain rounded-xl"
+                loading="eager"
+              />
+              <div className="absolute -bottom-2 -right-2 bg-purple-600 text-white p-1.5 rounded-full shadow-md">
+                <QrCode className="w-3.5 h-3.5" />
+              </div>
+            </div>
+
+            <div className="flex-1 text-left flex flex-col justify-between h-full space-y-3 w-full">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400">
+                  Examination Access Code
+                </span>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-2xl font-black font-mono text-purple-600 dark:text-purple-400 tracking-wider">
+                    {displayCode}
+                  </span>
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleCopyCode}
+                    className="p-1.5 rounded-xl bg-slate-200/70 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer border-0 outline-none"
+                    title="Copy exam code"
+                  >
+                    {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                  </motion.button>
+                </div>
+              </div>
+
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400">
+                  Direct Student Link
+                </span>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate font-mono mt-0.5">
+                  /exam/waiting-room?code={displayCode}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 pt-1">
+                <motion.button
+                  type="button"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleCopyJoinLink}
+                  className="flex-1 py-2 px-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
+                >
+                  {copiedLink ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedLink ? 'Copied' : 'Copy Join Link'}</span>
+                </motion.button>
+
+                <motion.button
+                  type="button"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleShareInvite}
+                  className="py-2 px-3 rounded-xl bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5"
+                  title="Share invitation"
+                >
+                  <Share2 className="w-3.5 h-3.5" />
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Primary Action Button */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={handleShareInvite}
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-extrabold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_8px_25px_rgba(147,51,234,0.3)]"
+            >
+              <Share2 className="w-4 h-4" />
+              <span>Invite Students</span>
+            </motion.button>
+
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={fetchRoomState}
+              className="px-4 py-3 rounded-full bg-slate-200/70 hover:bg-slate-300/80 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span>Refresh Room</span>
+            </motion.button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // ─────────────────────────────────────────────────────────────
+  // RENDER: INDIVIDUAL CANDIDATE TILE
+  // ─────────────────────────────────────────────────────────────
+  const renderParticipantTile = (p: CustomExamParticipant, isSpotlight = false) => {
+    const isSelected = p.student_id === selectedStudentId;
+    const streamData = CANDIDATE_STREAMS[p.student_id];
+
+    return (
+      <motion.div
+        key={p.student_id}
+        layout
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+        onClick={() => setSelectedStudentId(p.student_id)}
+        onDoubleClick={() => setDrawerStudent(p)}
+        className={`group relative rounded-3xl overflow-hidden bg-slate-900 shadow-[0_8px_25px_rgba(0,0,0,0.08)] dark:shadow-[0_12px_35px_rgba(0,0,0,0.6)] cursor-pointer flex flex-col justify-between transition-all duration-300 border-0 outline-none ring-0 ${
+          isSpotlight || activeCandidates.length === 1
+            ? 'w-full h-full min-h-[340px] sm:min-h-[460px]'
+            : 'aspect-video min-h-[160px]'
+        } ${isSelected ? 'shadow-[0_12px_40px_rgba(147,51,234,0.45)] ring-2 ring-purple-500/70' : ''}`}
+      >
+        {/* Candidate Video Stream */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={streamData?.poster}
+          className={`absolute inset-0 w-full h-full object-cover filter brightness-95 contrast-105 transition-all duration-300 ${
+            p.is_suspended ? 'blur-md brightness-40' : ''
+          }`}
+        >
+          <source src={streamData?.videoUrl} type="video/mp4" />
+        </video>
+
+        {/* Soft Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40 pointer-events-none" />
+
+        {/* Top Floating Status Indicators */}
+        <div className="relative z-10 p-3 sm:p-4 flex items-center justify-between w-full">
+          <div className="flex items-center gap-2">
+            <span
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold backdrop-blur-md shadow-xs ${
+                p.is_suspended
+                  ? 'bg-rose-600/90 text-white'
+                  : 'bg-black/45 text-white'
+              }`}
+            >
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  p.is_suspended ? 'bg-white' : 'bg-emerald-400 shadow-[0_0_8px_#34d399]'
+                }`}
+              />
+              <span>{p.is_suspended ? 'Suspended' : 'Live'}</span>
+            </span>
+
+            {/* Audio Indicator */}
+            <span className="p-1.5 rounded-full bg-black/45 backdrop-blur-md text-slate-200">
+              <Mic className="w-3 h-3 text-emerald-400" />
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            {p.hand_raised && (
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-amber-500 text-slate-950 flex items-center gap-1 shadow-md animate-pulse">
+                <Hand className="w-3 h-3" />
+                <span>Hand Raised</span>
+              </span>
+            )}
+            {p.warning_count > 0 && (
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-amber-500 text-slate-950 shadow-md">
+                {p.warning_count} Warning{p.warning_count > 1 ? 's' : ''}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* If Suspended: Center Lock Screen */}
+        {p.is_suspended && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-4 text-center bg-rose-950/60 backdrop-blur-sm">
+            <div className="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-300 flex items-center justify-center mb-2">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h4 className="text-sm font-bold text-white">Examination Paused</h4>
+            <p className="text-[11px] text-rose-200 mt-0.5 max-w-[200px] truncate">
+              {p.suspended_reason || 'Flagged by invigilator'}
+            </p>
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRestoreStudent(p);
+              }}
+              className="mt-3 px-4 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold shadow-md cursor-pointer border-0 outline-none flex items-center gap-1.5"
+            >
+              <Play className="w-3 h-3" />
+              <span>Restore</span>
+            </motion.button>
+          </div>
+        )}
+
+        {/* Bottom Floating Candidate Information Bar */}
+        <div className="relative z-10 p-3 sm:p-4 flex items-center justify-between w-full">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/45 backdrop-blur-md text-white text-xs font-semibold shadow-md">
+            <span>{p.student_name}</span>
+            <span className="text-[10px] text-slate-300 font-mono">({p.student_lce_code})</span>
+          </div>
+
+          {/* Quick Hover Supervision Actions */}
+          <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setWarningModalStudent(p);
+              }}
+              className="p-2 rounded-full bg-amber-500 text-slate-950 shadow-md cursor-pointer border-0 outline-none"
+              title="Issue Warning"
+            >
+              <AlertTriangle className="w-3.5 h-3.5" />
+            </motion.button>
+
+            {!p.is_suspended && (
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.94 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSuspendModalStudent(p);
+                }}
+                className="p-2 rounded-full bg-rose-600 text-white shadow-md cursor-pointer border-0 outline-none"
+                title="Suspend Student"
+              >
+                <Pause className="w-3.5 h-3.5" />
+              </motion.button>
+            )}
+
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setDrawerStudent(p);
+              }}
+              className="p-2 rounded-full bg-white/20 backdrop-blur-md text-white shadow-md cursor-pointer border-0 outline-none"
+              title="Inspect Dossier"
+            >
+              <MoreVertical className="w-3.5 h-3.5" />
+            </motion.button>
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
+
+  // ─────────────────────────────────────────────────────────────
+  // RENDER: DESKTOP WORKSPACE
+  // ─────────────────────────────────────────────────────────────
+  return (
+    <div className="flex flex-col h-[calc(100vh-4.25rem)] w-full select-none overflow-hidden bg-[#EEF3FB] dark:bg-[#080C16] text-slate-800 dark:text-slate-100 transition-colors duration-300 font-sans">
+      {/* ── SUPER ADMIN SUPERVISION BANNER ── */}
+      {isSuperAdmin && (
+        <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-950 text-white px-4 py-2 flex items-center justify-between text-xs font-semibold shadow-md z-30 shrink-0">
+          <div className="flex items-center gap-2.5">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
             </span>
             <span className="tracking-wider uppercase font-black text-amber-300">
-              Super Admin Supervision Mode
+              Super Admin Universal Control Room
             </span>
             <span className="text-white/40 hidden sm:inline">|</span>
             <span className="text-white/80 hidden sm:inline text-[11px]">
-              Platform-Wide Oversight & Intervention Authority (Audit Logged as Admin)
+              Full Platform Oversight & Audit Logging Active
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="bg-purple-500/30 text-purple-200 px-2.5 py-0.5 rounded-full text-[10px] font-bold border border-purple-400/20">
-              Actor Role: Admin
-            </span>
             {onBackToDashboard && (
               <button
                 type="button"
@@ -731,8 +931,8 @@ export function LiveTeacherSupervisionRoom({
         </div>
       )}
 
-      {/* ── TOP INFORMATION BAR ── */}
-      <header className="h-16 px-4 sm:px-6 bg-white/90 dark:bg-[#0E1322]/90 backdrop-blur-2xl flex items-center justify-between shrink-0 z-20 shadow-xs border-b border-slate-200/50 dark:border-slate-800/60">
+      {/* ── TOP HEADER (MEETORA / ZOOM STYLE) ── */}
+      <header className="h-16 px-4 sm:px-6 bg-white/80 dark:bg-[#0E1424]/80 backdrop-blur-2xl flex items-center justify-between shrink-0 z-20 shadow-[0_2px_15px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_25px_rgba(0,0,0,0.4)] border-0">
         <div className="flex items-center gap-3 min-w-0">
           <motion.button
             type="button"
@@ -748,7 +948,7 @@ export function LiveTeacherSupervisionRoom({
           <div className="min-w-0">
             <div className="flex items-center gap-2.5">
               <h1 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white truncate">
-                {exam?.title || 'Custom Examination Supervision Room'}
+                {exam?.title || 'Examination Supervision Room'}
               </h1>
               <motion.button
                 type="button"
@@ -756,18 +956,14 @@ export function LiveTeacherSupervisionRoom({
                 whileTap={{ scale: 0.96 }}
                 onClick={handleCopyCode}
                 className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 hover:bg-purple-200 dark:bg-purple-950/70 dark:hover:bg-purple-900/70 text-purple-800 dark:text-purple-300 text-xs font-mono font-bold transition-all border-0 outline-none shadow-xs"
-                title="Copy CE Code"
+                title="Copy Exam Code"
               >
                 <span>{displayCode}</span>
-                {copiedCode ? (
-                  <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                ) : (
-                  <Copy className="w-3 h-3" />
-                )}
+                {copiedCode ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
               </motion.button>
             </div>
             <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 truncate">
-              <span>{totalJoinedCount} Joined</span>
+              <span>{totalJoinedCount} Students Connected</span>
               <span>•</span>
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{activeCount} Active</span>
               {suspendedCount > 0 && (
@@ -776,38 +972,12 @@ export function LiveTeacherSupervisionRoom({
                   <span className="text-rose-600 dark:text-rose-400 font-semibold">{suspendedCount} Suspended</span>
                 </>
               )}
-              {handRaisedCount > 0 && (
-                <>
-                  <span>•</span>
-                  <span className="text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1 animate-pulse">
-                    <Hand className="w-3 h-3" />
-                    <span>{handRaisedCount} Hand Raised</span>
-                  </span>
-                </>
-              )}
             </div>
           </div>
         </div>
 
-        {/* Center: View Switcher (Spotlight Focus vs Multi-Cam Wall) */}
-        <div className="hidden lg:flex items-center p-1 rounded-full bg-slate-200/70 dark:bg-white/10 shadow-xs border-0 outline-none relative">
-          <button
-            type="button"
-            onClick={() => setViewMode('spotlight')}
-            className="relative flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10"
-          >
-            {viewMode === 'spotlight' && (
-              <motion.div
-                layoutId="viewModeActiveIndicator"
-                transition={{ type: 'spring', stiffness: 450, damping: 32 }}
-                className="absolute inset-0 rounded-full bg-white dark:bg-purple-600 shadow-[0_2px_10px_rgba(0,0,0,0.12)] dark:shadow-[0_2px_14px_rgba(147,51,234,0.45)]"
-              />
-            )}
-            <Columns className={`w-3.5 h-3.5 relative z-10 transition-colors ${viewMode === 'spotlight' ? 'text-purple-700 dark:text-white' : 'text-slate-500 dark:text-slate-400'}`} />
-            <span className={`relative z-10 transition-colors ${viewMode === 'spotlight' ? 'text-purple-950 dark:text-white font-extrabold' : 'text-slate-600 dark:text-slate-300'}`}>
-              Spotlight View
-            </span>
-          </button>
+        {/* Center: View Switcher (Desktop) */}
+        <div className="hidden lg:flex items-center p-1 rounded-full bg-slate-200/70 dark:bg-white/10 shadow-inner border-0 outline-none relative">
           <button
             type="button"
             onClick={() => setViewMode('grid')}
@@ -817,17 +987,53 @@ export function LiveTeacherSupervisionRoom({
               <motion.div
                 layoutId="viewModeActiveIndicator"
                 transition={{ type: 'spring', stiffness: 450, damping: 32 }}
-                className="absolute inset-0 rounded-full bg-white dark:bg-purple-600 shadow-[0_2px_10px_rgba(0,0,0,0.12)] dark:shadow-[0_2px_14px_rgba(147,51,234,0.45)]"
+                className="absolute inset-0 rounded-full bg-white dark:bg-purple-600 shadow-[0_2px_10px_rgba(0,0,0,0.12)]"
               />
             )}
-            <LayoutGrid className={`w-3.5 h-3.5 relative z-10 transition-colors ${viewMode === 'grid' ? 'text-purple-700 dark:text-white' : 'text-slate-500 dark:text-slate-400'}`} />
-            <span className={`relative z-10 transition-colors ${viewMode === 'grid' ? 'text-purple-950 dark:text-white font-extrabold' : 'text-slate-600 dark:text-slate-300'}`}>
-              Multi-Cam Grid
+            <LayoutGrid
+              className={`w-3.5 h-3.5 relative z-10 transition-colors ${
+                viewMode === 'grid' ? 'text-purple-700 dark:text-white' : 'text-slate-500 dark:text-slate-400'
+              }`}
+            />
+            <span
+              className={`relative z-10 transition-colors ${
+                viewMode === 'grid' ? 'text-purple-950 dark:text-white font-extrabold' : 'text-slate-600 dark:text-slate-300'
+              }`}
+            >
+              Adaptive Grid
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setViewMode('spotlight')}
+            className="relative flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10"
+          >
+            {viewMode === 'spotlight' && (
+              <motion.div
+                layoutId="viewModeActiveIndicator"
+                transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                className="absolute inset-0 rounded-full bg-white dark:bg-purple-600 shadow-[0_2px_10px_rgba(0,0,0,0.12)]"
+              />
+            )}
+            <Columns
+              className={`w-3.5 h-3.5 relative z-10 transition-colors ${
+                viewMode === 'spotlight' ? 'text-purple-700 dark:text-white' : 'text-slate-500 dark:text-slate-400'
+              }`}
+            />
+            <span
+              className={`relative z-10 transition-colors ${
+                viewMode === 'spotlight'
+                  ? 'text-purple-950 dark:text-white font-extrabold'
+                  : 'text-slate-600 dark:text-slate-300'
+              }`}
+            >
+              Spotlight View
             </span>
           </button>
         </div>
 
-        {/* Right Header Status Badges & Action Buttons */}
+        {/* Right Header Status Badges & Quick Reports */}
         <div className="flex items-center gap-2.5">
           {/* Start Exam Button if Exam is Waiting */}
           {exam?.status === 'waiting' && (
@@ -839,53 +1045,61 @@ export function LiveTeacherSupervisionRoom({
               className="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1.5 shadow-md shadow-emerald-600/30"
             >
               <Play className="w-3.5 h-3.5" />
-              <span>Start Examination</span>
+              <span>Start Exam</span>
             </motion.button>
           )}
 
-          <div className="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-xs border-0 outline-none">
+          {/* Official Countdown Pill */}
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-white/10 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-xs border-0 outline-none">
             <Clock className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
             <span>{formatCountdown(remainingSeconds)}</span>
           </div>
 
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 text-xs font-bold shadow-xs border-0 outline-none">
-            <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-            <span>{(exam?.status || 'live').toUpperCase()}</span>
-          </div>
-
-          {/* Download Excel Report */}
+          {/* Excel Report Download */}
           <motion.button
             type="button"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleDownloadExcel}
-            className="p-2 sm:px-3.5 sm:py-2 rounded-full bg-purple-100 hover:bg-purple-200 dark:bg-purple-950/60 dark:hover:bg-purple-900/60 text-purple-800 dark:text-purple-300 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1.5 shadow-xs"
-            title="Download 5-Sheet Excel Report"
+            className="hidden sm:flex items-center gap-1.5 p-2 sm:px-3.5 sm:py-2 rounded-full bg-purple-100 hover:bg-purple-200 dark:bg-purple-950/60 dark:hover:bg-purple-900/60 text-purple-800 dark:text-purple-300 text-xs font-bold transition-all cursor-pointer border-0 outline-none shadow-xs"
+            title="Download Excel Report"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-            <span className="hidden sm:inline">Excel Report</span>
+            <span>Excel</span>
           </motion.button>
 
-          {/* Open Full Audit Report Modal */}
+          {/* Supervision Audit Modal */}
           <motion.button
             type="button"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleOpenReport}
-            className="p-2 sm:px-3.5 sm:py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1.5 shadow-xs"
-            title="Supervision Audit Dashboard"
+            className="hidden md:flex items-center gap-1.5 p-2 sm:px-3.5 sm:py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none shadow-xs"
+            title="Supervision Audit"
           >
             <FileText className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-            <span className="hidden md:inline">Audit Log</span>
+            <span>Audit</span>
+          </motion.button>
+
+          {/* Toggle Right Panel (Desktop) */}
+          <motion.button
+            type="button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setShowSidePanel(!showSidePanel)}
+            className="p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-all cursor-pointer border-0 outline-none shadow-xs"
+            title={showSidePanel ? 'Collapse Sidebar' : 'Expand Sidebar'}
+          >
+            <Users className="w-4 h-4" />
           </motion.button>
         </div>
       </header>
 
-      {/* ── MAIN WORKSPACE ── */}
-      <div className="flex-1 flex min-h-0 relative p-3 sm:p-4 gap-4">
-        {/* CENTER COLUMN: MAIN VIEW */}
+      {/* ── MAIN WORKSPACE CONTAINER ── */}
+      <div className="flex-1 flex min-h-0 relative p-3 sm:p-5 gap-4">
+        {/* CENTER COLUMN: MEETING STAGE */}
         <div className="flex-1 flex flex-col min-w-0 relative">
-          {/* Notification Toast */}
+          {/* Action Notification Pill Toast */}
           <AnimatePresence>
             {actionNotification && (
               <motion.div
@@ -900,863 +1114,675 @@ export function LiveTeacherSupervisionRoom({
             )}
           </AnimatePresence>
 
-          {/* VIEW MODE A: SPOTLIGHT MODE */}
-          {viewMode === 'spotlight' ? (
-            activeCandidates.length === 0 ? (
+          {/* ── MEETING STAGE VIEWPORT ── */}
+          <div
+            ref={centerContainerRef}
+            className="flex-1 flex flex-col min-h-0 relative rounded-[32px] overflow-hidden bg-white/70 dark:bg-[#0E1424]/70 backdrop-blur-xl shadow-[0_12px_45px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.5)] p-3 sm:p-4 border-0"
+          >
+            {activeCandidates.length === 0 ? (
               renderEmptyLobby()
+            ) : viewMode === 'grid' ? (
+              /* ADAPTIVE PARTICIPANT GRID (ZOOM / MEETORA STYLE) */
+              <div
+                className={`flex-1 grid ${getGridColsClass(
+                  activeCandidates.length
+                )} gap-3.5 overflow-y-auto pr-1 pb-1 scrollbar-none`}
+              >
+                {activeCandidates.map((p) => renderParticipantTile(p, false))}
+              </div>
             ) : (
-              <>
-                {/* Spotlight Center Video Stage */}
-                <div
-                  ref={centerContainerRef}
-                  className="flex-1 relative rounded-[32px] overflow-hidden bg-slate-950 dark:bg-[#030611] shadow-[0_20px_50px_rgba(0,0,0,0.18)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.7)] flex items-center justify-center min-h-[300px]"
-                >
-                  {selectedStudent ? (
-                    <>
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={selectedStudent.student_id + (useLocalCam ? '_local' : '_stream')}
-                          initial={{ opacity: 0, scale: 0.98 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 1.01 }}
-                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                          className="absolute inset-0 w-full h-full"
-                        >
-                          {useLocalCam ? (
-                            <video
-                              ref={centerVideoRef}
-                              autoPlay
-                              playsInline
-                              muted
-                              className="w-full h-full object-cover -scale-x-100"
-                            />
-                          ) : (
-                            <video
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              poster={CANDIDATE_STREAMS[selectedStudent.student_id]?.poster}
-                              className={`w-full h-full object-cover filter brightness-95 contrast-105 transition-all duration-300 ${
-                                selectedStudent.is_suspended ? 'blur-md brightness-50' : ''
-                              }`}
-                            >
-                              <source
-                                src={CANDIDATE_STREAMS[selectedStudent.student_id]?.videoUrl}
-                                type="video/mp4"
-                              />
-                            </video>
-                          )}
-                        </motion.div>
-                      </AnimatePresence>
-
-                      {/* Subtle Cinematic Vignette */}
-                      <div className="absolute inset-0 bg-radial from-transparent via-black/10 to-black/50 pointer-events-none" />
-
-                      {/* If Suspended: Prominent Frosted Suspension Screen */}
-                      {selectedStudent.is_suspended && (
-                        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-rose-950/60 backdrop-blur-md">
-                          <div className="w-16 h-16 rounded-3xl bg-rose-600/20 text-rose-400 flex items-center justify-center mb-4 relative">
-                            <Lock className="w-8 h-8" />
-                            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 animate-ping opacity-75" />
-                            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500" />
-                          </div>
-                          <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-600 text-white mb-2 shadow-lg">
-                            Candidate Suspended
-                          </span>
-                          <h3 className="text-xl sm:text-2xl font-extrabold text-white">
-                            Examination Paused by Invigilator
-                          </h3>
-                          <p className="text-xs text-rose-200 mt-1 max-w-md">
-                            Reason: {selectedStudent.suspended_reason || 'Examination integrity breach flagged.'}
-                          </p>
-                          <motion.button
-                            type="button"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => handleRestoreStudent(selectedStudent)}
-                            className="mt-5 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_8px_25px_rgba(16,185,129,0.5)]"
-                          >
-                            <Play className="w-4 h-4" />
-                            <span>Restore Candidate Access</span>
-                          </motion.button>
-                        </div>
-                      )}
-
-                      {/* Overlaid Candidate Name Tag with Live Audio Visualizer */}
-                      <div className="absolute bottom-5 left-5 z-10 flex items-center gap-2.5">
-                        <div className="flex items-center gap-3 px-4 py-2.5 rounded-full bg-black/65 backdrop-blur-2xl text-white text-xs font-bold shadow-xl border-0 outline-none">
-                          <span className={`w-2.5 h-2.5 rounded-full ${selectedStudent.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_10px_#34d399]'}`} />
-                          <span>{selectedStudent.student_name}</span>
-                          <span className="text-[10px] text-slate-300 font-mono">
-                            ({selectedStudent.student_lce_code})
-                          </span>
-
-                          {!selectedStudent.is_suspended && (
-                            <div className="flex items-center gap-0.5 ml-1">
-                              <span className="w-1 h-3 rounded-full bg-emerald-400 animate-pulse" />
-                              <span className="w-1 h-4 rounded-full bg-emerald-400 animate-pulse delay-75" />
-                              <span className="w-1 h-2 rounded-full bg-emerald-400 animate-pulse delay-150" />
-                            </div>
-                          )}
-                        </div>
-
-                        {selectedStudent.hand_raised && (
-                          <div className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold shadow-xl animate-pulse">
-                            <Hand className="w-4 h-4" />
-                            <span>Hand Raised</span>
-                          </div>
-                        )}
-
-                        {!selectedStudent.is_suspended && (
-                          <div className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full bg-black/60 backdrop-blur-xl text-slate-200 text-xs font-medium shadow-xl">
-                            <Eye className="w-3.5 h-3.5 text-purple-400" />
-                            <span>{CANDIDATE_STREAMS[selectedStudent.student_id]?.gaze || 'Screen Focused'}</span>
-                          </div>
-                        )}
-
-                        {selectedStudent.warning_count > 0 && (
-                          <span className="px-3 py-2 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold shadow-xl">
-                            {selectedStudent.warning_count} Warning{selectedStudent.warning_count > 1 ? 's' : ''}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Network Quality Tag */}
-                      <div className="absolute top-5 right-5 z-10 flex items-center gap-2">
-                        <span className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-xl text-emerald-300 text-xs font-bold shadow-xl border-0">
-                          <Wifi className="w-3.5 h-3.5 text-emerald-400" />
-                          <span>1080p HD (24ms)</span>
-                        </span>
-                      </div>
-
-                      {/* Camera Switcher & Fullscreen */}
-                      <div className="absolute bottom-5 right-5 z-10 flex items-center gap-2">
-                        <motion.button
-                          type="button"
-                          whileHover={{ scale: 1.08 }}
-                          whileTap={{ scale: 0.94 }}
-                          onClick={toggleLocalCamera}
-                          className={`p-3 rounded-full backdrop-blur-xl transition-all cursor-pointer border-0 outline-none shadow-xl ${
-                            useLocalCam
-                              ? 'bg-purple-600 text-white shadow-[0_0_25px_rgba(147,51,234,0.7)]'
-                              : 'bg-black/60 text-white hover:bg-black/80'
-                          }`}
-                          title={useLocalCam ? 'Switch to student video feed' : 'Connect and show my live webcam'}
-                        >
-                          <Camera className="w-4 h-4" />
-                        </motion.button>
-
-                        <motion.button
-                          type="button"
-                          whileHover={{ scale: 1.08 }}
-                          whileTap={{ scale: 0.94 }}
-                          onClick={toggleFullscreen}
-                          className="p-3 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-xl text-white transition-all cursor-pointer border-0 outline-none shadow-xl"
-                          title="Toggle fullscreen"
-                        >
-                          {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-                        </motion.button>
-                      </div>
-                    </>
-                  ) : null}
+              /* SPOTLIGHT MODE: FOCUSED STUDENT + CAROUSEL RIBBON */
+              <div className="flex-1 flex flex-col min-h-0 gap-3">
+                <div className="flex-1 relative min-h-0">
+                  {selectedStudent && renderParticipantTile(selectedStudent, true)}
                 </div>
 
-                {/* Bottom Carousel Strip with Live Moving Feeds */}
+                {/* Candidate Thumbnails Carousel Ribbon */}
+                {activeCandidates.length > 1 && (
+                  <div className="flex items-center gap-2.5 overflow-x-auto py-1 scrollbar-none shrink-0">
+                    {activeCandidates.map((p) => {
+                      const isSel = p.student_id === selectedStudentId;
+                      const streamData = CANDIDATE_STREAMS[p.student_id];
+                      return (
+                        <motion.div
+                          key={`ribbon-${p.student_id}`}
+                          whileHover={{ scale: 1.04 }}
+                          whileTap={{ scale: 0.96 }}
+                          onClick={() => setSelectedStudentId(p.student_id)}
+                          className={`relative w-36 sm:w-44 aspect-video rounded-2xl overflow-hidden cursor-pointer shrink-0 shadow-sm transition-all border-0 ${
+                            isSel ? 'ring-2 ring-purple-600 scale-[1.02]' : 'opacity-80 hover:opacity-100'
+                          }`}
+                        >
+                          <img
+                            src={streamData?.poster}
+                            alt={p.student_name}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                          <div className="absolute bottom-2 left-2 right-2 text-white text-[11px] font-bold truncate">
+                            {p.student_name}
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* ── FLOATING BOTTOM MEETING CONTROL BAR (ZOOM / GOOGLE MEET STYLE) ── */}
+          <div className="mt-3.5 flex items-center justify-center relative z-20">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+              className="px-5 py-3 rounded-full bg-white/95 dark:bg-[#12182B]/95 backdrop-blur-2xl shadow-[0_15px_45px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.6)] flex items-center gap-2.5 sm:gap-4 border-0"
+            >
+              {/* Mic Toggle */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={() => setIsMicMuted(!isMicMuted)}
+                className={`p-3 rounded-full transition-all cursor-pointer border-0 outline-none ${
+                  isMicMuted
+                    ? 'bg-rose-100 dark:bg-rose-950/70 text-rose-600 dark:text-rose-400'
+                    : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200'
+                }`}
+                title={isMicMuted ? 'Unmute Microphone' : 'Mute Microphone'}
+              >
+                {isMicMuted ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+              </motion.button>
+
+              {/* Invigilator Video Preview Toggle */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={toggleLocalCamera}
+                className={`p-3 rounded-full transition-all cursor-pointer border-0 outline-none ${
+                  useLocalCam
+                    ? 'bg-purple-600 text-white shadow-[0_0_20px_rgba(147,51,234,0.5)]'
+                    : 'bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200'
+                }`}
+                title={useLocalCam ? 'Hide My Webcam' : 'Show My Webcam'}
+              >
+                <Camera className="w-4 h-4" />
+              </motion.button>
+
+              {/* View Mode Toggle */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={() => setViewMode(viewMode === 'grid' ? 'spotlight' : 'grid')}
+                className="p-3 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-all cursor-pointer border-0 outline-none"
+                title={viewMode === 'grid' ? 'Switch to Spotlight View' : 'Switch to Adaptive Grid'}
+              >
+                {viewMode === 'grid' ? <Columns className="w-4 h-4" /> : <LayoutGrid className="w-4 h-4" />}
+              </motion.button>
+
+              {/* Participants Drawer Button */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={() => {
+                  setSidebarTab('participants');
+                  setShowSidePanel(true);
+                  setMobileBottomSheet('participants');
+                }}
+                className="relative p-3 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-all cursor-pointer border-0 outline-none"
+                title="Participant Roster"
+              >
+                <Users className="w-4 h-4" />
                 {activeCandidates.length > 0 && (
-                  <div className="mt-3 relative shrink-0">
-                    <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
-                      {activeCandidates.map((p, idx) => {
+                  <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-purple-600 text-white text-[10px] font-black flex items-center justify-center shadow-xs">
+                    {activeCandidates.length}
+                  </span>
+                )}
+              </motion.button>
+
+              {/* Chat Toggle Button */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={() => {
+                  setSidebarTab('chat');
+                  setShowSidePanel(true);
+                  setMobileBottomSheet('chat');
+                }}
+                className="p-3 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-all cursor-pointer border-0 outline-none"
+                title="Advisory Broadcast Chat"
+              >
+                <MessageSquare className="w-4 h-4" />
+              </motion.button>
+
+              {/* Invite / Share Quick Button */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={handleShareInvite}
+                className="p-3 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-all cursor-pointer border-0 outline-none"
+                title="Invite Candidates (Share Code & QR)"
+              >
+                <Share2 className="w-4 h-4" />
+              </motion.button>
+
+              {/* Fullscreen Button */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={toggleFullscreen}
+                className="hidden sm:block p-3 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition-all cursor-pointer border-0 outline-none"
+                title="Toggle Fullscreen"
+              >
+                {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+              </motion.button>
+
+              {/* Leave / End Examination Button (Prominent Soft Coral Pill) */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => setShowEndExamModal(true)}
+                className="ml-1 sm:ml-2 px-5 py-3 rounded-full bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_8px_25px_rgba(225,29,72,0.35)]"
+              >
+                <PhoneOff className="w-4 h-4" />
+                <span className="hidden sm:inline">Leave Supervision</span>
+              </motion.button>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* ── RIGHT COLLAPSIBLE SUPERVISION PANEL (DESKTOP) ── */}
+        <AnimatePresence>
+          {showSidePanel && (
+            <motion.aside
+              initial={{ x: 320, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 320, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+              className="hidden lg:flex w-84 xl:w-96 rounded-[32px] bg-white/90 dark:bg-[#0E1424]/90 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.5)] flex-col shrink-0 z-10 overflow-hidden border-0"
+            >
+              {/* Header Segmented Tabs */}
+              <div className="p-3.5 pb-2">
+                <div className="relative p-1 rounded-2xl bg-slate-200/70 dark:bg-[#161D2E] flex items-center shadow-inner">
+                  <button
+                    type="button"
+                    onClick={() => setSidebarTab('participants')}
+                    className="relative flex-1 py-2 rounded-xl text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10 text-center"
+                  >
+                    {sidebarTab === 'participants' && (
+                      <motion.div
+                        layoutId="sidebarActiveTabIndicator"
+                        transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                        className="absolute inset-0 rounded-xl bg-white dark:bg-[#222C44] shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
+                      />
+                    )}
+                    <span
+                      className={`relative z-10 ${
+                        sidebarTab === 'participants'
+                          ? 'text-slate-900 dark:text-white font-extrabold'
+                          : 'text-slate-500 dark:text-slate-400'
+                      }`}
+                    >
+                      Students ({activeCandidates.length})
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setSidebarTab('insights')}
+                    className="relative flex-1 py-2 rounded-xl text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10 text-center"
+                  >
+                    {sidebarTab === 'insights' && (
+                      <motion.div
+                        layoutId="sidebarActiveTabIndicator"
+                        transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                        className="absolute inset-0 rounded-xl bg-white dark:bg-[#222C44] shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
+                      />
+                    )}
+                    <span
+                      className={`relative z-10 ${
+                        sidebarTab === 'insights'
+                          ? 'text-slate-900 dark:text-white font-extrabold'
+                          : 'text-slate-500 dark:text-slate-400'
+                      }`}
+                    >
+                      AI Insights
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setSidebarTab('chat')}
+                    className="relative flex-1 py-2 rounded-xl text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10 text-center"
+                  >
+                    {sidebarTab === 'chat' && (
+                      <motion.div
+                        layoutId="sidebarActiveTabIndicator"
+                        transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                        className="absolute inset-0 rounded-xl bg-white dark:bg-[#222C44] shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
+                      />
+                    )}
+                    <span
+                      className={`relative z-10 ${
+                        sidebarTab === 'chat'
+                          ? 'text-slate-900 dark:text-white font-extrabold'
+                          : 'text-slate-500 dark:text-slate-400'
+                      }`}
+                    >
+                      Chat
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* ── TAB 1: PARTICIPANTS ── */}
+              {sidebarTab === 'participants' && (
+                <div className="flex-1 flex flex-col min-h-0 px-4 pb-4 space-y-3">
+                  {/* Search Bar */}
+                  <div className="relative">
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+                    <input
+                      type="text"
+                      value={searchParticipant}
+                      onChange={(e) => setSearchParticipant(e.target.value)}
+                      placeholder="Search candidate name or LCE..."
+                      className="w-full pl-9 pr-3 py-2 rounded-2xl bg-slate-100 dark:bg-[#161D2E] text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-0 border-0 shadow-xs"
+                    />
+                  </div>
+
+                  {/* Filter Pills */}
+                  <div className="relative flex items-center gap-1 p-1 rounded-2xl bg-slate-200/70 dark:bg-[#161D2E] overflow-x-auto scrollbar-none text-[11px] font-semibold">
+                    {(['all', 'active', 'suspended', 'hand_raised', 'warned'] as const).map((f) => {
+                      const isActive = studentFilter === f;
+                      return (
+                        <button
+                          key={f}
+                          type="button"
+                          onClick={() => setStudentFilter(f)}
+                          className="relative px-3 py-1.5 rounded-xl capitalize transition-colors duration-200 cursor-pointer shrink-0 border-0 outline-none z-10"
+                        >
+                          {isActive && (
+                            <motion.div
+                              layoutId="examineeFilterActiveIndicator"
+                              transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                              className="absolute inset-0 rounded-xl bg-white dark:bg-purple-600 shadow-sm"
+                            />
+                          )}
+                          <span
+                            className={`relative z-10 ${
+                              isActive
+                                ? 'text-purple-900 dark:text-white font-extrabold'
+                                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                            }`}
+                          >
+                            {f === 'hand_raised' ? 'Hand Raised' : f}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Candidate Cards List */}
+                  <div className="flex-1 overflow-y-auto space-y-2 pr-1 pb-4 scrollbar-none">
+                    {filteredParticipants.length === 0 ? (
+                      <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 text-center">
+                        <div className="w-14 h-14 rounded-2xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3">
+                          <Users className="w-6 h-6" />
+                        </div>
+                        <h4 className="text-sm font-extrabold text-slate-900 dark:text-white mb-1">
+                          No one is here right now
+                        </h4>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 max-w-[200px]">
+                          Share the exam code <strong>{displayCode}</strong> or QR code to invite candidates.
+                        </p>
+                        <motion.button
+                          type="button"
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          onClick={handleShareInvite}
+                          className="px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer border-0 outline-none"
+                        >
+                          <Share2 className="w-3.5 h-3.5" />
+                          <span>Invite Candidates</span>
+                        </motion.button>
+                      </div>
+                    ) : (
+                      filteredParticipants.map((p) => {
                         const isSelected = p.student_id === selectedStudentId;
                         const streamData = CANDIDATE_STREAMS[p.student_id];
                         return (
                           <motion.div
-                            key={`carousel-${p.id || p.student_id}-${idx}`}
-                            layout
-                            whileHover={{ scale: 1.03, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
-                            transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-                            className={`group relative w-44 sm:w-52 aspect-[16/10] rounded-2xl overflow-hidden transition-all duration-300 shrink-0 text-left p-2.5 flex flex-col justify-between border-0 outline-none ring-0 cursor-pointer ${
+                            key={p.student_id}
+                            whileHover={{ scale: 1.01 }}
+                            onClick={() => {
+                              setSelectedStudentId(p.student_id);
+                              setDrawerStudent(p);
+                            }}
+                            className={`p-3 rounded-2xl cursor-pointer transition-all flex flex-col gap-2 border-0 outline-none ring-0 ${
                               isSelected
-                                ? 'shadow-[0_12px_36px_rgba(147,51,234,0.45)] scale-[1.03] opacity-100'
-                                : 'shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)] opacity-85 hover:opacity-100'
+                                ? 'bg-purple-100/80 dark:bg-purple-950/60 shadow-md'
+                                : 'bg-slate-50/90 hover:bg-slate-100 dark:bg-[#141B2D] dark:hover:bg-[#1B2338]'
                             }`}
-                            onClick={() => setSelectedStudentId(p.student_id)}
                           >
-                            <video
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              poster={streamData?.poster}
-                              className={`absolute inset-0 w-full h-full object-cover filter brightness-90 ${
-                                p.is_suspended ? 'blur-xs brightness-40' : ''
-                              }`}
-                            >
-                              <source src={streamData?.videoUrl} type="video/mp4" />
-                            </video>
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/35 pointer-events-none" />
+                            <div className="flex items-center gap-3">
+                              <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-xs">
+                                <img
+                                  src={streamData?.poster}
+                                  alt={p.student_name}
+                                  className="w-full h-full object-cover"
+                                />
+                                <span
+                                  className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-white dark:border-[#141B2D] ${
+                                    p.is_suspended ? 'bg-rose-500' : 'bg-emerald-500'
+                                  }`}
+                                />
+                              </div>
 
-                            {/* Status Pill Top Right */}
-                            <div className="flex items-center justify-between w-full z-10">
-                              <span className={`w-2 h-2 rounded-full ${p.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_8px_#34d399]'}`} />
-                              <div className="flex items-center gap-1">
-                                {p.hand_raised && (
-                                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950 flex items-center gap-0.5">
-                                    <Hand className="w-2.5 h-2.5" />
-                                  </span>
-                                )}
-                                {p.is_suspended ? (
-                                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-rose-600 text-white">
-                                    Suspended
-                                  </span>
-                                ) : p.warning_count > 0 ? (
-                                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950">
-                                    {p.warning_count}W
-                                  </span>
-                                ) : null}
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center justify-between gap-1">
+                                  <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                                    {p.student_name}
+                                  </h4>
+                                  {p.is_suspended ? (
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300">
+                                      Suspended
+                                    </span>
+                                  ) : p.warning_count > 0 ? (
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+                                      {p.warning_count}W
+                                    </span>
+                                  ) : null}
+                                </div>
+                                <p className="text-[11px] text-slate-400 font-mono mt-0.5">
+                                  {p.student_lce_code} • {p.questions_answered}/25 Qs
+                                </p>
                               </div>
                             </div>
 
-                            {/* Hover Overlay Action Pills for Each Student */}
-                            <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-xs flex items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity p-2">
-                              <motion.button
+                            <div className="flex items-center gap-2 pt-1 border-0">
+                              <button
                                 type="button"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  setSelectedStudentId(p.student_id);
                                   setWarningModalStudent(p);
                                 }}
-                                className="px-2.5 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                                className="flex-1 py-1 rounded-xl bg-amber-500/15 hover:bg-amber-500 text-amber-800 hover:text-slate-950 dark:bg-amber-500/20 dark:hover:bg-amber-500 dark:text-amber-300 dark:hover:text-slate-950 text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
                               >
                                 <AlertTriangle className="w-3 h-3" />
                                 <span>Warn</span>
-                              </motion.button>
+                              </button>
 
                               {p.is_suspended ? (
-                                <motion.button
+                                <button
                                   type="button"
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.95 }}
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     handleRestoreStudent(p);
                                   }}
-                                  className="px-2.5 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                                  className="flex-1 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-600 text-emerald-800 hover:text-white dark:bg-emerald-500/20 dark:hover:bg-emerald-600 dark:text-emerald-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
                                 >
                                   <Play className="w-3 h-3" />
                                   <span>Restore</span>
-                                </motion.button>
+                                </button>
                               ) : (
-                                <motion.button
+                                <button
                                   type="button"
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.95 }}
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    setSelectedStudentId(p.student_id);
                                     setSuspendModalStudent(p);
                                   }}
-                                  className="px-2.5 py-1.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-[10px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1 shadow-xs"
+                                  className="flex-1 py-1 rounded-xl bg-rose-500/15 hover:bg-rose-600 text-rose-800 hover:text-white dark:bg-rose-500/20 dark:hover:bg-rose-600 dark:text-rose-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
                                 >
                                   <Pause className="w-3 h-3" />
                                   <span>Suspend</span>
-                                </motion.button>
+                                </button>
                               )}
-                            </div>
-
-                            {/* Candidate Name Tag Bottom */}
-                            <div className="w-full z-10 p-1 pointer-events-none">
-                              <p className="text-[11px] font-bold text-white truncate drop-shadow-md">
-                                {p.student_name}
-                              </p>
-                              <div className="flex items-center justify-between text-[9px] text-slate-300">
-                                <span className="font-mono">{p.student_lce_code}</span>
-                                <span>{p.questions_answered}/25 Qs</span>
-                              </div>
                             </div>
                           </motion.div>
                         );
-                      })}
-                    </div>
+                      })
+                    )}
                   </div>
-                )}
-              </>
-            )
-          ) : (
-            /* VIEW MODE B: MULTI-CAM GRID */
-            activeCandidates.length === 0 ? (
-              renderEmptyLobby()
-            ) : (
-              <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 gap-3.5 min-h-[380px] overflow-y-auto pr-1">
-                {activeCandidates.map((p, idx) => {
-                  const isSelected = p.student_id === selectedStudentId;
-                  const streamData = CANDIDATE_STREAMS[p.student_id];
-                  return (
-                    <motion.div
-                      key={`grid-${p.id || p.student_id}-${idx}`}
-                      layout
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-                      onClick={() => {
-                        setSelectedStudentId(p.student_id);
-                        setDrawerStudent(p);
-                      }}
-                      className={`relative rounded-[28px] overflow-hidden bg-slate-950 shadow-[0_10px_30px_rgba(0,0,0,0.15)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.6)] cursor-pointer flex flex-col justify-between p-3.5 transition-all duration-300 border-0 outline-none ring-0 ${
-                        isSelected ? 'shadow-[0_14px_45px_rgba(147,51,234,0.5)] scale-[1.02]' : ''
-                      }`}
-                    >
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        poster={streamData?.poster}
-                        className={`absolute inset-0 w-full h-full object-cover filter brightness-95 ${
-                          p.is_suspended ? 'blur-xs brightness-40' : ''
-                        }`}
-                      >
-                        <source src={streamData?.videoUrl} type="video/mp4" />
-                      </video>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/45" />
+                </div>
+              )}
 
-                      {/* Top Row: Live Status + Badges */}
-                      <div className="relative z-10 flex items-center justify-between">
-                        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-bold">
-                          <span className={`w-2 h-2 rounded-full ${p.is_suspended ? 'bg-rose-500' : 'bg-emerald-400 shadow-[0_0_8px_#34d399]'}`} />
-                          <span>{p.is_suspended ? 'Suspended' : 'Live Feed'}</span>
-                        </div>
-
-                        <div className="flex items-center gap-1.5">
-                          {p.hand_raised && (
-                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-950 shadow-xs flex items-center gap-1 animate-pulse">
-                              <Hand className="w-3 h-3" />
-                              <span>Hand</span>
-                            </span>
+              {/* ── TAB 2: AI INSIGHTS & TELEMETRY ── */}
+              {sidebarTab === 'insights' && (
+                <div className="flex-1 flex flex-col min-h-0 p-4 space-y-3.5 overflow-y-auto scrollbar-none">
+                  {/* Summary Metric Card */}
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 dark:from-purple-950/40 dark:to-indigo-950/40 border-0">
+                    <div className="flex items-center gap-2 text-xs font-bold text-purple-700 dark:text-purple-300 mb-2">
+                      <Sparkles className="w-4 h-4" />
+                      <span>Proctoring Integrity Summary</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-center mt-3">
+                      <div className="p-2.5 rounded-xl bg-white/70 dark:bg-[#1A2236] shadow-xs">
+                        <span className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400">
+                          {Math.round(
+                            (activeCandidates.filter((c) => c.warning_count === 0 && !c.is_suspended).length /
+                              (activeCandidates.length || 1)) *
+                              100
                           )}
-                          {p.warning_count > 0 && (
-                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-slate-950 shadow-xs">
-                              {p.warning_count} Warn
-                            </span>
-                          )}
-                        </div>
+                          %
+                        </span>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Integrity Index</p>
                       </div>
 
-                      {/* Bottom Row: Candidate Information + Direct Individual Actions */}
-                      <div className="relative z-10 space-y-2">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h4 className="text-sm font-bold text-white drop-shadow-md">
-                              {p.student_name}
-                            </h4>
-                            <p className="text-[10px] text-slate-300 font-mono">
-                              {p.student_lce_code} • {p.questions_answered}/25 Answered
-                            </p>
-                          </div>
+                      <div className="p-2.5 rounded-xl bg-white/70 dark:bg-[#1A2236] shadow-xs">
+                        <span className="text-xl font-extrabold text-purple-600 dark:text-purple-400">
+                          {activeCandidates.reduce((acc, c) => acc + (c.warning_count || 0), 0)}
+                        </span>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">Total Warnings</p>
+                      </div>
+                    </div>
+                  </div>
 
-                          {!p.is_suspended && (
-                            <div className="flex items-center gap-0.5 px-2 py-1 rounded-full bg-black/50 backdrop-blur-md">
-                              <span className="w-1 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                              <span className="w-1 h-3.5 rounded-full bg-emerald-400 animate-pulse delay-75" />
-                              <span className="w-1 h-2 rounded-full bg-emerald-400 animate-pulse delay-150" />
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="flex items-center gap-2 pt-1">
-                          <motion.button
-                            type="button"
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedStudentId(p.student_id);
-                              setWarningModalStudent(p);
-                            }}
-                            className="flex-1 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
+                  {/* Realtime Event Stream */}
+                  <div>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                      Live Telemetry Stream
+                    </span>
+                    <div className="space-y-2">
+                      {events.length > 0 ? (
+                        events.slice(0, 8).map((evt) => (
+                          <div
+                            key={evt.id}
+                            className="p-2.5 rounded-xl bg-slate-50 dark:bg-[#141B2D] text-xs flex items-center justify-between"
                           >
-                            <AlertTriangle className="w-3.5 h-3.5" />
-                            <span>Warn</span>
-                          </motion.button>
-
-                          {p.is_suspended ? (
-                            <motion.button
-                              type="button"
-                              whileHover={{ scale: 1.03 }}
-                              whileTap={{ scale: 0.97 }}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleRestoreStudent(p);
-                              }}
-                              className="flex-1 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
-                            >
-                              <Play className="w-3.5 h-3.5" />
-                              <span>Restore</span>
-                            </motion.button>
-                          ) : (
-                            <motion.button
-                              type="button"
-                              whileHover={{ scale: 1.03 }}
-                              whileTap={{ scale: 0.97 }}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedStudentId(p.student_id);
-                                setSuspendModalStudent(p);
-                              }}
-                              className="flex-1 py-2 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1.5 shadow-sm"
-                            >
-                              <Pause className="w-3.5 h-3.5" />
-                              <span>Suspend</span>
-                            </motion.button>
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            )
-          )}
-
-          {/* ── FLOATING ACTION CONTROLS BAR ── */}
-          <div className="mt-3 p-3 rounded-full bg-white/95 dark:bg-[#111728]/95 backdrop-blur-2xl shadow-[0_15px_45px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.6)] flex items-center justify-between gap-3 border-0 outline-none">
-            {/* Left: Timer Pill with Theme-Adaptive Colors */}
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 text-purple-700 dark:bg-white/10 dark:text-white text-xs font-mono font-bold shadow-xs border-0 outline-none">
-              <Clock className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-              <span>{formatCountdown(remainingSeconds)}</span>
-            </div>
-
-            {/* Center: Supervisory Actions for Currently Focused Student */}
-            {activeCandidates.length === 0 ? (
-              <div className="flex items-center gap-2.5">
-                <span className="hidden sm:inline text-xs font-semibold text-slate-500 dark:text-slate-400">
-                  Focus: <strong className="text-slate-700 dark:text-slate-300">None (Awaiting examinees)</strong>
-                </span>
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.04, y: -1 }}
-                  whileTap={{ scale: 0.96, y: 1 }}
-                  onClick={handleShareInvite}
-                  className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(147,51,234,0.35)]"
-                >
-                  <Share2 className="w-3.5 h-3.5" />
-                  <span>Invite to Start Examination</span>
-                </motion.button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2.5">
-                <span className="hidden xl:inline text-xs font-semibold text-slate-500 dark:text-slate-400">
-                  Focus: <strong className="text-slate-900 dark:text-white">{selectedStudent?.student_name}</strong>
-                </span>
-
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.05, y: -1 }}
-                  whileTap={{ scale: 0.95, y: 1 }}
-                  disabled={!selectedStudent}
-                  onClick={() => setWarningModalStudent(selectedStudent)}
-                  className="px-4 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(245,158,11,0.35)] disabled:opacity-40"
-                >
-                  <AlertTriangle className="w-3.5 h-3.5" />
-                  <span>Issue Warning</span>
-                </motion.button>
-
-                {selectedStudent?.is_suspended ? (
-                  <motion.button
-                    type="button"
-                    whileHover={{ scale: 1.05, y: -1 }}
-                    whileTap={{ scale: 0.95, y: 1 }}
-                    onClick={() => handleRestoreStudent(selectedStudent)}
-                    className="px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(16,185,129,0.35)]"
-                  >
-                    <Play className="w-3.5 h-3.5" />
-                    <span>Restore Student</span>
-                  </motion.button>
-                ) : (
-                  <motion.button
-                    type="button"
-                    whileHover={{ scale: 1.05, y: -1 }}
-                    whileTap={{ scale: 0.95, y: 1 }}
-                    disabled={!selectedStudent}
-                    onClick={() => setSuspendModalStudent(selectedStudent)}
-                    className="px-4 py-2.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_20px_rgba(225,29,72,0.35)] disabled:opacity-40"
-                  >
-                    <Pause className="w-3.5 h-3.5" />
-                    <span>Suspend Student</span>
-                  </motion.button>
-                )}
-
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.05, y: -1 }}
-                  whileTap={{ scale: 0.95, y: 1 }}
-                  disabled={!selectedStudent}
-                  onClick={() => setTimeModalStudent(selectedStudent)}
-                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 hover:bg-indigo-100 text-indigo-700 dark:text-indigo-300 text-xs font-bold transition-all cursor-pointer border-0 outline-none disabled:opacity-40"
-                >
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>Adjust Time</span>
-                </motion.button>
-
-                {selectedStudent?.hand_raised && (
-                  <motion.button
-                    type="button"
-                    whileHover={{ scale: 1.05, y: -1 }}
-                    whileTap={{ scale: 0.95, y: 1 }}
-                    onClick={() => handleAcknowledgeHand(selectedStudent.student_id)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition-all cursor-pointer border-0 outline-none animate-pulse"
-                  >
-                    <Hand className="w-3.5 h-3.5" />
-                    <span>Lower Hand</span>
-                  </motion.button>
-                )}
-              </div>
-            )}
-
-            {/* Right: End Examination Pill Button */}
-            <div>
-              <motion.button
-                type="button"
-                whileHover={{ scale: 1.05, y: -1 }}
-                whileTap={{ scale: 0.95, y: 1 }}
-                onClick={() => setShowEndExamModal(true)}
-                className="px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-2 shadow-[0_6px_25px_rgba(225,29,72,0.4)]"
-              >
-                <PhoneOff className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">End Examination</span>
-              </motion.button>
-            </div>
-          </div>
-        </div>
-
-        {/* ── RIGHT PARTICIPANT SIDEBAR ── */}
-        <aside className="w-80 lg:w-96 rounded-[32px] bg-white/90 dark:bg-[#0E1322]/90 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.5)] flex flex-col shrink-0 z-10 overflow-hidden">
-          {/* Segmented Pill Tabs */}
-          <div className="p-3">
-            <div className="relative p-1 rounded-2xl bg-slate-200/70 dark:bg-[#161D2E] flex items-center shadow-inner">
-              <button
-                type="button"
-                onClick={() => setSidebarTab('participants')}
-                className="relative flex-1 py-2 rounded-xl text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10 text-center"
-              >
-                {sidebarTab === 'participants' && (
-                  <motion.div
-                    layoutId="sidebarActiveTabIndicator"
-                    transition={{ type: 'spring', stiffness: 450, damping: 32 }}
-                    className="absolute inset-0 rounded-xl bg-white dark:bg-[#222C44] shadow-[0_2px_10px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_14px_rgba(0,0,0,0.5)]"
-                  />
-                )}
-                <span
-                  className={`relative z-10 transition-colors duration-200 ${
-                    sidebarTab === 'participants'
-                      ? 'text-slate-900 dark:text-white font-extrabold'
-                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
-                  }`}
-                >
-                  Participants ({activeCandidates.length})
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setSidebarTab('chat')}
-                className="relative flex-1 py-2 rounded-xl text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10 text-center"
-              >
-                {sidebarTab === 'chat' && (
-                  <motion.div
-                    layoutId="sidebarActiveTabIndicator"
-                    transition={{ type: 'spring', stiffness: 450, damping: 32 }}
-                    className="absolute inset-0 rounded-xl bg-white dark:bg-[#222C44] shadow-[0_2px_10px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_14px_rgba(0,0,0,0.5)]"
-                  />
-                )}
-                <span
-                  className={`relative z-10 transition-colors duration-200 ${
-                    sidebarTab === 'chat'
-                      ? 'text-slate-900 dark:text-white font-extrabold'
-                      : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
-                  }`}
-                >
-                  Advisory Chat
-                </span>
-              </button>
-            </div>
-          </div>
-
-          {sidebarTab === 'participants' ? (
-            <div className="flex-1 flex flex-col min-h-0 px-4 pb-4 space-y-2.5">
-              {/* Search Bar */}
-              <div className="relative">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
-                <input
-                  type="text"
-                  value={searchParticipant}
-                  onChange={(e) => setSearchParticipant(e.target.value)}
-                  placeholder="Search candidate name or LCE..."
-                  className="w-full pl-9 pr-3 py-2 rounded-2xl bg-slate-100 dark:bg-[#161D2E] text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-0 border-0 shadow-xs"
-                />
-              </div>
-
-              {/* Status Filter Pills with Smooth Sliding Animation */}
-              <div className="relative flex items-center gap-1 p-1 rounded-2xl bg-slate-200/70 dark:bg-[#161D2E] overflow-x-auto scrollbar-none text-[11px] font-semibold">
-                {(['all', 'active', 'suspended', 'hand_raised', 'warned'] as const).map((f) => {
-                  const isActive = studentFilter === f;
-                  return (
-                    <button
-                      key={f}
-                      type="button"
-                      onClick={() => setStudentFilter(f)}
-                      className="relative px-3 py-1.5 rounded-xl capitalize transition-colors duration-200 cursor-pointer shrink-0 border-0 outline-none z-10"
-                    >
-                      {isActive && (
-                        <motion.div
-                          layoutId="examineeFilterActiveIndicator"
-                          transition={{ type: 'spring', stiffness: 450, damping: 32 }}
-                          className="absolute inset-0 rounded-xl bg-white dark:bg-purple-600 shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_12px_rgba(147,51,234,0.4)]"
-                        />
-                      )}
-                      <span
-                        className={`relative z-10 transition-colors duration-200 ${
-                          isActive
-                            ? 'text-purple-900 dark:text-white font-extrabold'
-                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium'
-                        }`}
-                      >
-                        {f === 'hand_raised' ? 'Hand Raised' : f}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Categorized Candidate Cards */}
-              <div className="flex-1 overflow-y-auto space-y-2 pr-1 pb-16 scrollbar-none">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
-                  Examinees ({filteredParticipants.length})
-                </span>
-
-                {filteredParticipants.length === 0 ? (
-                  <div className="flex-1 flex flex-col items-center justify-center py-10 px-4 text-center">
-                    <div className="w-14 h-14 rounded-2xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3 shadow-inner">
-                      <Users className="w-6 h-6" />
-                    </div>
-                    <h4 className="text-sm font-extrabold text-slate-900 dark:text-white mb-1">
-                      None is here now
-                    </h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 max-w-[220px] leading-relaxed">
-                      Invite candidates using access code <strong className="font-mono text-purple-600 dark:text-purple-400">{displayCode}</strong> or share the waiting room link.
-                    </p>
-                    <motion.button
-                      type="button"
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={handleShareInvite}
-                      className="px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer border-0 outline-none"
-                    >
-                      <Share2 className="w-3.5 h-3.5" />
-                      <span>Invite Candidates</span>
-                    </motion.button>
-                  </div>
-                ) : (
-                  filteredParticipants.map((p, idx) => {
-                    const isSelected = p.student_id === selectedStudentId;
-                    const streamData = CANDIDATE_STREAMS[p.student_id];
-                    return (
-                      <motion.div
-                        key={`examinee-${p.id || p.student_id}-${idx}`}
-                        whileHover={{ scale: 1.01 }}
-                        onClick={() => {
-                          setSelectedStudentId(p.student_id);
-                          setDrawerStudent(p);
-                        }}
-                        className={`p-3 rounded-2xl cursor-pointer transition-all flex flex-col gap-2 border-0 outline-none ring-0 ${
-                          isSelected
-                            ? 'bg-purple-100/80 dark:bg-purple-950/60 shadow-[0_6px_22px_rgba(147,51,234,0.15)] dark:shadow-[0_8px_25px_rgba(147,51,234,0.3)]'
-                            : 'bg-slate-50/90 hover:bg-slate-100 dark:bg-[#141B2D] dark:hover:bg-[#1B2338] shadow-xs'
-                        }`}
-                      >
-                        {/* Top Row: Avatar + Info + Badges */}
-                        <div className="flex items-center gap-3">
-                          <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-xs">
-                            <img
-                              src={streamData?.poster}
-                              alt={p.student_name}
-                              className="w-full h-full object-cover"
-                            />
-                            <span
-                              className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-white dark:border-[#141B2D] ${
-                                p.is_suspended ? 'bg-rose-500' : 'bg-emerald-500'
-                              }`}
-                            />
-                          </div>
-
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center justify-between gap-1.5">
-                              <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                                {p.student_name}
-                              </h4>
-
-                              <div className="flex items-center gap-1 shrink-0">
-                                {p.hand_raised && (
-                                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-950 flex items-center gap-0.5 animate-pulse">
-                                    <Hand className="w-2.5 h-2.5" />
-                                  </span>
-                                )}
-                                {p.is_suspended ? (
-                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300">
-                                    Suspended
-                                  </span>
-                                ) : p.warning_count > 0 ? (
-                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
-                                    {p.warning_count} Warn
-                                  </span>
-                                ) : (
-                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
-                                    Active
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-
-                            <div className="flex items-center gap-2 text-[10px] text-slate-400 font-mono mt-0.5">
-                              <span>{p.student_lce_code}</span>
-                              <span className="text-slate-300 dark:text-slate-600">•</span>
-                              <span className="text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                                {p.questions_answered}/25 answered
+                            <div className="flex items-center gap-2">
+                              <Activity className="w-3.5 h-3.5 text-purple-500" />
+                              <span className="font-semibold text-slate-800 dark:text-slate-200">
+                                {evt.event_type.replace('_', ' ')}
                               </span>
                             </div>
+                            <span className="text-[10px] text-slate-400">
+                              {new Date(evt.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </span>
                           </div>
-                        </div>
-
-                        {/* Bottom Row: Quick Action Buttons */}
-                        <div className="flex items-center gap-2 pt-1 border-0">
-                          <motion.button
-                            type="button"
-                            whileHover={{ scale: 1.04 }}
-                            whileTap={{ scale: 0.96 }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedStudentId(p.student_id);
-                              setWarningModalStudent(p);
-                            }}
-                            className="flex-1 py-1 rounded-xl bg-amber-500/15 hover:bg-amber-500 text-amber-800 hover:text-slate-950 dark:bg-amber-500/20 dark:hover:bg-amber-500 dark:text-amber-300 dark:hover:text-slate-950 text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
-                          >
-                            <AlertTriangle className="w-3 h-3" />
-                            <span>Warn</span>
-                          </motion.button>
-
-                          {p.is_suspended ? (
-                            <motion.button
-                              type="button"
-                              whileHover={{ scale: 1.04 }}
-                              whileTap={{ scale: 0.96 }}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleRestoreStudent(p);
-                              }}
-                              className="flex-1 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-600 text-emerald-800 hover:text-white dark:bg-emerald-500/20 dark:hover:bg-emerald-600 dark:text-emerald-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
-                            >
-                              <Play className="w-3 h-3" />
-                              <span>Restore</span>
-                            </motion.button>
-                          ) : (
-                            <motion.button
-                              type="button"
-                              whileHover={{ scale: 1.04 }}
-                              whileTap={{ scale: 0.96 }}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedStudentId(p.student_id);
-                                setSuspendModalStudent(p);
-                              }}
-                              className="flex-1 py-1 rounded-xl bg-rose-500/15 hover:bg-rose-600 text-rose-800 hover:text-white dark:bg-rose-500/20 dark:hover:bg-rose-600 dark:text-rose-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none flex items-center justify-center gap-1 shadow-xs"
-                            >
-                              <Pause className="w-3 h-3" />
-                              <span>Suspend</span>
-                            </motion.button>
-                          )}
-
-                          <motion.button
-                            type="button"
-                            whileHover={{ scale: 1.04 }}
-                            whileTap={{ scale: 0.96 }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedStudentId(p.student_id);
-                              setTimeModalStudent(p);
-                            }}
-                            className="px-2 py-1 rounded-xl bg-indigo-500/15 hover:bg-indigo-600 text-indigo-800 hover:text-white dark:bg-indigo-500/20 dark:hover:bg-indigo-600 dark:text-indigo-300 dark:hover:text-white text-[11px] font-bold transition-all cursor-pointer border-0 outline-none shadow-xs"
-                            title="Adjust Time"
-                          >
-                            <Clock className="w-3 h-3" />
-                          </motion.button>
-                        </div>
-                      </motion.div>
-                    );
-                  })
-                )}
-              </div>
-            </div>
-          ) : (
-            /* Advisory Broadcast Chat */
-            <div className="flex-1 flex flex-col min-h-0 p-4">
-              <div className="flex-1 overflow-y-auto space-y-2 pr-1 scrollbar-none">
-                {advisoryMessages.map((msg) => (
-                  <div key={msg.id} className="p-3 rounded-2xl bg-slate-50 dark:bg-[#141B2D]">
-                    <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span className="font-bold text-purple-600 dark:text-purple-400">{msg.sender}</span>
-                      <span>{msg.time}</span>
+                        ))
+                      ) : (
+                        <p className="text-xs text-slate-400 text-center py-6">
+                          Real-time telemetry events will stream here as students interact with their exams.
+                        </p>
+                      )}
                     </div>
-                    <p className="text-xs text-slate-800 dark:text-slate-200">{msg.text}</p>
                   </div>
-                ))}
-              </div>
+                </div>
+              )}
 
-              {/* Chat Input */}
-              <div className="mt-3 flex items-center gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSendAdvisory()}
-                  placeholder="Broadcast instructions to candidates..."
-                  className="flex-1 px-3.5 py-2.5 rounded-2xl bg-slate-100 dark:bg-[#162032] text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-0 border-0 shadow-inner"
-                />
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleSendAdvisory}
-                  className="p-2.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white transition-all cursor-pointer border-0 outline-none shadow-sm"
-                >
-                  <Send className="w-4 h-4" />
-                </motion.button>
-              </div>
-            </div>
+              {/* ── TAB 3: ADVISORY CHAT ── */}
+              {sidebarTab === 'chat' && (
+                <div className="flex-1 flex flex-col min-h-0 p-4">
+                  <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 scrollbar-none mb-3">
+                    {advisoryMessages.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={`p-3 rounded-2xl text-xs ${
+                          msg.isTeacher
+                            ? 'bg-purple-100/90 dark:bg-purple-950/70 ml-4'
+                            : 'bg-slate-100 dark:bg-[#141B2D] mr-4'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                          <span className="font-bold text-purple-700 dark:text-purple-300">{msg.sender}</span>
+                          <span>{msg.time}</span>
+                        </div>
+                        <p className="text-slate-800 dark:text-slate-200">{msg.text}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Chat Input */}
+                  <div className="relative flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleSendAdvisory()}
+                      placeholder="Broadcast message to all students..."
+                      className="flex-1 px-4 py-2.5 rounded-full bg-slate-100 dark:bg-[#141B2D] text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none border-0 shadow-xs"
+                    />
+                    <motion.button
+                      type="button"
+                      whileHover={{ scale: 1.06 }}
+                      whileTap={{ scale: 0.94 }}
+                      onClick={handleSendAdvisory}
+                      className="p-2.5 rounded-full bg-purple-600 hover:bg-purple-700 text-white cursor-pointer border-0 outline-none shadow-xs"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                    </motion.button>
+                  </div>
+                </div>
+              )}
+            </motion.aside>
           )}
-        </aside>
+        </AnimatePresence>
       </div>
 
-      {/* ── SUPERVISORY MODALS & DRAWERS ── */}
+      {/* ── MOBILE BOTTOM SHEET (FOR MOBILE MEETING EXPERIENCE) ── */}
+      <AnimatePresence>
+        {mobileBottomSheet !== 'none' && (
+          <div className="lg:hidden fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 350 }}
+              className="w-full max-h-[80vh] rounded-t-[32px] bg-white dark:bg-[#0E1424] p-5 flex flex-col shadow-2xl border-0"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                <h3 className="text-sm font-extrabold capitalize text-slate-900 dark:text-white">
+                  {mobileBottomSheet}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setMobileBottomSheet('none')}
+                  className="p-2 rounded-full bg-slate-100 dark:bg-white/10 text-slate-500 cursor-pointer border-0 outline-none"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto pt-3">
+                {mobileBottomSheet === 'participants' && (
+                  <div className="space-y-2">
+                    {activeCandidates.map((p) => (
+                      <div
+                        key={p.student_id}
+                        className="p-3 rounded-2xl bg-slate-50 dark:bg-[#141B2D] flex items-center justify-between"
+                      >
+                        <div>
+                          <p className="text-xs font-bold text-slate-900 dark:text-white">{p.student_name}</p>
+                          <p className="text-[10px] text-slate-400 font-mono">{p.student_lce_code}</p>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setMobileBottomSheet('none');
+                              setWarningModalStudent(p);
+                            }}
+                            className="px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 text-[10px] font-bold"
+                          >
+                            Warn
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setMobileBottomSheet('none');
+                              setSuspendModalStudent(p);
+                            }}
+                            className="px-2.5 py-1 rounded-full bg-rose-600 text-white text-[10px] font-bold"
+                          >
+                            Suspend
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {mobileBottomSheet === 'chat' && (
+                  <div className="flex flex-col h-72">
+                    <div className="flex-1 overflow-y-auto space-y-2 pb-2">
+                      {advisoryMessages.map((m) => (
+                        <div key={m.id} className="p-2.5 rounded-xl bg-slate-100 dark:bg-[#141B2D] text-xs">
+                          <span className="font-bold text-purple-600 block text-[10px]">{m.sender}</span>
+                          <span>{m.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-2 pt-2">
+                      <input
+                        type="text"
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                        placeholder="Broadcast message..."
+                        className="flex-1 px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#141B2D] text-xs"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleSendAdvisory}
+                        className="p-2 rounded-xl bg-purple-600 text-white"
+                      >
+                        <Send className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ── MODALS & INCIDENT MANAGEMENT (PRESERVED ARCHITECTURE) ── */}
       <IssueWarningModal
-        isOpen={Boolean(warningModalStudent)}
-        participant={warningModalStudent}
+        isOpen={!!warningModalStudent}
         onClose={() => setWarningModalStudent(null)}
+        participant={warningModalStudent}
         onConfirm={handleConfirmWarning}
       />
 
       <SuspendStudentModal
-        isOpen={Boolean(suspendModalStudent)}
-        participant={suspendModalStudent}
+        isOpen={!!suspendModalStudent}
         onClose={() => setSuspendModalStudent(null)}
+        participant={suspendModalStudent}
         onConfirm={handleConfirmSuspend}
       />
 
       <TimeAdjustmentModal
-        isOpen={Boolean(timeModalStudent)}
-        participant={timeModalStudent}
+        isOpen={!!timeModalStudent}
         onClose={() => setTimeModalStudent(null)}
+        participant={timeModalStudent}
         onConfirm={handleConfirmTimeAdjustment}
       />
 
@@ -1771,22 +1797,28 @@ export function LiveTeacherSupervisionRoom({
         />
       )}
 
+      <SupervisionReportModal
+        isOpen={!!reportModalData}
+        onClose={() => setReportModalData(null)}
+        report={reportModalData}
+      />
+
       <StudentSupervisionDrawer
-        isOpen={Boolean(drawerStudent)}
+        isOpen={!!drawerStudent}
+        onClose={() => setDrawerStudent(null)}
         participant={drawerStudent}
         events={events}
-        onClose={() => setDrawerStudent(null)}
         onOpenWarnModal={() => {
-          setWarningModalStudent(drawerStudent);
+          if (drawerStudent) setWarningModalStudent(drawerStudent);
         }}
         onOpenSuspendModal={() => {
-          setSuspendModalStudent(drawerStudent);
+          if (drawerStudent) setSuspendModalStudent(drawerStudent);
         }}
         onRestore={async () => {
           if (drawerStudent) await handleRestoreStudent(drawerStudent);
         }}
         onOpenTimeModal={() => {
-          setTimeModalStudent(drawerStudent);
+          if (drawerStudent) setTimeModalStudent(drawerStudent);
         }}
         onAcknowledgeHand={async () => {
           if (drawerStudent) await handleAcknowledgeHand(drawerStudent.student_id);
@@ -1794,12 +1826,6 @@ export function LiveTeacherSupervisionRoom({
         onForceSubmit={async () => {
           if (drawerStudent) await handleForceEndStudent(drawerStudent.student_id);
         }}
-      />
-
-      <SupervisionReportModal
-        isOpen={Boolean(reportModalData)}
-        report={reportModalData}
-        onClose={() => setReportModalData(null)}
       />
     </div>
   );

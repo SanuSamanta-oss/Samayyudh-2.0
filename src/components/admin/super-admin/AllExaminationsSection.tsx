@@ -107,7 +107,7 @@ export function AllExaminationsSection({
   return (
     <div className="space-y-4 select-none">
       {/* Header & Search Toolbar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 rounded-3xl bg-white dark:bg-[#111A2E] shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 sm:p-6 rounded-[28px] bg-white dark:bg-[#111A2E] shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-0 ring-0">
         <div>
           <h2 className="text-lg font-black text-slate-900 dark:text-white tracking-tight">
             Platform Examinations ({totalCount})
@@ -133,7 +133,7 @@ export function AllExaminationsSection({
             type="button"
             onClick={fetchExams}
             disabled={loading}
-            className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 text-xs font-bold transition-all cursor-pointer border-0 outline-none"
+            className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 text-xs font-bold transition-all cursor-pointer border-0 outline-none shadow-xs"
             title="Refresh list"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
@@ -142,7 +142,7 @@ export function AllExaminationsSection({
           <button
             type="button"
             onClick={onOpenNewExam}
-            className="px-3.5 py-2 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1.5 shadow-sm shadow-purple-600/30"
+            className="px-4 py-2 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1.5 shadow-md shadow-purple-600/30"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>New Exam</span>
@@ -186,7 +186,7 @@ export function AllExaminationsSection({
       </div>
 
       {/* Main Table */}
-      <div className="rounded-3xl bg-white dark:bg-[#111A2E] shadow-xs overflow-hidden">
+      <div className="rounded-[28px] bg-white dark:bg-[#111A2E] shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-0 ring-0 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>

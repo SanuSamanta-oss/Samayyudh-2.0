@@ -48,22 +48,22 @@ export function SuperAdminSupervisionHub({
 
   return (
     <div className="space-y-4 select-none">
-      {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 rounded-3xl bg-gradient-to-r from-purple-950 via-indigo-950 to-slate-950 text-white shadow-lg">
+      {/* Top Banner — Theme Adaptive */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 sm:p-6 rounded-[28px] bg-gradient-to-r from-purple-100/90 via-indigo-50/70 to-white dark:from-[#1E1238] dark:via-[#16122E] dark:to-[#0F172A] text-slate-900 dark:text-white shadow-[0_10px_35px_-10px_rgba(109,40,217,0.12)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.5)] border-0 ring-0">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
             </span>
-            <span className="text-[10px] font-black uppercase tracking-wider text-rose-300">
+            <span className="text-[10px] font-black uppercase tracking-wider text-rose-600 dark:text-rose-300">
               Universal Control Hub
             </span>
           </div>
-          <h2 className="text-xl font-black tracking-tight text-white">
+          <h2 className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
             Platform Live Supervision Control ({liveExams.length})
           </h2>
-          <p className="text-xs text-purple-200/80 mt-0.5">
+          <p className="text-xs text-slate-600 dark:text-purple-200/80 mt-0.5">
             Real-time feed across all concurrent faculty exams with Super Admin intervention override.
           </p>
         </div>
@@ -72,7 +72,7 @@ export function SuperAdminSupervisionHub({
           type="button"
           onClick={fetchLiveExams}
           disabled={loading}
-          className="p-2.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1.5 self-start sm:self-auto"
+          className="p-2.5 rounded-2xl bg-white/80 hover:bg-white dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-white text-xs font-bold transition-all cursor-pointer border-0 outline-none flex items-center gap-1.5 self-start sm:self-auto shadow-xs"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
           <span>Refresh Feeds</span>
@@ -86,7 +86,7 @@ export function SuperAdminSupervisionHub({
           <span>Polling active control rooms...</span>
         </div>
       ) : liveExams.length === 0 ? (
-        <div className="p-12 rounded-3xl bg-white dark:bg-[#111A2E] text-center shadow-xs space-y-2">
+        <div className="p-12 rounded-[28px] bg-white dark:bg-[#111A2E] text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-0 ring-0 space-y-2">
           <Radio className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto" />
           <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">
             No live examination streams active right now
@@ -100,7 +100,7 @@ export function SuperAdminSupervisionHub({
           {liveExams.map((exam) => (
             <div
               key={exam.id}
-              className="p-5 rounded-3xl bg-white dark:bg-[#111A2E] shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+              className="p-5 rounded-[26px] bg-white dark:bg-[#111A2E] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.6)] transition-all flex flex-col justify-between space-y-4 border-0 ring-0"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">

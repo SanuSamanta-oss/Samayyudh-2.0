@@ -53,7 +53,7 @@ export function TeacherDirectorySection({
   return (
     <div className="space-y-4 select-none">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 rounded-3xl bg-white dark:bg-[#111A2E] shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 sm:p-6 rounded-[28px] bg-white dark:bg-[#111A2E] shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-0 ring-0">
         <div>
           <h2 className="text-lg font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <GraduationCap className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
@@ -80,7 +80,7 @@ export function TeacherDirectorySection({
             type="button"
             onClick={fetchTeachers}
             disabled={loading}
-            className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer border-0 outline-none"
+            className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer border-0 outline-none shadow-xs"
             title="Refresh educators"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
@@ -96,14 +96,14 @@ export function TeacherDirectorySection({
             <span>Loading faculty directory...</span>
           </div>
         ) : teachers.length === 0 ? (
-          <div className="col-span-full p-8 rounded-3xl bg-white dark:bg-[#111A2E] text-center text-xs text-slate-400">
+          <div className="col-span-full p-8 rounded-[28px] bg-white dark:bg-[#111A2E] text-center text-xs text-slate-400 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-0 ring-0">
             No educators found.
           </div>
         ) : (
           teachers.map((t) => (
             <div
               key={t.id}
-              className="p-5 rounded-3xl bg-white dark:bg-[#111A2E] shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+              className="p-5 rounded-[26px] bg-white dark:bg-[#111A2E] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.6)] transition-all flex flex-col justify-between space-y-4 border-0 ring-0"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">

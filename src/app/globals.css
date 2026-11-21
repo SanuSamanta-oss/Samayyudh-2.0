@@ -247,9 +247,6 @@ body {
    Zero Outline & Focus System (Strictly No Outlines in Any Theme)
    ============================================================ */
 
-*,
-*::before,
-*::after,
 *:focus,
 *:focus-visible,
 *:focus-within,
@@ -273,7 +270,6 @@ a:focus-visible {
   outline-style: none !important;
   outline-color: transparent !important;
   outline-offset: 0 !important;
-  box-shadow: none;
   -webkit-tap-highlight-color: transparent !important;
 }
 

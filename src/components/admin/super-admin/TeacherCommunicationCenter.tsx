@@ -172,7 +172,7 @@ export function TeacherCommunicationCenter({
   return (
     <div className="space-y-6 select-none">
       {/* Top Header */}
-      <div className="p-5 rounded-3xl bg-white dark:bg-[#111A2E] shadow-xs flex items-center justify-between">
+      <div className="p-5 sm:p-6 rounded-[28px] bg-white dark:bg-[#111A2E] shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-0 ring-0 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <Mail className="w-5 h-5 text-purple-600 dark:text-purple-400" />
@@ -187,7 +187,7 @@ export function TeacherCommunicationCenter({
           type="button"
           onClick={fetchHistory}
           disabled={loadingHistory}
-          className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer border-0 outline-none"
+          className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all cursor-pointer border-0 outline-none shadow-xs"
           title="Refresh history"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${loadingHistory ? 'animate-spin' : ''}`} />
@@ -196,7 +196,7 @@ export function TeacherCommunicationCenter({
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Email Composer (7 cols) */}
-        <div className="lg:col-span-7 p-6 rounded-3xl bg-white dark:bg-[#111A2E] shadow-xs space-y-4">
+        <div className="lg:col-span-7 p-6 rounded-[28px] bg-white dark:bg-[#111A2E] shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-0 ring-0 space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-slate-900 dark:text-white text-sm">
               Compose Official Teacher Notice
@@ -344,7 +344,7 @@ export function TeacherCommunicationCenter({
         </div>
 
         {/* Right Column: Sent History (5 cols) */}
-        <div className="lg:col-span-5 p-6 rounded-3xl bg-white dark:bg-[#111A2E] shadow-xs space-y-4 flex flex-col">
+        <div className="lg:col-span-5 p-6 rounded-[28px] bg-white dark:bg-[#111A2E] shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-0 ring-0 space-y-4 flex flex-col">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-slate-900 dark:text-white text-sm">
               Dispatched Notices History

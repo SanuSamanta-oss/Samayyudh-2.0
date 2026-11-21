@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import {
   AlertTriangle,
   Plus,
@@ -171,23 +172,37 @@ export function ExaminationIssueTracker() {
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+      {/* Filter Tabs with Smooth Sliding Animation */}
+      <div className="relative flex items-center gap-1 p-1 rounded-2xl bg-slate-200/70 dark:bg-white/5 w-fit overflow-x-auto scrollbar-none shadow-inner">
         {(['all', 'open', 'under_review', 'waiting_teacher', 'resolved', 'closed'] as const).map(
-          (st) => (
-            <button
-              key={st}
-              type="button"
-              onClick={() => setStatusFilter(st)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border-0 outline-none capitalize shrink-0 ${
-                statusFilter === st
-                  ? 'bg-purple-600 text-white shadow-xs'
-                  : 'bg-white dark:bg-[#111A2E] text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
-              }`}
-            >
-              {st.replace('_', ' ')}
-            </button>
-          )
+          (st) => {
+            const isActive = statusFilter === st;
+            return (
+              <button
+                key={st}
+                type="button"
+                onClick={() => setStatusFilter(st)}
+                className="relative px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none capitalize shrink-0 z-10"
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="issueTrackerStatusIndicator"
+                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    className="absolute inset-0 rounded-xl bg-white dark:bg-purple-600 shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_12px_rgba(147,51,234,0.4)]"
+                  />
+                )}
+                <span
+                  className={`relative z-10 transition-colors duration-200 ${
+                    isActive
+                      ? 'text-purple-900 dark:text-white font-black'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  {st.replace('_', ' ')}
+                </span>
+              </button>
+            );
+          }
         )}
       </div>
 

@@ -234,41 +234,40 @@ export function ExaminationDetailDrawer({
             </button>
           </div>
 
-          {/* Navigation Tabs */}
-          <div className="flex items-center px-5 border-b border-slate-100 dark:border-white/5 shrink-0 bg-white dark:bg-[#0E1526]">
-            <button
-              type="button"
-              onClick={() => setActiveTab('overview')}
-              className={`py-3 px-3 text-xs font-bold transition-all border-b-2 cursor-pointer border-0 outline-none ${
-                activeTab === 'overview'
-                  ? 'border-purple-600 text-purple-600 dark:text-purple-400'
-                  : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              Overview & Timestamps
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('examinees')}
-              className={`py-3 px-3 text-xs font-bold transition-all border-b-2 cursor-pointer border-0 outline-none ${
-                activeTab === 'examinees'
-                  ? 'border-purple-600 text-purple-600 dark:text-purple-400'
-                  : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              Examinees ({participants.length || exam.total_joined})
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('reassign')}
-              className={`py-3 px-3 text-xs font-bold transition-all border-b-2 cursor-pointer border-0 outline-none ${
-                activeTab === 'reassign'
-                  ? 'border-purple-600 text-purple-600 dark:text-purple-400'
-                  : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              Assign Proctor
-            </button>
+          {/* Navigation Tabs with Smooth Sliding Animation */}
+          <div className="flex items-center px-5 gap-2 border-b border-slate-100 dark:border-white/5 shrink-0 bg-white dark:bg-[#0E1526]">
+            {[
+              { id: 'overview' as const, label: 'Overview & Timestamps' },
+              { id: 'examinees' as const, label: `Examinees (${participants.length || exam.total_joined})` },
+              { id: 'reassign' as const, label: 'Assign Proctor' },
+            ].map((tab) => {
+              const active = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className="relative py-3.5 px-3 text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none"
+                >
+                  <span
+                    className={`relative z-10 transition-colors duration-200 ${
+                      active
+                        ? 'text-purple-700 dark:text-purple-300 font-extrabold'
+                        : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+                    }`}
+                  >
+                    {tab.label}
+                  </span>
+                  {active && (
+                    <motion.div
+                      layoutId="examDetailTabIndicator"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                      className="absolute bottom-0 inset-x-0 h-0.5 bg-purple-600 dark:bg-purple-400 rounded-full shadow-[0_0_8px_rgba(147,51,234,0.6)]"
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           {/* Tab Body */}

@@ -1464,22 +1464,36 @@ export function LiveTeacherSupervisionRoom({
                 />
               </div>
 
-              {/* Status Filter Pills */}
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px] font-semibold text-slate-500">
-                {(['all', 'active', 'suspended', 'hand_raised', 'warned'] as const).map((f) => (
-                  <button
-                    key={f}
-                    type="button"
-                    onClick={() => setStudentFilter(f)}
-                    className={`px-2.5 py-1 rounded-xl capitalize transition-all cursor-pointer shrink-0 border-0 outline-none ${
-                      studentFilter === f
-                        ? 'bg-purple-600 text-white font-bold shadow-xs'
-                        : 'bg-slate-100 dark:bg-[#161D2E] text-slate-600 dark:text-slate-300 hover:bg-slate-200'
-                    }`}
-                  >
-                    {f === 'hand_raised' ? 'Hand Raised' : f}
-                  </button>
-                ))}
+              {/* Status Filter Pills with Smooth Sliding Animation */}
+              <div className="relative flex items-center gap-1 p-1 rounded-2xl bg-slate-200/70 dark:bg-[#161D2E] overflow-x-auto scrollbar-none text-[11px] font-semibold">
+                {(['all', 'active', 'suspended', 'hand_raised', 'warned'] as const).map((f) => {
+                  const isActive = studentFilter === f;
+                  return (
+                    <button
+                      key={f}
+                      type="button"
+                      onClick={() => setStudentFilter(f)}
+                      className="relative px-3 py-1.5 rounded-xl capitalize transition-colors duration-200 cursor-pointer shrink-0 border-0 outline-none z-10"
+                    >
+                      {isActive && (
+                        <motion.div
+                          layoutId="examineeFilterActiveIndicator"
+                          transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                          className="absolute inset-0 rounded-xl bg-white dark:bg-purple-600 shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_12px_rgba(147,51,234,0.4)]"
+                        />
+                      )}
+                      <span
+                        className={`relative z-10 transition-colors duration-200 ${
+                          isActive
+                            ? 'text-purple-900 dark:text-white font-extrabold'
+                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium'
+                        }`}
+                      >
+                        {f === 'hand_raised' ? 'Hand Raised' : f}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Categorized Candidate Cards */}

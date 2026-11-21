@@ -184,30 +184,39 @@ export function CustomExamManagementDashboard({
 
       {/* ── FILTER & SEARCH TOOLBAR ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2 rounded-2xl bg-slate-100/90 dark:bg-[#0D1527] shadow-xs border-0">
-        {/* Segmented Tab Pill */}
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={() => setActiveTab('active')}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border-0 outline-none ${
-              activeTab === 'active'
-                ? 'bg-white dark:bg-[#1E293B] text-slate-900 dark:text-white shadow-xs'
-                : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
-            }`}
-          >
-            <span>Active &amp; Scheduled ({activeCount})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('completed')}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border-0 outline-none ${
-              activeTab === 'completed'
-                ? 'bg-white dark:bg-[#1E293B] text-slate-900 dark:text-white shadow-xs'
-                : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
-            }`}
-          >
-            <span>Archived ({completedCount})</span>
-          </button>
+        {/* Segmented Tab Pill with Smooth Sliding Animation */}
+        <div className="relative flex items-center gap-1 p-1 rounded-2xl bg-slate-200/70 dark:bg-white/5 shadow-inner">
+          {[
+            { id: 'active' as const, label: `Active & Scheduled (${activeCount})` },
+            { id: 'completed' as const, label: `Archived (${completedCount})` },
+          ].map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className="relative px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10"
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="customExamDashboardActiveTab"
+                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    className="absolute inset-0 rounded-xl bg-white dark:bg-purple-600 shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_12px_rgba(147,51,234,0.4)]"
+                  />
+                )}
+                <span
+                  className={`relative z-10 transition-colors duration-200 ${
+                    isActive
+                      ? 'text-purple-900 dark:text-white font-extrabold'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Search Bar */}

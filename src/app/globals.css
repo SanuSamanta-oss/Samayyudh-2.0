@@ -243,10 +243,38 @@ body {
   box-shadow: 0 0 0 2px var(--danger-500), 0 0 12px rgba(239, 68, 68, 0.2);
 }
 
-/* Focus styles */
-:focus-visible {
-  outline: 2px solid var(--color-brand-500);
-  outline-offset: 2px;
+/* ============================================================
+   Zero Outline & Focus System (Strictly No Outlines in Any Theme)
+   ============================================================ */
+
+*,
+*::before,
+*::after,
+*:focus,
+*:focus-visible,
+*:focus-within,
+button,
+button:focus,
+button:focus-visible,
+input,
+input:focus,
+input:focus-visible,
+select,
+select:focus,
+select:focus-visible,
+textarea,
+textarea:focus,
+textarea:focus-visible,
+a,
+a:focus,
+a:focus-visible {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 /* ============================================================

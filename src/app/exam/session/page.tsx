@@ -28,7 +28,7 @@ import { TeacherWarningOverlay } from '@/components/custom-exams/TeacherWarningO
 import { ExamSuspensionOverlay } from '@/components/custom-exams/ExamSuspensionOverlay';
 import {
   ChevronLeft, ChevronRight, Flag, Grid3X3, Send, Award,
-  AlertTriangle, CheckCircle2, Calculator, Trophy, ShieldCheck, Radio
+  AlertTriangle, CheckCircle2, Calculator, Trophy, ShieldCheck, Radio, Hand
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -81,6 +81,25 @@ function ExamSessionInner() {
     timestamp: string;
   } | null>(null);
   const [acknowledgedWarningIds, setAcknowledgedWarningIds] = useState<Set<string>>(new Set());
+  const [isHandRaised, setIsHandRaised] = useState(false);
+
+  const handleRaiseHand = async () => {
+    if (!customExamInfo?.id) return;
+    const studentId = state.session?.user_id || 'stud_1';
+    try {
+      const res = await fetch('/api/custom-exams/hand-raise', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          exam_id: customExamInfo.id,
+          student_id: studentId,
+        }),
+      });
+      if (res.ok) {
+        setIsHandRaised(true);
+      }
+    } catch {}
+  };
 
   const { warningMessage, connectionQuality, dismissWarning } = useProctoringMonitor({
     sessionId: proctorSessionId || state.session?.id || '',
@@ -755,6 +774,24 @@ function ExamSessionInner() {
                       : 'bg-slate-300 dark:bg-slate-500 group-hover:bg-purple-400'
                   )}
                 />
+              </motion.button>
+            )}
+            {customExamInfo && (
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.94, y: 1 }}
+                onClick={handleRaiseHand}
+                className={cn(
+                  'group relative flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer border-0 outline-none select-none shadow-sm',
+                  isHandRaised
+                    ? 'bg-amber-500 text-slate-950 shadow-[0_4px_16px_rgba(245,158,11,0.4)]'
+                    : 'bg-white hover:bg-amber-50 text-slate-800 hover:text-amber-700 dark:bg-[#1E293B] dark:hover:bg-[#28354D] dark:text-white'
+                )}
+                title={isHandRaised ? 'Hand raised — Proctor notified' : 'Raise hand for proctor attention'}
+              >
+                <Hand className={cn('w-3.5 h-3.5', isHandRaised ? 'text-slate-950 animate-bounce' : 'text-amber-500')} />
+                <span className="hidden sm:inline">{isHandRaised ? 'Hand Raised' : 'Raise Hand'}</span>
               </motion.button>
             )}
             <ExamTimer endsAt={state.session.ends_at} onTimeUp={handleTimeUp} isPaused={isSuspended} />

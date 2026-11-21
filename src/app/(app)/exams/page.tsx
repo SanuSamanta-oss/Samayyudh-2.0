@@ -13,16 +13,26 @@ import { GateLandingPage } from '@/components/gate/GateLandingPage';
 import { WbjeeLandingPage } from '@/components/wbjee/WbjeeLandingPage';
 import { WbjeeChapter, WbjeeSubject } from '@/data/wbjee/wbjeeSyllabus';
 import { UpscLandingPage } from '@/components/upsc/UpscLandingPage';
+import { CustomExamManagementDashboard } from '@/components/custom-exams/CustomExamManagementDashboard';
+import { JoinCustomExamModal } from '@/components/custom-exams/JoinCustomExamModal';
+import { Radio } from 'lucide-react';
 
 export default function ExamsPage() {
   const router = useRouter();
   const [loadingExam, setLoadingExam] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
   const [activeWorkspaceCode, setActiveWorkspaceCode] = useState<string | null>(null);
+  const [showJoinModal, setShowJoinModal] = useState(false);
 
   const activeSyllabus = getExamSyllabus(activeWorkspaceCode);
 
   const handleExamClick = (code: string, customName?: string) => {
+    // If CUSTOM is selected, open dedicated Custom Exam Management Suite in-place
+    if (code === 'CUSTOM' || code === 'CUSTOM_EXAM') {
+      setActiveWorkspaceCode('CUSTOM');
+      return;
+    }
+
     // If GATE is selected, open dedicated GATE workspace in-place
     if (code === 'ENGINEERING' || code === 'GATE' || code.startsWith('GATE')) {
       setActiveWorkspaceCode('GATE');
@@ -137,6 +147,20 @@ export default function ExamsPage() {
               }}
             />
           </motion.div>
+        ) : activeWorkspaceCode === 'CUSTOM' ? (
+          <motion.div
+            key="CUSTOM"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <CustomExamManagementDashboard
+              onBackToCategorySelect={() => setActiveWorkspaceCode(null)}
+              onOpenSupervisionRoom={(id, code) => {
+                router.push(`/teacher/supervise/${id}?code=${code}`);
+              }}
+            />
+          </motion.div>
         ) : activeSyllabus ? (
           <motion.div
             key={activeSyllabus.code}
@@ -165,9 +189,21 @@ export default function ExamsPage() {
           </motion.div>
         ) : (
           <>
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-foreground">Choose Your Exam</h1>
-              <p className="text-stone-500 mt-1">One engine. Every exam pattern.</p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-foreground">Choose Your Exam</h1>
+                <p className="text-stone-500 mt-1">One engine. Every exam pattern.</p>
+              </div>
+
+              {/* Quick Action: Join Custom Exam with Code */}
+              <button
+                type="button"
+                onClick={() => setShowJoinModal(true)}
+                className="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-purple-100/80 hover:bg-purple-200 dark:bg-purple-950/60 dark:hover:bg-purple-900/60 text-purple-900 dark:text-purple-300 text-xs sm:text-sm font-bold transition-all active:scale-95 cursor-pointer border-0 outline-none shadow-xs"
+              >
+                <Radio className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                <span>Join Custom Exam (CE Code)</span>
+              </button>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {EXAM_CATEGORIES.map((cat, i) => (
@@ -239,6 +275,20 @@ export default function ExamsPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Direct Join Custom Exam Modal */}
+      <JoinCustomExamModal
+        isOpen={showJoinModal}
+        onClose={() => setShowJoinModal(false)}
+        onJoined={(exam) => {
+          setShowJoinModal(false);
+          router.push(
+            exam.status === 'in_progress'
+              ? `/exam/session?customExam=${exam.exam_code}`
+              : `/exam/waiting-room?code=${exam.exam_code}`
+          );
+        }}
+      />
     </>
   );
 }

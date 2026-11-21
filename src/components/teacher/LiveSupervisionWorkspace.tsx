@@ -148,7 +148,7 @@ export function LiveSupervisionWorkspace() {
                 No active exam supervision sessions found
               </h3>
               <p className="text-xs text-neutral-500 dark:text-neutral-400 max-w-sm mx-auto">
-                When candidates start an invigilated test, their live circular video feeds, LCE identification, and connection status will appear here automatically.
+                When candidates start an invigilated test, their live encrypted video feeds, LCE identification, and connection status will appear here automatically.
               </p>
             </div>
           ) : (

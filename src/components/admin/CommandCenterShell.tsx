@@ -19,7 +19,7 @@ import { UserRoleManagementSection } from './UserRoleManagementSection';
 import { LoginActivitySection } from './LoginActivitySection';
 import { LiveProctoringSection } from './LiveProctoringSection';
 import { TeacherVerificationCenter } from '@/components/teacher/TeacherVerificationCenter';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { SuperAdminOverviewSection } from './super-admin/SuperAdminOverviewSection';
 import { AllExaminationsSection } from './super-admin/AllExaminationsSection';
 import { ExaminationDetailDrawer } from './super-admin/ExaminationDetailDrawer';
@@ -63,9 +63,17 @@ interface AuthStatusResponse {
 export function CommandCenterShell() {
   const [authStatus, setAuthStatus] = useState<AuthStatusResponse | null>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [bootLoading, setBootLoading] = useState(true);
 
   const [activeSection, setActiveSection] = useState<AdminSectionId>('overview');
+
+  useEffect(() => {
+    const sec = searchParams.get('section') as AdminSectionId | null;
+    if (sec) {
+      setActiveSection(sec);
+    }
+  }, [searchParams]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -433,9 +441,13 @@ export function CommandCenterShell() {
       <CreateCustomExamModal
         isOpen={openCreateExamModal}
         onClose={() => setOpenCreateExamModal(false)}
-        onCreated={() => {
+        onCreated={(exam) => {
           setOpenCreateExamModal(false);
-          setActiveSection('super_admin_exams');
+          if (exam && (exam.id || exam.exam_code)) {
+            handleEnterExamRoom(exam.id, exam.exam_code);
+          } else {
+            setActiveSection('super_admin_exams');
+          }
         }}
       />
     </div>

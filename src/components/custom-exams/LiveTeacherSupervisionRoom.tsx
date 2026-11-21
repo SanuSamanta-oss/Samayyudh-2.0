@@ -61,6 +61,7 @@ interface LiveTeacherSupervisionRoomProps {
   examId: string;
   examCode?: string;
   onBackToDashboard?: () => void;
+  isSuperAdmin?: boolean;
 }
 
 // Realistic candidate webcam video streams
@@ -264,6 +265,7 @@ export function LiveTeacherSupervisionRoom({
   examId,
   examCode: initialCode,
   onBackToDashboard,
+  isSuperAdmin = false,
 }: LiveTeacherSupervisionRoomProps) {
   const router = useRouter();
 
@@ -474,6 +476,7 @@ export function LiveTeacherSupervisionRoom({
           warning_level: level,
           reason: reasonLabel,
           note,
+          actor_role: isSuperAdmin ? 'admin' : 'teacher',
         }),
       });
 
@@ -510,6 +513,7 @@ export function LiveTeacherSupervisionRoom({
           student_id: targetStudent.student_id,
           action: 'suspend',
           reason,
+          actor_role: isSuperAdmin ? 'admin' : 'teacher',
         }),
       });
 
@@ -541,6 +545,7 @@ export function LiveTeacherSupervisionRoom({
           exam_id: exam?.id || examId,
           student_id: student.student_id,
           action: 'restore',
+          actor_role: isSuperAdmin ? 'admin' : 'teacher',
         }),
       });
 
@@ -577,6 +582,7 @@ export function LiveTeacherSupervisionRoom({
           action: 'time_adjustment',
           time_adjustment_seconds: secondsDelta,
           reason,
+          actor_role: isSuperAdmin ? 'admin' : 'teacher',
         }),
       });
       if (res.ok) {
@@ -686,6 +692,39 @@ export function LiveTeacherSupervisionRoom({
 
   return (
     <div className="flex flex-col h-[calc(100vh-4.25rem)] w-full select-none overflow-hidden bg-slate-100/90 dark:bg-[#070A12] text-slate-800 dark:text-slate-100 transition-colors duration-300">
+      {/* ── SUPER ADMIN SUPERVISION MODE BANNER ── */}
+      {isSuperAdmin && (
+        <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-950 text-white px-4 py-2 flex items-center justify-between text-xs font-semibold shadow-md z-30 shrink-0 border-b border-purple-500/30">
+          <div className="flex items-center gap-2.5">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
+            </span>
+            <span className="tracking-wider uppercase font-black text-amber-300">
+              Super Admin Supervision Mode
+            </span>
+            <span className="text-white/40 hidden sm:inline">|</span>
+            <span className="text-white/80 hidden sm:inline text-[11px]">
+              Platform-Wide Oversight & Intervention Authority (Audit Logged as Admin)
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="bg-purple-500/30 text-purple-200 px-2.5 py-0.5 rounded-full text-[10px] font-bold border border-purple-400/20">
+              Actor Role: Admin
+            </span>
+            {onBackToDashboard && (
+              <button
+                type="button"
+                onClick={onBackToDashboard}
+                className="text-white/80 hover:text-white underline text-[11px] cursor-pointer"
+              >
+                Exit to Command Center
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* ── TOP INFORMATION BAR ── */}
       <header className="h-16 px-4 sm:px-6 bg-white/90 dark:bg-[#0E1322]/90 backdrop-blur-2xl flex items-center justify-between shrink-0 z-20 shadow-xs border-b border-slate-200/50 dark:border-slate-800/60">
         <div className="flex items-center gap-3 min-w-0">
@@ -1017,12 +1056,12 @@ export function LiveTeacherSupervisionRoom({
               {/* Bottom Carousel Strip with Live Moving Feeds */}
               <div className="mt-3 relative shrink-0">
                 <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
-                  {activeCandidates.map((p) => {
+                  {activeCandidates.map((p, idx) => {
                     const isSelected = p.student_id === selectedStudentId;
                     const streamData = CANDIDATE_STREAMS[p.student_id];
                     return (
                       <motion.div
-                        key={p.student_id}
+                        key={`carousel-${p.id || p.student_id}-${idx}`}
                         layout
                         whileHover={{ scale: 1.03, y: -2 }}
                         whileTap={{ scale: 0.98 }}
@@ -1137,12 +1176,12 @@ export function LiveTeacherSupervisionRoom({
           ) : (
             /* VIEW MODE B: MULTI-CAM GRID */
             <div className="flex-1 grid grid-cols-2 lg:grid-cols-3 gap-3.5 min-h-[380px] overflow-y-auto pr-1">
-              {activeCandidates.map((p) => {
+              {activeCandidates.map((p, idx) => {
                 const isSelected = p.student_id === selectedStudentId;
                 const streamData = CANDIDATE_STREAMS[p.student_id];
                 return (
                   <motion.div
-                    key={p.student_id}
+                    key={`grid-${p.id || p.student_id}-${idx}`}
                     layout
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
@@ -1449,12 +1488,12 @@ export function LiveTeacherSupervisionRoom({
                   Examinees ({filteredParticipants.length})
                 </span>
 
-                {filteredParticipants.map((p) => {
+                {filteredParticipants.map((p, idx) => {
                   const isSelected = p.student_id === selectedStudentId;
                   const streamData = CANDIDATE_STREAMS[p.student_id];
                   return (
                     <motion.div
-                      key={p.student_id}
+                      key={`examinee-${p.id || p.student_id}-${idx}`}
                       whileHover={{ scale: 1.01 }}
                       onClick={() => {
                         setSelectedStudentId(p.student_id);

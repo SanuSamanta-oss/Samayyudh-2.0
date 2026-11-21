@@ -7,8 +7,20 @@ import { LiveTeacherSupervisionRoom } from '@/components/custom-exams/LiveTeache
 function TeacherSuperviseInner({ examId }: { examId: string }) {
   const searchParams = useSearchParams();
   const code = searchParams.get('code') || undefined;
+  const isSuperAdmin = searchParams.get('super_admin') === 'true';
 
-  return <LiveTeacherSupervisionRoom examId={examId} examCode={code} />;
+  return (
+    <LiveTeacherSupervisionRoom
+      examId={examId}
+      examCode={code}
+      isSuperAdmin={isSuperAdmin}
+      onBackToDashboard={() => {
+        if (typeof window !== 'undefined') {
+          window.location.href = isSuperAdmin ? '/admin?section=super_admin_exams' : '/exams';
+        }
+      }}
+    />
+  );
 }
 
 export default function TeacherSupervisePage({

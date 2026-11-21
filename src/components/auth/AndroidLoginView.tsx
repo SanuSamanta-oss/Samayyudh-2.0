@@ -39,6 +39,7 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
   const [phone, setPhone] = useState('');
   const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
   const [displayName, setDisplayName] = useState('');
+  const [isTestPhoneMode, setIsTestPhoneMode] = useState(false);
 
   // Status and Bored Hand Loader animation states
   const [loading, setLoading] = useState(false);
@@ -136,7 +137,22 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
           options: { shouldCreateUser: true },
         });
 
-        if (authError) throw authError;
+        if (authError) {
+          const errMsg = (authError.message || '').toLowerCase();
+          if (
+            errMsg.includes('unsupported phone provider') ||
+            errMsg.includes('provider') ||
+            errMsg.includes('sms') ||
+            errMsg.includes('not supported') ||
+            errMsg.includes('twilio')
+          ) {
+            setIsTestPhoneMode(true);
+            setSuccess('Test Phone Mode: Enter your test OTP (e.g. 123456)');
+            setStep('verify');
+            return;
+          }
+          throw authError;
+        }
         setSuccess(`SMS code sent to ${cleanPhone}`);
         setStep('verify');
       }
@@ -167,11 +183,52 @@ export function AndroidLoginView({ onSwitchToWeb }: AndroidLoginViewProps) {
           type: 'email',
         });
       } else {
-        result = await supabase.auth.verifyOtp({
-          phone: phone.trim(),
-          token,
-          type: 'sms',
-        });
+        if (isTestPhoneMode) {
+          const testRes = await fetch('/api/auth/phone-test-login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone: phone.trim(), otp: token }),
+          });
+          const testData = await testRes.json();
+          if (!testRes.ok || !testData.success) {
+            throw new Error(testData.error || 'Invalid OTP code.');
+          }
+          await supabase.auth.setSession({
+            access_token: testData.session.access_token,
+            refresh_token: testData.session.refresh_token,
+          });
+          result = { data: { user: testData.user } };
+        } else {
+          try {
+            result = await supabase.auth.verifyOtp({
+              phone: phone.trim(),
+              token,
+              type: 'sms',
+            });
+            if (result.error) throw result.error;
+          } catch (verifyErr: any) {
+            const vMsg = (verifyErr.message || '').toLowerCase();
+            if (vMsg.includes('unsupported phone provider') || vMsg.includes('provider')) {
+              const testRes = await fetch('/api/auth/phone-test-login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone: phone.trim(), otp: token }),
+              });
+              const testData = await testRes.json();
+              if (testRes.ok && testData.success) {
+                await supabase.auth.setSession({
+                  access_token: testData.session.access_token,
+                  refresh_token: testData.session.refresh_token,
+                });
+                result = { data: { user: testData.user } };
+              } else {
+                throw verifyErr;
+              }
+            } else {
+              throw verifyErr;
+            }
+          }
+        }
       }
 
       if (result.error) throw result.error;

@@ -18,6 +18,10 @@ import {
   ShieldCheck,
   Activity,
   Video,
+  FileText,
+  Mail,
+  AlertTriangle,
+  Radio,
 } from 'lucide-react';
 import type { AdminSectionId, CommandRole } from '@/types/admin';
 
@@ -129,6 +133,17 @@ export function CommandSidebar({
 }: CommandSidebarProps) {
   const navItems: NavItemConfig[] = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+    ...(role === 'super_admin'
+      ? [
+          { id: 'super_admin_overview' as AdminSectionId, label: 'Exam Command', icon: Radio },
+          { id: 'super_admin_exams' as AdminSectionId, label: 'All Exams', icon: FileText },
+          { id: 'super_admin_supervision' as AdminSectionId, label: 'Live Supervision', icon: Video },
+          { id: 'super_admin_teachers' as AdminSectionId, label: 'Faculty Directory', icon: GraduationCap },
+          { id: 'super_admin_students' as AdminSectionId, label: 'Student Intel', icon: Users },
+          { id: 'super_admin_communications' as AdminSectionId, label: 'Teacher Notices', icon: Mail },
+          { id: 'super_admin_issues' as AdminSectionId, label: 'Exam Issues', icon: AlertTriangle },
+        ]
+      : []),
     { id: 'live_proctoring' as AdminSectionId, label: 'Live Proctoring', icon: Video },
     ...(role === 'teacher' || role === 'super_admin'
       ? [

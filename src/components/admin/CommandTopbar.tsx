@@ -30,6 +30,14 @@ interface CommandTopbarProps {
 
 const SECTION_TITLES: Record<AdminSectionId, string> = {
   overview: 'Command Overview',
+  super_admin_overview: 'Examination Command Center',
+  super_admin_exams: 'Platform-Wide Examinations',
+  super_admin_supervision: 'Platform Live Supervision Hub',
+  super_admin_teachers: 'Faculty & Educator Directory',
+  super_admin_students: 'Student Intelligence & Integrity Registry',
+  super_admin_communications: 'Teacher Incident Communications',
+  super_admin_issues: 'Supervision Issues & Incidents',
+  super_admin_audit: 'Platform Examination Audit Log',
   live_proctoring: 'Live Exam Proctoring & Supervision',
   teacher_verify: 'Teacher Verification Center',
   user_management: 'User & Role Management',

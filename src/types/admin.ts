@@ -6,6 +6,14 @@ export type CommandRole = 'super_admin' | 'admin' | 'teacher' | 'student';
 
 export type AdminSectionId =
   | 'overview'
+  | 'super_admin_overview'
+  | 'super_admin_exams'
+  | 'super_admin_supervision'
+  | 'super_admin_teachers'
+  | 'super_admin_students'
+  | 'super_admin_communications'
+  | 'super_admin_issues'
+  | 'super_admin_audit'
   | 'live_proctoring'
   | 'teacher_verify'
   | 'user_management'
@@ -344,3 +352,116 @@ export interface AdminOverviewPayload {
     subject_distribution: { subject: string; count: number }[];
   };
 }
+
+// ============================================================
+// Super Admin Examination Command Center Data Models
+// ============================================================
+
+export type ExamCategory =
+  | 'wbjee'
+  | 'jee_main'
+  | 'jee_advanced'
+  | 'neet'
+  | 'gate'
+  | 'board'
+  | 'custom';
+
+export interface PlatformExamSummary {
+  id: string;
+  exam_code: string;
+  title: string;
+  subject: string;
+  exam_category?: string;
+  duration_minutes: number;
+  total_marks: number;
+  passing_marks: number;
+  questions_count: number;
+  status: 'draft' | 'scheduled' | 'waiting' | 'live' | 'ended' | 'cancelled';
+  scheduled_start: string | null;
+  scheduled_end: string | null;
+  actual_start: string | null;
+  actual_end: string | null;
+  created_at: string;
+  updated_at: string;
+  created_by: string;
+  creator_name?: string | null;
+  creator_email?: string | null;
+  assigned_teacher_id?: string | null;
+  assigned_teacher_name?: string | null;
+  assigned_teacher_email?: string | null;
+  total_registered: number;
+  total_joined: number;
+  total_submitted: number;
+  total_suspended: number;
+  total_flagged: number;
+  is_live_now?: boolean;
+}
+
+export interface TeacherCommunicationItem {
+  id: string;
+  exam_id?: string | null;
+  exam_code?: string | null;
+  exam_title?: string | null;
+  teacher_id: string;
+  teacher_name?: string | null;
+  teacher_email: string;
+  sender_id?: string | null;
+  sender_email?: string | null;
+  subject: string;
+  category: 'exam_issue' | 'schedule_notice' | 'supervision_clarification' | 'compliance_warning' | 'general';
+  priority: 'low' | 'normal' | 'high' | 'urgent';
+  message: string;
+  status: 'queued' | 'sent' | 'delivered' | 'failed';
+  error_message?: string | null;
+  created_at: string;
+}
+
+export interface SupervisionIssueItem {
+  id: string;
+  exam_id: string;
+  exam_code?: string;
+  exam_title?: string;
+  teacher_id?: string | null;
+  teacher_name?: string | null;
+  student_id?: string | null;
+  student_name?: string | null;
+  category: 'technical_glitch' | 'proctoring_violation' | 'disconnection' | 'time_dispute' | 'cheating_flag' | 'other';
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  title: string;
+  description: string;
+  status: 'open' | 'under_review' | 'waiting_teacher' | 'resolved' | 'closed';
+  assigned_to?: string | null;
+  resolution_notes?: string | null;
+  created_by?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface PlatformTeacherDirectoryItem {
+  id: string;
+  name: string;
+  email: string;
+  institution?: string;
+  role: string;
+  verified: boolean;
+  total_exams_created: number;
+  total_exams_supervised: number;
+  active_exams_now: number;
+  last_active?: string | null;
+  created_at: string;
+}
+
+export interface PlatformStudentDirectoryItem {
+  id: string;
+  name: string;
+  email: string;
+  lce_code?: string;
+  total_exams_taken: number;
+  total_exams_in_progress: number;
+  total_warnings_received: number;
+  total_suspensions: number;
+  average_accuracy: number;
+  last_exam_date?: string | null;
+  created_at: string;
+}
+

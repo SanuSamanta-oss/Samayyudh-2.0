@@ -146,20 +146,28 @@ function AuthPageContent() {
         }
         const supabase = createClient();
         const { error: authError } = await supabase.auth.signInWithOtp({
-          phone,
+          phone: phone.trim(),
           options: { shouldCreateUser: true },
         });
         if (authError) {
-          const errMsg = authError.message?.toLowerCase() || '';
-          if (errMsg.includes('unsupported phone provider') || errMsg.includes('provider')) {
+          const errMsg = (authError.message || '').toLowerCase();
+          if (
+            errMsg.includes('unsupported phone provider') ||
+            errMsg.includes('provider') ||
+            errMsg.includes('sms') ||
+            errMsg.includes('not supported') ||
+            errMsg.includes('twilio')
+          ) {
             setIsTestPhoneMode(true);
-            setSuccess(`Test Phone Mode Active: Enter your test OTP (e.g., 123456)`);
             goTo('otp');
+            setSuccess('Test Phone Mode: Enter your test OTP (e.g. 123456) to continue.');
             return;
           }
           throw authError;
         }
+        goTo('otp');
         setSuccess(`OTP sent to ${phone}!`);
+        return;
       }
       goTo('otp');
     } catch (err) {

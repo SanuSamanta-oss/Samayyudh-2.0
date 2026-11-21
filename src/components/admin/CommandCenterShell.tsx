@@ -19,12 +19,23 @@ import { UserRoleManagementSection } from './UserRoleManagementSection';
 import { LoginActivitySection } from './LoginActivitySection';
 import { LiveProctoringSection } from './LiveProctoringSection';
 import { TeacherVerificationCenter } from '@/components/teacher/TeacherVerificationCenter';
+import { useRouter } from 'next/navigation';
+import { SuperAdminOverviewSection } from './super-admin/SuperAdminOverviewSection';
+import { AllExaminationsSection } from './super-admin/AllExaminationsSection';
+import { ExaminationDetailDrawer } from './super-admin/ExaminationDetailDrawer';
+import { TeacherDirectorySection } from './super-admin/TeacherDirectorySection';
+import { TeacherCommunicationCenter } from './super-admin/TeacherCommunicationCenter';
+import { ExaminationIssueTracker } from './super-admin/ExaminationIssueTracker';
+import { StudentIntelligenceSection } from './super-admin/StudentIntelligenceSection';
+import { SuperAdminSupervisionHub } from './super-admin/SuperAdminSupervisionHub';
+import { CreateCustomExamModal } from '@/components/custom-exams/CreateCustomExamModal';
 import type {
   AdminOverviewPayload,
   AdminSectionId,
   ClassroomItem,
   CommandRole,
   StudentGroupItem,
+  PlatformExamSummary,
 } from '@/types/admin';
 
 interface AuthStatusResponse {
@@ -51,6 +62,7 @@ interface AuthStatusResponse {
 
 export function CommandCenterShell() {
   const [authStatus, setAuthStatus] = useState<AuthStatusResponse | null>(null);
+  const router = useRouter();
   const [bootLoading, setBootLoading] = useState(true);
 
   const [activeSection, setActiveSection] = useState<AdminSectionId>('overview');
@@ -66,6 +78,30 @@ export function CommandCenterShell() {
 
   const [openQuestionComposer, setOpenQuestionComposer] = useState(false);
   const [openUploadModal, setOpenUploadModal] = useState(false);
+
+  // Super Admin Command Center States
+  const [selectedExamDetail, setSelectedExamDetail] = useState<PlatformExamSummary | null>(null);
+  const [noticeRecipient, setNoticeRecipient] = useState<{
+    email: string;
+    name?: string;
+    examId?: string;
+    examCode?: string;
+  } | null>(null);
+  const [openCreateExamModal, setOpenCreateExamModal] = useState(false);
+
+  const handleEnterExamRoom = (examId: string, examCode?: string) => {
+    router.push(`/teacher/supervise/${examId}?code=${examCode || ''}&super_admin=true`);
+  };
+
+  const handleContactTeacher = (
+    email: string,
+    name?: string,
+    examId?: string,
+    examCode?: string
+  ) => {
+    setNoticeRecipient({ email, name, examId, examCode });
+    setActiveSection('super_admin_communications');
+  };
 
   const loadAuthStatus = useCallback(async () => {
     try {
@@ -247,6 +283,53 @@ export function CommandCenterShell() {
                 />
               )}
 
+              {/* Super Admin Examination Command Center Sections */}
+              {activeSection === 'super_admin_overview' && (
+                <SuperAdminOverviewSection
+                  onNavigate={setActiveSection}
+                  onEnterExamRoom={handleEnterExamRoom}
+                  onOpenExamDetail={(exam) => setSelectedExamDetail(exam)}
+                  onOpenNewExam={() => setOpenCreateExamModal(true)}
+                />
+              )}
+
+              {activeSection === 'super_admin_exams' && (
+                <AllExaminationsSection
+                  onEnterExamRoom={handleEnterExamRoom}
+                  onOpenExamDetail={(exam) => setSelectedExamDetail(exam)}
+                  onContactTeacher={handleContactTeacher}
+                  onOpenNewExam={() => setOpenCreateExamModal(true)}
+                />
+              )}
+
+              {activeSection === 'super_admin_supervision' && (
+                <SuperAdminSupervisionHub
+                  onEnterExamRoom={handleEnterExamRoom}
+                  onOpenExamDetail={(exam) => setSelectedExamDetail(exam)}
+                />
+              )}
+
+              {activeSection === 'super_admin_teachers' && (
+                <TeacherDirectorySection
+                  onContactTeacher={(email, name) => handleContactTeacher(email, name)}
+                  onViewTeacherExams={() => {
+                    setActiveSection('super_admin_exams');
+                  }}
+                />
+              )}
+
+              {activeSection === 'super_admin_students' && (
+                <StudentIntelligenceSection />
+              )}
+
+              {activeSection === 'super_admin_communications' && (
+                <TeacherCommunicationCenter initialRecipient={noticeRecipient} />
+              )}
+
+              {activeSection === 'super_admin_issues' && (
+                <ExaminationIssueTracker />
+              )}
+
               {activeSection === 'live_proctoring' && (
                 <LiveProctoringSection
                   currentUserId={authStatus.identity?.userId}
@@ -335,6 +418,25 @@ export function CommandCenterShell() {
         open={searchOpen}
         onClose={() => setSearchOpen(false)}
         onNavigate={setActiveSection}
+      />
+
+      {/* Examination Detail Drawer */}
+      <ExaminationDetailDrawer
+        isOpen={Boolean(selectedExamDetail)}
+        exam={selectedExamDetail}
+        onClose={() => setSelectedExamDetail(null)}
+        onEnterExamRoom={handleEnterExamRoom}
+        onContactTeacher={handleContactTeacher}
+      />
+
+      {/* Super Admin Create Custom Exam Modal */}
+      <CreateCustomExamModal
+        isOpen={openCreateExamModal}
+        onClose={() => setOpenCreateExamModal(false)}
+        onCreated={() => {
+          setOpenCreateExamModal(false);
+          setActiveSection('super_admin_exams');
+        }}
       />
     </div>
   );

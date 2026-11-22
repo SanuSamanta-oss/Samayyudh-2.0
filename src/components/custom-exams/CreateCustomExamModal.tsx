@@ -22,6 +22,8 @@ import {
   QrCode,
   Users,
   Shuffle,
+  Share2,
+  Send,
 } from 'lucide-react';
 import type { CustomExam, CreateCustomExamInput } from '@/types/custom-exam';
 
@@ -67,7 +69,21 @@ export function CreateCustomExamModal({
   const [submitting, setSubmitting] = useState(false);
   const [createdExam, setCreatedExam] = useState<CustomExam | null>(null);
   const [copied, setCopied] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const handleCopyLink = (url: string) => {
+    if (typeof navigator !== 'undefined') {
+      navigator.clipboard.writeText(url);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    }
+  };
+
+  const handleShareWhatsApp = (examCode: string, examTitle: string, url: string) => {
+    const text = `You are invited to join custom examination "${examTitle}" on SamayYudh 2.0!\n\nUniversal Link: ${url}\nExam Code: ${examCode}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  };
 
   const toggleSubject = (subject: string) => {
     setSelectedSubjects((prev) =>
@@ -133,8 +149,8 @@ export function CreateCustomExamModal({
 
   const joinUrl =
     typeof window !== 'undefined'
-      ? `${window.location.origin}/exam/waiting-room?code=${createdExam?.exam_code}`
-      : `https://samayyudh.vercel.app/exam/waiting-room?code=${createdExam?.exam_code}`;
+      ? `${window.location.origin}/join/${createdExam?.exam_code}`
+      : `https://samayyudh-2-0.vercel.app/join/${createdExam?.exam_code}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md select-none overflow-y-auto">
@@ -216,8 +232,28 @@ export function CreateCustomExamModal({
                   </button>
                 </div>
 
+                <div className="flex items-center gap-2 pt-1 flex-wrap justify-center sm:justify-start">
+                  <button
+                    type="button"
+                    onClick={() => handleCopyLink(joinUrl)}
+                    className="px-3 py-1.5 rounded-xl bg-slate-200/80 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 font-semibold text-xs transition-all active:scale-95 cursor-pointer border-0 outline-none flex items-center gap-1.5"
+                  >
+                    {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedLink ? 'Link Copied' : 'Copy Link'}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleShareWhatsApp(createdExam.exam_code, createdExam.title, joinUrl)}
+                    className="px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs transition-all active:scale-95 cursor-pointer border-0 outline-none flex items-center gap-1.5 shadow-sm"
+                  >
+                    <Share2 className="w-3.5 h-3.5" />
+                    <span>WhatsApp</span>
+                  </button>
+                </div>
+
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 max-w-xs">
-                  Students can join directly with this code or by scanning the QR code above.
+                  Universal link works across Android, iOS, desktop and mobile browsers.
                 </p>
               </div>
             </div>

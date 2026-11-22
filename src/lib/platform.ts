@@ -77,3 +77,27 @@ export function isAndroidApp(): boolean {
 
   return false;
 }
+
+/**
+ * Returns an Android intent URI for explicitly opening the installed app
+ * with fallback to web if app is not present.
+ */
+export function getAndroidIntentUrl(path: string): string {
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  const host = typeof window !== 'undefined' ? window.location.host : 'samayyudh-2-0.vercel.app';
+  return `intent://${host}/${cleanPath}#Intent;scheme=https;package=com.samayyudh.app;S.browser_fallback_url=https://${host}/${cleanPath};end`;
+}
+
+/**
+ * Checks if the application is currently running in an installed standalone window or mobile wrapper.
+ */
+export function isStandaloneApp(): boolean {
+  if (typeof window === 'undefined') return false;
+  return (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.matchMedia('(display-mode: fullscreen)').matches ||
+    (window.navigator as unknown as { standalone?: boolean }).standalone === true ||
+    isAndroidApp()
+  );
+}
+

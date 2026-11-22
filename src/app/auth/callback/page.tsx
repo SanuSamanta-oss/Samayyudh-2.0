@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 import { BoredHandLoader } from '@/components/BoredHandLoader';
 import { markUserLoggedIn } from '@/lib/auth-welcome';
+import { getPendingInvitation } from '@/lib/invitations/pending-invitation-service';
 
 function AuthCallbackContent() {
   const router = useRouter();
@@ -32,7 +33,16 @@ function AuthCallbackContent() {
 
         const supabase = createClient();
         const code = searchParams.get('code');
-        const next = searchParams.get('next') || '/?welcome_hint=true';
+        const nextParam = searchParams.get('next');
+        let next = nextParam;
+        if (!next) {
+          const pending = getPendingInvitation();
+          if (pending?.code) {
+            next = `/join/${pending.code}`;
+          } else {
+            next = '/?welcome_hint=true';
+          }
+        }
         const targetUrl = next.startsWith('/') && !next.startsWith('//') ? next : '/?welcome_hint=true';
 
         // Check for error parameters sent by provider (e.g. Google cancellation or rejection)

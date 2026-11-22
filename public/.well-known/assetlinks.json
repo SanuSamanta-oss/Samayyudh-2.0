@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.samayyudh.app",
+      "sha256_cert_fingerprints": [
+        "14:6D:E9:7D:0F:52:AB:E6:EC:74:12:F4:60:33:2F:9E:AC:4B:86:40:4F:08:14:42:A4:44:E4:00:18:51:89:A4"
+      ]
+    }
+  }
+]

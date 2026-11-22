@@ -253,3 +253,58 @@ export interface CustomExamReport {
   events: SupervisionAuditLog[];
   generated_at: string;
 }
+
+export type InvitationStatus = 'active' | 'revoked' | 'expired';
+
+export interface CustomExamInvitation {
+  id: string;
+  exam_id: string;
+  invitation_code: string;
+  token_hash?: string | null;
+  created_by?: string | null;
+  status: InvitationStatus;
+  expires_at?: string | null;
+  max_uses?: number | null;
+  use_count: number;
+  access_restrictions?: Record<string, any>;
+  revoked_at?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface InvitationValidationResult {
+  valid: boolean;
+  status: 'valid' | 'expired' | 'revoked' | 'not_found' | 'already_submitted' | 'not_started' | 'ended' | 'full';
+  message: string;
+  exam?: {
+    id: string;
+    exam_code: string;
+    title: string;
+    description?: string | null;
+    subject?: string | null;
+    target_class?: string | null;
+    duration_minutes: number;
+    total_marks: number;
+    start_time?: string | null;
+    end_time?: string | null;
+    supervision_enabled: boolean;
+    mic_enabled: boolean;
+    negative_marking: boolean;
+    instructions?: string | null;
+    status: CustomExamStatus;
+    total_questions: number;
+    teacher_name?: string | null;
+    institution_name?: string | null;
+  } | null;
+  invitation?: {
+    code: string;
+    expires_at?: string | null;
+  } | null;
+  student_status?: {
+    is_authenticated: boolean;
+    student_id?: string | null;
+    already_submitted: boolean;
+    is_suspended: boolean;
+  };
+}
+

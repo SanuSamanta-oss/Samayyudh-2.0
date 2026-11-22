@@ -24,6 +24,7 @@ import { hasUserLoggedInBefore, markUserLoggedIn } from '@/lib/auth-welcome';
 import { isAndroidApp } from '@/lib/platform';
 import { AndroidLoginView } from '@/components/auth/AndroidLoginView';
 import { AndroidSplashScreen } from '@/components/auth/AndroidSplashScreen';
+import { getPendingInvitation } from '@/lib/invitations/pending-invitation-service';
 
 type AuthMethod = 'email' | 'phone' | null;
 type AuthStep = 'choose' | 'input' | 'otp' | 'name';
@@ -75,7 +76,18 @@ function AuthPageContent() {
   const targetUrl = useMemo(() => {
     const redirectParam = searchParams.get('redirect') || searchParams.get('next');
     const examParam = searchParams.get('exam');
-    let url = redirectParam || '/?welcome_hint=true';
+    let url = redirectParam;
+    
+    // Check pending exam invitation in storage/cookie if not provided in search params
+    if (!url) {
+      const pending = getPendingInvitation();
+      if (pending?.code) {
+        url = `/join/${pending.code}`;
+      } else {
+        url = '/?welcome_hint=true';
+      }
+    }
+
     if (examParam && !url.includes('exam=')) {
       url += (url.includes('?') ? '&' : '?') + `exam=${encodeURIComponent(examParam)}`;
     }

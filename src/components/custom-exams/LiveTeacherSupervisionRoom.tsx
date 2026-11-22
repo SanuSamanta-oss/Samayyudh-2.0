@@ -270,8 +270,8 @@ export function LiveTeacherSupervisionRoom({
 
   const joinUrl =
     typeof window !== 'undefined'
-      ? `${window.location.origin}/exam/waiting-room?code=${displayCode}`
-      : `https://samayyudh.vercel.app/exam/waiting-room?code=${displayCode}`;
+      ? `${window.location.origin}/join/${displayCode}`
+      : `https://samayyudh-2-0.vercel.app/join/${displayCode}`;
 
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(joinUrl)}`;
 
@@ -969,10 +969,10 @@ export function LiveTeacherSupervisionRoom({
 
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                  Direct Student Link
+                  Universal Invitation Link
                 </span>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate font-mono mt-0.5">
-                  /exam/waiting-room?code={displayCode}
+                  /join/{displayCode}
                 </p>
               </div>
 

@@ -62,6 +62,140 @@ import { SupervisionReportModal } from './SupervisionReportModal';
 import { TimeAdjustmentModal } from './TimeAdjustmentModal';
 import { EndExamConfirmationModal } from './EndExamConfirmationModal';
 import { StudentSupervisionDrawer } from './StudentSupervisionDrawer';
+import { ProctorViewer, getCustomExamStreamSessionId } from '@/lib/proctoring/webrtc-service';
+
+interface StudentLiveStreamFeedProps {
+  examCode: string;
+  studentId: string;
+  studentName: string;
+  studentLceCode?: string;
+  isSuspended: boolean;
+  isMini?: boolean;
+}
+
+function StudentLiveStreamFeed({
+  examCode,
+  studentId,
+  studentName,
+  studentLceCode,
+  isSuspended,
+  isMini = false,
+}: StudentLiveStreamFeedProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [stream, setStream] = useState<MediaStream | null>(null);
+  const [fallbackFrame, setFallbackFrame] = useState<string | null>(null);
+  const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'connected' | 'disconnected' | 'failed'>('connecting');
+  const [isAudioMuted, setIsAudioMuted] = useState(isMini);
+
+  useEffect(() => {
+    if (isSuspended) return;
+
+    const streamSessionId = getCustomExamStreamSessionId(examCode, studentId);
+    const viewerId = `teacher_viewer_${Math.random().toString(36).substring(2, 7)}`;
+
+    const viewer = new ProctorViewer(
+      streamSessionId,
+      viewerId,
+      'teacher',
+      (remoteStream) => {
+        setStream(remoteStream);
+        if (videoRef.current) {
+          videoRef.current.srcObject = remoteStream;
+          videoRef.current.play().catch(() => {});
+        }
+      },
+      (status) => {
+        setConnectionStatus(status);
+      }
+    );
+
+    // Frame snapshot listener for instant zero-delay preview & NAT fallback
+    viewer.onFrame((frameData) => {
+      setFallbackFrame(frameData);
+    });
+
+    viewer.start();
+
+    return () => {
+      viewer.destroy();
+    };
+  }, [examCode, studentId, isSuspended]);
+
+  useEffect(() => {
+    if (stream && videoRef.current) {
+      videoRef.current.srcObject = stream;
+      videoRef.current.play().catch(() => {});
+    }
+  }, [stream]);
+
+  const hasLiveVideo = Boolean(stream);
+
+  return (
+    <div className="absolute inset-0 w-full h-full overflow-hidden bg-slate-950 flex items-center justify-center select-none">
+      {/* 1. Real WebRTC Video Element */}
+      <video
+        ref={videoRef}
+        autoPlay
+        playsInline
+        muted={isAudioMuted}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+          hasLiveVideo ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
+        }`}
+      />
+
+      {/* 2. Fallback Canvas Frame Snapshot */}
+      {!hasLiveVideo && fallbackFrame && (
+        <img
+          src={fallbackFrame}
+          alt={studentName}
+          className="absolute inset-0 w-full h-full object-cover z-5"
+        />
+      )}
+
+      {/* 3. Placeholder Avatar when connecting / waiting */}
+      {!hasLiveVideo && !fallbackFrame && (
+        <div className="flex flex-col items-center justify-center text-center p-3 z-0">
+          <div
+            className={`${
+              isMini ? 'w-10 h-10 text-xs' : 'w-16 h-16 sm:w-20 sm:h-20 text-xl sm:text-2xl'
+            } rounded-full bg-purple-600/25 text-purple-300 flex items-center justify-center font-black shadow-inner mb-2 border-0`}
+          >
+            {studentName.slice(0, 2).toUpperCase()}
+          </div>
+          <span className={`${isMini ? 'text-[11px]' : 'text-xs sm:text-sm'} font-bold text-white drop-shadow-sm`}>
+            {studentName}
+          </span>
+          {studentLceCode && !isMini && (
+            <span className="text-[10px] text-slate-400 font-mono mt-0.5">{studentLceCode}</span>
+          )}
+          {!isMini && (
+            <div className="flex items-center gap-1.5 text-[11px] text-purple-400 mt-2 font-medium">
+              <span className="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc] animate-pulse" />
+              <span>Connecting live camera...</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Audio Mute/Unmute Quick Toggle on tile (only for full-size tiles with audio) */}
+      {!isMini && hasLiveVideo && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsAudioMuted(!isAudioMuted);
+          }}
+          className={`absolute bottom-3 right-12 z-20 p-2 rounded-full backdrop-blur-md text-white transition-all border-0 outline-none cursor-pointer ${
+            isAudioMuted ? 'bg-rose-600/80 hover:bg-rose-600' : 'bg-black/50 hover:bg-black/70'
+          }`}
+          title={isAudioMuted ? 'Click to Unmute Candidate Audio' : 'Click to Mute Candidate Audio'}
+        >
+          {isAudioMuted ? <MicOff className="w-3.5 h-3.5 text-white" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+        </button>
+      )}
+    </div>
+  );
+}
 
 interface LiveTeacherSupervisionRoomProps {
   examId: string;
@@ -647,21 +781,14 @@ export function LiveTeacherSupervisionRoom({
             : 'aspect-video min-h-[160px]'
         } ${isSelected ? 'ring-2 ring-purple-500/80 shadow-[0_12px_45px_rgba(147,51,234,0.4)]' : ''}`}
       >
-        {/* Live Proctoring Video Canvas Placeholder */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 text-white">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-purple-600/20 text-purple-300 flex items-center justify-center font-black text-xl sm:text-2xl shadow-inner mb-2 border-0">
-            {p.student_name.slice(0, 2).toUpperCase()}
-          </div>
-          <span className="text-xs sm:text-sm font-bold text-white drop-shadow-sm">{p.student_name}</span>
-          <span className="text-[10px] text-slate-400 font-mono mt-0.5">{p.student_lce_code}</span>
-
-          {!p.is_suspended && (
-            <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 mt-2 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse" />
-              <span>Camera Stream Active</span>
-            </div>
-          )}
-        </div>
+        {/* Live Proctoring Real Video & Audio Stream Feed */}
+        <StudentLiveStreamFeed
+          examCode={displayCode}
+          studentId={p.student_id}
+          studentName={p.student_name}
+          studentLceCode={p.student_lce_code}
+          isSuspended={p.is_suspended}
+        />
 
         {/* Soft Vignette Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40 pointer-events-none" />
@@ -1268,9 +1395,13 @@ export function LiveTeacherSupervisionRoom({
                             isSel ? 'ring-2 ring-purple-600 scale-[1.02]' : 'opacity-80 hover:opacity-100'
                           }`}
                         >
-                          <div className="w-10 h-10 rounded-full bg-purple-600/30 text-purple-300 font-bold text-xs flex items-center justify-center">
-                            {p.student_name.slice(0, 2).toUpperCase()}
-                          </div>
+                          <StudentLiveStreamFeed
+                            examCode={displayCode}
+                            studentId={p.student_id}
+                            studentName={p.student_name}
+                            isSuspended={p.is_suspended}
+                            isMini={true}
+                          />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                           <div className="absolute bottom-2 left-2 right-2 text-white text-[11px] font-bold truncate">
                             {p.student_name}

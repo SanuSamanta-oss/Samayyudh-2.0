@@ -17,6 +17,15 @@ export const DEFAULT_RTC_CONFIG: RTCConfiguration = {
 };
 
 /**
+ * Standardizes stream session channel identifiers for custom examinations.
+ */
+export function getCustomExamStreamSessionId(examCodeOrId: string, studentId: string): string {
+  const cleanCode = (examCodeOrId || 'EXAM').trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const cleanStudent = (studentId || 'STUDENT').trim().replace(/[^a-zA-Z0-9_-]/g, '');
+  return `ce_${cleanCode}_${cleanStudent}`;
+}
+
+/**
  * Student Broadcaster: Captures local webcam stream and streams it
  * to authorized teachers and parents via peer-to-peer WebRTC connections.
  */
@@ -27,6 +36,9 @@ export class ProctorBroadcaster {
   private peers: Map<string, RTCPeerConnection> = new Map();
   private channel: any = null;
   private isDestroyed = false;
+  private snapshotInterval: any = null;
+  private hiddenVideo: HTMLVideoElement | null = null;
+  private snapshotCanvas: HTMLCanvasElement | null = null;
 
   constructor(sessionId: string, studentId: string) {
     this.sessionId = sessionId;
@@ -35,6 +47,7 @@ export class ProctorBroadcaster {
 
   public setStream(stream: MediaStream) {
     this.localStream = stream;
+
     // Update existing peers if stream replaced
     this.peers.forEach((pc) => {
       const senders = pc.getSenders();
@@ -47,6 +60,70 @@ export class ProctorBroadcaster {
         }
       });
     });
+
+    // Notify any listening viewers that broadcaster is live
+    this.sendSignal({
+      type: 'broadcaster_ready',
+      sessionId: this.sessionId,
+      senderId: this.studentId,
+      senderRole: 'student',
+    });
+
+    // Start snapshot backup
+    this.startSnapshotBroadcast();
+  }
+
+  public startSnapshotBroadcast(intervalMs = 2000) {
+    if (typeof window === 'undefined') return;
+    this.stopSnapshotBroadcast();
+
+    try {
+      this.snapshotCanvas = document.createElement('canvas');
+      this.snapshotCanvas.width = 320;
+      this.snapshotCanvas.height = 240;
+      const ctx = this.snapshotCanvas.getContext('2d');
+
+      this.hiddenVideo = document.createElement('video');
+      this.hiddenVideo.muted = true;
+      this.hiddenVideo.playsInline = true;
+      if (this.localStream) {
+        this.hiddenVideo.srcObject = this.localStream;
+        this.hiddenVideo.play().catch(() => {});
+      }
+
+      this.snapshotInterval = setInterval(() => {
+        if (this.isDestroyed || !this.localStream || !this.channel) return;
+        try {
+          if (this.hiddenVideo && this.hiddenVideo.readyState >= 2 && ctx && this.snapshotCanvas) {
+            ctx.drawImage(this.hiddenVideo, 0, 0, 320, 240);
+            const dataUrl = this.snapshotCanvas.toDataURL('image/jpeg', 0.5);
+            this.channel.send({
+              type: 'broadcast',
+              event: 'frame',
+              payload: {
+                sessionId: this.sessionId,
+                studentId: this.studentId,
+                frame: dataUrl,
+                timestamp: Date.now(),
+              },
+            });
+          }
+        } catch {}
+      }, intervalMs);
+    } catch {}
+  }
+
+  public stopSnapshotBroadcast() {
+    if (this.snapshotInterval) {
+      clearInterval(this.snapshotInterval);
+      this.snapshotInterval = null;
+    }
+    if (this.hiddenVideo) {
+      this.hiddenVideo.pause();
+      this.hiddenVideo.srcObject = null;
+      this.hiddenVideo = null;
+    }
+    this.snapshotCanvas = null;
   }
 
   public startSignaling() {
@@ -92,7 +169,16 @@ export class ProctorBroadcaster {
           }
         }
       })
-      .subscribe();
+      .subscribe((status: string) => {
+        if (status === 'SUBSCRIBED' && this.localStream) {
+          this.sendSignal({
+            type: 'broadcaster_ready',
+            sessionId: this.sessionId,
+            senderId: this.studentId,
+            senderRole: 'student',
+          });
+        }
+      });
   }
 
   private async initiatePeerForViewer(viewerId: string) {
@@ -166,6 +252,7 @@ export class ProctorBroadcaster {
 
   public destroy() {
     this.isDestroyed = true;
+    this.stopSnapshotBroadcast();
     this.peers.forEach((pc) => pc.close());
     this.peers.clear();
 
@@ -187,7 +274,9 @@ export class ProctorViewer {
   private pc: RTCPeerConnection | null = null;
   private channel: any = null;
   private isDestroyed = false;
+  private announceInterval: any = null;
   private onStreamCallback: (stream: MediaStream) => void;
+  private onFrameCallback: ((frame: string) => void) | null = null;
   private onStatusCallback: (status: 'connecting' | 'connected' | 'disconnected' | 'failed') => void;
 
   constructor(
@@ -206,6 +295,11 @@ export class ProctorViewer {
 
   public onStream(callback: (stream: MediaStream) => void) {
     this.onStreamCallback = callback;
+    return this;
+  }
+
+  public onFrame(callback: (frame: string) => void) {
+    this.onFrameCallback = callback;
     return this;
   }
 
@@ -248,11 +342,22 @@ export class ProctorViewer {
     });
 
     this.channel
+      .on('broadcast', { event: 'frame' }, ({ payload }: { payload: any }) => {
+        if (this.isDestroyed || !payload || payload.sessionId !== this.sessionId) return;
+        if (payload.frame && this.onFrameCallback) {
+          this.onFrameCallback(payload.frame);
+        }
+      })
       .on('broadcast', { event: 'signal' }, async ({ payload }: { payload: WebRTCSignalingMessage }) => {
         if (this.isDestroyed || !payload || payload.sessionId !== this.sessionId) return;
 
+        // When student broadcaster is ready, announce our join
+        if (payload.type === 'broadcaster_ready') {
+          this.announceJoin();
+        }
+
         // When receiving offer from student intended for this viewer
-        if (payload.type === 'offer' && payload.targetId === this.viewerId) {
+        else if (payload.type === 'offer' && payload.targetId === this.viewerId) {
           await this.handleOffer(payload.senderId, payload.payload);
         }
 
@@ -271,6 +376,16 @@ export class ProctorViewer {
         if (status === 'SUBSCRIBED') {
           // Announce presence so student broadcaster initiates an offer
           this.announceJoin();
+
+          // Periodically re-announce join while waiting for connection
+          if (this.announceInterval) clearInterval(this.announceInterval);
+          this.announceInterval = setInterval(() => {
+            if (this.isDestroyed || this.pc?.connectionState === 'connected') {
+              if (this.announceInterval) clearInterval(this.announceInterval);
+              return;
+            }
+            this.announceJoin();
+          }, 3000);
         }
       });
   }
@@ -358,6 +473,10 @@ export class ProctorViewer {
 
   public destroy() {
     this.isDestroyed = true;
+    if (this.announceInterval) {
+      clearInterval(this.announceInterval);
+      this.announceInterval = null;
+    }
     if (this.pc) {
       this.pc.close();
       this.pc = null;

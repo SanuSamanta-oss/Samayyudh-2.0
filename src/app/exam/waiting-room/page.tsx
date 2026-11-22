@@ -19,6 +19,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import type { CustomExam } from '@/types/custom-exam';
+import { ProctorBroadcaster, getCustomExamStreamSessionId } from '@/lib/proctoring/webrtc-service';
 
 function WaitingRoomContent() {
   const router = useRouter();
@@ -34,6 +35,7 @@ function WaitingRoomContent() {
   const [isReady, setIsReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const broadcasterRef = useRef<ProctorBroadcaster | null>(null);
 
   // Load exam details
   useEffect(() => {
@@ -90,31 +92,67 @@ function WaitingRoomContent() {
     };
   }, [examCode, router]);
 
-  // Request camera stream
+  // Request camera and microphone stream and broadcast to supervisor
   const requestCamera = async () => {
+    let stream: MediaStream | null = null;
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
+      stream = await navigator.mediaDevices.getUserMedia({
         video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
-        audio: false,
+        audio: true,
       });
+    } catch {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
+          audio: false,
+        });
+      } catch {
+        setCameraPermission('denied');
+        return;
+      }
+    }
+
+    if (stream) {
       streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        videoRef.current.play().catch(() => {});
       }
       setCameraPermission('granted');
-    } catch {
-      setCameraPermission('denied');
+
+      // Start live WebRTC and frame broadcast for supervisor control room
+      try {
+        let sId = localStorage.getItem('sy_student_id');
+        if (!sId) {
+          sId = `stud_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+          localStorage.setItem('sy_student_id', sId);
+        }
+        const sessionId = getCustomExamStreamSessionId(examCode, sId);
+        if (broadcasterRef.current) {
+          broadcasterRef.current.destroy();
+        }
+        const broadcaster = new ProctorBroadcaster(sessionId, sId);
+        broadcaster.setStream(stream);
+        broadcaster.startSignaling();
+        broadcasterRef.current = broadcaster;
+      } catch (err) {
+        console.warn('[WaitingRoom] Failed to initialize live stream broadcaster:', err);
+      }
     }
   };
 
   useEffect(() => {
     requestCamera();
     return () => {
+      if (broadcasterRef.current) {
+        broadcasterRef.current.destroy();
+        broadcasterRef.current = null;
+      }
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
-  }, []);
+  }, [examCode]);
 
   // Poll for exam start or teacher individual admission
   useEffect(() => {

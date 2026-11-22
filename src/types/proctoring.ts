@@ -90,7 +90,7 @@ export interface ParentStudentLink {
 }
 
 export interface WebRTCSignalingMessage {
-  type: 'viewer_join' | 'offer' | 'answer' | 'ice_candidate' | 'heartbeat' | 'intervention' | 'event';
+  type: 'viewer_join' | 'offer' | 'answer' | 'ice_candidate' | 'heartbeat' | 'intervention' | 'event' | 'broadcaster_ready';
   sessionId: string;
   senderId: string;
   senderRole: 'student' | 'teacher' | 'parent';

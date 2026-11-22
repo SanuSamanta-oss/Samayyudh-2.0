@@ -14,7 +14,7 @@ import { PreExamCameraCheckModal } from '@/components/exam/proctoring/PreExamCam
 import { StudentProctoringBubble } from '@/components/exam/proctoring/StudentProctoringBubble';
 import { ExamCalculator } from '@/components/exam/calculator/ExamCalculator';
 import { useProctoringMonitor } from '@/hooks/useProctoringMonitor';
-import { ProctorBroadcaster } from '@/lib/proctoring/webrtc-service';
+import { ProctorBroadcaster, getCustomExamStreamSessionId } from '@/lib/proctoring/webrtc-service';
 import { questionBank, getQuestionsByExam } from '@/lib/questions';
 import { convertPyqListToBattle } from '@/lib/pyq/battleAdapter';
 import type { PyqQuestion } from '@/lib/pyq/types';
@@ -136,15 +136,22 @@ function ExamSessionInner() {
     setCameraVerified(true);
     setShowCameraCheck(false);
 
-    if (state.session?.id) {
-      const broadcaster = new ProctorBroadcaster(
-        proctorSessionId || state.session.id,
-        state.session.user_id || 'student'
-      );
-      broadcaster.setStream(stream);
-      broadcaster.startSignaling();
-      broadcasterRef.current = broadcaster;
+    const customCode = searchParams.get('customExam') || searchParams.get('code');
+    const studentId =
+      state.session?.user_id ||
+      (typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null) ||
+      'candidate_student';
+    const streamSessionId = customCode
+      ? getCustomExamStreamSessionId(customCode, studentId)
+      : (proctorSessionId || state.session?.id || 'session');
+
+    if (broadcasterRef.current) {
+      broadcasterRef.current.destroy();
     }
+    const broadcaster = new ProctorBroadcaster(streamSessionId, studentId);
+    broadcaster.setStream(stream);
+    broadcaster.startSignaling();
+    broadcasterRef.current = broadcaster;
   };
 
   // Register / fetch proctoring session & config when exam session is initialized

@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import type { CustomExam } from '@/types/custom-exam';
 import { ProctorBroadcaster, getCustomExamStreamSessionId } from '@/lib/proctoring/webrtc-service';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 
 function WaitingRoomContent() {
   const router = useRouter();
@@ -61,7 +62,7 @@ function WaitingRoomContent() {
             const sName = localStorage.getItem('sy_student_name') || 'Candidate Student';
             const sLce = localStorage.getItem('sy_student_lce') || `LCE-${Math.floor(1000 + Math.random() * 9000)}`;
 
-            await fetch('/api/custom-exams/join', {
+            const joinRes = await fetch('/api/custom-exams/join', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -71,12 +72,16 @@ function WaitingRoomContent() {
                 student_lce_code: sLce,
               }),
             });
-          } catch {}
 
-          // If already in progress, redirect straight to session
-          if (data.exam?.status === 'in_progress') {
-            router.push(`/exam/session?customExam=${examCode}`);
-          }
+            if (joinRes.ok) {
+              const joinData = await joinRes.json();
+              // Only redirect if participant was already previously admitted
+              if (joinData.participant?.exam_status === 'in_progress') {
+                router.push(`/exam/session?customExam=${examCode}`);
+                return;
+              }
+            }
+          } catch {}
         }
       } catch (err: any) {
         if (active) {
@@ -134,6 +139,7 @@ function WaitingRoomContent() {
         const broadcaster = new ProctorBroadcaster(sessionId, sId);
         broadcaster.setStream(stream);
         broadcaster.startSignaling();
+        broadcaster.startSnapshotBroadcast(1500); // 1.5s live snapshot fallback
         broadcasterRef.current = broadcaster;
       } catch (err) {
         console.warn('[WaitingRoom] Failed to initialize live stream broadcaster:', err);
@@ -154,16 +160,35 @@ function WaitingRoomContent() {
     };
   }, [examCode]);
 
-  // Poll for exam start or teacher individual admission
+  // Real-time admission listener via Supabase Realtime Channel
   useEffect(() => {
-    if (!exam || exam.status === 'in_progress') return;
+    if (!isSupabaseConfigured || !examCode) return;
+    const supabase = createClient();
+    const channelName = `custom_exam_${examCode.toLowerCase()}`;
+    const channel = supabase.channel(channelName);
 
+    channel
+      .on('broadcast', { event: 'student_admitted' }, ({ payload }: { payload: any }) => {
+        const sId = typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null;
+        if (payload?.student_id === 'all' || (sId && payload?.student_id === sId)) {
+          router.push(`/exam/session?customExam=${examCode}`);
+        }
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [examCode, router]);
+
+  // Polling fallback: check for teacher admission every 1.5 seconds
+  useEffect(() => {
     const interval = setInterval(async () => {
       try {
         const sId = typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null;
         if (sId) {
           const statusRes = await fetch(
-            `/api/custom-exams/student-status?exam_id=${exam.id || examCode}&student_id=${sId}`
+            `/api/custom-exams/student-status?exam_id=${exam?.id || examCode}&student_id=${sId}`
           );
           if (statusRes.ok) {
             const statusData = await statusRes.json();
@@ -174,17 +199,8 @@ function WaitingRoomContent() {
             }
           }
         }
-
-        const res = await fetch(`/api/custom-exams/${examCode}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data.exam?.status === 'in_progress') {
-            clearInterval(interval);
-            router.push(`/exam/session?customExam=${examCode}`);
-          }
-        }
       } catch {}
-    }, 2000);
+    }, 1500);
 
     return () => clearInterval(interval);
   }, [exam, examCode, router]);

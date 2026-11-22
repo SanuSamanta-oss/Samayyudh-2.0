@@ -6,6 +6,8 @@
 
 import { isSupabaseConfigured } from '@/lib/supabase/client';
 import { createServiceRoleClient } from '@/lib/supabase/admin';
+import fs from 'fs';
+import path from 'path';
 import type {
   CustomExam,
   CustomExamParticipant,
@@ -16,6 +18,12 @@ import type {
   CustomExamReport,
   SupervisionAuditLog,
 } from '@/types/custom-exam';
+
+// Helper for validating UUIDs before passing to PostgreSQL UUID columns
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+export function isValidUuid(str?: string | null): boolean {
+  return Boolean(str && UUID_REGEX.test(str.trim()));
+}
 
 // Local storage keys for reliable offline development & local persistence
 const STORAGE_EXAMS_KEY = 'samayyudh:custom_exams';
@@ -89,6 +97,43 @@ interface ServerMemoryStore {
 
 const GLOBAL_STORE_KEY = '__samayyudh_exam_store__';
 
+function getStoreDiskPath(): string {
+  try {
+    const tmp = process.env.TEMP || process.env.TMPDIR || '/tmp';
+    return path.join(tmp, 'samayyudh_exam_store_v2.json');
+  } catch {
+    return '';
+  }
+}
+
+function syncStoreFromDisk(store: ServerMemoryStore): void {
+  try {
+    const p = getStoreDiskPath();
+    if (p && fs.existsSync(p)) {
+      const raw = fs.readFileSync(p, 'utf8');
+      const data = JSON.parse(raw);
+      if (Array.isArray(data.participants)) {
+        data.participants.forEach((pt: CustomExamParticipant) => {
+          store.participants.set(`${pt.exam_id}:${pt.student_id}`, pt);
+          if (pt.exam_id === 'demo_exam') {
+            store.participants.set(`CE4821:${pt.student_id}`, pt);
+          }
+        });
+      }
+    }
+  } catch {}
+}
+
+function syncStoreToDisk(store: ServerMemoryStore): void {
+  try {
+    const p = getStoreDiskPath();
+    if (p) {
+      const participants = Array.from(store.participants.values());
+      fs.writeFileSync(p, JSON.stringify({ participants, updated_at: new Date().toISOString() }), 'utf8');
+    }
+  } catch {}
+}
+
 function getServerStore(): ServerMemoryStore {
   const g = globalThis as unknown as { [GLOBAL_STORE_KEY]?: ServerMemoryStore };
   if (!g[GLOBAL_STORE_KEY]) {
@@ -125,18 +170,14 @@ function getServerStore(): ServerMemoryStore {
     defaultExams.set('demo', demoExam);
     defaultExams.set('CE4821', demoExam);
 
-    const demoStudents: CustomExamParticipant[] = [];
-
-    demoStudents.forEach((s) => {
-      defaultParticipants.set(`demo_exam:${s.student_id}`, s);
-    });
-
-    g[GLOBAL_STORE_KEY] = {
+    const store: ServerMemoryStore = {
       exams: defaultExams,
       participants: defaultParticipants,
       events: [],
       auditLogs: [],
     };
+    syncStoreFromDisk(store);
+    g[GLOBAL_STORE_KEY] = store;
   }
   return g[GLOBAL_STORE_KEY]!;
 }
@@ -167,22 +208,54 @@ function saveLocalExams(exams: CustomExam[]): void {
 
 export function getLocalParticipants(examId?: string): CustomExamParticipant[] {
   if (typeof window === 'undefined') {
-    const all = Array.from(getServerStore().participants.values());
-    return examId ? all.filter((p) => p.exam_id === examId || (examId === 'demo' && p.exam_id === 'demo_exam') || (examId === 'demo_exam' && p.exam_id === 'demo')) : all;
+    const store = getServerStore();
+    syncStoreFromDisk(store);
+    const all = Array.from(store.participants.values());
+    if (!examId) return all;
+    const normalizedExamId = examId.trim().toUpperCase();
+    return all.filter((p) => {
+      const pExam = (p.exam_id || '').trim().toUpperCase();
+      if (pExam === normalizedExamId) return true;
+      if (
+        (normalizedExamId === 'CE4821' || normalizedExamId === 'DEMO_EXAM' || normalizedExamId === 'DEMO') &&
+        (pExam === 'CE4821' || pExam === 'DEMO_EXAM' || pExam === 'DEMO')
+      ) {
+        return true;
+      }
+      return false;
+    });
   }
   try {
     const raw = localStorage.getItem(STORAGE_PARTICIPANTS_KEY);
     const parsed: CustomExamParticipant[] = raw ? JSON.parse(raw) : [];
-    return examId ? parsed.filter((p) => p.exam_id === examId) : parsed;
+    if (!examId) return parsed;
+    const normalizedExamId = examId.trim().toUpperCase();
+    return parsed.filter((p) => {
+      const pExam = (p.exam_id || '').trim().toUpperCase();
+      if (pExam === normalizedExamId) return true;
+      if (
+        (normalizedExamId === 'CE4821' || normalizedExamId === 'DEMO_EXAM' || normalizedExamId === 'DEMO') &&
+        (pExam === 'CE4821' || pExam === 'DEMO_EXAM' || pExam === 'DEMO')
+      ) {
+        return true;
+      }
+      return false;
+    });
   } catch {
     return [];
   }
 }
 
 export function saveLocalParticipants(participants: CustomExamParticipant[]): void {
+  const store = getServerStore();
   participants.forEach((p) => {
-    getServerStore().participants.set(`${p.exam_id}:${p.student_id}`, p);
+    store.participants.set(`${p.exam_id}:${p.student_id}`, p);
+    if (p.exam_id === 'demo_exam') {
+      store.participants.set(`CE4821:${p.student_id}`, p);
+    }
   });
+  syncStoreToDisk(store);
+
   if (typeof window !== 'undefined') {
     try {
       localStorage.setItem(STORAGE_PARTICIPANTS_KEY, JSON.stringify(participants));
@@ -433,7 +506,7 @@ export async function joinCustomExamParticipant(
     joined_at: new Date().toISOString(),
     connection_status: 'connected',
     camera_status: 'active',
-    exam_status: exam.status === 'in_progress' ? 'in_progress' : 'waiting',
+    exam_status: 'waiting',
     warning_count: 0,
     is_suspended: false,
     suspended_at: null,
@@ -454,7 +527,7 @@ export async function joinCustomExamParticipant(
     updated_at: new Date().toISOString(),
   };
 
-  if (isSupabaseConfigured) {
+  if (isSupabaseConfigured && isValidUuid(participant.exam_id) && isValidUuid(participant.student_id)) {
     try {
       const adminClient = createServiceRoleClient();
       if (adminClient) {
@@ -474,16 +547,17 @@ export async function joinCustomExamParticipant(
             event_source: 'waiting_room',
             metadata: { student_name: participant.student_name, lce_code: participant.student_lce_code },
           });
-          return { participant: data as CustomExamParticipant };
         }
       }
     } catch {}
   }
 
-  // Local fallback
+  // Always save in resilient persistent store
   const all = getLocalParticipants();
   const existingIdx = all.findIndex(
-    (p) => p.exam_id === exam.id && p.student_id === student.id
+    (p) =>
+      (p.exam_id === exam.id || (exam.id === 'demo_exam' && p.exam_id === 'CE4821')) &&
+      p.student_id === student.id
   );
   if (existingIdx >= 0) {
     all[existingIdx] = { ...all[existingIdx], ...participant };
@@ -502,6 +576,26 @@ export async function joinCustomExamParticipant(
     metadata: { student_name: participant.student_name, lce_code: participant.student_lce_code },
   });
 
+  // Broadcast student join to realtime channel so supervisor sees them instantly
+  if (isSupabaseConfigured) {
+    try {
+      const adminClient = createServiceRoleClient();
+      if (adminClient) {
+        const channelName = `custom_exam_${exam.exam_code.toLowerCase()}`;
+        const ch = adminClient.channel(channelName);
+        ch.subscribe((st: string) => {
+          if (st === 'SUBSCRIBED') {
+            ch.send({
+              type: 'broadcast',
+              event: 'student_joined',
+              payload: { participant },
+            });
+          }
+        });
+      }
+    } catch {}
+  }
+
   return { participant };
 }
 
@@ -515,15 +609,23 @@ export async function getStudentParticipantStatus(
   const targetExamIds = Array.from(
     new Set([examId, exam?.id, exam?.exam_code].filter(Boolean) as string[])
   );
+  if (
+    targetExamIds.some((id) => id.toUpperCase() === 'CE4821' || id === 'demo_exam' || id === 'demo')
+  ) {
+    if (!targetExamIds.includes('CE4821')) targetExamIds.push('CE4821');
+    if (!targetExamIds.includes('demo_exam')) targetExamIds.push('demo_exam');
+    if (!targetExamIds.includes('demo')) targetExamIds.push('demo');
+  }
+  const validUuids = targetExamIds.filter(isValidUuid);
 
-  if (isSupabaseConfigured) {
+  if (isSupabaseConfigured && validUuids.length > 0 && isValidUuid(studentId)) {
     try {
       const adminClient = createServiceRoleClient();
       if (adminClient) {
         const { data: pData } = await adminClient
           .from('custom_exam_participants')
           .select('*')
-          .in('exam_id', targetExamIds)
+          .in('exam_id', validUuids)
           .eq('student_id', studentId)
           .maybeSingle();
 
@@ -532,7 +634,7 @@ export async function getStudentParticipantStatus(
         const { data: eData } = await adminClient
           .from('exam_supervision_events')
           .select('*')
-          .in('exam_id', targetExamIds)
+          .in('exam_id', validUuids)
           .eq('student_id', studentId)
           .order('created_at', { ascending: false })
           .limit(1)
@@ -860,7 +962,8 @@ export async function executeSupervisionAction(
   const partIdx = allParts.findIndex(
     (p) =>
       (p.exam_id === exam_id ||
-        (exam_id === 'demo_exam' && p.exam_id === 'demo') ||
+        (exam_id === 'demo_exam' && (p.exam_id === 'demo' || p.exam_id === 'CE4821')) ||
+        (exam_id === 'CE4821' && (p.exam_id === 'demo_exam' || p.exam_id === 'demo')) ||
         (exam_id === 'demo' && p.exam_id === 'demo_exam')) &&
       p.student_id === student_id
   );
@@ -869,7 +972,8 @@ export async function executeSupervisionAction(
     allParts.forEach((p) => {
       if (
         (p.exam_id === exam_id ||
-          (exam_id === 'demo_exam' && p.exam_id === 'demo') ||
+          (exam_id === 'demo_exam' && (p.exam_id === 'demo' || p.exam_id === 'CE4821')) ||
+          (exam_id === 'CE4821' && (p.exam_id === 'demo_exam' || p.exam_id === 'demo')) ||
           (exam_id === 'demo' && p.exam_id === 'demo_exam')) &&
         p.exam_status === 'waiting'
       ) {
@@ -888,6 +992,28 @@ export async function executeSupervisionAction(
       event_source: 'control_room',
       metadata: {},
     });
+
+    if (isSupabaseConfigured) {
+      try {
+        const adminClient = createServiceRoleClient();
+        if (adminClient) {
+          getCustomExamById(exam_id).then((ex) => {
+            const code = ex?.exam_code || exam_id;
+            const ch = adminClient.channel(`custom_exam_${code.toLowerCase()}`);
+            ch.subscribe((st: string) => {
+              if (st === 'SUBSCRIBED') {
+                ch.send({
+                  type: 'broadcast',
+                  event: 'student_admitted',
+                  payload: { student_id: 'all', exam_status: 'in_progress' },
+                });
+              }
+            });
+          });
+        }
+      } catch {}
+    }
+
     return { success: true, event: newEvent };
   }
 
@@ -948,6 +1074,27 @@ export async function executeSupervisionAction(
         event_source: 'control_room',
         metadata: {},
       });
+
+      if (isSupabaseConfigured) {
+        try {
+          const adminClient = createServiceRoleClient();
+          if (adminClient) {
+            getCustomExamById(exam_id).then((ex) => {
+              const code = ex?.exam_code || exam_id;
+              const ch = adminClient.channel(`custom_exam_${code.toLowerCase()}`);
+              ch.subscribe((st: string) => {
+                if (st === 'SUBSCRIBED') {
+                  ch.send({
+                    type: 'broadcast',
+                    event: 'student_admitted',
+                    payload: { student_id, exam_status: 'in_progress' },
+                  });
+                }
+              });
+            });
+          }
+        } catch {}
+      }
     } else if (action === 'time_adjustment') {
       const delta = time_adjustment_seconds || 0;
       p.time_adjustment_seconds = (p.time_adjustment_seconds || 0) + delta;
@@ -1287,46 +1434,81 @@ export async function getExamSupervisionRoomState(examId: string): Promise<{
   const targetExamIds = Array.from(
     new Set([examId, exam?.id, exam?.exam_code].filter(Boolean) as string[])
   );
+  if (
+    targetExamIds.some((id) => id.toUpperCase() === 'CE4821' || id === 'demo_exam' || id === 'demo')
+  ) {
+    if (!targetExamIds.includes('CE4821')) targetExamIds.push('CE4821');
+    if (!targetExamIds.includes('demo_exam')) targetExamIds.push('demo_exam');
+    if (!targetExamIds.includes('demo')) targetExamIds.push('demo');
+  }
+
+  const validUuids = targetExamIds.filter(isValidUuid);
 
   const [participants, events] = await Promise.all([
     (async () => {
-      if (isSupabaseConfigured) {
+      let sbParticipants: CustomExamParticipant[] = [];
+      if (isSupabaseConfigured && validUuids.length > 0) {
         try {
           const adminClient = createServiceRoleClient();
           if (adminClient) {
             const { data } = await adminClient
               .from('custom_exam_participants')
               .select('*')
-              .in('exam_id', targetExamIds)
+              .in('exam_id', validUuids)
               .order('joined_at', { ascending: true });
-            if (data && data.length > 0) return data as CustomExamParticipant[];
+            if (data && data.length > 0) {
+              sbParticipants = data as CustomExamParticipant[];
+            }
           }
         } catch {}
       }
+
       const local = getLocalParticipants();
-      return local.filter(
+      const localMatched = local.filter(
         (p) =>
           targetExamIds.includes(p.exam_id) ||
           (targetExamIds.includes('demo') && p.exam_id === 'demo_exam') ||
-          (targetExamIds.includes('demo_exam') && p.exam_id === 'demo')
+          (targetExamIds.includes('demo_exam') && (p.exam_id === 'demo' || p.exam_id === 'CE4821')) ||
+          (targetExamIds.includes('CE4821') && (p.exam_id === 'demo_exam' || p.exam_id === 'CE4821'))
       );
+
+      // Merge and deduplicate by student_id, preferring most recently updated record
+      const map = new Map<string, CustomExamParticipant>();
+      sbParticipants.forEach((p) => map.set(p.student_id, p));
+      localMatched.forEach((p) => {
+        const existing = map.get(p.student_id);
+        if (!existing || new Date(p.updated_at || p.joined_at) >= new Date(existing.updated_at || existing.joined_at)) {
+          map.set(p.student_id, p);
+        }
+      });
+      return Array.from(map.values());
     })(),
     (async () => {
-      if (isSupabaseConfigured) {
+      let sbEvents: ExamSupervisionEvent[] = [];
+      if (isSupabaseConfigured && validUuids.length > 0) {
         try {
           const adminClient = createServiceRoleClient();
           if (adminClient) {
             const { data } = await adminClient
               .from('exam_supervision_events')
               .select('*')
-              .in('exam_id', targetExamIds)
+              .in('exam_id', validUuids)
               .order('created_at', { ascending: false });
-            if (data && data.length > 0) return data as ExamSupervisionEvent[];
+            if (data && data.length > 0) {
+              sbEvents = data as ExamSupervisionEvent[];
+            }
           }
         } catch {}
       }
       const local = getLocalEvents();
-      return local.filter((e) => targetExamIds.includes(e.exam_id));
+      const localMatched = local.filter((e) => targetExamIds.includes(e.exam_id));
+      const seen = new Set<string>();
+      const combined = [...sbEvents, ...localMatched].filter((e) => {
+        if (!e.id || seen.has(e.id)) return false;
+        seen.add(e.id);
+        return true;
+      });
+      return combined;
     })(),
   ]);
 

@@ -137,9 +137,10 @@ function ExamSessionInner() {
     setShowCameraCheck(false);
 
     const customCode = searchParams.get('customExam') || searchParams.get('code');
+    const storedStudentId = typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null;
     const studentId =
-      state.session?.user_id ||
-      (typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null) ||
+      (storedStudentId && storedStudentId.trim()) ||
+      (state.session?.user_id && state.session.user_id !== 'local-user' ? state.session.user_id : null) ||
       'candidate_student';
     const streamSessionId = customCode
       ? getCustomExamStreamSessionId(customCode, studentId)
@@ -151,8 +152,39 @@ function ExamSessionInner() {
     const broadcaster = new ProctorBroadcaster(streamSessionId, studentId);
     broadcaster.setStream(stream);
     broadcaster.startSignaling();
+    broadcaster.startSnapshotBroadcast(1500); // Continuous live snapshot fallback
     broadcasterRef.current = broadcaster;
   };
+
+  // Auto-acquire camera if arriving from custom exam waiting room
+  useEffect(() => {
+    const customCode = searchParams.get('customExam') || searchParams.get('code');
+    if (!customCode || cameraVerified) return;
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({
+          video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
+          audio: true,
+        })
+        .then((stream) => {
+          handleCameraConfirmed(stream);
+        })
+        .catch(() => {
+          navigator.mediaDevices
+            .getUserMedia({
+              video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
+              audio: false,
+            })
+            .then((stream) => {
+              handleCameraConfirmed(stream);
+            })
+            .catch(() => {
+              // Permission check modal will appear if necessary
+            });
+        });
+    }
+  }, [searchParams, cameraVerified]);
 
   // Register / fetch proctoring session & config when exam session is initialized
   useEffect(() => {
@@ -398,9 +430,12 @@ function ExamSessionInner() {
             const examDurationSeconds = (ex.duration_minutes || 60) * 60;
             const endTime = new Date(Date.now() + examDurationSeconds * 1000).toISOString();
 
+            const activeStudentId =
+              (typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null) || 'local-user';
+
             const session: ExamSession = {
               id: generateId(),
-              user_id: 'local-user',
+              user_id: activeStudentId,
               title: ex.title,
               exam_code: ex.exam_code,
               mode: 'custom',

@@ -63,6 +63,7 @@ import { TimeAdjustmentModal } from './TimeAdjustmentModal';
 import { EndExamConfirmationModal } from './EndExamConfirmationModal';
 import { StudentSupervisionDrawer } from './StudentSupervisionDrawer';
 import { ProctorViewer, getCustomExamStreamSessionId } from '@/lib/proctoring/webrtc-service';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 
 interface StudentLiveStreamFeedProps {
   examCode: string;
@@ -294,9 +295,12 @@ export function LiveTeacherSupervisionRoom({
   };
 
   // ── Fetch Room State (Real Connected Students Only) ──
+  const activeExamCode = exam?.exam_code || initialCode || 'CE4821';
+
   const fetchRoomState = useCallback(async () => {
     try {
-      const res = await fetch(`/api/custom-exams/supervision/${examId}`);
+      const codeQuery = activeExamCode ? `?code=${encodeURIComponent(activeExamCode)}` : '';
+      const res = await fetch(`/api/custom-exams/supervision/${examId}${codeQuery}`);
       if (res.ok) {
         const data = await res.json();
         setExam(data.exam);
@@ -322,13 +326,53 @@ export function LiveTeacherSupervisionRoom({
     } finally {
       setLoading(false);
     }
-  }, [examId, selectedStudentId]);
+  }, [examId, activeExamCode, selectedStudentId]);
 
   useEffect(() => {
     fetchRoomState();
-    const interval = setInterval(fetchRoomState, 3500);
+    const interval = setInterval(fetchRoomState, 1500); // 1.5s responsive polling interval
     return () => clearInterval(interval);
   }, [fetchRoomState]);
+
+  // Real-time peer admission and join sync via Supabase Realtime Channel
+  useEffect(() => {
+    if (!isSupabaseConfigured || !activeExamCode) return;
+    const supabase = createClient();
+    const channelName = `custom_exam_${activeExamCode.toLowerCase()}`;
+    const channel = supabase.channel(channelName);
+
+    channel
+      .on('broadcast', { event: 'student_joined' }, ({ payload }: { payload: any }) => {
+        if (payload?.participant) {
+          const pt = payload.participant as CustomExamParticipant;
+          setParticipants((prev) => {
+            const idx = prev.findIndex((x) => x.student_id === pt.student_id);
+            if (idx >= 0) {
+              const updated = [...prev];
+              updated[idx] = { ...updated[idx], ...pt };
+              return updated;
+            }
+            return [...prev, pt];
+          });
+        }
+      })
+      .on('broadcast', { event: 'student_admitted' }, ({ payload }: { payload: any }) => {
+        if (payload?.student_id) {
+          setParticipants((prev) =>
+            prev.map((x) =>
+              payload.student_id === 'all' || x.student_id === payload.student_id
+                ? { ...x, exam_status: 'in_progress' }
+                : x
+            )
+          );
+        }
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [activeExamCode]);
 
   // ── Local Webcam Preview Toggle ──
   const toggleLocalCamera = async () => {
@@ -481,8 +525,35 @@ export function LiveTeacherSupervisionRoom({
 
   // ── Waiting Room Approvals ──
   const handleApproveStudent = async (student: CustomExamParticipant) => {
+    // 1. Optimistically update local participant list immediately
+    setParticipants((prev) =>
+      prev.map((p) =>
+        p.student_id === student.student_id ? { ...p, exam_status: 'in_progress' } : p
+      )
+    );
+    setActionNotification(`Admitted ${student.student_name} to examination.`);
+    setTimeout(() => setActionNotification(null), 3000);
+
+    // 2. Broadcast via Supabase Realtime channel so student waiting room redirects in 0ms
+    if (isSupabaseConfigured && activeExamCode) {
+      try {
+        const supabase = createClient();
+        const ch = supabase.channel(`custom_exam_${activeExamCode.toLowerCase()}`);
+        ch.subscribe((st: string) => {
+          if (st === 'SUBSCRIBED') {
+            ch.send({
+              type: 'broadcast',
+              event: 'student_admitted',
+              payload: { student_id: student.student_id, exam_status: 'in_progress' },
+            });
+          }
+        });
+      } catch {}
+    }
+
+    // 3. Persist action to backend
     try {
-      const res = await fetch('/api/custom-exams/supervision/actions', {
+      await fetch('/api/custom-exams/supervision/actions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -492,25 +563,38 @@ export function LiveTeacherSupervisionRoom({
           actor_role: isSuperAdmin ? 'admin' : 'teacher',
         }),
       });
-      if (res.ok) {
-        setActionNotification(`Admitted ${student.student_name} to examination.`);
-        setTimeout(() => setActionNotification(null), 3000);
-        fetchRoomState();
-      }
-    } catch {
-      setParticipants((prev) =>
-        prev.map((p) =>
-          p.student_id === student.student_id ? { ...p, exam_status: 'in_progress' } : p
-        )
-      );
-      setActionNotification(`Admitted ${student.student_name}.`);
-      setTimeout(() => setActionNotification(null), 3000);
-    }
+      fetchRoomState();
+    } catch {}
   };
 
   const handleApproveAll = async () => {
+    // 1. Optimistically admit all waiting candidates immediately
+    setParticipants((prev) =>
+      prev.map((p) => (p.exam_status === 'waiting' ? { ...p, exam_status: 'in_progress' } : p))
+    );
+    setActionNotification('Admitted all waiting candidates!');
+    setTimeout(() => setActionNotification(null), 3000);
+
+    // 2. Broadcast admission signal to all waiting students
+    if (isSupabaseConfigured && activeExamCode) {
+      try {
+        const supabase = createClient();
+        const ch = supabase.channel(`custom_exam_${activeExamCode.toLowerCase()}`);
+        ch.subscribe((st: string) => {
+          if (st === 'SUBSCRIBED') {
+            ch.send({
+              type: 'broadcast',
+              event: 'student_admitted',
+              payload: { student_id: 'all', exam_status: 'in_progress' },
+            });
+          }
+        });
+      } catch {}
+    }
+
+    // 3. Persist action to backend
     try {
-      const res = await fetch('/api/custom-exams/supervision/actions', {
+      await fetch('/api/custom-exams/supervision/actions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -519,18 +603,8 @@ export function LiveTeacherSupervisionRoom({
           actor_role: isSuperAdmin ? 'admin' : 'teacher',
         }),
       });
-      if (res.ok) {
-        setActionNotification('Admitted all waiting candidates!');
-        setTimeout(() => setActionNotification(null), 3000);
-        fetchRoomState();
-      }
-    } catch {
-      setParticipants((prev) =>
-        prev.map((p) => (p.exam_status === 'waiting' ? { ...p, exam_status: 'in_progress' } : p))
-      );
-      setActionNotification('Admitted all waiting candidates.');
-      setTimeout(() => setActionNotification(null), 3000);
-    }
+      fetchRoomState();
+    } catch {}
   };
 
   // ── Disciplinary Interventions ──
@@ -959,9 +1033,9 @@ export function LiveTeacherSupervisionRoom({
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               onClick={handleApproveAll}
-              className="px-5 py-2.5 rounded-full bg-emerald-100 hover:bg-emerald-200 text-emerald-900 dark:bg-emerald-950/70 dark:hover:bg-emerald-900/80 dark:text-emerald-200 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xs cursor-pointer border-0 outline-none transition-all shrink-0"
+              className="px-6 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm hover:shadow-md cursor-pointer border-0 outline-none transition-all shrink-0"
             >
-              <CheckCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <CheckCheck className="w-4 h-4 text-white" />
               <span>Approve All Candidates</span>
             </motion.button>
           </div>
@@ -976,8 +1050,15 @@ export function LiveTeacherSupervisionRoom({
                 className="p-4 rounded-2xl bg-slate-50/90 dark:bg-[#141B2D]/90 flex items-center justify-between gap-3 shadow-xs border-0 outline-none"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 font-bold text-sm flex items-center justify-center shrink-0">
-                    {student.student_name.slice(0, 2).toUpperCase()}
+                  <div className="relative w-11 h-11 rounded-2xl overflow-hidden bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 font-bold text-sm flex items-center justify-center shrink-0">
+                    <StudentLiveStreamFeed
+                      examCode={displayCode}
+                      studentId={student.student_id}
+                      studentName={student.student_name}
+                      studentLceCode={student.student_lce_code}
+                      isSuspended={false}
+                      isMini
+                    />
                   </div>
                   <div className="min-w-0">
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
@@ -994,9 +1075,9 @@ export function LiveTeacherSupervisionRoom({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleApproveStudent(student)}
-                  className="px-3 py-1.5 rounded-full bg-emerald-100 hover:bg-emerald-200 text-emerald-800 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/60 dark:text-emerald-300 text-xs font-bold flex items-center gap-1 shadow-xs cursor-pointer border-0 outline-none transition-all shrink-0"
+                  className="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm hover:shadow-md cursor-pointer border-0 outline-none transition-all shrink-0"
                 >
-                  <Check className="w-3.5 h-3.5" />
+                  <Check className="w-3.5 h-3.5 text-white" />
                   <span>Approve</span>
                 </motion.button>
               </motion.div>
@@ -1354,10 +1435,10 @@ export function LiveTeacherSupervisionRoom({
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     onClick={handleApproveAll}
-                    className="px-3.5 py-1.5 rounded-full bg-emerald-100 hover:bg-emerald-200 text-emerald-900 dark:bg-emerald-900/60 dark:hover:bg-emerald-800 dark:text-emerald-200 text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer border-0 outline-none transition-all"
+                    className="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm hover:shadow-md cursor-pointer border-0 outline-none transition-all"
                   >
-                    <CheckCheck className="w-3.5 h-3.5" />
-                    <span>Approve All</span>
+                    <CheckCheck className="w-3.5 h-3.5 text-white" />
+                    <span>Approve All Candidates</span>
                   </motion.button>
                 </div>
               </motion.div>
@@ -1610,9 +1691,9 @@ export function LiveTeacherSupervisionRoom({
                         <button
                           type="button"
                           onClick={handleApproveAll}
-                          className="px-2.5 py-1 rounded-full bg-emerald-100 hover:bg-emerald-200 dark:bg-emerald-900/60 dark:hover:bg-emerald-800 text-emerald-900 dark:text-emerald-200 text-[11px] font-bold cursor-pointer border-0 outline-none transition-all flex items-center gap-1 shadow-xs"
+                          className="px-3 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-[11px] font-bold cursor-pointer border-0 outline-none transition-all flex items-center gap-1 shadow-xs"
                         >
-                          <CheckCheck className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                          <CheckCheck className="w-3 h-3 text-white" />
                           <span>Approve All</span>
                         </button>
                       </div>
@@ -1632,9 +1713,9 @@ export function LiveTeacherSupervisionRoom({
                             <button
                               type="button"
                               onClick={() => handleApproveStudent(s)}
-                              className="px-2.5 py-1 rounded-full bg-emerald-100 hover:bg-emerald-200 text-emerald-800 dark:bg-emerald-950 dark:hover:bg-emerald-900 dark:text-emerald-300 text-[10px] font-bold cursor-pointer border-0 outline-none transition-all flex items-center gap-1 shrink-0"
+                              className="px-3 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-[10px] font-bold cursor-pointer border-0 outline-none transition-all flex items-center gap-1 shrink-0 shadow-xs"
                             >
-                              <Check className="w-3 h-3" />
+                              <Check className="w-3 h-3 text-white" />
                               <span>Approve</span>
                             </button>
                           </div>
@@ -2019,7 +2100,7 @@ export function LiveTeacherSupervisionRoom({
                           <button
                             type="button"
                             onClick={handleApproveAll}
-                            className="px-2.5 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-bold"
+                            className="px-3 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-[11px] font-bold cursor-pointer border-0 outline-none transition-all shadow-xs"
                           >
                             Approve All
                           </button>
@@ -2027,13 +2108,16 @@ export function LiveTeacherSupervisionRoom({
                         {waitingStudents.map((s, idx) => (
                           <div
                             key={s.id || `${s.student_id}-${idx}`}
-                            className="p-2 rounded-xl bg-white dark:bg-[#141B2D] flex items-center justify-between"
+                            className="p-2.5 rounded-xl bg-white dark:bg-[#141B2D] flex items-center justify-between gap-2 shadow-xs border-0 outline-none"
                           >
-                            <span className="text-xs font-bold text-slate-900 dark:text-white">{s.student_name}</span>
+                            <div className="min-w-0">
+                              <p className="text-xs font-bold text-slate-900 dark:text-white truncate">{s.student_name}</p>
+                              <p className="text-[10px] text-slate-400 font-mono">{s.student_lce_code}</p>
+                            </div>
                             <button
                               type="button"
                               onClick={() => handleApproveStudent(s)}
-                              className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold"
+                              className="px-3 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-[11px] font-bold cursor-pointer border-0 outline-none transition-all shadow-xs shrink-0"
                             >
                               Approve
                             </button>

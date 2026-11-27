@@ -64,6 +64,7 @@ import { EndExamConfirmationModal } from './EndExamConfirmationModal';
 import { StudentSupervisionDrawer } from './StudentSupervisionDrawer';
 import { ProctorViewer, getCustomExamStreamSessionId } from '@/lib/proctoring/webrtc-service';
 import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
+import { ZoomMeetingView } from '@/components/zoom/ZoomMeetingView';
 
 interface StudentLiveStreamFeedProps {
   examCode: string;
@@ -223,8 +224,8 @@ export function LiveTeacherSupervisionRoom({
   const [selectedStudentId, setSelectedStudentId] = useState<string>('');
   const [drawerStudent, setDrawerStudent] = useState<CustomExamParticipant | null>(null);
 
-  // ── View Mode: 'grid' (adaptive meeting wall) | 'spotlight' (focused speaker view) ──
-  const [viewMode, setViewMode] = useState<'grid' | 'spotlight'>('grid');
+  // ── View Mode: 'grid' (adaptive meeting wall) | 'spotlight' (focused speaker view) | 'zoom' (meeting SDK) ──
+  const [viewMode, setViewMode] = useState<'grid' | 'spotlight' | 'zoom'>('grid');
 
   // ── Side Panels & Mobile Sheets ──
   const [showSidePanel, setShowSidePanel] = useState(true);
@@ -1342,6 +1343,34 @@ export function LiveTeacherSupervisionRoom({
               Spotlight View
             </span>
           </button>
+
+          <button
+            type="button"
+            onClick={() => setViewMode('zoom')}
+            className="relative flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold transition-colors duration-200 cursor-pointer border-0 outline-none z-10"
+          >
+            {viewMode === 'zoom' && (
+              <motion.div
+                layoutId="viewModeIndicator"
+                transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                className="absolute inset-0 rounded-full bg-white dark:bg-purple-600 shadow-[0_2px_10px_rgba(0,0,0,0.12)]"
+              />
+            )}
+            <Video
+              className={`w-3.5 h-3.5 relative z-10 transition-colors ${
+                viewMode === 'zoom' ? 'text-purple-700 dark:text-white' : 'text-slate-500 dark:text-slate-400'
+              }`}
+            />
+            <span
+              className={`relative z-10 transition-colors ${
+                viewMode === 'zoom'
+                  ? 'text-purple-950 dark:text-white font-extrabold'
+                  : 'text-slate-600 dark:text-slate-300'
+              }`}
+            >
+              Zoom Live Stream
+            </span>
+          </button>
         </div>
 
         {/* Right Header Status Badges & Quick Reports */}
@@ -1444,7 +1473,17 @@ export function LiveTeacherSupervisionRoom({
               </motion.div>
             )}
 
-            {activeCandidates.length === 0 ? (
+            {viewMode === 'zoom' ? (
+              /* ZOOM MEETING SDK STAGE (TEACHER HOST) */
+              <div className="flex-1 flex flex-col min-h-0 w-full h-full rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 bg-slate-950 shadow-xl">
+                <ZoomMeetingView
+                  examId={examId}
+                  role={1}
+                  userName="Teacher Invigilator"
+                  className="w-full h-full flex-1"
+                />
+              </div>
+            ) : activeCandidates.length === 0 ? (
               renderEmptyStage()
             ) : viewMode === 'grid' ? (
               /* ADAPTIVE PARTICIPANT GRID (MEETORA / ZOOM STYLE) */

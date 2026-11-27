@@ -75,6 +75,15 @@ function WaitingRoomContent() {
 
             if (joinRes.ok) {
               const joinData = await joinRes.json();
+              if (joinData.participant?.student_id) {
+                localStorage.setItem('sy_student_id', joinData.participant.student_id);
+              }
+              if (joinData.participant?.student_name) {
+                localStorage.setItem('sy_student_name', joinData.participant.student_name);
+              }
+              if (joinData.participant?.student_lce_code) {
+                localStorage.setItem('sy_student_lce', joinData.participant.student_lce_code);
+              }
               // Only redirect if participant was already previously admitted
               if (joinData.participant?.exam_status === 'in_progress') {
                 router.push(`/exam/session?customExam=${examCode}`);

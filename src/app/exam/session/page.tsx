@@ -26,6 +26,7 @@ import type { ExamSession, ExamMode, BoardNote, StickyNoteColor, Question } from
 import type { CustomExam, WarningLevel } from '@/types/custom-exam';
 import { TeacherWarningOverlay } from '@/components/custom-exams/TeacherWarningOverlay';
 import { ExamSuspensionOverlay } from '@/components/custom-exams/ExamSuspensionOverlay';
+import { ZoomMeetingView } from '@/components/zoom/ZoomMeetingView';
 import {
   ChevronLeft, ChevronRight, Flag, Grid3X3, Send, Award,
   AlertTriangle, CheckCircle2, Calculator, Trophy, ShieldCheck, Radio, Hand
@@ -82,6 +83,17 @@ function ExamSessionInner() {
   } | null>(null);
   const [acknowledgedWarningIds, setAcknowledgedWarningIds] = useState<Set<string>>(new Set());
   const [isHandRaised, setIsHandRaised] = useState(false);
+
+  // Concurrency, Idempotency & Offline Sync States
+  const [submissionState, setSubmissionState] = useState<
+    'idle' | 'submitting' | 'pending_sync' | 'confirmed' | 'error' | 'suspended' | 'already_submitted'
+  >('idle');
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const idempotencyKeyRef = useRef<string>('');
+  const isSubmittingRef = useRef<boolean>(false);
+  const isSyncingRef = useRef<boolean>(false);
+  const autosaveRevisionRef = useRef<number>(1);
+  const lastAutosavedAnswersRef = useRef<string>('');
 
   const handleRaiseHand = async () => {
     if (!customExamInfo?.id) return;
@@ -598,7 +610,172 @@ function ExamSessionInner() {
   }, [goToQuestion, state.currentQuestionIndex, state.questions.length]);
 
   const handleSubmit = useCallback(async () => {
-    // Notify linked guardians that examination has been submitted
+    if (isSubmittingRef.current || submissionState === 'confirmed' || submissionState === 'submitting') {
+      return;
+    }
+
+    // Synchronize final custom examination submission with server ledger atomically
+    if (customExamInfo?.id) {
+      // Retrieve or generate stable persistent idempotency key
+      const storageKey = `sy_sub_key_${customExamInfo.id}`;
+      let idempotencyKey = idempotencyKeyRef.current;
+      if (!idempotencyKey && typeof window !== 'undefined') {
+        idempotencyKey = localStorage.getItem(storageKey) || '';
+      }
+      if (!idempotencyKey) {
+        idempotencyKey = `sub_${customExamInfo.id}_${state.session?.id || Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(storageKey, idempotencyKey);
+        }
+      }
+      idempotencyKeyRef.current = idempotencyKey;
+
+      const studentId = state.session?.user_id || (typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null);
+      const answersObj: Record<string, any> = {};
+      state.answers.forEach((ans, qId) => {
+        answersObj[qId] = ans.selected_option || ans.selected_options || ans.answer_text;
+      });
+
+      isSubmittingRef.current = true;
+      setSubmissionState('submitting');
+      setSubmissionError(null);
+
+      // Check offline capability
+      if (typeof navigator !== 'undefined' && !navigator.onLine) {
+        await localDB.enqueueOfflineSubmission({
+          id: idempotencyKey,
+          exam_id: customExamInfo.id,
+          student_id: studentId,
+          answers: answersObj,
+          submission_type: 'normal',
+          created_at: new Date().toISOString(),
+          synced: false,
+          status: 'pending',
+        });
+        setSubmissionState('pending_sync');
+        setSubmissionError('You are currently offline. Answers have been securely preserved locally and will synchronize automatically once connectivity returns.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/custom-exams/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Idempotency-Key': idempotencyKey,
+          },
+          body: JSON.stringify({
+            exam_id: customExamInfo.id,
+            student_id: studentId,
+            answers: answersObj,
+            submission_type: 'normal',
+            idempotency_key: idempotencyKey,
+          }),
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok || data.idempotent) {
+          // Authoritatively confirmed by server
+          await localDB.markSynced(idempotencyKey);
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem(storageKey);
+          }
+          if (state.session?.user_id) {
+            fetch('/api/proctoring/notifications', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                studentId: state.session.user_id,
+                eventType: 'exam_submitted',
+                examTitle: state.session.title || 'Examination',
+              }),
+            }).catch(() => {});
+          }
+          setSubmissionState('confirmed');
+          await submitExam();
+          setShowSubmitDialog(false);
+          router.push('/results?session=' + state.session?.id);
+          return;
+        }
+
+        if (res.status === 409 && data.code === 'ALREADY_SUBMITTED') {
+          if (data.idempotent) {
+            // Matching key replay
+            await localDB.markSynced(idempotencyKey);
+            if (typeof window !== 'undefined') {
+              localStorage.removeItem(storageKey);
+            }
+            if (state.session?.user_id) {
+              fetch('/api/proctoring/notifications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  studentId: state.session.user_id,
+                  eventType: 'exam_submitted',
+                  examTitle: state.session.title || 'Examination',
+                }),
+              }).catch(() => {});
+            }
+            setSubmissionState('already_submitted');
+            await submitExam();
+            setShowSubmitDialog(false);
+            router.push('/results?session=' + state.session?.id);
+            return;
+          }
+
+          // Conflicting submission with different key: DO NOT mark synced, preserve locally
+          isSubmittingRef.current = false;
+          await localDB.markSubmissionConflict(idempotencyKey, 'Already submitted on server with different submission key');
+          setSubmissionState('already_submitted');
+          setSubmissionError('This examination was already submitted with different data. Your answers remain saved locally.');
+          setShowSubmitDialog(false);
+          return;
+        }
+
+        if (res.status === 403 && data.code === 'STUDENT_SUSPENDED') {
+          isSubmittingRef.current = false;
+          setIsSuspended(true);
+          setSuspensionReason(data.suspended_reason || 'Examination locked due to active proctoring suspension.');
+          setSubmissionState('suspended');
+          setShowSubmitDialog(false);
+          return;
+        }
+
+        // Generic server rejection: preserve locally in sync queue
+        await localDB.enqueueOfflineSubmission({
+          id: idempotencyKey,
+          exam_id: customExamInfo.id,
+          student_id: studentId,
+          answers: answersObj,
+          submission_type: 'normal',
+          created_at: new Date().toISOString(),
+          synced: false,
+          status: 'pending',
+        });
+        setSubmissionState('pending_sync');
+        setSubmissionError(data.error || 'Server was temporarily unreachable. Answers queued for reliable background synchronization.');
+        return;
+      } catch (submitErr) {
+        console.warn('Network error syncing submission, queuing locally:', submitErr);
+        await localDB.enqueueOfflineSubmission({
+          id: idempotencyKey,
+          exam_id: customExamInfo.id,
+          student_id: studentId,
+          answers: answersObj,
+          submission_type: 'normal',
+          created_at: new Date().toISOString(),
+          synced: false,
+          status: 'pending',
+        });
+        setSubmissionState('pending_sync');
+        setSubmissionError('Network interruption during submission. Answers saved locally and will auto-sync on reconnect.');
+        return;
+      }
+    }
+
+    // Standard platform exam submission
+    await submitExam();
     if (state.session?.user_id) {
       fetch('/api/proctoring/notifications', {
         method: 'POST',
@@ -610,11 +787,169 @@ function ExamSessionInner() {
         }),
       }).catch(() => {});
     }
-
-    await submitExam();
     setShowSubmitDialog(false);
     router.push('/results?session=' + state.session?.id);
-  }, [submitExam, router, state.session?.id, state.session?.user_id, state.session?.title]);
+  }, [
+    submitExam,
+    router,
+    state.session?.id,
+    state.session?.user_id,
+    state.session?.title,
+    customExamInfo?.id,
+    state.answers,
+    submissionState,
+  ]);
+
+  // Reconnection & Offline Submission Sync Queue Listener
+  useEffect(() => {
+    const syncOfflineQueue = async () => {
+      if (isSyncingRef.current) return;
+      isSyncingRef.current = true;
+      try {
+        const pending = await localDB.getPendingOfflineSubmissions();
+        for (const item of pending) {
+          try {
+            const res = await fetch('/api/custom-exams/submit', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Idempotency-Key': item.id,
+              },
+              body: JSON.stringify({
+                exam_id: item.exam_id,
+                student_id: item.student_id,
+                answers: item.answers,
+                submission_type: item.submission_type,
+                idempotency_key: item.id,
+              }),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (res.ok || data.idempotent) {
+              await localDB.markSynced(item.id);
+              if (typeof window !== 'undefined') {
+                localStorage.removeItem(`sy_sub_key_${item.exam_id}`);
+              }
+              if (item.student_id) {
+                fetch('/api/proctoring/notifications', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    studentId: item.student_id,
+                    eventType: 'exam_submitted',
+                    examTitle: state.session?.title || 'Examination',
+                  }),
+                }).catch(() => {});
+              }
+              // STRICT ISOLATION: Only navigate if the synced item belongs to THIS active exam AND this view was awaiting sync!
+              if (customExamInfo?.id && item.exam_id === customExamInfo.id && submissionState === 'pending_sync') {
+                setSubmissionState('confirmed');
+                router.push('/results?session=' + (state.session?.id || item.exam_id));
+              }
+            } else if (res.status === 409 && data.code === 'ALREADY_SUBMITTED') {
+              if (data.idempotent) {
+                await localDB.markSynced(item.id);
+                if (typeof window !== 'undefined') {
+                  localStorage.removeItem(`sy_sub_key_${item.exam_id}`);
+                }
+                if (item.student_id) {
+                  fetch('/api/proctoring/notifications', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      studentId: item.student_id,
+                      eventType: 'exam_submitted',
+                      examTitle: state.session?.title || 'Examination',
+                    }),
+                  }).catch(() => {});
+                }
+                if (customExamInfo?.id && item.exam_id === customExamInfo.id && submissionState === 'pending_sync') {
+                  setSubmissionState('confirmed');
+                  router.push('/results?session=' + (state.session?.id || item.exam_id));
+                }
+              } else {
+                // Different-key conflict: flag in local store without marking synced and without redirecting active session!
+                await localDB.markSubmissionConflict(item.id, data.message || 'Already submitted with different key');
+                if (customExamInfo?.id && item.exam_id === customExamInfo.id && submissionState === 'pending_sync') {
+                  setSubmissionState('already_submitted');
+                  setSubmissionError('This examination was already finalized on the server. Your offline answers have been preserved locally.');
+                }
+              }
+            }
+          } catch {}
+        }
+      } catch {} finally {
+        isSyncingRef.current = false;
+      }
+    };
+
+    window.addEventListener('online', syncOfflineQueue);
+    return () => window.removeEventListener('online', syncOfflineQueue);
+  }, [router, state.session?.id, customExamInfo?.id, submissionState]);
+
+  // Debounced Server Autosave with Revision Tracking
+  useEffect(() => {
+    if (
+      !customExamInfo?.id ||
+      isSubmittingRef.current ||
+      ['submitting', 'confirmed', 'already_submitted'].includes(submissionState)
+    ) {
+      return;
+    }
+
+    const currentAnswersString = JSON.stringify(Array.from(state.answers.entries()));
+    if (currentAnswersString === lastAutosavedAnswersRef.current) return;
+
+    const timer = setTimeout(async () => {
+      if (
+        isSubmittingRef.current ||
+        ['submitting', 'confirmed', 'already_submitted'].includes(submissionState)
+      ) {
+        return;
+      }
+      const studentId =
+        state.session?.user_id ||
+        (typeof window !== 'undefined' ? localStorage.getItem('sy_student_id') : null);
+      if (!studentId) return;
+
+      const answersObj: Record<string, any> = {};
+      state.answers.forEach((ans, qId) => {
+        answersObj[qId] = ans.selected_option || ans.selected_options || ans.answer_text;
+      });
+
+      autosaveRevisionRef.current += 1;
+      const revision = autosaveRevisionRef.current;
+      lastAutosavedAnswersRef.current = currentAnswersString;
+
+      try {
+        const res = await fetch('/api/custom-exams/autosave', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            exam_id: customExamInfo.id,
+            student_id: studentId,
+            answers: answersObj,
+            revision,
+          }),
+        });
+
+        if (res.status === 409) {
+          const errData = await res.json().catch(() => ({}));
+          if (errData.code === 'ALREADY_SUBMITTED') {
+            setSubmissionState('already_submitted');
+            handleSubmit();
+          }
+        } else if (res.status === 403) {
+          const errData = await res.json().catch(() => ({}));
+          if (errData.code === 'STUDENT_SUSPENDED') {
+            setIsSuspended(true);
+            setSubmissionState('suspended');
+          }
+        }
+      } catch {}
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, [state.answers, customExamInfo?.id, submissionState, state.session?.user_id, handleSubmit]);
 
   // Warn before leaving
   useEffect(() => {
@@ -1055,18 +1390,35 @@ function ExamSessionInner() {
               </div>
             )}
 
+            {submissionError && (
+              <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-xs text-amber-600 dark:text-amber-400">
+                {submissionError}
+              </div>
+            )}
+
             <div className="flex gap-3">
               <button
+                disabled={submissionState === 'submitting'}
                 onClick={() => setShowSubmitDialog(false)}
-                className="flex-1 px-4 py-3 rounded-xl text-sm font-semibold border border-border hover:bg-stone-50"
+                className="flex-1 px-4 py-3 rounded-xl text-sm font-semibold border border-border hover:bg-stone-50 disabled:opacity-50"
               >
                 Review
               </button>
               <button
+                disabled={submissionState === 'submitting'}
                 onClick={handleSubmit}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-brand"
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-brand disabled:opacity-50"
               >
-                <CheckCircle2 className="w-4 h-4" /> Submit
+                {submissionState === 'submitting' ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle2 className="w-4 h-4" /> Submit
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -1091,6 +1443,17 @@ function ExamSessionInner() {
           examTitle={state.session?.title}
           warningMessage={warningMessage}
           onDismissWarning={dismissWarning}
+        />
+      )}
+
+      {/* ── ZOOM MEETING SDK FLOATING STREAM (SUPERVISED CANDIDATE) ── */}
+      {customExamInfo?.id && proctorConfig.live_video_enabled && cameraVerified && (
+        <ZoomMeetingView
+          examId={customExamInfo.id}
+          role={0}
+          userName={state.session?.user_id ? `Student (${state.session.user_id.slice(-6)})` : 'Student Candidate'}
+          compact={true}
+          className="fixed bottom-24 right-4 z-40 max-w-xs w-72 sm:w-80 shadow-2xl"
         />
       )}
 

@@ -137,6 +137,7 @@ export interface CustomExamParticipant {
   camera_status: ParticipantCameraStatus;
   mic_status?: 'active' | 'muted' | 'unavailable';
   exam_status: ParticipantExamStatus;
+  admitted?: boolean;
   warning_count: number;
   is_suspended: boolean;
   suspended_at: string | null;
@@ -151,10 +152,13 @@ export interface CustomExamParticipant {
   questions_unanswered: number;
   questions_correct: number;
   questions_incorrect: number;
-  accuracy_percentage: number;
+  accuracy_percentage: number | null;
   final_score: number | null;
   submission_type?: 'normal' | 'early_exit' | 'timeout' | 'teacher_forced' | null;
   submitted_at?: string | null;
+  submission_locked_at?: string | null;
+  idempotency_key?: string | null;
+  answers_revision?: number;
   score_achieved?: number;
   last_heartbeat: string;
   updated_at: string;

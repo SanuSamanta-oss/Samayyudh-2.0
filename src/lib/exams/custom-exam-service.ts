@@ -25,6 +25,59 @@ export function isValidUuid(str?: string | null): boolean {
   return Boolean(str && UUID_REGEX.test(str.trim()));
 }
 
+export function isDemoExamId(id?: string | null): boolean {
+  if (!id) return false;
+  const s = id.trim().toLowerCase();
+  return s === 'demo_exam' || s === 'demo' || s === 'ce4821';
+}
+
+/**
+ * Checks whether a teacher/admin is authorized to manage or supervise an examination.
+ */
+export async function isTeacherAuthorizedForExam(examId: string, teacherId: string): Promise<boolean> {
+  if (!examId || !teacherId) return false;
+
+  if (isSupabaseConfigured) {
+    try {
+      const adminClient = createServiceRoleClient();
+      if (adminClient) {
+        // 1. Check if user is the direct creator of the exam
+        const { data: exam } = await adminClient
+          .from('custom_exams')
+          .select('created_by')
+          .eq('id', examId)
+          .single();
+
+        if (exam && exam.created_by === teacherId) return true;
+
+        // 2. Check if user has an elevated role with global supervision privileges (super_admin, admin)
+        const { data: roleData } = await adminClient
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', teacherId)
+          .single();
+
+        if (roleData && ['super_admin', 'admin'].includes(roleData.role)) {
+          return true;
+        }
+
+        // If exam exists in production database, do not fall back to local exams to bypass authorization
+        if (exam) {
+          return false;
+        }
+      }
+    } catch {}
+  }
+
+  // Local/demo fallback
+  const local = getLocalExams();
+  const matched = local.find((e) => e.id === examId || (examId === 'demo_exam' && e.id === 'CE4821'));
+  if (matched && (matched.created_by === teacherId || (matched.created_by === 'teacher_demo' && teacherId === 'teacher_demo'))) {
+    return true;
+  }
+  return false;
+}
+
 // Local storage keys for reliable offline development & local persistence
 const STORAGE_EXAMS_KEY = 'samayyudh:custom_exams';
 const STORAGE_PARTICIPANTS_KEY = 'samayyudh:custom_exam_participants';
@@ -158,7 +211,10 @@ function getServerStore(): ServerMemoryStore {
       question_types: ['mcq', 'numerical'],
       max_participants: 60,
       instructions: 'Ensure full visibility of face and workspace. Multi-screen setups and unauthorized accessories are strictly flagged.',
-      selected_questions: [],
+      selected_questions: [
+        { id: 'q1', question_number: 1, text: 'What is the SI unit of force?', correct_answer: 'A', marks: 4 },
+        { id: 'q2', question_number: 2, text: 'What is acceleration due to gravity?', correct_answer: 'B', marks: 4 },
+      ],
       subjects: ['Physics', 'Mechanics'],
       target_class: 'Grade 12 Advanced Batch A',
       subject: 'Physics',
@@ -679,6 +735,18 @@ export async function updateStudentParticipantHeartbeat(
     try {
       const adminClient = createServiceRoleClient();
       if (adminClient) {
+        // Enforce route-level suspension check: Reject writes from suspended students
+        const { data: part } = await adminClient
+          .from('custom_exam_participants')
+          .select('is_suspended, exam_status')
+          .eq('exam_id', examId)
+          .eq('student_id', studentId)
+          .single();
+
+        if (part && (part.is_suspended || part.exam_status === 'suspended')) {
+          return false;
+        }
+
         await adminClient
           .from('custom_exam_participants')
           .update({
@@ -696,6 +764,9 @@ export async function updateStudentParticipantHeartbeat(
   const all = getLocalParticipants();
   const idx = all.findIndex((p) => p.exam_id === examId && p.student_id === studentId);
   if (idx >= 0) {
+    if (all[idx].is_suspended || all[idx].exam_status === 'suspended') {
+      return false;
+    }
     all[idx] = {
       ...all[idx],
       ...updates,
@@ -713,7 +784,7 @@ export async function updateStudentParticipantHeartbeat(
 export async function executeSupervisionAction(
   payload: TeacherSupervisionActionPayload,
   teacherId: string
-): Promise<{ success: boolean; event?: ExamSupervisionEvent; participant?: CustomExamParticipant }> {
+): Promise<{ success: boolean; event?: ExamSupervisionEvent; participant?: CustomExamParticipant; error?: string }> {
   const { exam_id, student_id, action, warning_level, reason, note, time_adjustment_seconds } = payload;
   const now = new Date().toISOString();
 
@@ -741,220 +812,283 @@ export async function executeSupervisionAction(
 
   let updatedParticipant: CustomExamParticipant | undefined;
 
-  // Supabase update
-  if (isSupabaseConfigured) {
+  // Supabase update with strict fail-closed boundary
+  if (isSupabaseConfigured && !isDemoExamId(exam_id)) {
     try {
       const adminClient = createServiceRoleClient();
-      if (adminClient) {
-        await adminClient.from('exam_supervision_events').insert(newEvent);
-
-        if (action === 'warning') {
-          const { data } = await adminClient
-            .from('custom_exam_participants')
-            .select('warning_count')
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .single();
-          const nextCount = (data?.warning_count || 0) + 1;
-
-          const { data: part } = await adminClient
-            .from('custom_exam_participants')
-            .update({ warning_count: nextCount, updated_at: now })
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .select()
-            .single();
-          if (part) updatedParticipant = part as CustomExamParticipant;
-
-          appendAuditLog({
-            exam_id,
-            student_id,
-            teacher_id: teacherId,
-            actor_id: teacherId,
-            actor_role: 'teacher',
-            event_type: 'STUDENT_WARNED',
-            event_source: 'control_room',
-            metadata: { warning_level: warning_level || 'first', category: reason, message: note },
-          });
-        } else if (action === 'suspend') {
-          const { data: part } = await adminClient
-            .from('custom_exam_participants')
-            .update({
-              is_suspended: true,
-              exam_status: 'suspended',
-              suspended_at: now,
-              suspended_reason: reason || 'Suspicious behaviour detected by supervisor.',
-              updated_at: now,
-            })
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .select()
-            .single();
-          if (part) updatedParticipant = part as CustomExamParticipant;
-
-          appendAuditLog({
-            exam_id,
-            student_id,
-            teacher_id: teacherId,
-            actor_id: teacherId,
-            actor_role: 'teacher',
-            event_type: 'STUDENT_SUSPENDED',
-            event_source: 'control_room',
-            metadata: { reason },
-          });
-        } else if (action === 'restore') {
-          const { data: part } = await adminClient
-            .from('custom_exam_participants')
-            .update({
-              is_suspended: false,
-              exam_status: 'in_progress',
-              suspended_at: null,
-              suspended_reason: null,
-              updated_at: now,
-            })
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .select()
-            .single();
-          if (part) updatedParticipant = part as CustomExamParticipant;
-
-          appendAuditLog({
-            exam_id,
-            student_id,
-            teacher_id: teacherId,
-            actor_id: teacherId,
-            actor_role: 'teacher',
-            event_type: 'STUDENT_RESUMED',
-            event_source: 'control_room',
-            metadata: {},
-          });
-        } else if (action === 'approve' || action === 'admit') {
-          const { data: part } = await adminClient
-            .from('custom_exam_participants')
-            .update({
-              exam_status: 'in_progress',
-              updated_at: now,
-            })
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .select()
-            .single();
-          if (part) updatedParticipant = part as CustomExamParticipant;
-
-          appendAuditLog({
-            exam_id,
-            student_id,
-            teacher_id: teacherId,
-            actor_id: teacherId,
-            actor_role: 'teacher',
-            event_type: 'STUDENT_ADMITTED',
-            event_source: 'control_room',
-            metadata: {},
-          });
-        } else if (action === 'approve_all' || action === 'admit_all') {
-          await adminClient
-            .from('custom_exam_participants')
-            .update({
-              exam_status: 'in_progress',
-              updated_at: now,
-            })
-            .eq('exam_id', exam_id)
-            .eq('exam_status', 'waiting');
-
-          appendAuditLog({
-            exam_id,
-            student_id: 'all',
-            teacher_id: teacherId,
-            actor_id: teacherId,
-            actor_role: 'teacher',
-            event_type: 'STUDENTS_ALL_ADMITTED',
-            event_source: 'control_room',
-            metadata: {},
-          });
-        } else if (action === 'time_adjustment') {
-          const delta = time_adjustment_seconds || 0;
-          const { data } = await adminClient
-            .from('custom_exam_participants')
-            .select('time_adjustment_seconds')
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .single();
-          const nextAdj = (data?.time_adjustment_seconds || 0) + delta;
-
-          const { data: part } = await adminClient
-            .from('custom_exam_participants')
-            .update({ time_adjustment_seconds: nextAdj, updated_at: now })
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .select()
-            .single();
-          if (part) updatedParticipant = part as CustomExamParticipant;
-
-          appendAuditLog({
-            exam_id,
-            student_id,
-            teacher_id: teacherId,
-            actor_id: teacherId,
-            actor_role: 'teacher',
-            event_type: delta >= 0 ? 'TIME_EXTENDED' : 'TIME_REDUCED',
-            event_source: 'control_room',
-            metadata: { delta_seconds: delta, reason },
-          });
-        } else if (action === 'acknowledge_hand') {
-          const { data: part } = await adminClient
-            .from('custom_exam_participants')
-            .update({ hand_raised: false, updated_at: now })
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .select()
-            .single();
-          if (part) updatedParticipant = part as CustomExamParticipant;
-
-          appendAuditLog({
-            exam_id,
-            student_id,
-            teacher_id: teacherId,
-            actor_id: teacherId,
-            actor_role: 'teacher',
-            event_type: 'HAND_ACKNOWLEDGED',
-            event_source: 'control_room',
-            metadata: {},
-          });
-        } else if (action === 'end_student_exam') {
-          const { data: part } = await adminClient
-            .from('custom_exam_participants')
-            .update({
-              exam_status: 'submitted',
-              submission_type: 'teacher_forced',
-              submitted_at: now,
-              updated_at: now,
-            })
-            .eq('exam_id', exam_id)
-            .eq('student_id', student_id)
-            .select()
-            .single();
-          if (part) updatedParticipant = part as CustomExamParticipant;
-
-          appendAuditLog({
-            exam_id,
-            student_id,
-            teacher_id: teacherId,
-            actor_id: teacherId,
-            actor_role: 'teacher',
-            event_type: 'STUDENT_SUBMITTED',
-            event_source: 'control_room',
-            metadata: { submission_type: 'teacher_forced' },
-          });
-        }
-
-        if (updatedParticipant) {
-          return { success: true, event: newEvent, participant: updatedParticipant };
-        }
+      if (!adminClient) {
+        return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
       }
-    } catch {}
+
+      const { error: insErr } = await adminClient.from('exam_supervision_events').insert(newEvent);
+      if (insErr) {
+        console.error('[executeSupervisionAction] Event insert error:', insErr);
+      }
+
+      if (action === 'warning') {
+        const { data } = await adminClient
+          .from('custom_exam_participants')
+          .select('warning_count')
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .single();
+        const nextCount = (data?.warning_count || 0) + 1;
+
+        const { data: part, error: upErr } = await adminClient
+          .from('custom_exam_participants')
+          .update({ warning_count: nextCount, updated_at: now })
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .select()
+          .single();
+        if (upErr || !part) {
+          return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+        }
+        updatedParticipant = part as CustomExamParticipant;
+
+        appendAuditLog({
+          exam_id,
+          student_id,
+          teacher_id: teacherId,
+          actor_id: teacherId,
+          actor_role: 'teacher',
+          event_type: 'STUDENT_WARNED',
+          event_source: 'control_room',
+          metadata: { warning_level: warning_level || 'first', category: reason, message: note },
+        });
+      } else if (action === 'suspend') {
+        const { data: part, error: upErr } = await adminClient
+          .from('custom_exam_participants')
+          .update({
+            is_suspended: true,
+            exam_status: 'suspended',
+            suspended_at: now,
+            suspended_reason: reason || 'Suspicious behaviour detected by supervisor.',
+            updated_at: now,
+          })
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .select()
+          .single();
+        if (upErr || !part) {
+          return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+        }
+        updatedParticipant = part as CustomExamParticipant;
+
+        appendAuditLog({
+          exam_id,
+          student_id,
+          teacher_id: teacherId,
+          actor_id: teacherId,
+          actor_role: 'teacher',
+          event_type: 'STUDENT_SUSPENDED',
+          event_source: 'control_room',
+          metadata: { reason },
+        });
+      } else if (action === 'restore') {
+        const { data: part, error: upErr } = await adminClient
+          .from('custom_exam_participants')
+          .update({
+            is_suspended: false,
+            exam_status: 'in_progress',
+            suspended_at: null,
+            suspended_reason: null,
+            updated_at: now,
+          })
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .select()
+          .single();
+        if (upErr || !part) {
+          return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+        }
+        updatedParticipant = part as CustomExamParticipant;
+
+        appendAuditLog({
+          exam_id,
+          student_id,
+          teacher_id: teacherId,
+          actor_id: teacherId,
+          actor_role: 'teacher',
+          event_type: 'STUDENT_RESUMED',
+          event_source: 'control_room',
+          metadata: {},
+        });
+      } else if (action === 'approve' || action === 'admit') {
+        const { data: part, error: upErr } = await adminClient
+          .from('custom_exam_participants')
+          .update({
+            exam_status: 'in_progress',
+            updated_at: now,
+          })
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .select()
+          .single();
+        if (upErr || !part) {
+          return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+        }
+        updatedParticipant = part as CustomExamParticipant;
+
+        appendAuditLog({
+          exam_id,
+          student_id,
+          teacher_id: teacherId,
+          actor_id: teacherId,
+          actor_role: 'teacher',
+          event_type: 'STUDENT_ADMITTED',
+          event_source: 'control_room',
+          metadata: {},
+        });
+
+        getCustomExamById(exam_id).then((ex) => {
+          const code = ex?.exam_code || exam_id;
+          const ch = adminClient.channel(`custom_exam_${code.toLowerCase()}`);
+          ch.subscribe((st: string) => {
+            if (st === 'SUBSCRIBED') {
+              ch.send({
+                type: 'broadcast',
+                event: 'student_admitted',
+                payload: { student_id, exam_status: 'in_progress' },
+              });
+            }
+          });
+        });
+
+        return { success: true, event: newEvent, participant: updatedParticipant };
+      } else if (action === 'approve_all' || action === 'admit_all') {
+        const { error: upErr } = await adminClient
+          .from('custom_exam_participants')
+          .update({
+            exam_status: 'in_progress',
+            updated_at: now,
+          })
+          .eq('exam_id', exam_id)
+          .eq('exam_status', 'waiting');
+
+        if (upErr) {
+          return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+        }
+
+        appendAuditLog({
+          exam_id,
+          student_id: 'all',
+          teacher_id: teacherId,
+          actor_id: teacherId,
+          actor_role: 'teacher',
+          event_type: 'STUDENTS_ALL_ADMITTED',
+          event_source: 'control_room',
+          metadata: {},
+        });
+
+        getCustomExamById(exam_id).then((ex) => {
+          const code = ex?.exam_code || exam_id;
+          const ch = adminClient.channel(`custom_exam_${code.toLowerCase()}`);
+          ch.subscribe((st: string) => {
+            if (st === 'SUBSCRIBED') {
+              ch.send({
+                type: 'broadcast',
+                event: 'student_admitted',
+                payload: { student_id: 'all', exam_status: 'in_progress' },
+              });
+            }
+          });
+        });
+
+        return { success: true, event: newEvent };
+      } else if (action === 'time_adjustment') {
+        const delta = time_adjustment_seconds || 0;
+        const { data } = await adminClient
+          .from('custom_exam_participants')
+          .select('time_adjustment_seconds')
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .single();
+        const nextAdj = (data?.time_adjustment_seconds || 0) + delta;
+
+        const { data: part, error: upErr } = await adminClient
+          .from('custom_exam_participants')
+          .update({ time_adjustment_seconds: nextAdj, updated_at: now })
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .select()
+          .single();
+        if (upErr || !part) {
+          return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+        }
+        updatedParticipant = part as CustomExamParticipant;
+
+        appendAuditLog({
+          exam_id,
+          student_id,
+          teacher_id: teacherId,
+          actor_id: teacherId,
+          actor_role: 'teacher',
+          event_type: delta >= 0 ? 'TIME_EXTENDED' : 'TIME_REDUCED',
+          event_source: 'control_room',
+          metadata: { delta_seconds: delta, reason },
+        });
+      } else if (action === 'acknowledge_hand') {
+        const { data: part, error: upErr } = await adminClient
+          .from('custom_exam_participants')
+          .update({ hand_raised: false, updated_at: now })
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .select()
+          .single();
+        if (upErr || !part) {
+          return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+        }
+        updatedParticipant = part as CustomExamParticipant;
+
+        appendAuditLog({
+          exam_id,
+          student_id,
+          teacher_id: teacherId,
+          actor_id: teacherId,
+          actor_role: 'teacher',
+          event_type: 'HAND_ACKNOWLEDGED',
+          event_source: 'control_room',
+          metadata: {},
+        });
+      } else if (action === 'end_student_exam') {
+        const { data: part, error: upErr } = await adminClient
+          .from('custom_exam_participants')
+          .update({
+            exam_status: 'submitted',
+            submission_type: 'teacher_forced',
+            submitted_at: now,
+            updated_at: now,
+          })
+          .eq('exam_id', exam_id)
+          .eq('student_id', student_id)
+          .select()
+          .single();
+        if (upErr || !part) {
+          return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+        }
+        updatedParticipant = part as CustomExamParticipant;
+
+        appendAuditLog({
+          exam_id,
+          student_id,
+          teacher_id: teacherId,
+          actor_id: teacherId,
+          actor_role: 'teacher',
+          event_type: 'STUDENT_SUBMITTED',
+          event_source: 'control_room',
+          metadata: { submission_type: 'teacher_forced' },
+        });
+      }
+
+      return { success: true, event: newEvent, participant: updatedParticipant };
+    } catch (err) {
+      console.error('[executeSupervisionAction] Supabase database error:', err);
+      return { success: false, event: newEvent, error: 'DATABASE_ERROR' };
+    }
   }
 
-  // Local / in-memory server fallback
+  // Local / in-memory server fallback strictly for demo / offline environments
   const events = getLocalEvents();
   saveLocalEvents([newEvent, ...events]);
 
@@ -1149,47 +1283,73 @@ export async function executeSupervisionAction(
 export async function startCustomExamSession(
   examId: string,
   teacherId: string
-): Promise<{ success: boolean; exam: CustomExam | null }> {
+): Promise<{ success: boolean; exam: CustomExam | null; error?: string }> {
   const now = new Date();
   const exam = await getCustomExamById(examId);
-  if (!exam) return { success: false, exam: null };
+  if (!exam) return { success: false, exam: null, error: 'EXAM_NOT_FOUND' };
 
   const durationMin = exam.duration_minutes || 60;
   const startTime = now.toISOString();
   const endTime = new Date(now.getTime() + durationMin * 60000).toISOString();
 
+  if (isSupabaseConfigured && !isDemoExamId(examId)) {
+    try {
+      const adminClient = createServiceRoleClient();
+      if (!adminClient) return { success: false, exam: null, error: 'DATABASE_ERROR' };
+
+      const { error: examErr } = await adminClient
+        .from('custom_exams')
+        .update({
+          status: 'in_progress',
+          start_time: startTime,
+          end_time: endTime,
+          updated_at: startTime,
+        })
+        .eq('id', exam.id);
+
+      if (examErr) {
+        console.error('[startCustomExamSession] Database update error on custom_exams:', examErr);
+        return { success: false, exam: null, error: 'DATABASE_ERROR' };
+      }
+
+      const { error: partErr } = await adminClient
+        .from('custom_exam_participants')
+        .update({
+          exam_status: 'in_progress',
+          updated_at: startTime,
+        })
+        .eq('exam_id', exam.id)
+        .eq('exam_status', 'waiting');
+
+      if (partErr) {
+        console.error('[startCustomExamSession] Database update error on participants:', partErr);
+        return { success: false, exam: null, error: 'DATABASE_ERROR' };
+      }
+
+      appendAuditLog({
+        exam_id: exam.id,
+        teacher_id: teacherId,
+        actor_id: teacherId,
+        actor_role: 'teacher',
+        event_type: 'EXAM_STARTED',
+        event_source: 'control_room',
+        metadata: { start_time: startTime, end_time: endTime },
+      });
+
+      const updatedExam = { ...exam, status: 'in_progress' as const, start_time: startTime, end_time: endTime, updated_at: startTime };
+      return { success: true, exam: updatedExam };
+    } catch (err) {
+      console.error('[startCustomExamSession] DB exception:', err);
+      return { success: false, exam: null, error: 'DATABASE_ERROR' };
+    }
+  }
+
+  // Local/demo fallback
   exam.status = 'in_progress';
   exam.start_time = startTime;
   exam.end_time = endTime;
   exam.updated_at = startTime;
 
-  if (isSupabaseConfigured) {
-    try {
-      const adminClient = createServiceRoleClient();
-      if (adminClient) {
-        await adminClient
-          .from('custom_exams')
-          .update({
-            status: 'in_progress',
-            start_time: startTime,
-            end_time: endTime,
-            updated_at: startTime,
-          })
-          .eq('id', exam.id);
-
-        await adminClient
-          .from('custom_exam_participants')
-          .update({
-            exam_status: 'in_progress',
-            updated_at: startTime,
-          })
-          .eq('exam_id', exam.id)
-          .eq('exam_status', 'waiting');
-      }
-    } catch {}
-  }
-
-  // Update in local store
   getServerStore().exams.set(exam.id, exam);
   getServerStore().exams.set(exam.exam_code, exam);
 
@@ -1218,49 +1378,75 @@ export async function startCustomExamSession(
 export async function endCustomExamSession(
   examId: string,
   teacherId: string
-): Promise<{ success: boolean; exam: CustomExam | null }> {
+): Promise<{ success: boolean; exam: CustomExam | null; error?: string }> {
   const now = new Date();
   const exam = await getCustomExamById(examId);
-  if (!exam) return { success: false, exam: null };
+  if (!exam) return { success: false, exam: null, error: 'EXAM_NOT_FOUND' };
 
   const endTime = now.toISOString();
   // 3-minute post-exam expiration rule for code expiration metadata
   const codeExpiresAt = new Date(now.getTime() + 3 * 60000).toISOString();
 
+  if (isSupabaseConfigured && !isDemoExamId(examId)) {
+    try {
+      const adminClient = createServiceRoleClient();
+      if (!adminClient) return { success: false, exam: null, error: 'DATABASE_ERROR' };
+
+      const { error: examErr } = await adminClient
+        .from('custom_exams')
+        .update({
+          status: 'completed',
+          end_time: endTime,
+          code_expires_at: codeExpiresAt,
+          updated_at: endTime,
+        })
+        .eq('id', exam.id);
+
+      if (examErr) {
+        console.error('[endCustomExamSession] Database update error on custom_exams:', examErr);
+        return { success: false, exam: null, error: 'DATABASE_ERROR' };
+      }
+
+      const { error: partErr } = await adminClient
+        .from('custom_exam_participants')
+        .update({
+          exam_status: 'submitted',
+          submission_type: 'teacher_forced',
+          submitted_at: endTime,
+          updated_at: endTime,
+        })
+        .eq('exam_id', exam.id)
+        .in('exam_status', ['in_progress', 'waiting', 'suspended']);
+
+      if (partErr) {
+        console.error('[endCustomExamSession] Database update error on participants:', partErr);
+        return { success: false, exam: null, error: 'DATABASE_ERROR' };
+      }
+
+      appendAuditLog({
+        exam_id: exam.id,
+        teacher_id: teacherId,
+        actor_id: teacherId,
+        actor_role: 'teacher',
+        event_type: 'EXAM_ENDED',
+        event_source: 'control_room',
+        metadata: { end_time: endTime, code_expires_at: codeExpiresAt },
+      });
+
+      const updatedExam = { ...exam, status: 'completed' as const, end_time: endTime, code_expires_at: codeExpiresAt, updated_at: endTime };
+      return { success: true, exam: updatedExam };
+    } catch (err) {
+      console.error('[endCustomExamSession] DB exception:', err);
+      return { success: false, exam: null, error: 'DATABASE_ERROR' };
+    }
+  }
+
+  // Update in local store
   exam.status = 'completed';
   exam.end_time = endTime;
   exam.code_expires_at = codeExpiresAt;
   exam.updated_at = endTime;
 
-  if (isSupabaseConfigured) {
-    try {
-      const adminClient = createServiceRoleClient();
-      if (adminClient) {
-        await adminClient
-          .from('custom_exams')
-          .update({
-            status: 'completed',
-            end_time: endTime,
-            code_expires_at: codeExpiresAt,
-            updated_at: endTime,
-          })
-          .eq('id', exam.id);
-
-        await adminClient
-          .from('custom_exam_participants')
-          .update({
-            exam_status: 'submitted',
-            submission_type: 'teacher_forced',
-            submitted_at: endTime,
-            updated_at: endTime,
-          })
-          .eq('exam_id', exam.id)
-          .in('exam_status', ['in_progress', 'waiting', 'suspended']);
-      }
-    } catch {}
-  }
-
-  // Update in local store
   getServerStore().exams.set(exam.id, exam);
   getServerStore().exams.set(exam.exam_code, exam);
 
@@ -1294,22 +1480,53 @@ export async function studentRaiseHand(
   examId: string,
   studentId: string
 ): Promise<boolean> {
-  if (isSupabaseConfigured) {
+  if (isSupabaseConfigured && !isDemoExamId(examId)) {
     try {
       const adminClient = createServiceRoleClient();
-      if (adminClient) {
-        await adminClient
-          .from('custom_exam_participants')
-          .update({ hand_raised: true, hand_raised_at: new Date().toISOString() })
-          .eq('exam_id', examId)
-          .eq('student_id', studentId);
+      if (!adminClient) return false;
+
+      // Enforce suspension check
+      const { data: part, error: pErr } = await adminClient
+        .from('custom_exam_participants')
+        .select('is_suspended, exam_status')
+        .eq('exam_id', examId)
+        .eq('student_id', studentId)
+        .single();
+
+      if (pErr || !part || part.is_suspended || part.exam_status === 'suspended') {
+        return false;
       }
-    } catch {}
+
+      const { error: upErr } = await adminClient
+        .from('custom_exam_participants')
+        .update({ hand_raised: true, hand_raised_at: new Date().toISOString() })
+        .eq('exam_id', examId)
+        .eq('student_id', studentId);
+
+      if (upErr) return false;
+
+      appendAuditLog({
+        exam_id: examId,
+        student_id: studentId,
+        actor_id: studentId,
+        actor_role: 'student',
+        event_type: 'HAND_RAISED',
+        event_source: 'exam_workspace',
+        metadata: {},
+      });
+
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   const parts = getLocalParticipants();
   const p = parts.find((pt) => pt.exam_id === examId && pt.student_id === studentId);
   if (p) {
+    if (p.is_suspended || p.exam_status === 'suspended') {
+      return false;
+    }
     p.hand_raised = true;
     p.hand_raised_at = new Date().toISOString();
     saveLocalParticipants(parts);
@@ -1331,40 +1548,169 @@ export async function submitStudentExam(
   examId: string,
   studentId: string,
   answers: Record<string, any>,
-  submissionType: 'normal' | 'early_exit' | 'timeout' = 'normal'
-): Promise<{ success: boolean; score?: number; accuracy?: number }> {
+  submissionType: 'normal' | 'early_exit' | 'timeout' | 'teacher_forced' = 'normal',
+  options?: {
+    idempotencyKey?: string;
+    actorId?: string;
+  }
+): Promise<{
+  success: boolean;
+  score?: number | null;
+  accuracy?: number | null;
+  submitted_at?: string;
+  idempotent?: boolean;
+  already_submitted?: boolean;
+  error?: string;
+  code?: string;
+}> {
   const now = new Date().toISOString();
+  const idempotencyKey = options?.idempotencyKey || null;
+  const actorId = options?.actorId || studentId;
 
   // Validate server deadline
   const exam = await getCustomExamById(examId);
-  if (exam && exam.status === 'completed') {
-    // Already finalized by teacher
+  if (exam && ['completed', 'archived'].includes(exam.status) && submissionType !== 'teacher_forced') {
+    return { success: false, error: 'EXAM_CONCLUDED', code: 'EXAM_CONCLUDED' };
   }
 
-  let calculatedScore = 0;
+  let calculatedScore: number | null = null;
   let correctCount = 0;
   let incorrectCount = 0;
+  let accuracy: number | null = null;
   const attemptedCount = Object.keys(answers || {}).length;
 
-  if (attemptedCount > 0) {
-    // Benchmark marking simulation against selected questions
-    correctCount = Math.round(attemptedCount * 0.75);
-    incorrectCount = attemptedCount - correctCount;
-    calculatedScore = Math.max(0, correctCount * 4 - incorrectCount * 1);
+  // Grade strictly against known question answer keys if present
+  const questionsList = exam?.selected_questions;
+  const hasQuestionList = Array.isArray(questionsList) && questionsList.length > 0;
+  const allQuestionsHaveKeys = hasQuestionList && questionsList.every((q: any) =>
+    q.correct_answer !== undefined || q.correct_option !== undefined
+  );
+
+  if (hasQuestionList && allQuestionsHaveKeys) {
+    let scoreAcc = 0;
+    for (const q of questionsList) {
+      const studentAns = answers ? (answers[q.id] ?? answers[String(q.id)] ?? answers[q.question_number]) : undefined;
+      const expectedKey = String(q.correct_answer ?? q.correct_option ?? '').trim().toLowerCase();
+
+      if (studentAns !== undefined && studentAns !== null && String(studentAns).trim() !== '') {
+        const normalizedStudentAns = String(studentAns).trim().toLowerCase();
+        if (normalizedStudentAns === expectedKey) {
+          correctCount++;
+          scoreAcc += (typeof q.marks === 'number' ? q.marks : 4);
+        } else {
+          incorrectCount++;
+          const negMarks = typeof q.negative_marks === 'number' ? q.negative_marks : 1;
+          scoreAcc -= negMarks;
+        }
+      }
+    }
+    calculatedScore = Math.max(0, scoreAcc);
+    accuracy = attemptedCount > 0 ? (correctCount / attemptedCount) * 100 : 0;
+  } else {
+    // If questions do NOT have trusted answer keys (e.g. subjective questions or unkeyed question set),
+    // do NOT fabricate a simulated 75% score. Leave score and accuracy as null (pending teacher grading).
+    calculatedScore = null;
+    accuracy = null;
   }
 
-  const accuracy = attemptedCount > 0 ? (correctCount / attemptedCount) * 100 : 0;
-
-  if (isSupabaseConfigured) {
+  if (isSupabaseConfigured && !isDemoExamId(examId)) {
     try {
       const adminClient = createServiceRoleClient();
-      if (adminClient) {
-        await adminClient
+      if (!adminClient) {
+        console.error('[submitStudentExam] Failed to initialize Supabase admin client');
+        return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+      }
+
+      // Attempt atomic database RPC submission
+      const { data: rpcResult, error: rpcError } = await adminClient.rpc('submit_custom_exam_student', {
+        p_exam_id: examId,
+        p_student_id: studentId,
+        p_answers: answers || {},
+        p_submission_type: submissionType,
+        p_idempotency_key: idempotencyKey,
+        p_actor_id: actorId,
+        p_score: calculatedScore,
+        p_accuracy: accuracy,
+      });
+
+      if (!rpcError && rpcResult) {
+        if (rpcResult.success) {
+          appendAuditLog({
+            exam_id: examId,
+            student_id: studentId,
+            actor_id: actorId,
+            actor_role: submissionType === 'teacher_forced' ? 'teacher' : 'student',
+            event_type: 'STUDENT_SUBMITTED',
+            event_source: 'exam_workspace',
+            metadata: { submission_type: submissionType, score: rpcResult.score, accuracy: rpcResult.accuracy, idempotency_key: idempotencyKey },
+          });
+
+          return {
+            success: true,
+            score: rpcResult.score,
+            accuracy: rpcResult.accuracy,
+            submitted_at: rpcResult.submitted_at || now,
+            idempotent: Boolean(rpcResult.idempotent),
+            already_submitted: Boolean(rpcResult.already_submitted),
+          };
+        }
+        return {
+          success: false,
+          error: rpcResult.error || 'SUBMISSION_REJECTED',
+          code: rpcResult.code || rpcResult.error,
+          score: rpcResult.score,
+          accuracy: rpcResult.accuracy,
+          already_submitted: Boolean(rpcResult.already_submitted),
+        };
+      }
+
+      // Fallback for pre-RPC environments with explicit checks
+      if (rpcError && rpcError.code === 'PGRST202') {
+        const { data: existing, error: existErr } = await adminClient
+          .from('custom_exam_participants')
+          .select('is_suspended, exam_status, idempotency_key, final_score, accuracy_percentage, submitted_at')
+          .eq('exam_id', examId)
+          .eq('student_id', studentId)
+          .single();
+
+        if (existErr) {
+          console.error('[submitStudentExam] Database query error on participants:', existErr);
+          return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+        }
+
+        if (existing) {
+          if ((existing.is_suspended || existing.exam_status === 'suspended') && submissionType !== 'teacher_forced') {
+            return { success: false, error: 'STUDENT_SUSPENDED', code: 'STUDENT_SUSPENDED' };
+          }
+          if (existing.exam_status === 'submitted') {
+            if (idempotencyKey && existing.idempotency_key === idempotencyKey) {
+              return {
+                success: true,
+                score: existing.final_score ?? calculatedScore,
+                accuracy: existing.accuracy_percentage ?? accuracy,
+                submitted_at: existing.submitted_at ?? now,
+                idempotent: true,
+                already_submitted: true,
+              };
+            }
+            return {
+              success: false,
+              error: 'ALREADY_SUBMITTED',
+              code: 'ALREADY_SUBMITTED',
+              score: existing.final_score ?? undefined,
+              accuracy: existing.accuracy_percentage ?? undefined,
+              already_submitted: true,
+            };
+          }
+        }
+
+        const { error: updateErr } = await adminClient
           .from('custom_exam_participants')
           .update({
             exam_status: 'submitted',
             submission_type: submissionType,
             submitted_at: now,
+            idempotency_key: idempotencyKey,
             questions_attempted: attemptedCount,
             questions_answered: attemptedCount,
             questions_correct: correctCount,
@@ -1376,7 +1722,12 @@ export async function submitStudentExam(
           .eq('exam_id', examId)
           .eq('student_id', studentId);
 
-        await adminClient
+        if (updateErr) {
+          console.error('[submitStudentExam] Failed to update participant submission:', updateErr);
+          return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+        }
+
+        const { error: upsertErr } = await adminClient
           .from('custom_exam_submissions')
           .upsert(
             {
@@ -1386,40 +1737,201 @@ export async function submitStudentExam(
               score: calculatedScore,
               accuracy,
               submission_type: submissionType,
+              idempotency_key: idempotencyKey,
               submitted_at: now,
             },
             { onConflict: 'exam_id,student_id' }
           );
+
+        if (upsertErr) {
+          console.error('[submitStudentExam] Failed to upsert submission:', upsertErr);
+          return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+        }
+
+        appendAuditLog({
+          exam_id: examId,
+          student_id: studentId,
+          actor_id: actorId,
+          actor_role: submissionType === 'teacher_forced' ? 'teacher' : 'student',
+          event_type: 'STUDENT_SUBMITTED',
+          event_source: 'exam_workspace',
+          metadata: { submission_type: submissionType, score: calculatedScore, accuracy, idempotency_key: idempotencyKey },
+        });
+
+        return { success: true, score: calculatedScore, accuracy, submitted_at: now };
       }
-    } catch {}
+
+      console.error('[submitStudentExam] Database RPC error:', rpcError);
+      return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+    } catch (err) {
+      console.error('[submitStudentExam] Unexpected database error:', err);
+      return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+    }
   }
 
-  const parts = getLocalParticipants();
-  const p = parts.find((pt) => pt.exam_id === examId && pt.student_id === studentId);
-  if (p) {
-    p.exam_status = 'submitted';
-    p.submission_type = submissionType;
-    p.submitted_at = now;
-    p.questions_attempted = attemptedCount;
-    p.questions_answered = attemptedCount;
-    p.questions_correct = correctCount;
-    p.questions_incorrect = incorrectCount;
-    p.accuracy_percentage = accuracy;
-    p.final_score = calculatedScore;
-    saveLocalParticipants(parts);
+  // Local/demo fallback strictly for demo/offline environments
+  const localParts = getLocalParticipants();
+  const localP = localParts.find((pt) => pt.exam_id === examId && pt.student_id === studentId);
+  if (localP) {
+    if ((localP.is_suspended || localP.exam_status === 'suspended') && submissionType !== 'teacher_forced') {
+      return { success: false, error: 'STUDENT_SUSPENDED', code: 'STUDENT_SUSPENDED' };
+    }
+    if (localP.exam_status === 'submitted') {
+      if (idempotencyKey && (localP as any).idempotency_key === idempotencyKey) {
+        return {
+          success: true,
+          score: localP.final_score ?? calculatedScore,
+          accuracy: localP.accuracy_percentage ?? accuracy,
+          submitted_at: localP.submitted_at ?? now,
+          idempotent: true,
+          already_submitted: true,
+        };
+      }
+      return {
+        success: false,
+        error: 'ALREADY_SUBMITTED',
+        code: 'ALREADY_SUBMITTED',
+        score: localP.final_score ?? undefined,
+        accuracy: localP.accuracy_percentage ?? undefined,
+        already_submitted: true,
+      };
+    }
+
+    localP.exam_status = 'submitted';
+    localP.submission_type = submissionType;
+    localP.submitted_at = now;
+    (localP as any).idempotency_key = idempotencyKey;
+    localP.questions_attempted = attemptedCount;
+    localP.questions_answered = attemptedCount;
+    localP.questions_correct = correctCount;
+    localP.questions_incorrect = incorrectCount;
+    localP.accuracy_percentage = accuracy;
+    localP.final_score = calculatedScore;
+    saveLocalParticipants(localParts);
   }
 
   appendAuditLog({
     exam_id: examId,
     student_id: studentId,
-    actor_id: studentId,
-    actor_role: 'student',
+    actor_id: actorId,
+    actor_role: submissionType === 'teacher_forced' ? 'teacher' : 'student',
     event_type: 'STUDENT_SUBMITTED',
     event_source: 'exam_workspace',
-    metadata: { submission_type: submissionType, score: calculatedScore, accuracy },
+    metadata: { submission_type: submissionType, score: calculatedScore, accuracy, idempotency_key: idempotencyKey },
   });
 
-  return { success: true, score: calculatedScore, accuracy };
+  return { success: true, score: calculatedScore, accuracy, submitted_at: now };
+}
+
+/**
+ * Atomic answer autosave with revision tracking and stale write rejection.
+ */
+export async function autosaveStudentAnswers(
+  examId: string,
+  studentId: string,
+  answers: Record<string, any>,
+  revisionNumber: number
+): Promise<{
+  success: boolean;
+  revision?: number;
+  error?: string;
+  code?: string;
+}> {
+  if (!examId || !studentId) {
+    return { success: false, error: 'MISSING_PARAMS', code: 'MISSING_PARAMS' };
+  }
+
+  if (isSupabaseConfigured && !isDemoExamId(examId)) {
+    try {
+      const adminClient = createServiceRoleClient();
+      if (!adminClient) {
+        return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+      }
+
+      const { data: rpcResult, error: rpcError } = await adminClient.rpc('autosave_custom_exam_answers', {
+        p_exam_id: examId,
+        p_student_id: studentId,
+        p_answers: answers || {},
+        p_client_revision: revisionNumber,
+      });
+
+      if (!rpcError && rpcResult) {
+        if (rpcResult.success) {
+          return { success: true, revision: rpcResult.revision };
+        }
+        return {
+          success: false,
+          error: rpcResult.error || 'AUTOSAVE_FAILED',
+          code: rpcResult.code || rpcResult.error,
+        };
+      }
+
+      if (rpcError && rpcError.code === 'PGRST202') {
+        const { data: part, error: pErr } = await adminClient
+          .from('custom_exam_participants')
+          .select('is_suspended, exam_status, answers_revision')
+          .eq('exam_id', examId)
+          .eq('student_id', studentId)
+          .single();
+
+        if (pErr) {
+          return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+        }
+
+        if (part) {
+          if (part.exam_status === 'submitted') {
+            return { success: false, error: 'ALREADY_SUBMITTED', code: 'ALREADY_SUBMITTED' };
+          }
+          if (part.is_suspended || part.exam_status === 'suspended') {
+            return { success: false, error: 'STUDENT_SUSPENDED', code: 'STUDENT_SUSPENDED' };
+          }
+          const currentRev = part.answers_revision || 0;
+          if (revisionNumber <= currentRev) {
+            return { success: false, error: 'STALE_REVISION', code: 'STALE_REVISION' };
+          }
+          const boundedRev = revisionNumber > currentRev + 1 ? currentRev + 1 : revisionNumber;
+          await adminClient
+            .from('custom_exam_participants')
+            .update({ answers_revision: boundedRev, updated_at: new Date().toISOString() })
+            .eq('exam_id', examId)
+            .eq('student_id', studentId);
+          return { success: true, revision: boundedRev };
+        }
+      }
+
+      console.error('[autosaveStudentAnswers] RPC error:', rpcError);
+      return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+    } catch (err) {
+      console.error('[autosaveStudentAnswers] Unexpected database error:', err);
+      return { success: false, error: 'DATABASE_ERROR', code: 'DATABASE_ERROR' };
+    }
+  }
+
+  // Local/demo fallback
+  const parts = getLocalParticipants();
+  const p = parts.find((pt) => pt.exam_id === examId && pt.student_id === studentId);
+  if (p) {
+    if (p.exam_status === 'submitted') {
+      return { success: false, error: 'ALREADY_SUBMITTED', code: 'ALREADY_SUBMITTED' };
+    }
+    if (p.is_suspended || p.exam_status === 'suspended') {
+      return { success: false, error: 'STUDENT_SUSPENDED', code: 'STUDENT_SUSPENDED' };
+    }
+    const currentRev = (p as any).answers_revision || 0;
+    if (revisionNumber <= currentRev) {
+      return { success: false, error: 'STALE_REVISION', code: 'STALE_REVISION' };
+    }
+    // Bounded revision increment: clamp arbitrary jumps to sequential progression
+    const boundedRev = revisionNumber > currentRev + 1 ? currentRev + 1 : revisionNumber;
+    (p as any).answers_revision = boundedRev;
+    (p as any).draft_answers = answers;
+    p.questions_answered = Object.keys(answers || {}).length;
+    p.last_heartbeat = new Date().toISOString();
+    saveLocalParticipants(parts);
+    return { success: true, revision: boundedRev };
+  }
+
+  return { success: false, error: 'PARTICIPANT_NOT_FOUND', code: 'PARTICIPANT_NOT_FOUND' };
 }
 
 // ─── LIVE SUPERVISION ROOM QUERY & REPORT ───────────────────────────

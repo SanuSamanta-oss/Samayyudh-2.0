@@ -173,7 +173,8 @@ export async function addToSyncQueue(item: SyncQueueItem): Promise<void> {
 export async function getUnsyncedItems(): Promise<SyncQueueItem[]> {
   const db = await getDB();
   if (!db) return [];
-  return db.getAllFromIndex('sync_queue', 'by_synced', 0);
+  const all = await db.getAll('sync_queue');
+  return all.filter((item) => !item.synced);
 }
 
 export async function markSynced(id: string): Promise<void> {
@@ -182,6 +183,56 @@ export async function markSynced(id: string): Promise<void> {
   const item = await db.get('sync_queue', id);
   if (item) {
     item.synced = true;
+    await db.put('sync_queue', item);
+  }
+}
+
+export interface OfflineSubmissionItem {
+  id: string; // idempotency_key
+  exam_id: string;
+  student_id: string | null;
+  answers: Record<string, any>;
+  submission_type: 'normal' | 'early_exit' | 'timeout';
+  created_at: string;
+  synced: boolean;
+  status?: 'pending' | 'conflict_rejected' | 'synced';
+  conflict_reason?: string;
+}
+
+export async function enqueueOfflineSubmission(sub: OfflineSubmissionItem): Promise<void> {
+  await addToSyncQueue({
+    id: sub.id,
+    table: 'custom_exam_submissions',
+    operation: 'upsert',
+    data: { ...sub, status: sub.status || 'pending' },
+    timestamp: sub.created_at,
+    synced: false,
+  });
+}
+
+export async function getPendingOfflineSubmissions(): Promise<OfflineSubmissionItem[]> {
+  const db = await getDB();
+  if (!db) return [];
+  const all = await db.getAll('sync_queue');
+  return all
+    .filter((item) => {
+      if (item.table !== 'custom_exam_submissions' || item.synced) return false;
+      const data = item.data as OfflineSubmissionItem;
+      // Do not auto-retry items that have been permanently flagged as conflict_rejected
+      return data.status !== 'conflict_rejected';
+    })
+    .map((item) => item.data as OfflineSubmissionItem);
+}
+
+export async function markSubmissionConflict(id: string, reason: string): Promise<void> {
+  const db = await getDB();
+  if (!db) return;
+  const item = await db.get('sync_queue', id);
+  if (item) {
+    const data = item.data as OfflineSubmissionItem;
+    data.status = 'conflict_rejected';
+    data.conflict_reason = reason;
+    item.synced = false; // Remains unconfirmed but flagged as conflict for recovery
     await db.put('sync_queue', item);
   }
 }
